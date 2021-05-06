@@ -30,7 +30,7 @@ const SimpleAccordion = (props) => {
         <AccordionSummary
           expandIcon={
             <ExpandMoreIcon
-              color="secondary"
+              color="error"
               fontSize="large"
             />
           }

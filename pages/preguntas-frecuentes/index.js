@@ -1,10 +1,10 @@
-// Arreglar problema de scroll
-// Acomodar colores
 // Agregar dependencias de Home
+// Agregar media queries
 
 // Utils & Config
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from "clsx";
 
 // External components
 import Typography from '@material-ui/core/Typography';
@@ -25,19 +25,26 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   padd1: {
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(1),
   },
   padd2: {
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
   },
   padd4: {
-    paddingBottom: theme.spacing(4)
+    paddingBottom: theme.spacing(4),
   },
   padd6: {
-    paddingBottom: theme.spacing(6)
+    paddingBottom: theme.spacing(6),
   },
   padd8: {
-    paddingBottom: theme.spacing(8)
+    paddingBottom: theme.spacing(8),
+  },
+  align: {
+    textAlign: "center",
+  },
+  margin0: {
+    maxWidth: "100vw",
+    margin: "0 auto",
   }
 }));
 
@@ -46,30 +53,36 @@ const preguntasFrecuentes = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container direction="column" alignItems="center" className={classes.padd6}>
-        <Typography variant="h4" className={classes.padd2}>
-          Preguntas frecuentes
-        </Typography>
+      <Grid container direction="column" alignItems="center" className={clsx(classes.padd6, classes.align)}>
+        <Grid item xs={12} sm={12}>
+          <Typography variant="h4" color="primary" className={classes.padd2}>
+            Preguntas frecuentes
+          </Typography>
+        </Grid>
 
-        <Typography variant="body1" color="textSecondary" className={classes.padd4}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Typography>
+        <Grid item xs={12} sm={12}>
+          <Typography variant="body1" color="textSecondary" className={classes.padd4}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </Typography>
+        </Grid>
 
-        <FormControl variant="outlined" style={{ width: "60%" }}>
+        <Grid item xs={12} sm={12}>
+        <FormControl variant="outlined">
           <OutlinedInput
-            style={{ borderRadius: "15px", backgroundColor: "white" }}
+            style={{ borderRadius: "15px", backgroundColor: "white", width: "50vw" }}
             placeholder="Buscar preguntas..."
             startAdornment={
               <InputAdornment position="start">
-                <SearchIcon color="secondary" />
+                <SearchIcon className="searchIcon" color="error" />
               </InputAdornment>
             }
           />
         </FormControl>
+        </Grid>
       </Grid>
 
-      <Grid container spacing={4} justify="center" alignItems="center" className={classes.padd2} style={{maxWidth: "100vw"}}>
-        <Grid item xs={12} sm={5}>
+      <Grid container spacing={4} justify="center" alignItems="center" className={clsx(classes.padd2, classes.margin0)}>
+        <Grid item xs={12} sm={4}>
           <Typography variant="h6">
             Tema 1
           </Typography>
@@ -83,7 +96,7 @@ const preguntasFrecuentes = () => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={4}>
           <Typography variant="h6">
             Tema 2
           </Typography>
@@ -98,8 +111,8 @@ const preguntasFrecuentes = () => {
         </Grid>
       </Grid>
 
-      <Grid container spacing={4} justify="center" alignItems="center" className={classes.padd8} style={{maxWidth: "100vw"}}>
-        <Grid item xs={12} sm={5}>
+      <Grid container spacing={4} justify="center" alignItems="center" className={clsx(classes.padd8, classes.margin0)}>
+        <Grid item xs={12} sm={4}>
           <Typography variant="h6">
             Tema 3
           </Typography>
@@ -113,7 +126,7 @@ const preguntasFrecuentes = () => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={4}>
           <Typography variant="h6">
             Tema 4
           </Typography>
@@ -128,20 +141,15 @@ const preguntasFrecuentes = () => {
         </Grid>
       </Grid>
 
-      <Grid
-        container
-        spacing={4}
-        direction="column"
-        justify="center"
-        alignItems="center"
-        style={{maxWidth: "100vw"}}
-      >
-        <Typography variant="h5" className={classes.padd1}>
-          ¿Tienes alguna otra duda?
-        </Typography>
+      <Grid container spacing={4} direction="column" alignItems="center" className={clsx(classes.align, classes.margin0)}>
+        <Grid item xs={12} sm={12}>
+          <Typography variant="h5" className={classes.padd1}>
+            ¿Tienes alguna otra duda?
+          </Typography>
+        </Grid>
 
         <Grid item xs={12} sm={8}>
-          <Typography variant="body1" color="textSecondary" className={classes.padd4} style={{ textAlign: "center" }}>
+          <Typography variant="body1" color="textSecondary" className={classes.padd4}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde molestiae deserunt exercitationem illo ducimus iste commodi voluptas ipsum fuga, odio possimus
           </Typography>
         </Grid>
