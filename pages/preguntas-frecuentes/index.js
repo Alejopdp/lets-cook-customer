@@ -1,5 +1,4 @@
 // Agregar dependencias de Home
-// Agregar media queries
 
 // Utils & Config
 import React from 'react';
@@ -8,16 +7,12 @@ import clsx from "clsx";
 
 // External components
 import Typography from '@material-ui/core/Typography';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 
 // Internal components
-import SimpleAccordion from '../../components/accordion/accordion';
-
-// Icons & Images
-import SearchIcon from '@material-ui/icons/Search';
+import TitleOtherPages from '../../components/molecules/titleOtherPages/titleOtherPages';
+import SimpleAccordion from '../../components/atoms/accordion/accordion';
+import SearchBar from '../../components/atoms/searchBar/searchBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
   },
   padd4: {
     paddingBottom: theme.spacing(4),
-  },
-  padd6: {
-    paddingBottom: theme.spacing(6),
   },
   padd8: {
     paddingBottom: theme.spacing(8),
@@ -53,36 +45,15 @@ const preguntasFrecuentes = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container direction="column" alignItems="center" className={clsx(classes.padd6, classes.align)}>
-        <Grid item xs={12} sm={12}>
-          <Typography variant="h4" color="primary" className={classes.padd2}>
-            Preguntas frecuentes
-          </Typography>
-        </Grid>
+      <TitleOtherPages
+        title="Preguntas frecuentes"
+        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      />
 
-        <Grid item xs={12} sm={12}>
-          <Typography variant="body1" color="textSecondary" className={classes.padd4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </Typography>
-        </Grid>
-
-        <Grid item xs={12} sm={12}>
-        <FormControl variant="outlined">
-          <OutlinedInput
-            style={{ borderRadius: "15px", backgroundColor: "white", width: "50vw" }}
-            placeholder="Buscar preguntas..."
-            startAdornment={
-              <InputAdornment position="start">
-                <SearchIcon className="searchIcon" color="error" />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-        </Grid>
-      </Grid>
+      <SearchBar />
 
       <Grid container spacing={4} justify="center" alignItems="center" className={clsx(classes.padd2, classes.margin0)}>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={5}>
           <Typography variant="h6">
             Tema 1
           </Typography>
@@ -96,7 +67,7 @@ const preguntasFrecuentes = () => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={5}>
           <Typography variant="h6">
             Tema 2
           </Typography>
@@ -112,7 +83,7 @@ const preguntasFrecuentes = () => {
       </Grid>
 
       <Grid container spacing={4} justify="center" alignItems="center" className={clsx(classes.padd8, classes.margin0)}>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={5}>
           <Typography variant="h6">
             Tema 3
           </Typography>
@@ -126,7 +97,7 @@ const preguntasFrecuentes = () => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={5}>
           <Typography variant="h6">
             Tema 4
           </Typography>

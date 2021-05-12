@@ -13,11 +13,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const useStyles = makeStyles((theme) => ({
   root: {
     // width: '100%',
-    paddingTop: theme.spacing(2)
-  },
-  heading: {
-    // fontSize: theme.typography.pxToRem(15),
-    // fontWeight: theme.typography.fontWeightRegular,
+    paddingTop: theme.spacing(2),
   },
 }));
 
