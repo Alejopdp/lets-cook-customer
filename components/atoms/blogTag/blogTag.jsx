@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     tag: {
         backgroundColor: theme.palette.background.default,
         padding: "0px 16px 0px 16px",
-        marginRight: theme.spacing(1)
+        marginTop: theme.spacing(1),
+        marginRight: theme.spacing(1),
     },
 }));
 

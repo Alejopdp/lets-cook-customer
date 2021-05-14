@@ -10,7 +10,7 @@ const BlogRecetas = () => {
         <div>
             <TitleOtherPages title="Blog" subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
 
-            <BlogPostCard/>
+            <BlogPostCard />
         </div>
     );
 };
