@@ -1,12 +1,8 @@
 // Utils & Config
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import PropTypes from "prop-types";
 
 // External components
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
@@ -57,23 +53,32 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const tags = [
+const posts = [
     {
-        name: "Tag 1",
+        image: "/unnamed.jpg",
+        title: "Eixample, Pedralbes, Espluges y más allá: el reparto a domicilio de meal kits en Barcelona",
+        description: "Let's Cook aspira a dar el servicio de reparto a domicilio de meal kits en Barcelona perfecto, con criterios de calidad y un rango geográfico amplio.",
+        tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
+        author: "Equipo Let's Cook",
+        date: "Publicado el 20 de abril de 2021"
     },
     {
-        name: "Tag 2",
+        image: "/unnamed.jpg",
+        title: "Eixample, Pedralbes, Espluges y más allá: el reparto a domicilio de meal kits en Barcelona",
+        description: "Let's Cook aspira a dar el servicio de reparto a domicilio de meal kits en Barcelona perfecto, con criterios de calidad y un rango geográfico amplio.",
+        tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
+        author: "Equipo Let's Cook",
+        date: "Publicado el 20 de abril de 2021"
     },
     {
-        name: "Tag 3",
+        image: "/unnamed.jpg",
+        title: "Eixample, Pedralbes, Espluges y más allá: el reparto a domicilio de meal kits en Barcelona",
+        description: "Let's Cook aspira a dar el servicio de reparto a domicilio de meal kits en Barcelona perfecto, con criterios de calidad y un rango geográfico amplio.",
+        tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
+        author: "Equipo Let's Cook",
+        date: "Publicado el 20 de abril de 2021"
     },
-    {
-        name: "Tag 4",
-    },
-    {
-        name: "Tag 5",
-    },
-];
+]
 
 const BlogPostCard = (props) => {
     const classes = useStyles();
@@ -81,47 +86,50 @@ const BlogPostCard = (props) => {
     const { root, card } = classes;
 
     return (
-        <div className={root}>
-            <Grid container>
-                <Grid item xs={12} md={4}>
-                    <Image src="/unnamed.jpg" width={300} height={270} layout="responsive" className={classes.image} />
-                </Grid>
+        <>
+            {posts.map((post, index) => (
+                <div className={root} style={{ marginBottom: "24px" }}>
+                    <Grid container key={index}>
+                        <Grid item xs={12} md={4}>
+                            <Image src={post.image} width={300} height={270} layout="responsive" className={classes.image} />
+                        </Grid>
 
-                <Grid item xs={12} md={7} style={{ margin: "0 24px 0 24px" }}>
-                    <Typography variant="subtitle1" className={classes.marg4}>
-                        Eixample, Pedralbes, Espluges y más allá: el reparto a domicilio de meal kits en Barcelona
-                    </Typography>
+                        <Grid item xs={12} md={7} style={{ margin: "0 24px 0 24px" }}>
+                            <Typography variant="subtitle1" className={classes.marg4}>
+                                {post.title}
+                            </Typography>
 
-                    <Typography variant="body1" className={classes.marg1}>
-                        Let's Cook aspira a dar el servicio de reparto a domicilio de meal kits en Barcelona perfecto, con criterios de
-                        calidad y un rango geográfico amplio.
-                    </Typography>
+                            <Typography variant="body1" className={classes.marg1}>
+                                {post.description}
+                            </Typography>
 
-                    <Grid container direction="row" className={classes.marg2}>
-                        {tags.map((tag, index) => (
-                            <BlogTag tagName={tag.name} key={index} />
-                        ))}
+                            <Grid container direction="row" className={classes.marg2}>
+                                {post.tags.map((tag, index) => (
+                                    <BlogTag tagName={tag} key={index} />
+                                ))}
 
-                        <Typography variant="body1" className={classes.marg1}>
-                            y 3 más...
-                        </Typography>
+                                <Typography variant="body1" className={classes.marg1}>
+                                    y 3 más...
+                            </Typography>
+                            </Grid>
+
+                            {/* <Publisher /> */}
+
+                            <Grid container direction="row" alignItems="center" className={classes.publisher}>
+                                <Avatar style={{ marginRight: "8px" }}>LC</Avatar>
+                                <Typography variant="body2">
+                                    {post.author}
+                                </Typography>
+
+                                <Typography variant="body2" className={classes.date}>
+                                    {post.date}
+                                </Typography>
+                            </Grid>
+                        </Grid>
                     </Grid>
-
-                    {/* <Publisher /> */}
-
-                    <Grid container direction="row" alignItems="center" className={classes.publisher}>
-                        <Avatar style={{ marginRight: "8px" }}>LC</Avatar>
-                        <Typography variant="body2" style={{}}>
-                            Equipo Let's Cook
-                        </Typography>
-
-                        <Typography variant="body2" className={classes.date}>
-                            Publicado el 20 de marzo del 2021
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </Grid>
-        </div>
+                </div>
+            ))}
+        </>
     );
 };
 
