@@ -42,7 +42,7 @@ const ComoFunciona = () => {
                 direction="row"
             />
 
-            <Benefits />
+            {/* <Benefits /> */}
         </div>
     );
 };

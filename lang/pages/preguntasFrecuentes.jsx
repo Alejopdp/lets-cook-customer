@@ -9,7 +9,7 @@ export const preguntasFrecuentes = {
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde molestiae deserunt exercitationem illo ducimus iste commodi voluptas ipsum fuga, odio possimus",
     },
     en: {
-        title: "Frequent questions",
+        title: "Frequently asked questions",
         subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         question: "Lorem ipsum dolor sit amet sadipscing elitr?",
         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
