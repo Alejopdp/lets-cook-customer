@@ -24,7 +24,9 @@ const SimpleAccordion = (props) => {
         <div className={classes.root}>
             <Accordion style={{ borderRadius: "15px" }}>
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon color="error" fontSize="large" />}
+                    expandIcon={
+                        <ExpandMoreIcon color="error" fontSize="large" />
+                    }
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >

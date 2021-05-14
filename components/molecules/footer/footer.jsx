@@ -66,10 +66,22 @@ const Footer = () => {
                 <Grid item>
                     <Image src="/logo.png" width={190} height={60} />
                     <Grid>
-                        <InstagramIcon fontSize="large" style={{ margin: "8px" }} />
-                        <FacebookIcon fontSize="large" style={{ margin: "8px" }} />
-                        <PinterestIcon fontSize="large" style={{ margin: "8px" }} />
-                        <YouTubeIcon fontSize="large" style={{ margin: "8px" }} />
+                        <InstagramIcon
+                            fontSize="large"
+                            style={{ margin: "8px" }}
+                        />
+                        <FacebookIcon
+                            fontSize="large"
+                            style={{ margin: "8px" }}
+                        />
+                        <PinterestIcon
+                            fontSize="large"
+                            style={{ margin: "8px" }}
+                        />
+                        <YouTubeIcon
+                            fontSize="large"
+                            style={{ margin: "8px" }}
+                        />
                     </Grid>
                 </Grid>
 
@@ -105,8 +117,16 @@ const Footer = () => {
                 </Grid>
             </Grid>
 
-            <Grid container direction="row" justify="space-between" alignItems="flex-end" className={footer}>
-                <Typography variant="body2">Let's Cook 2021 - Todos los derechos reservados</Typography>
+            <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="flex-end"
+                className={footer}
+            >
+                <Typography variant="body2">
+                    Let's Cook 2021 - Todos los derechos reservados
+                </Typography>
                 <Image src="/enisa.png" width={50} height={100} />
             </Grid>
         </div>

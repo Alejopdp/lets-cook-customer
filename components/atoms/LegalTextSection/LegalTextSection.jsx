@@ -25,10 +25,16 @@ const LegalTextSection = () => {
     const lang = langs[router.locale];
 
     return (
-        <Grid container direction="column" className={clsx(classes.padd6, classes.align)}>
+        <Grid
+            container
+            direction="column"
+            className={clsx(classes.padd6, classes.align)}
+        >
             <Grid item>
                 {/* Párrafo 1 */}
-                <Typography variant="subtitle1">{lang.firstParagraph.subtitle}</Typography>
+                <Typography variant="subtitle1">
+                    {lang.firstParagraph.subtitle}
+                </Typography>
                 <Typography paragraph variant="body1">
                     {lang.firstParagraph.paragraph1}
                 </Typography>
@@ -43,7 +49,9 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 2 */}
-                <Typography variant="subtitle1">{lang.secondParagraph.subtitle}</Typography>
+                <Typography variant="subtitle1">
+                    {lang.secondParagraph.subtitle}
+                </Typography>
                 <Typography paragraph variant="body1">
                     {lang.secondParagraph.paragraph1}
                 </Typography>
@@ -61,7 +69,9 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 3 */}
-                <Typography variant="subtitle1">{lang.thirdParagraph.subtitle}</Typography>
+                <Typography variant="subtitle1">
+                    {lang.thirdParagraph.subtitle}
+                </Typography>
                 <Typography paragraph variant="body1">
                     {lang.thirdParagraph.paragraph1}
                 </Typography>
@@ -70,6 +80,21 @@ const LegalTextSection = () => {
                 </Typography>
                 <Typography paragraph variant="body1">
                     {lang.thirdParagraph.paragraph3}
+                </Typography>
+                <Typography paragraph variant="body1">
+                    {lang.thirdParagraph.paragraph4}
+                </Typography>
+                <Typography paragraph variant="body1">
+                    {lang.thirdParagraph.paragraph5}
+                </Typography>
+                <Typography paragraph variant="body1">
+                    {lang.thirdParagraph.paragraph6}
+                </Typography>
+                <Typography paragraph variant="body1">
+                    {lang.thirdParagraph.paragraph7}
+                </Typography>
+                <Typography paragraph variant="body1">
+                    {lang.thirdParagraph.paragraph8}
                 </Typography>
             </Grid>
         </Grid>

@@ -1,9 +1,8 @@
-// Agregar dependencias de Home
-
 // Utils & Config
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+import { useRouter } from "next/router";
+const langs = require("../../lang").avisoLegal;
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -23,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
 
 const AvisoLegal = () => {
     const classes = useStyles();
+    const router = useRouter();
+    const lang = langs[router.locale];
 
     return (
         <div className={classes.root}>
-            <TitleOtherPages title="Aviso legal" subtitle="Condiciones generales del uso del sitio web." />
+            <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
 
             <LegalTextSection />
 

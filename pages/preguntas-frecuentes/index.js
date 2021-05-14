@@ -1,9 +1,9 @@
-// Agregar dependencias de Home
-
 // Utils & Config
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
+import { useRouter } from "next/router";
+const langs = require("../../lang").preguntasFrecuentes;
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -42,76 +42,99 @@ const useStyles = makeStyles((theme) => ({
 
 const preguntasFrecuentes = () => {
     const classes = useStyles();
+    const router = useRouter();
+    const lang = langs[router.locale];
 
     return (
         <div className={classes.root}>
-            <TitleOtherPages title="Preguntas frecuentes" subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+            <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
 
             <SearchBar />
 
-            <Grid container spacing={4} justify="center" alignItems="center" className={clsx(classes.padd2, classes.margin0)}>
+            <Grid
+                container
+                spacing={4}
+                justify="center"
+                alignItems="center"
+                className={clsx(classes.padd2, classes.margin0)}
+            >
                 <Grid item xs={12} sm={5}>
                     <Typography variant="h6">Tema 1</Typography>
                     <SimpleAccordion
-                        question="Lorem ipsum dolor sit amet sadipscing elitr?"
-                        answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+                        question={lang.question}
+                        answer={lang.answer}
                     />
                     <SimpleAccordion
-                        question="Lorem ipsum dolor sit amet sadipscing elitr?"
-                        answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+                        question={lang.question}
+                        answer={lang.answer}
                     />
                 </Grid>
 
                 <Grid item xs={12} sm={5}>
                     <Typography variant="h6">Tema 2</Typography>
                     <SimpleAccordion
-                        question="Lorem ipsum dolor sit amet sadipscing elitr?"
-                        answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+                        question={lang.question}
+                        answer={lang.answer}
                     />
                     <SimpleAccordion
-                        question="Lorem ipsum dolor sit amet sadipscing elitr?"
-                        answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+                        question={lang.question}
+                        answer={lang.answer}
                     />
                 </Grid>
             </Grid>
 
-            <Grid container spacing={4} justify="center" alignItems="center" className={clsx(classes.padd8, classes.margin0)}>
+            <Grid
+                container
+                spacing={4}
+                justify="center"
+                alignItems="center"
+                className={clsx(classes.padd8, classes.margin0)}
+            >
                 <Grid item xs={12} sm={5}>
                     <Typography variant="h6">Tema 3</Typography>
                     <SimpleAccordion
-                        question="Lorem ipsum dolor sit amet sadipscing elitr?"
-                        answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+                        question={lang.question}
+                        answer={lang.answer}
                     />
                     <SimpleAccordion
-                        question="Lorem ipsum dolor sit amet sadipscing elitr?"
-                        answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+                        question={lang.question}
+                        answer={lang.answer}
                     />
                 </Grid>
 
                 <Grid item xs={12} sm={5}>
                     <Typography variant="h6">Tema 4</Typography>
                     <SimpleAccordion
-                        question="Lorem ipsum dolor sit amet sadipscing elitr?"
-                        answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+                        question={lang.question}
+                        answer={lang.answer}
                     />
                     <SimpleAccordion
-                        question="Lorem ipsum dolor sit amet sadipscing elitr?"
-                        answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+                        question={lang.question}
+                        answer={lang.answer}
                     />
                 </Grid>
             </Grid>
 
-            <Grid container spacing={4} direction="column" alignItems="center" className={clsx(classes.align, classes.margin0)}>
+            <Grid
+                container
+                spacing={4}
+                direction="column"
+                alignItems="center"
+                className={clsx(classes.align, classes.margin0)}
+            >
                 <Grid item xs={12} sm={12}>
                     <Typography variant="h5" className={classes.padd1}>
-                        ¿Tienes alguna otra duda?
+                        {lang.doubt}
                     </Typography>
                 </Grid>
 
                 <Grid item xs={12} sm={8}>
-                    <Typography variant="body1" color="textSecondary" className={classes.padd4}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde molestiae deserunt exercitationem illo ducimus iste
-                        commodi voluptas ipsum fuga, odio possimus
+                    <Typography
+                        variant="body1"
+                        color="textSecondary"
+                        className={classes.padd4}
+                    >
+                        {lang.doubtAnswer}
                     </Typography>
                 </Grid>
             </Grid>

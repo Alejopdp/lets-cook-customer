@@ -23,7 +23,12 @@ const Benefits = () => {
 
     return (
         <div className={classes.root}>
-            <Grid container direction="column" alignItems="center" justify="center">
+            <Grid
+                container
+                direction="column"
+                alignItems="center"
+                justify="center"
+            >
                 <Typography variant="subtitle1" color="textSecondary">
                     <LocalCafeIcon className={classes.paddLeft} />
                     Productos frescos y de proximidad
@@ -31,7 +36,8 @@ const Benefits = () => {
 
                 <Grid item>
                     <Typography variant="body1">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam modi maxime aliquid cupiditate sunt,
+                        Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Aperiam modi maxime aliquid cupiditate sunt,
                     </Typography>
                 </Grid>
             </Grid>

@@ -1,5 +1,7 @@
 // Utils & Config
 import React from "react";
+import { useRouter } from "next/router";
+const langs = require("../../lang").recetas;
 
 // External components
 import Grid from "@material-ui/core/Grid";
@@ -9,21 +11,45 @@ import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOth
 import ReceiptCard from "../../components/molecules/receiptCard/receiptCard";
 
 const Recetas = () => {
+    const router = useRouter();
+    const lang = langs[router.locale];
+
     return (
         <div>
-            <TitleOtherPages title="Menú semanal" subtitle="Cada semana cambiamos el menú con nuevas recetas" />
+            <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
 
-            <Grid container direction="row" justify="center" alignItems="flex-start" spacing={1}>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start"
+                spacing={1}
+            >
                 <Grid item>
-                    <ReceiptCard mainTag={"Más vendido"} timeTag={"15 min"} difficultyTag={"Fácil"} recipeName={"Salmón con quinoa"} />
+                    <ReceiptCard
+                        mainTag={"Más vendido"}
+                        timeTag={"15 min"}
+                        difficultyTag={"Fácil"}
+                        recipeName={"Salmón con quinoa"}
+                    />
                 </Grid>
 
                 <Grid item>
-                    <ReceiptCard mainTag={"Más vendido"} timeTag={"15 min"} difficultyTag={"Fácil"} recipeName={"Salmón con quinoa"} />
+                    <ReceiptCard
+                        mainTag={"Más vendido"}
+                        timeTag={"15 min"}
+                        difficultyTag={"Fácil"}
+                        recipeName={"Salmón con quinoa"}
+                    />
                 </Grid>
 
                 <Grid item>
-                    <ReceiptCard mainTag={"Más vendido"} timeTag={"15 min"} difficultyTag={"Fácil"} recipeName={"Salmón con quinoa"} />
+                    <ReceiptCard
+                        mainTag={"Más vendido"}
+                        timeTag={"15 min"}
+                        difficultyTag={"Fácil"}
+                        recipeName={"Salmón con quinoa"}
+                    />
                 </Grid>
             </Grid>
         </div>

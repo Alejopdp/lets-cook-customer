@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 350,
         height: 250,
         background: "rgb(0,0,0)",
-        background: "linear-gradient(0deg, rgba(0,0,0,0.9444152661064426) 0%, rgba(0,0,0,0) 100%)",
+        background:
+            "linear-gradient(0deg, rgba(0,0,0,0.9444152661064426) 0%, rgba(0,0,0,0) 100%)",
         zIndex: "99",
     },
     gradient: {
@@ -65,7 +66,10 @@ const ReceiptCard = (props) => {
         <div className={gradient}>
             <Card className={root}>
                 <CardContent style={{ height: "60%" }}>
-                    <Typography variant="subtitle2" className={clsx(button, textWhite)}>
+                    <Typography
+                        variant="subtitle2"
+                        className={clsx(button, textWhite)}
+                    >
                         {props.mainTag}
                     </Typography>
                 </CardContent>
@@ -75,13 +79,17 @@ const ReceiptCard = (props) => {
                         <Grid item className={tag}>
                             <TimerIcon color="primary" className={marg} />
 
-                            <Typography variant="subtitle2">{props.timeTag}</Typography>
+                            <Typography variant="subtitle2">
+                                {props.timeTag}
+                            </Typography>
                         </Grid>
 
                         <Grid item className={tag}>
                             <SpeedIcon color="primary" className={marg} />
 
-                            <Typography variant="subtitle2">{props.difficultyTag}</Typography>
+                            <Typography variant="subtitle2">
+                                {props.difficultyTag}
+                            </Typography>
                         </Grid>
                     </Grid>
 

@@ -1,6 +1,8 @@
 // Utils & Config
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useRouter } from "next/router";
+const langs = require("../../lang").comoFunciona;
 
 // Internal components
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
@@ -16,29 +18,27 @@ const useStyles = makeStyles((theme) => ({
 
 const ComoFunciona = () => {
     const classes = useStyles();
+    const router = useRouter();
+    const lang = langs[router.locale];
 
     return (
         <div className={classes.root}>
-            <TitleOtherPages title="Cómo funciona" subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+            <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
 
             {/*
-        No creo que esto sea la solución más elegante
-        Pero es lo unico que se me ocurrió sin saber cómo van a venir los datos!
-        Cualquier cosa me chiflan y vemos como lo acomodamos! -Lionel
-      */}
+                No creo que esto sea la solución más elegante
+                Pero es lo unico que se me ocurrió sin saber cómo van a venir los datos!
+                Cualquier cosa me chiflan y vemos como lo acomodamos! -Lionel
+            */}
             <HowItWorksExtended
-                title={"Lorem ipsum dolor"}
-                subtitle={
-                    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam modi maxime aliquid cupiditate sunt, numquam quae. Facilis consectetur dolorem suscipit totam magnam quos asperiores vel ducimus iste, ullam ut minima!"
-                }
+                title={lang.howTitle}
+                subtitle={lang.howSubtitle}
                 direction="row-reverse"
             />
 
             <HowItWorksExtended
-                title={"Lorem ipsum dolor"}
-                subtitle={
-                    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam modi maxime aliquid cupiditate sunt, numquam quae. Facilis consectetur dolorem suscipit totam magnam quos asperiores vel ducimus iste, ullam ut minima!"
-                }
+                title={lang.howTitle}
+                subtitle={lang.howSubtitle}
                 direction="row"
             />
 

@@ -23,9 +23,21 @@ const HowItWorksExtended = (props) => {
     const classes = useStyles();
 
     return (
-        <Grid container spacing={3} direction={props.direction} justify="center" alignItems="center" className={clsx(classes.margin0)}>
+        <Grid
+            container
+            spacing={3}
+            direction={props.direction}
+            justify="center"
+            alignItems="center"
+            className={clsx(classes.margin0)}
+        >
             <Grid item xs={12} sm={3}>
-                <Image src="/unnamed.jpg" layout="responsive" width={222} height={151} />
+                <Image
+                    src="/unnamed.jpg"
+                    layout="responsive"
+                    width={222}
+                    height={151}
+                />
             </Grid>
 
             <Grid item xs={12} sm={3}>
