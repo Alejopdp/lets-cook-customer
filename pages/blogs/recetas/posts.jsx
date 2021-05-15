@@ -1,13 +1,7 @@
-// Utils & Config
-import React from "react";
-
-// Internal componentss
-import BlogPostCardDetail from "../../../components/organisms/blogPostCardDetail/blogPostCardDetail";
-
-const Posts = [
-    {
+const Posts = {
+    post1: {
         image: "/unnamed.jpg",
-        title: "post1",
+        title: "Post 1",
         description:
             "Let's Cook aspira a dar el servicio de reparto a domicilio de meal kits en Barcelona perfecto, con criterios de calidad y un rango geográfico amplio.",
         tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
@@ -19,11 +13,10 @@ const Posts = [
             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis exercitationem quis, cum, sunt consectetur facere ut laboriosam mollitia rerum reiciendis sapiente sit vero odit hic laudantium nihil eligendi autem delectus. Necessitatibus enim nesciunt harum officia, minima repellat incidunt beatae sit hic commodi iure minus deleniti cupiditate possimus cumque nobis, dolor at similique maiores modi. Numquam maiores vel odit fugit quia. Sequi optio blanditiis nam tempora aut inventore numquam asperiores deleniti earum accusamus hic magni, dicta tempore esse ut quis incidunt, debitis fugit quaerat. Velit deserunt soluta ad optio repudiandae pariatur",
             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis exercitationem quis, cum, sunt consectetur facere ut laboriosam mollitia rerum reiciendis sapiente sit vero odit hic laudantium nihil eligendi autem delectus. Necessitatibus enim nesciunt harum officia, minima repellat incidunt beatae sit hic commodi iure minus deleniti cupiditate possimus cumque nobis, dolor at similique maiores modi. Numquam maiores vel odit fugit quia. Sequi optio blanditiis nam tempora aut inventore numquam asperiores deleniti earum accusamus hic magni, dicta tempore esse ut quis incidunt, debitis fugit quaerat. Velit deserunt soluta ad optio repudiandae pariatur?",
         ],
-        id: "1",
     },
-    {
+    post1: {
         image: "/unnamed.jpg",
-        title: "post2",
+        title: "Post 2",
         description:
             "Let's Cook aspira a dar el servicio de reparto a domicilio de meal kits en Barcelona perfecto, con criterios de calidad y un rango geográfico amplio.",
         tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
@@ -35,11 +28,10 @@ const Posts = [
             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis exercitationem quis, cum, sunt consectetur facere ut laboriosam mollitia rerum reiciendis sapiente sit vero odit hic laudantium nihil eligendi autem delectus. Necessitatibus enim nesciunt harum officia, minima repellat incidunt beatae sit hic commodi iure minus deleniti cupiditate possimus cumque nobis, dolor at similique maiores modi. Numquam maiores vel odit fugit quia. Sequi optio blanditiis nam tempora aut inventore numquam asperiores deleniti earum accusamus hic magni, dicta tempore esse ut quis incidunt, debitis fugit quaerat. Velit deserunt soluta ad optio repudiandae pariatur",
             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis exercitationem quis, cum, sunt consectetur facere ut laboriosam mollitia rerum reiciendis sapiente sit vero odit hic laudantium nihil eligendi autem delectus. Necessitatibus enim nesciunt harum officia, minima repellat incidunt beatae sit hic commodi iure minus deleniti cupiditate possimus cumque nobis, dolor at similique maiores modi. Numquam maiores vel odit fugit quia. Sequi optio blanditiis nam tempora aut inventore numquam asperiores deleniti earum accusamus hic magni, dicta tempore esse ut quis incidunt, debitis fugit quaerat. Velit deserunt soluta ad optio repudiandae pariatur?",
         ],
-        id: "2",
     },
-    {
+    post1: {
         image: "/unnamed.jpg",
-        title: "post3",
+        title: "Post 3",
         description:
             "Let's Cook aspira a dar el servicio de reparto a domicilio de meal kits en Barcelona perfecto, con criterios de calidad y un rango geográfico amplio.",
         tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
@@ -51,48 +43,5 @@ const Posts = [
             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis exercitationem quis, cum, sunt consectetur facere ut laboriosam mollitia rerum reiciendis sapiente sit vero odit hic laudantium nihil eligendi autem delectus. Necessitatibus enim nesciunt harum officia, minima repellat incidunt beatae sit hic commodi iure minus deleniti cupiditate possimus cumque nobis, dolor at similique maiores modi. Numquam maiores vel odit fugit quia. Sequi optio blanditiis nam tempora aut inventore numquam asperiores deleniti earum accusamus hic magni, dicta tempore esse ut quis incidunt, debitis fugit quaerat. Velit deserunt soluta ad optio repudiandae pariatur",
             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis exercitationem quis, cum, sunt consectetur facere ut laboriosam mollitia rerum reiciendis sapiente sit vero odit hic laudantium nihil eligendi autem delectus. Necessitatibus enim nesciunt harum officia, minima repellat incidunt beatae sit hic commodi iure minus deleniti cupiditate possimus cumque nobis, dolor at similique maiores modi. Numquam maiores vel odit fugit quia. Sequi optio blanditiis nam tempora aut inventore numquam asperiores deleniti earum accusamus hic magni, dicta tempore esse ut quis incidunt, debitis fugit quaerat. Velit deserunt soluta ad optio repudiandae pariatur?",
         ],
-        id: "3",
     },
-];
-
-export const getStaticPaths = () => {
-    const response = Posts;
-
-    const paths = response.map((post, index) => ({
-        params: {
-            id: post.id,
-        },
-    }));
-
-    return {
-        // incremental static generation
-        // Statically generate all paths
-        paths: paths,
-        // Everything else falls for 404
-        fallback: false,
-    };
 };
-
-export const getStaticProps = ({ params }) => {
-    const id = params?.id;
-
-    const response = Posts[`${id}`];
-
-    const post = response;
-
-    return {
-        props: {
-            post,
-        },
-    };
-};
-
-const BlogPostPage = ({ post }) => {
-    return (
-        <>
-            <BlogPostCardDetail post={post} />
-        </>
-    );
-};
-
-export default BlogPostPage;
