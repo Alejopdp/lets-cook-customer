@@ -15,7 +15,7 @@ const Recetas = () => {
     const lang = langs[router.locale];
 
     return (
-        <div>
+        <>
             <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
 
             <Grid
@@ -52,7 +52,7 @@ const Recetas = () => {
                     />
                 </Grid>
             </Grid>
-        </div>
+        </>
     );
 };
 
