@@ -91,14 +91,22 @@ const BlogPostCard = (props) => {
     const classes = useStyles();
 
     const { root, image, marg1, marg2, marg4, publisher, date } = classes;
+    console.log("LA URL: ", process.env.BLOG_API_URL);
 
     return (
         <>
-            {posts.map((post, index) => (
+            {props.posts.map((post, index) => (
                 <div className={root} key={index}>
                     <Grid container>
                         <Grid item xs={12} md={4}>
-                            <Image src={post.image} width={300} height={270} layout="responsive" className={image} />
+                            <Image
+                                src={`${process.env.NEXT_PUBLIC_BLOG_API_URL}${post.image.url}`}
+                                alt={post.image.name}
+                                width={300}
+                                height={270}
+                                layout="responsive"
+                                className={image}
+                            />
                         </Grid>
 
                         <Grid item xs={12} md={7} style={{ margin: "0 24px 0 24px" }}>
@@ -111,9 +119,9 @@ const BlogPostCard = (props) => {
                             </Typography>
 
                             <Grid container direction="row" className={marg2}>
-                                {post.tags.map((tag, index) => (
+                                {/* {post.tags.map((tag, index) => (
                                     <BlogTag tagName={tag} key={index} />
-                                ))}
+                                ))} */}
 
                                 <Typography variant="body1" className={marg1}>
                                     y 3 más...
@@ -123,12 +131,12 @@ const BlogPostCard = (props) => {
                             {/* <Publisher /> */}
 
                             <Grid container direction="row" alignItems="center" className={publisher}>
-                                <Avatar style={{ marginRight: "8px" }}>{post.avatar}</Avatar>
+                                <Avatar style={{ marginRight: "8px" }}>{post.author.picture.formats.large.url}</Avatar>
 
-                                <Typography variant="body2">{post.author}</Typography>
+                                <Typography variant="body2">{post.author.name}</Typography>
 
                                 <Typography variant="body2" className={date}>
-                                    {post.date}
+                                    {post.publishedAt}
                                 </Typography>
                             </Grid>
                         </Grid>
