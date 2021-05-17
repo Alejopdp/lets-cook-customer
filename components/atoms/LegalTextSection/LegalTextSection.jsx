@@ -25,16 +25,10 @@ const LegalTextSection = () => {
     const lang = langs[router.locale];
 
     return (
-        <Grid
-            container
-            direction="column"
-            className={clsx(classes.padd6, classes.align)}
-        >
+        <>
             <Grid item>
                 {/* Párrafo 1 */}
-                <Typography variant="subtitle1">
-                    {lang.firstParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.firstParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.firstParagraph.paragraph1}
                 </Typography>
@@ -49,9 +43,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 2 */}
-                <Typography variant="subtitle1">
-                    {lang.secondParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.secondParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.secondParagraph.paragraph1}
                 </Typography>
@@ -69,9 +61,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 3 */}
-                <Typography variant="subtitle1">
-                    {lang.thirdParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.thirdParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.thirdParagraph.paragraph1}
                 </Typography>
@@ -98,9 +88,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 4 */}
-                <Typography variant="subtitle1">
-                    {lang.fourthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.fourthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.fourthParagraph.paragraph1}
                 </Typography>
@@ -112,17 +100,13 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 5 */}
-                <Typography variant="subtitle1">
-                    {lang.fifthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.fifthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.fifthParagraph.paragraph1}
                 </Typography>
 
                 {/* Párrafo 6 */}
-                <Typography variant="subtitle1">
-                    {lang.sixthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.sixthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.sixthParagraph.paragraph1}
                 </Typography>
@@ -140,9 +124,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 7 */}
-                <Typography variant="subtitle1">
-                    {lang.seventhParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.seventhParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.seventhParagraph.paragraph1}
                 </Typography>
@@ -154,17 +136,13 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 8 */}
-                <Typography variant="subtitle1">
-                    {lang.eighthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.eighthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.eighthParagraph.paragraph1}
                 </Typography>
 
                 {/* Párrafo 9 */}
-                <Typography variant="subtitle1">
-                    {lang.ninthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.ninthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.ninthParagraph.paragraph1}
                 </Typography>
@@ -191,17 +169,13 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 10 */}
-                <Typography variant="subtitle1">
-                    {lang.tenthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.tenthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.tenthParagraph.paragraph1}
                 </Typography>
 
                 {/* Párrafo 11 */}
-                <Typography variant="subtitle1">
-                    {lang.eleventhParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.eleventhParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.eleventhParagraph.paragraph1}
                 </Typography>
@@ -213,9 +187,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 12 */}
-                <Typography variant="subtitle1">
-                    {lang.twelfthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twelfthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twelfthParagraph.paragraph1}
                 </Typography>
@@ -227,9 +199,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 13 */}
-                <Typography variant="subtitle1">
-                    {lang.thirteenthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.thirteenthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.thirteenthParagraph.paragraph1}
                 </Typography>
@@ -238,9 +208,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 14 */}
-                <Typography variant="subtitle1">
-                    {lang.fourteenthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.fourteenthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.fourteenthParagraph.paragraph1}
                 </Typography>
@@ -249,17 +217,13 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 15 */}
-                <Typography variant="subtitle1">
-                    {lang.fifteenthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.fifteenthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.fifteenthParagraph.paragraph1}
                 </Typography>
 
                 {/* Párrafo 16 */}
-                <Typography variant="subtitle1">
-                    {lang.sixteenthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.sixteenthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.sixteenthParagraph.paragraph1}
                 </Typography>
@@ -274,9 +238,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 17 */}
-                <Typography variant="subtitle1">
-                    {lang.seventeenthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.seventeenthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.seventeenthParagraph.paragraph1}
                 </Typography>
@@ -330,25 +292,19 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 18 */}
-                <Typography variant="subtitle1">
-                    {lang.eighthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.eighthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.eighthParagraph.paragraph1}
                 </Typography>
 
                 {/* Párrafo 19 */}
-                <Typography variant="subtitle1">
-                    {lang.nineteenthParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.nineteenthParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.nineteenthParagraph.paragraph1}
                 </Typography>
 
                 {/* Párrafo 20 */}
-                <Typography variant="subtitle1">
-                    {lang.twentiethParagraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twentiethParagraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twentiethParagraph.paragraph1}
                 </Typography>
@@ -360,9 +316,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 21 */}
-                <Typography variant="subtitle1">
-                    {lang.twenty1Paragraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twenty1Paragraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twenty1Paragraph.paragraph1}
                 </Typography>
@@ -374,17 +328,13 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 22 */}
-                <Typography variant="subtitle1">
-                    {lang.twenty2Paragraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twenty2Paragraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twenty2Paragraph.paragraph1}
                 </Typography>
 
                 {/* Párrafo 23 */}
-                <Typography variant="subtitle1">
-                    {lang.twenty3Paragraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twenty3Paragraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twenty3Paragraph.paragraph1}
                 </Typography>
@@ -402,9 +352,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 24 */}
-                <Typography variant="subtitle1">
-                    {lang.twenty4Paragraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twenty4Paragraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twenty4Paragraph.paragraph1}
                 </Typography>
@@ -428,17 +376,13 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 25 */}
-                <Typography variant="subtitle1">
-                    {lang.twenty5Paragraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twenty5Paragraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twenty5Paragraph.paragraph1}
                 </Typography>
 
                 {/* Párrafo 26 */}
-                <Typography variant="subtitle1">
-                    {lang.twenty6Paragraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twenty6Paragraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twenty6Paragraph.paragraph1}
                 </Typography>
@@ -450,9 +394,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 27 */}
-                <Typography variant="subtitle1">
-                    {lang.twenty7Paragraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twenty7Paragraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twenty7Paragraph.paragraph1}
                 </Typography>
@@ -488,9 +430,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 28 */}
-                <Typography variant="subtitle1">
-                    {lang.twenty8Paragraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twenty8Paragraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twenty8Paragraph.paragraph1}
                 </Typography>
@@ -502,9 +442,7 @@ const LegalTextSection = () => {
                 </Typography>
 
                 {/* Párrafo 29 */}
-                <Typography variant="subtitle1">
-                    {lang.twenty9Paragraph.subtitle}
-                </Typography>
+                <Typography variant="subtitle1">{lang.twenty9Paragraph.subtitle}</Typography>
                 <Typography paragraph variant="body1">
                     {lang.twenty9Paragraph.paragraph1}
                 </Typography>
@@ -515,7 +453,7 @@ const LegalTextSection = () => {
                     {lang.twenty9Paragraph.paragraph3}
                 </Typography>
             </Grid>
-        </Grid>
+        </>
     );
 };
 

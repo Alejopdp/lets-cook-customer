@@ -16,6 +16,13 @@ import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
+    container: {
+        margin: "auto",
+        marginBottom: theme.spacing(8),
+        [theme.breakpoints.down("md")]: {
+            marginBottom: theme.spacing(5),
+        },
+    },
     padd2: {
         paddingBottom: theme.spacing(2),
     },
@@ -25,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     searchBar: {
         borderRadius: "15px",
         backgroundColor: "white",
-        width: "60vw",
+        // width: "60vw",
     },
 }));
 
@@ -39,22 +46,21 @@ const SearchBar = (props) => {
     };
 
     return (
-        <Grid container direction="column" alignItems="center" className={clsx(classes.padd2, classes.align)}>
-            <Grid item xs={12} sm={12}>
-                <FormControl variant="outlined">
-                    <OutlinedInput
-                        className={classes.searchBar}
-                        value={props.searchValue}
-                        onChange={handleChange}
-                        placeholder={lang.placeholder}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <SearchIcon className="searchIcon" color="error" />
-                            </InputAdornment>
-                        }
-                    />
-                </FormControl>
-            </Grid>
+        <Grid classes={{ root: classes.container }} item xs={12} md={6}>
+            <FormControl variant="outlined" fullWidth>
+                <OutlinedInput
+                    className={classes.searchBar}
+                    value={props.searchValue}
+                    onChange={handleChange}
+                    placeholder={lang.placeholder}
+                    fullWidth
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <SearchIcon className="searchIcon" color="error" />
+                        </InputAdornment>
+                    }
+                />
+            </FormControl>
         </Grid>
     );
 };

@@ -25,35 +25,31 @@ const HowItWorksExtended = (props) => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <Grid
-                container
-                spacing={4}
-                direction={props.direction}
-                justify="center"
-                alignItems="center"
-            >
-                <Grid item xs={12} sm={4} md={3}>
-                    <Image
-                        src="/unnamed.jpg"
-                        layout="responsive"
-                        width={222}
-                        height={151}
-                        className={classes.img}
-                    />
-                </Grid>
-
-                <Grid item xs={12} sm={4} md={3}>
-                    <Typography variant="subtitle1" className={classes.marg2}>
-                        {props.title}
-                    </Typography>
-
-                    <Typography variant="body2" className={classes.marg2}>
-                        {props.subtitle}
-                    </Typography>
-                </Grid>
+        // <div className={classes.root}>
+        <Grid
+            container
+            item
+            spacing={4}
+            direction={props.direction}
+            justify="center"
+            alignItems="center"
+            style={{ marginTop: 16, marginBottom: 16 }}
+        >
+            <Grid item xs={12} sm={4}>
+                <Image src="/unnamed.jpg" layout="responsive" width={222} height={151} className={classes.img} />
             </Grid>
-        </div>
+
+            <Grid item xs={12} sm={4}>
+                <Typography variant="subtitle1" className={classes.marg2}>
+                    {props.title}
+                </Typography>
+
+                <Typography variant="body2" className={classes.marg2}>
+                    {props.subtitle}
+                </Typography>
+            </Grid>
+        </Grid>
+        // </div>
     );
 };
 

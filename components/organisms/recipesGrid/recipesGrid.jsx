@@ -12,7 +12,7 @@ const RecipesGrid = (props) => {
     return (
         <Grid container direction="row" justify="center" alignItems="flex-start" spacing={2}>
             {props.recipes.map((recipe, index) => (
-                <Grid item xs={4} key={index}>
+                <Grid item xs={12} md={4} key={index}>
                     <ReceiptCard
                         mainTag={"Más vendido"}
                         timeTag={recipe.cookDuration}

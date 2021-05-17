@@ -17,9 +17,7 @@ const preguntasFrecuentes = () => {
     return (
         <Layout>
             <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-
             <SearchBar searchValue={searchValue} setsearchValue={setsearchValue} />
-
             <FaqsSection searchValue={searchValue} />
         </Layout>
     );
