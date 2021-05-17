@@ -1,6 +1,7 @@
 // Utils & Config
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Link from "next/link";
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -10,12 +11,12 @@ import Grid from "@material-ui/core/Grid";
 import BlogTag from "../../atoms/blogTag/blogTag";
 
 // Icons & Images
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Image from "next/image";
 import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // backgroundColor: theme.palette.background.paper,
         maxWidth: "700px",
         margin: "0 auto",
         borderRadius: "8px",
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     image: {
-        borderRadius: "8px 8px 0 0",
+        borderRadius: "8px",
     },
     marg1: {
         marginTop: theme.spacing(1),
@@ -56,6 +57,15 @@ const BlogPostCardDetail = ({ post }) => {
 
     return (
         <div className={root}>
+            <Link href="/blogs/recetas">
+                <Grid container alignItems="center" style={{ marginBottom: "24px", cursor: "pointer" }}>
+                    <ArrowBackIcon style={{ marginRight: "8px", color: "#2b2b2b" }} />
+                    <Typography variant="h6" style={{ color: "#2b2b2b" }}>
+                        Volver al Blog
+                    </Typography>
+                </Grid>
+            </Link>
+
             <Grid container>
                 <Grid item>
                     <Image src={post.image} width={700} height={350} className={image} />
