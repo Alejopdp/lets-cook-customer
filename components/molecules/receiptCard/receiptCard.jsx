@@ -16,7 +16,7 @@ import SpeedIcon from "@material-ui/icons/Speed";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 350,
+        // maxWidth: 350,
         height: 250,
         background: "rgb(0,0,0)",
         background:
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         zIndex: "99",
     },
     gradient: {
-        maxWidth: 350,
+        // maxWidth: 350,
         height: 250,
         backgroundImage: "url(/unnamed.jpg)",
         backgroundSize: "cover",

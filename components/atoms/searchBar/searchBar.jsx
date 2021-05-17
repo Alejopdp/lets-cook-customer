@@ -1,5 +1,6 @@
 // Utils & Config
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
@@ -28,29 +29,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SearchBar = () => {
+const SearchBar = (props) => {
     const classes = useStyles();
     const router = useRouter();
     const lang = langs[router.locale];
 
+    const handleChange = (e) => {
+        props.setsearchValue(e.target.value);
+    };
+
     return (
-        <Grid
-            container
-            direction="column"
-            alignItems="center"
-            className={clsx(classes.padd2, classes.align)}
-        >
+        <Grid container direction="column" alignItems="center" className={clsx(classes.padd2, classes.align)}>
             <Grid item xs={12} sm={12}>
                 <FormControl variant="outlined">
                     <OutlinedInput
                         className={classes.searchBar}
+                        value={props.searchValue}
+                        onChange={handleChange}
                         placeholder={lang.placeholder}
                         startAdornment={
                             <InputAdornment position="start">
-                                <SearchIcon
-                                    className="searchIcon"
-                                    color="error"
-                                />
+                                <SearchIcon className="searchIcon" color="error" />
                             </InputAdornment>
                         }
                     />
@@ -61,3 +60,8 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
+SearchBar.propTypes = {
+    searchValue: PropTypes.string.isRequired,
+    setsearchValue: PropTypes.func.isRequired,
+};

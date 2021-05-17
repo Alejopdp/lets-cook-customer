@@ -39,10 +39,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const FaqsSection = () => {
+const FaqsSection = (props) => {
     const classes = useStyles();
     const router = useRouter();
     const lang = langs[router.locale];
+
+    const filteredSections = props.searchValue
+        ? lang.sections
+              .filter((section) =>
+                  section.accordions
+                      .filter((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
+                      .some((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
+              )
+              .map((section) => {
+                  return {
+                      ...section,
+                      accordions: section.accordions.filter(
+                          (accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1
+                      ),
+                  };
+              })
+        : lang.sections;
 
     return (
         <div className={classes.root}>
@@ -51,18 +68,15 @@ const FaqsSection = () => {
                 spacing={3}
                 justify="center"
                 alignItems="center"
-                className={classes.margin0}
+                // className={classes.margin0}
+                style={{ marginBottom: 128 }}
             >
-                {lang.sections.map((section, index) => (
-                    <Grid item xs={12} sm={5} key={index}>
+                {filteredSections.map((section, index) => (
+                    <Grid item xs={12} sm={6} key={index} style={{ height: "fit-content" }}>
                         <Typography variant="h6">{section.title}</Typography>
 
                         {section.accordions.map((accordion, index) => (
-                            <SimpleAccordion
-                                question={accordion.question}
-                                answer={accordion.answer}
-                                key={index}
-                            />
+                            <SimpleAccordion question={accordion.question} answer={accordion.answer} key={index} />
                         ))}
                     </Grid>
                 ))}

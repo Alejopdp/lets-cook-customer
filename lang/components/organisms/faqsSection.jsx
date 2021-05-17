@@ -8,23 +8,19 @@ export const faqsSection = {
                 title: "Tema 1",
                 accordions: [
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum loremboca dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                 ],
@@ -33,23 +29,19 @@ export const faqsSection = {
                 title: "Tema 2",
                 accordions: [
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                 ],
@@ -58,23 +50,19 @@ export const faqsSection = {
                 title: "Tema 3",
                 accordions: [
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                 ],
@@ -83,23 +71,19 @@ export const faqsSection = {
                 title: "Tema 4",
                 accordions: [
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Ipsum lorem dolor sit amet sadipscing elitr?",
+                        question: "Ipsum lorem dolor sit amet sadipscing elitr?",
                         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                 ],
@@ -115,23 +99,19 @@ export const faqsSection = {
                 title: "Section 1",
                 accordions: [
                     {
-                        question:
-                            "[EN] Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "[EN] Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                 ],
@@ -140,23 +120,19 @@ export const faqsSection = {
                 title: "Section 2",
                 accordions: [
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "[EN] Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "[EN] Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                 ],
@@ -165,23 +141,19 @@ export const faqsSection = {
                 title: "Section 3",
                 accordions: [
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "[EN] Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "[EN] Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                 ],
@@ -190,23 +162,19 @@ export const faqsSection = {
                 title: "Section 4",
                 accordions: [
                     {
-                        question:
-                            "[EN] Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "[EN] Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                     {
-                        question:
-                            "Lorem ipsum dolor sit amet sadipscing elitr?",
+                        question: "Lorem ipsum dolor sit amet sadipscing elitr?",
                         answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
                     },
                 ],
