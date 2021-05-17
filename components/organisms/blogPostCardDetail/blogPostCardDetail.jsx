@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import BlogTag from "../../atoms/blogTag/blogTag";
 
 // Icons & Images
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Image from "next/image";
 import Avatar from "@material-ui/core/Avatar";
 
@@ -68,7 +68,7 @@ const BlogPostCardDetail = ({ post }) => {
 
             <Grid container>
                 <Grid item>
-                    <Image src={post.image} width={700} height={350} className={image} />
+                    <Image src={post.image.url} width={700} height={350} className={image} alt={post.image.alt} />
                 </Grid>
 
                 <Grid item>
@@ -81,18 +81,18 @@ const BlogPostCardDetail = ({ post }) => {
                     </Typography>
 
                     <Grid container alignItems="center" className={publisher}>
-                        <Avatar style={{ marginRight: "8px" }}>{post.avatar}</Avatar>
+                        <Avatar style={{ marginRight: "8px" }}>{post.author.picture.formats.large.url}</Avatar>
 
                         <Typography variant="body2" style={{ marginRight: "130px" }}>
-                            {post.author}
+                            {post.author.name}
                         </Typography>
 
                         <Typography variant="body2" className={date}>
-                            {post.date}
+                            {post.publishedAt}
                         </Typography>
                     </Grid>
 
-                    <Grid container className={marg2}>
+                    {/* <Grid container className={marg2}>
                         {post.paragraphs.map((paragraph, index) => (
                             <Typography variant="body2" paragraph className={marg1} key={index}>
                                 {paragraph}
@@ -108,7 +108,7 @@ const BlogPostCardDetail = ({ post }) => {
                         <Typography variant="body1" className={marg1}>
                             y 3 más...
                         </Typography>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Grid>
         </div>
