@@ -1,6 +1,6 @@
 // Utils & Config
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
 // External components
@@ -23,31 +23,31 @@ const useStyles = makeStyles((theme) => ({
 
 const HowItWorksExtended = (props) => {
     const classes = useStyles();
+    const theme = useTheme();
 
     return (
         // <div className={classes.root}>
         <Grid
             container
-            item
             spacing={4}
             direction={props.direction}
             justify="center"
             alignItems="center"
-            style={{ marginTop: 16, marginBottom: 16 }}
+            style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}
         >
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
                 <Image src="/unnamed.jpg" layout="responsive" width={222} height={151} className={classes.img} />
             </Grid>
 
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" className={classes.marg2}>
                     {props.title}
                 </Typography>
-
-                <Typography variant="body2" className={classes.marg2}>
+                <Typography variant="body2">
                     {props.subtitle}
                 </Typography>
             </Grid>
+
         </Grid>
         // </div>
     );

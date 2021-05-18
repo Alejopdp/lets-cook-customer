@@ -9,7 +9,7 @@ import { getPosts } from "../../../helpers/serverRequests/blog";
 
 const BlogRecetas = (props) => {
     return (
-        <Layout>
+        <Layout containerMaxWidth="md">
             <TitleOtherPages title="Blog" subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
             <BlogsGrid posts={props.posts} />
         </Layout>

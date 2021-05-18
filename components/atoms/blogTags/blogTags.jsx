@@ -1,5 +1,5 @@
 // Utils & Config
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import propTypes from "prop-types";
 
@@ -8,29 +8,42 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
-    tag: {
+    tagClass: {
         backgroundColor: theme.palette.background.default,
-        // backgroundColor: "#f9f9f9",
         padding: "0px 16px 0px 16px",
         marginTop: theme.spacing(1),
         marginRight: theme.spacing(1),
     },
 }));
 
-const BlogTag = (props) => {
+const BlogTags = (props) => {
     const classes = useStyles();
+    const { tagClass } = classes;
+    const [tags, setTags] = useState(props.tags)
 
-    const { tag } = classes;
+
+    // const filteredTags = tags.splice(4);
+
+    // const handleSeeMoreTags = () => {
+    //     setTags(...tags, filteredTags)
+    // }
 
     return (
-        <Typography variant="body1" className={tag}>
-            {props.tagName}
-        </Typography>
+        <>
+            {tags.map((tag, index) => (
+                <Typography variant="body1" className={tagClass}>
+                    {tag}
+                </Typography>
+            ))}
+        </>
+
     );
 };
+
+
 
 // BlogTag.propTypes = {
 //     tagName: propTypes.string.isRequired,
 // };
 
-export default BlogTag;
+export default BlogTags;
