@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "1000px",
         margin: "0 auto",
         borderRadius: "8px",
-        // border: "1px solid red",
         marginBottom: theme.spacing(2),
         cursor: "pointer",
         [theme.breakpoints.down("md")]: {

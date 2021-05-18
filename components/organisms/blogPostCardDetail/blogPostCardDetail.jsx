@@ -2,6 +2,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "next/link";
+import { useRouter } from "next/router";
+const langs = require("../../../lang").BlogPostCardDetail;
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -52,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
 
 const BlogPostCardDetail = ({ post }) => {
     const classes = useStyles();
+    const router = useRouter();
+    const lang = langs[router.locale];
 
     const { root, image, marg1, marg2, publisher, date, tags } = classes;
 
