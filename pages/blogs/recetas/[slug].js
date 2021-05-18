@@ -1,9 +1,11 @@
 // Utils & Config
 import React from "react";
+import { getPostBySlug, getPosts } from "../../../helpers/serverRequests/blog";
 
 // Internal componentss
 import BlogPostCardDetail from "../../../components/organisms/blogPostCardDetail/blogPostCardDetail";
-import { getPostBySlug, getPosts } from "../../../helpers/serverRequests/blog";
+import Layout from "../../../components/layout/publicLayout";
+import BackButtonTitle from "../../../components/atoms/backButtonTitle/backButtonTitle";
 
 export const getStaticPaths = async (context) => {
     const response = await getPosts(context.locale);
@@ -24,7 +26,7 @@ export const getStaticPaths = async (context) => {
 };
 
 export const getStaticProps = async (context) => {
-    const slug = context.params?.slug;
+    const slug = context.params.slug;
     const res = await getPostBySlug(slug, context.locale);
 
     return {
@@ -37,9 +39,10 @@ export const getStaticProps = async (context) => {
 
 const BlogPostPage = ({ post, error }) => {
     return (
-        <>
+        <Layout containerMaxWidth="md">
+            <BackButtonTitle url="/blogs/recetas" title="Volver al Blog" />
             <BlogPostCardDetail post={post} />
-        </>
+        </Layout>
     );
 };
 

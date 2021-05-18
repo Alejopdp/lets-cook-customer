@@ -1,7 +1,9 @@
 // Utils & Config
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Link from "next/link";
+import Parser from 'html-react-parser';
+import { dateFromISO8601 } from '../../../helpers/utils/date';
+import { useRouter } from "next/router";
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -16,15 +18,6 @@ import Image from "next/image";
 import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        maxWidth: "700px",
-        margin: "0 auto",
-        borderRadius: "8px",
-        marginTop: theme.spacing(2),
-        [theme.breakpoints.down("xs")]: {
-            margin: theme.spacing(2),
-        },
-    },
     image: {
         borderRadius: "8px",
     },
@@ -48,70 +41,60 @@ const useStyles = makeStyles((theme) => ({
     tags: {
         marginBottom: theme.spacing(6),
     },
+    gridContent: {
+        whiteSpace: 'break-spaces',
+        overflowWrap: 'break-word',
+        '& iframe': {
+            width: '100%'
+        }
+    }
 }));
 
 const BlogPostCardDetail = ({ post }) => {
     const classes = useStyles();
-
-    const { root, image, marg1, marg2, publisher, date, tags } = classes;
+    const router = useRouter();
+    const { root, image, marg1, marg2, publisher, date, tags, gridContent } = classes;
+    console.log('post', post)
 
     return (
-        <div className={root}>
-            <Link href="/blogs/recetas">
-                <Grid container alignItems="center" style={{ marginBottom: "24px", cursor: "pointer" }}>
-                    <ArrowBackIcon style={{ marginRight: "8px", color: "#2b2b2b" }} />
-                    <Typography variant="h6" style={{ color: "#2b2b2b" }}>
-                        Volver al Blog
-                    </Typography>
-                </Grid>
-            </Link>
-
+        <>
             <Grid container>
-                <Grid item>
-                    <Image src={post.image.url} width={700} height={350} className={image} alt={post.image.alt} />
+                <Grid item xs={12}>
+                    <div>
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_BLOG_API_URL}${post.image.url}`}
+                            alt={post.image.name}
+                            width={700}
+                            height={350}
+                            layout="responsive"
+                            className={image}
+                        />
+                    </div>
                 </Grid>
-
-                <Grid item>
+                <Grid item xs={12}>
                     <Typography variant="subtitle1" className={marg2}>
                         {post.title}
                     </Typography>
-
                     <Typography variant="body1" className={marg1}>
                         {post.description}
                     </Typography>
-
                     <Grid container alignItems="center" className={publisher}>
                         <Avatar style={{ marginRight: "8px" }}>{post.author.picture.formats.large.url}</Avatar>
-
                         <Typography variant="body2" style={{ marginRight: "130px" }}>
                             {post.author.name}
                         </Typography>
-
                         <Typography variant="body2" className={date}>
-                            {post.publishedAt}
+                            {dateFromISO8601(post.publishedAt, router.locale)}
                         </Typography>
                     </Grid>
-
-                    {/* <Grid container className={marg2}>
-                        {post.paragraphs.map((paragraph, index) => (
-                            <Typography variant="body2" paragraph className={marg1} key={index}>
-                                {paragraph}
-                            </Typography>
-                        ))}
-                    </Grid>
-
-                    <Grid container className={tags}>
-                        {post.tags.map((tag, index) => (
-                            <BlogTag tagName={tag} key={index} />
-                        ))}
-
-                        <Typography variant="body1" className={marg1}>
-                            y 3 más...
-                        </Typography>
-                    </Grid> */}
                 </Grid>
             </Grid>
-        </div>
+            <Grid container>
+                <Grid item xs={12} className={gridContent}>
+                    {Parser(post.content)}
+                </Grid>
+            </Grid>
+        </>
     );
 };
 

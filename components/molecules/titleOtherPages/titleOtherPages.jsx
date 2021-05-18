@@ -24,12 +24,7 @@ const TitleOtherPages = (props) => {
     const classes = useStyles();
 
     return (
-        <Grid
-            container
-            direction="column"
-            alignItems="center"
-            className={clsx(classes.padd4, classes.align)}
-        >
+        <Grid container direction="column" alignItems="center" className={clsx(classes.padd4, classes.align)} >
             <Grid item xs={12} sm={12}>
                 <Typography
                     variant="h4"
