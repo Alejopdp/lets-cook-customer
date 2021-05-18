@@ -46,7 +46,7 @@ const SearchBar = (props) => {
     };
 
     return (
-        <Grid classes={{ root: classes.container }} item xs={12} md={6}>
+        <Grid classes={{ root: classes.container }} item xs={12} md={8}>
             <FormControl variant="outlined" fullWidth>
                 <OutlinedInput
                     className={classes.searchBar}

@@ -1,6 +1,6 @@
 // Utils & Config
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").faqsSection;
@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 
 // Internal components
 import SimpleAccordion from "../../atoms/accordion/accordion";
+import EmptyState from "../../molecules/emptyState/emptyState";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,25 +42,27 @@ const useStyles = makeStyles((theme) => ({
 
 const FaqsSection = (props) => {
     const classes = useStyles();
+    const theme = useTheme();
     const router = useRouter();
     const lang = langs[router.locale];
 
     const filteredSections = props.searchValue
         ? lang.sections
-              .filter((section) =>
-                  section.accordions
-                      .filter((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
-                      .some((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
-              )
-              .map((section) => {
-                  return {
-                      ...section,
-                      accordions: section.accordions.filter(
-                          (accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1
-                      ),
-                  };
-              })
+            .filter((section) =>
+                section.accordions
+                    .filter((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
+                    .some((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
+            )
+            .map((section) => {
+                return {
+                    ...section,
+                    accordions: section.accordions.filter(
+                        (accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1
+                    ),
+                };
+            })
         : lang.sections;
+
 
     return (
         <div className={classes.root}>
@@ -67,19 +70,26 @@ const FaqsSection = (props) => {
                 container
                 spacing={3}
                 justify="center"
-                alignItems="center"
+                alignItems="start"
                 // className={classes.margin0}
-                style={{ marginBottom: 128 }}
+                style={{ marginBottom: theme.spacing(10) }}
             >
-                {filteredSections.map((section, index) => (
-                    <Grid item xs={12} sm={6} key={index} style={{ height: "fit-content" }}>
-                        <Typography variant="h6">{section.title}</Typography>
-
-                        {section.accordions.map((accordion, index) => (
-                            <SimpleAccordion question={accordion.question} answer={accordion.answer} key={index} />
-                        ))}
-                    </Grid>
-                ))}
+                {filteredSections.length === 0 ? (
+                    <EmptyState title={lang.emptyState.title} text={lang.emptyState.text} />
+                ) : (
+                        <>
+                            {filteredSections.map((section, index) => (
+                                <Grid item xs={12} sm={6} key={index} style={{ height: "fit-content", marginBottom: theme.spacing(2) }}>
+                                    <Typography variant="h6">
+                                        {section.title}
+                                    </Typography>
+                                    {section.accordions.map((accordion, index) => (
+                                        <SimpleAccordion question={accordion.question} answer={accordion.answer} key={index} />
+                                    ))}
+                                </Grid>
+                            ))}
+                        </>
+                    )}
             </Grid>
 
             <Grid container direction="column" align="center">

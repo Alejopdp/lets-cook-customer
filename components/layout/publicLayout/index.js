@@ -14,8 +14,10 @@ const PublicLayout = (props) => {
     return (
         <Box minHeight="100vh">
             <Box height="64px">Navbar</Box>
-            <Container maxWidth="lg" style={{ paddingBottom: 128 }}>
-                <Grid container>{props.children}</Grid>
+            <Container maxWidth={props.containerMaxWidth || "lg"} style={{ paddingBottom: 128 }}>
+                <Grid container>
+                    {props.children}
+                </Grid>
             </Container>
             <Footer />
         </Box>

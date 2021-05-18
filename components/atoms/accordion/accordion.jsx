@@ -30,13 +30,15 @@ const SimpleAccordion = (props) => {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography variant="body1" color="textSecondary">
                         {props.question}
                     </Typography>
                 </AccordionSummary>
 
                 <AccordionDetails>
-                    <Typography>{props.answer}</Typography>
+                    <Typography variant="body2" color="textSecondary">
+                        {props.answer}
+                    </Typography>
                 </AccordionDetails>
             </Accordion>
         </div>
