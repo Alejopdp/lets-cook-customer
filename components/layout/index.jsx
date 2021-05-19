@@ -21,8 +21,9 @@ const useStyles = makeStyles((theme) => ({
         width: 250,
     },
     content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -115,7 +116,6 @@ const Layout = ({ children: Component, ...props }) => {
                     <RoundedButton label="Ver planes" variant="content" ></RoundedButton>
                 </Hidden>
                 <LangSelector onChangeLang={_handleOnChangeLang} />
-
             </Toolbar>
         </AppBar>
     );
