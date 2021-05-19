@@ -15,6 +15,12 @@ const useStyles = makeStyles((theme) => ({
         // width: '100%',
         paddingTop: theme.spacing(2),
     },
+    accordionCard: {
+        borderRadius: "15px !important",
+        boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+    }
 }));
 
 const SimpleAccordion = (props) => {
@@ -22,7 +28,7 @@ const SimpleAccordion = (props) => {
 
     return (
         <div className={classes.root}>
-            <Accordion style={{ borderRadius: "15px" }}>
+            <Accordion className={classes.accordionCard}>
                 <AccordionSummary
                     expandIcon={
                         <ExpandMoreIcon color="error" fontSize="large" />

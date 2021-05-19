@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const BlogTags = (props) => {
+const BlogTagsWithFilter = (props) => {
     const classes = useStyles();
     const { tagClass } = classes;
     const [tags, setTags] = useState(props.tags)
@@ -42,8 +42,8 @@ const BlogTags = (props) => {
 
 
 
-// BlogTag.propTypes = {
+// BlogTagsWithFilter.propTypes = {
 //     tagName: propTypes.string.isRequired,
 // };
 
-export default BlogTags;
+export default BlogTagsWithFilter;

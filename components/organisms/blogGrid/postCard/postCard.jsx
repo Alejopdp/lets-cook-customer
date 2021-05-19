@@ -12,7 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
 // Internal components
-import BlogTags from '../../../atoms/blogTags/blogTags';
+import BlogTagsWithFilter from '../../../atoms/blogTags/blogTagsFWithFilter';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "8px",
         marginBottom: theme.spacing(3),
         cursor: "pointer",
+        boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
     },
     image: {
         borderRadius: "8px 0 0 8px",
@@ -83,7 +86,7 @@ const PostCard = (props) => {
                     {props.post.description}
                 </Typography>
                 <Grid container direction="row" className={marg2}>
-                    <BlogTags tags={harcodedTags} />
+                    <BlogTagsWithFilter tags={harcodedTags} />
                 </Grid>
 
                 <Grid container direction="row" alignItems="center" className={publisher}>

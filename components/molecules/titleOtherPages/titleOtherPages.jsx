@@ -10,10 +10,10 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
     padd2: {
-        paddingBottom: theme.spacing(2),
+        paddingBottom: theme.spacing(1),
     },
     padd4: {
-        paddingBottom: theme.spacing(4),
+        paddingBottom: theme.spacing(6),
     },
     align: {
         textAlign: "center",

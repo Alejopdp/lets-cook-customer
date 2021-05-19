@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
         margin: "0 auto",
         marginBottom: theme.spacing(2),
     },
+    faqsContainer: {
+        height: "fit-content",
+        marginBottom: theme.spacing(2),
+    }
 }));
 
 const FaqsSection = (props) => {
@@ -79,7 +83,7 @@ const FaqsSection = (props) => {
                 ) : (
                         <>
                             {filteredSections.map((section, index) => (
-                                <Grid item xs={12} sm={6} key={index} style={{ height: "fit-content", marginBottom: theme.spacing(2) }}>
+                                <Grid item xs={12} sm={6} key={index} className={classes.faqsContainer}>
                                     <Typography variant="h6">
                                         {section.title}
                                     </Typography>
