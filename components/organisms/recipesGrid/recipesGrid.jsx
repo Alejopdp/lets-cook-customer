@@ -40,14 +40,18 @@ const RecipesGrid = (props) => {
         shortDescription: "Lorem ipsum dolor sit amet, conetur meand las ipscing elitr, sed diam nonumy eir tempor invidunt uorem ipsum dolor sit amet aswim",
         cookDuration: "50 min",
         difficultyLevel: "Alta",
-        variantOptions: { opcionSinGluten: true, opcionSinLactosa: true, opcionVegana: false },
+        variantOptions: ['Opción sin gluten', 'Opción sin lactosa'],
         longDescription: "Lorem ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet aswim",
+        // recipeVariants: [
+        //     { name: 'Opción principal', ingredients: ["Pan", "Tomate", "Lechuga", "Queso", "Carne"] },
+        //     { name: 'Opción sin glúten', ingredients: ["Tomate", "Lechuga",] },
+        //     { name: 'Opción sin lactosa', ingredients: ["Pan", "Lechuga", "Carne"] }
+        // ],
         recipeVariants: [
-            { name: 'Opción principal', ingredients: ["Pan", "Tomate", "Lechuga", "Queso", "Carne"] },
-            { name: 'Opción sin glúten', ingredients: ["Tomate", "Lechuga",] },
-            { name: 'Opción sin lactosa', ingredients: ["Pan", "Lechuga", "Carne"] }
+            ['Opción principal', 'Opción sin glúten', 'Opción sin lactosa'],
+            ['Pan, Tomate, Lechuga, Queso, Carne', 'Tomate, Lechuga', 'Pan, Lechuga, Carne']
         ],
-        tools: ['Bol', 'Tenedor', 'Cuchillo'],
+        tools: 'Bol, Tenedor, Cuchillo',
         nutritionalInformation: [
             { key: 'Valor energético', value: '114,8 kcal' },
             { key: 'Grasas', value: '2,2 g' },
