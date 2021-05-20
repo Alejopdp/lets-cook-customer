@@ -15,7 +15,7 @@ const preguntasFrecuentes = () => {
     const [searchValue, setsearchValue] = useState("");
 
     return (
-        <Layout containerMaxWidth="md">
+        <Layout containerMaxWidth="lg">
             <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
             <SearchBar searchValue={searchValue} setsearchValue={setsearchValue} />
             <FaqsSection searchValue={searchValue} />

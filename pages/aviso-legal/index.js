@@ -14,7 +14,7 @@ const AvisoLegal = () => {
     const lang = langs[router.locale];
 
     return (
-        <Layout>
+        <Layout containerMaxWidth="lg">
             <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
             <LegalTextSection />
         </Layout>

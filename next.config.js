@@ -9,7 +9,7 @@ module.exports = {
         defaultLocale: "es",
     },
     images: {
-        domains: ["localhost"],
+        domains: ["localhost", "cdn.shopify.com"],
     },
     // IT'S DEPRECATED
     // publicRuntimeConfig: {

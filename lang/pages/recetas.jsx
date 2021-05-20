@@ -1,6 +1,6 @@
 export const recetas = {
     es: {
-        title: "Cómo funciona",
+        title: "Menú semanal",
         subtitle: "Cada semana cambiamos el menú con nuevas recetas",
     },
     en: {

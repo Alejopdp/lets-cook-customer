@@ -4,6 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 
+// Internal Components
+import RecipeImgTags from '../../atoms/recipeImgTags/recipeImgTags';
+
 // External components
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -62,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ReceiptCard = (props) => {
+const RecipeCard = (props) => {
     const classes = useStyles();
 
     const { root, imgTag, tag, marg, textWhite, gradient, titleText } = classes;
@@ -70,17 +73,12 @@ const ReceiptCard = (props) => {
     return (
         <div
             className={gradient}
-            style={{ backgroundImage: `url(${props.img})` }}
+            style={{ backgroundImage: `url(${props.img})`, cursor: 'pointer' }}
+            onClick={props.handleClickOpenModal}
         >
-            <Card className={root}>
+            <Card className={root} >
                 <CardContent style={{ height: "60%" }}>
-                    <Box style={{ display: 'flex' }}>
-                        {props.imgTags.map((tag, index) => (
-                            <Typography key={index} variant="subtitle2" style={{ marginRight: '4px' }} className={clsx(imgTag, textWhite)}>
-                                {tag}
-                            </Typography>
-                        ))}
-                    </Box>
+                    <RecipeImgTags imgTags={props.imgTags} />
                 </CardContent>
 
                 <CardContent style={{ height: "40%" }}>
@@ -109,11 +107,11 @@ const ReceiptCard = (props) => {
     );
 };
 
-ReceiptCard.propTypes = {
+RecipeCard.propTypes = {
     mainTag: PropTypes.string,
     timeTag: PropTypes.string.isRequired,
     difficultyTag: PropTypes.string.isRequired,
     recipeName: PropTypes.string.isRequired,
 };
 
-export default ReceiptCard;
+export default RecipeCard;

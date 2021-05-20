@@ -18,7 +18,7 @@ const Recetas = (props) => {
     const lang = langs[router.locale];
 
     return (
-        <Layout>
+        <Layout containerMaxWidth="lg">
             <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
             <RecipesGrid recipes={props.recipes} />
         </Layout>

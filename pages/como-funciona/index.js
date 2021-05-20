@@ -13,7 +13,7 @@ const ComoFunciona = () => {
     const lang = langs[router.locale];
 
     return (
-        <Layout containerMaxWidth="md">
+        <Layout containerMaxWidth="lg">
             <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
             <HowItWorksExtendedSection />
         </Layout>
