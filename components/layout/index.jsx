@@ -109,28 +109,28 @@ const Layout = ({ children: Component, ...props }) => {
         </>
     );
     const AppBarContent = () => (
-        <AppBar position="static" color="default" className={classes.navbarClass}>
-            <Toolbar>
-                <IconButton
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    className={classes.menuButton}
-                    onClick={_toggleOpeningDrawer}>
-                    <MenuIcon />
-                </IconButton>
-                <div className={classes.logo}>
-                    <Link href='/'>
-                        <Image src="/logo.png" width={135} height={40} />
-                    </Link>
-                </div>
-                <Hidden xsDown implementation="css">
-                    <LoginButton />
-                    <RoundedButton label="Ver planes" variant="content" ></RoundedButton>
-                </Hidden>
-                <LangSelector onChangeLang={_handleOnChangeLang} />
-            </Toolbar>
-        </AppBar>
+            <AppBar position="fixed" color="default" className={classes.navbarClass}>
+                <Toolbar>
+                    <IconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        className={classes.menuButton}
+                        onClick={_toggleOpeningDrawer}>
+                        <MenuIcon />
+                    </IconButton>
+                    <div className={classes.logo}>
+                        <Link href='/'>
+                            <Image src="/logo.png" width={135} height={40} />
+                        </Link>
+                    </div>
+                    <Hidden xsDown implementation="css">
+                        <LoginButton />
+                        <RoundedButton label="Ver planes" variant="content" ></RoundedButton>
+                    </Hidden>
+                    <LangSelector onChangeLang={_handleOnChangeLang} />
+                </Toolbar>
+            </AppBar>
     );
 
     return (

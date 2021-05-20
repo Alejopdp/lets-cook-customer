@@ -1,4 +1,4 @@
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Typography, useTheme } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import RoundedButton from '../../atoms/roundedButton/roundedButton.jsx';
 import CircularBotton from '../../atoms/circularBotton/CircularBotton.jsx';
@@ -35,27 +35,25 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         maxWidth: 670,
     },
-    paddingX2: {
-        paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2)
-    }
 }))
 const ValuePropositionSection = () => {
     const classes = useStyles();
+    const theme = useTheme();
+
     return (<>
         <div className={classes.root}>
             <div className={classes.overlay}>
                 <div className={classes.textContent}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" style={{ marginBottom: theme.spacing(1) }}>
                         Llegó la hora de redescubrir tu cocina
                     </Typography>
-                    <Typography className={classes.paddingX2} variant="body1">
+                    <Typography variant="body1" style={{ marginBottom: theme.spacing(3) }}>
                         Pensamos por ti <b>recetas sanas y equilibradas</b> con la mejor selección de <b>ingredientes frescos y naturales</b> y te las enviamos <b>semanalmente</b> a la puerta de tu casa
                     </Typography>
                     <RoundedButton label="Ver planes" />
-                    <Typography className={classes.paddingX2} variant="caption">Sin compromiso de permanencia</Typography>
+                    <Typography style={{ marginTop: theme.spacing(0.5) }} variant="caption">Sin compromiso de permanencia</Typography>
                 </div>
-                <div className={classes.paddingX2}>
+                <div style={{ marginBottom: theme.spacing(3) }}>
                     <CircularBotton>
                         <ArrowIcon color="primary" fontSize="large" />
                     </CircularBotton>

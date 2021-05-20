@@ -5,9 +5,7 @@ import { PersonOutlineRounded } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
     loginButton: {
         minWidth: 150,
-        padding: theme.spacing(1),
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(2),
+        padding: `${theme.spacing(1)}px ${theme.spacing(4)}px`,
         borderRadius: 50,
         margin: `0 auto`,
     }

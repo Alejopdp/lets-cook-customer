@@ -67,21 +67,21 @@ const Footer = () => {
                     <Link href='/'>
                         <Image src="/logo.png" width={190} height={60} />
                     </Link>
-                    <Grid>
+                    <Grid style={{ marginTop: '16px' }}>
                         <InstagramIcon
-                            fontSize="large"
+                            fontSize="medium"
                             style={{ margin: "8px" }}
                         />
                         <FacebookIcon
-                            fontSize="large"
+                            fontSize="medium"
                             style={{ margin: "8px" }}
                         />
                         <PinterestIcon
-                            fontSize="large"
+                            fontSize="medium"
                             style={{ margin: "8px" }}
                         />
                         <YouTubeIcon
-                            fontSize="large"
+                            fontSize="medium"
                             style={{ margin: "8px" }}
                         />
                     </Grid>
@@ -126,7 +126,7 @@ const Footer = () => {
                 alignItems="flex-end"
                 className={footer}
             >
-                <Typography variant="body2">
+                <Typography variant="body2" style={{ fontSize: '13px' }}>
                     Let's Cook 2021 - Todos los derechos reservados
                 </Typography>
                 <Image src="/enisa.png" width={50} height={100} />

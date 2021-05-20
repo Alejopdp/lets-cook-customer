@@ -1,4 +1,4 @@
-import { GridList, makeStyles, Typography } from '@material-ui/core';
+import { GridList, makeStyles, Typography, Container, Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import RoundedButton from '../../atoms/roundedButton/roundedButton';
 import RecipeCard from '../../molecules/recipeCard/recipeCard';
@@ -40,22 +40,52 @@ const useStyles = makeStyles(theme => ({
 
 const RecipesSection = () => {
     const classes = useStyles();
-    const recipes = [1, 2, 3, 4, 5, 6, 7, 8]
+    const recipes = [1, 2, 3, 4]
     return (
-        <div className={classes.root}>
-            <div className={classes.title}>
+        // <div className={classes.root}>
+        //     <div className={classes.title}>
+        //         <TitleOtherPages
+        //             title="Hecha un vistazo a las recetas de esta semana"
+        //             subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
+        //             align="flex-start"
+        //         />
+        //     </div>
+        //     <div className={classes.carrusel}>
+        //         {recipes.map((recipe, key) => (
+        //             <div key={key} style={{
+        //                 padding: 8,
+        //                 width: 500,
+        //             }}>
+        //                 <RecipeCard
+        //                     img='https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg'
+        //                     imgTags={["Más vendido", "Vegano"]}
+        //                     timeTag={"15 min"}
+        //                     difficultyTag={"Fácil"}
+        //                     recipeName={"Salmón con quinoa"}
+        //                 />
+        //             </div>
+        //         ))}
+        //     </div>
+        //     <div className={classes.rootCenter}>
+        //         <RoundedButton label="Ver planes" />
+        //         <Typography
+        //             className={classes.smallText}
+        //             variant="caption">
+        //             Podrás pausar, cambiar o cancelar el plan cuando quieras
+        //         </Typography>
+        //     </div>
+        // </div>
+
+
+        <Container maxWidth='lg'>
+            <Grid container spacing={2}>
                 <TitleOtherPages
                     title="Hecha un vistazo a las recetas de esta semana"
                     subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
                     align="flex-start"
                 />
-            </div>
-            <div className={classes.carrusel}>
                 {recipes.map((recipe, key) => (
-                    <div key={key} style={{
-                        padding: 8,
-                        width: 500,
-                    }}>
+                    <Grid item xs={12} sm={6} md={3} >
                         <RecipeCard
                             img='https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg'
                             imgTags={["Más vendido", "Vegano"]}
@@ -63,19 +93,10 @@ const RecipesSection = () => {
                             difficultyTag={"Fácil"}
                             recipeName={"Salmón con quinoa"}
                         />
-                    </div>
-                ))
-                }
-            </div>
-            <div className={classes.rootCenter}>
-                <RoundedButton label="Ver planes" />
-                <Typography
-                    className={classes.smallText}
-                    variant="caption">
-                    Podrás pausar, cambiar o cancelar el plan cuando quieras
-                </Typography>
-            </div>
-        </div>
+                    </Grid>
+                ))}
+            </Grid>
+        </Container>
     );
 }
 RecipesSection.propTypes = {

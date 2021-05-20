@@ -16,13 +16,13 @@ const useStyles = makeStyles(theme => ({
     //     display: 'flex',
     //     flexDirection: "column"
     // },
-    paddingY6: {
-        paddingTop: theme.spacing(6),
-        paddingBottom: theme.spacing(6)
+    paddingY8: {
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8)
     },
-    paddingX6: {
-        paddingLeft: theme.spacing(6),
-        paddingRight: theme.spacing(6),
+    paddingX8: {
+        paddingLeft: theme.spacing(8),
+        paddingRight: theme.spacing(8),
     }
 }));
 /**
@@ -33,32 +33,22 @@ const HomePage = () => {
     return (
         <Layout>
             <ValuePropositionSection />
+            <div style={{paddingTop: '32px'}}>
             <GoogleRatingSection />
-            <div className={classes.paddingY6}>
+            </div>
+
+            <div className={classes.paddingY8}>
                 <HowItWorksSection />
             </div>
-            <div className={classes.paddingY6}>
+            <div className={classes.paddingY8}>
                 <PlansSection />
             </div>
-            <div className={clsx(classes.paddingX6, classes.paddingY6)}>
+            <div>
                 <BenefitsSection />
             </div>
-            <div>
+            <div className={classes.paddingY8}>
                 <RecipesSection />
             </div>
-            {/* TODO REMOVE TO PUT MAILER PLUGIN */}
-            <div style={{
-                width: "100%",
-                height: 54,
-                backgroundColor: "rgba(0, 130, 71,0.2)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
-            }}>
-                TODO: Put here the mailer plugin
-                </div>
-            {/* <CallToActionSection /> */}
-            {/* <Footer /> */}
         </Layout>
     )
 }

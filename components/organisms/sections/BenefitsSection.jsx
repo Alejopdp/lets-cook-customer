@@ -1,4 +1,4 @@
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Box, useTheme, Typography, Container, Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import RoundedButton from '../../atoms/roundedButton/roundedButton';
 
@@ -18,9 +18,7 @@ const useStyles = makeStyles(theme => ({
     },
     imgContainer: {
         justifyContent: "center",
-        alignItems: "center",
-        padding: theme.spacing(3),
-        boxSizing: "border-box", 
+        boxSizing: "border-box",
         display: "flex"
     },
     img: {
@@ -54,6 +52,7 @@ const useStyles = makeStyles(theme => ({
 
 const BenefitsSection = () => {
     const classes = useStyles();
+    const theme = useTheme();
 
     const cards = [
         {
@@ -79,34 +78,40 @@ const BenefitsSection = () => {
     ];
 
     return (
-        <div className={classes.root}>
-            <div className={classes.row}>
-                <div className={classes.imgContainer}>
-                    <img
-                        className={classes.img}
-                        src="/assets/img-beneficios-letscook.jpeg" />
-                </div>
-                <div>
-                    {cards.map((card,index) => (
-                        <div key={index} className={classes.card}>
-                            <div className={classes.cardIcon}>
-                                <img src={card.image} className={classes.icon}></img>
-                            </div>
-                            <div>
-                                <Typography variant="subtitle1" color="initial">{card.title}</Typography>
-                                <Typography variant="body1" color="initial">{card.content}</Typography>
-                            </div>
+        <Box style={{ backgroundColor: 'white', padding: `${theme.spacing(8)}px 0px` }}>
+            <Container maxWidth='lg'>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={6} alignSelf='center'>
+                        <div className={classes.imgContainer}>
+                            <img
+                                className={classes.img}
+                                src="/assets/img-beneficios-letscook.jpeg" />
                         </div>
-                    ))}
-                </div>
-            </div>
-            <RoundedButton label="Ver planes" />
-            <Typography
-                className={classes.smallText}
-                variant="caption">
-                Podrás pausar, cambiar o cancelar el plan cuando quieras
-        </Typography>
-        </div>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        {cards.map((card, index) => (
+                            <div key={index} className={classes.card}>
+                                <div className={classes.cardIcon}>
+                                    <img src={card.image} className={classes.icon}></img>
+                                </div>
+                                <div>
+                                    <Typography variant="subtitle1" color="initial">{card.title}</Typography>
+                                    <Typography variant="body1" color="initial">{card.content}</Typography>
+                                </div>
+                            </div>
+                        ))}
+                    </Grid>
+                </Grid>
+                <Grid container style={{ marginTop: theme.spacing(4) }}>
+                    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'column' }}>
+                        <RoundedButton label="Ver planes" />
+                        <Typography className={classes.smallText} variant="caption">
+                            Podrás pausar, cambiar o cancelar el plan cuando quieras
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </Container>
+        </Box>
     );
 }
 BenefitsSection.propTypes = {
