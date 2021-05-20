@@ -15,15 +15,11 @@ const PublicLayout = (props) => {
     const theme = useTheme();
 
     return (
-        <Box minHeight="100vh">
-            <Box height="64px">Navbar</Box>
-            <Container maxWidth={props.containerMaxWidth || "lg"} style={{ paddingBottom: theme.spacing(10) }}>
-                <Grid container>
-                    {props.children}
-                </Grid>
-            </Container>
-            <Footer />
-        </Box>
+        <Container maxWidth={props.containerMaxWidth || "lg"}>
+            <Grid container style={{paddingTop: theme.spacing(8), paddingBottom: theme.spacing(8)}}>
+                {props.children}
+            </Grid>
+        </Container>
     );
 };
 

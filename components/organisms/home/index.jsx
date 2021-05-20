@@ -10,12 +10,12 @@ import PlansSection from '../sections/PlansSection';
 import RecipesSection from '../sections/RecipesSection';
 import Footer from '../../molecules/footer/footer';
 const useStyles = makeStyles(theme => ({
-    root: {
-        top: 0,
-        position: "absolute",
-        display: 'flex',
-        flexDirection: "column"
-    },
+    // root: {
+    //     top: 0,
+    //     position: "absolute",
+    //     display: 'flex',
+    //     flexDirection: "column"
+    // },
     paddingY6: {
         paddingTop: theme.spacing(6),
         paddingBottom: theme.spacing(6)
@@ -32,36 +32,33 @@ const HomePage = () => {
     const classes = useStyles();
     return (
         <Layout>
-            <div className={classes.root}>
-                <ValuePropositionSection />
-                <GoogleRatingSection />
-                <div className={classes.paddingY6}>
-                    <HowItWorksSection />
-                </div>
-                <div className={classes.paddingY6}>
-                    <PlansSection />
-                </div>
-                <div className={clsx(classes.paddingX6, classes.paddingY6)}>
-                    <BenefitsSection />
-                </div>
-                <div>
-                    <RecipesSection />
-                </div>
-
-                <CallToActionSection />
-                {/* TODO REMOVE TO PUT MAILER PLUGIN */}
-                <div style={{
-                    width: "100%",
-                    height: 54,
-                    backgroundColor: "rgba(0, 130, 71,0.2)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center"
-                }}>
-                    TODO: Put here the mailer plugin
+            <ValuePropositionSection />
+            <GoogleRatingSection />
+            <div className={classes.paddingY6}>
+                <HowItWorksSection />
             </div>
-                <Footer />
+            <div className={classes.paddingY6}>
+                <PlansSection />
             </div>
+            <div className={clsx(classes.paddingX6, classes.paddingY6)}>
+                <BenefitsSection />
+            </div>
+            <div>
+                <RecipesSection />
+            </div>
+            {/* TODO REMOVE TO PUT MAILER PLUGIN */}
+            <div style={{
+                width: "100%",
+                height: 54,
+                backgroundColor: "rgba(0, 130, 71,0.2)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+            }}>
+                TODO: Put here the mailer plugin
+                </div>
+            {/* <CallToActionSection /> */}
+            {/* <Footer /> */}
         </Layout>
     )
 }

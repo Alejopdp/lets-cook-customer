@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { AppBar, Button, ButtonBase, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Menu, MenuItem, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Link, Container, Grid, Box, Button, ButtonBase, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, useTheme, Menu, MenuItem, Toolbar, Typography } from "@material-ui/core";
 import { Inbox, Menu as MenuIcon } from '@material-ui/icons';
 import Image from "next/image";
 import LoginButton from '../atoms/loginButton/LoginButton'
 import RoundedButton from '../atoms/roundedButton/roundedButton'
 import LangSelector from "../molecules/langSelector/langSelector";
+import Footer from "../molecules/footer/footer";
+import CallToActionSection from "../organisms/sections/CallToActionSection";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
         flex: 1,
         display: "flex",
         flexDirection: "column",
+        position: "relative",
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -43,6 +47,11 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             justifyContent: "right",
         }
+    },
+    navbarClass: {
+        boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.1)',
+        webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.1)',
+        mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.1)',
     }
 }));
 
@@ -64,6 +73,8 @@ const Layout = ({ children: Component, ...props }) => {
     };
 
     const classes = useStyles();
+    const theme = useTheme();
+
     const [openDrawerMenu, setOpenDrawerMenu] = useState(false);
 
     const _handleOnChangeLang = (lang) => { }
@@ -98,7 +109,7 @@ const Layout = ({ children: Component, ...props }) => {
         </>
     );
     const AppBarContent = () => (
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="default" className={classes.navbarClass}>
             <Toolbar>
                 <IconButton
                     edge="start"
@@ -109,7 +120,9 @@ const Layout = ({ children: Component, ...props }) => {
                     <MenuIcon />
                 </IconButton>
                 <div className={classes.logo}>
-                    <Image src="/logo.png" width={135} height={40} />
+                    <Link href='/'>
+                        <Image src="/logo.png" width={135} height={40} />
+                    </Link>
                 </div>
                 <Hidden xsDown implementation="css">
                     <LoginButton />
@@ -120,31 +133,37 @@ const Layout = ({ children: Component, ...props }) => {
         </AppBar>
     );
 
-    return (<div className={classes.root}>
-        <CssBaseline />
-        <AppBarContent />
-        <nav className={classes.drawer} aria-label="mailbox folders">
-            <Hidden smUp implementation="css">
-                <Drawer
-                    variant="temporary"
-                    anchor='left'
-                    open={openDrawerMenu}
-                    onClose={_toggleOpeningDrawer}
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                >
-                    {DrawerContent()}
-                </Drawer>
-            </Hidden>
-        </nav>
-        <main className={classes.content}>
-            {Component}
-        </main>
-    </div>);
+    return (
+        <div className={classes.root}>
+            <CssBaseline />
+            <AppBarContent />
+            <nav className={classes.drawer} aria-label="mailbox folders">
+                <Hidden smUp implementation="css">
+                    <Drawer
+                        variant="temporary"
+                        anchor='left'
+                        open={openDrawerMenu}
+                        onClose={_toggleOpeningDrawer}
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+                    >
+                        {DrawerContent()}
+                    </Drawer>
+                </Hidden>
+            </nav>
+            <main className={classes.content}>
+                {Component}
+                <CallToActionSection />
+            </main>
+            <footer>
+                <Footer />
+            </footer>
+        </div>
+    );
 }
 
 export default Layout;

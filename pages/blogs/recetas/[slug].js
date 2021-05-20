@@ -4,8 +4,9 @@ import { getPostBySlug, getPosts } from "../../../helpers/serverRequests/blog";
 
 // Internal componentss
 import BlogPostCardDetail from "../../../components/organisms/blogPostCardDetail/blogPostCardDetail";
-import Layout from "../../../components/layout/publicLayout";
+import InnerSectionLayout from "../../../components/layout/publicLayout";
 import BackButtonTitle from "../../../components/atoms/backButtonTitle/backButtonTitle";
+import Layout from '../../../components/layout/index';
 
 export const getStaticPaths = async (context) => {
     const response = await getPosts(context.locale);
@@ -39,9 +40,11 @@ export const getStaticProps = async (context) => {
 
 const BlogPostPage = ({ post, error }) => {
     return (
-        <Layout containerMaxWidth="md">
-            <BackButtonTitle url="/blogs/recetas" title="Volver al Blog" />
-            <BlogPostCardDetail post={post} />
+        <Layout>
+            <InnerSectionLayout containerMaxWidth="md">
+                <BackButtonTitle url="/blogs/recetas" title="Volver al Blog" />
+                <BlogPostCardDetail post={post} />
+            </InnerSectionLayout>
         </Layout>
     );
 };

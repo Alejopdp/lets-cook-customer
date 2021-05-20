@@ -16,7 +16,7 @@ import { Link } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: theme.palette.background.default,
         paddingTop: theme.spacing(6),
         paddingBottom: theme.spacing(6),
     },
@@ -48,7 +48,7 @@ const links = [
     },
     {
         name: "Blog",
-        url: "/blogs",
+        url: "/blogs/recetas",
     },
     {
         name: "Aviso legal",
@@ -64,7 +64,9 @@ const Footer = () => {
         <div className={root}>
             <Grid container justify="space-between" className={footer}>
                 <Grid item>
-                    <Image src="/logo.png" width={190} height={60} />
+                    <Link href='/'>
+                        <Image src="/logo.png" width={190} height={60} />
+                    </Link>
                     <Grid>
                         <InstagramIcon
                             fontSize="large"

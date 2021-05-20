@@ -9,18 +9,21 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
 // Internal Components
-import Layout from "../../components/layout/publicLayout";
+import InnerSectionLayout from "../../components/layout/publicLayout";
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
 import RecipesGrid from "../../components/organisms/recipesGrid/recipesGrid";
+import Layout from '../../components/layout/index';
 
 const Recetas = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
 
     return (
-        <Layout containerMaxWidth="lg">
-            <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-            <RecipesGrid recipes={props.recipes} />
+        <Layout>
+            <InnerSectionLayout containerMaxWidth="lg">
+                <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
+                <RecipesGrid recipes={props.recipes} />
+            </InnerSectionLayout>
         </Layout>
     );
 };

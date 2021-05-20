@@ -38,7 +38,7 @@ const LangSelector = ({ onChangeLang }) => {
     };
 
     return (
-        <>
+        <div>
             <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"
@@ -46,6 +46,7 @@ const LangSelector = ({ onChangeLang }) => {
                 startIcon={
                     lang.icon
                 }
+                style={{ marginLeft: '16px' }}
                 onClick={_toggleOpen}>
                 {lang.label}
             </Button>
@@ -55,6 +56,7 @@ const LangSelector = ({ onChangeLang }) => {
                 keepMounted
                 open={open}
                 onClose={_toggleOpen}
+                style={{ marginTop: '40px' }}
             >
                 {Object.keys(languages).map((key) =>
                     <MenuItem key={key} onClick={() => _handleOptionSelected(languages[key])}>
@@ -65,7 +67,7 @@ const LangSelector = ({ onChangeLang }) => {
                     </MenuItem>
                 )}
             </Menu>
-        </>
+        </div>
     );
 }
 

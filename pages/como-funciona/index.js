@@ -4,18 +4,21 @@ import { useRouter } from "next/router";
 const langs = require("../../lang").comoFunciona;
 
 // Internal components
-import Layout from "../../components/layout/publicLayout";
+import InnerSectionLayout from "../../components/layout/publicLayout";
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
 import HowItWorksExtendedSection from "../../components/organisms/howItWorksExtendedSection/howItWorksExtendedSection";
+import Layout from '../../components/layout/index';
 
 const ComoFunciona = () => {
     const router = useRouter();
     const lang = langs[router.locale];
 
     return (
-        <Layout containerMaxWidth="lg">
-            <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-            <HowItWorksExtendedSection />
+        <Layout>
+            <InnerSectionLayout containerMaxWidth="lg">
+                <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
+                <HowItWorksExtendedSection />
+            </InnerSectionLayout>
         </Layout>
     );
 };
