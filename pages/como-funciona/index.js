@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 const langs = require("../../lang").comoFunciona;
 
 // Internal components
+import Layout from "../../components/layout/publicLayout";
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
 import HowItWorksExtendedSection from "../../components/organisms/howItWorksExtendedSection/howItWorksExtendedSection";
 
@@ -12,11 +13,10 @@ const ComoFunciona = () => {
     const lang = langs[router.locale];
 
     return (
-        <>
+        <Layout containerMaxWidth="md">
             <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-
             <HowItWorksExtendedSection />
-        </>
+        </Layout>
     );
 };
 

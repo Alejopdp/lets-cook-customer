@@ -8,6 +8,9 @@ module.exports = {
         // a non-locale prefixed path e.g. `/hello`
         defaultLocale: "es",
     },
+    images: {
+        domains: ["localhost"],
+    },
     // IT'S DEPRECATED
     // publicRuntimeConfig: {
     //   // Will be available on both server and client

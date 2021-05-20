@@ -1,6 +1,6 @@
 // Utils & Config
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").faqsSection;
@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 
 // Internal components
 import SimpleAccordion from "../../atoms/accordion/accordion";
+import EmptyState from "../../molecules/emptyState/emptyState";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,12 +38,35 @@ const useStyles = makeStyles((theme) => ({
         margin: "0 auto",
         marginBottom: theme.spacing(2),
     },
+    faqsContainer: {
+        height: "fit-content",
+        marginBottom: theme.spacing(2),
+    }
 }));
 
-const FaqsSection = () => {
+const FaqsSection = (props) => {
     const classes = useStyles();
+    const theme = useTheme();
     const router = useRouter();
     const lang = langs[router.locale];
+
+    const filteredSections = props.searchValue
+        ? lang.sections
+            .filter((section) =>
+                section.accordions
+                    .filter((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
+                    .some((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
+            )
+            .map((section) => {
+                return {
+                    ...section,
+                    accordions: section.accordions.filter(
+                        (accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1
+                    ),
+                };
+            })
+        : lang.sections;
+
 
     return (
         <div className={classes.root}>
@@ -50,22 +74,26 @@ const FaqsSection = () => {
                 container
                 spacing={3}
                 justify="center"
-                alignItems="center"
-                className={classes.margin0}
+                alignItems="start"
+                // className={classes.margin0}
+                style={{ marginBottom: theme.spacing(10) }}
             >
-                {lang.sections.map((section, index) => (
-                    <Grid item xs={12} sm={5} key={index}>
-                        <Typography variant="h6">{section.title}</Typography>
-
-                        {section.accordions.map((accordion, index) => (
-                            <SimpleAccordion
-                                question={accordion.question}
-                                answer={accordion.answer}
-                                key={index}
-                            />
-                        ))}
-                    </Grid>
-                ))}
+                {filteredSections.length === 0 ? (
+                    <EmptyState title={lang.emptyState.title} text={lang.emptyState.text} />
+                ) : (
+                        <>
+                            {filteredSections.map((section, index) => (
+                                <Grid item xs={12} sm={6} key={index} className={classes.faqsContainer}>
+                                    <Typography variant="h6">
+                                        {section.title}
+                                    </Typography>
+                                    {section.accordions.map((accordion, index) => (
+                                        <SimpleAccordion question={accordion.question} answer={accordion.answer} key={index} />
+                                    ))}
+                                </Grid>
+                            ))}
+                        </>
+                    )}
             </Grid>
 
             <Grid container direction="column" align="center">
