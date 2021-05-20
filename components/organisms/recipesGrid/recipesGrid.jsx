@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 
 // Internal components
-import ReceiptCard from "../../molecules/receiptCard/receiptCard";
+import ReceiptCard from '../../molecules/receiptCard/receiptCard'
 
 const RecipesGrid = (props) => {
     return (

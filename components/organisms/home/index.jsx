@@ -30,38 +30,40 @@ const useStyles = makeStyles(theme => ({
  */
 const HomePage = () => {
     const classes = useStyles();
-    return <Layout>
-        <div className={classes.root}>
-            <ValuePropositionSection />
-            <GoogleRatingSection />
-            <div className={classes.paddingY6}>
-                <HowItWorksSection />
-            </div>
-            <div className={classes.paddingY6}>
-                <PlansSection />
-            </div>
-            <div className={clsx(classes.paddingX6, classes.paddingY6)}>
-                <BenefitsSection />
-            </div>
-            <div>
-                <RecipesSection />
-            </div>
+    return (
+        <Layout>
+            <div className={classes.root}>
+                <ValuePropositionSection />
+                <GoogleRatingSection />
+                <div className={classes.paddingY6}>
+                    <HowItWorksSection />
+                </div>
+                <div className={classes.paddingY6}>
+                    <PlansSection />
+                </div>
+                <div className={clsx(classes.paddingX6, classes.paddingY6)}>
+                    <BenefitsSection />
+                </div>
+                <div>
+                    <RecipesSection />
+                </div>
 
-            <CallToActionSection />
-            {/* TODO REMOVE TO PUT MAILER PLUGIN */}
-            <div style={{
-                width: "100%",
-                height: 54,
-                backgroundColor: "rgba(0, 130, 71,0.2)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
+                <CallToActionSection />
+                {/* TODO REMOVE TO PUT MAILER PLUGIN */}
+                <div style={{
+                    width: "100%",
+                    height: 54,
+                    backgroundColor: "rgba(0, 130, 71,0.2)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
                 }}>
-                TODO: Put here the mailer plugin
+                    TODO: Put here the mailer plugin
             </div>
-            <Footer />
-        </div>
-    </Layout>
+                <Footer />
+            </div>
+        </Layout>
+    )
 }
 
 export default HomePage;
