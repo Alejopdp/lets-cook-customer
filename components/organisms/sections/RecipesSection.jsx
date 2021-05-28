@@ -1,10 +1,10 @@
-import { GridList, makeStyles, Typography, Container, Grid } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import RoundedButton from '../../atoms/roundedButton/roundedButton';
-import RecipeCard from '../../molecules/recipeCard/recipeCard';
-import TitleOtherPages from '../../molecules/titleOtherPages/titleOtherPages';
+import { GridList, makeStyles, Typography, Container, Grid } from "@material-ui/core";
+import PropTypes from "prop-types";
+import RoundedButton from "../../atoms/roundedButton/roundedButton";
+import RecipeCard from "../../molecules/recipeCard/recipeCard";
+import TitleOtherPages from "../../molecules/titleOtherPages/titleOtherPages";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
         flexDirection: "column",
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         paddingLeft: theme.spacing(6),
-        paddingRight: theme.spacing(6)
+        paddingRight: theme.spacing(6),
     },
     smallText: {
         paddingTop: theme.spacing(1),
@@ -34,13 +34,13 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "row",
         alignItems: "center",
         paddingLeft: theme.spacing(4),
-        paddingRight: theme.spacing(4)
-    }
+        paddingRight: theme.spacing(4),
+    },
 }));
 
 const RecipesSection = () => {
     const classes = useStyles();
-    const recipes = [1, 2, 3, 4]
+    const recipes = [1, 2, 3, 4];
     return (
         // <div className={classes.root}>
         //     <div className={classes.title}>
@@ -76,8 +76,7 @@ const RecipesSection = () => {
         //     </div>
         // </div>
 
-
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <TitleOtherPages
                     title="Hecha un vistazo a las recetas de esta semana"
@@ -85,9 +84,9 @@ const RecipesSection = () => {
                     align="flex-start"
                 />
                 {recipes.map((recipe, key) => (
-                    <Grid item xs={12} sm={6} md={3} >
+                    <Grid item xs={12} sm={6} md={3} key={key}>
                         <RecipeCard
-                            img='https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg'
+                            img="https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg"
                             imgTags={["Más vendido", "Vegano"]}
                             timeTag={"15 min"}
                             difficultyTag={"Fácil"}
@@ -98,9 +97,7 @@ const RecipesSection = () => {
             </Grid>
         </Container>
     );
-}
-RecipesSection.propTypes = {
-
 };
+RecipesSection.propTypes = {};
 
 export default RecipesSection;
