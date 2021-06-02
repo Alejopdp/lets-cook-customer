@@ -24,13 +24,9 @@ const TitleOtherPages = (props) => {
     const classes = useStyles();
 
     return (
-        <Grid container direction="column" alignItems={props.align || "center"} className={clsx(classes.padd4, classes.align)} >
+        <Grid container direction="column" alignItems={props.align || "center"} className={clsx(classes.padd4, classes.align)}>
             <Grid item xs={12} sm={12}>
-                <Typography
-                    variant="h4"
-                    color={props.color || "primary"}
-                    className={classes.padd2}
-                >
+                <Typography variant="h4" color={props.color || "primary"} className={classes.padd2}>
                     {props.title}
                 </Typography>
             </Grid>
@@ -48,12 +44,12 @@ TitleOtherPages.propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
     align: PropTypes.string,
-    color: PropTypes.string
+    color: PropTypes.string,
 };
 
 TitleOtherPages.defaultProps = {
     align: "center",
-    color: "primary"
-}
+    color: "primary",
+};
 
 export default TitleOtherPages;
