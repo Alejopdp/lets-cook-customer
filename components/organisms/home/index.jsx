@@ -8,7 +8,8 @@ import GoogleRatingSection from '../sections/GoogleRatingSection';
 import HowItWorksSection from '../sections/HowItWorksSection';
 import PlansSection from '../sections/PlansSection';
 import RecipesSection from '../sections/RecipesSection';
-import Footer from '../../molecules/footer/footer';
+import ReviewsSection from '../sections/ReviewsSection.jsx'
+
 const useStyles = makeStyles(theme => ({
     // root: {
     //     top: 0,
@@ -33,10 +34,9 @@ const HomePage = () => {
     return (
         <Layout>
             <ValuePropositionSection />
-            <div style={{paddingTop: '32px'}}>
-            <GoogleRatingSection />
+            <div style={{ paddingTop: '32px' }}>
+                <GoogleRatingSection />
             </div>
-
             <div className={classes.paddingY8}>
                 <HowItWorksSection />
             </div>
@@ -48,6 +48,9 @@ const HomePage = () => {
             </div>
             <div className={classes.paddingY8}>
                 <RecipesSection />
+            </div>
+            <div className={classes.paddingY8}>
+                <ReviewsSection />
             </div>
         </Layout>
     )
