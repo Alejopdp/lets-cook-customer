@@ -14,7 +14,7 @@ function MyApp(props) {
     //     const visibility = style.getPropertyValue("visibility");
     //     console.log("MAILER LITE: ", mailerLiteBottomBar);
     //     console.log("Visibility: ", visibility);
-    // }, [document.getElementById("ml-webforms-popup-4174405")]);
+    // }, []);
 
     return (
         <React.Fragment>
