@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 // Internal Components
 import Layout from '../../components/layout/index';
 import InnerSectionLayout from "../../components/layout/publicLayout";
-import MailSignup from "../../components/organisms/mailSignup/mailSignup";
-import PassSignup from "../../components/organisms/passSignup/passSignup";
+import RecoverPasswordCode from "../../components/organisms/recoverPassword/recoverPasswordCode";
+import RecoverPasswordMail from "../../components/organisms/recoverPassword/recoverPasswordMail";
+import RecoverPassword from "../../components/organisms/recoverPassword/recoverPassword";
 
 const Signup = () => {
     const router = useRouter();
@@ -16,8 +17,9 @@ const Signup = () => {
     return (
         <Layout>
             <InnerSectionLayout containerMaxWidth="lg">
-                <MailSignup />
-                <PassSignup />
+                <RecoverPasswordMail />
+                <RecoverPasswordCode />
+                <RecoverPassword />
             </InnerSectionLayout>
         </Layout>
     );

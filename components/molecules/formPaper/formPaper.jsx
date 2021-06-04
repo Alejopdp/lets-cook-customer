@@ -31,6 +31,11 @@ const FormPaper = (props) => {
                     <Typography variant="h5" color="textSecondary" className={title}>
                         {props.title}
                     </Typography>
+                    {props.paragraph &&
+                        <Typography variant="body2" className={title}>
+                            {props.paragraph}
+                        </Typography>
+                    }
                     {props.children}
                 </Paper>
             </Grid>
@@ -42,6 +47,7 @@ FormPaper.propTypes = {
     title: PropTypes.string.isRequired,
     width: PropTypes.number,
     fullWidth: PropTypes.bool,
+    paragraph: PropTypes.string,
 };
 
 export default FormPaper;
