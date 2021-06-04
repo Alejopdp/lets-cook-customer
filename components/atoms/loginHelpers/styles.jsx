@@ -7,6 +7,12 @@ const useStyles = makeStyles((theme) => ({
     },
     btn: {
         marginTop: theme.spacing(4)
+    },
+    margin: {
+        marginTop: theme.spacing(6)
+    },
+    link: {
+        color: "#707070"
     }
 }));
 

@@ -1,11 +1,8 @@
 // Utils & Config
 import React from 'react'
 
-// External components
-import Typography from '@material-ui/core/Typography';
-
 // Internal components
-import FormPaper from "../formPaper/formPaper";
+import FormPaper from "../../molecules/formPaper/formPaper";
 import { TextInput, PasswordInput } from "../../atoms/inputs/inputs";
 import CustomButton from "../../atoms/customButton/customButton";
 import SocialNetworksButtons from '../../atoms/socialNetworksButtons/socialNetworksButtons';

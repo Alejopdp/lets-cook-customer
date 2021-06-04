@@ -12,10 +12,10 @@ import Image from "next/image";
 import { Grid } from "@material-ui/core";
 
 const FormPaper = (props) => {
-    const { paper, image, shadow, displayImage, title } = useStyles();
+    const { margin, paper, image, shadow, displayImage, title } = useStyles();
 
     return (
-        <Box width={props.fullWidth ? "100%" : props.width}>
+        <Box width={props.fullWidth ? "100%" : props.width} className={margin}>
             <Grid item container direction="row" justify="center">
                 <Box className={displayImage}>
                     <Image

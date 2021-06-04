@@ -6,18 +6,23 @@ import { useRouter } from "next/router";
 // External components
 
 // Internal Components
+import Layout from '../../components/layout/index';
 import InnerSectionLayout from "../../components/layout/publicLayout";
-import LoginBox from "../../components/organisms/loginBox/loginBox";
+import MailSignup from "../../components/organisms/mailSignup/mailSignup";
+import PassSignup from "../../components/organisms/passSignup/passSignup";
 
-const Login = () => {
+const Signup = () => {
     const router = useRouter();
     // const lang = langs[router.locale];
 
     return (
+        <Layout>
             <InnerSectionLayout containerMaxWidth="lg">
-                <LoginBox />
+                <MailSignup />
+                <PassSignup />
             </InnerSectionLayout>
+        </Layout>
     );
 };
 
-export default Login;
+export default Signup;
