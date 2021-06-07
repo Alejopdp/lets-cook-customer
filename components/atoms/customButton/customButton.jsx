@@ -15,6 +15,12 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: theme.spacing(4),
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
+        "&:hover": {
+            backgroundColor: theme.palette.primary.light,
+        },
+        "&:disabled": {
+            backgroundColor: theme.palette.background.default
+        }
     }
 }));
 
@@ -22,7 +28,7 @@ const CustomButton = ({ text, onClick, disabled }) => {
     const { button } = useStyles();
 
     return (
-        <Button className={button} onClick={onClick} disabled={disabled || false}>
+        <Button className={button} onClick={onClick} disabled={disabled}>
             {text}
         </Button>
     )

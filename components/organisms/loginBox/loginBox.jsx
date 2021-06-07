@@ -1,5 +1,6 @@
 // Utils & Config
-import React from 'react'
+import React, { useState } from 'react'
+import { emailRegex, pswRegex } from "../../../helpers/regex/regex";
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -10,9 +11,9 @@ import { ForgotPassword, Register } from '../../atoms/loginHelpers/loginHelpers'
 import Divider from '../../atoms/divider/divider';
 
 const LoginBox = () => {
-    const [values, setValues] = React.useState({
-        password: '',
-        email: '',
+    const [values, setValues] = useState({
+        password: "",
+        email: "",
     });
 
     const handleChange = (prop) => (event) => {
@@ -22,6 +23,9 @@ const LoginBox = () => {
     const handleSubmit = () => {
         console.log("Submit")
     };
+
+    const isEmail = emailRegex.test(values.email);
+    const isPassword = pswRegex.test(values.password);
 
     console.log(values)
 
@@ -46,13 +50,18 @@ const LoginBox = () => {
             <CustomButton
                 text={"Ingresar"}
                 onClick={handleSubmit}
+                disabled={!isEmail || !isPassword}
             />
 
             <Divider />
 
             <SocialNetworksButtons />
 
-            <Register text="¿Aún no tienes cuenta?" boldText="Registrate aquí" />
+            <Register
+                text="¿Aún no tienes cuenta?"
+                boldText="Registrate aquí"
+                redirectTo="/registrarme"
+            />
         </FormPaper>
     )
 }
