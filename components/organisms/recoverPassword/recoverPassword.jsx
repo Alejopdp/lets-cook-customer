@@ -1,16 +1,16 @@
 // Utils & Config
-import React from 'react'
+import React from "react";
 import { pswRegex } from "../../../helpers/regex/regex";
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
 import { PasswordInput } from "../../atoms/inputs/inputs";
 import CustomButton from "../../atoms/customButton/customButton";
-import { Register } from '../../atoms/loginHelpers/loginHelpers';
+import { Register } from "../../atoms/loginHelpers/loginHelpers";
 
 const RecoverPassword = () => {
     const [values, setValues] = React.useState({
-        password: '',
+        password: "",
     });
 
     const handleChange = (prop) => (event) => {
@@ -18,10 +18,8 @@ const RecoverPassword = () => {
     };
 
     const handleSubmit = () => {
-        console.log("Submit")
+        console.log("Submit");
     };
-
-    const isPassword = pswRegex.test(values.password);
 
     return (
         <FormPaper
@@ -29,22 +27,13 @@ const RecoverPassword = () => {
             title="Recuperar contraseña"
             paragraph="El código ingresasdo es válido. Ingrese a continuación su nueva contraseña:"
         >
-            <PasswordInput
-                label="Ingrese su contraseña"
-                name="password"
-                value={values.password}
-                onChange={handleChange("password")}
-            />
+            <PasswordInput label="Ingrese su contraseña" name="password" value={values.password} onChange={props.handleChange} />
 
-            <CustomButton
-                text={"Recuperar contraseña"}
-                disabled={ isPassword ? false : true }
-                onClick={handleSubmit}
-            />
+            <CustomButton text={"Recuperar contraseña"} disabled={isPassword(props.password)} onClick={handleSubmit} />
 
             <Register text="¿Aún no tienes cuenta?" boldText="Registrate aquí" />
         </FormPaper>
-    )
-}
+    );
+};
 
 export default RecoverPassword;
