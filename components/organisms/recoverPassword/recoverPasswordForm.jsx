@@ -29,12 +29,9 @@ const RecoverPasswordForm = (props) => {
         });
     };
 
-    console.log(formData)
-    console.log(currentStep)
-
-    switch (currentStep) {
+    switch (true) {
         case currentStep === 0:
-            currentInputs = <RecoverPasswordMail handleChange handeSubmit value={formData.email}/>;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmit} value={formData.email} />;
             break;
 
         case currentStep === 1:
@@ -48,11 +45,7 @@ const RecoverPasswordForm = (props) => {
             currentInputs = <RecoverPasswordMail />;
     }
 
-    return (
-        <>
-            {currentInputs}
-        </>
-    );
+    return <>{currentInputs}</>;
 };
 
 RecoverPasswordForm.propTypes = {};
