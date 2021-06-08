@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import RecoverPassword from "./recoverPassword";
-import RecoverPasswordCode from "./recoverPasswordCode";
 import RecoverPasswordMail from "./recoverPasswordMail";
+import RecoverPasswordCode from "./recoverPasswordCode";
+import RecoverPassword from "./recoverPassword";
 
 const stepsQty = 3;
 
 const RecoverPasswordForm = (props) => {
     const [currentStep, setcurrentStep] = useState(0);
-    const [formData, setformData] = useState({
+    const [formData, setFormData] = useState({
         email: "",
         password: "",
         code: "",
     });
+
     var currentInputs = <></>;
 
     const handleSubmit = (number) => {
@@ -22,15 +23,18 @@ const RecoverPasswordForm = (props) => {
     };
 
     const handleChange = (e) => {
-        setformData({
+        setFormData({
             ...formData,
             [e.target.name]: e.target.value,
         });
     };
 
+    console.log(formData)
+    console.log(currentStep)
+
     switch (currentStep) {
         case currentStep === 0:
-            currentInputs = <RecoverPassword handleChange handeSubmit password={formData.password} />;
+            currentInputs = <RecoverPasswordMail handleChange handeSubmit value={formData.email}/>;
             break;
 
         case currentStep === 1:
@@ -38,22 +42,16 @@ const RecoverPasswordForm = (props) => {
             break;
 
         case currentStep === 2:
-            currentInputs = <RecoverPasswordMail handleChange handeSubmit />;
+            currentInputs = <RecoverPassword handleChange handleSubmit value={formData.password} />;
 
         default:
-            currentInputs = <RecoverPassword />;
+            currentInputs = <RecoverPasswordMail />;
     }
 
     return (
-        <FormPaper
-            fullWidth
-            title="Recuperar contraseña"
-            paragraph="El código ingresasdo es válido. Ingrese a continuación su nueva contraseña:"
-        >
+        <>
             {currentInputs}
-
-            <Register text="¿Aún no tienes cuenta?" boldText="Registrate aquí" />
-        </FormPaper>
+        </>
     );
 };
 

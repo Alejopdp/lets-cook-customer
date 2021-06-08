@@ -8,20 +8,20 @@ import { TextInput } from "../../atoms/inputs/inputs";
 import CustomButton from "../../atoms/customButton/customButton";
 import { Register } from '../../atoms/loginHelpers/loginHelpers';
 
-const RecoverPasswordMail = () => {
-    const [values, setValues] = React.useState({
-        email: '',
-    });
+const RecoverPasswordMail = (props) => {
+    // const [values, setValues] = React.useState({
+    //     email: '',
+    // });
 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+    // const handleChange = (prop) => (event) => {
+    //     setValues({ ...values, [prop]: event.target.value });
+    // };
 
-    const isEmail = emailRegex.test(values.email);
+    // const handleSubmit = () => {
+    //     console.log("Submit")
+    // };
 
-    const handleSubmit = () => {
-        console.log("Submit")
-    };
+    // const isEmail = emailRegex.test(values.email);
 
     return (
         <FormPaper
@@ -31,14 +31,13 @@ const RecoverPasswordMail = () => {
             <TextInput
                 label="Ingrese su correo electrónico"
                 name="email"
-                value={values.email}
-                onChange={handleChange("email")}
+                value={props.value}
+                onChange={props.handleChange}
             />
 
             <CustomButton
                 text={"Recuperar contraseña"}
-                disabled={isEmail ? false : true}
-                onClick={handleSubmit}
+                onClick={props.handleSubmit}
             />
 
             <Register text="¿Aún no tienes cuenta?" boldText="Registrate aquí" redirectTo="/signup" />
