@@ -6,7 +6,9 @@ import PropTypes from "prop-types";
 import { Divider, Typography } from '@material-ui/core';
 
 const RecipesCalculation = ({ recipesQty, peopleQty, totalPrice }) => {
-    const rations = recipesQty * peopleQty;
+    var rations = recipesQty * peopleQty;
+    var rationPrice = totalPrice / rations;
+    var fixedRationPrice = Math.round(rationPrice * 100) / 100;
 
     return (
         <>
@@ -15,13 +17,11 @@ const RecipesCalculation = ({ recipesQty, peopleQty, totalPrice }) => {
             </Typography>
 
             <Typography variant="body1" paragraph>
-                {rations} raciones a {totalPrice / rations} € por ración
+                {rations} raciones a {fixedRationPrice} € por ración
             </Typography>
 
             <Divider />
 
-            {/* Le iba a tirar un toFixed(2) pero retorna un string,
-                dejo pendiente para mañana arreglar el float */}
             <Typography variant="body1" color="primary">
                 <b>Precio final {totalPrice} €/semana</b>
             </Typography>
