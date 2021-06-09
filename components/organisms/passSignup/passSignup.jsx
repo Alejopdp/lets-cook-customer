@@ -64,7 +64,7 @@ const PassSignup = () => {
 
             <SocialNetworksButtons />
 
-            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/login" />
+            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/ingresar" />
         </FormPaper>
     )
 }
