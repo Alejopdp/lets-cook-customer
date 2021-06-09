@@ -2,18 +2,19 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-// External components
-
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
-import { Register, AcceptLegalTerms } from "../../atoms/loginHelpers/loginHelpers";
+import { Register } from "../../atoms/loginHelpers/loginHelpers";
 import MailStep from "./mailStep";
+import PasswordStep from "./passwordStep";
 
 const SignUpForm = (props) => {
     const [currentStep, setcurrentStep] = useState(0);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
+        authorize: false,
+        sendInfo: false
     });
 
     var currentInputs = <></>;
@@ -26,9 +27,13 @@ const SignUpForm = (props) => {
     const handleChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value || e.target.checked,
         });
     };
+
+    const handleCreateAccount = () => {
+        alert("Cuenta creada (redireccionar a perfil de usuario)")
+    }
 
     switch (true) {
         case currentStep === 0:
@@ -36,7 +41,14 @@ const SignUpForm = (props) => {
             break;
 
         case currentStep === 1:
-            currentInputs = <div> Segundo paso</div>;
+            currentInputs =
+                <PasswordStep
+                    password={formData.password}
+                    authorize={formData.authorize}
+                    sendInfo={formData.sendInfo}
+                    handleChange={handleChange}
+                    handleSubmit={handleCreateAccount}
+                />;
             break;
 
         default:

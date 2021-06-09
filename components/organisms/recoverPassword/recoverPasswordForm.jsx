@@ -29,8 +29,8 @@ const RecoverPasswordForm = () => {
         });
     };
 
-    const handleLogin = () => {
-        alert("Login exitoso")
+    const handleRecover = () => {
+        alert("Password cambiada con éxito")
     }
 
     switch (true) {
@@ -43,7 +43,7 @@ const RecoverPasswordForm = () => {
             break;
 
         case currentStep === 2:
-            currentInputs = <RecoverPassword handleChange={handleChange} handleSubmit={handleLogin} value={formData.password} />;
+            currentInputs = <RecoverPassword handleChange={handleChange} handleSubmit={handleRecover} value={formData.password} />;
             break;
 
         default:

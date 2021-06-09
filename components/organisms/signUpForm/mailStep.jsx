@@ -1,6 +1,7 @@
 // Utils & config
 import React from "react";
 import PropTypes from "prop-types";
+import { isEmail } from "../../../helpers/regex/regex";
 
 // External components
 import { TextInput } from "../../atoms/inputs/inputs";
@@ -14,7 +15,11 @@ const MailStep = (props) => {
         <>
             <TextInput label="Ingrese su correo electrónico" name="email" value={props.email} onChange={props.handleChange} />
 
-            <CustomButton text="Continuar" onClick={() => props.handleSubmit(1)} />
+            <CustomButton
+                disabled={!isEmail(props.email)}
+                text="Continuar"
+                onClick={() => props.handleSubmit(1)}
+            />
 
             <Divider />
 
