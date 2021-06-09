@@ -56,6 +56,7 @@ export const PasswordInput = (props) => {
             <OutlinedInput
                 className={border}
                 type={values.showPassword ? 'text' : 'password'}
+                name={props.name}
                 value={props.value}
                 onChange={props.onChange}
                 endAdornment={

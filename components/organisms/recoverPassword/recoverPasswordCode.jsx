@@ -1,5 +1,6 @@
 // Utils & Config
 import React from 'react'
+import PropTypes from "prop-types";
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -7,19 +8,7 @@ import { TextInput } from "../../atoms/inputs/inputs";
 import CustomButton from "../../atoms/customButton/customButton";
 import { Register } from '../../atoms/loginHelpers/loginHelpers';
 
-const RecoverPasswordCode = () => {
-    const [values, setValues] = React.useState({
-        code: '',
-    });
-
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
-
-    const handleSubmit = () => {
-        console.log("Submit")
-    };
-
+const RecoverPasswordCode = (props) => {
     return (
         <FormPaper
             fullWidth
@@ -29,19 +18,25 @@ const RecoverPasswordCode = () => {
             <TextInput
                 label="Código de 6 dígitos"
                 name="code"
-                value={values.code}
-                onChange={handleChange("code")}
+                value={props.value}
+                onChange={props.handleChange}
             />
 
             <CustomButton
                 text={"Continuar"}
-                disabled={values.code.length === 6 ? false : true}
-                onClick={handleSubmit}
+                disabled={props.value.length !== 6}
+                onClick={() => props.handleSubmit(1)}
             />
 
             <Register text="¿Aún no tienes cuenta?" boldText="Registrate aquí" redirectTo="/signup" />
         </FormPaper>
     )
 }
+
+RecoverPasswordCode.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired
+};
 
 export default RecoverPasswordCode;
