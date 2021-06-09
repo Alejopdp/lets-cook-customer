@@ -32,6 +32,7 @@ export const TextInput = (props) => {
                 className={border}
                 name={props.name}
                 value={props.value}
+                placeholder={props.placeholder}
                 onChange={props.onChange}
                 labelWidth={props.labelWidth || 210}
             />
@@ -78,6 +79,7 @@ TextInput.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     value: PropTypes.any.isRequired,
+    placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     type: PropTypes.string,
     labelWidth: PropTypes.number,
