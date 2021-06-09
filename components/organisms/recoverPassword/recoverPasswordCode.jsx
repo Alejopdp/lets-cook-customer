@@ -28,7 +28,7 @@ const RecoverPasswordCode = (props) => {
                 onClick={() => props.handleSubmit(1)}
             />
 
-            <Register text="¿Aún no tienes cuenta?" boldText="Registrate aquí" redirectTo="/signup" />
+            <Register text="¿Aún no tienes cuenta?" boldText="Registrate aquí" redirectTo="/registrarme" />
         </FormPaper>
     )
 }
