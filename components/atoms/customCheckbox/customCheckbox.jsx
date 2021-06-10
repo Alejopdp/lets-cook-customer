@@ -18,13 +18,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CustomCheckbox = ({ name, checked, onChange, color, label, redirectTo, boldText }) => {
+const CustomCheckbox = ({ className, name, checked, onChange, color, label, redirectTo, boldText }) => {
   const { form } = useStyles();
 
   return (
     <FormGroup row>
       <FormControlLabel
-        className={form}
+        className={className || form}
         control={
           <Checkbox
             name={name}

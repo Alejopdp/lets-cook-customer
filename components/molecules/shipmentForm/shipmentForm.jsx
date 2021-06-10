@@ -13,7 +13,7 @@ import CustomButton from "../../atoms/customButton/customButton";
 
 const ShipmentForm = (props) => {
     return (
-        <FormPaperWithIcons title="Datos de entrega" initialIcon="/icons/informacion-de-envio.svg" finalIcons>
+        <FormPaperWithIcons title="Datos de entrega" initialIcon="/icons/checkout/informacion-de-envio.svg" finalIcons>
             <TextInput
                 name="address"
                 label="Dirección de entrega"

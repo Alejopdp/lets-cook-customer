@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
 // External components
-import { Button } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -21,15 +21,27 @@ const useStyles = makeStyles((theme) => ({
         "&:disabled": {
             backgroundColor: theme.palette.background.default
         }
+    },
+    box: {
+        display: "flex",
+        flexDirection: "row"
     }
 }));
 
-const CustomButton = ({ text, onClick, disabled }) => {
-    const { button } = useStyles();
+const CustomButton = ({ text, icon, onClick, disabled }) => {
+    const { button, box } = useStyles();
 
     return (
         <Button className={button} onClick={onClick} disabled={disabled}>
-            {text}
+            <Box className={box}>
+                {icon &&
+                    <Box marginRight="8px">
+                        {icon}
+                    </Box>
+                }
+
+                {text}
+            </Box>
         </Button>
     )
 };
@@ -39,5 +51,6 @@ export default CustomButton;
 CustomButton.propTypes = {
     disabled: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
-    text: PropTypes.string.isRequired
+    text: PropTypes.string.isRequired,
+    icon: PropTypes.element,
 };
