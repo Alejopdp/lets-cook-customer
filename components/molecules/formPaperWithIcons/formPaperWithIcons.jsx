@@ -16,7 +16,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const FormPaperWithIcons = (props) => {
-    const { paper, title, alignIcons } = useStyles();
+    const { paper, title, alignIcons, titleMargin } = useStyles();
 
     return (
         <Paper className={paper}>
@@ -25,14 +25,15 @@ const FormPaperWithIcons = (props) => {
                     {props.initialIcon &&
                         <Image src={props.initialIcon} height={40} width={40} />
                     }
-                    <Typography variant="h6" color="textSecondary" >
+
+                    <Typography variant="h6" color="textSecondary" className={titleMargin}>
                         {props.title}
                     </Typography>
                 </Grid>
 
                 {props.finalIcons &&
                     <Grid item className={alignIcons}>
-                        <Button onClick={props.handleEdit}>
+                        <Button onClick={props.onClick}>
                             <EditIcon fontSize="large" />
                         </Button>
 
@@ -47,10 +48,10 @@ const FormPaperWithIcons = (props) => {
 };
 
 FormPaperWithIcons.propTypes = {
+    initialIcon: PropTypes.string,
     title: PropTypes.string.isRequired,
-    width: PropTypes.number,
-    fullWidth: PropTypes.bool,
-    paragraph: PropTypes.string,
+    finalIcons: PropTypes.bool,
+    onClick: PropTypes.func,
 };
 
 export default FormPaperWithIcons;

@@ -5,7 +5,7 @@ import ShipmentForm from '../../components/molecules/shipmentForm/shipmentForm';
 
 const Form = () => {
     return (
-        <ShipmentForm />
+        <ShipmentForm registeredUser/>
     )
 }
 

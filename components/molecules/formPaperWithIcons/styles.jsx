@@ -5,9 +5,9 @@ const useStyles = makeStyles((theme) => ({
         margin: "0 auto",
         marginTop: theme.spacing(6),
         marginBottom: theme.spacing(4),
-        padding: theme.spacing(4),
+        padding: theme.spacing(2),
         borderRadius: theme.spacing(1),
-        height: "620px",
+        // height: "620px",
         maxWidth: "586px",
         boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
         webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     alignIcons: {
         display: "flex",
         alignItems: "center"
+    },
+    titleMargin: {
+        marginLeft: theme.spacing(2)
     }
 }));
 
