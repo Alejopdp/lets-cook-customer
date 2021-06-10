@@ -56,7 +56,7 @@ const SignUpForm = (props) => {
     }
 
     return (
-        <FormPaper fullWidth title="Crear tu cuenta">
+        <FormPaper title="Crear tu cuenta">
             {currentInputs}
             <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/ingresar" />
         </FormPaper>

@@ -28,7 +28,7 @@ const PassSignup = () => {
     console.log(values)
 
     return (
-        <FormPaper fullWidth title="Crear tu cuenta">
+        <FormPaper title="Crear tu cuenta">
             <PasswordInput
                 label="Ingrese su contraseña"
                 name="password"

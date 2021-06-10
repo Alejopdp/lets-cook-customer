@@ -11,7 +11,7 @@ import { Register } from "../../atoms/loginHelpers/loginHelpers";
 
 const RecoverPasswordMail = (props) => {
     return (
-        <FormPaper fullWidth title="Recuperar contraseña">
+        <FormPaper title="Recuperar contraseña">
             <TextInput
                 label="Ingrese su correo electrónico"
                 name="email"

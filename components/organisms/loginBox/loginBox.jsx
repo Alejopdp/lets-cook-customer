@@ -30,7 +30,7 @@ const LoginBox = () => {
     console.log(values)
 
     return (
-        <FormPaper fullWidth title="Ingresa con tu cuenta">
+        <FormPaper title="Ingresa con tu cuenta">
             <TextInput
                 label="Ingrese su correo electrónico"
                 name="email"

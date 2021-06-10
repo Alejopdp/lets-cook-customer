@@ -12,7 +12,6 @@ import { Register } from "../../atoms/loginHelpers/loginHelpers";
 const RecoverPassword = (props) => {
     return (
         <FormPaper
-            fullWidth
             title="Recuperar contraseña"
             paragraph="El código ingresasdo es válido. Ingrese a continuación su nueva contraseña:"
         >

@@ -11,7 +11,6 @@ import { Register } from '../../atoms/loginHelpers/loginHelpers';
 const RecoverPasswordCode = (props) => {
     return (
         <FormPaper
-            fullWidth
             title="Recuperar contraseña"
             paragraph="Te hemos enviado un correo electrónico con un código de 6 dígitos. Ingresa el código a continuación para ingresar una nueva contraseña:"
         >
