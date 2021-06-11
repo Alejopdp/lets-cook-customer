@@ -1,6 +1,8 @@
 // Utils & config
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useRouter } from "next/router";
+const langs = require("../../../lang").signupForm;
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -35,6 +37,9 @@ const SignUpForm = (props) => {
         alert("Cuenta creada (redireccionar a perfil de usuario)")
     }
 
+    const router = useRouter();
+    const lang = langs[router.locale];
+
     switch (true) {
         case currentStep === 0:
             currentInputs = <MailStep handleChange={handleChange} handleSubmit={handleSubmit} email={formData.email} />;
@@ -56,9 +61,14 @@ const SignUpForm = (props) => {
     }
 
     return (
-        <FormPaper title="Crear tu cuenta">
+        <FormPaper title={lang.title}>
             {currentInputs}
-            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/ingresar" />
+
+            <Register
+                text={lang.register.text}
+                boldText={lang.register.boldText}
+                redirectTo={lang.register.redirectTo}
+            />
         </FormPaper>
     );
 };

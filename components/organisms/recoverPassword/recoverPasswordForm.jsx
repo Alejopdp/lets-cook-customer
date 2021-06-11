@@ -1,6 +1,8 @@
+// Utils & Config
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+// Internal components
 import RecoverPasswordMail from "./recoverPasswordMail";
 import RecoverPasswordCode from "./recoverPasswordCode";
 import RecoverPassword from "./recoverPassword";
@@ -47,7 +49,7 @@ const RecoverPasswordForm = () => {
             break;
 
         default:
-            currentInputs = <RecoverPasswordMail />;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmit} value={formData.email} />;
     }
 
     return <>{currentInputs}</>;

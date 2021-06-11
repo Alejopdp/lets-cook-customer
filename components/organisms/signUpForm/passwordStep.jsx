@@ -2,6 +2,8 @@
 import React from 'react'
 import PropTypes from "prop-types";
 import { isPassword } from '../../../helpers/regex/regex';
+import { useRouter } from "next/router";
+const langs = require("../../../lang").passwordStep;
 
 // Internal components
 import { PasswordInput } from "../../atoms/inputs/inputs";
@@ -11,10 +13,13 @@ import Divider from '../../atoms/divider/divider';
 import CustomCheckbox from '../../atoms/customCheckbox/customCheckbox';
 
 const PasswordStep = (props) => {
+    const router = useRouter();
+    const lang = langs[router.locale];
+
     return (
         <>
             <PasswordInput
-                label="Ingrese su contraseña"
+                label={lang.passwordInput}
                 name="password"
                 value={props.password}
                 onChange={props.handleChange}
@@ -24,23 +29,23 @@ const PasswordStep = (props) => {
                 name="authorize"
                 checked={props.authorize}
                 onChange={props.handleChange}
-                label="Autorizo a Let's Cook a tratar mis datos para poder gestionar el alta como usuario en su web. Puedes obtener más información"
-                boldText="pulsando aquí."
-                redirectTo={"/aviso-legal"}
+                label={lang.authorizeCheckbox.label}
+                boldText={lang.authorizeCheckbox.boldText}
+                redirectTo={lang.authorizeCheckbox.redirectTo}
             />
 
             <CustomCheckbox
                 name="sendInfo"
                 checked={props.sendInfo}
                 onChange={props.handleChange}
-                label="Quiero recibir información por correo electrónico sobre los productos de Let's Cook y cualquier otra información que pudiera ser de mi interés como promociones y ofertas. Puedes obtener mas información"
-                boldText="pulsando aquí."
-                redirectTo={"/aviso-legal"}
+                label={lang.infoCheckbox.label}
+                boldText={lang.infoCheckbox.boldText}
+                redirectTo={lang.infoCheckbox.redirectTo}
             />
 
             <CustomButton
                 disabled={!props.authorize || !isPassword(props.password)}
-                text={"Ingresar"}
+                text={lang.buttonText}
                 onClick={props.handleSubmit}
             />
 
