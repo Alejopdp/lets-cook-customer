@@ -35,9 +35,9 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
         webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
         mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        '& fieldset.MuiOutlinedInput-notchedOutline': {
-            borderColor: 'transparent',
-        },
+        // '& fieldset.MuiOutlinedInput-notchedOutline': {
+        //     borderColor: 'transparent',
+        // },
     }
 }));
 

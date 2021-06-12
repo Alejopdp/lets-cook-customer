@@ -16,7 +16,6 @@ const CircularBotton = ({ variant = "content", label, children: Component, ...pr
 
     return (
         <ButtonBase
-            focusRipple
             className={classes.root}
             focusRipple={true}
             {...props}
@@ -36,7 +35,7 @@ const CircularBotton = ({ variant = "content", label, children: Component, ...pr
 }
 
 CircularBotton.propTypes = {
-    vaariant: PropTypes.oneOf(["content", "flat", "outline"]),
+    variant: PropTypes.oneOf(["content", "flat", "outline"]),
     label: PropTypes.string
 }
 

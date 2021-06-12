@@ -121,7 +121,7 @@ const Layout = ({ children: Component, ...props }) => {
                     </IconButton>
                     <div className={classes.logo}>
                         <Link href='/'>
-                            <Image src="/logo.png" width={135} height={40} />
+                            <img src="/logo.png" width={106} height={37} />
                         </Link>
                     </div>
                     <Hidden xsDown implementation="css">
