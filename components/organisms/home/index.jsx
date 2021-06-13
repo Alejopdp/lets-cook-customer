@@ -47,7 +47,11 @@ const HomePage = () => {
                 <BenefitsSection />
             </div>
             <div className={classes.paddingY8}>
-                <RecipesSection />
+                <RecipesSection 
+                 title="Hecha un vistazo a las recetas de esta semana"
+                 subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
+                 titleAlign="flex-start"
+                />
             </div>
             <div className={classes.paddingY8}>
                 <ReviewsSection />

@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const RecipesSection = () => {
+const RecipesSection = ({title, subtitle, titleAlign}) => {
     const classes = useStyles();
     const recipes = [1, 2, 3, 4]
     return (
@@ -80,12 +80,12 @@ const RecipesSection = () => {
         <Container maxWidth='lg'>
             <Grid container spacing={2}>
                 <TitleOtherPages
-                    title="Hecha un vistazo a las recetas de esta semana"
-                    subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
-                    align="flex-start"
+                    title={title}
+                    subtitle={subtitle}
+                    align={titleAlign}
                 />
                 {recipes.map((recipe, key) => (
-                    <Grid item xs={12} sm={6} md={3} >
+                    <Grid key={key} item xs={12} sm={6} md={3} >
                         <RecipeCard
                             img='https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg'
                             imgTags={["Más vendido", "Vegano"]}
@@ -99,8 +99,11 @@ const RecipesSection = () => {
         </Container>
     );
 }
-RecipesSection.propTypes = {
 
+RecipesSection.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    titleAlign: PropTypes.string,
 };
 
 export default RecipesSection;

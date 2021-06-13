@@ -41,7 +41,10 @@ export const StepperBuy = ({ steps, smUpHide, smDowmHide }) => {
 };
 
 StepperBuy.propTypes = {
-    steps: PropTypes.arrayOf(PropTypes.string),
+    steps: PropTypes.arrayOf(PropTypes.shape({
+        icon: PropTypes.string,
+        label: PropTypes.string
+    })),
     smUpHide: PropTypes.bool,
     smDowmHide: PropTypes.bool,
 };

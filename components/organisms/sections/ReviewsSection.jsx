@@ -186,7 +186,7 @@ const HowItWorksSection = () => {
                     swipeable
                 >
                     {reviews.map((review, index) => (
-                        <GoogleReviewBox review={review} />
+                        <GoogleReviewBox key={index} review={review} />
                     ))}
                 </Carousel>
             </div>

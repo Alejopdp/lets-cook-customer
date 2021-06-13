@@ -3,6 +3,7 @@ import { Typography, Container, Grid } from '@material-ui/core/';
 import { makeStyles, useTheme } from '@material-ui/core';
 import Title from "../../molecules/titleOtherPages/titleOtherPages";
 import RoundedButton from '../../atoms/roundedButton/roundedButton.jsx';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -57,27 +58,31 @@ const useStyles = makeStyles(theme => ({
 
 const PlansSection = () => {
     const theme = useTheme();
-
+    const {push: navigateTo} = useRouter();
     const cards = [
         {
             title: "Plan familiar",
             content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-            image: "unnamed.jpg"
+            image: "unnamed.jpg",
+            slug: "plan-familiar"
         },
         {
             title: "Plan gourmet",
             content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-            image: "unnamed.jpg"
+            image: "unnamed.jpg",
+            slug: "plan-gourmet"
         },
         {
             title: "Plan vegetariano/vegano",
             content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-            image: "unnamed.jpg"
+            image: "unnamed.jpg",
+            slug: "plan-vegetariano"
         },
         {
             title: "Plan ahorro",
             content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-            image: "unnamed.jpg"
+            image: "unnamed.jpg",
+            slug: "plan-ahorro"
         },
     ];
 
@@ -106,7 +111,14 @@ const PlansSection = () => {
                                         color="initial">{card.content}</Typography>
                                 </div>
                                 <div className={classes.cardAction}>
-                                    <RoundedButton label="¡QUIERO ESTE PLAN!" />
+                                    <RoundedButton label="¡QUIERO ESTE PLAN!" onClick={()=>navigateTo({
+                                        pathname:"/planes/[slug]",
+                                        query: {
+                                            slug: card.slug,
+                                            personas: 2,
+                                            recetas: 2
+                                        }
+                                    })} />
                                 </div>
                             </div>
                         </div>

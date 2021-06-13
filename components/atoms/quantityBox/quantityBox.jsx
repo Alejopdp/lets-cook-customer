@@ -1,44 +1,36 @@
 // Utils & Config
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import useStyles from "./styles";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 
 // External components
-import Checkbox from '@material-ui/core/Checkbox';
-import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core';
+import Checkbox from "@material-ui/core/Checkbox";
+import Typography from "@material-ui/core/Typography";
+import { Radio, FormControlLabel } from "@material-ui/core";
 
-const QuantityBox = ({  }) => {
-    const { box, checkedBox } = useStyles();
-
-    const checkeado = false;
+const QuantityBox = ({ label, state }) => {
+    const classes = useStyles();
 
     return (
-        <Box className={checkeado === true ? clsx(box, checkedBox) : box }>
-            <Checkbox
-                color="primary"
-                icon={
-                    <Typography variant="subtitle1">
-                        1
-                    </Typography>
-                }
-                checkedIcon={
-                    <Typography variant="subtitle1">
-                        1
-                    </Typography>
-                }
-                name="checked"
-                checked={checkeado}
-            />
-        </Box>
-    )
-}
+        <FormControlLabel
+            className={clsx(classes.box, {
+                [classes.checkedBox]: state,
+            })}
+            value={`${label}`}
+            control={<Radio className={classes.hidden} />}
+            label={
+                <Typography variant="subtitle1" color={state ? "primary" : "initial"}>
+                    {label}
+                </Typography>
+            }
+        />
+    );
+};
 
 QuantityBox.propTypes = {
-    icon: PropTypes.string.isRequired,
-    checkedIcon: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-}
+    label: PropTypes.string.isRequired,
+    state: PropTypes.bool.isRequired,
+};
 
 export default QuantityBox;

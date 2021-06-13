@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
         border: `1px solid ${theme.palette.primary.main}`,
         backgroundColor: "#F2FFF8"
     },
+    hidden: {
+        display: "none"
+    }
 }));
 
 export default useStyles;

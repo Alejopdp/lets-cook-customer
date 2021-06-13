@@ -94,6 +94,7 @@ const Kriss = () => {
             <Box width="200px">
                 <CustomButton
                     text="Seleccionar plan"
+                    onClick={()=>{}}
                 />
             </Box>
 
