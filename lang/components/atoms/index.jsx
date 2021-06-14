@@ -1,2 +1,4 @@
 export * from "./LegalTextSection";
-export * from "./searchBar.jsx";
+export * from "./searchBar";
+export * from "./socialNetworksButtons";
+export * from "./acceptLegalTerms";

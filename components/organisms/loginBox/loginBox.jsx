@@ -1,6 +1,8 @@
 // Utils & Config
 import React, { useState } from 'react'
-import { emailRegex, pswRegex } from "../../../helpers/regex/regex";
+import { isEmail, isPassword } from "../../../helpers/regex/regex";
+import { useRouter } from "next/router";
+const langs = require("../../../lang").loginBox;
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -21,36 +23,34 @@ const LoginBox = () => {
     };
 
     const handleSubmit = () => {
-        console.log("Submit")
+        alert("Login exitoso (redirigir a perfil de usuario)")
     };
 
-    const isEmail = emailRegex.test(values.email);
-    const isPassword = pswRegex.test(values.password);
-
-    console.log(values)
+    const router = useRouter();
+    const lang = langs[router.locale];
 
     return (
-        <FormPaper fullWidth title="Ingresa con tu cuenta">
+        <FormPaper title={lang.title}>
             <TextInput
-                label="Ingrese su correo electrónico"
+                label={lang.emailInput}
                 name="email"
                 value={values.email}
                 onChange={handleChange("email")}
             />
 
             <PasswordInput
-                label="Ingrese su contraseña"
+                label={lang.passwordInput}
                 name="password"
                 value={values.password}
                 onChange={handleChange("password")}
             />
 
-            <ForgotPassword text="Olvidé mi contraseña"/>
+            <ForgotPassword text={lang.forgotPassword} />
 
             <CustomButton
-                text={"Ingresar"}
+                text={lang.buttonText}
                 onClick={handleSubmit}
-                disabled={!isEmail || !isPassword}
+                disabled={!isEmail(values.email) || !isPassword(values.password)}
             />
 
             <Divider />
@@ -58,9 +58,9 @@ const LoginBox = () => {
             <SocialNetworksButtons />
 
             <Register
-                text="¿Aún no tienes cuenta?"
-                boldText="Registrate aquí"
-                redirectTo="/registrarme"
+                text={lang.register.text}
+                boldText={lang.register.boldText}
+                redirectTo={lang.register.redirectTo}
             />
         </FormPaper>
     )

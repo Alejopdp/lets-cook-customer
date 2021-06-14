@@ -25,7 +25,7 @@ const MailSignup = () => {
     console.log(values)
 
     return (
-        <FormPaper fullWidth title="Crear tu cuenta">
+        <FormPaper title="Crear tu cuenta">
             <TextInput
                 label="Ingrese su correo electrónico"
                 name="email"
@@ -44,7 +44,7 @@ const MailSignup = () => {
 
             <AcceptLegalTerms />
 
-            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/login" />
+            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/ingresar" />
         </FormPaper>
     )
 }

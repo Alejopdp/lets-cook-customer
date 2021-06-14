@@ -1,18 +1,20 @@
+// Utils & Config
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+// Internal components
 import RecoverPasswordMail from "./recoverPasswordMail";
 import RecoverPasswordCode from "./recoverPasswordCode";
 import RecoverPassword from "./recoverPassword";
 
 const stepsQty = 3;
 
-const RecoverPasswordForm = (props) => {
+const RecoverPasswordForm = () => {
     const [currentStep, setcurrentStep] = useState(0);
     const [formData, setFormData] = useState({
         email: "",
-        password: "",
         code: "",
+        password: "",
     });
 
     var currentInputs = <></>;
@@ -29,30 +31,28 @@ const RecoverPasswordForm = (props) => {
         });
     };
 
-    console.log(formData)
-    console.log(currentStep)
+    const handleRecover = () => {
+        alert("Password cambiada con éxito")
+    }
 
-    switch (currentStep) {
+    switch (true) {
         case currentStep === 0:
-            currentInputs = <RecoverPasswordMail handleChange handeSubmit value={formData.email}/>;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmit} value={formData.email} />;
             break;
 
         case currentStep === 1:
-            currentInputs = <RecoverPasswordCode handleChange handeSubmit />;
+            currentInputs = <RecoverPasswordCode handleChange={handleChange} handleSubmit={handleSubmit} value={formData.code} />;
             break;
 
         case currentStep === 2:
-            currentInputs = <RecoverPassword handleChange handleSubmit value={formData.password} />;
+            currentInputs = <RecoverPassword handleChange={handleChange} handleSubmit={handleRecover} value={formData.password} />;
+            break;
 
         default:
-            currentInputs = <RecoverPasswordMail />;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmit} value={formData.email} />;
     }
 
-    return (
-        <>
-            {currentInputs}
-        </>
-    );
+    return <>{currentInputs}</>;
 };
 
 RecoverPasswordForm.propTypes = {};

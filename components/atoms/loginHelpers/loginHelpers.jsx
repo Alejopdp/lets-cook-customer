@@ -2,6 +2,8 @@
 import React from 'react';
 import useStyles from "./styles";
 import PropTypes from "prop-types";
+import { useRouter } from "next/router";
+const langs = require("../../../lang").acceptLegalTerms;
 
 // External components
 import Button from '@material-ui/core/Button';
@@ -37,15 +39,19 @@ export const Register = ({ redirectTo, text, boldText }) => {
 
 export const AcceptLegalTerms = () => {
     const { margin, link } = useStyles();
+
+    const router = useRouter();
+    const lang = langs[router.locale];
+
     return (
         <Typography variant="body2" className={margin}>
-            Al continuar, aceptas los
+            {lang.continuing}
             <Link href="/aviso-legal" className={link}>
-                <b> términos y condiciones </b>
+                <b> {lang.terms} </b>
             </Link>
-            y la
+            {lang.and}
             <Link href="/aviso-legal" className={link}>
-                <b> política de privacidad.</b>
+                <b> {lang.politics}</b>
             </Link>
         </Typography>
     )

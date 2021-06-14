@@ -1,5 +1,8 @@
 // Utils & Config
 import React from 'react'
+import PropTypes from "prop-types";
+import { useRouter } from "next/router";
+const langs = require("../../../lang").recoverPasswordCode;
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -7,41 +10,38 @@ import { TextInput } from "../../atoms/inputs/inputs";
 import CustomButton from "../../atoms/customButton/customButton";
 import { Register } from '../../atoms/loginHelpers/loginHelpers';
 
-const RecoverPasswordCode = () => {
-    const [values, setValues] = React.useState({
-        code: '',
-    });
-
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
-
-    const handleSubmit = () => {
-        console.log("Submit")
-    };
+const RecoverPasswordCode = (props) => {
+    const router = useRouter();
+    const lang = langs[router.locale];
 
     return (
-        <FormPaper
-            fullWidth
-            title="Recuperar contraseña"
-            paragraph="Te hemos enviado un correo electrónico con un código de 6 dígitos. Ingresa el código a continuación para ingresar una nueva contraseña:"
-        >
+        <FormPaper title={lang.title} paragraph={lang.paragraph}>
             <TextInput
-                label="Código de 6 dígitos"
+                label={lang.codeInput}
                 name="code"
-                value={values.code}
-                onChange={handleChange("code")}
+                value={props.value}
+                onChange={props.handleChange}
             />
 
             <CustomButton
-                text={"Continuar"}
-                disabled={values.code.length === 6 ? false : true}
-                onClick={handleSubmit}
+                text={lang.buttonText}
+                disabled={props.value.length !== 6}
+                onClick={() => props.handleSubmit(1)}
             />
 
-            <Register text="¿Aún no tienes cuenta?" boldText="Registrate aquí" redirectTo="/signup" />
+            <Register
+                text={lang.register.text}
+                boldText={lang.register.boldText}
+                redirectTo={lang.register.redirectTo}
+            />
         </FormPaper>
     )
 }
+
+RecoverPasswordCode.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired
+};
 
 export default RecoverPasswordCode;
