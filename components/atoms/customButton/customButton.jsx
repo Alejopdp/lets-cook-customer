@@ -1,6 +1,7 @@
 // Utils & Config
 import React from 'react'
 import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 import PropTypes from "prop-types";
 
 // External components
@@ -22,20 +23,27 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: theme.palette.background.default
         }
     },
+    slimButton: {
+        padding: theme.spacing(0.5),
+    },
     box: {
         display: "flex",
-        flexDirection: "row"
+        flexDirection: "row",
     }
 }));
 
-const CustomButton = ({ text, icon, onClick, disabled }) => {
-    const { button, box } = useStyles();
+const CustomButton = ({ text, icon, onClick, disabled, smallButton }) => {
+    const { button, slimButton, box } = useStyles();
 
     return (
-        <Button className={button} onClick={onClick} disabled={disabled}>
+        <Button
+            className={ smallButton ? clsx(button, slimButton) : button}
+            onClick={onClick}
+            disabled={disabled}
+        >
             <Box className={box}>
                 {icon &&
-                    <Box marginRight="8px">
+                    <Box className={box} marginRight="8px">
                         {icon}
                     </Box>
                 }
@@ -53,4 +61,5 @@ CustomButton.propTypes = {
     onClick: PropTypes.func.isRequired,
     text: PropTypes.string.isRequired,
     icon: PropTypes.element,
+    smallButton: PropTypes.bool,
 };

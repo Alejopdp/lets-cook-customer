@@ -5,8 +5,8 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 
 // Internal Components
-import RecipeImgTags from '../../components/atoms/recipeImgTags/recipeImgTags';
-import CustomButton from '../../components/atoms/customButton/customButton';
+import RecipeImgTags from '../../atoms/recipeImgTags/recipeImgTags';
+import CustomButton from '../../atoms/customButton/customButton';
 
 // External components
 import Card from "@material-ui/core/Card";
@@ -19,12 +19,13 @@ import TimerIcon from "@material-ui/icons/Timer";
 import SpeedIcon from "@material-ui/icons/Speed";
 import Visibility from "@material-ui/icons/Visibility";
 import AddCircle from "@material-ui/icons/AddCircle";
+import { Box, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         borderRadius: '8px',
         width: 300,
-        height: 350,
+        height: 360,
     },
     tag: {
         width: "max-content",
@@ -41,22 +42,25 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(1),
     },
     titleText: {
-        marginTop: theme.spacing(1)
+        marginTop: theme.spacing(2)
+    },
+    visibilityBtn: {
+        marginLeft: "-16px"
     }
 }));
 
-const RecipeCard = (props) => {
+const RecipeCardBuyFlow = (props) => {
     const classes = useStyles();
 
-    const { root, tag, marg,titleText } = classes;
+    const { root, tag, marg, titleText, visibilityBtn } = classes;
 
     return (
         <Card className={root} >
-            <CardContent style={{ height: "60%", backgroundImage: "url(https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg)", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}>
+            <CardContent style={{ height: "200px", backgroundImage: "url(https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg)", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}>
                 <RecipeImgTags imgTags={["Más vendido"]} />
             </CardContent>
 
-            <CardContent style={{ height: "40%" }}>
+            <CardContent>
                 <Grid container>
                     <Grid item className={tag}>
                         <TimerIcon color="primary" className={marg} />
@@ -77,23 +81,29 @@ const RecipeCard = (props) => {
                             Arepas de Kriss
                         </Typography>
                     </Grid>
-
-                    <Grid item container direction="row">
-                        <Visibility />
-                        <CustomButton icon={<AddCircle />} text="Agregar" />
-                    </Grid>
-
                 </Grid>
+
+                <Box display="flex" flexDirection="row">
+                    <Button className={visibilityBtn}>
+                        <Visibility />
+                    </Button>
+
+                    <CustomButton
+                        smallButton
+                        icon={<AddCircle />}
+                        text="Agregar"
+                    />
+                </Box>
             </CardContent>
         </Card>
     );
 };
 
-RecipeCard.propTypes = {
+RecipeCardBuyFlow.propTypes = {
     mainTag: PropTypes.string,
     timeTag: PropTypes.string.isRequired,
     difficultyTag: PropTypes.string.isRequired,
     recipeName: PropTypes.string.isRequired,
 };
 
-export default RecipeCard;
+export default RecipeCardBuyFlow;
