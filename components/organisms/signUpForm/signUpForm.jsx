@@ -52,7 +52,7 @@ const SignUpForm = (props) => {
                     authorize={formData.authorize}
                     sendInfo={formData.sendInfo}
                     handleChange={handleChange}
-                    handleSubmit={handleCreateAccount}
+                    handleSubmit={props.handleCreateAccount || handleCreateAccount}
                 />;
             break;
 
@@ -73,6 +73,8 @@ const SignUpForm = (props) => {
     );
 };
 
-SignUpForm.propTypes = {};
+SignUpForm.propTypes = {
+    handleCreateAccount: PropTypes.func,
+};
 
 export default SignUpForm;

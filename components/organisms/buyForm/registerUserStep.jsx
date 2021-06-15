@@ -1,11 +1,15 @@
 import { PropTypes } from "@material-ui/core";
 import { useBuyFlow } from "../../../stores/buyflow";
 
+import SignUpForm from "../signUpForm/signUpForm";
+
 export const RegisterUserStep = () => {
     const gotToNextView = useBuyFlow(({ forward }) => forward);
     return (
         <>
-            RegisterUserStep
+            <SignUpForm
+                handleCreateAccount={() => gotToNextView()}
+            />
             <button onClick={() => gotToNextView()}>Checkout</button>
         </>
     );
