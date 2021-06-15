@@ -37,6 +37,10 @@ const SignUpForm = (props) => {
         alert("Cuenta creada (redireccionar a perfil de usuario)")
     }
 
+    const handleRedirect = () => {
+        router.push("/ingresar")
+    }
+
     const router = useRouter();
     const lang = langs[router.locale];
 
@@ -67,7 +71,8 @@ const SignUpForm = (props) => {
             <Register
                 text={lang.register.text}
                 boldText={lang.register.boldText}
-                redirectTo={lang.register.redirectTo}
+                // redirectTo={lang.register.redirectTo}
+                handleRedirect={props.handleRedirect || handleRedirect}
             />
         </FormPaper>
     );
@@ -75,6 +80,7 @@ const SignUpForm = (props) => {
 
 SignUpForm.propTypes = {
     handleCreateAccount: PropTypes.func,
+    handleRedirect: PropTypes.func,
 };
 
 export default SignUpForm;

@@ -23,17 +23,17 @@ export const ForgotPassword = ({ text }) => {
     )
 }
 
-export const Register = ({ redirectTo, text, boldText }) => {
+export const Register = ({ redirectTo, handleRedirect, text, boldText }) => {
     const { register, btn } = useStyles();
     return (
-        <Link href={redirectTo}>
-            <Button className={btn}>
+        // <Link href={redirectTo}>
+            <Button className={btn} onClick={handleRedirect}>
                     <ExitToAppIcon />
                     <Typography variant="body1" className={register}>
                         {text} <b>{boldText}</b>
                     </Typography>
             </Button>
-        </Link>
+        // </Link>
     )
 }
 
@@ -62,7 +62,8 @@ ForgotPassword.propTypes = {
 };
 
 Register.propTypes = {
-    redirectTo: PropTypes.string.isRequired,
+    // redirectTo: PropTypes.string.isRequired,
+    handleRedirect: PropTypes.func.isRequired,
     text: PropTypes.string.isRequired,
     boldText: PropTypes.string.isRequired
 };

@@ -12,7 +12,7 @@ import SocialNetworksButtons from '../../atoms/socialNetworksButtons/socialNetwo
 import { ForgotPassword, Register } from '../../atoms/loginHelpers/loginHelpers';
 import Divider from '../../atoms/divider/divider';
 
-const LoginBox = () => {
+const LoginBox = (props) => {
     const [values, setValues] = useState({
         password: "",
         email: "",
@@ -25,6 +25,10 @@ const LoginBox = () => {
     const handleSubmit = () => {
         alert("Login exitoso (redirigir a perfil de usuario)")
     };
+
+    const handleRedirect = () => {
+        router.push("/registrarme")
+    }
 
     const router = useRouter();
     const lang = langs[router.locale];
@@ -60,7 +64,8 @@ const LoginBox = () => {
             <Register
                 text={lang.register.text}
                 boldText={lang.register.boldText}
-                redirectTo={lang.register.redirectTo}
+                // redirectTo={lang.register.redirectTo}
+                handleRedirect={props.handleRedirect || handleRedirect}
             />
         </FormPaper>
     )
