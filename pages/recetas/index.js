@@ -4,10 +4,6 @@ import { useRouter } from "next/router";
 import { getRecipes } from "../../helpers/serverRequests/recipe";
 const langs = require("../../lang").recetas;
 
-// External components
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-
 // Internal Components
 import InnerSectionLayout from "../../components/layout/publicLayout";
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
@@ -22,7 +18,7 @@ const Recetas = (props) => {
         <Layout>
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-                <RecipesGrid recipes={props.recipes} />
+                <RecipesGrid recipesPage recipes={props.recipes} />
             </InnerSectionLayout>
         </Layout>
     );

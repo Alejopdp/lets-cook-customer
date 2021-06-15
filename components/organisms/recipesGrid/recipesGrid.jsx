@@ -8,9 +8,9 @@ import Grid from "@material-ui/core/Grid";
 // Internal components
 import RecipeCard from "../../molecules/recipeCard/recipeCard";
 import RecipeModal from "../../molecules/recipeModal/recipeModal";
+import RecipeCardBuyFlow from "../../molecules/recipeCardBuyFlow/recipeCardBuyFlow";
 
 const RecipesGrid = (props) => {
-
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpenModal = () => {
@@ -66,20 +66,40 @@ const RecipesGrid = (props) => {
 
     return (
         <>
-            <Grid container direction="row" justify="left" alignItems="flex-start" spacing={2}>
-                {props.recipes.map((recipe, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                        <RecipeCard
-                            img='https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg'
-                            imgTags={["Más vendido"]}
-                            timeTag={recipe.cookDuration}
-                            difficultyTag={recipe.difficultyLevel}
-                            recipeName={recipe.name}
-                            handleClickOpenModal={handleClickOpenModal}
-                        />
-                    </Grid>
-                ))}
-            </Grid>
+            {props.recipesPage &&
+                <Grid container direction="row" justify="left" alignItems="flex-start" spacing={2}>
+                    {props.recipes.map((recipe, index) => (
+                        <Grid item xs={12} sm={6} md={4} key={index}>
+                            <RecipeCard
+                                img='https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg'
+                                imgTags={["Más vendido"]}
+                                timeTag={recipe.cookDuration}
+                                difficultyTag={recipe.difficultyLevel}
+                                recipeName={recipe.name}
+                                handleClickOpenModal={handleClickOpenModal}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+            }
+
+            {props.recipesSelection &&
+                <Grid container direction="row" justify="center" alignItems="flex-start" spacing={2}>
+                    {props.recipes.map((recipe, index) => (
+                        <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                            <RecipeCardBuyFlow
+                                img='https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg'
+                                imgTags={["Más vendido"]}
+                                timeTag={recipe.cookDuration}
+                                difficultyTag={recipe.difficultyLevel}
+                                recipeName={recipe.name}
+                                handleClickOpenModal={handleClickOpenModal}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+            }
+
             <RecipeModal
                 open={open}
                 handleClose={handleClose}
@@ -90,6 +110,9 @@ const RecipesGrid = (props) => {
     );
 };
 
-RecipesGrid.propTypes = {};
+RecipesGrid.propTypes = {
+    recipesPage: PropTypes.bool,
+    recipesSelection: PropTypes.bool,
+};
 
 export default RecipesGrid;
