@@ -1,5 +1,6 @@
 // Utils & Config
 import React, { useState } from 'react'
+import PropTypes from "prop-types";
 import { isEmail, isPassword } from "../../../helpers/regex/regex";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").loginBox;
@@ -22,7 +23,7 @@ const LoginBox = (props) => {
         setValues({ ...values, [prop]: event.target.value });
     };
 
-    const handleSubmit = () => {
+    const handleLogin = () => {
         alert("Login exitoso (redirigir a perfil de usuario)")
     };
 
@@ -53,7 +54,7 @@ const LoginBox = (props) => {
 
             <CustomButton
                 text={lang.buttonText}
-                onClick={handleSubmit}
+                onClick={props.handleLogin || handleLogin}
                 disabled={!isEmail(values.email) || !isPassword(values.password)}
             />
 
@@ -70,5 +71,10 @@ const LoginBox = (props) => {
         </FormPaper>
     )
 }
+
+LoginBox.propTypes = {
+    handleLogin: PropTypes.func,
+    handleRedirect: PropTypes.func,
+};
 
 export default LoginBox;

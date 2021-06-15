@@ -1,22 +1,36 @@
 // Utils & Config
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useBuyFlow } from "../../../stores/buyflow";
 
 // Internal components
 import SignUpForm from "../signUpForm/signUpForm";
+import LoginBox from "../loginBox/loginBox";
 
 export const RegisterUserStep = () => {
+    const [ haveAccount, setHaveAccount] = useState(false);
+
     const gotToNextView = useBuyFlow(({ forward }) => forward);
 
     const handleRedirect = () => {
-        alert("Cambiar componente a Login")
+        setHaveAccount(!haveAccount);
     }
+
     return (
         <>
-            <SignUpForm
-                handleCreateAccount={() => gotToNextView()}
-                handleRedirect={handleRedirect}
-            />
+            {haveAccount
+            ?
+                <LoginBox
+                    handleLogin={() => gotToNextView()}
+                    handleRedirect={handleRedirect}
+                />
+            :
+                <SignUpForm
+                    handleCreateAccount={() => gotToNextView()}
+                    handleRedirect={handleRedirect}
+                />
+            }
+
             <button onClick={() => gotToNextView()}>Checkout</button>
         </>
     );
