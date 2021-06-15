@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
         filter: "sepia(100%) saturate(3457%) hue-rotate(118deg) brightness(99%) contrast(102%)",
     },
     subttl: {
-        marginTop: theme.spacing(2)
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(4)
     },
 }));
 

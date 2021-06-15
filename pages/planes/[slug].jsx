@@ -1,10 +1,14 @@
+// Utils & Config
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import BuyFlowLayout from "../../components/layout/buyFlow";
-import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "../../components/organisms/buyForm";
+import { getRecipes } from "../../helpers/serverRequests/recipe";
 import { useBuyFlow } from "../../stores/buyflow";
 
-export const PlanesPage = ({ isLogged, plans, faqs, ...props }) => {
+// Internal components
+import BuyFlowLayout from "../../components/layout/buyFlow";
+import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "../../components/organisms/buyForm";
+
+export const PlanesPage = ({ isLogged, plans, faqs, recipes, ...props }) => {
     const router = useRouter();
     const buyFlow = useBuyFlow(({ step, showRegister, setRegisterState, forward, form, setBuyFlowData }) => ({
         step,
@@ -26,20 +30,36 @@ export const PlanesPage = ({ isLogged, plans, faqs, ...props }) => {
             {buyFlow.step === 0 && <SelectPlanStep plans={plans} faqs={faqs} />}
             {buyFlow.step === 1 && <RegisterUserStep />}
             {buyFlow.step === 2 && <CheckoutStep />}
-            {buyFlow.step === 3 && <RecipeChoiseStep />}
+            {buyFlow.step === 3 && <RecipeChoiseStep recipes={recipes} />}
         </BuyFlowLayout>
     );
 };
 
 export async function getServerSideProps({ locale, query, previewData, params, ...context }) {
+    // En la page /recetas, esta llamada se hace con getStaticProps,
+    // Como no se puede poner ambas funciones en un mismo archivo, la metí acá
+    // Anda igual, pero no sé si será lo ideal
+    const res = await getRecipes(locale);
+
     return {
         props: {
+            recipes: res.status === 200 ? res.data : [],
             isLogged: true,
             plans,
             faqs
         },
     };
 }
+
+// export async function getStaticProps(context) {
+//     const res = await getRecipes(context.locale);
+
+//     return {
+//         props: {
+//             recipes: res.status === 200 ? res.data : [],
+//         },
+//     };
+// }
 
 export default PlanesPage;
 
