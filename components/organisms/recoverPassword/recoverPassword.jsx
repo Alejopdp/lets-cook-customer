@@ -5,21 +5,23 @@ import { isPassword } from "../../../helpers/regex/regex";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").recoverPassword;
 
+// External componentes
+import { Typography } from "@material-ui/core";
+
 // Internal components
-import FormPaper from "../../molecules/formPaper/formPaper";
 import { PasswordInput } from "../../atoms/inputs/inputs";
 import CustomButton from "../../atoms/customButton/customButton";
-import { Register } from "../../atoms/loginHelpers/loginHelpers";
 
 const RecoverPassword = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
 
     return (
-        <FormPaper
-            title={lang.title}
-            paragraph={lang.paragraph}
-        >
+        <>
+            <Typography variant="body2" paragraph>
+                {lang.paragraph}
+            </Typography>
+
             <PasswordInput
                 label={lang.passwordInput}
                 name="password"
@@ -32,20 +34,14 @@ const RecoverPassword = (props) => {
                 disabled={!isPassword(props.value)}
                 onClick={props.handleSubmit}
             />
-
-            <Register
-                text={lang.register.text}
-                boldText={lang.register.boldText}
-                redirectTo={lang.register.redirectTo}
-            />
-        </FormPaper>
+        </>
     );
 };
 
 RecoverPassword.propTypes = {
     value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onClick: PropTypes.func.isRequired
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
 };
 
 export default RecoverPassword;
