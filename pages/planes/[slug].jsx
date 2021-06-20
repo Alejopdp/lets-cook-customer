@@ -22,7 +22,7 @@ export const PlanesPage = ({ isLogged, plans, faqs, recipes, ...props }) => {
     useEffect(() => {
         const { personas: personQty = 1, recetas: recipeQty = 1, slug } = router.query;
         console.log("***-> Properties", personQty, recipeQty, slug);
-        console.log('***-> Plans', plans)
+        console.log("***-> Plans", plans);
     }, []);
 
     return (
@@ -39,14 +39,15 @@ export async function getServerSideProps({ locale, query, previewData, params, .
     // En la page /recetas, esta llamada se hace con getStaticProps,
     // Como no se puede poner ambas funciones en un mismo archivo, la metí acá
     // Anda igual, pero no sé si será lo ideal
-    const res = await getRecipes(locale);
+    // const res = await getRecipes(locale);
+    // console.log("Recipes: ", res);
 
     return {
         props: {
-            recipes: res.status === 200 ? res.data : [],
             isLogged: true,
-            plans,
-            faqs
+            recipes: _recipes, //res.status === 200 ? res.data : [],
+            plans: _plans,
+            faqs: _faqs,
         },
     };
 }
@@ -63,35 +64,30 @@ export async function getServerSideProps({ locale, query, previewData, params, .
 
 export default PlanesPage;
 
-const faqs = [
+const _faqs = [
     {
         question: "Ipsum lorem dolor sit amet sadipscing elitr?",
         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-
     },
     {
         question: "Ipsum lorem dolor sit amet sadipscing elitr?",
         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-
     },
     {
         question: "Ipsum lorem dolor sit amet sadipscing elitr?",
         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-
     },
     {
         question: "Ipsum lorem dolor sit amet sadipscing elitr?",
         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-
     },
     {
         question: "Ipsum lorem dolor sit amet sadipscing elitr?",
         answer: "Ipsum lorem dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-
     },
-]
+];
 
-const plans = [
+const _plans = [
     {
         name: "Plan Familiar",
         description: "Plan Familiar lorem ipsum dolor sit amet",
@@ -134,4 +130,43 @@ const plans = [
         checkedIcon: "/icons/plans/plan-familiar-color.svg",
         slug: "plan-x",
     },
-]
+];
+
+const _recipes = Array(3)
+    .fill({
+        id: "3003d63c-68ee-4be4-82f6-20a5241afd6f",
+        imageUrl: "https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg",
+        imageTags: ["Mas vendida"],
+        name: "Arepas ",
+        shortDescription:
+            "Lorem ipsum dolor sit amet, conetur meand las ipscing elitr, sed diam nonumy eir tempor invidunt uorem ipsum dolor sit amet aswim",
+        cookDuration: "50 min",
+        difficultyLevel: "Alta",
+        variantOptions: ["Opción sin gluten", "Opción sin lactosa"],
+        longDescription:
+            "Lorem ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet aswim",
+        recipeVariants: [
+            { name: 'Opción principal', ingredients: ["Pan", "Tomate", "Lechuga", "Queso", "Carne"] },
+            { name: 'Opción sin glúten', ingredients: ["Tomate", "Lechuga",] },
+            { name: 'Opción sin lactosa', ingredients: ["Pan", "Lechuga", "Carne"] }
+        ],
+        recipeVariants: [
+            ["Opción principal", "Opción sin glúten", "Opción sin lactosa"],
+            ["Pan, Tomate, Lechuga, Queso, Carne", "Tomate, Lechuga", "Pan, Lechuga, Carne"],
+        ],
+        tools: "Bol, Tenedor, Cuchillo",
+        nutritionalInformation: [
+            { key: "Valor energético", value: "114,8 kcal" },
+            { key: "Grasas", value: "2,2 g" },
+            { key: "- de las cuales saturadas", value: "1,1 g" },
+            { key: "Hidratos de carbono", value: "18 g" },
+            { key: "- de los cuales azúcares", value: "1,8 g" },
+            { key: "Proteínas", value: "4,4 g" },
+            { key: "Sal", value: "0,8 g" },
+        ],
+    })
+    .map((recipe, index) => ({
+        ...recipe,
+        id: index,
+        name: recipe.name + " " + index,
+    }));

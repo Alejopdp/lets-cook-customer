@@ -92,6 +92,7 @@ const RecipesSection = ({title, subtitle, titleAlign}) => {
                             timeTag={"15 min"}
                             difficultyTag={"Fácil"}
                             recipeName={"Salmón con quinoa"}
+                            handleClickOpenModal={()=>{ console.log('Recipe Card clicked...')}}
                         />
                     </Grid>
                 ))}

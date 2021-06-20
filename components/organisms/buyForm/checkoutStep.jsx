@@ -15,11 +15,10 @@ export const CheckoutStep = () => {
 
     return (
         <Container maxWidth="lg">
+             <button onClick={() => gotToNextView()}>Elegir recetas</button>
             <ShipmentForm registeredUser />
             <PaymentForm savedCards />
             <IconsWithText />
-
-            <button onClick={() => gotToNextView()}>Elegir recetas</button>
         </Container>
     );
 };
