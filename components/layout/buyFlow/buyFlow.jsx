@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { AppBar, Link, CssBaseline, Hidden, Toolbar } from "@material-ui/core";
+import { AppBar, Link, CssBaseline, Toolbar } from "@material-ui/core";
 import Image from "next/image";
+import { useRouter } from "next/router";
+
 import DrawerMenu from "../../molecules/drawerFilters/drawer";
 import { StepperBuy } from "../../molecules/stepperBuy";
 import LangSelector from "../../molecules/langSelector/langSelector";
+
 import { useStyles } from "./styles";
-import { useFilterDrawer } from "../../../stores/buyflow";
+import { useBuyFlow, useFilterDrawer } from "../../../stores/buyflow";
 
 export const BuyFlowLayout = ({ children: Component }) => {
     const filterOptions = [
@@ -36,14 +38,19 @@ export const BuyFlowLayout = ({ children: Component }) => {
     ];
 
     const classes = useStyles();
+    const router = useRouter();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
+    const { showRegister, setRegisterState: toggleRegister } = useBuyFlow(({ setRegisterState, showRegister }) => ({
+        setRegisterState,
+        showRegister,
+    }));
 
     const _toggleOpeningDrawer = () => {
         setDrawerOpen(!drawerIsOpen);
     };
 
-    const _handleOnChangeLang = (lang) => {
-        _toggleOpeningDrawer();
+    const _handleOnChangeLang = ({ label: locale }) => {
+        router.push(router.asPath, router.asPath, { locale });
     };
 
     const _handleClickApplyFilters = (_filters) => {
@@ -61,6 +68,18 @@ export const BuyFlowLayout = ({ children: Component }) => {
                     </Link>
                 </div>
                 <StepperBuy smDowmHide steps={steps} />
+                {/* TODO: REMOVE!! ONLY IS DEMO TO HIDE OR SHOW REGISTER HEADER */}
+                <button
+                    onClick={() => toggleRegister(!showRegister)}
+                    style={{
+                        color: "lightblue",
+                        backgroundColor: "transparent",
+                        border: "none",
+                    }}
+                >
+                    {showRegister ? "Ocultar Registrarse" : "Mostrar Registrarse"}
+                </button>
+                {/* END DEMO BUTTON */}
                 <LangSelector onChangeLang={_handleOnChangeLang} />
             </Toolbar>
             <StepperBuy smUpHide steps={steps} />

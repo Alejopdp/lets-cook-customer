@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const RoundedButton = ({ variant = "content", label, children: Component, ...props }) => {
+const RoundedButton = ({ variant = "content", label, children: Component, style,...props }) => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -20,11 +20,12 @@ const RoundedButton = ({ variant = "content", label, children: Component, ...pro
             focusRipple
             className={classes.loginButton}
             focusRipple={true}
-            {...props}
             style={{
                 border: variant === "outline" ? "solid 1px gray" : "none",
-                backgroundColor: variant === "content" ? theme.palette.primary.main : "transparent"
+                backgroundColor: variant === "content" ? theme.palette.primary.main : "transparent",
+                ...style
             }}
+            {...props}
         >
             <div style={{ marginRight: 4 }} >
                 {Component}

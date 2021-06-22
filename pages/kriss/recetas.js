@@ -11,7 +11,7 @@ const Recetas = (props) => {
     return (
         <InnerSectionLayout containerMaxWidth="lg">
             <TitleOtherPages title={"El pago ha sido exitoso ¡Muchas gracias por tu compra!"} subtitle={"Elige las 3 recetas que recibirás el martes 18"} />
-            <RecipesGrid recipesSelection recipes={props.recipes} />
+            {/* <RecipesGrid recipesSelection recipes={props.recipes} /> */}
         </InnerSectionLayout>
     );
 };

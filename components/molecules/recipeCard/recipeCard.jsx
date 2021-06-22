@@ -66,4 +66,7 @@ RecipeCard.propTypes = {
     handleClickOpenModal: PropTypes.func.isRequired,
 };
 
+RecipeCard.defaultProps = {
+    handleClickOpenModal: () => {}
+}
 export default RecipeCard;

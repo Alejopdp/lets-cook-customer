@@ -81,7 +81,7 @@ const BenefitsSection = () => {
         <Box style={{ backgroundColor: 'white', padding: `${theme.spacing(8)}px 0px` }}>
             <Container maxWidth='lg'>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} md={6} alignSelf='center'>
+                    <Grid item xs={12} md={6} style={{alignSelf:'center'}}>
                         <div className={classes.imgContainer}>
                             <img
                                 className={classes.img}
