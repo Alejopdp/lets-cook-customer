@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const BoxWithTitleAndButton = (props) => {
+const BoxWithTitleAndTextButton = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -35,8 +35,8 @@ const BoxWithTitleAndButton = (props) => {
     );
 };
 
-BoxWithTitleAndButton.propTypes = {
+BoxWithTitleAndTextButton.propTypes = {
     btnText: PropTypes.string.isRequired,
 };
 
-export default BoxWithTitleAndButton;
+export default BoxWithTitleAndTextButton;
