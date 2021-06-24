@@ -21,7 +21,7 @@ const BoxWithTitle = (props) => {
     return (
         <GeneralBox variant='medium'>
             <div>
-                <Typography variant='subtitle1' color='textSecondary' style={{ fontSize: '20px' }}>
+                <Typography variant='subtitle1' color='textSecondary' style={{ fontSize: '20px', marginBottom: theme.spacing(2) }}>
                     {props.title}
                 </Typography>
                 {props.children}

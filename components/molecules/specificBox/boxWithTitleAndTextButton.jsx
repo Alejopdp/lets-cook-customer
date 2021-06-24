@@ -27,7 +27,7 @@ const BoxWithTitleAndTextButton = (props) => {
 
     return (
         <GeneralBox variant='medium'>
-            <div>
+            <div style={{width:'100%'}}>
                 <Typography variant='subtitle1' color='textSecondary' style={{ fontSize: '20px', marginBottom: theme.spacing(2) }}>
                     {props.title}
                 </Typography>
