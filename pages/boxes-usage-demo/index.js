@@ -18,6 +18,8 @@ import BoxWithTitleAndTextButton from "../../components/molecules/specificBox/bo
 import BoxWithTextButton from "../../components/molecules/specificBox/boxWithTextButton";
 import PlanInfoWithStatus from "../../components/molecules/planInfo/planInfoWithStatus";
 import PlanInfo from "../../components/molecules/planInfo/planInfo";
+import DataDisplayEditable from "../../components/molecules/dataDisplay/dataDisplayEditable";
+import DataDisplay from "../../components/molecules/dataDisplay/dataDisplay";
 
 const PlanDetails = () => {
     const theme = useTheme();
@@ -46,6 +48,8 @@ const PlanDetails = () => {
                         </Grid>
                         <Grid item>
                             <BoxWithTitleAndTextButton title='BoxWithTitleAndTextButton' btnText='button text'>
+                                <DataDisplayEditable title='Correo electrónico' text='alejo@novolabs.xyz' handleClick={() => alert('clicked')} style={{marginBottom: theme.spacing(2)}} />
+                                <DataDisplay title='Nombre completo' text='Alejo Scotti' style={{marginBottom: theme.spacing(2)}} />
                                 <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
                                     Contenido del componente BoxWithTitleAndTextButton (/molecules/specificBox/BoxWithTitleAndTextButton)
                                 </Typography>
