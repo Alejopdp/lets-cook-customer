@@ -1,7 +1,7 @@
 // Utils & Config
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import clsx from "clsx";
 
 // External components
@@ -17,11 +17,12 @@ const useStyles = makeStyles((theme) => ({
 
 const BoxWithTitle = (props) => {
     const classes = useStyles();
+    const theme = useTheme();
 
     return (
         <GeneralBox variant='medium'>
             <div>
-                <Typography variant='subtitle1' color='textSecondary' style={{ fontSize: '20px' }}>
+                <Typography variant='subtitle1' color='textSecondary' style={{ fontSize: '20px', marginBottom: theme.spacing(2) }}>
                     {props.title}
                 </Typography>
                 {props.children}
