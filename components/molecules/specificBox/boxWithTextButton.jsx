@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const BoxWithTitleAndButton = (props) => {
+const BoxWithTitleAndTextButton = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -30,13 +30,13 @@ const BoxWithTitleAndButton = (props) => {
             <div>
                 {props.children}
             </div>
-            <TextButton btnText={props.btnText} style={{ marginTop: theme.spacing(3) }} />
+            <TextButton btnText={props.btnText} style={{ marginTop: theme.spacing(3) }} handleClick={props.handleClick} />
         </GeneralBox>
     );
 };
 
-BoxWithTitleAndButton.propTypes = {
+BoxWithTitleAndTextButton.propTypes = {
     btnText: PropTypes.string.isRequired,
 };
 
-export default BoxWithTitleAndButton;
+export default BoxWithTitleAndTextButton;

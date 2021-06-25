@@ -16,12 +16,12 @@ const BackButtonTitle = props => {
     const theme = useTheme();
 
     return (
-        <Grid container>
+        <Grid container style={{ marginBottom: theme.spacing(3) }}>
             <Grid item xs={12}>
                 <Link href={props.url}>
                     <Grid container alignItems="center" style={{ cursor: "pointer" }}>
                         <ArrowBackIcon style={{ marginRight: theme.spacing(1), color: "#707070" }} />
-                        <Typography variant="h6" style={{fontSize: '24px'}}>
+                        <Typography variant="h6" style={{ fontSize: '24px' }}>
                             {props.title}
                         </Typography>
                     </Grid>

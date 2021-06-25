@@ -30,12 +30,12 @@ import CloseIcon from '@material-ui/icons/Close';
 const styles = (theme) => ({
     root: {
         margin: 0,
-        padding: theme.spacing(2),
+        padding: theme.spacing(3),
     },
     closeButton: {
         position: 'absolute',
-        right: theme.spacing(1),
-        top: theme.spacing(1),
+        right: theme.spacing(2),
+        top: theme.spacing(2),
         color: theme.palette.grey[500],
     },
     tag: {
@@ -59,7 +59,7 @@ const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose, ...other } = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h6">{children}</Typography>
+            <Typography variant="h5">{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
                     <CloseIcon />
@@ -74,107 +74,112 @@ const RecipeModal = withStyles(styles)((props) => {
     const isMdUp = useMediaQuery("(min-width:960px)")
 
     return (
-        <div>
-            <Dialog
-                fullScreen={isMdUp ? false : true}
-                fullWidth={true}
-                maxWidth='md'
-                open={props.open}
-                onClose={props.handleClose}
-                scroll='paper'
-                aria-labelledby="scroll-dialog-title"
-                aria-describedby="scroll-dialog-description"
-            >
-                <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
-                    Detalle de la receta
-                </DialogTitle>
+        <>
+            {props.data && (
+                <div>
+                    <Dialog
+                        fullScreen={isMdUp ? false : true}
+                        fullWidth={true}
+                        maxWidth='md'
+                        open={props.open}
+                        onClose={props.handleClose}
+                        scroll='paper'
+                        aria-labelledby="scroll-dialog-title"
+                        aria-describedby="scroll-dialog-description"
+                        style={{ zIndex: '3147483647' }}
+                    >
+                        <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
+                            Detalle de la receta
+                      </DialogTitle>
 
-                <DialogContent dividers={true}>
-                    <DialogContentText id="scroll-dialog-description" ref={props.descriptionElementRef} tabIndex={-1} >
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <Image className={props.classes.image} src={props.data.imageUrl} alt={props.data.name} width={400} height={250} />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
+                        <DialogContent dividers={false}>
+                            <DialogContentText id="scroll-dialog-description" ref={props.descriptionElementRef} tabIndex={-1} >
                                 <Grid container spacing={2}>
-                                    <Grid item xs={12}>
-                                        <RecipeImgTags imgTags={props.data.imageTags} />
+                                    <Grid item xs={12} sm={6}>
+                                        <Image className={props.classes.image} src={props.data.imageUrl} alt={props.data.name} width={400} height={250} />
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <Typography variant='h6'>
-                                            {props.data.name}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Typography variant='body1'>
-                                            {props.data.shortDescription}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Grid container>
-                                            <Grid item className={props.classes.tag}>
-                                                <TimerIcon color="primary" style={{ marginRight: theme.spacing(1) }} />
-                                                <Typography variant="subtitle2">
-                                                    {props.data.cookDuration}
+                                    <Grid item xs={12} sm={6}>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <RecipeImgTags imgTags={props.data.imageTags} />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Typography variant='h6'>
+                                                    {props.data.name}
                                                 </Typography>
                                             </Grid>
-                                            <Grid item className={props.classes.tag}>
-                                                <SpeedIcon color="primary" style={{ marginRight: theme.spacing(1) }} />
-                                                <Typography variant="subtitle2">
-                                                    {props.data.difficultyLevel}
+                                            <Grid item xs={12}>
+                                                <Typography variant='body1'>
+                                                    {props.data.shortDescription}
                                                 </Typography>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Grid container>
+                                                    <Grid item className={props.classes.tag}>
+                                                        <TimerIcon color="primary" style={{ marginRight: theme.spacing(1) }} />
+                                                        <Typography variant="subtitle2">
+                                                            {props.data.cookDuration}
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item className={props.classes.tag}>
+                                                        <SpeedIcon color="primary" style={{ marginRight: theme.spacing(1) }} />
+                                                        <Typography variant="subtitle2">
+                                                            {props.data.difficultyLevel}
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                            </Grid>
-                        </Grid>
 
-                        <Grid container>
-                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', margin: `${theme.spacing(3)}px 0px` }}>
-                                {props.data.variantOptions.map((option, index) => (
-                                    <Typography style={{ marginRight: theme.spacing(2) }}>
-                                        {option}
-                                    </Typography>
-                                ))}
-                            </Grid>
-                        </Grid>
+                                <Grid container>
+                                    <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', margin: `${theme.spacing(3)}px 0px` }}>
+                                        {props.data.variantOptions.map((option, index) => (
+                                            <Typography style={{ marginRight: theme.spacing(2) }}>
+                                                {option}
+                                            </Typography>
+                                        ))}
+                                    </Grid>
+                                </Grid>
 
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
-                                <Typography variant='subtitle1' style={{ marginBottom: theme.spacing(1) }}>
-                                    Descripción
-                                </Typography>
-                                <Typography variant='body1'>
-                                    {props.data.longDescription}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
-                                <Typography variant='subtitle1' style={{ marginBottom: theme.spacing(1) }}>
-                                    Ingredientes
-                                </Typography>
-                                <RecipeVariantsTab variants={props.data.recipeVariants[0]} ingredientsLists={props.data.recipeVariants[1]} />
-                            </Grid>
-                            <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
-                                <Typography variant='subtitle1' style={{ marginBottom: theme.spacing(1) }}>
-                                    Herramientas necesarias
-                                </Typography>
-                                <Typography variant='body1'>
-                                    {props.data.tools}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
-                                <Typography variant='subtitle1' style={{ marginBottom: theme.spacing(1) }}>
-                                    Información nutricional (cada 100 gramos)
-                                </Typography>
-                                <NutritionalInformationTable rows={props.data.nutritionalInformation} />
-                            </Grid>
-                        </Grid>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                        <Typography variant='subtitle1' style={{ marginBottom: theme.spacing(1) }}>
+                                            Descripción
+                                      </Typography>
+                                        <Typography variant='body1'>
+                                            {props.data.longDescription}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                        <Typography variant='subtitle1' style={{ marginBottom: theme.spacing(1) }}>
+                                            Ingredientes
+                                      </Typography>
+                                        <RecipeVariantsTab variants={props.data.recipeVariants[0]} ingredientsLists={props.data.recipeVariants[1]} />
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                        <Typography variant='subtitle1' style={{ marginBottom: theme.spacing(1) }}>
+                                            Herramientas necesarias
+                                      </Typography>
+                                        <Typography variant='body1'>
+                                            {props.data.tools}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                        <Typography variant='subtitle1' style={{ marginBottom: theme.spacing(1) }}>
+                                            Información nutricional (cada 100 gramos)
+                                      </Typography>
+                                        <NutritionalInformationTable rows={props.data.nutritionalInformation} />
+                                    </Grid>
+                                </Grid>
 
-                    </DialogContentText>
-                </DialogContent>
-            </Dialog>
-        </div >
+                            </DialogContentText>
+                        </DialogContent>
+                    </Dialog>
+                </div>
+            )}
+        </>
     );
 });
 
