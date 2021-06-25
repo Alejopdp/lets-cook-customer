@@ -36,21 +36,38 @@ const ChangePlanModal = (props) => {
         })
     }, [props.open]);
 
+
     const handleChangePlan = (event) => {
-        console.log('event', event.target.value)
-        const name = event.target.name;
+        console.log('planId', event.target.value)
         setPlanSelected({
             ...planSelected,
-            [name]: event.target.value,
+            planId: event.target.value,
+        });
+        handleChangeVariantFromChangePlan()
+    };
+
+    // No anda. Me apunta siempre al anterior al que esta seleccionado
+    const handleChangeVariantFromChangePlan = () => {
+        let planVariantValue = document.getElementById("variantDropdown").value;
+        console.log('planVariantId', planVariantValue)
+    }
+
+    const handleChangeVariant = (event) => {
+        setPlanSelected({
+            ...planSelected,
+            planVariantId: event.target.value,
         });
     };
 
+    const submitNewPlan = () => {
+        props.handlePrimaryButtonClick(planSelected);
+    }
 
     return (
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            handlePrimaryButtonClick={props.handlePrimaryButtonClick}
+            handlePrimaryButtonClick={submitNewPlan}
             title='Cambiar plan'
             primaryButtonText='cambiar plan'
             secondaryButtonText='cancelar'
@@ -65,10 +82,10 @@ const ChangePlanModal = (props) => {
                     value={planSelected.planId}
                     onChange={handleChangePlan}
                     label="Plan"
-                    inputProps={{ name: 'planId', id: 'outlined-age-native-simple' }}
+                    inputProps={{ name: 'planId', id: 'planDropdown' }}
                 >
-                    {props.data.plans.map((plan, index) => (
-                        <option key={index} value={plan.planId}>{plan.name}</option>
+                    {props.data.plans.map(plan => (
+                        <option key={plan.planId} value={plan.planId}>{plan.name}</option>
                     ))}
                 </Select>
             </FormControl>
@@ -80,12 +97,12 @@ const ChangePlanModal = (props) => {
                 <Select
                     native
                     value={planSelected.planVariantId}
-                    onChange={handleChangePlan}
+                    onChange={handleChangeVariant}
                     label="Variante"
-                    inputProps={{ name: 'planVariantId', id: 'outlined-age-native-simple' }}
+                    inputProps={{ name: 'planVariantId', id: 'variantDropdown' }}
                 >
-                    {props.data.variants.filter(variant => variant.planId === planSelected.planId).map((variant, index) => (
-                        <option key={index} value={variant.planVariantId}>{variant.variantDescription}</option>
+                    {props.data.variants.filter(variant => variant.planId === planSelected.planId).map(variant => (
+                        <option key={variant.planVariantId} value={variant.planVariantId}>{variant.variantDescription}</option>
                     ))}
                 </Select>
             </FormControl>
