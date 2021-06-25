@@ -1,7 +1,7 @@
 // Utils & Config
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 // import clsx from "clsx";
 
 // External components
@@ -11,7 +11,6 @@ import GeneralBox from "../../atoms/generalBox/generalBox";
 import Typography from "@material-ui/core/Typography";
 
 const BoxWithTitle = (props) => {
-    const classes = useStyles();
     const theme = useTheme();
 
     return (
