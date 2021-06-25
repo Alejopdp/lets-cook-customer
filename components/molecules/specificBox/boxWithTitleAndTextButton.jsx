@@ -27,13 +27,13 @@ const BoxWithTitleAndTextButton = (props) => {
 
     return (
         <GeneralBox variant='medium'>
-            <div style={{width:'100%'}}>
+            <div style={{ width: '100%' }}>
                 <Typography variant='subtitle1' color='textSecondary' style={{ fontSize: '20px', marginBottom: theme.spacing(2) }}>
                     {props.title}
                 </Typography>
                 {props.children}
             </div>
-            <TextButton btnText={props.btnText} style={{ marginTop: theme.spacing(3) }} />
+            <TextButton btnText={props.btnText} style={{ marginTop: theme.spacing(3) }} handleClick={props.handleClick} />
         </GeneralBox>
     );
 };
