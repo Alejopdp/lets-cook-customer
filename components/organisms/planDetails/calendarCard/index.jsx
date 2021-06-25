@@ -30,7 +30,7 @@ const CalendarCard = props => {
     // const lang = langs[router.locale];
 
     return (
-        <BoxWithTitleAndTextButton title='Calendario' btnText='saltar semana'>
+        <BoxWithTitleAndTextButton title='Calendario' btnText='saltar semana' handleClick={props.handleClick}>
             <Grid container>
                 <Grid item xs={12} sm={6}>
                     <DataDisplay title='Próxima entrega' text={props.calendar.nextShippingDate} />

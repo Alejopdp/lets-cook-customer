@@ -17,6 +17,8 @@ import RecipesNextWeekCard from "./recipesNextWeekCard/index";
 import TextButton from "../../atoms/textButton/textButton";
 import RecipeModal from "../../molecules/recipeModal/recipeModal";
 import ChangePlanModal from "../../molecules/managePlanModals/changePlanModal";
+import CancelPlanModal from "../../molecules/managePlanModals/cancelPlanModal";
+import SkipPlanModal from "../../molecules/managePlanModals/skipPlanModal";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -234,6 +236,8 @@ const PlanDetails = props => {
     const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: -1, period: '' })
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
     const [openChangePlanModal, setOpenChangePlanModal] = useState(false);
+    const [openCancelPlanModal, setOpenCancelPlanModal] = useState(false);
+    const [openSkipPlanModal, setOpenSkipPlanModal] = useState(false);
 
 
     // Change Plan Modal Functions
@@ -249,6 +253,38 @@ const PlanDetails = props => {
     const handlePrimaryButtonClickChangePlanModal = () => {
         alert('primary click change plan modal')
         setOpenChangePlanModal(false);
+    };
+
+
+    // Cancel Plan Modal Functions
+
+    const handleClickOpenCancelPlanModal = () => {
+        setOpenCancelPlanModal(true);
+    };
+
+    const handleCloseCancelPlanModal = () => {
+        setOpenCancelPlanModal(false);
+    };
+
+    const handlePrimaryButtonClickCancelPlanModal = () => {
+        alert('primary click cancel plan modal')
+        setOpenCancelPlanModal(false);
+    };
+
+
+    // Skip Plan Modal Functions
+
+    const handleClickOpenSkipPlanModal = () => {
+        setOpenSkipPlanModal(true);
+    };
+
+    const handleCloseSkipPlanModal = () => {
+        setOpenSkipPlanModal(false);
+    };
+
+    const handlePrimaryButtonClickSkipPlanModal = () => {
+        alert('primary click skip plan modal')
+        setOpenSkipPlanModal(false);
     };
 
 
@@ -292,7 +328,7 @@ const PlanDetails = props => {
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <PlanCard plan={data.plan} handleClickOpenChangePlanModal={handleClickOpenChangePlanModal} />
+                            <PlanCard plan={data.plan} handleClick={handleClickOpenChangePlanModal} />
                         </Grid>
                         <Grid item xs={12}>
                             <ShippingAddressCard shippingAddress={data.shippingAddress} />
@@ -301,14 +337,14 @@ const PlanDetails = props => {
                             <PaymentMethodCard paymentMethod={data.paymentMethod} />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextButton btnText='cancelar plan' style={{ color: '#FC1919', marginTop: theme.spacing(2) }} />
+                            <TextButton handleClick={handleClickOpenCancelPlanModal} btnText='cancelar plan' style={{ color: '#FC1919', marginTop: theme.spacing(2) }} />
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={8}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <CalendarCard calendar={data.calendar} />
+                            <CalendarCard calendar={data.calendar} handleClick={handleClickOpenSkipPlanModal}/>
                         </Grid>
                         {data.hasRecipesActualWeek && (
                             <Grid item xs={12}>
@@ -334,6 +370,16 @@ const PlanDetails = props => {
                 handleClose={handleCloseChangePlanModal}
                 handlePrimaryButtonClick={handlePrimaryButtonClickChangePlanModal}
                 data={changePlanData}
+            />
+            <CancelPlanModal
+                open={openCancelPlanModal}
+                handleClose={handleCloseCancelPlanModal}
+                handlePrimaryButtonClick={handlePrimaryButtonClickCancelPlanModal}
+            />
+            <SkipPlanModal
+                open={openSkipPlanModal}
+                handleClose={handleCloseSkipPlanModal}
+                handlePrimaryButtonClick={handlePrimaryButtonClickSkipPlanModal}
             />
 
         </>
