@@ -30,12 +30,12 @@ import CloseIcon from '@material-ui/icons/Close';
 const styles = (theme) => ({
     root: {
         margin: 0,
-        padding: theme.spacing(2),
+        padding: theme.spacing(3),
     },
     closeButton: {
         position: 'absolute',
-        right: theme.spacing(1),
-        top: theme.spacing(1),
+        right: theme.spacing(2),
+        top: theme.spacing(2),
         color: theme.palette.grey[500],
     },
     tag: {
@@ -59,7 +59,7 @@ const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose, ...other } = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h6">{children}</Typography>
+            <Typography variant="h5">{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
                     <CloseIcon />
@@ -86,12 +86,13 @@ const RecipeModal = withStyles(styles)((props) => {
                         scroll='paper'
                         aria-labelledby="scroll-dialog-title"
                         aria-describedby="scroll-dialog-description"
+                        style={{ zIndex: '3147483647' }}
                     >
                         <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
                             Detalle de la receta
                       </DialogTitle>
 
-                        <DialogContent dividers={true}>
+                        <DialogContent dividers={false}>
                             <DialogContentText id="scroll-dialog-description" ref={props.descriptionElementRef} tabIndex={-1} >
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={6}>

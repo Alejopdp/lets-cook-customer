@@ -14,21 +14,15 @@ import PaymentMethodCard from "./paymentMethodCard/index";
 import CalendarCard from "./calendarCard/index";
 import RecipesActualWeekCard from "./recipesActualWeekCard/index";
 import RecipesNextWeekCard from "./recipesNextWeekCard/index";
-import RecipeModal from "../../molecules/recipeModal/recipeModal";
 import TextButton from "../../atoms/textButton/textButton";
+import RecipeModal from "../../molecules/recipeModal/recipeModal";
+import ChangePlanModal from "../../molecules/managePlanModals/changePlanModal";
 
 const useStyles = makeStyles((theme) => ({
 
 }));
 
 const PlanDetails = props => {
-    const theme = useTheme();
-    const classes = useStyles();
-    // const router = useRouter();
-    // const lang = langs[router.locale];
-    const [open, setOpen] = useState(false);
-    const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: 0, period: '' })
-
     const data = {
         plan: {
             name: 'Plan Familiar',
@@ -211,6 +205,55 @@ const PlanDetails = props => {
         ]
     }
 
+    const changePlanData = {
+        plans: [
+            { planId: '1', name: 'Plan Familiar', active: false },
+            { planId: '2', name: 'Plan Gourmet', active: false },
+            { planId: '3', name: 'Plan Ahorro', active: true },
+            { planId: '4', name: 'Plan Vegetariano', active: false },
+            { planId: '5', name: 'Plan Vegano', active: false },
+        ],
+        variants: [
+            { planId: '1', planVariantId: '6', variantDescription: '4 recetas para 3 personas - 36 €/semana', active: false },
+            { planId: '1', planVariantId: '7', variantDescription: '3 recetas para 3 personas - 30 €/semana', active: false },
+            { planId: '1', planVariantId: '8', variantDescription: '2 recetas para 3 personas - 24 €/semana', active: false },
+            { planId: '2', planVariantId: '9', variantDescription: '4 recetas para 2 personas - 30 €/semana', active: false },
+            { planId: '2', planVariantId: '10', variantDescription: '3 recetas para 2 personas - 24 €/semana', active: false },
+            { planId: '2', planVariantId: '11', variantDescription: '2 recetas para 2 personas - 18 €/semana', active: false },
+            { planId: '3', planVariantId: '12', variantDescription: '3 recetas para 2 personas - 24 €/semana', active: true },
+            { planId: '3', planVariantId: '13', variantDescription: '2 recetas para 2 personas - 18 €/semana', active: false },
+            { planId: '4', planVariantId: '14', variantDescription: '2 recetas para 2 personas - 18 €/semana', active: false },
+            { planId: '5', planVariantId: '15', variantDescription: '2 recetas para 2 personas - 18 €/semana', active: false },
+        ]
+    }
+
+    const theme = useTheme();
+    const classes = useStyles();
+    // const router = useRouter();
+    // const lang = langs[router.locale];
+    const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: -1, period: '' })
+    const [openRecipeModal, setOpenRecipeModal] = useState(false);
+    const [openChangePlanModal, setOpenChangePlanModal] = useState(false);
+
+
+    // Change Plan Modal Functions
+
+    const handleClickOpenChangePlanModal = () => {
+        setOpenChangePlanModal(true);
+    };
+
+    const handleCloseChangePlanModal = () => {
+        setOpenChangePlanModal(false);
+    };
+
+    const handlePrimaryButtonClickChangePlanModal = () => {
+        alert('primary click change plan modal')
+        setOpenChangePlanModal(false);
+    };
+
+
+    // Recipes Modal Functions
+
     const handleClickOpenRecipeModal = (recipeId, period) => {
         let recipeIndex;
         if (period === 'actualWeek') {
@@ -223,22 +266,24 @@ const PlanDetails = props => {
             index: recipeIndex,
             period: period,
         });
-        setOpen(true);
+        setOpenRecipeModal(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseRecipeModal = () => {
+        setOpenRecipeModal(false);
     };
 
-    const descriptionElementRef = useRef(null);
+
+    const descriptionElementRefRecipeModal = useRef(null);
+
     useEffect(() => {
-        if (open) {
-            const { current: descriptionElement } = descriptionElementRef;
+        if (openRecipeModal) {
+            const { current: descriptionElement } = descriptionElementRefRecipeModal;
             if (descriptionElement !== null) {
                 descriptionElement.focus();
             }
         }
-    }, [open]);
+    }, [openRecipeModal]);
 
 
     return (
@@ -247,7 +292,7 @@ const PlanDetails = props => {
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <PlanCard plan={data.plan} />
+                            <PlanCard plan={data.plan} handleClickOpenChangePlanModal={handleClickOpenChangePlanModal} />
                         </Grid>
                         <Grid item xs={12}>
                             <ShippingAddressCard shippingAddress={data.shippingAddress} />
@@ -279,11 +324,18 @@ const PlanDetails = props => {
                 </Grid>
             </Grid>
             <RecipeModal
-                open={open}
-                handleClose={handleClose}
-                descriptionElementRef={descriptionElementRef}
+                open={openRecipeModal}
+                handleClose={handleCloseRecipeModal}
+                descriptionElementRef={descriptionElementRefRecipeModal}
                 data={recipeSelectedIndex.period === 'actualWeek' ? data.recipesActualWeek[recipeSelectedIndex.index] : data.recipesNextWeek[recipeSelectedIndex.index]}
             />
+            <ChangePlanModal
+                open={openChangePlanModal}
+                handleClose={handleCloseChangePlanModal}
+                handlePrimaryButtonClick={handlePrimaryButtonClickChangePlanModal}
+                data={changePlanData}
+            />
+
         </>
 
     );

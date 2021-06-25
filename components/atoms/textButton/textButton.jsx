@@ -26,7 +26,7 @@ const TextButton = (props) => {
     const classes = useStyles();
 
     return (
-        <Button size="small" className={classes.textButton} style={props.style}>
+        <Button size="small" className={classes.textButton} style={props.style} onClick={props.handleClick}>
             {props.btnText}
         </Button>
     );
