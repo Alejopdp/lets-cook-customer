@@ -1,0 +1,633 @@
+.proximanova-bold-sonic-silver-16px {
+    color: #777777;
+    font-family: "ProximaNova-Bold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+}
+.opensans-normal-sonic-silver-14px {
+    color: #777777;
+    font-family: "Open Sans", Helvetica;
+    font-size: 14px;
+}
+.opensans-normal-sonic-silver-14px-2 {
+    color: #777777;
+    font-family: "Open Sans", Helvetica;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+}
+.opensans-normal-sonic-silver-14px-3 {
+    color: #777777;
+    font-family: "Open Sans", Helvetica;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+}
+.proximanova-semi-bold-sonic-silver-13px {
+    color: #777777;
+    font-family: "ProximaNova-Semibold", Helvetica;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+}
+.proximanova-bold-sonic-silver-20px {
+    color: #777777;
+    font-family: "ProximaNova-Bold", Helvetica;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+}
+.proximanova-bold-log-cabin-24px {
+    color: #202223de;
+    font-family: "ProximaNova-Bold", Helvetica;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+}
+.border-1-6px-dove-gray {
+    border: 1.6px solid #707070;
+}
+
+.blog-page-15 {
+    align-items: flex-start;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    height: 1022px;
+    width: 1366px;
+}
+.blog-page-15 .abstract-user-flat-1 {
+    align-items: center;
+    align-self: flex-end;
+    border-radius: 11px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    min-height: 22px;
+    padding: 2.4px 0.9px;
+    width: 22px;
+}
+.blog-page-15 .alejo {
+    color: #777777;
+    font-family: "ProximaNova-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-left: 7px;
+    margin-top: -11px;
+    min-height: 26px;
+    min-width: 56px;
+    white-space: nowrap;
+}
+.blog-page-15 .ellipse-2 {
+    border-radius: 3.9473776817321777px;
+    height: 8px;
+    margin-right: 2.83px;
+    width: 8px;
+}
+.blog-page-15 .group-1005 {
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 167px;
+    width: 260px;
+}
+.blog-page-15 .group-1009 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+    margin-top: 16px;
+    min-height: 140px;
+    width: 230px;
+}
+.blog-page-15 .group-1009-1 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+    margin-top: 16px;
+    min-height: 111px;
+    width: 230px;
+}
+.blog-page-15 .group-1018 {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px #0000001a;
+    display: flex;
+    flex-direction: column;
+    min-height: 339px;
+    width: 260px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+.blog-page-15 .group-104 {
+    align-items: flex-start;
+    display: flex;
+    height: 24px;
+    justify-content: flex-end;
+    margin-left: 1054px;
+    min-width: 110px;
+}
+.blog-page-15 .group-1531 {
+    align-items: flex-start;
+    display: flex;
+    height: 24px;
+    left: 0;
+    min-width: 141px;
+    position: absolute;
+    top: 0;
+}
+.blog-page-15 .group-1927 {
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 16px #00000014;
+    display: flex;
+    height: 64px;
+    min-width: 1366px;
+    padding: 13px 48px;
+}
+.blog-page-15 .group-1976 {
+    align-items: flex-start;
+    align-self: center;
+    display: flex;
+    /* height: 339px; */
+    margin-top: 25px;
+    min-width: 1088px;
+    max-width: 1104px;
+    flex-wrap: wrap;
+}
+.blog-page-15 .group-1977 {
+    align-items: flex-start;
+    align-self: center;
+    display: flex;
+    height: 310px;
+    margin-top: 25px;
+    min-width: 1088px;
+}
+.blog-page-15 .group-1978 {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px #0000001a;
+    display: flex;
+    flex-direction: column;
+    min-height: 310px;
+    width: 260px;
+}
+.blog-page-15 .group-1979 {
+    align-items: flex-start;
+    display: flex;
+    margin-left: 0;
+    margin-top: 19px;
+    min-width: 141px;
+}
+.blog-page-15 .group-198 {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px #0000001a;
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    min-height: 339px;
+    width: 260px;
+}
+.blog-page-15 .group-198-1 {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px #0000001a;
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    min-height: 310px;
+    width: 260px;
+}
+.blog-page-15 .group-5 {
+    align-items: flex-start;
+    display: flex;
+    height: 32px;
+    justify-content: flex-end;
+    margin-left: 139px;
+    margin-top: 36px;
+    min-width: 200px;
+}
+.blog-page-15 .icon {
+    height: 24px;
+    object-fit: cover;
+    width: 25px;
+}
+.blog-page-15 .icon-1 {
+    height: 24px;
+    margin-left: 3px;
+    object-fit: cover;
+    width: 25px;
+}
+.blog-page-15 .icon-awesome-angle-down {
+    align-self: center;
+    height: 6px;
+    margin-left: 14px;
+    margin-top: 2px;
+    object-fit: cover;
+    width: 9px;
+}
+.blog-page-15 .icon-material-arrowback {
+    align-self: center;
+    height: 16px;
+    margin-top: 4px;
+    object-fit: cover;
+    width: 16px;
+}
+.blog-page-15 .image-1 {
+    align-self: flex-end;
+    height: 37px;
+    object-fit: cover;
+    width: 106px;
+}
+.blog-page-15 .overlap-group {
+    height: 42px;
+    margin-top: 19px;
+    position: relative;
+    width: 163px;
+}
+.blog-page-15 .path-51 {
+    height: 6px;
+    margin-right: 2.72px;
+    object-fit: cover;
+    width: 17px;
+}
+.blog-page-15 .recetas-valoradas {
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-left: 139px;
+    margin-top: 42px;
+    min-height: 29px;
+    white-space: nowrap;
+}
+.blog-page-15 .salmon-con-quinoa {
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-bottom: -1px;
+    margin-top: -4px;
+    min-height: 23px;
+    white-space: nowrap;
+}
+.blog-page-15 .text {
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-top: 4px;
+    min-height: 45px;
+    width: 230px;
+}
+.blog-page-15 .text-1 {
+    left: 0;
+    letter-spacing: 0;
+    line-height: 40px;
+    position: absolute;
+    top: 22px;
+    white-space: nowrap;
+}
+.blog-page-15 .text-13 {
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-left: 139px;
+    margin-top: 27px;
+    min-height: 29px;
+    white-space: nowrap;
+}
+.blog-page-15 .x24 {
+    letter-spacing: 0.18px;
+    line-height: 27px;
+    margin-left: 8px;
+    margin-top: -1.5px;
+    min-height: 34px;
+    white-space: nowrap;
+}
+.iphone-x-xs-11-pro-7 {
+    align-items: flex-start;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    height: 989px;
+    overflow-y: auto;
+    width: 375px;
+}
+.iphone-x-xs-11-pro-7 .abstract-user-flat-1 {
+    align-items: center;
+    border-radius: 11px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 95px;
+    margin-top: 0;
+    min-height: 22px;
+    padding: 2.4px 0.9px;
+    width: 22px;
+}
+.iphone-x-xs-11-pro-7 .ellipse-2 {
+    border-radius: 3.9473776817321777px;
+    height: 8px;
+    margin-right: 2.83px;
+    width: 8px;
+}
+.iphone-x-xs-11-pro-7 .flex-row {
+    align-items: flex-start;
+    align-self: flex-end;
+    display: flex;
+    margin-right: -150px;
+    margin-top: 17px;
+    min-width: 510px;
+    flex-direction: column;
+}
+.iphone-x-xs-11-pro-7 .flex-row-1 {
+    align-items: flex-start;
+    align-self: flex-end;
+    display: flex;
+    height: 302px;
+    margin-right: -154px;
+    margin-top: 17px;
+    min-width: 510px;
+}
+.iphone-x-xs-11-pro-7 .group-1005 {
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 159px;
+    width: 247px;
+}
+.iphone-x-xs-11-pro-7 .group-1009 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+    margin-top: 16px;
+    min-height: 140px;
+    width: 217px;
+}
+.iphone-x-xs-11-pro-7 .group-1009-1 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+    margin-top: 16px;
+    min-height: 111px;
+    width: 217px;
+}
+.iphone-x-xs-11-pro-7 .group-1018 {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px #0000001a;
+    display: flex;
+    flex-direction: column;
+    min-height: 331px;
+    width: 247px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+.iphone-x-xs-11-pro-7 .group-1531 {
+    align-items: flex-start;
+    display: flex;
+    height: 24px;
+    left: 0;
+    min-width: 141px;
+    position: absolute;
+    top: 0;
+}
+.iphone-x-xs-11-pro-7 .group-2015 {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px #0000001a;
+    display: flex;
+    flex-direction: column;
+    min-height: 302px;
+    width: 247px;
+}
+.iphone-x-xs-11-pro-7 .group-2016 {
+    align-items: flex-start;
+    display: flex;
+    margin-top: 19px;
+    min-width: 141px;
+    padding: 0 0px;
+}
+.iphone-x-xs-11-pro-7 .group-2017 {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px #0000001a;
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    min-height: 331px;
+    width: 247px;
+}
+.iphone-x-xs-11-pro-7 .group-2018 {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px #0000001a;
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    min-height: 302px;
+    width: 247px;
+}
+.iphone-x-xs-11-pro-7 .group-5 {
+    align-items: flex-start;
+    display: flex;
+    height: 32px;
+    justify-content: flex-end;
+    margin-left: 15px;
+    margin-top: 28px;
+    min-width: 200px;
+}
+.iphone-x-xs-11-pro-7 .group-810 {
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 16px #00000014;
+    display: flex;
+    height: 64px;
+    min-width: 375px;
+    padding: 13px 16px;
+}
+.iphone-x-xs-11-pro-7 .icon {
+    height: 24px;
+    object-fit: cover;
+    width: 25px;
+}
+.iphone-x-xs-11-pro-7 .icon-1 {
+    height: 24px;
+    margin-left: 3px;
+    object-fit: cover;
+    width: 25px;
+}
+.iphone-x-xs-11-pro-7 .icon-feather-menu {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 16px;
+    width: 24px;
+}
+.iphone-x-xs-11-pro-7 .icon-material-arrowback {
+    align-self: center;
+    height: 16px;
+    margin-top: 4px;
+    object-fit: cover;
+    width: 16px;
+}
+.iphone-x-xs-11-pro-7 .image-1 {
+    align-self: flex-end;
+    height: 37px;
+    margin-left: 95px;
+    object-fit: cover;
+    width: 106px;
+}
+.iphone-x-xs-11-pro-7 .overlap-group {
+    height: 42px;
+    margin-top: 19px;
+    position: relative;
+    width: 163px;
+}
+.iphone-x-xs-11-pro-7 .path-5 {
+    height: 3px;
+    margin-left: -1.5px;
+    margin-top: 5px;
+    object-fit: cover;
+    width: 27px;
+}
+.iphone-x-xs-11-pro-7 .path-51 {
+    height: 6px;
+    margin-right: 2.72px;
+    object-fit: cover;
+    width: 17px;
+}
+.iphone-x-xs-11-pro-7 .path-53 {
+    height: 3px;
+    margin-left: -1.5px;
+    object-fit: cover;
+    width: 27px;
+}
+.iphone-x-xs-11-pro-7 .recetas-valoradas {
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-left: 19px;
+    margin-top: 26px;
+    min-height: 29px;
+    white-space: nowrap;
+}
+.iphone-x-xs-11-pro-7 .salmon-con-quinoa {
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-bottom: -1px;
+    margin-top: -4px;
+    min-height: 23px;
+    white-space: nowrap;
+}
+.iphone-x-xs-11-pro-7 .text {
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-top: 4px;
+    min-height: 45px;
+    width: 217px;
+}
+.iphone-x-xs-11-pro-7 .text-1 {
+    left: 0;
+    letter-spacing: 0;
+    line-height: 40px;
+    position: absolute;
+    top: 22px;
+    white-space: nowrap;
+}
+.iphone-x-xs-11-pro-7 .text-14 {
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-left: 15px;
+    margin-top: 19px;
+    min-height: 29px;
+    white-space: nowrap;
+}
+.iphone-x-xs-11-pro-7 .x24 {
+    letter-spacing: 0.18px;
+    line-height: 27px;
+    margin-left: 8px;
+    margin-top: -1.5px;
+    min-height: 34px;
+    white-space: nowrap;
+}
+@media screen and (max-width: 960px) {
+    .screen.blog-page-15 {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 961px) {
+    .screen.iphone-x-xs-11-pro-7 {
+        display: none;
+    }
+}
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic");
+
+@font-face {
+    font-family: "ProximaNova-Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: url("https://fonts.animaapp.com/ProximaNova-Bold") format("opentype");
+}
+
+@font-face {
+    font-family: "ProximaNova-Semibold";
+    font-style: normal;
+    font-weight: 600;
+    src: url("https://fonts.animaapp.com/ProximaNova-Semibold") format("opentype");
+}
+
+.container-center-horizontal {
+    pointer-events: none;
+    display: flex;
+    /* flex-direction: row; */
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+.container-center-horizontal > div {
+    pointer-events: auto;
+    flex-shrink: 0;
+    overflow-x: scroll;
+}
+.hidden {
+    visibility: hidden;
+    pointer-events: none;
+}
+.screen a {
+    text-decoration: none;
+    display: contents;
+}
+
+.recetasSinValorar {
+    align-items: flex-start;
+    align-self: center;
+    display: flex;
+    height: 339px;
+    margin-top: 25px;
+    min-width: 1088px;
+    max-width: 1104px;
+    flex-wrap: wrap;
+}
+
+.pendingToValue3 {
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-left: 0;
+    margin-top: 27px;
+    min-height: 29px;
+    white-space: nowrap;
+    color: #777777;
+    font-family: "ProximaNova-Bold", Helvetica;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+}
