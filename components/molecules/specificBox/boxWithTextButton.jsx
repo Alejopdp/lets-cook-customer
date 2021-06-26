@@ -17,7 +17,7 @@ import TextButton from "../../atoms/textButton/textButton";
 
 const useStyles = makeStyles((theme) => ({}));
 
-const BoxWithTitleAndButton = (props) => {
+const BoxWithTitleAndTextButton = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -25,6 +25,7 @@ const BoxWithTitleAndButton = (props) => {
         <GeneralBox variant="medium">
             <div style={{ width: "100%" }}>{props.children}</div>
             <TextButton
+                handleClick={props.handleClick}
                 btnText={props.btnText}
                 style={{
                     marginTop: theme.spacing(3),
@@ -35,8 +36,8 @@ const BoxWithTitleAndButton = (props) => {
     );
 };
 
-BoxWithTitleAndButton.propTypes = {
+BoxWithTitleAndTextButton.propTypes = {
     btnText: PropTypes.string.isRequired,
 };
 
-export default BoxWithTitleAndButton;
+export default BoxWithTitleAndTextButton;

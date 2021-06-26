@@ -16,8 +16,10 @@ import RestoreIcon from "@material-ui/icons/Restore";
 const useStyles = makeStyles((theme) => ({
     textButton: {
         padding: "0px",
+        fontSize: "14px",
         "&:hover": {
-            backgroundColor: theme.palette.background.paper,
+            // backgroundColor: theme.palette.background.paper,
+            backgroundColor: "transparent",
         },
     },
     container: {
@@ -33,7 +35,7 @@ const TextButton = (props) => {
     const classes = useStyles();
     let onlyIcon = false;
     let content = (
-        <Button size="small" className={classes.textButton} style={props.style}>
+        <Button size="small" className={classes.textButton} style={props.style} onClick={props.handleClick}>
             {props.icon === "plus-circle-outline" ? (
                 <AddCircleOutlineIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
             ) : props.icon === "settings" ? (
