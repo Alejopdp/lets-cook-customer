@@ -44,10 +44,10 @@ const PlanDetailsDesktop = ({ data, handleClickOpenChangePlanModal, handleClickO
                     </Grid>
                     {data.hasRecipesActualWeek && (
                         <Grid item xs={12}>
-                            <RecipesActualWeekCard recipesActualWeek={data.recipesActualWeek} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
+                            <RecipesActualWeekCard recipesActualWeek={data.recipesActualWeek} abilityToChooseRecipes={data.abilityToChooseRecipes} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
                         </Grid>
                     )}
-                    {data.hasRecipesNextWeek && (
+                    {(data.hasRecipesNextWeek && data.abilityToChooseRecipes) && (
                         <Grid item xs={12}>
                             <RecipesNextWeekCard recipesNextWeek={data.recipesNextWeek} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
                         </Grid>

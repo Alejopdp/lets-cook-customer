@@ -41,88 +41,94 @@ const PlanDetails = props => {
         calendar: {
             nextShippingDate: 'Martes 12 de Junio',
             nextChargeDate: 'Sábado 9 de Junio',
+            // si skipWeeks == '', no muestro el cartel "Has saltado las siguientes semanas..."
             skipWeeks: '9 al 16 de mayo, 17 al 24 de mayo'
         },
+        // si abilityToChooseRecipes == false, no muestro el componente de recetas de las proxima semana, y ademas, si recipesActualWeek == [], muestro un texto diferente
         abilityToChooseRecipes: true,
+        // si hasRecipesActualWeek == false, no muestro el componente de recetas de las semana actual
         hasRecipesActualWeek: true,
+        // si hasRecipesNextWeek == false, no muestro el componente de recetas de la proxima semana
         hasRecipesNextWeek: true,
+        // si recipesActualWeek == [], muestro que no se seleccionaron recetas
         recipesActualWeek: [
-            {
-                id: "3003d63c-68ee-4be4-82f6-20a5241afd6f",
-                imageUrl: "https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg",
-                imageTags: ["Mas vendida"],
-                name: "Arepas de Crhistian",
-                shortDescription: "Lorem ipsum dolor sit amet, conetur meand las ipscing elitr, sed diam nonumy eir tempor invidunt uorem ipsum dolor sit amet aswim",
-                cookDuration: "50 min",
-                difficultyLevel: "Alta",
-                variantOptions: ['Opción sin gluten', 'Opción sin lactosa'],
-                longDescription: "Lorem ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet aswim",
-                recipeVariants: [
-                    ['Opción principal', 'Opción sin glúten', 'Opción sin lactosa'],
-                    ['Pan, Tomate, Lechuga, Queso, Carne', 'Tomate, Lechuga', 'Pan, Lechuga, Carne']
-                ],
-                tools: 'Bol, Tenedor, Cuchillo',
-                nutritionalInformation: [
-                    { key: 'Valor energético', value: '114,8 kcal' },
-                    { key: 'Grasas', value: '2,2 g' },
-                    { key: '- de las cuales saturadas', value: '1,1 g' },
-                    { key: 'Hidratos de carbono', value: '18 g' },
-                    { key: '- de los cuales azúcares', value: '1,8 g' },
-                    { key: 'Proteínas', value: '4,4 g' },
-                    { key: 'Sal', value: '0,8 g' },
-                ]
-            },
-            {
-                id: "4003d63c-68ee-4be4-82f6-20a5241afd6f",
-                imageUrl: "https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg",
-                imageTags: ["Mas vendida"],
-                name: "Arepas de Alejo",
-                shortDescription: "Lorem ipsum dolor sit amet, conetur meand las ipscing elitr, sed diam nonumy eir tempor invidunt uorem ipsum dolor sit amet aswim",
-                cookDuration: "50 min",
-                difficultyLevel: "Alta",
-                variantOptions: ['Opción sin gluten', 'Opción sin lactosa'],
-                longDescription: "Lorem ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet aswim",
-                recipeVariants: [
-                    ['Opción principal', 'Opción sin glúten', 'Opción sin lactosa'],
-                    ['Pan, Tomate, Lechuga, Queso, Carne', 'Tomate, Lechuga', 'Pan, Lechuga, Carne']
-                ],
-                tools: 'Bol, Tenedor, Cuchillo',
-                nutritionalInformation: [
-                    { key: 'Valor energético', value: '114,8 kcal' },
-                    { key: 'Grasas', value: '2,2 g' },
-                    { key: '- de las cuales saturadas', value: '1,1 g' },
-                    { key: 'Hidratos de carbono', value: '18 g' },
-                    { key: '- de los cuales azúcares', value: '1,8 g' },
-                    { key: 'Proteínas', value: '4,4 g' },
-                    { key: 'Sal', value: '0,8 g' },
-                ]
-            },
-            {
-                id: "5003d63c-68ee-4be4-82f6-20a5241afd6f",
-                imageUrl: "https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg",
-                imageTags: ["Mas vendida"],
-                name: "Arepas de Mabel",
-                shortDescription: "Lorem ipsum dolor sit amet, conetur meand las ipscing elitr, sed diam nonumy eir tempor invidunt uorem ipsum dolor sit amet aswim",
-                cookDuration: "50 min",
-                difficultyLevel: "Alta",
-                variantOptions: ['Opción sin gluten', 'Opción sin lactosa'],
-                longDescription: "Lorem ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet aswim",
-                recipeVariants: [
-                    ['Opción principal', 'Opción sin glúten', 'Opción sin lactosa'],
-                    ['Pan, Tomate, Lechuga, Queso, Carne', 'Tomate, Lechuga', 'Pan, Lechuga, Carne']
-                ],
-                tools: 'Bol, Tenedor, Cuchillo',
-                nutritionalInformation: [
-                    { key: 'Valor energético', value: '114,8 kcal' },
-                    { key: 'Grasas', value: '2,2 g' },
-                    { key: '- de las cuales saturadas', value: '1,1 g' },
-                    { key: 'Hidratos de carbono', value: '18 g' },
-                    { key: '- de los cuales azúcares', value: '1,8 g' },
-                    { key: 'Proteínas', value: '4,4 g' },
-                    { key: 'Sal', value: '0,8 g' },
-                ]
-            }
+            // {
+            //     id: "3003d63c-68ee-4be4-82f6-20a5241afd6f",
+            //     imageUrl: "https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg",
+            //     imageTags: ["Mas vendida"],
+            //     name: "Arepas de Crhistian",
+            //     shortDescription: "Lorem ipsum dolor sit amet, conetur meand las ipscing elitr, sed diam nonumy eir tempor invidunt uorem ipsum dolor sit amet aswim",
+            //     cookDuration: "50 min",
+            //     difficultyLevel: "Alta",
+            //     variantOptions: ['Opción sin gluten', 'Opción sin lactosa'],
+            //     longDescription: "Lorem ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet aswim",
+            //     recipeVariants: [
+            //         ['Opción principal', 'Opción sin glúten', 'Opción sin lactosa'],
+            //         ['Pan, Tomate, Lechuga, Queso, Carne', 'Tomate, Lechuga', 'Pan, Lechuga, Carne']
+            //     ],
+            //     tools: 'Bol, Tenedor, Cuchillo',
+            //     nutritionalInformation: [
+            //         { key: 'Valor energético', value: '114,8 kcal' },
+            //         { key: 'Grasas', value: '2,2 g' },
+            //         { key: '- de las cuales saturadas', value: '1,1 g' },
+            //         { key: 'Hidratos de carbono', value: '18 g' },
+            //         { key: '- de los cuales azúcares', value: '1,8 g' },
+            //         { key: 'Proteínas', value: '4,4 g' },
+            //         { key: 'Sal', value: '0,8 g' },
+            //     ]
+            // },
+            // {
+            //     id: "4003d63c-68ee-4be4-82f6-20a5241afd6f",
+            //     imageUrl: "https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg",
+            //     imageTags: ["Mas vendida"],
+            //     name: "Arepas de Alejo",
+            //     shortDescription: "Lorem ipsum dolor sit amet, conetur meand las ipscing elitr, sed diam nonumy eir tempor invidunt uorem ipsum dolor sit amet aswim",
+            //     cookDuration: "50 min",
+            //     difficultyLevel: "Alta",
+            //     variantOptions: ['Opción sin gluten', 'Opción sin lactosa'],
+            //     longDescription: "Lorem ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet aswim",
+            //     recipeVariants: [
+            //         ['Opción principal', 'Opción sin glúten', 'Opción sin lactosa'],
+            //         ['Pan, Tomate, Lechuga, Queso, Carne', 'Tomate, Lechuga', 'Pan, Lechuga, Carne']
+            //     ],
+            //     tools: 'Bol, Tenedor, Cuchillo',
+            //     nutritionalInformation: [
+            //         { key: 'Valor energético', value: '114,8 kcal' },
+            //         { key: 'Grasas', value: '2,2 g' },
+            //         { key: '- de las cuales saturadas', value: '1,1 g' },
+            //         { key: 'Hidratos de carbono', value: '18 g' },
+            //         { key: '- de los cuales azúcares', value: '1,8 g' },
+            //         { key: 'Proteínas', value: '4,4 g' },
+            //         { key: 'Sal', value: '0,8 g' },
+            //     ]
+            // },
+            // {
+            //     id: "5003d63c-68ee-4be4-82f6-20a5241afd6f",
+            //     imageUrl: "https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg",
+            //     imageTags: ["Mas vendida"],
+            //     name: "Arepas de Mabel",
+            //     shortDescription: "Lorem ipsum dolor sit amet, conetur meand las ipscing elitr, sed diam nonumy eir tempor invidunt uorem ipsum dolor sit amet aswim",
+            //     cookDuration: "50 min",
+            //     difficultyLevel: "Alta",
+            //     variantOptions: ['Opción sin gluten', 'Opción sin lactosa'],
+            //     longDescription: "Lorem ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet ipsum dolor sit amet, conetur meand ipscing elitr, sed diam nonumy eir tempor invidunt uLorem ipsum dolor sit amet aswim",
+            //     recipeVariants: [
+            //         ['Opción principal', 'Opción sin glúten', 'Opción sin lactosa'],
+            //         ['Pan, Tomate, Lechuga, Queso, Carne', 'Tomate, Lechuga', 'Pan, Lechuga, Carne']
+            //     ],
+            //     tools: 'Bol, Tenedor, Cuchillo',
+            //     nutritionalInformation: [
+            //         { key: 'Valor energético', value: '114,8 kcal' },
+            //         { key: 'Grasas', value: '2,2 g' },
+            //         { key: '- de las cuales saturadas', value: '1,1 g' },
+            //         { key: 'Hidratos de carbono', value: '18 g' },
+            //         { key: '- de los cuales azúcares', value: '1,8 g' },
+            //         { key: 'Proteínas', value: '4,4 g' },
+            //         { key: 'Sal', value: '0,8 g' },
+            //     ]
+            // }
         ],
+        // si recipesNextWeek == [], muestro que no se seleccionaron recetas, y que estan pendientes de eleccion
         recipesNextWeek: [
             // {
             //     id: "7003d63c-68ee-4be4-82f6-20a5241afd6f",

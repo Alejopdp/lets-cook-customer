@@ -30,11 +30,13 @@ const RecipesActualWeekCard = props => {
                     <Box style={{ textAlign: 'center', marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
                         <Image src='/assets/userProfile/recipesEmptyState.svg' width='80' height='80' />
                         <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginTop: theme.spacing(1), marginBottom: theme.spacing(0.5) }}>
-                            No has seleccionado recetas para la entrega del martes 12 de junio
-                    </Typography>
-                        <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
-                            Elegiremos por tí las recetas de esta semana
-                    </Typography>
+                            {props.abilityToChooseRecipes ? 'No has seleccionado recetas para la entrega del martes 12 de junio' : 'Estamos eligiendo por tí las recetas de la semana actual'}
+                        </Typography>
+                        {props.abilityToChooseRecipes && (
+                            <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
+                                Elegiremos por tí las recetas de esta semana
+                            </Typography>
+                        )}
                     </Box>
                 </BoxWithTitle>
             ) : (
