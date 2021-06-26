@@ -1,5 +1,5 @@
 // Utils & Config
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 // External Components
@@ -25,23 +25,6 @@ const CantGetKitsNextWeek = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
-    const skipWeekData = {
-        weeks: [
-            { weekId: '1', text: '1 al 7 de marzo', skipped: false },
-            { weekId: '2', text: '8 al 15 de marzo', skipped: true },
-            { weekId: '3', text: '16 al 23 de marzo', skipped: false },
-            { weekId: '4', text: '24 al 31 de marzo', skipped: false },
-            { weekId: '5', text: '1 al 7 de abril', skipped: false },
-            { weekId: '6', text: '8 al 15 de abril', skipped: false },
-            { weekId: '7', text: '16 al 23 de abril', skipped: false },
-            { weekId: '8', text: '24 al 1 de mayo', skipped: false },
-            { weekId: '9', text: '2 al 8 de mayo', skipped: false },
-            { weekId: '10', text: '9 al 16 de mayo', skipped: false },
-            { weekId: '11', text: '17 al 24 de mayo', skipped: false },
-            { weekId: '12', text: '25 al 2 de junio', skipped: false },
-        ]
-    }
-
     return (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
@@ -50,9 +33,12 @@ const CantGetKitsNextWeek = (props) => {
             <Autocomplete
                 multiple
                 id="weeks-to-skip"
-                options={skipWeekData.weeks}
+                options={props.weeks}
                 disableCloseOnSelect
                 getOptionLabel={(option) => option.text}
+                getOptionDisabled={(option) => option.skipped === true}
+                onChange={props.handleChange}
+                value={props.value}
                 renderOption={(option, { selected }) => (
                     <>
                         <Checkbox
@@ -61,9 +47,10 @@ const CantGetKitsNextWeek = (props) => {
                             style={{ marginRight: 8 }}
                             checked={selected}
                         />
-                        {option.text}
+                        {option.text} {option.skipped && '- Semana ya saltada'}
                     </>
                 )}
+
                 renderInput={(params) => (
                     <TextField {...params} variant="outlined" label="Semanas a saltar" />
                 )}

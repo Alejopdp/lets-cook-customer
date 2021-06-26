@@ -35,32 +35,27 @@ const SpecialDiet = (props) => {
         { id: 6, value: 'other', text: 'Tengo otro tipo de dieta' }
     ]
 
-    const [dietSelected, setDiet] = useState('');
-
-    const handleChange = (event) => {
-        setDiet(event.target.value);
-    };
-
     return (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
                 Si tienes alguna intolerancia (como gluten o lactosa) o dieta especial (como vegano), lo puedes comunicar y nosotros enviaremos ingredientes que se adapten a tus requerimientos
             </Typography>
             <FormControl variant="outlined" className={classes.formControl} style={{ marginBottom: theme.spacing(3) }}>
-                <InputLabel htmlFor="outlined-age-native-simple">Dieta especial</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">Indique su dieta</InputLabel>
                 <Select
                     native
-                    value={dietSelected}
-                    onChange={handleChange}
-                    label="Dieta especial"
-                    inputProps={{ name: 'id', id: 'planDropdown' }}
+                    value={props.valueSelect}
+                    onChange={props.handleChangeSelect}
+                    label="Indique su dieta"
+                    inputProps={{ name: 'id', id: 'specialDiet' }}
                 >
+                    <option key='0' value=''></option>
                     {specialDietsOptions.map(diet => (
                         <option key={diet.id} value={diet.value}>{diet.text}</option>
                     ))}
                 </Select>
             </FormControl>
-            {dietSelected === 'other' && (
+            {props.valueSelect === 'other' && (
                 <div className={classes.formControl}>
                     <TextField
                         id="special_diet_comments"
@@ -68,6 +63,8 @@ const SpecialDiet = (props) => {
                         multiline
                         rows={4}
                         variant="outlined"
+                        value={props.valueComments}
+                        onChange={props.handleChangeComments}
                     />
                 </div>
             )}

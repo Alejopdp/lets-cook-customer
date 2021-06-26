@@ -33,6 +33,8 @@ const HadProblemsWithLetscook = (props) => {
                     multiline
                     rows={5}
                     variant="outlined"
+                    value={props.value}
+                    onChange={props.handleChange}
                 />
             </div>
         </>

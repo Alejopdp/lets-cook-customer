@@ -6,6 +6,8 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 // External Components
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 // Internal components
 import BoxWithTitleAndTextButton from "../../../molecules/specificBox/boxWithTitleAndTextButton";
@@ -37,6 +39,14 @@ const CalendarCard = props => {
                 </Grid>
                 <Grid item xs={12} sm={6} className={classes.nextChargeGrid}>
                     <DataDisplay title='Próximo cargo' text={props.calendar.nextChargeDate} />
+                </Grid>
+                <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <InfoOutlinedIcon fontSize='small' color='secondary' />
+                        <Typography variant='body2' color='textSecondary' style={{ fontSize: '14px', opacity: 0.7, marginLeft: theme.spacing(0.5) }}>
+                            Has saltado las siguientes semanas: {props.calendar.skipWeeks}
+                        </Typography>
+                    </div>
                 </Grid>
             </Grid>
         </BoxWithTitleAndTextButton>

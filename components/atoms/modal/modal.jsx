@@ -62,7 +62,7 @@ const Modal = (props) => {
             <DialogContent>
                 {props.children}
             </DialogContent>
-            <DialogActions>
+            <DialogActions style={{padding:theme.spacing(3)}}>
                 <Button onClick={props.handleSecondaryButtonClick ? props.handleSecondaryButtonClick : props.handleClose} style={{ color: props.secondaryButtonColor ? props.secondaryButtonColor : theme.palette.text.secondary }}>
                     {props.secondaryButtonText}
                 </Button>

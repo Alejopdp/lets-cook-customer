@@ -34,30 +34,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const PriceTooHigh = (props) => {
-
-    const plan = {
-        planId: '1',
-        name: 'Plan Ahorro',
-        icon: '/assets/plan-test-color.svg',
-        variantInfo: '4 recetas para 3 personas por semana',
-        variantExtraInfo: '12 raciones a 3 € por ración',
-        planVariantId: '1',
-        priceText: '36 €/semana'
-    }
-
-    const variants = [
-        { planId: '1', planVariantId: '6', variantDescription: '4 recetas para 3 personas - 36 €/semana', active: true },
-        { planId: '1', planVariantId: '7', variantDescription: '3 recetas para 3 personas - 30 €/semana', active: false },
-        { planId: '1', planVariantId: '8', variantDescription: '2 recetas para 3 personas - 24 €/semana', active: false },
-    ]
-
+const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdSelected }) => {
     const classes = useStyles();
     const theme = useTheme();
     const [operationView, setOperationView] = useState('economyPlan')
-    const [planVariantIdSelected, setPlanVariantIdSelected] = useState(plan.planVariantId);
-
-
 
     const changeOperationView = (newView) => {
         if (newView === 'economyPlan') {
@@ -94,7 +74,7 @@ const PriceTooHigh = (props) => {
                     </Typography>
                 </Box>
             </Box>
-            <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
+            <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(0.5) }}>
                 También podemos ofrecerte reducir raciones del plan actual.
             </Typography>
             <Link onClick={() => changeOperationView('lowerVariants')} color='textPrimary' style={{ cursor: 'pointer', textDecoration: 'none' }}>
@@ -124,7 +104,7 @@ const PriceTooHigh = (props) => {
                     ))}
                 </Select>
             </FormControl>
-            <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
+            <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(0.5) }}>
                 También podemos ofrecerte cambiar a un plan más económico.
             </Typography>
             <Link onClick={() => changeOperationView('economyPlan')} color='textPrimary' style={{ cursor: 'pointer', textDecoration: 'none' }}>

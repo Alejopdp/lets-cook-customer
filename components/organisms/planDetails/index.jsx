@@ -5,20 +5,15 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // const langs = require("../../lang").comoFunciona;
 
 // External Components
-import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
 
 // Internal components
-import PlanCard from "./planCard/index";
-import ShippingAddressCard from "./ShippingAddressCard/index";
-import PaymentMethodCard from "./paymentMethodCard/index";
-import CalendarCard from "./calendarCard/index";
-import RecipesActualWeekCard from "./recipesActualWeekCard/index";
-import RecipesNextWeekCard from "./recipesNextWeekCard/index";
-import TextButton from "../../atoms/textButton/textButton";
 import RecipeModal from "../../molecules/recipeModal/recipeModal";
 import ChangePlanModal from "../../molecules/managePlanModals/changePlanModal";
 import CancelPlanModal from "../../molecules/managePlanModals/cancelPlanModal";
 import SkipPlanModal from "../../molecules/managePlanModals/skipPlanModal";
+import PlanDetailsDesktop from "./planDetailsDesktop/index";
+import PlanDetailsMobile from "./planDetailsMobile/index";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -46,7 +41,7 @@ const PlanDetails = props => {
         calendar: {
             nextShippingDate: 'Martes 12 de Junio',
             nextChargeDate: 'Sábado 9 de Junio',
-            skipWeeks: ''
+            skipWeeks: '9 al 16 de mayo, 17 al 24 de mayo'
         },
         abilityToChooseRecipes: true,
         hasRecipesActualWeek: true,
@@ -216,8 +211,8 @@ const PlanDetails = props => {
             { planId: '5', name: 'Plan Vegano', active: false },
         ],
         variants: [
-            { planId: '1', planVariantId: '6', variantDescription: '4 recetas para 3 personas - 36 €/semana', active: true },
-            { planId: '1', planVariantId: '7', variantDescription: '3 recetas para 3 personas - 30 €/semana', active: false },
+            { planId: '1', planVariantId: '6', variantDescription: '4 recetas para 3 personas - 36 €/semana', active: false },
+            { planId: '1', planVariantId: '7', variantDescription: '3 recetas para 3 personas - 30 €/semana', active: true },
             { planId: '1', planVariantId: '8', variantDescription: '2 recetas para 3 personas - 24 €/semana', active: false },
             { planId: '2', planVariantId: '9', variantDescription: '4 recetas para 2 personas - 30 €/semana', active: false },
             { planId: '2', planVariantId: '10', variantDescription: '3 recetas para 2 personas - 24 €/semana', active: false },
@@ -232,7 +227,7 @@ const PlanDetails = props => {
     const skipWeekData = {
         weeks: [
             { weekId: '1', text: '1 al 7 de marzo', skipped: false },
-            { weekId: '2', text: '8 al 15 de marzo', skipped: true },
+            { weekId: '2', text: '8 al 15 de marzo', skipped: false },
             { weekId: '3', text: '16 al 23 de marzo', skipped: false },
             { weekId: '4', text: '24 al 31 de marzo', skipped: false },
             { weekId: '5', text: '1 al 7 de abril', skipped: false },
@@ -240,8 +235,8 @@ const PlanDetails = props => {
             { weekId: '7', text: '16 al 23 de abril', skipped: false },
             { weekId: '8', text: '24 al 1 de mayo', skipped: false },
             { weekId: '9', text: '2 al 8 de mayo', skipped: false },
-            { weekId: '10', text: '9 al 16 de mayo', skipped: false },
-            { weekId: '11', text: '17 al 24 de mayo', skipped: false },
+            { weekId: '10', text: '9 al 16 de mayo', skipped: true },
+            { weekId: '11', text: '17 al 24 de mayo', skipped: true },
             { weekId: '12', text: '25 al 2 de junio', skipped: false },
         ]
     }
@@ -259,12 +254,11 @@ const PlanDetails = props => {
         ]
     }
 
-
-
     const theme = useTheme();
     const classes = useStyles();
     // const router = useRouter();
     // const lang = langs[router.locale];
+
     const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: -1, period: '' })
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
     const [openChangePlanModal, setOpenChangePlanModal] = useState(false);
@@ -355,41 +349,25 @@ const PlanDetails = props => {
 
     return (
         <>
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={4}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <PlanCard plan={data.plan} handleClick={handleClickOpenChangePlanModal} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <ShippingAddressCard shippingAddress={data.shippingAddress} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <PaymentMethodCard paymentMethod={data.paymentMethod} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextButton handleClick={handleClickOpenCancelPlanModal} btnText='cancelar plan' style={{ color: '#FC1919', marginTop: theme.spacing(2) }} />
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={12} md={8}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <CalendarCard calendar={data.calendar} handleClick={handleClickOpenSkipPlanModal} />
-                        </Grid>
-                        {data.hasRecipesActualWeek && (
-                            <Grid item xs={12}>
-                                <RecipesActualWeekCard recipesActualWeek={data.recipesActualWeek} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
-                            </Grid>
-                        )}
-                        {data.hasRecipesNextWeek && (
-                            <Grid item xs={12}>
-                                <RecipesNextWeekCard recipesNextWeek={data.recipesNextWeek} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
-                            </Grid>
-                        )}
-                    </Grid>
-                </Grid>
-            </Grid>
+            <Hidden smDown>
+                <PlanDetailsDesktop
+                    data={data}
+                    handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
+                    handleClickOpenCancelPlanModal={handleClickOpenCancelPlanModal}
+                    handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
+                    handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                />
+            </Hidden>
+            <Hidden mdUp>
+                <PlanDetailsMobile
+                    data={data}
+                    handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
+                    handleClickOpenCancelPlanModal={handleClickOpenCancelPlanModal}
+                    handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
+                    handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                />
+            </Hidden>
+
             <RecipeModal
                 open={openRecipeModal}
                 handleClose={handleCloseRecipeModal}
@@ -414,7 +392,6 @@ const PlanDetails = props => {
                 handlePrimaryButtonClick={handlePrimaryButtonClickSkipPlanModal}
                 data={skipWeekData}
             />
-
         </>
 
     );
