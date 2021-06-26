@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'column',
         cursor: 'pointer',
     },
     activeWeek: {
@@ -68,15 +69,18 @@ const SkipPlanModal = (props) => {
             fullScreen={true}
             maxWidth='lg'
         >
-            <Typography variant='subtitle2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
+            {/* <Typography variant='subtitle2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
                 Haga click a continuación sobre la semana que desea saltar
-            </Typography>
+            </Typography> */}
             <Grid container spacing={2}>
                 {weeksStore.map((week, index) => (
                     <Grid key={week.weekId} item xs={6} sm={3}>
                         <Box className={clsx(classes.generalBoxStyle, week.skipped ? classes.skippedWeek : classes.activeWeek)} onClick={() => skipWeek(week.weekId)}>
-                            <Typography variant='subtitle2' style={{ fontSize: '16px' }}>
+                            <Typography variant='subtitle2' align='center' style={{ fontWeight: 600, fontSize: '16px', marginBottom: theme.spacing(0.5) }}>
                                 {week.text}
+                            </Typography>
+                            <Typography variant='subtitle2' style={{ fontWeight: 700, fontSize: '14px', textTransform: 'uppercase' }}>
+                                {week.skipped ? 'reanudar' : 'saltar'}
                             </Typography>
                         </Box>
                     </Grid>

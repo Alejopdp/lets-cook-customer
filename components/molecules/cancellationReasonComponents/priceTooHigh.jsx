@@ -78,7 +78,7 @@ const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdS
                 También podemos ofrecerte reducir raciones del plan actual.
             </Typography>
             <Link onClick={() => changeOperationView('lowerVariants')} color='textPrimary' style={{ cursor: 'pointer', textDecoration: 'none' }}>
-                <Typography variant="subtitle1" color="textPrimary" style={{ fontSize: '16px' }}>
+                <Typography variant="subtitle1" color="textPrimary" style={{ fontSize: '14px' }}>
                     Ver opciones
             </Typography>
             </Link>
@@ -108,7 +108,7 @@ const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdS
                 También podemos ofrecerte cambiar a un plan más económico.
             </Typography>
             <Link onClick={() => changeOperationView('economyPlan')} color='textPrimary' style={{ cursor: 'pointer', textDecoration: 'none' }}>
-                <Typography variant="subtitle1" color="textPrimary" style={{ fontSize: '16px' }}>
+                <Typography variant="subtitle1" color="textPrimary" style={{ fontSize: '14px' }}>
                     Ver opciones
                 </Typography>
             </Link>

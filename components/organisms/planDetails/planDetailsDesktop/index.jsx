@@ -42,16 +42,21 @@ const PlanDetailsDesktop = ({ data, handleClickOpenChangePlanModal, handleClickO
                     <Grid item xs={12}>
                         <CalendarCard calendar={data.calendar} handleClick={handleClickOpenSkipPlanModal} />
                     </Grid>
-                    {data.hasRecipesActualWeek && (
-                        <Grid item xs={12}>
-                            <RecipesActualWeekCard recipesActualWeek={data.recipesActualWeek} abilityToChooseRecipes={data.abilityToChooseRecipes} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
-                        </Grid>
+                    {data.hasRecipes && (
+                        <>
+                            {data.hasRecipesActualWeek && (
+                                <Grid item xs={12}>
+                                    <RecipesActualWeekCard recipesActualWeek={data.recipesActualWeek} abilityToChooseRecipes={data.abilityToChooseRecipes} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
+                                </Grid>
+                            )}
+                            {(data.hasRecipesNextWeek && data.abilityToChooseRecipes) && (
+                                <Grid item xs={12}>
+                                    <RecipesNextWeekCard recipesNextWeek={data.recipesNextWeek} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
+                                </Grid>
+                            )}
+                        </>
                     )}
-                    {(data.hasRecipesNextWeek && data.abilityToChooseRecipes) && (
-                        <Grid item xs={12}>
-                            <RecipesNextWeekCard recipesNextWeek={data.recipesNextWeek} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
-                        </Grid>
-                    )}
+
                 </Grid>
             </Grid>
         </Grid>

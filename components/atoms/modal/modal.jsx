@@ -62,11 +62,11 @@ const Modal = (props) => {
             <DialogContent>
                 {props.children}
             </DialogContent>
-            <DialogActions style={{padding:theme.spacing(3)}}>
-                <Button onClick={props.handleSecondaryButtonClick ? props.handleSecondaryButtonClick : props.handleClose} style={{ color: props.secondaryButtonColor ? props.secondaryButtonColor : theme.palette.text.secondary }}>
+            <DialogActions style={{ padding: theme.spacing(3) }}>
+                <Button onClick={props.handleSecondaryButtonClick ? props.handleSecondaryButtonClick : props.handleClose} style={{ textAlign: 'right', color: props.secondaryButtonColor ? props.secondaryButtonColor : theme.palette.text.secondary }}>
                     {props.secondaryButtonText}
                 </Button>
-                <Button onClick={props.handlePrimaryButtonClick} style={{ color: props.primaryButtonColor ? props.primaryButtonColor : theme.palette.primary.main }} autoFocus>
+                <Button onClick={props.handlePrimaryButtonClick} style={{ textAlign: 'right', color: props.primaryButtonColor ? props.primaryButtonColor : theme.palette.primary.main }} autoFocus>
                     {props.primaryButtonText}
                 </Button>
             </DialogActions>

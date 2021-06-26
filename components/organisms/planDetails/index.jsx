@@ -44,6 +44,8 @@ const PlanDetails = props => {
             // si skipWeeks == '', no muestro el cartel "Has saltado las siguientes semanas..."
             skipWeeks: '9 al 16 de mayo, 17 al 24 de mayo'
         },
+        // si hasRecipes == false, no muestro los componentes de recetas
+        hasRecipes: true,
         // si abilityToChooseRecipes == false, no muestro el componente de recetas de las proxima semana, y ademas, si recipesActualWeek == [], muestro un texto diferente
         abilityToChooseRecipes: true,
         // si hasRecipesActualWeek == false, no muestro el componente de recetas de las semana actual

@@ -250,6 +250,7 @@ const CancelPlanModal = (props) => {
             handleSecondaryButtonClick={handleSecondaryBtnClick}
             secondaryButtonColor={secondaryBtnColor}
             secondaryButtonText={secondaryBtnText}
+            fullScreen={true}
         >
             <Typography variant='subtitle2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(2) }}>
                 ¿Por qué quieres cancelar el plan?
