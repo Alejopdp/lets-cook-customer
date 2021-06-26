@@ -15,22 +15,22 @@ import TextButton from "../../atoms/textButton/textButton";
 
 // Icons & Images
 
-
-
-const useStyles = makeStyles((theme) => ({
-
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const BoxWithTitleAndButton = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
     return (
-        <GeneralBox variant='medium'>
-            <div>
-                {props.children}
-            </div>
-            <TextButton btnText={props.btnText} style={{ marginTop: theme.spacing(3) }} />
+        <GeneralBox variant="medium">
+            <div style={{ width: "100%" }}>{props.children}</div>
+            <TextButton
+                btnText={props.btnText}
+                style={{
+                    marginTop: theme.spacing(3),
+                    color: props.status === "expired" || props.status === "cancelled" ? theme.palette.primary.main : null,
+                }}
+            />
         </GeneralBox>
     );
 };

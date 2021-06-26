@@ -20,6 +20,7 @@ const theme = createMuiTheme({
             primary: colors.titleColor,
             secondary: colors.paragraphColor,
             danger: colors.dangerColor,
+            black: colors.blackColor,
         },
     },
 
