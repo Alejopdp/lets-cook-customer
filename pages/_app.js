@@ -9,14 +9,6 @@ import "../styles/recipes.css"
 function MyApp(props) {
     const { Component, pageProps } = props;
 
-    // useEffect(() => {
-    //     const mailerLiteBottomBar = document.getElementById("ml-webforms-popup-4174405");
-    //     const style = window.getComputedStyle(mailerLiteBottomBar);
-    //     const visibility = style.getPropertyValue("visibility");
-    //     console.log("MAILER LITE: ", mailerLiteBottomBar);
-    //     console.log("Visibility: ", visibility);
-    // }, []);
-
     return (
         <React.Fragment>
             <Head>

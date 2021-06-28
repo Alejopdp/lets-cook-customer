@@ -1,22 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-import classes from "./classesObject";
+import StarRatingRecipeCard from "../../molecules/card/starRatingRecipeCard";
+import RecipesModal from "../../molecules/valueRecipesModal/recipesModal";
 
-import SimpleRating from "../../molecules/starRating/starRating";
+const classes = {
+    // desktop
+    first: "container",
+    second: "blog screen-1",
 
-const Recipes = () => {
+    iconArrow: "iconArrow",
+    valueRecipes: "x24-1 proximanova-24px",
+    pendingToValue: "text13 proximanova-20px",
+
+    group1018: "group1018",
+    group1005: "group1005",
+    group1009: "group1009",
+    group10091: "group1009-1",
+    group1531: "group1531",
+    group1976: "group1976",
+    group1977: "group1977",
+    group1978: "group1978",
+    group1979: "group1979",
+
+    recipeTitle: "recipeTitle proximanova-16px",
+    p: "p opensans-14px",
+    delivered: "opensans-14px-2",
+    date: "opensans-14px-3",
+    overlapGroup: "overlapGroup",
+    icon: "starIcon",
+    icon1: "starIcon-1",
+    notValue: "text1 proximanova-13px",
+    ratedRecipes: "recetasValoradas proximanova-20px",
+    recetasSinValorar: "recetasSinValorar",
+    pendingToValue3: "pendingToValue3",
+
+    // mobile
+    mobile: "mobile screen-1",
+    pendingToValue2: "text14 proximanova-20px",
+
+    group5: "group5",
+    group2015: "group2015",
+    group2016: "group2016",
+
+    flexRow: "flexRow",
+    flexRow1: "flexRow1",
+};
+
+const Recipes = ({ id }) => {
     const matches = useMediaQuery("(min-width:961px)");
 
-    // matches > 378 (desktop view) -> false
-    // matches < 378 (mobile view) -> true
+    const [openRecipeModal, setOpenRecipeModal] = useState(false);
+
+    const handleClickOpenRecipeModal = () => {
+        setOpenRecipeModal(true);
+    };
+
+    const handleCloseRecipeModal = () => {
+        setOpenRecipeModal(false);
+    };
+
     return (
         <>
-            {/* <div className={classes.first}> */}
             <div className={matches ? classes.second : classes.mobile}>
-                <div className={matches ? classes.third : classes.group5}>
+                <div className={classes.group5}>
                     <ArrowBackIcon />
                     <h1 className={classes.valueRecipes}>Valorar recetas</h1>
                 </div>
@@ -24,67 +73,21 @@ const Recipes = () => {
                 <div className={matches ? classes.pendingToValue : classes.pendingToValue2}>Recetas pendientes de valorar</div>
 
                 <div className={matches ? classes.group1976 : classes.flexRow}>
-                    {[...Array(20)].map((x, i) => {
-                        return (
-                            <div className={classes.group1018}>
-                                <div>
-                                    <img
-                                        className={classes.group1005}
-                                        src="https://live.mrf.io/statics/i/ps/www.cocinacaserayfacil.net/wp-content/uploads/2020/03/Recetas-faciles-de-cocinar-y-sobrevivir-en-casa-al-coronavirus_2.jpg?width=1200&enable=upscale"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className={classes.group1009}>
-                                    <div className={classes.recipeTitle}>Salmón con quinoa</div>
-                                    <p className={classes.p}>
-                                        <span className={classes.delivered}>Entregado 1 vez</span>
-                                        <span className={classes.date}> (ultima entrega el 1-7 mayo)</span>
-                                    </p>
-                                    <div className={classes.overlapGroup}>
-                                        <div className={classes.group1531}>
-                                            <SimpleRating />
-                                        </div>
-                                        <div className={classes.notValue}>NO VALORAR ESTA RECETA</div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
+                    {[...Array(5)].map((x, i) => {
+                        return <StarRatingRecipeCard rated = {false} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />;
                     })}
                 </div>
 
                 <div className={matches ? classes.pendingToValue : classes.pendingToValue2}>Recetas valoradas</div>
 
                 <div className={matches ? classes.group1976 : classes.flexRow}>
-                    {[...Array(10)].map((x, i) => {
-                        return (
-                            <div className={classes.group1018}>
-                                <div>
-                                    <img
-                                        className={classes.group1005}
-                                        src="https://live.mrf.io/statics/i/ps/www.cocinacaserayfacil.net/wp-content/uploads/2020/03/Recetas-faciles-de-cocinar-y-sobrevivir-en-casa-al-coronavirus_2.jpg?width=1200&enable=upscale"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className={classes.group1009}>
-                                    <div className={classes.recipeTitle}>Salmón con quinoa</div>
-                                    <p className={classes.p}>
-                                        <span className={classes.delivered}>Entregado 1 vez</span>
-                                        <span className={classes.date}> (ultima entrega el 1-7 mayo)</span>
-                                    </p>
-                                    <div className={classes.overlapGroup}>
-                                        <div className={classes.group1531}>
-                                            <SimpleRating />
-                                        </div>
-                                        <div className={classes.notValue}>NO VALORAR ESTA RECETA</div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
+                    {[...Array(5)].map((x, i) => {
+                        return <StarRatingRecipeCard rated = {true} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />;
                     })}
                 </div>
             </div>
 
-            {/* </div> */}
+            <RecipesModal open={openRecipeModal} handleClose={handleCloseRecipeModal} />
         </>
     );
 };
