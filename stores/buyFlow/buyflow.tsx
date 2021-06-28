@@ -18,8 +18,8 @@ export interface BuyFlowStore {
     showRegister: boolean;
     form: {
         planCode: string;
-        peopleQty: number;
-        recipesQty: number;
+        peopleQty: string;
+        recipesQty: string;
         deliveryForm: DeliveryForm;
         paymentMethods: PaymentMethods[];
         recipes: Recipes[];
@@ -42,8 +42,8 @@ export const BuyFlowInitialStore: BuyFlowStore = {
     showRegister: true,
     form: {
         planCode: "",
-        peopleQty: 2,
-        recipesQty: 3,
+        peopleQty: "2",
+        recipesQty: "3",
         deliveryForm: {
             address: "",
             addressDesc: "",
@@ -57,14 +57,12 @@ export const BuyFlowInitialStore: BuyFlowStore = {
     },
 };
 
-
-
 const store = devtools<Store>((set, get) => ({
     ...BuyFlowInitialStore,
 
     setRegisterState: (isVisible: boolean) => set({ showRegister: isVisible }),
 
-    // TODO: Optimize this part the idea is controller 
+    // TODO: Optimize this part the idea is controller
     // the steps during buy process.
     forward: () => {
         const indexStepToOmmit = 2;
@@ -83,7 +81,7 @@ const store = devtools<Store>((set, get) => ({
     },
     setRecipesQty: (qty: string) => {
         const form = get().form;
-        form.peopleQty = parseInt(qty);
+        form.recipesQty = parseInt(qty);
         set({ form });
     },
     setPeopleQty: (qty: string) => {

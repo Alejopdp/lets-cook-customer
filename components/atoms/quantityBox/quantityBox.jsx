@@ -6,14 +6,14 @@ import PropTypes from "prop-types";
 // External components
 import Typography from "@material-ui/core/Typography";
 
-const QuantityBox = ({ name = "", label = "", value = "", state = false, onChange }) => {
+const QuantityBox = ({ name, label = "", value = "", state = false, onChange }) => {
     const ID = Math.random() * Date.now();
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <input
-                id={label + '-id-1000'}
+                id={label + name +'-id-1000'}
                 type="radio"
                 name={name || value || label || ID}
                 value={value}
@@ -22,7 +22,7 @@ const QuantityBox = ({ name = "", label = "", value = "", state = false, onChang
                 className={classes.hidden}
             />
             <label
-                htmlFor={label + '-id-1000'}
+                htmlFor={label + name + '-id-1000'}
                 className={clsx(classes.box, {
                     [classes.checkedBox]: state,
                 })}
@@ -48,7 +48,6 @@ QuantityBox.defaultProps = {
     label: "",
     value: "",
     state: false,
-    onChange: () => undefined,
 };
 
 export default QuantityBox;

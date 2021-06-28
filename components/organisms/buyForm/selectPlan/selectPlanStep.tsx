@@ -24,31 +24,44 @@ interface SelectPlanProps {
 }
 
 export const SelectPlanStep = (props: SelectPlanProps) => {
-
     const { push: navigateTo } = useRouter();
     const classes = useStyles();
 
     const buyFlow = useBuyFlow();
 
-    const handleOnSelectPeopleQty = (qty: string) => {
-        console.log(qty);
-        buyFlow.setPeopleQty(qty);
+    const handleOnSelectPeopleQty = (qty: { name: string; value: string }) => {
+        buyFlow.setPeopleQty(qty.value);
+        navigateTo({
+            pathname: "/planes/[slug]",
+            query: {
+                slug: props.initialPlanSettins.slug,
+                personas: qty.value,
+                recetas: props.initialPlanSettins.recipeQty,
+            },
+        });
     };
 
-    const handleOnSelectRecipeQty = (qty) => {
-        console.log(qty);
-        buyFlow.setRecipesQty(qty);
+    const handleOnSelectRecipeQty = (qty: { name: string; value: string }) => {
+        buyFlow.setRecipesQty(qty.value);
+        navigateTo({
+            pathname: "/planes/[slug]",
+            query: {
+                slug: props.initialPlanSettins.slug,
+                personas: props.initialPlanSettins.personQty,
+                recetas: qty.value,
+            },
+        });
     };
 
     const handleOnSelectPlan = (plan: Plan) => {
-        const { peopleQty, recipesQty } = buyFlow.form;
+        buyFlow.setPlanCode(plan.id);
         navigateTo({
             pathname: "/planes/[slug]",
             query: {
                 slug: plan.slug,
-                personas: peopleQty,
-                recetas: recipesQty
-            }
+                personas: props.initialPlanSettins.personQty,
+                recetas: props.initialPlanSettins.recipeQty
+            },
         });
     };
 
@@ -96,6 +109,7 @@ export const SelectPlanStep = (props: SelectPlanProps) => {
                         subtitle="Cantidad de personas"
                         fromNumber={2}
                         numberItems={4}
+                        valueSelected={props.initialPlanSettins.personQty}
                         handleOnChange={handleOnSelectPeopleQty}
                     />
                 </Grid>
@@ -105,6 +119,7 @@ export const SelectPlanStep = (props: SelectPlanProps) => {
                         subtitle="Cantidad de recetas por semana"
                         fromNumber={2}
                         numberItems={5}
+                        valueSelected={props.initialPlanSettins.recipeQty}
                         handleOnChange={handleOnSelectRecipeQty}
                     />
                 </Grid>
@@ -114,7 +129,7 @@ export const SelectPlanStep = (props: SelectPlanProps) => {
             </Grid>
 
             <Grid item xs={10}>
-                <CustomButton text="Seleccionar plan" onClick={() => gotToNextView()} />
+                <CustomButton text="Seleccionar plan" onClick={() => buyFlow.forward()} />
             </Grid>
 
             <Grid item xs={10}>
