@@ -3,7 +3,7 @@ import useStyles from "./styles";
 import Image from "next/image";
 import clsx from "clsx";
 import { Typography, Breadcrumbs, Hidden } from "@material-ui/core";
-import { useBuyFlow } from "../../../stores/buyflow";
+import { useBuyFlow } from "../../../stores/buyFlow";
 
 export const StepperBuy = ({ steps, smUpHide, smDowmHide }) => {
     const classes = useStyles();

@@ -1,6 +1,6 @@
 // Utils & Config
 import PropTypes from "prop-types";
-import { useBuyFlow } from "../../../stores/buyflow";
+import { useBuyFlow } from "../../../stores/buyFlow";
 
 // External components
 import { Container } from "@material-ui/core";

@@ -1,6 +1,6 @@
 // Utils & Config
 import PropTypes from "prop-types";
-import { useBuyFlow, useFilterDrawer } from "../../../stores/buyflow";
+import { useBuyFlow, useFilterDrawer } from "../../../stores/buyFlow";
 
 // External components
 import { Container, Grid, Chip, Icon } from "@material-ui/core";

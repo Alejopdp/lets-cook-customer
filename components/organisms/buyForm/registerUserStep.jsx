@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useBuyFlow } from "../../../stores/buyflow";
+import { useBuyFlow } from "../../../stores/buyFlow";
 
 // Internal components
 import SignUpForm from "../signUpForm/signUpForm";

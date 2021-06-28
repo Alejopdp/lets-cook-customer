@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        display: "flex"
+    },
     box: {
         backgroundColor: theme.palette.background.paper,
         border: `1px solid ${theme.palette.text.primary}`,

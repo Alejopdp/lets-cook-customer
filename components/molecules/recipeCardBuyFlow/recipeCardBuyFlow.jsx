@@ -21,7 +21,7 @@ import AddCircle from "@material-ui/icons/AddCircle";
 import AddCircleOutline from "@material-ui/icons/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { Box, Button, IconButton } from "@material-ui/core";
-import { useBuyFlow } from "../../../stores/buyflow";
+import { useBuyFlow } from "../../../stores/buyFlow";
 
 const RecipeCardBuyFlow = ({handleClickAddRecipe, handleClickRemoveRecipe, ...props}) => {
     const { root, cardCnt, tag, marg, titleText, visibilityBtn } = useStyles();

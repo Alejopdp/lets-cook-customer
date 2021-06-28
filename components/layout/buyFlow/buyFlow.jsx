@@ -7,7 +7,7 @@ import { StepperBuy } from "../../molecules/stepperBuy";
 import LangSelector from "../../molecules/langSelector/langSelector";
 
 import { useStyles } from "./styles";
-import { useBuyFlow, useFilterDrawer } from "../../../stores/buyflow";
+import { useBuyFlow, useFilterDrawer } from "../../../stores/buyFlow";
 
 export const BuyFlowLayout = ({ children: Component }) => {
     const filterOptions = [

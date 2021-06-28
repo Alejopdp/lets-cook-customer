@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography, Grid } from "@material-ui/core";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CustomButton from "../../atoms/customButton/customButton";
-import { useBuyFlow, useRecipesBottomBar } from "../../../stores/buyflow";
+import { useBuyFlow, useRecipesBottomBar } from "../../../stores/buyFlow";
 import useStyles from "./styles";
 import clsx from "clsx";
 

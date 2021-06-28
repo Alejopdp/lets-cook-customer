@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import RecipeCard from "../../molecules/recipeCard/recipeCard";
 import RecipeModal from "../../molecules/recipeModal/recipeModal";
 import RecipeCardBuyFlow from "../../molecules/recipeCardBuyFlow/recipeCardBuyFlow";
-import { useBuyFlow } from "../../../stores/buyflow";
+import { useBuyFlow } from "../../../stores/buyFlow";
 
 const RecipesGrid = (props) => {
     const [open, setOpen] = React.useState(false);
