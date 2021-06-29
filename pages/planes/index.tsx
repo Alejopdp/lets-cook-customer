@@ -18,7 +18,7 @@ export interface PlanUrlParams {
     personQty: string;
     recipeQty: string;
     slug: string;
-};
+}
 
 export interface PlanesPageProps {
     isLogged: boolean;
@@ -42,41 +42,32 @@ export const PlanesPage = (props: PlanesPageProps) => {
 };
 
 export async function getServerSideProps({ locale, query, params }) {
-
     let redirect = undefined;
-    let slug = query.slug || '';
-    const personQty = query.personas || '2';
-    const recipeQty = query.recetas || '3';
+    let slug = query.slug || "";
+    const personQty = query.personas || "2";
+    const recipeQty = query.recetas || "3";
 
-    const [_plans, _recipes, _faqs] = await Promise.all([
-        getPlans(locale),
-        getRecipes(locale),
-        getFAQS(locale)
-    ])
+    const [_plans, _recipes, _faqs] = await Promise.all([getPlans(locale), getRecipes(locale), getFAQS(locale)]);
 
-    const errors = [
-        _plans.error,
-        _recipes.error,
-        _faqs.error
-    ].filter(e => !!e)
+    const errors = [_plans.error, _recipes.error, _faqs.error].filter((e) => !!e);
 
     const isSlugvalid = _plans.data?.some(({ slug: _slug }) => _slug === slug);
 
-    if (!isSlugvalid && Array.isArray(_plans.data)) {
-        slug = _plans.data[0]?.slug; // TODO: What happen when is undefined??
-        redirect = {
-            destination: `/planes/${slug}?personas=${personQty}&recetas=${recipeQty}`,
-            permanent: true,
-        }
-    } else {
-         // TODO: What happen with slug when no have plans??
-    }
+    // if (!isSlugvalid && Array.isArray(_plans.data)) {
+    //     slug = _plans.data[0]?.slug; // TODO: What happen when is undefined??
+    //     redirect = {
+    //         destination: `/planes/${slug}?personas=${personQty}&recetas=${recipeQty}`,
+    //         permanent: true,
+    //     };
+    // } else {
+    //     // TODO: What happen with slug when no have plans??
+    // }
 
     const planUrlParams: PlanUrlParams = {
         personQty,
         recipeQty,
-        slug
-    }
+        slug,
+    };
 
     return {
         props: {
@@ -85,9 +76,9 @@ export async function getServerSideProps({ locale, query, params }) {
             recipes: _recipes.data || [],
             faqs: _faqs.data || [],
             planUrlParams,
-            errors
+            errors,
         },
-        redirect
+        // redirect,
     };
 }
 

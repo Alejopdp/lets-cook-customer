@@ -24,7 +24,7 @@ interface SelectPlanProps {
 }
 
 export const SelectPlanStep = (props: SelectPlanProps) => {
-    const { push: navigateTo } = useRouter();
+    const { push: navigateTo, query } = useRouter();
     const classes = useStyles();
 
     const buyFlow = useBuyFlow();
@@ -32,37 +32,37 @@ export const SelectPlanStep = (props: SelectPlanProps) => {
     const handleOnSelectPeopleQty = (qty: { name: string; value: string }) => {
         buyFlow.setPeopleQty(qty.value);
         navigateTo({
-            pathname: "/planes/[slug]",
+            pathname: "/planes",
             query: {
-                slug: props.initialPlanSettins.slug,
+                plan: query.plan,
                 personas: qty.value,
-                recetas: props.initialPlanSettins.recipeQty,
+                recetas: query.recetas,
             },
-        });
+        }, undefined, {shallow: true});
     };
 
     const handleOnSelectRecipeQty = (qty: { name: string; value: string }) => {
         buyFlow.setRecipesQty(qty.value);
         navigateTo({
-            pathname: "/planes/[slug]",
+            pathname: "/planes",
             query: {
-                slug: props.initialPlanSettins.slug,
-                personas: props.initialPlanSettins.personQty,
+                plan: query.plan,
+                personas: query.personas,
                 recetas: qty.value,
             },
-        });
+        }, undefined, {shallow: true});
     };
 
     const handleOnSelectPlan = (plan: Plan) => {
         buyFlow.setPlanCode(plan.id);
         navigateTo({
-            pathname: "/planes/[slug]",
+            pathname: "/planes",
             query: {
-                slug: plan.slug,
-                personas: props.initialPlanSettins.personQty,
-                recetas: props.initialPlanSettins.recipeQty
+                plan: plan.slug,
+                personas: query.personas,
+                recetas: query.recetas
             },
-        });
+        }, undefined, {shallow: true});
     };
 
     return (
@@ -77,7 +77,7 @@ export const SelectPlanStep = (props: SelectPlanProps) => {
                         <PlanWithIcon
                             key={index}
                             plan={plan}
-                            isSelected={props.initialPlanSettins.slug === plan.slug}
+                            isSelected={query.plan === plan.slug}
                             onClick={handleOnSelectPlan}
                         />
                     ))}
