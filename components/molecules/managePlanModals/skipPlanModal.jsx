@@ -64,7 +64,7 @@ const SkipPlanModal = (props) => {
             handleClose={props.handleClose}
             handlePrimaryButtonClick={submitSkippedWeeks}
             title='Saltar semana'
-            primaryButtonText='saltar semana'
+            primaryButtonText='guardar cambios'
             secondaryButtonText='cancelar'
             fullScreen={true}
             maxWidth='lg'

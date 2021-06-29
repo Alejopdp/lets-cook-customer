@@ -25,14 +25,16 @@ const RecipesActualWeekCard = props => {
 
     return (
         <>
-            {props.recipesActualWeek.length === 0 ? (
+            {console.log('props.hasChosenRecipesForActualWeek', props.hasChosenRecipesForActualWeek)}
+
+            {!props.hasChosenRecipesForActualWeek ? (
                 <BoxWithTitle title='Recetas de la semana actual'>
                     <Box style={{ textAlign: 'center', marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
                         <Image src='/assets/userProfile/recipesEmptyState.svg' width='80' height='80' />
                         <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginTop: theme.spacing(1), marginBottom: theme.spacing(0.5) }}>
-                            {props.abilityToChooseRecipes ? 'No has seleccionado recetas para la entrega del martes 12 de junio' : 'Estamos eligiendo por tí las recetas de la semana actual'}
+                            {props.canChooseRecipes ? `No has seleccionado recetas para la entrega del ${props.actualWeekOrder.shippingDate}` : 'Estamos eligiendo por tí las recetas de la semana actual'}
                         </Typography>
-                        {props.abilityToChooseRecipes && (
+                        {props.canChooseRecipes && (
                             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
                                 Elegiremos por tí las recetas de esta semana
                             </Typography>
@@ -42,9 +44,9 @@ const RecipesActualWeekCard = props => {
             ) : (
                     <BoxWithTitle title='Recetas de la semana actual'>
                         <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
-                            Estas son las recetas que recibirás el martes 12 de junio
+                            Estas son las recetas que recibirás el {props.actualWeekOrder.shippingDate}
                         </Typography>
-                        <ChosenRecipes recipes={props.recipesActualWeek} handleClickOpenRecipeModal={props.handleClickOpenRecipeModal} period='actualWeek' />
+                        <ChosenRecipes recipes={props.actualWeekOrder.recipes} handleClickOpenRecipeModal={props.handleClickOpenRecipeModal} period='actualWeek' />
                     </BoxWithTitle>
                 )}
         </>

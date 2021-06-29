@@ -25,18 +25,18 @@ const PlanDetailsMobile = ({ data, handleClickOpenChangePlanModal, handleClickOp
                 <PlanCard plan={data.plan} handleClick={handleClickOpenChangePlanModal} />
             </Grid>
             <Grid item xs={12}>
-                <CalendarCard calendar={data.calendar} handleClick={handleClickOpenSkipPlanModal} />
+                <CalendarCard schedule={data.schedule} skippedOrders={data.skippedOrders} handleClick={handleClickOpenSkipPlanModal} />
             </Grid>
             {data.hasRecipes && (
                 <>
-                    {data.hasRecipesActualWeek && (
+                    {data.actualWeekOrder !== null && (
                         <Grid item xs={12}>
-                            <RecipesActualWeekCard recipesActualWeek={data.recipesActualWeek} abilityToChooseRecipes={data.abilityToChooseRecipes} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
+                            <RecipesActualWeekCard actualWeekOrder={data.actualWeekOrder} canChooseRecipes={data.canChooseRecipes} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
                         </Grid>
                     )}
-                    {(data.hasRecipesNextWeek && data.abilityToChooseRecipes) && (
+                    {(data.nextWeekOrder !== null && data.canChooseRecipes) && (
                         <Grid item xs={12}>
-                            <RecipesNextWeekCard recipesNextWeek={data.recipesNextWeek} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
+                            <RecipesNextWeekCard nextWeekOrder={data.nextWeekOrder} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
                         </Grid>
                     )}
                 </>

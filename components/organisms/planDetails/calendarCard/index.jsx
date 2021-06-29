@@ -35,17 +35,17 @@ const CalendarCard = props => {
         <BoxWithTitleAndTextButton title='Calendario' btnText='saltar semana' handleClick={props.handleClick}>
             <Grid container>
                 <Grid item xs={12} sm={6}>
-                    <DataDisplay title='Próxima entrega' text={props.calendar.nextShippingDate} />
+                    <DataDisplay title='Próxima entrega' text={props.schedule.nextDelivery} />
                 </Grid>
                 <Grid item xs={12} sm={6} className={classes.nextChargeGrid}>
-                    <DataDisplay title='Próximo cargo' text={props.calendar.nextChargeDate} />
+                    <DataDisplay title='Próximo cargo' text={props.schedule.nextPayment} />
                 </Grid>
-                {props.calendar.skipWeeks != '' && (
+                {props.skippedOrders.length > 0 && (
                     <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <InfoOutlinedIcon fontSize='small' color='secondary' />
                             <Typography variant='body2' color='textSecondary' style={{ fontSize: '14px', opacity: 0.7, marginLeft: theme.spacing(0.5) }}>
-                                Has saltado las siguientes semanas: {props.calendar.skipWeeks}
+                                Has saltado las siguientes semanas: {props.skippedOrders.map(order => (`${order}, `))}
                             </Typography>
                         </div>
                     </Grid>
