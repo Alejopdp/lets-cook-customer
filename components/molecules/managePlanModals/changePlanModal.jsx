@@ -106,7 +106,6 @@ const ChangePlanModal = (props) => {
                     ))}
                 </Select>
             </FormControl>
-
         </Modal>
     );
 }
