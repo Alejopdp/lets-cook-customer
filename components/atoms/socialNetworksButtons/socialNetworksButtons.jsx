@@ -1,24 +1,46 @@
 // Utils & Config
-import React from 'react'
+import React from "react";
 import useStyles from "./styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
+// const firebase = require("firebase");
 const langs = require("../../../lang").socialNetworksButtons;
 
 // External components
-import { Box, Button, Typography } from '@material-ui/core';
-import Image from 'next/image';
+import { Box, Button, Typography } from "@material-ui/core";
+import Image from "next/image";
+import { loginWithFacebookAndGetIdToken, loginWithGoogleAndGetIdToken } from "../../../helpers/firebase";
+import { useSnackbar } from "notistack";
 
-const SocialNetworksButtons = () => {
+const SocialNetworksButtons = (props) => {
     const { button, facebook, google, txt } = useStyles();
+    // const { enqueueSnackbar } = useSnackbar();
 
-    const handleFacebookLogin = () => {
-        console.log("Facebook login")
-    }
+    const handleFacebookLogin = async () => {
+        const token = await loginWithFacebookAndGetIdToken();
 
-    const handleGoogleLogin = () => {
-        console.log("Google login")
-    }
+        if (!!token) {
+            // enqueueSnackbar("Send to backend", { variant: "success" });
+            props.handleSubmit(token);
+            alert("Send to backend");
+        } else {
+            // enqueueSnackbar("Error al querer ingresar con Facebook");
+            alert("Error al querer ingresar con Facebook");
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        const token = await loginWithGoogleAndGetIdToken();
+
+        if (!!token) {
+            // enqueueSnackbar("Send to backend", { variant: "success" });
+            props.handleSubmit(token);
+            alert("Send to backend");
+        } else {
+            // enqueueSnackbar("Error al querer ingresar con Google");
+            alert("Error al querer ingresar con Google");
+        }
+    };
 
     const router = useRouter();
     const lang = langs[router.locale];
@@ -41,7 +63,7 @@ const SocialNetworksButtons = () => {
                 </Typography>
             </Button>
         </Box>
-    )
+    );
 };
 
 export default SocialNetworksButtons;
