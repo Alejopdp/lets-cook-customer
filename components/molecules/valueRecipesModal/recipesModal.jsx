@@ -76,11 +76,11 @@ const RecipesModal = (props) => {
                                 rows="4"
                             />
 
-                            <div class={classes.group964}>
+                            <button class={classes.group964}>
                                 <div class={fullScreen ? classes.textCalificarRecetaMobie : classes.textCalificarReceta}>
                                     CALIFICAR RECETA
                                 </div>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </div>
