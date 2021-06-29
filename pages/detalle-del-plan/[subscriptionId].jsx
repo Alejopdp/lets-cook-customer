@@ -1,8 +1,10 @@
 // Utils & Config
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { getSubscriptionById } from '../../helpers/serverRequests/userProfile';
 // import { useRouter } from "next/router";
 // const langs = require("../../lang").comoFunciona;
+
 
 // External Components
 
@@ -24,11 +26,27 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const PlanDetailsPage = () => {
+
+export async function getServerSideProps(context) {
+    const subscriptionId = context.params.subscriptionId;
+    const locale = context.locale
+    const res = await getSubscriptionById(subscriptionId, locale);
+
+
+    return {
+        props: {
+            subscription: res.data || null,
+            error: res.status !== 200 ? "ERROR" : "",
+        }
+    }
+}
+
+const PlanDetailsPage = ({ subscription, error }) => {
     const theme = useTheme();
     const classes = useStyles();
-    // const router = useRouter();
     // const lang = langs[router.locale];
+
+    console.log(subscription, error)
 
     return (
         <Layout>
