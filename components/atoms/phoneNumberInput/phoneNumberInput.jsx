@@ -13,13 +13,13 @@ const PhoneNumberInput = (props) => {
     return (
         <>
             <PhoneInput
-                country={"es"}
                 value={props.value}
                 inputStyle={{ backgroundColor: theme.palette.background.secondary, width: "100%" }}
                 dropdownStyle={{ backgroundColor: theme.palette.background.secondary, color: "gray", width: props.width }}
                 containerStyle={{ width: "100%" }}
                 specialLabel={""}
                 onChange={(newValue) => props.handleChange(newValue)}
+                placeholder={props.placeholder}
             />
         </>
     );

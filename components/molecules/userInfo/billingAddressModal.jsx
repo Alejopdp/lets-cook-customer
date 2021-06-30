@@ -4,15 +4,11 @@ import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { useMediaQuery } from "@material-ui/core";
-import { useTheme, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 // Internal Components
 import Modal from "../../atoms/modal/modal";
-import PhoneNumberInput from "../../atoms/phoneNumberInput/phoneNumberInput";
-import PreferedLanguageInput from "../../atoms/preferedLanguageInput/preferedLanguageInput";
-import DatePicker from "../../atoms/datePickerInput/datePickerInput";
-import LangSelector from "../langSelector/langSelector";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
             width: "30ch",
             [theme.breakpoints.down("sm")]: {
-                width: "36ch",
+                width: "35ch",
             },
         },
         marginLeft: "-0.6rem",
@@ -31,12 +27,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PersonalDataModal = (props) => {
+const BillingAddressModal = (props) => {
     const isMdUp = useMediaQuery("(min-width:960px)");
     const classes = useStyles();
-
-    const [valuePhoneInput, setValuePhoneInput] = useState(null);
-    const [valuePhoneInput2, setValuePhoneInput2] = useState(null);
 
     return (
         <Modal
@@ -51,7 +44,7 @@ const PersonalDataModal = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
-                                Modificar datos personales
+                                Modificar direccion de facturacion
                             </Typography>
                         </Grid>
                     </Grid>
@@ -59,61 +52,66 @@ const PersonalDataModal = (props) => {
             </Grid>
 
             <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <form noValidate autoComplete="off">
+                            <form className={classes.root} noValidate autoComplete="off">
                                 <TextField
-                                    className={classes.root}
                                     id="outlined-basic"
-                                    label="Nombre"
+                                    label="Direccion de Entrega"
                                     variant="outlined"
-                                    style={{ marginBottom: "-1rem" }}
+                                    style={{ width: "97%", marginTop: "1rem" }}
                                 />
                             </form>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} md={6}>
+            </Grid>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <form noValidate autoComplete="off">
-                                <TextField className={classes.root} id="outlined-basic" label="Apellido" variant="outlined" />
+                            <form className={classes.root} noValidate autoComplete="off">
+                                <TextField
+                                    id="outlined-basic"
+                                    label="Piso / Puerta / Aclaraciones"
+                                    variant="outlined"
+                                    style={{ width: "97%", marginTop: ".5rem" }}
+                                />
                             </form>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-
             <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <PhoneNumberInput value={valuePhoneInput} handleChange={setValuePhoneInput} placeholder="Telefono (1)" />
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <PhoneNumberInput value={valuePhoneInput2} handleChange={setValuePhoneInput2} placeholder="Telefono (2)" />
+                            {" "}
+                            <form className={classes.root} noValidate autoComplete="off">
+                                <TextField
+                                    id="outlined-basic"
+                                    label="Nombre Completo"
+                                    variant="outlined"
+                                    style={{ width: "97%", marginTop: ".5rem" }}
+                                />
+                            </form>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-
             <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <DatePicker />
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <PreferedLanguageInput />
+                            <form className={classes.root} noValidate autoComplete="off">
+                                <TextField
+                                    id="outlined-basic"
+                                    label="DNI/NIE/CIF"
+                                    variant="outlined"
+                                    style={{ width: "97%", marginTop: ".5rem" }}
+                                />
+                            </form>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -122,4 +120,4 @@ const PersonalDataModal = (props) => {
     );
 };
 
-export default PersonalDataModal;
+export default BillingAddressModal;

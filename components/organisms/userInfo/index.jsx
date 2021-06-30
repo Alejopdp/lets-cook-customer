@@ -12,13 +12,18 @@ import DataDisplayEditable from "../../molecules/dataDisplay/dataDisplayEditable
 import EmailModal from "../../molecules/userInfo/emailModal";
 import PasswordModal from "../../molecules/userInfo/passwordModal";
 import PersonalDataModal from "../../molecules/userInfo/personalDataModal";
+import BillingAddressModal from "../../molecules/userInfo/billingAddressModal";
+import DeliveryAddressModal from "../../molecules/userInfo/deliveryAddressModal";
+import PaymentMethodModal from "../../molecules/userInfo/paymentMethod";
 
 const UserInfoDetail = () => {
     const theme = useTheme();
     const [openEmailModal, setEmailModal] = useState(false);
     const [openPasswordModal, setPasswordModal] = useState(false);
     const [openPersonalDataModal, setPersonalDataModal] = useState(false);
-
+    const [openBillingAddressModal, setBillingAddressModal] = useState(false);
+    const [openDeliveryAddressModal, setDeliveryAddressModal] = useState(false);
+    const [openPaymentMethod, setPaymentMethod] = useState(false);
     //EMAIL
     const handleClickOpenEmailModal = () => {
         setEmailModal(true);
@@ -46,6 +51,32 @@ const UserInfoDetail = () => {
         setPersonalDataModal(false);
     };
 
+    // BILLING ADDRESS
+    const handleClickOpenBillingAddressModal = () => {
+        setBillingAddressModal(true);
+    };
+
+    const handleClickCloseBillingAddressModal = () => {
+        setBillingAddressModal(false);
+    };
+
+    // DELIVERY ADDRESS
+    const handleClickOpenDeliveryAddressModal = () => {
+        setDeliveryAddressModal(true);
+    };
+
+    const handleClickCloseDeliveryAddressModal = () => {
+        setDeliveryAddressModal(false);
+    };
+
+    // PAYMENT METHOD
+    const handleClickOpenPaymentMethodModal = () => {
+        setPaymentMethod(true);
+    };
+
+    const handleClickClosePaymentMethodModal = () => {
+        setPaymentMethod(false);
+    };
     return (
         <>
             <Grid container spacing={2}>
@@ -69,7 +100,11 @@ const UserInfoDetail = () => {
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <BoxWithTitleAndTextButton title="Direccion de Entrega" btnText="MODIFICAR DIRECCION DE ENTREGA">
+                            <BoxWithTitleAndTextButton
+                                title="Direccion de Entrega"
+                                btnText="MODIFICAR DIRECCION DE ENTREGA"
+                                handleClick={() => handleClickOpenDeliveryAddressModal()}
+                            >
                                 <DataDisplay title="Direccion de Entrega" text="Belgrano" style={{ marginBottom: theme.spacing(2) }} />
                                 <DataDisplay title="Piso / Puerta / Aclaraciones" text="1558" style={{ marginBottom: theme.spacing(2) }} />
                                 <DataDisplay
@@ -84,7 +119,11 @@ const UserInfoDetail = () => {
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <BoxWithTitleAndTextButton title="Datos de Facturacion" btnText="MODIFICAR DATOS DE FACTURACION">
+                            <BoxWithTitleAndTextButton
+                                title="Datos de Facturacion"
+                                btnText="MODIFICAR DATOS DE FACTURACION"
+                                handleClick={() => handleClickOpenBillingAddressModal()}
+                            >
                                 <DataDisplay title="Direccion de Entrega" text="Belgrano" style={{ marginBottom: theme.spacing(2) }} />
                                 <DataDisplay title="Piso / Puerta / Aclaraciones" text="1558" style={{ marginBottom: theme.spacing(2) }} />
                                 <DataDisplay title="Nombre Completo" text="Alejo Scotti" style={{ marginBottom: theme.spacing(2) }} />
@@ -96,7 +135,11 @@ const UserInfoDetail = () => {
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <BoxWithTitleAndTextButton title="Metodo de Pago" btnText="MODIFICAR METODO DE PAGO">
+                            <BoxWithTitleAndTextButton
+                                title="Metodo de Pago"
+                                btnText="MODIFICAR METODO DE PAGO"
+                                handleClick={() => handleClickOpenPaymentMethodModal()}
+                            >
                                 <DataDisplay title="Tarjeta" text="Belgrano" style={{ marginBottom: theme.spacing(2) }} />
                                 <DataDisplay title="Vencimiento" text="1558" style={{ marginBottom: theme.spacing(2) }} />
                             </BoxWithTitleAndTextButton>
@@ -142,6 +185,24 @@ const UserInfoDetail = () => {
                 open={openPersonalDataModal}
                 handleClose={handleClickClosePersonalDataModal}
                 primaryButtonText="MODIFICAR DATOS PERSONALES"
+                secondaryButtonText="CANCELAR"
+            />
+            <BillingAddressModal
+                open={openBillingAddressModal}
+                handleClose={handleClickCloseBillingAddressModal}
+                primaryButtonText="MODIFICAR DIRECCION DE FACTURACION"
+                secondaryButtonText="CANCELAR"
+            />
+            <DeliveryAddressModal
+                open={openDeliveryAddressModal}
+                handleClose={handleClickCloseDeliveryAddressModal}
+                primaryButtonText="MODIFICAR DIRECCION DE ENTREGA"
+                secondaryButtonText="CANCELAR"
+            />
+            <PaymentMethodModal
+                open={openPaymentMethod}
+                handleClose={handleClickClosePaymentMethodModal}
+                primaryButtonText="MODIFICAR METODO DE PAGO"
                 secondaryButtonText="CANCELAR"
             />
             {/* <RecipeModal
