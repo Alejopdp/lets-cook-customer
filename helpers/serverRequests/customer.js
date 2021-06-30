@@ -5,7 +5,7 @@ export const loginWithSocialMedia = async (token) => {
     try {
         const res = await axios({
             method: "POST",
-            url: `${apiUrl}/login`,
+            url: `${apiUrl}/social-auth/${token}`,
             data: { token },
         });
 
