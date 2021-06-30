@@ -9,14 +9,10 @@ export default class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     {/* PWA primary color */}
-                    <meta
-                        name="theme-color"
-                        content={theme.palette.primary.main}
-                    />
-                    <link
-                        rel="stylesheet"
-                        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                    />
+                    <meta name="theme-color" content={theme.palette.primary.main} />
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+                    <script async src="/script/ml.js"></script>
+                    <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/20136870.js"></script>
                 </Head>
                 <body>
                     <Main />
@@ -66,9 +62,6 @@ MyDocument.getInitialProps = async (ctx) => {
     return {
         ...initialProps,
         // Styles fragment is rendered after the app and page rendering finish.
-        styles: [
-            ...React.Children.toArray(initialProps.styles),
-            sheets.getStyleElement(),
-        ],
+        styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
     };
 };

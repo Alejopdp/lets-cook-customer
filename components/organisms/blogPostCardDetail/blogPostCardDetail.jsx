@@ -1,8 +1,8 @@
 // Utils & Config
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Parser from 'html-react-parser';
-import { dateFromISO8601 } from '../../../helpers/utils/date';
+import Parser from "html-react-parser";
+import { dateFromISO8601 } from "../../../helpers/utils/date";
 import { useRouter } from "next/router";
 
 // External components
@@ -10,8 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 // Internal components
-import BlogTagsWhiteBg from "../../atoms/blogTags/BlogTagsWhiteBg";
-
+import BlogTagsWhiteBg from "../../atoms/blogTags/blogTagsWhiteBg";
 
 // Icons & Images
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -30,12 +29,12 @@ const useStyles = makeStyles((theme) => ({
     },
     gridContent: {
         marginTop: theme.spacing(6),
-        whiteSpace: 'break-spaces',
-        overflowWrap: 'break-word',
-        '& iframe': {
-            width: '100%'
-        }
-    }
+        whiteSpace: "break-spaces",
+        overflowWrap: "break-word",
+        "& iframe": {
+            width: "100%",
+        },
+    },
 }));
 
 const BlogPostCardDetail = ({ post }) => {
@@ -44,21 +43,16 @@ const BlogPostCardDetail = ({ post }) => {
     const router = useRouter();
     const { image, date, gridContent } = classes;
 
-    const harcodedTags = ['harcodedTag1', 'harcodedTag2', 'harcodedTag3'];
-
+    const harcodedTags = ["harcodedTag1", "harcodedTag2", "harcodedTag3"];
 
     return (
         <>
             <Grid container>
-                <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
-                    <Typography variant="h4">
-                        {post.title}
-                    </Typography>
+                <Grid item xs={12}>
+                    <Typography variant="h4">{post.title}</Typography>
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(1) }}>
-                    <Typography variant="body1" >
-                        {post.description}
-                    </Typography>
+                    <Typography variant="body1">{post.description}</Typography>
                 </Grid>
 
                 <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
@@ -71,7 +65,7 @@ const BlogPostCardDetail = ({ post }) => {
                         className={image}
                     />
                 </Grid>
-                <Grid item xs={12} style={{ marginTop: theme.spacing(3), display: 'flex' }} alignItems='center'>
+                <Grid item xs={12} style={{ marginTop: theme.spacing(3), display: "flex" }} alignItems="center">
                     <Avatar style={{ marginRight: theme.spacing(1) }}>{post.author.picture.formats.large.url}</Avatar>
                     <Typography variant="body2" style={{ marginRight: "0px" }}>
                         {post.author.name}

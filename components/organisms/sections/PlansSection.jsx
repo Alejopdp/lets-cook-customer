@@ -1,20 +1,19 @@
-import PropTypes from 'prop-types';
-import { Typography, Container, Grid } from '@material-ui/core/';
-import { makeStyles, useTheme } from '@material-ui/core';
+import PropTypes from "prop-types";
+import { Typography, Container, Grid } from "@material-ui/core/";
+import { makeStyles, useTheme } from "@material-ui/core";
 import Title from "../../molecules/titleOtherPages/titleOtherPages";
-import RoundedButton from '../../atoms/roundedButton/roundedButton.jsx';
-import { useRouter } from 'next/router';
+import RoundedButton from "../../atoms/roundedButton/roundedButton.jsx";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     row: {
         display: "flex",
         justifyContent: "center",
-        paddingBottom: theme.spacing(3)
+        paddingBottom: theme.spacing(3),
     },
     card: {
         display: "flex",
@@ -27,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",
-        borderRadius: 8
+        borderRadius: 8,
     },
     overlay: {
         display: "flex",
@@ -48,77 +47,69 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column",
         padding: theme.spacing(2),
         paddingTop: theme.spacing(4),
-        textAlign: "left"
+        textAlign: "left",
     },
     cardAction: {
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),
-    }
+    },
 }));
 
 const PlansSection = () => {
     const theme = useTheme();
-    const {push: navigateTo} = useRouter();
+
     const cards = [
         {
             title: "Plan familiar",
             content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
             image: "unnamed.jpg",
-            slug: "plan-familiar"
         },
         {
             title: "Plan gourmet",
             content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
             image: "unnamed.jpg",
-            slug: "plan-gourmet"
         },
         {
             title: "Plan vegetariano/vegano",
             content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
             image: "unnamed.jpg",
-            slug: "plan-vegetariano"
         },
         {
             title: "Plan ahorro",
             content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
             image: "unnamed.jpg",
-            slug: "plan-ahorro"
         },
     ];
 
     const classes = useStyles();
 
     return (
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Title
                     title="Encuentra el plan indicado para tí"
                     subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
                 />
                 {cards.map((card, index) => (
-                    <Grid item xs={12} md={3}>
-                        <div key={index} className={classes.card} style={{
-                            backgroundImage: `url(${classes.img})`
-                        }}>
-                            <div className={classes.overlay} >
+                    <Grid item xs={12} md={3} key={index}>
+                        <div
+                            key={index}
+                            className={classes.card}
+                            style={{
+                                backgroundImage: `url(${classes.img})`,
+                            }}
+                        >
+                            <div className={classes.overlay}>
                                 <div className={classes.cardContent}>
-                                    <Typography
-                                        className={classes.paddingCardTitle}
-                                        variant="subtitle1"
-                                        color="initial">{card.title}</Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="initial">{card.content}</Typography>
+                                    <Typography className={classes.paddingCardTitle} variant="subtitle1" color="initial">
+                                        {card.title}
+                                    </Typography>
+                                    <Typography variant="body2" color="initial">
+                                        {card.content}
+                                    </Typography>
                                 </div>
                                 <div className={classes.cardAction}>
-                                    <RoundedButton label="¡QUIERO ESTE PLAN!" onClick={()=>navigateTo({
-                                        pathname:"/planes/[slug]",
-                                        query: {
-                                            slug: card.slug,
-                                            personas: 2,
-                                            recetas: 2
-                                        }
-                                    })} />
+                                    <RoundedButton label="¡QUIERO ESTE PLAN!" />
                                 </div>
                             </div>
                         </div>
@@ -126,12 +117,8 @@ const PlansSection = () => {
                 ))}
             </Grid>
         </Container>
-    )
-}
-PlansSection.propTypes = {
-
+    );
 };
+PlansSection.propTypes = {};
 
 export default PlansSection;
-
-
