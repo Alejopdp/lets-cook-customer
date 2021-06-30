@@ -1,6 +1,6 @@
 // Utils & Config
 import React from 'react';
-import { withStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, withStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 // External Components
@@ -25,7 +25,7 @@ const styles = (theme) => ({
         right: theme.spacing(2),
         top: theme.spacing(2),
         color: theme.palette.grey[500],
-    },
+    }
 });
 
 const DialogTitle = withStyles(styles)((props) => {
@@ -43,8 +43,18 @@ const DialogTitle = withStyles(styles)((props) => {
 });
 
 
+const useStyles = makeStyles((theme) => ({
+    primaryButtonClass: {
+        '&.Mui-disabled': {
+            opacity: '0.5'
+        }
+    }
+}));
+
+
 const Modal = (props) => {
     const theme = useTheme();
+    const classes = useStyles();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
@@ -66,7 +76,7 @@ const Modal = (props) => {
                 <Button onClick={props.handleSecondaryButtonClick ? props.handleSecondaryButtonClick : props.handleClose} style={{ textAlign: 'right', color: props.secondaryButtonColor ? props.secondaryButtonColor : theme.palette.text.secondary }}>
                     {props.secondaryButtonText}
                 </Button>
-                <Button onClick={props.handlePrimaryButtonClick} style={{ textAlign: 'right', color: props.primaryButtonColor ? props.primaryButtonColor : theme.palette.primary.main }} autoFocus>
+                <Button className={classes.primaryButtonClass} disabled={props.disabled} onClick={props.handlePrimaryButtonClick} style={{ textAlign: 'right', color: props.primaryButtonColor ? props.primaryButtonColor : theme.palette.primary.main }} autoFocus>
                     {props.primaryButtonText}
                 </Button>
             </DialogActions>

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ChangePlanModal = (props) => {
+const SwapPlanModal = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -26,31 +26,49 @@ const ChangePlanModal = (props) => {
         planVariantId: '',
     });
 
+
     useEffect(() => {
         let activePlanId = props.data.plans.filter(plan => plan.active === true)[0].planId
         let activePlanVariantId = props.data.variants.filter(variant => variant.active === true)[0].planVariantId
         setPlanSelected({
             ...planSelected,
+            subscriptionId: '123',
             planId: activePlanId,
             planVariantId: activePlanVariantId
         })
     }, [props.open]);
 
 
+    useEffect(() => {
+        let newPlanVariantId; 
+        if (planSelected.planId == '') {
+            newPlanVariantId = ''
+        } else {
+            newPlanVariantId = props.data.variants.filter(variant => variant.planId === planSelected.planId)[0].planVariantId
+        }
+        console.log(newPlanVariantId);
+        setPlanSelected({
+            ...planSelected,
+            planVariantId: newPlanVariantId
+        })
+    }, [planSelected.planId]);
+    
+
+    const handleDisableButton = () => {
+        let currentPlanVariantId = props.data.variants.filter(variant => variant.active === true)[0].planVariantId
+        if (planSelected.planVariantId === currentPlanVariantId) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     const handleChangePlan = (event) => {
-        console.log('planId', event.target.value)
         setPlanSelected({
             ...planSelected,
             planId: event.target.value,
         });
-        handleChangeVariantFromChangePlan()
     };
-
-    // No anda. Me apunta siempre al anterior al que esta seleccionado
-    const handleChangeVariantFromChangePlan = () => {
-        let planVariantValue = document.getElementById("variantDropdown").value;
-        console.log('planVariantId', planVariantValue)
-    }
 
     const handleChangeVariant = (event) => {
         setPlanSelected({
@@ -71,6 +89,7 @@ const ChangePlanModal = (props) => {
             title='Cambiar plan'
             primaryButtonText='cambiar plan'
             secondaryButtonText='cancelar'
+            disabled={handleDisableButton()}
         >
             <Typography variant='subtitle2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(2) }}>
                 1. Elige tu plan
@@ -110,4 +129,4 @@ const ChangePlanModal = (props) => {
     );
 }
 
-export default ChangePlanModal;
+export default SwapPlanModal;

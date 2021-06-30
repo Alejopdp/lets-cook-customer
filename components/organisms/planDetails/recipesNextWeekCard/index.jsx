@@ -27,7 +27,6 @@ const RecipesNextWeekCard = props => {
 
     return (
         <>
-            {console.log('props.hasChosenRecipesForNextWeek', props.hasChosenRecipesForNextWeek)}
             {!props.hasChosenRecipesForNextWeek ? (
                 <BoxWithTitle title='Recetas de la próxima semana'>
                     <Box style={{ textAlign: 'center', marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>

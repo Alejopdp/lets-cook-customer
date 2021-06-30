@@ -9,7 +9,7 @@ import Hidden from "@material-ui/core/Hidden";
 
 // Internal components
 import RecipeModal from "../../molecules/recipeModal/recipeModal";
-import ChangePlanModal from "../../molecules/managePlanModals/changePlanModal";
+import SwapPlanModal from "../../molecules/managePlanModals/swapPlanModal";
 import CancelPlanModal from "../../molecules/managePlanModals/cancelPlanModal";
 import SkipPlanModal from "../../molecules/managePlanModals/skipPlanModal";
 import PlanDetailsDesktop from "./planDetailsDesktop/index";
@@ -30,8 +30,8 @@ const PlanDetails = ({ data }) => {
             { planId: '5', name: 'Plan Vegano', active: false },
         ],
         variants: [
-            { planId: '1', planVariantId: '6', variantDescription: '4 recetas para 3 personas - 36 €/semana', active: false },
-            { planId: '1', planVariantId: '7', variantDescription: '3 recetas para 3 personas - 30 €/semana', active: true },
+            { planId: '1', planVariantId: '6', variantDescription: '4 recetas para 3 personas - 36 €/semana', active: true },
+            { planId: '1', planVariantId: '7', variantDescription: '3 recetas para 3 personas - 30 €/semana', active: false },
             { planId: '1', planVariantId: '8', variantDescription: '2 recetas para 3 personas - 24 €/semana', active: false },
             { planId: '2', planVariantId: '9', variantDescription: '4 recetas para 2 personas - 30 €/semana', active: false },
             { planId: '2', planVariantId: '10', variantDescription: '3 recetas para 2 personas - 24 €/semana', active: false },
@@ -192,7 +192,7 @@ const PlanDetails = ({ data }) => {
                 descriptionElementRef={descriptionElementRefRecipeModal}
             // data={recipeSelectedIndex.period === 'actualWeek' ? data.actualWeekOrder[recipeSelectedIndex.index] : data.nextWeekOrder[recipeSelectedIndex.index]}
             />
-            <ChangePlanModal
+            <SwapPlanModal
                 open={openChangePlanModal}
                 handleClose={handleCloseChangePlanModal}
                 handlePrimaryButtonClick={handlePrimaryButtonClickChangePlanModal}

@@ -37,22 +37,23 @@ export async function getServerSideProps(context) {
         props: {
             subscription: res.data || null,
             error: res.status !== 200 ? "ERROR" : "",
+            subscriptionId: subscriptionId
         }
     }
 }
 
-const PlanDetailsPage = ({ subscription, error }) => {
+const PlanDetailsPage = ({ subscription, error, subscriptionId }) => {
     const theme = useTheme();
     const classes = useStyles();
     // const lang = langs[router.locale];
 
-    console.log(subscription, error)
+    console.log(subscription, error, subscriptionId)
 
     return (
         <Layout>
             <InnerSectionLayout containerMaxWidth="lg">
                 <BackButtonTitle url="/perfil" title="Detalle del plan" />
-                <PlanDetails data={subscription} />
+                <PlanDetails data={subscription} subscriptionId={subscriptionId} />
             </InnerSectionLayout>
         </Layout>
     );
