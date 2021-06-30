@@ -1,12 +1,12 @@
 // Utils & Config
 import { useEffect } from "react";
-import { getPlans, getRecipes, Plan, Recipe, FAQS } from "../../helpers/serverRequests";
-import { useBuyFlow } from "../../stores/buyFlow";
+import { getPlans, getRecipes, Plan, Recipe, FAQS } from "@helpers";
+import { useBuyFlow } from "@stores";
 
 // Internal components
 import BuyFlowLayout from "../../components/layout/buyFlow";
-import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "../../components/organisms/buyForm";
-import { getFAQS } from "../../helpers/serverRequests/faqs/faqs";
+import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "@organisms";
+import { getFAQS } from "@helpers";
 
 export interface PlansErrors {
     plans?: string;

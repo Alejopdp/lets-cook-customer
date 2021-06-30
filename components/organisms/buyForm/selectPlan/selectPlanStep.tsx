@@ -14,7 +14,7 @@ import { PlanUrlParams } from "../../../../pages/planes/[slug]";
 
 import { useBuyFlow } from "../../../../stores/buyFlow";
 import { useStyles } from "./styles";
-import { faqsSection } from "../../../../lang";
+import { faqsSection } from "@lang";
 import { useRouter } from "next/router";
 
 interface SelectPlanProps {
