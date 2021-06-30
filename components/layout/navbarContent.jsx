@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up("sm")]: {
             justifyContent: "right",
         },
+        cursor: "pointer",
     },
     navbarClass: {
         boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
@@ -56,7 +57,7 @@ const NavbarContent = (props) => {
                 </IconButton>
                 <div className={classes.logo}>
                     <Link href="/">
-                        <Image src="/logo.png" width={135} height={40} />
+                        <Image src="/logo.png" width={135} height={40} alt="lets-cook-logo" style={{ cursor: "pointer" }} />
                     </Link>
                 </div>
                 <Hidden xsDown implementation="css">

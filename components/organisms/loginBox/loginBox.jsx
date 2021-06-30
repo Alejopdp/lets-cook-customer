@@ -4,6 +4,7 @@ import { isEmail, isPassword } from "../../../helpers/regex/regex";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").loginBox;
 import { loginWithSocialMedia } from "../../../helpers/serverRequests/customer";
+import cookies from "js-cookie";
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -12,13 +13,18 @@ import CustomButton from "../../atoms/customButton/customButton";
 import SocialNetworksButtons from "../../atoms/socialNetworksButtons/socialNetworksButtons";
 import { ForgotPassword, Register } from "../../atoms/loginHelpers/loginHelpers";
 import Divider from "../../atoms/divider/divider";
+import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
+import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
 
 const LoginBox = () => {
     const [values, setValues] = useState({
         password: "",
         email: "",
     });
-
+    const { saveInLocalStorage } = useLocalStorage();
+    const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
+    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+    const [serverError, setserverError] = useState("");
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
@@ -35,9 +41,10 @@ const LoginBox = () => {
             saveInLocalStorage("userInfo", res.data.userInfo);
             setUserInfo(res.data.userInfo);
             cookies.set("token", res.data.token);
-            // router.push("/dashboard");
-            setserverError(res.data.message);
+            setIsAuthenticated(true);
+            router.push("/");
         } else {
+            setserverError(res.data.message);
             alert("Error al querer ingresar");
         }
     };

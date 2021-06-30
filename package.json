@@ -16,6 +16,7 @@
         "axios": "^0.21.1",
         "firebase": "^8.6.7",
         "html-react-parser": "^1.2.7",
+        "js-cookie": "^2.2.1",
         "next": "^11.0.1",
         "node-sass": "^5.0.0",
         "notistack": "^1.0.9",

@@ -22,7 +22,6 @@ const SocialNetworksButtons = (props) => {
         if (!!token) {
             // enqueueSnackbar("Send to backend", { variant: "success" });
             props.handleSubmit(token);
-            alert("Send to backend");
         } else {
             // enqueueSnackbar("Error al querer ingresar con Facebook");
             alert("Error al querer ingresar con Facebook");
@@ -35,7 +34,6 @@ const SocialNetworksButtons = (props) => {
         if (!!token) {
             // enqueueSnackbar("Send to backend", { variant: "success" });
             props.handleSubmit(token);
-            alert("Send to backend");
         } else {
             // enqueueSnackbar("Error al querer ingresar con Google");
             alert("Error al querer ingresar con Google");

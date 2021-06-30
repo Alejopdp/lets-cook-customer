@@ -1,7 +1,7 @@
 import create from "zustand";
 
 export const useAuthStore = create((set) => ({
-    isAuthenticated: true,
+    isAuthenticated: false,
     setIsAuthenticated: (isAuthenticated) => set((state) => ({ isAuthenticated })),
 }));
 

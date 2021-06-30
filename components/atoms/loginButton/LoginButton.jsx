@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonBase, makeStyles, Typography } from "@material-ui/core";
 import { PersonOutlineRounded } from "@material-ui/icons";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
     loginButton: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginButton = ({ border = false, ...props }) => {
     const classes = useStyles();
-    // const { push } = useRouter();
+    const router = useRouter();
 
     return (
         <ButtonBase
@@ -23,7 +23,7 @@ const LoginButton = ({ border = false, ...props }) => {
             style={{
                 border: border ? "solid 1px gray" : "none",
             }}
-            // onClick={push("/ingresar")}
+            onClick={() => router.push("/ingresar")}
         >
             <PersonOutlineRounded style={{ marginRight: 4 }} />
             <Typography variant="button">Ingresar</Typography>

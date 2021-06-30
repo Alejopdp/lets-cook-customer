@@ -54,8 +54,8 @@ const NavbarContent = (props) => {
                     <MenuIcon />
                 </IconButton>
                 <div className={classes.logo}>
-                    <Link href="/">
-                        <Image src="/logo.png" width={135} height={40} />
+                    <Link href="/" style={{ cursor: "pointer" }}>
+                        <Image src="/logo.png" width={135} height={40} style={{ cursor: "pointer" }} />
                     </Link>
                 </div>
                 <UserBox />
