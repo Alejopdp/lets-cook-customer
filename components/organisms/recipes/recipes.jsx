@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
 
 import StarRatingRecipeCard from "../../molecules/card/starRatingRecipeCard";
 import RecipesModal from "../../molecules/valueRecipesModal/recipesModal";
@@ -65,11 +65,6 @@ const Recipes = ({ id }) => {
     return (
         <>
             <div className={matches ? classes.second : classes.mobile}>
-                <div className={classes.group5}>
-                    <ArrowBackIcon />
-                    <h1 className={classes.valueRecipes}>Valorar recetas</h1>
-                </div>
-
                 <div className={matches ? classes.pendingToValue : classes.pendingToValue2}>Recetas pendientes de valorar</div>
 
                 <div className={matches ? classes.group1976 : classes.flexRow}>

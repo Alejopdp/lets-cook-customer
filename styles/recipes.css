@@ -128,9 +128,7 @@
 }
 
 .blog {
-    align-items: flex-start;
-    height: 1022px;
-    width: 1366px;
+    align-items: flex-start; 
 }
 
 .blog .group1005 {
@@ -305,7 +303,6 @@
 
 .blog .text13 {
     line-height: 24px;
-    margin-left: 139px;
     margin-top: 27px;
     min-height: 29px;
 }
@@ -361,7 +358,7 @@
     background-position: 50% 50%;
     background-size: cover;
     height: 159px;
-    width: 247px;
+    width: 275px;
 }
 .mobile .group1009,
 .mobile .group1009-1 {
@@ -380,7 +377,7 @@
 .mobile .group1018 {
     border-radius: 8px;
     min-height: 331px;
-    width: 247px;
+    width: 275px;
     margin-right: 1rem;
     margin-bottom: 1rem;
 }
@@ -437,7 +434,6 @@
 }
 .mobile .text14 {
     line-height: 24px;
-    margin-left: 15px;
     margin-top: 19px;
     min-height: 29px;
 }

@@ -33,7 +33,7 @@ const BoxWithTitleAndTextButton = (props) => {
                 </Typography>
                 {props.children}
             </div>
-            <TextButton btnText={props.btnText} style={{ marginTop: theme.spacing(3) }} />
+            <TextButton btnText={props.btnText} style={{ marginTop: theme.spacing(3) }} handleClick = {props.handleClick}/>
         </GeneralBox>
     );
 };

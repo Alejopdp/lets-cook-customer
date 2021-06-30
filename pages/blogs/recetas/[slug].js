@@ -10,7 +10,6 @@ import Layout from '../../../components/layout/index';
 
 export const getStaticPaths = async (context) => {
     const response = await getPosts(context.locale);
-
     const paths = response.data.map((post, index) => ({
         params: {
             slug: post.slug,

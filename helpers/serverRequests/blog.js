@@ -6,7 +6,6 @@ export const getPosts = async (locale) => {
             method: "GET",
             url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles`,
         });
-
         return res;
     } catch (error) {
         return error.response;
