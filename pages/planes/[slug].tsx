@@ -69,7 +69,7 @@ export const PlanesPage = (props: PlanesPageProps) => {
             const res = await createSubscription(data);
 
             if (res.status === 200) {
-                if (res.data.status === "requires_action") {
+                if (res.data.payment_status === "requires_action") {
                     await stripe.confirmCardPayment(res.data.client_secret, {
                         payment_method: paymentMethodRes.paymentMethod.id,
                     });
