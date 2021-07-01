@@ -1,3 +1,4 @@
+// External components
 import "../styles/globals.scss";
 import React, { useEffect } from "react";
 import Head from "next/head";
@@ -8,7 +9,11 @@ import useLocalStorage from "../hooks/useLocalStorage/localStorage";
 import cookies from "js-cookie";
 import { useAuthStore, useUserInfoStore } from "../stores/auth";
 import { verifyToken } from "../helpers/serverRequests/customer";
+import { loadStripe } from "@stripe/stripe-js";
 import { SnackbarProvider } from "notistack";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
 function MyApp(props) {
     const { Component, pageProps } = props;
@@ -45,8 +50,10 @@ function MyApp(props) {
             </Head>
             <ThemeProvider theme={theme}>
                 <SnackbarProvider maxSnack={3}>
-                    <CssBaseline />
-                    <Component {...pageProps} />
+                    <Elements stripe={stripePromise}>
+                        <CssBaseline />
+                        <Component {...pageProps} />
+                    </Elements>
                 </SnackbarProvider>
             </ThemeProvider>
         </React.Fragment>

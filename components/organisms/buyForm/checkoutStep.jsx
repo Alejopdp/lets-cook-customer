@@ -6,18 +6,18 @@ import { useBuyFlow } from "../../../stores/buyFlow";
 import { Container } from "@material-ui/core";
 
 // Internal components
-import ShipmentForm from '../../molecules/shipmentForm/shipmentForm';
-import PaymentForm from '../../molecules/paymentForm/paymentForm';
-import IconsWithText from '../../molecules/iconsWithText/iconsWithText';
+import ShipmentForm from "../../molecules/shipmentForm/shipmentForm";
+import PaymentForm from "../../molecules/paymentForm/paymentForm";
+import IconsWithText from "../../molecules/iconsWithText/iconsWithText";
 
-export const CheckoutStep = () => {
+export const CheckoutStep = (props) => {
     const gotToNextView = useBuyFlow(({ forward }) => forward);
 
     return (
         <Container maxWidth="lg">
-             <button onClick={() => gotToNextView()}>Elegir recetas</button>
+            <button onClick={() => gotToNextView()}>Elegir recetas</button>
             <ShipmentForm registeredUser />
-            <PaymentForm savedCards />
+            <PaymentForm savedCards handleSubmitPayment={props.handleSubmitPayment} />
             <IconsWithText />
         </Container>
     );

@@ -39,6 +39,7 @@ export const BuyFlowLayout = ({ children: Component }) => {
 
     const classes = useStyles();
     const router = useRouter();
+
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
     const { showRegister, setRegisterState: toggleRegister } = useBuyFlow(({ setRegisterState, showRegister }) => ({
         setRegisterState,
