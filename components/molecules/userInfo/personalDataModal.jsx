@@ -12,7 +12,7 @@ import Modal from "../../atoms/modal/modal";
 import PhoneNumberInput from "../../atoms/phoneNumberInput/phoneNumberInput";
 import PreferedLanguageInput from "../../atoms/preferedLanguageInput/preferedLanguageInput";
 import DatePicker from "../../atoms/datePickerInput/datePickerInput";
-import LangSelector from "../langSelector/langSelector";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {

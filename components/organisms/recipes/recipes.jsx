@@ -1,56 +1,28 @@
 import React, { useState } from "react";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { Grid, useTheme, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-
-import StarRatingRecipeCard from "../../molecules/card/starRatingRecipeCard";
 import RecipesModal from "../../molecules/valueRecipesModal/recipesModal";
+import FoodCard from "../../molecules/foodCard";
 
-const classes = {
-    // desktop
-    first: "container",
-    second: "blog screen-1",
-
-    iconArrow: "iconArrow",
-    valueRecipes: "x24-1 proximanova-24px",
-    pendingToValue: "text13 proximanova-20px",
-
-    group1018: "group1018",
-    group1005: "group1005",
-    group1009: "group1009",
-    group10091: "group1009-1",
-    group1531: "group1531",
-    group1976: "group1976",
-    group1977: "group1977",
-    group1978: "group1978",
-    group1979: "group1979",
-
-    recipeTitle: "recipeTitle proximanova-16px",
-    p: "p opensans-14px",
-    delivered: "opensans-14px-2",
-    date: "opensans-14px-3",
-    overlapGroup: "overlapGroup",
-    icon: "starIcon",
-    icon1: "starIcon-1",
-    notValue: "text1 proximanova-13px",
-    ratedRecipes: "recetasValoradas proximanova-20px",
-    recetasSinValorar: "recetasSinValorar",
-    pendingToValue3: "pendingToValue3",
-
-    // mobile
-    mobile: "mobile screen-1",
-    pendingToValue2: "text14 proximanova-20px",
-
-    group5: "group5",
-    group2015: "group2015",
-    group2016: "group2016",
-
-    flexRow: "flexRow",
-    flexRow1: "flexRow1",
-};
+const useStyles = makeStyles((theme) => ({
+    typography: {
+        fontWeight: "500",
+        fontFamily: theme.typography.fontFamily,
+        marginBottom: ".5rem",
+    },
+    valueRecipes: {
+        fontWeight: "500",
+        fontFamily: theme.typography.fontFamily,
+        marginBottom: ".5rem",
+        marginTop: "1rem",
+    },
+}));
 
 const Recipes = ({ id }) => {
-    const matches = useMediaQuery("(min-width:961px)");
+    const classes = useStyles();
 
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
 
@@ -64,25 +36,65 @@ const Recipes = ({ id }) => {
 
     return (
         <>
-            <div className={matches ? classes.second : classes.mobile}>
-                <div className={matches ? classes.pendingToValue : classes.pendingToValue2}>Recetas pendientes de valorar</div>
+            <Grid container style={{ marginBottom: "1rem" }}>
+                <Grid item xs={12}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.typography}>
+                                Recetas pendientes de valorar
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+                {[...Array(5)].map((x) => {
+                    return (
+                        <>
+                            <Grid item xs={12} md={3}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <FoodCard height="339px" handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </>
+                    );
+                })}
+            </Grid>
+            <Grid container style={{ marginBottom: "1rem" }}>
+                <Grid item xs={12}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.valueRecipes}>
+                                Recetas valoradas
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+                {[...Array(5)].map((x) => {
+                    return (
+                        <>
+                            <Grid item xs={12} md={3}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <FoodCard isRated={true} height="310px" handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </>
+                    );
+                })}
+            </Grid>
 
-                <div className={matches ? classes.group1976 : classes.flexRow}>
-                    {[...Array(5)].map((x, i) => {
-                        return <StarRatingRecipeCard rated = {false} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />;
-                    })}
-                </div>
-
-                <div className={matches ? classes.pendingToValue : classes.pendingToValue2}>Recetas valoradas</div>
-
-                <div className={matches ? classes.group1976 : classes.flexRow}>
-                    {[...Array(5)].map((x, i) => {
-                        return <StarRatingRecipeCard rated = {true} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />;
-                    })}
-                </div>
-            </div>
-
-            <RecipesModal open={openRecipeModal} handleClose={handleCloseRecipeModal} />
+            <RecipesModal
+                open={openRecipeModal}
+                handleClose={handleCloseRecipeModal}
+                primaryButtonText="CALIFICAR RECETA"
+                secondaryButtonText="CANCELAR"
+            />
         </>
     );
 };
