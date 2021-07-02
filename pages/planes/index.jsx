@@ -1,3 +1,4 @@
+import {memo} from 'react';
 const PlansIndexPage = () => {
     return <></>;
 };
@@ -14,4 +15,4 @@ export async function getServerSideProps({ locale, previewData }) {
         },
     };
 }
-export default  React.memo(PlansIndexPage);
+export default  memo(PlansIndexPage);

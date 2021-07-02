@@ -4,5 +4,5 @@ export type IconsType = {
 }
 
 export interface IconsWithTextProps {
-    icons: IconsType[]
+    icons?: IconsType[]
 }

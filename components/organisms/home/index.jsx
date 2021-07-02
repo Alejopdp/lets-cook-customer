@@ -1,6 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import clsx from "clsx";
-import { Layout } from "@layouts";
+import {Layout} from "@layouts";
 import ValuePropositionSection from "../sections/ValuePropositionSection";
 import BenefitsSection from "../sections/BenefitsSection";
 import CallToActionSection from "../sections/CallToActionSection";
@@ -27,9 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 /**
- * TODO: IMPORTANT!!! is needly add all values to container,
- * the idea is go to controlling the spaces 
- * o margins for the differents sections.
+ * TODO: IMPORTANT!!! is needly add all values to container, the idea is go to controlling the spaces o margins for the differents sections.
  */
 const HomePage = () => {
     const classes = useStyles();
@@ -49,11 +47,7 @@ const HomePage = () => {
                 <BenefitsSection />
             </div>
             <div className={classes.paddingY8}>
-                <RecipesSection
-                    title="Hecha un vistazo a las recetas de esta semana"
-                    subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
-                    titleAlign="flex-start"
-                />
+                <RecipesSection />
             </div>
             <div className={classes.paddingY8}>
                 <ReviewsSection />

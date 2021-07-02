@@ -4,6 +4,6 @@ export interface FormPaperWithIconsProps {
     initialIcon: string,
     title: string,
     finalIcons?: boolean,
-    children: ReactNode
+    children?: ReactNode
     onClick?: () => void,
 };

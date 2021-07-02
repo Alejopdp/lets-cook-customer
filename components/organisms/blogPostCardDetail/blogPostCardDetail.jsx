@@ -48,7 +48,7 @@ const BlogPostCardDetail = ({ post }) => {
     return (
         <>
             <Grid container>
-                <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
+                <Grid item xs={12}>
                     <Typography variant="h4">{post.title}</Typography>
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(1) }}>

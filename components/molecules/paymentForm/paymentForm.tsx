@@ -9,6 +9,7 @@ import HttpsOutlinedIcon from '@material-ui/icons/HttpsOutlined';
 
 // Internal components
 import { FormPaperWithIcons } from '@molecules';
+import StripeForm from "../../molecules/stripeForm/stripeForm";
 import { RoundedCheckbox, CustomCheckbox, CustomButton } from '@atoms';
 import { useRouter } from 'next/router';
 
@@ -53,7 +54,7 @@ export const PaymentForm = (props) => {
                 checked={props.checked}
                 onChange={props.onChange}
             />
-
+            <StripeForm />
             <CustomCheckbox
                 name="acceptTerms"
                 label={<p>He leído y acepto las <b>condiciones generales de venta</b></p>}
@@ -67,6 +68,7 @@ export const PaymentForm = (props) => {
                 text="Realizar pago"
                 icon={<HttpsOutlinedIcon />}
                 disabled={props.disabled}
+                onClick={props.handleSubmitPayment}
             />
         </FormPaperWithIcons>
     )

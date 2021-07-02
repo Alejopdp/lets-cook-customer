@@ -81,12 +81,12 @@ const store = devtools<Store>((set, get) => ({
     },
     setRecipesQty: (qty: string) => {
         const form = get().form;
-        form.recipesQty = parseInt(qty);
+        form.recipesQty = qty;
         set({ form });
     },
     setPeopleQty: (qty: string) => {
         const form = get().form;
-        form.peopleQty = parseInt(qty);
+        form.peopleQty = qty;
         set({ form });
     },
     setDeliveryInfo: (deliveryForm: DeliveryForm) => {

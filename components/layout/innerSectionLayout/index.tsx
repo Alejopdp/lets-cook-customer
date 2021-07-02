@@ -8,7 +8,7 @@ const PublicLayout = (props) => {
     return (
         <Container maxWidth={props.containerMaxWidth || "lg"}>
             <Grid container style={{
-                paddingTop: theme.spacing(8),
+                paddingTop: theme.spacing(12),
                 paddingBottom: theme.spacing(8)
             }}> {props.children} </Grid>
         </Container>
