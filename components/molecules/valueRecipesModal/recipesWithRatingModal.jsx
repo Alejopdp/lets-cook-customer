@@ -28,27 +28,29 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const RecipesModal = (props) => {
+const RecipesWithRatingModal = (props) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
     const classes = useStyles();
 
-    const {chosenRecipe} = props
+    const styleRatingStar = {
+        display: "flex",
+        justifyContent: "center",
+    };
 
     return (
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            primaryButtonText= {chosenRecipe.rating ? "Modificar calificacion" : "Calificar receta"}
+            primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
             fullScreen={fullScreen}
-            
         >
             <Grid container style={{ marginBottom: "1rem" }}>
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <Typography variant="h6">{chosenRecipe.rating ? "Modificar calificacion" : "Calificar receta"}</Typography>
+                            <Typography variant="h6">Modificar calificacion</Typography>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -72,7 +74,7 @@ const RecipesModal = (props) => {
                                 Salmon con Quinoa
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                Entregado
+                                Entregado 1 vez <span className={classes.span}>(ultima entrega el 1 - 7 mayo)</span>
                             </Typography>
                         </Grid>
                     </Grid>
@@ -83,7 +85,7 @@ const RecipesModal = (props) => {
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <SimpleRating selectedRecipe = {chosenRecipe} isModal={true} fullScreen={fullScreen} />
+                            <SimpleRating isModal={true} fullScreen={fullScreen} />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -111,4 +113,4 @@ const RecipesModal = (props) => {
     );
 };
 
-export default RecipesModal;
+export default RecipesWithRatingModal;

@@ -1,9 +1,12 @@
 import React from "react";
 import Rating from "@material-ui/lab/Rating";
-import { Box, makeStyles } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 
-export default function SimpleRating({ handleClickOpenRecipeModal, isModal, fullScreen }) {
+export default function SimpleRating({ handleClickOpenRecipeModal, isModal, fullScreen, selectedRecipe }) {
     const [value, setValue] = React.useState(0);
+
+    console.log(selectedRecipe.id, "id")
+    console.log(selectedRecipe.rating, "rating")
 
     return (
         <div>
@@ -15,14 +18,14 @@ export default function SimpleRating({ handleClickOpenRecipeModal, isModal, full
                 style={{ display: isModal ? "flex" : null, justifyContent: isModal ? "center" : null }}
             >
                 <Rating
-                    name="simple-controlled"
-                    value={value}
+                    name={`${selectedRecipe.id}`}
+                    value={selectedRecipe.rating !== undefined ? selectedRecipe.rating : 0}
                     onChange={(event, newValue) => {
                         setValue(newValue);
                     }}
-                    onClick={handleClickOpenRecipeModal}
+                    onClick={() => handleClickOpenRecipeModal ? handleClickOpenRecipeModal() : console.log("click")}
                     size="large"
-                    style = {{marginLeft: '-.8rem'}}
+                    style={{ marginLeft: "-.8rem" }}
                 />
             </Box>
         </div>
