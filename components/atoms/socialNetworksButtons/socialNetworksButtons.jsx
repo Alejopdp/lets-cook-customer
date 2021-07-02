@@ -1,5 +1,5 @@
 // Utils & Config
-import React from 'react'
+import React from "react";
 import useStyles from "./styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
@@ -8,10 +8,10 @@ import { loginWithFacebookAndGetIdToken, loginWithGoogleAndGetIdToken } from "..
 import { useSnackbar } from "notistack";
 
 // External components
-import { Box, Button, Typography } from '@material-ui/core';
-import Image from 'next/image';
+import { Box, Button, Typography } from "@material-ui/core";
+import Image from "next/image";
 
-export const SocialNetworksButtons = () => {
+export const SocialNetworksButtons = (props) => {
     const { button, facebook, google, txt } = useStyles();
     // const { enqueueSnackbar } = useSnackbar();
 
@@ -19,11 +19,9 @@ export const SocialNetworksButtons = () => {
         const token = await loginWithFacebookAndGetIdToken();
 
         if (!!token) {
-            // enqueueSnackbar("Send to backend", { variant: "success" });
             props.handleSubmit(token);
         } else {
-            // enqueueSnackbar("Error al querer ingresar con Facebook");
-            alert("Error al querer ingresar con Facebook");
+            enqueueSnackbar("Error al querer ingresar con Facebook");
         }
     };
 
@@ -31,11 +29,9 @@ export const SocialNetworksButtons = () => {
         const token = await loginWithGoogleAndGetIdToken();
 
         if (!!token) {
-            // enqueueSnackbar("Send to backend", { variant: "success" });
             props.handleSubmit(token);
         } else {
-            // enqueueSnackbar("Error al querer ingresar con Google");
-            alert("Error al querer ingresar con Google");
+            enqueueSnackbar("Error al querer ingresar con Google");
         }
     };
 
@@ -60,7 +56,7 @@ export const SocialNetworksButtons = () => {
                 </Typography>
             </Button>
         </Box>
-    )
+    );
 };
 
 export default SocialNetworksButtons;

@@ -11,7 +11,7 @@ export async function getServerSideProps({ locale, previewData }) {
     return {
         redirect: {
             destination: `/${locale}/planes/${defaultPlan}?personas=${defaultPeopleQty}&recetas=${defaultRecipesQty}`,
-            permanent: true,
+            permanent: false,
         },
     };
 }
