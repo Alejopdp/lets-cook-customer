@@ -1,0 +1,58 @@
+// Utils & Config
+import React from "react";
+import useStyles from "./styles";
+import { useRouter } from "next/router";
+import { ForgotPasswordProps, RegisterProps } from "./interfaces";
+import { acceptLegalTerms as langs } from "@lang";
+
+// External components
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { Link } from "@material-ui/core";
+
+// Icons & Images
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+
+export const ForgotPassword = (props: ForgotPasswordProps) => {
+    return (
+        <Link href="/recuperar-contrasena">
+            <Typography variant="subtitle2" color="primary">
+                {props.text}
+            </Typography>
+        </Link>
+    );
+};
+
+export const Register = (props: RegisterProps) => {
+    const { register, btn } = useStyles();
+    return (
+        // <Link href={redirectTo}>
+        <Button className={btn} onClick={props.handleRedirect}>
+            <ExitToAppIcon />
+            <Typography variant="body1" className={register}>
+                {props.text} <b>{props.boldText}</b>
+            </Typography>
+        </Button>
+        // </Link>
+    );
+};
+
+export const AcceptLegalTerms = () => {
+    const { margin, link } = useStyles();
+
+    const router = useRouter();
+    const lang = langs[router.locale];
+
+    return (
+        <Typography variant="body2" className={margin}>
+            {lang.continuing}
+            <Link href="/aviso-legal" className={link}>
+                <b> {lang.terms} </b>
+            </Link>
+            {lang.and}
+            <Link href="/aviso-legal" className={link}>
+                <b> {lang.politics}</b>
+            </Link>
+        </Typography>
+    );
+};

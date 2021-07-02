@@ -1,1 +1,1 @@
-export {default} from './buyFlow';
+export * from './buyFlow';

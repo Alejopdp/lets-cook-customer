@@ -1,23 +1,17 @@
 // Utils & Config
 import React, { useState } from 'react';
-import useStyles from "./styles";
 import clsx from "clsx";
-import PropTypes from "prop-types";
 
 // External components
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
-import { Plan } from '../../../helpers/serverRequests';
+import { Plan } from '@helpers';
+import { PlanWithIconProp } from './interfaces';
+import useStyles from "./styles";
 
-interface PlanWithIconProp {
-    isSelected: boolean;
-    plan: Plan;
-    onClick: (plan: Plan) => void;
-}
-
-const PlanWithIcon = (props: PlanWithIconProp) => {
+export const PlanWithIcon = (props: PlanWithIconProp) => {
     const { box, text, checkedBox } = useStyles();
 
     return (

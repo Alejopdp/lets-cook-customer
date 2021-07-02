@@ -14,4 +14,4 @@ export async function getServerSideProps({ locale, previewData }) {
         },
     };
 }
-export default PlansIndexPage;
+export default  React.memo(PlansIndexPage);

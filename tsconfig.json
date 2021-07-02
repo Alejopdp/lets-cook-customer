@@ -22,7 +22,7 @@
       "@atoms": ["components/atoms"],
       "@molecules": ["components/molecules"],
       "@organisms": ["components/organisms"],
-      "@layouts": ["components/layout/"],
+      "@layouts": ["components/layout"],
       "@lang": ["lang"],
       "@stores": ["stores"],
       "@helpers": ["helpers"],

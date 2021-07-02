@@ -3,13 +3,13 @@ import React from 'react'
 import useStyles from "./styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-const langs = require("../../../lang").socialNetworksButtons;
+import { socialNetworksButtons as langs } from "@lang";
 
 // External components
 import { Box, Button, Typography } from '@material-ui/core';
 import Image from 'next/image';
 
-const SocialNetworksButtons = () => {
+export const SocialNetworksButtons = () => {
     const { button, facebook, google, txt } = useStyles();
 
     const handleFacebookLogin = () => {

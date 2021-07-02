@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 // External components
 import { Divider, Typography } from '@material-ui/core';
 
-const RecipesCalculation = ({ recipesQty, peopleQty, totalPrice }) => {
+export const RecipesCalculation = ({ recipesQty, peopleQty, totalPrice }) => {
     var rations = recipesQty * peopleQty;
     var rationPrice = totalPrice / rations;
     var fixedRationPrice = Math.round(rationPrice * 100) / 100;

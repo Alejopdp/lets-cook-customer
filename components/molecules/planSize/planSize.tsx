@@ -1,19 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { Grid, Typography, FormControl, FormLabel } from "@material-ui/core";
-import QuantityBox from "../../atoms/quantityBox/quantityBox";
+import { QuantityBox } from "@atoms";
+import { PlanSizeProps, ARGS } from "./interfaces";
 
-type ARGS = { name: string; value: string };
-
-interface PlanSizeProps {
-    valueSelected: string;
-    name: string;
-    subtitle: string;
-    numberItems: number;
-    fromNumber: number;
-    handleOnChange: (args: ARGS) => void;
-}
-
-const PlanSize = (props: PlanSizeProps) => {
+export const PlanSize = memo((props: PlanSizeProps) => {
     const [value, setValue] = useState(props.valueSelected);
 
     const _handleOnChange = (args: ARGS) => {
@@ -32,7 +22,6 @@ const PlanSize = (props: PlanSizeProps) => {
                         {Array(props.numberItems)
                             .fill(props.fromNumber)
                             .map((from, index) => {
-                                console.log(`${index + from}` === value, value, `${index + from}`);
                                 return (
                                     <QuantityBox
                                         name={props.name}
@@ -54,6 +43,6 @@ const PlanSize = (props: PlanSizeProps) => {
             </Grid>
         </Grid>
     );
-};
+});
 
 export default PlanSize;

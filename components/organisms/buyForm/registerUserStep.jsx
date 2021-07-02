@@ -36,8 +36,4 @@ export const RegisterUserStep = () => {
     );
 };
 
-RegisterUserStep.propTypes = {};
-
-RegisterUserStep.defaultProps = {};
-
 export default RegisterUserStep;

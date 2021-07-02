@@ -1,30 +1,18 @@
-// Utils & Config
-import PropTypes from "prop-types";
-import { useBuyFlow } from "../../../stores/buyFlow";
-
-// External components
+import React, { memo } from "react";
+import { useBuyFlow } from "@stores";
 import { Container } from "@material-ui/core";
+import { ShipmentForm, PaymentForm, IconsWithText } from "@molecules";
 
-// Internal components
-import ShipmentForm from '../../molecules/shipmentForm/shipmentForm';
-import PaymentForm from '../../molecules/paymentForm/paymentForm';
-import IconsWithText from '../../molecules/iconsWithText/iconsWithText';
-
-export const CheckoutStep = () => {
+export const CheckoutStep = memo(() => {
     const gotToNextView = useBuyFlow(({ forward }) => forward);
-
     return (
         <Container maxWidth="lg">
-             <button onClick={() => gotToNextView()}>Elegir recetas</button>
+            <button onClick={() => gotToNextView()}>Elegir recetas</button>
             <ShipmentForm registeredUser />
             <PaymentForm savedCards />
             <IconsWithText />
         </Container>
     );
-};
-
-CheckoutStep.propTypes = {};
-
-CheckoutStep.defaultProps = {};
+});
 
 export default CheckoutStep;

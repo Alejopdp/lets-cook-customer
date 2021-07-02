@@ -1,43 +1,38 @@
+import React from "react";
 import clsx from "clsx";
 import { Grid, Typography } from "@material-ui/core";
 
-import PlanWithIcon from "../../../atoms/planWithIcon/planWithIcon";
-import CustomButton from "../../../atoms/customButton/customButton";
-import SimpleAccordion from "../../../atoms/accordion/accordion";
-import PlanSize from "../../../molecules/planSize/planSize";
+import { PlanWithIcon, CustomButton, SimpleAccordion } from "@atoms";
+import { PlanSize, } from "@molecules";
 import RecipesCalculation from "../../../molecules/recipesCalculation/recipesCalculation";
 import RecipesSection from "../../sections/RecipesSection";
 import ReviewsSection from "../../sections/ReviewsSection";
 
-import { Plan, FAQS } from "../../../../helpers/serverRequests";
-import { PlanUrlParams } from "../../../../pages/planes/[slug]";
-
-import { useBuyFlow } from "../../../../stores/buyFlow";
-import { useStyles } from "./styles";
+import { Plan, FAQS } from "@helpers";
+import { useBuyFlow } from "@stores";
 import { faqsSection } from "@lang";
 import { useRouter } from "next/router";
+import { useStyles } from "./styles";
+import { SelectPlanProps, ARGS } from "./interfaces";
+import { memo } from "react";
 
-interface SelectPlanProps {
-    plans: Plan[];
-    faqs: FAQS[];
-    initialPlanSettins: PlanUrlParams;
-}
+export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
-export const SelectPlanStep = (props: SelectPlanProps) => {
     const { push: navigateTo } = useRouter();
     const classes = useStyles();
-
     const buyFlow = useBuyFlow();
 
-    const handleOnSelectPeopleQty = (qty: { name: string; value: string }) => {
+    const handleOnSelectPeopleQty = (qty: ARGS) => {
         buyFlow.setPeopleQty(qty.value);
         navigateTo({
             pathname: "/planes/[slug]",
             query: {
                 slug: props.initialPlanSettins.slug,
                 personas: qty.value,
-                recetas: props.initialPlanSettins.recipeQty,
+                recetas: buyFlow.form.recipesQty || props.initialPlanSettins.recipeQty,
             },
+        }, undefined, {
+            shallow: true
         });
     };
 
@@ -47,9 +42,11 @@ export const SelectPlanStep = (props: SelectPlanProps) => {
             pathname: "/planes/[slug]",
             query: {
                 slug: props.initialPlanSettins.slug,
-                personas: props.initialPlanSettins.personQty,
+                personas: buyFlow.form.peopleQty || props.initialPlanSettins.personQty,
                 recetas: qty.value,
             },
+        }, undefined, {
+            shallow: true
         });
     };
 
@@ -59,9 +56,11 @@ export const SelectPlanStep = (props: SelectPlanProps) => {
             pathname: "/planes/[slug]",
             query: {
                 slug: plan.slug,
-                personas: props.initialPlanSettins.personQty,
-                recetas: props.initialPlanSettins.recipeQty
-            },
+                personas: buyFlow.form.peopleQty || props.initialPlanSettins.personQty,
+                recetas: buyFlow.form.recipesQty || props.initialPlanSettins.recipeQty
+            }
+        }, undefined, {
+            shallow: true
         });
     };
 
@@ -170,6 +169,6 @@ export const SelectPlanStep = (props: SelectPlanProps) => {
             </Grid>
         </Grid>
     );
-};
+});
 
 export default SelectPlanStep;

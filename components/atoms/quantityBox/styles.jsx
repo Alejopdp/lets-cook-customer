@@ -1,8 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
-        display: "flex"
+        display: "flex",
     },
     box: {
         backgroundColor: theme.palette.background.paper,
@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        cursor: "pointer"
     },
     checkedBox: {
         border: `1px solid ${theme.palette.primary.main}`,

@@ -1,16 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
-        borderRadius: '8px',
+        borderRadius: "8px",
         height: 250,
         background: "rgb(0,0,0)",
-        background:
-            "linear-gradient(0deg, rgba(0,0,0,0.9444152661064426) 0%, rgba(0,0,0,0) 100%)",
+        background: "linear-gradient(0deg, rgba(0,0,0,0.9444152661064426) 0%, rgba(0,0,0,0) 100%)",
         zIndex: "99",
     },
     gradient: {
-        borderRadius: '8px',
+        borderRadius: "8px",
         height: 250,
         backgroundSize: "cover",
     },
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.primary.main,
         textTransform: "uppercase",
         textAlign: "center",
-        fontWeight: '600',
+        fontWeight: "600",
         padding: `${theme.spacing(0.5)}px ${theme.spacing(1.5)}px`,
         borderRadius: "60px",
         marginRight: theme.spacing(1),
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: '#262626',
+        backgroundColor: "#262626",
         color: theme.palette.primary.contrastText,
         textAlign: "center",
         padding: `${theme.spacing(0.5)}px ${theme.spacing(1)}px`,
@@ -43,8 +42,9 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.contrastText,
     },
     titleText: {
-        marginTop: theme.spacing(1)
-    }
+        marginTop: theme.spacing(1),
+    },
+    gradient: {},
 }));
 
 export default useStyles;

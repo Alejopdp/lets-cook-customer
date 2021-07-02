@@ -1,25 +1,14 @@
 // Utils & Config
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+import { useStyles } from "./styles";
 import { useRouter } from "next/router";
-const langs = require("../../../lang").LegalTextSection;
+import { LegalTextSection as langs } from '@lang';
 
 // External components
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-    padd6: {
-        paddingBottom: theme.spacing(6),
-    },
-    align: {
-        maxWidth: "80vw",
-        margin: "0 auto",
-    },
-}));
-
-const LegalTextSection = () => {
+export const LegalTextSection = () => {
     const classes = useStyles();
     const router = useRouter();
     const lang = langs[router.locale];

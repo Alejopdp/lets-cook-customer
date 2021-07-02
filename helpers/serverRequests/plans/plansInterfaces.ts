@@ -17,9 +17,9 @@ export interface PlanVariant {
 }
 
 export interface Plan {
-    id: string;
+    id?: string;
     name: string;
-    sku: string;
+    sku?: string;
     description?: string;
     availablePlanFrecuencies?: AvailablePlanFrecuencies[];
     isActive?: boolean;
@@ -34,6 +34,6 @@ export interface Plan {
     numberOfRecipes?: number;
     abilityToChooseRecipes?: boolean;
     slug: string;
-    icon: string;
-    iconWithColor: string;
+    icon?: string;
+    iconWithColor?: string;
 }

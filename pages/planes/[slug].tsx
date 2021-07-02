@@ -1,12 +1,11 @@
 // Utils & Config
-import { useEffect } from "react";
-import { getPlans, getRecipes, Plan, Recipe, FAQS } from "@helpers";
+import React, { memo } from "react";
+import { getPlans, getRecipes, Plan, Recipe, FAQS, getFAQS } from "@helpers";
 import { useBuyFlow } from "@stores";
 
 // Internal components
-import BuyFlowLayout from "../../components/layout/buyFlow";
+import { BuyFlowLayout } from "@layouts";
 import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "@organisms";
-import { getFAQS } from "@helpers";
 
 export interface PlansErrors {
     plans?: string;
@@ -29,14 +28,14 @@ export interface PlanesPageProps {
     errors?: PlansErrors;
 }
 
-export const PlanesPage = (props: PlanesPageProps) => {
+const PlanesPage = (props: PlanesPageProps) => {
     const step = useBuyFlow(({ step }) => step);
     return (
         <BuyFlowLayout>
             {step === 0 && <SelectPlanStep initialPlanSettins={props.planUrlParams} plans={props.plans} faqs={props.faqs} />}
             {step === 1 && <RegisterUserStep />}
             {step === 2 && <CheckoutStep />}
-            {step === 3 && <RecipeChoiseStep recipes={props.recipes} />}
+            {step === 3 && <RecipeChoiseStep recipes={props.recipes}  />}
         </BuyFlowLayout>
     );
 };
@@ -91,4 +90,4 @@ export async function getServerSideProps({ locale, query, params }) {
     };
 }
 
-export default PlanesPage;
+export default memo(PlanesPage);
