@@ -20,6 +20,7 @@ export interface PlanUrlParams {
     personQty: string;
     recipeQty: string;
     slug: string;
+    id?:any;
 };
 
 export interface PlanesPageProps {
@@ -96,6 +97,7 @@ export async function getServerSideProps({ locale, query, params }) {
 
     let redirect = undefined;
     let slug = query.slug || '';
+    let id = query.id || '';
     const personQty = query.personas || '2';
     const recipeQty = query.recetas || '3';
 
@@ -115,6 +117,7 @@ export async function getServerSideProps({ locale, query, params }) {
 
     if (!isSlugvalid && Array.isArray(_plans.data)) {
         slug = _plans.data[0]?.slug; // TODO: What happen when is undefined??
+        id = _plans.data[0]?.id; // TODO: What happen when is undefined??
         redirect = {
             destination: `/planes/${slug}?personas=${personQty}&recetas=${recipeQty}`,
             permanent: true,
@@ -126,7 +129,8 @@ export async function getServerSideProps({ locale, query, params }) {
     const planUrlParams: PlanUrlParams = {
         personQty,
         recipeQty,
-        slug
+        slug,
+        id
     }
 
     return {

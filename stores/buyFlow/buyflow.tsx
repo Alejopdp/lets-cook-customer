@@ -18,6 +18,7 @@ export interface BuyFlowStore {
     showRegister: boolean;
     form: {
         planCode: string;
+        planSlug?: string;
         peopleQty: string;
         recipesQty: string;
         deliveryForm: DeliveryForm;
@@ -42,6 +43,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
     showRegister: true,
     form: {
         planCode: "",
+        planSlug: "",
         peopleQty: "2",
         recipesQty: "3",
         deliveryForm: {
@@ -74,9 +76,10 @@ const store = devtools<Store>((set, get) => ({
         set({ step: _step + 1 });
     },
 
-    setPlanCode: (code: string) => {
+    setPlanCode: (code: string, slug: string = '') => {
         const form = get().form;
         form.planCode = code;
+        form.planSlug = slug;
         set({ form });
     },
     setRecipesQty: (qty: string) => {

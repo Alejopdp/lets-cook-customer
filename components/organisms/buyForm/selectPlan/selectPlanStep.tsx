@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, useEffect } from "react";
 import clsx from "clsx";
 import { Grid, Typography } from "@material-ui/core";
 
@@ -14,7 +14,8 @@ import { faqsSection } from "@lang";
 import { useRouter } from "next/router";
 import { useStyles } from "./styles";
 import { SelectPlanProps, ARGS } from "./interfaces";
-import { memo } from "react";
+import { PlansList } from "./planesList";
+import Slug from "pages/planes/[slug]";
 
 export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
@@ -22,12 +23,16 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const classes = useStyles();
     const buyFlow = useBuyFlow();
 
+    useEffect(() =>{
+        buyFlow.setPlanCode( props.initialPlanSettins.id, props.initialPlanSettins.slug);
+    },[])
+
     const handleOnSelectPeopleQty = (qty: ARGS) => {
         buyFlow.setPeopleQty(qty.value);
         navigateTo({
             pathname: "/planes/[slug]",
             query: {
-                slug: props.initialPlanSettins.slug,
+                slug: buyFlow.form.planSlug,
                 personas: qty.value,
                 recetas: buyFlow.form.recipesQty || props.initialPlanSettins.recipeQty,
             },
@@ -41,7 +46,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         navigateTo({
             pathname: "/planes/[slug]",
             query: {
-                slug: props.initialPlanSettins.slug,
+                slug: buyFlow.form.planSlug,
                 personas: buyFlow.form.peopleQty || props.initialPlanSettins.personQty,
                 recetas: qty.value,
             },
@@ -51,7 +56,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     };
 
     const handleOnSelectPlan = (plan: Plan) => {
-        buyFlow.setPlanCode(plan.id);
+        buyFlow.setPlanCode(plan.id, plan.slug);
         navigateTo({
             pathname: "/planes/[slug]",
             query: {
@@ -72,26 +77,25 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
             <Grid item xs={12}>
                 <div className={clsx(classes.root, classes.smUpHide)}>
-                    {props.plans.map((plan, index) => (
-                        <PlanWithIcon
+                    {props.plans.map((plan, index) => {
+                        return <PlanWithIcon
                             key={index}
                             plan={plan}
-                            isSelected={props.initialPlanSettins.slug === plan.slug}
+                            isSelected={buyFlow.form.planSlug === plan.slug}
                             onClick={handleOnSelectPlan}
                         />
-                    ))}
+
+                    }
+                    )}
                 </div>
             </Grid>
 
             <Grid className={clsx(classes.smDownHide)} item container direction="row" justify="center">
-                {props.plans.map((plan, index) => (
-                    <PlanWithIcon
-                        key={index}
-                        plan={plan}
-                        isSelected={props.initialPlanSettins.slug === plan.slug}
-                        onClick={handleOnSelectPlan}
-                    />
-                ))}
+                <PlansList 
+                    plans={props.plans}
+                    slug={buyFlow.form.planSlug}
+                    handleOnSelectPlan={handleOnSelectPlan}
+                />
             </Grid>
 
             <Grid item xs={10}>
