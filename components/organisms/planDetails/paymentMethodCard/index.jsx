@@ -22,8 +22,8 @@ const PaymentMethodCard = props => {
 
     return (
         <BoxWithTitle title='Método de pago'>
-            <DataDisplay title='Tarjeta' text={props.paymentMethod.cardInfo} style={{ marginBottom: theme.spacing(2) }} />
-            <DataDisplay title='Vencimiento' text={props.paymentMethod.cardExpiration} />
+            <DataDisplay title='Tarjeta' text={props.paymentMethod.cardLabel} style={{ marginBottom: theme.spacing(2) }} />
+            <DataDisplay title='Vencimiento' text={props.paymentMethod.expirationDateLabel} />
         </BoxWithTitle>
     );
 };

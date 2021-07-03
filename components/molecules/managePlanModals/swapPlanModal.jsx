@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ChangePlanModal = (props) => {
+const SwapPlanModal = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -26,34 +26,69 @@ const ChangePlanModal = (props) => {
         planVariantId: '',
     });
 
+
     useEffect(() => {
         let activePlanId = props.data.plans.filter(plan => plan.active === true)[0].planId
         let activePlanVariantId = props.data.variants.filter(variant => variant.active === true)[0].planVariantId
         setPlanSelected({
             ...planSelected,
+            subscriptionId: '123',
             planId: activePlanId,
             planVariantId: activePlanVariantId
         })
     }, [props.open]);
 
-    const handleChangePlan = (event) => {
-        console.log('event', event.target.value)
-        const name = event.target.name;
+
+    useEffect(() => {
+        let newPlanVariantId; 
+        if (planSelected.planId == '') {
+            newPlanVariantId = ''
+        } else {
+            newPlanVariantId = props.data.variants.filter(variant => variant.planId === planSelected.planId)[0].planVariantId
+        }
         setPlanSelected({
             ...planSelected,
-            [name]: event.target.value,
+            planVariantId: newPlanVariantId
+        })
+    }, [planSelected.planId]);
+    
+
+    const handleDisableButton = () => {
+        let currentPlanVariantId = props.data.variants.filter(variant => variant.active === true)[0].planVariantId
+        if (planSelected.planVariantId === currentPlanVariantId) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    const handleChangePlan = (event) => {
+        setPlanSelected({
+            ...planSelected,
+            planId: event.target.value,
         });
     };
 
+    const handleChangeVariant = (event) => {
+        setPlanSelected({
+            ...planSelected,
+            planVariantId: event.target.value,
+        });
+    };
+
+    const submitNewPlan = () => {
+        props.handlePrimaryButtonClick(planSelected);
+    }
 
     return (
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            handlePrimaryButtonClick={props.handlePrimaryButtonClick}
+            handlePrimaryButtonClick={submitNewPlan}
             title='Cambiar plan'
             primaryButtonText='cambiar plan'
             secondaryButtonText='cancelar'
+            disabled={handleDisableButton()}
         >
             <Typography variant='subtitle2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(2) }}>
                 1. Elige tu plan
@@ -65,10 +100,10 @@ const ChangePlanModal = (props) => {
                     value={planSelected.planId}
                     onChange={handleChangePlan}
                     label="Plan"
-                    inputProps={{ name: 'planId', id: 'outlined-age-native-simple' }}
+                    inputProps={{ name: 'planId', id: 'planDropdown' }}
                 >
-                    {props.data.plans.map((plan, index) => (
-                        <option key={index} value={plan.planId}>{plan.name}</option>
+                    {props.data.plans.map(plan => (
+                        <option key={plan.planId} value={plan.planId}>{plan.name}</option>
                     ))}
                 </Select>
             </FormControl>
@@ -80,12 +115,12 @@ const ChangePlanModal = (props) => {
                 <Select
                     native
                     value={planSelected.planVariantId}
-                    onChange={handleChangePlan}
+                    onChange={handleChangeVariant}
                     label="Variante"
-                    inputProps={{ name: 'planVariantId', id: 'outlined-age-native-simple' }}
+                    inputProps={{ name: 'planVariantId', id: 'variantDropdown' }}
                 >
-                    {props.data.variants.filter(variant => variant.planId === planSelected.planId).map((variant, index) => (
-                        <option key={index} value={variant.planVariantId}>{variant.variantDescription}</option>
+                    {props.data.variants.filter(variant => variant.planId === planSelected.planId).map(variant => (
+                        <option key={variant.planVariantId} value={variant.planVariantId}>{variant.variantDescription}</option>
                     ))}
                 </Select>
             </FormControl>
@@ -93,4 +128,4 @@ const ChangePlanModal = (props) => {
     );
 }
 
-export default ChangePlanModal;
+export default SwapPlanModal;
