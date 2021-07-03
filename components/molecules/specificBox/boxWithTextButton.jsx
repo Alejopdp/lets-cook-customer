@@ -29,7 +29,7 @@ const BoxWithTextButton = (props) => {
                 btnText={props.btnText}
                 style={{
                     marginTop: theme.spacing(3),
-                    color: props.status === "expired" || props.status === "cancelled" ? theme.palette.primary.main : null,
+                    color: props.status === "SUBSCRIPTION_EXPIRED" || props.status === "SUBSCRIPTION_CANCELLED" ? theme.palette.primary.main : null,
                 }}
             />
         </GeneralBox>
