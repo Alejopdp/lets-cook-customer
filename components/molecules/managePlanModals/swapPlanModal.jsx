@@ -46,7 +46,6 @@ const SwapPlanModal = (props) => {
         } else {
             newPlanVariantId = props.data.variants.filter(variant => variant.planId === planSelected.planId)[0].planVariantId
         }
-        console.log(newPlanVariantId);
         setPlanSelected({
             ...planSelected,
             planVariantId: newPlanVariantId
