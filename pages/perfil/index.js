@@ -21,6 +21,8 @@ import Options from "../../components/atoms/options/Options";
 import TextButton from "../../components/atoms/textButton/textButton";
 import PlanRecoverModal from "../../components/molecules/planRecoverModal/planRecoverModal";
 
+import mockJson from "../../public/assets/mockJsonRes";
+
 const Perfil = () => {
     const theme = useTheme();
     const router = useRouter();
@@ -31,22 +33,146 @@ const Perfil = () => {
 
     const handleClickOpenPlanRecoverModal = async () => {
         setOpenPlanRecoverModal(true);
-        const res = fetch(endpoint).then(async response => {
+        /*  const res = fetch(endpoint).then(async (response) => {
             try {
-             const data = await response.json()
-             console.log('response data?', data)
-           } catch(error) {
-             console.log('Error happened here!')
-             console.error(error)
-           }
-          })
-        console.log(res);
+                const data = await response.json();
+                console.log("response data?", data);
+            } catch (error) {
+                console.log("Error happened here!");
+                console.error(error);
+            }
+        });
+        console.log(res); */
     };
 
     const handleClosePlanRecoverModal = () => {
         setOpenPlanRecoverModal(false);
     };
 
+    console.log(mockJson.principalPlanSubscriptions);
+
+    const pendingActions = mockJson.pendingActions.map((el) => {
+        let message;
+        let btnText;
+        let icon;
+        switch (el.type) {
+            case "choose_recipes":
+                message = `Tienes pendiente elegir las recetas del ${el.planName} para la entrega del ${el.shippment}`;
+                btnText = "Elegir recetas";
+                icon = "test";
+                break;
+            case "rate_recipes":
+                message = "Tienes recetas pendientes de valorar. ¡Tu opinión nos ayuda a mejorar!";
+                btnText = "Valorar recetas";
+                icon = "rating";
+                break;
+            case "invite_code":
+                message = "Invitá a tus amigos a Let’s Cook con el código de descuento de 5€";
+                btnText = el.couponCode;
+                icon = "network";
+                break;
+            default:
+                return null;
+        }
+
+        return (
+            <Grid item sm={4} xs={12}>
+                <BoxWithIconAndTextButton icon={icon} btnText={btnText} noColor={el.type === "invite_code"}>
+                    <Typography variant="body2" style={{ fontSize: "16px" }}>
+                        {message}
+                    </Typography>
+                </BoxWithIconAndTextButton>
+            </Grid>
+        );
+    });
+
+    const renderPlans = (type) =>
+        mockJson[type].map((el) => {
+            let statusValue;
+            let statusText;
+            let btnText;
+
+            switch (el.stateTitle) {
+                case "SUBSCRIPTION_ACTIVE":
+                    statusValue = "active";
+                    statusText = "activo";
+                    btnText = "Ver detalle >";
+                    break;
+                case "SUBSCRIPTION_CANCELLED":
+                    statusValue = "cancelled";
+                    statusText = "cancelado";
+                    btnText = "Volver a pedir >";
+                    break;
+                case "SUBSCRIPTION_EXPIRED":
+                    statusValue = "expired";
+                    statusText = "expirado";
+                    btnText = "Volver a pedir >";
+                    break;
+                default:
+                    return null;
+            }
+
+            return (
+                <Grid item sm={4} xs={12}>
+                    <BoxWithTextButton
+                        status={statusValue}
+                        btnText={btnText}
+                        handleClick={() => {
+                            if (statusValue !== "active") {
+                                handleClickOpenPlanRecoverModal();
+                            }
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: "flex",
+                                flex: 1,
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                            }}
+                        >
+                            <PlanInfoWithStatus
+                                style={{ marginBottom: theme.spacing(1) }}
+                                planName={el.planName}
+                                planIcon="/assets/plan-test-color.svg"
+                                status={{ value: statusValue, text: statusText }}
+                            />
+                            <Options />
+                        </div>
+                        <div style={{ marginBottom: "24px", marginTop: "16px" }}>
+                            <Typography variant="body2" style={{ fontSize: "16px" }}>
+                                {el.planVariantLabel}
+                            </Typography>
+                        </div>
+                        {el.stateTitle === "SUBSCRIPTION_ACTIVE" ? (
+                            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
+                                <Network width={15} heigth={15} />
+                                <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
+                                    Próxima entrega: {el.nextShippment}
+                                </Typography>
+                            </div>
+                        ) : null}
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
+                            <Network width={15} heigth={15} />
+                            <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
+                                Frecuencia {el.frequency}
+                            </Typography>
+                        </div>
+                    </BoxWithTextButton>
+                </Grid>
+            );
+        });
+
+    const principalPlans = renderPlans("principalPlanSubscriptions");
+    const additionalPlans = renderPlans("additionalPlanSubscriptions");
+
+    /* const additionalPlans = mockJson.additionalPlanSubscriptions.map((el) => {
+        return (
+
+        )
+    })
+ */
     /* const descriptionElementRefRecipeModal = useRef(null);
 
     useEffect(() => {
@@ -83,27 +209,7 @@ const Perfil = () => {
                         </Grid>
                     </Grid>
                     <Grid container spacing={3} style={{ marginBottom: theme.spacing(5) }}>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithIconAndTextButton icon="test" btnText="Elegir recetas">
-                                <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                    Tienes pendiente elegir las recetas del Plan Familiar para la entrega del 12 junio
-                                </Typography>
-                            </BoxWithIconAndTextButton>
-                        </Grid>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithIconAndTextButton icon="rating" btnText="Valorar recetas">
-                                <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                    Tienes recetas pendientes de valorar. ¡Tu opinión nos ayuda a mejorar!
-                                </Typography>
-                            </BoxWithIconAndTextButton>
-                        </Grid>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithIconAndTextButton noColor icon="network" btnText="ALEJOAMIGO5">
-                                <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                    Invitá a tus amigos a Let’s Cook con el código de descuento de 5€
-                                </Typography>
-                            </BoxWithIconAndTextButton>
-                        </Grid>
+                        {pendingActions}
                     </Grid>
                     <Grid container direction="row" alignItems="center" spacing={3} justify="space-between">
                         <Grid item>
@@ -116,132 +222,7 @@ const Perfil = () => {
                         </Grid>
                     </Grid>
                     <Grid container spacing={3} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(5) }}>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithTextButton btnText="Ver detalle >">
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flex: 1,
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <PlanInfoWithStatus
-                                        style={{ marginBottom: theme.spacing(1) }}
-                                        planName="Plan Familiar"
-                                        planIcon="/assets/plan-test-color.svg"
-                                        status={{ value: "active", text: "activo" }}
-                                    />
-                                    <Options />
-                                </div>
-                                <div style={{ marginBottom: "24px", marginTop: "16px" }}>
-                                    <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                        4 recetas para 3 personas
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Próxima entrega: 12 de Junio
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Frecuencia semanal
-                                    </Typography>
-                                </div>
-                            </BoxWithTextButton>
-                        </Grid>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithTextButton
-                                handleClick={() => handleClickOpenPlanRecoverModal()}
-                                status="cancelled"
-                                btnText={false ? "Ver detalle >" : "Volver a pedir >"}
-                            >
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flex: 1,
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <PlanInfoWithStatus
-                                        style={{ marginBottom: theme.spacing(1) }}
-                                        planName="Plan Gourmet"
-                                        planIcon="/assets/plan-test-color.svg"
-                                        status={{ value: "cancelled", text: "cancelado" }}
-                                    />
-                                    <Options />
-                                </div>
-                                <div style={{ marginBottom: "24px", marginTop: "16px" }}>
-                                    <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                        4 recetas para 3 personas
-                                    </Typography>
-                                </div>
-                                {false ? (
-                                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                        <Network width={15} heigth={15} />
-                                        <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                            Próxima entrega: 12 de Junio
-                                        </Typography>
-                                    </div>
-                                ) : null}
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Frecuencia semanal
-                                    </Typography>
-                                </div>
-                            </BoxWithTextButton>
-                        </Grid>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithTextButton
-                                handleClick={() => handleClickOpenPlanRecoverModal()}
-                                status="expired"
-                                btnText={false ? "Ver detalle >" : "Volver a pedir >"}
-                            >
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flex: 1,
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <PlanInfoWithStatus
-                                        style={{ marginBottom: theme.spacing(1) }}
-                                        planName="Plan Vegano"
-                                        planIcon="/assets/plan-test-color.svg"
-                                        status={{ value: "expired", text: "expirado" }}
-                                    />
-                                    <Options />
-                                </div>
-                                <div style={{ marginBottom: "24px", marginTop: "16px" }}>
-                                    <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                        4 recetas para 3 personas
-                                    </Typography>
-                                </div>
-                                {false ? (
-                                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                        <Network width={15} heigth={15} />
-                                        <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                            Próxima entrega: 12 de Junio
-                                        </Typography>
-                                    </div>
-                                ) : null}
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Frecuencia semanal
-                                    </Typography>
-                                </div>
-                            </BoxWithTextButton>
-                        </Grid>
+                        {principalPlans}
                     </Grid>
                     <Grid container direction="row" alignItems="center" spacing={3} justify="space-between">
                         <Grid item>
@@ -258,158 +239,7 @@ const Perfil = () => {
                         </Grid>
                     </Grid>
                     <Grid container spacing={3} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(5) }}>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithTextButton btnText="Ver detalle >">
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flex: 1,
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <PlanInfoWithStatus
-                                        style={{ marginBottom: theme.spacing(1) }}
-                                        planName="Plan Frutas"
-                                        planIcon="/assets/plan-test-color.svg"
-                                        status={{ value: "active", text: "activo" }}
-                                    />
-                                    <Options />
-                                </div>
-                                <div style={{ marginBottom: "24px", marginTop: "16px" }}>
-                                    <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                        4 recetas para 3 personas
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Próxima entrega: 12 de Junio
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Frecuencia semanal
-                                    </Typography>
-                                </div>
-                            </BoxWithTextButton>
-                        </Grid>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithTextButton btnText="Ver detalle >">
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flex: 1,
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <PlanInfoWithStatus
-                                        style={{ marginBottom: theme.spacing(1) }}
-                                        planName="Plan Vinos"
-                                        planIcon="/assets/plan-test-color.svg"
-                                        status={{ value: "active", text: "activo" }}
-                                    />
-                                    <Options />
-                                </div>
-                                <div style={{ marginBottom: "24px", marginTop: "16px" }}>
-                                    <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                        4 recetas para 3 personas
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Próxima entrega: 12 de Junio
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Frecuencia semanal
-                                    </Typography>
-                                </div>
-                            </BoxWithTextButton>
-                        </Grid>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithTextButton btnText="Ver detalle >">
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flex: 1,
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <PlanInfoWithStatus
-                                        style={{ marginBottom: theme.spacing(1) }}
-                                        planName="Plan Desayuno"
-                                        planIcon="/assets/plan-test-color.svg"
-                                        status={{ value: "active", text: "activo" }}
-                                    />
-                                    <Options />
-                                </div>
-                                <div style={{ marginBottom: "24px", marginTop: "16px" }}>
-                                    <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                        4 recetas para 3 personas
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Próxima entrega: 12 de Junio
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Frecuencia semanal
-                                    </Typography>
-                                </div>
-                            </BoxWithTextButton>
-                        </Grid>
-                        <Grid item sm={4} xs={12}>
-                            <BoxWithTextButton btnText="Ver detalle >">
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flex: 1,
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <PlanInfoWithStatus
-                                        style={{ marginBottom: theme.spacing(1) }}
-                                        planName="Plan Desayuno"
-                                        planIcon="/assets/plan-test-color.svg"
-                                        status={{ value: "active", text: "activo" }}
-                                    />
-                                    <Options />
-                                </div>
-                                <div style={{ marginBottom: "24px", marginTop: "16px" }}>
-                                    <Typography variant="body2" style={{ fontSize: "16px" }}>
-                                        4 recetas para 3 personas
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Próxima entrega: 12 de Junio
-                                    </Typography>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: "16px" }}>
-                                    <Network width={15} heigth={15} />
-                                    <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                                        Frecuencia semanal
-                                    </Typography>
-                                </div>
-                            </BoxWithTextButton>
-                        </Grid>
+                        {additionalPlans}
                     </Grid>
                 </InnerSectionLayout>
             </Layout>
