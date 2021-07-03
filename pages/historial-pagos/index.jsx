@@ -18,17 +18,19 @@ import PaymentDetailsModal from "../../components/molecules/paymentDetailsModal/
 const HistorialPagos = (props) => {
     const theme = useTheme();
     const [openPaymentDetailsModal, setOpenPaymentDetailsModal] = useState(false);
+    const [selectedPayment, setSelectedPayment] = useState(null);
 
-    const handleClickOpenPaymentDetailsModal = () => {
+    const handleClickOpenPaymentDetailsModal = (data) => {
+        console.log("waaaaa");
+        console.log(data);
+        setSelectedPayment(data);
         setOpenPaymentDetailsModal(true);
     };
 
     const handleClosePaymentDetailsModal = () => {
         setOpenPaymentDetailsModal(false);
+        setSelectedPayment(null);
     };
-
-    console.log(theme.palette.text.black);
-    console.log(theme.palette.text.primary);
 
     return (
         <>
@@ -47,7 +49,7 @@ const HistorialPagos = (props) => {
                     <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} />
                 </InnerSectionLayout>
             </Layout>
-            <PaymentDetailsModal open={openPaymentDetailsModal} handleClose={handleClosePaymentDetailsModal} />
+            <PaymentDetailsModal data={selectedPayment} open={openPaymentDetailsModal} handleClose={handleClosePaymentDetailsModal} />
         </>
     );
 };

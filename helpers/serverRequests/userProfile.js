@@ -41,8 +41,8 @@ export const swapPlan = async (subscriptionId, newPlanId, newPlanVariantId) => {
             url: `${process.env.NEXT_PUBLIC_API_URL}/subscription/swap-plan/${subscriptionId}`,
             data: {
                 newPlanId: newPlanId,
-                newPlanVariantId: newPlanVariantId
-            }
+                newPlanVariantId: newPlanVariantId,
+            },
         });
         return res;
     } catch (error) {

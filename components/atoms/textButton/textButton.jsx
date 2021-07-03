@@ -54,10 +54,11 @@ const TextButton = (props) => {
     }
 
     if (onlyIcon && props.icon) {
+        console.log("jey");
         content = (
             <IconButton size="small">
                 {props.icon === "plus-circle-outline" ? (
-                    <AddCircleOutlineIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+                    <AddCircleOutlineIcon style={!onlyIcon ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
                 ) : props.icon === "settings" ? (
                     <SettingsIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
                 ) : props.icon === "time" ? (

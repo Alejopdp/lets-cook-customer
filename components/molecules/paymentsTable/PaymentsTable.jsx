@@ -50,20 +50,20 @@ function createData(fecha, orden, plan, variante, monto, estado, ver) {
 
 const rows = [
     createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
+    createData("08/08/2021", "42271", "Plan Familiar", "4 recetas para 3 personas", "24€", "ACEPTADO", "Ver"),
+    createData("15/08/2021", "42272", "Plan Familiar", "4 recetas para 3 personas", "21€", "ACEPTADO", "Ver"),
+    createData("22/08/2021", "42273", "Plan Familiar", "4 recetas para 3 personas", "22€", "ACEPTADO", "Ver"),
+    createData("29/08/2021", "42274", "Plan Familiar", "4 recetas para 3 personas", "32€", "ACEPTADO", "Ver"),
+    createData("04/09/2021", "42275", "Plan Familiar", "4 recetas para 3 personas", "28€", "ACEPTADO", "Ver"),
+    createData("11/09/2021", "42276", "Plan Familiar", "4 recetas para 3 personas", "27€", "ACEPTADO", "Ver"),
+    createData("18/09/2021", "42277", "Plan Familiar", "4 recetas para 3 personas", "35€", "ACEPTADO", "Ver"),
+    createData("25/09/2021", "42278", "Plan Familiar", "4 recetas para 3 personas", "31€", "ACEPTADO", "Ver"),
+    createData("02/09/2021", "42279", "Plan Familiar", "4 recetas para 3 personas", "25€", "ACEPTADO", "Ver"),
+    createData("09/09/2021", "42280", "Plan Familiar", "4 recetas para 3 personas", "20€", "ACEPTADO", "Ver"),
+    createData("16/09/2021", "42281", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
+    createData("23/09/2021", "42282", "Plan Familiar", "4 recetas para 3 personas", "29€", "ACEPTADO", "Ver"),
+    createData("30/09/2021", "42283", "Plan Familiar", "4 recetas para 3 personas", "27€", "ACEPTADO", "Ver"),
+    createData("07/10/2021", "42284", "Plan Familiar", "4 recetas para 3 personas", "32€", "ACEPTADO", "Ver"),
 ];
 
 const useStyles = makeStyles({
@@ -111,7 +111,7 @@ export default function PaymentsTable(props) {
                                         let value = row[column.id];
                                         if (value === "Ver") {
                                             value = (
-                                                <IconButton size="small" aria-label="close" onClick={props.onClick}>
+                                                <IconButton size="small" aria-label="close" onClick={() => props.onClick(row)}>
                                                     <VisibilityIcon />
                                                 </IconButton>
                                             );

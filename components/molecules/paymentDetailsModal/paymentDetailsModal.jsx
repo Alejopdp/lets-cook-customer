@@ -74,6 +74,8 @@ const PaymentDetailsModal = withStyles(styles)((props) => {
     const theme = useTheme();
     const isMdUp = useMediaQuery("(min-width:960px)");
 
+    let price = props.data ? props.data.monto : "";
+
     return (
         <div>
             <Dialog
@@ -99,7 +101,7 @@ const PaymentDetailsModal = withStyles(styles)((props) => {
                                     Detalle del monto
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
-                                    Subtotal: 30 €
+                                    Subtotal: {price} €
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
                                     Costo de envío: 0 €
@@ -108,7 +110,7 @@ const PaymentDetailsModal = withStyles(styles)((props) => {
                                     Descuento: 0 €
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", fontWeight: 900, marginBottom: theme.spacing(1) }}>
-                                    Total: 30 €
+                                    Total: {price} €
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} sm={6}>

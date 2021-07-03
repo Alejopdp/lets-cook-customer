@@ -74,6 +74,11 @@ const PlanRecoverModal = withStyles(styles)((props) => {
     const theme = useTheme();
     const isMdUp = useMediaQuery("(min-width:960px)");
 
+    let freq = props.data ? props.data.frequency : "";
+    let icon = props.data ? "/assets/plan-test-color.svg" /* props.data.planIcon */ : "/assets/plan-test-color.svg";
+    let name = props.data ? props.data.planName : "";
+    let label = props.data ? props.data.planVariantLabel : "";
+
     return (
         <div>
             <Dialog
@@ -95,16 +100,12 @@ const PlanRecoverModal = withStyles(styles)((props) => {
                     <DialogContentText id="scroll-dialog-description" ref={props.descriptionElementRef} tabIndex={-1}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
-                                <PlanInfo
-                                    planName="Plan Verduras"
-                                    planIcon="/assets/plan-test-color.svg"
-                                    style={{ marginBottom: theme.spacing(3) }}
-                                />
+                                <PlanInfo planName={name} planIcon={icon} style={{ marginBottom: theme.spacing(3) }} />
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
-                                    Pack Mediano
+                                    {label}
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
-                                    Frecuencia: por única vez
+                                    Frecuencia: {freq}
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1), fontWeight: 900 }}>
                                     Valor total: 36 €
