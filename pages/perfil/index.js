@@ -51,16 +51,16 @@ const Perfil = ({ data, error }) => {
 
     const handleClickOpenPlanRecoverModal = async () => {
         setOpenPlanRecoverModal(true);
-        const res = fetch(endpoint).then(async response => {
+        /*  const res = fetch(endpoint).then(async (response) => {
             try {
-                const data = await response.json()
-                console.log('response data?', data)
+                const data = await response.json();
+                console.log("response data?", data);
             } catch (error) {
-                console.log('Error happened here!')
-                console.error(error)
+                console.log("Error happened here!");
+                console.error(error);
             }
-        })
-        console.log(res);
+        });
+        console.log(res); */
     };
 
     const handleClosePlanRecoverModal = () => {

@@ -27,13 +27,16 @@ const HistorialPagos = (props) => {
         setOpenPaymentDetailsModal(false);
     };
 
+    console.log(theme.palette.text.black);
+    console.log(theme.palette.text.primary);
+
     return (
         <>
             <Layout>
                 <InnerSectionLayout containerMaxWidth="lg">
                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: theme.spacing(3) }}>
                         <Link href="/perfil">
-                            <IconButton aria-label="close" style={{ marginRight: theme.spacing(1) }}>
+                            <IconButton aria-label="close" style={{ marginRight: theme.spacing(1), color: theme.palette.text.black }}>
                                 <ArrowBackIcon />
                             </IconButton>
                         </Link>

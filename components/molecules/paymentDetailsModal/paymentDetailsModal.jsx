@@ -2,6 +2,7 @@
 import React from "react";
 import { withStyles, useTheme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
+import Image from "next/image";
 
 // Internal Components
 import PlanInfo from "../planInfo/planInfo";
@@ -18,7 +19,6 @@ import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Image from "next/image";
 
 // Icons & Images
 import TimerIcon from "@material-ui/icons/Timer";
@@ -54,10 +54,13 @@ const styles = (theme) => ({
 });
 
 const DialogTitle = withStyles(styles)((props) => {
+    const theme = useTheme();
     const { children, classes, onClose, ...other } = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h5">{children}</Typography>
+            <Typography variant="h5" style={{ color: theme.palette.text.black }}>
+                {children}
+            </Typography>
             {onClose ? (
                 <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
                     <CloseIcon />
@@ -92,7 +95,7 @@ const PaymentDetailsModal = withStyles(styles)((props) => {
                     <DialogContentText id="scroll-dialog-description" ref={props.descriptionElementRef} tabIndex={-1}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
-                                <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
+                                <Typography variant="body2" style={{ fontSize: "20px", marginBottom: theme.spacing(2) }}>
                                     Detalle del monto
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
@@ -109,18 +112,48 @@ const PaymentDetailsModal = withStyles(styles)((props) => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
+                                <Typography variant="body2" style={{ fontSize: "20px", marginBottom: theme.spacing(2) }}>
                                     Recetas elegidas
                                 </Typography>
-                                <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
-                                    Recetas 1
-                                </Typography>
-                                <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
-                                    Receta 2
-                                </Typography>
-                                <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
-                                    Receta 3
-                                </Typography>
+                                <div
+                                    style={{ display: "flex", flexDirection: "row", marginBottom: theme.spacing(1), alignItems: "center" }}
+                                >
+                                    <Image
+                                        src={`https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80`}
+                                        width={74}
+                                        height={48}
+                                        alt="Salmón con quinoa"
+                                    />
+                                    <Typography variant="body2" style={{ fontSize: "16px", marginLeft: theme.spacing(2) }}>
+                                        Salmón con quinoa
+                                    </Typography>
+                                </div>
+                                <div
+                                    style={{ display: "flex", flexDirection: "row", marginBottom: theme.spacing(1), alignItems: "center" }}
+                                >
+                                    <Image
+                                        src={`https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80`}
+                                        width={74}
+                                        height={48}
+                                        alt="Garbanzos revueltos"
+                                    />
+                                    <Typography variant="body2" style={{ fontSize: "16px", marginLeft: theme.spacing(2) }}>
+                                        Garbazos revueltos
+                                    </Typography>
+                                </div>
+                                <div
+                                    style={{ display: "flex", flexDirection: "row", marginBottom: theme.spacing(1), alignItems: "center" }}
+                                >
+                                    <Image
+                                        src={`https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80`}
+                                        width={74}
+                                        height={48}
+                                        alt="Hamburguesa de pollo"
+                                    />
+                                    <Typography variant="body2" style={{ fontSize: "16px", marginLeft: theme.spacing(2) }}>
+                                        Hamburguesa de pollo
+                                    </Typography>
+                                </div>
                             </Grid>
                         </Grid>
                     </DialogContentText>

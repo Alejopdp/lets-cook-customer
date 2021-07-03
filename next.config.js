@@ -9,7 +9,7 @@ module.exports = {
         defaultLocale: "es",
     },
     images: {
-        domains: ["localhost", "cdn.shopify.com", "lets-cook-assets.s3.eu-west-3.amazonaws.com"],
+        domains: ["localhost", "cdn.shopify.com", "lets-cook-assets.s3.eu-west-3.amazonaws.com", "images.unsplash.com"],
     },
     // IT'S DEPRECATED
     // publicRuntimeConfig: {
