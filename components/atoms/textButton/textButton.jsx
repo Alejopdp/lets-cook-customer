@@ -55,7 +55,7 @@ const TextButton = (props) => {
 
     if (onlyIcon && props.icon) {
         content = (
-            <IconButton>
+            <IconButton size="small">
                 {props.icon === "plus-circle-outline" ? (
                     <AddCircleOutlineIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
                 ) : props.icon === "settings" ? (

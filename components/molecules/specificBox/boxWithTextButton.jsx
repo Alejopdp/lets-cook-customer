@@ -17,7 +17,7 @@ import TextButton from "../../atoms/textButton/textButton";
 
 const useStyles = makeStyles((theme) => ({}));
 
-const BoxWithTitleAndTextButton = (props) => {
+const BoxWithTextButton = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -36,8 +36,8 @@ const BoxWithTitleAndTextButton = (props) => {
     );
 };
 
-BoxWithTitleAndTextButton.propTypes = {
+BoxWithTextButton.propTypes = {
     btnText: PropTypes.string.isRequired,
 };
 
-export default BoxWithTitleAndTextButton;
+export default BoxWithTextButton;
