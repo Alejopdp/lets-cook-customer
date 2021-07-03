@@ -24,9 +24,6 @@ import ReferalActionBox from './pendingActionsComponents/referalActionBox'
 
 
 const Perfil = () => {
-
-    console.log(dataHarcoded)
-
     const theme = useTheme();
     const router = useRouter();
     const [openPlanRecoverModal, setOpenPlanRecoverModal] = useState(false);
@@ -102,11 +99,11 @@ const Perfil = () => {
                                         <TextButton noColor icon="settings" btnText="Configuración" />
                                     </Link>
                                 </Grid>
-                                    {dataHarcoded.pendingActions.map((action, index) => (
-                                        <Grid item xs={12}>
-                                            {getPendingActionComponent(action)}
-                                        </Grid>
-                                    ))}
+                                {dataHarcoded.pendingActions.map((action, index) => (
+                                    <Grid item xs={12}>
+                                        {getPendingActionComponent(action)}
+                                    </Grid>
+                                ))}
                             </Grid>
                         </Grid>
                         <Grid item xs={12} md={8}>
@@ -136,55 +133,6 @@ const Perfil = () => {
             </Layout>
             <PlanRecoverModal open={openPlanRecoverModal} handleClose={handleClosePlanRecoverModal} />
         </>
-        // <>
-        //     <Layout>
-        //         <InnerSectionLayout containerMaxWidth="lg">
-        //             <Grid container direction="row" alignItems="center" justify="space-between" spacing={2} style={{ marginBottom: theme.spacing(3), marginTop: theme.spacing(3) }} >
-        //                 <Grid item>
-        //                     <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-        //                         Hola Alejo
-        //                     </Typography>
-        //                 </Grid>
-        //                 <Grid item style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-        //                     <Link href="/historial-pagos">
-        //                         <TextButton style={{ marginRight: "14px" }} noColor icon="time" btnText="Historial de pagos" />
-        //                     </Link>
-        //                     <Link href="/configuracion">
-        //                         <TextButton noColor icon="settings" btnText="Configuración" />
-        //                     </Link>
-        //                 </Grid>
-        //             </Grid>
-        //             <Grid container spacing={2} style={{ marginBottom: theme.spacing(5) }}>
-        //                 {dataHarcoded.pendingActions.map((action, index) => (
-        //                     <Grid item sm={4} xs={12}>
-        //                         {getPendingActionComponent(action)}
-        //                     </Grid>
-        //                 ))}
-        //             </Grid>
-        //             <Grid container direction="row" alignItems="center" spacing={2} justify="space-between">
-        // <ProfileTitleWithButton title='Mis planes' btnText='Nuevo plan' />
-        //             </Grid>
-        // <Grid container spacing={2} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(5) }}>
-        //     {dataHarcoded.principalPlanSubscriptions.map((plan, index) => (
-        //         <Grid item sm={4} xs={12}>
-        //             <PlanProfileCard plan={plan} handleClickOpenPlanRecoverModal={handleClickOpenPlanRecoverModal} handleClickRedirectToPlanDetail={handleClickRedirectToPlanDetail} />
-        //         </Grid>
-        //     ))}
-        // </Grid>
-        // <Grid container direction="row" alignItems="center" spacing={2} justify="space-between">
-        //     <ProfileTitleWithButton title='Mis acompañamientos' btnText='Nuevo acompañamiento' />
-        // </Grid>
-        // <Grid container spacing={2} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(5) }}>
-        //     {dataHarcoded.additionalPlanSubscriptions.map((plan, index) => (
-        //         <Grid item sm={4} xs={12}>
-        //             <PlanProfileCard plan={plan} handleClickOpenPlanRecoverModal={handleClickOpenPlanRecoverModal} handleClickRedirectToPlanDetail={handleClickRedirectToPlanDetail} />
-        //         </Grid>
-        //     ))}
-        // </Grid>
-        //         </InnerSectionLayout>
-        //     </Layout>
-        //     <PlanRecoverModal open={openPlanRecoverModal} handleClose={handleClosePlanRecoverModal} />
-        // </>
     );
 };
 
