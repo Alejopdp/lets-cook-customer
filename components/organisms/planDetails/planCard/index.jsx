@@ -23,15 +23,17 @@ const PlanCard = props => {
 
     return (
         <BoxWithTextButton btnText='cambiar plan' handleClick={props.handleClick}>
-            <PlanInfoWithStatus style={{ marginBottom: theme.spacing(2) }} planName={props.plan.name} planIcon={props.plan.icon} status={{ value: props.plan.status.value, text: props.plan.status.text }} />
+            <PlanInfoWithStatus style={{ marginBottom: theme.spacing(2) }} planName={props.plan.planName} planIcon={props.plan.icon} status={{ value: props.plan.state.stateTitle, text: props.plan.state.state }} />
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(1) }}>
-                {props.plan.variantInfo}
+                {props.plan.planVariantDescription}
             </Typography>
-            <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(1) }}>
-                {props.plan.variantExtraInfo}
-            </Typography>
+            {props.plan.servingsLabel !== '' && (
+                <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(1) }}>
+                    {props.plan.servingsLabel}
+                </Typography>
+            )}
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', fontWeight: 600 }}>
-                {props.plan.priceText}
+                {props.plan.priceLabel}
             </Typography>
         </BoxWithTextButton>
 

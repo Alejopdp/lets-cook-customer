@@ -22,8 +22,8 @@ const ShippingAddressCard = props => {
 
     return (
         <BoxWithTitle title='Dirección de entrega'>
-            <DataDisplay title='Dirección' text={props.shippingAddress.address} style={{ marginBottom: theme.spacing(2) }} />
-            <DataDisplay title='Piso / Puerta / Aclaraciones' text={props.shippingAddress.floor} style={{ marginBottom: theme.spacing(2) }} />
+            <DataDisplay title='Dirección' text={props.shippingAddress.addressName} style={{ marginBottom: theme.spacing(2) }} />
+            <DataDisplay title='Piso / Puerta / Aclaraciones' text={props.shippingAddress.addressDetails} style={{ marginBottom: theme.spacing(2) }} />
             <DataDisplay title='Horario de preferencia' text={props.shippingAddress.preferredSchedule} />
         </BoxWithTitle>
     );

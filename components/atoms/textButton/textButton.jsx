@@ -2,34 +2,73 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 
 // import clsx from "clsx";
 
 // External components
 import Button from "@material-ui/core/Button";
-
-
+import IconButton from "@material-ui/core/IconButton";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import SettingsIcon from "@material-ui/icons/Settings";
+import RestoreIcon from "@material-ui/icons/Restore";
 
 const useStyles = makeStyles((theme) => ({
     textButton: {
-        padding: '0px',
-        fontSize: '14px',
-        '&:hover': {
+        padding: "0px",
+        fontSize: "14px",
+        "&:hover": {
             // backgroundColor: theme.palette.background.paper,
-            backgroundColor: 'transparent',
-
-        }
-    }
+            backgroundColor: "transparent",
+        },
+    },
+    container: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+    },
 }));
 
 const TextButton = (props) => {
+    const theme = useTheme();
     const classes = useStyles();
-
-    return (
+    let onlyIcon = false;
+    let content = (
         <Button size="small" className={classes.textButton} style={props.style} onClick={props.handleClick}>
+            {props.icon === "plus-circle-outline" ? (
+                <AddCircleOutlineIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+            ) : props.icon === "settings" ? (
+                <SettingsIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+            ) : props.icon === "time" ? (
+                <RestoreIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+            ) : null}
             {props.btnText}
         </Button>
     );
+
+    if (process.browser) {
+        if (window.innerWidth < 500) {
+            onlyIcon = true;
+        }
+    }
+
+    if (onlyIcon && props.icon) {
+        console.log("jey");
+        content = (
+            <IconButton size="small">
+                {props.icon === "plus-circle-outline" ? (
+                    <AddCircleOutlineIcon style={!onlyIcon ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
+                ) : props.icon === "settings" ? (
+                    <SettingsIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+                ) : props.icon === "time" ? (
+                    <RestoreIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+                ) : null}
+            </IconButton>
+        );
+    }
+
+    return content;
 };
 
 TextButton.propTypes = {
