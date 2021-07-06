@@ -33,19 +33,33 @@ const Recipes = ({ recipes }) => {
     // onClick
     const [chosenRecipe, setChosenRecipe] = useState({});
 
-    const handleClickOpenRecipeModal = () => {
+    const [starValue, setStarValue] = useState(0);
+
+    const [oldValue, setOldValue] = useState(0);
+
+    const handleClickOpenRecipeModal = (starValue) => {
+        if (chosenRecipe.rating) setOldValue(chosenRecipe.rating);
+
+        if (starValue) setStarValue(starValue);
         setOpenRecipeModal(true);
     };
 
     const handleCloseRecipeModal = () => {
-        setChosenRecipe({});
+        if (chosenRecipe.rating === undefined) setStarValue(0);
+        if (chosenRecipe.rating) setStarValue(oldValue);
+        setOpenRecipeModal(false);
+    };
+
+    const handleSecondaryButtonClick = () => {
+        if (chosenRecipe.rating === undefined) setStarValue(0);
+        if (chosenRecipe.rating) setStarValue(oldValue);
         setOpenRecipeModal(false);
     };
 
     useEffect(() => {
         setRecipesToRate(recipes.recipesToRate);
         setRecipesWithRating(recipes.recipesWithRating);
-    }, []);
+    }, [recipes]);
 
     return (
         <>
@@ -63,20 +77,24 @@ const Recipes = ({ recipes }) => {
             <Grid container spacing={2}>
                 {recipesToRate.map((recipeToRate) => {
                     return (
-                        <>
-                            <Grid item xs={12} md={3} onClick={() => setChosenRecipe(recipeToRate)}>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12}>
-                                        <FoodCard
-                                            selectedRecipe={recipeToRate}
-                                            isRated={false}
-                                            height="339px"
-                                            handleClickOpenRecipeModal={handleClickOpenRecipeModal}
-                                        />
-                                    </Grid>
+                        <Grid item xs={12} md={3} key={recipeToRate.id} onClick={() => setChosenRecipe(recipeToRate)}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <FoodCard
+                                        selectedRecipe={recipeToRate}
+                                        isRated={false}
+                                        height="339px"
+                                        handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                                        starValue={starValue}
+                                        setStarValue={setStarValue}
+                                        chosenRecipe = {chosenRecipe}
+                                        recipesToRate = {recipesToRate}
+                                        setRecipesToRate = {setRecipesToRate}
+                                       
+                                    />
                                 </Grid>
                             </Grid>
-                        </>
+                        </Grid>
                     );
                 })}
             </Grid>
@@ -94,20 +112,24 @@ const Recipes = ({ recipes }) => {
             <Grid container spacing={2}>
                 {recipesWithRating.map((recipeWithRating) => {
                     return (
-                        <>
-                            <Grid item xs={12} md={3} onClick={() => setChosenRecipe(recipeWithRating)}>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12}>
-                                        <FoodCard
-                                            selectedRecipe={recipeWithRating}
-                                            isRated={true}
-                                            height="310px"
-                                            handleClickOpenRecipeModal={handleClickOpenRecipeModal}
-                                        />
-                                    </Grid>
+                        <Grid item xs={12} md={3} key={recipeWithRating.id} onClick={() => setChosenRecipe(recipeWithRating)}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <FoodCard
+                                        selectedRecipe={recipeWithRating}
+                                        isRated={true}
+                                        height="310px"
+                                        handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                                        starValue={starValue}
+                                        setStarValue={setStarValue}
+                                        chosenRecipe = {chosenRecipe}
+                                        recipesToRate = {recipesToRate}
+                                        setRecipesToRate = {setRecipesToRate}
+                                        
+                                    />
                                 </Grid>
                             </Grid>
-                        </>
+                        </Grid>
                     );
                 })}
             </Grid>
@@ -115,15 +137,17 @@ const Recipes = ({ recipes }) => {
             <RecipesModal
                 open={openRecipeModal}
                 handleClose={handleCloseRecipeModal}
-                secondaryButtonText="CANCELAR"
                 chosenRecipe={chosenRecipe}
+                starValue={starValue}
+                handleSecondaryButtonClick={handleSecondaryButtonClick}
+                setOpenRecipeModal={setOpenRecipeModal}
+                recipesToRate={recipesToRate}
+                setRecipesToRate={setRecipesToRate}
+                recipesWithRating={recipesWithRating}
+                setRecipesWithRating={setRecipesWithRating}
+                setStarValue={setStarValue}
+                setChosenRecipe = {setChosenRecipe}
             />
-            {/* <RecipesWithRatingModal
-                open={openRecipesWithRatingModal}
-                handleClose={handleClickCloseRecipesWithRatingModal}
-                primaryButtonText="MODIFICAR CALIFICACION"
-                secondaryButtonText="CANCELAR"
-            /> */}
         </>
     );
 };
