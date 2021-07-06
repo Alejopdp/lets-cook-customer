@@ -26,6 +26,7 @@ const LoginBox = (props) => {
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const [serverError, setserverError] = useState("");
+
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
@@ -65,6 +66,10 @@ const LoginBox = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
 
+    const handleRedirectToSignUp = () => {
+        router.push("/registrarme");
+    };
+
     return (
         <FormPaper title={lang.title}>
             <TextInput label={lang.emailInput} name="email" value={values.email} onChange={handleChange("email")} />
@@ -79,7 +84,12 @@ const LoginBox = (props) => {
 
             <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} />
 
-            <Register text={lang.register.text} boldText={lang.register.boldText} redirectTo={lang.register.redirectTo} />
+            <Register
+                text={lang.register.text}
+                boldText={lang.register.boldText}
+                handleRedirect={handleRedirectToSignUp}
+                redirectTo={lang.register.redirectTo}
+            />
         </FormPaper>
     );
 };

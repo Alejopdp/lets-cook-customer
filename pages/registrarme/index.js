@@ -1,5 +1,6 @@
 // Utils & Config
 import React from "react";
+import { useRouter } from "next/router";
 
 // Internal Components
 import { Layout } from "../../components/layout/index";
@@ -8,10 +9,15 @@ import SignUpForm from "../../components/organisms/signUpForm/signUpForm";
 import { verifyToken } from "../../helpers/serverRequests/customer";
 
 const Signup = () => {
+    const router = useRouter();
+
+    const handleSignUp = () => {
+        router.push("/");
+    };
     return (
         <Layout>
             <InnerSectionLayout containerMaxWidth="lg">
-                <SignUpForm />
+                <SignUpForm handleSignUp={handleSignUp} />
             </InnerSectionLayout>
         </Layout>
     );
