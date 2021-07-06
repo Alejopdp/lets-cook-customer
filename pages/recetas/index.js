@@ -8,7 +8,7 @@ const langs = require("../../lang").recetas;
 import InnerSectionLayout from "../../components/layout/publicLayout";
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
 import RecipesGrid from "../../components/organisms/recipesGrid/recipesGrid";
-import Layout from '../../components/layout/index';
+import Layout from "../../components/layout/index";
 
 const Recetas = (props) => {
     const router = useRouter();

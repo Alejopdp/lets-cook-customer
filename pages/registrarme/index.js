@@ -3,7 +3,7 @@ import React from "react";
 
 // Internal Components
 import Layout from "../../components/layout/index";
-import InnerSectionLayout from "../../components/layout/publicLayout";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import SignUpForm from "../../components/organisms/signUpForm/signUpForm";
 import { verifyToken } from "../../helpers/serverRequests/customer";
 

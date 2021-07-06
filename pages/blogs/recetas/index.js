@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            posts: res.status === 200 ? res.data : [],
+            posts: res?.status === 200 ? res?.data : [],
         },
     };
 }
