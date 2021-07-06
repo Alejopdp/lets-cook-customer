@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import Rating from "@material-ui/lab/Rating";
 import { Box } from "@material-ui/core";
 
@@ -20,7 +21,7 @@ export default function SimpleRating({ handleClickOpenRecipeModal, isModal, full
             >
                 <Rating
                     name={`${selectedRecipe.id}`}
-                    value={selectedRecipe.rating ? (isModal ? starValue : selectedRecipe.rating) : isModal ? starValue : 0}
+                    value={selectedRecipe.rating ? (isModal ? parseInt(starValue) : selectedRecipe.rating) : isModal ? parseInt(starValue) : 0}
                     onChange={(event, newValue) => {
                         setValue(newValue);
                     }}

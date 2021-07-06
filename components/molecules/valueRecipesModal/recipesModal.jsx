@@ -1,8 +1,7 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
 
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme, makeStyles, Typography, Grid, TextField, Button, DialogActions } from "@material-ui/core";
+import { useTheme, makeStyles, Typography, Grid, TextField, Button, DialogActions, useMediaQuery } from "@material-ui/core";
 
 // External Components
 import Modal from "../../atoms/modal/modal";
@@ -33,9 +32,6 @@ const RecipesModal = (props) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
     const classes = useStyles();
-
-    const [comment, setComment] = useState("");
-
     const {
         chosenRecipe,
         starValue,
@@ -49,13 +45,19 @@ const RecipesModal = (props) => {
         setChosenRecipe,
     } = props;
 
+    const [comment, setComment] = useState("");
+
+    useEffect(() => {
+        if (chosenRecipe.comment === "") setComment("");
+    }, [chosenRecipe.id]);
+
+    useEffect(() => {
+        if (chosenRecipe.recipeName) setChosenRecipe({ ...chosenRecipe, comment });
+    }, [comment]);
+
     const handleChangeComment = (e) => {
         setComment(e.target.value);
     };
-
-    useEffect(() => {
-        setChosenRecipe({ ...chosenRecipe, comment });
-    }, [comment]);
 
     const handleQualificationClick = async (recipeId, rating, comment) => {
         setOpenRecipeModal(false);
@@ -71,8 +73,13 @@ const RecipesModal = (props) => {
         recipesWithRating.map((recipeWithRating, i) => {
             if (recipeWithRating.id === chosenRecipe.id) {
                 const recipe = recipesWithRating.splice(i, 1).shift();
-                let obj = { ...recipe, rating: parseInt(rating), comment };
-                setRecipesWithRating(recipesWithRating.concat(obj));
+                if (chosenRecipe.comment !== "") {
+                    let obj = { ...recipe, rating: parseInt(rating), comment: chosenRecipe.comment };
+                    setRecipesWithRating(recipesWithRating.concat(obj));
+                } else {
+                    let obj = { ...recipe, rating: parseInt(rating), comment };
+                    setRecipesWithRating(recipesWithRating.concat(obj));
+                }
             }
         });
     };

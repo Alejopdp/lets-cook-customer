@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import RecipesModal from "../../molecules/valueRecipesModal/recipesModal";
 import FoodCard from "../../molecules/foodCard";
+import { deleteRecipe } from "../../../helpers/serverRequests/user-recipes";
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -23,14 +24,11 @@ const useStyles = makeStyles((theme) => ({
 const Recipes = ({ recipes }) => {
     const classes = useStyles();
 
-    // modal
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
 
-    // recipes from axios
     const [recipesToRate, setRecipesToRate] = useState([]);
     const [recipesWithRating, setRecipesWithRating] = useState([]);
 
-    // onClick
     const [chosenRecipe, setChosenRecipe] = useState({});
 
     const [starValue, setStarValue] = useState(0);
@@ -54,6 +52,12 @@ const Recipes = ({ recipes }) => {
         if (chosenRecipe.rating === undefined) setStarValue(0);
         if (chosenRecipe.rating) setStarValue(oldValue);
         setOpenRecipeModal(false);
+    };
+
+    const handleDeleteRecipe = async (x) => {
+        const res = await deleteRecipe(x.id);
+        const filteredArray = recipesToRate.filter((recipe) => recipe.id !== x.id);
+        setRecipesToRate(filteredArray);
     };
 
     useEffect(() => {
@@ -87,10 +91,11 @@ const Recipes = ({ recipes }) => {
                                         handleClickOpenRecipeModal={handleClickOpenRecipeModal}
                                         starValue={starValue}
                                         setStarValue={setStarValue}
-                                        chosenRecipe = {chosenRecipe}
-                                        recipesToRate = {recipesToRate}
-                                        setRecipesToRate = {setRecipesToRate}
-                                       
+                                        chosenRecipe={chosenRecipe}
+                                        recipesToRate={recipesToRate}
+                                        setRecipesToRate={setRecipesToRate}
+                                        handleDeleteRecipe={handleDeleteRecipe}
+                                        recipeToRate={recipeToRate}
                                     />
                                 </Grid>
                             </Grid>
@@ -122,10 +127,10 @@ const Recipes = ({ recipes }) => {
                                         handleClickOpenRecipeModal={handleClickOpenRecipeModal}
                                         starValue={starValue}
                                         setStarValue={setStarValue}
-                                        chosenRecipe = {chosenRecipe}
-                                        recipesToRate = {recipesToRate}
-                                        setRecipesToRate = {setRecipesToRate}
-                                        
+                                        chosenRecipe={chosenRecipe}
+                                        recipesToRate={recipesToRate}
+                                        setRecipesToRate={setRecipesToRate}
+                                        handleDeleteRecipe={handleDeleteRecipe}
                                     />
                                 </Grid>
                             </Grid>
@@ -146,7 +151,7 @@ const Recipes = ({ recipes }) => {
                 recipesWithRating={recipesWithRating}
                 setRecipesWithRating={setRecipesWithRating}
                 setStarValue={setStarValue}
-                setChosenRecipe = {setChosenRecipe}
+                setChosenRecipe={setChosenRecipe}
             />
         </>
     );

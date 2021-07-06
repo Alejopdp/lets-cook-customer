@@ -1,10 +1,8 @@
 import React from "react";
 
 import SimpleRating from "../starRating/starRating";
-import { deleteRecipe } from "../../../helpers/serverRequests/user-recipes";
 
-import { makeStyles } from "@material-ui/core/styles";
-import { CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Card } from "@material-ui/core";
+import { CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Card, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,8 +12,7 @@ const useStyles = makeStyles((theme) => ({
         height: "167px",
     },
     typography: {
-        // fontSize: theme.typography.fontSize,
-        fontSize: "10px",
+        fontSize: theme.typography.fontSize,
     },
     span: {
         fontStyle: "italic",
@@ -35,20 +32,10 @@ export default function FoodCard({
     selectedRecipe,
     starValue,
     setStarValue,
-    chosenRecipe,
-    recipesToRate,
-    setRecipesToRate,
+    handleDeleteRecipe,
+    recipeToRate,
 }) {
     const classes = useStyles();
-
-    const handleDeleteRecipe = async () => {
-        const res = await deleteRecipe(chosenRecipe.id);
-        recipesToRate.map((recipeToRate) => {
-            if (recipeToRate.id === chosenRecipe.id) {
-                console.log("dentro del if");
-            }
-        });
-    };
 
     return (
         <>
@@ -61,7 +48,7 @@ export default function FoodCard({
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h6" component="h2" className={classes.typography}>
-                            {selectedRecipe.id}
+                            {selectedRecipe.recipeName}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             {selectedRecipe.label}
@@ -79,8 +66,8 @@ export default function FoodCard({
                     />
                 </CardActions>
                 <CardActions>
-                    {!isRated && (
-                        <Button size="small" className={classes.button} onClick={() => handleDeleteRecipe()}>
+                    {isRated ? null : (
+                        <Button size="small" className={classes.button} onClick={() => handleDeleteRecipe(recipeToRate)}>
                             NO VALORAR ESTA RECETA
                         </Button>
                     )}
