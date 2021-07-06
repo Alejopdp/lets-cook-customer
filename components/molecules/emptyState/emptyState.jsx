@@ -10,7 +10,6 @@ import Container from "@material-ui/core/Container";
 import Image from "next/image";
 
 const EmptyState = (props) => {
-    const classes = useStyles();
     const theme = useTheme();
 
     return (

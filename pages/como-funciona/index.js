@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 const langs = require("../../lang").comoFunciona;
 
 // Internal components
-import InnerSectionLayout from "../../components/layout/publicLayout";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
 import HowItWorksExtendedSection from "../../components/organisms/howItWorksExtendedSection/howItWorksExtendedSection";
-import Layout from '../../components/layout/index';
+import { Layout } from "../../components/layout/index";
 
 const ComoFunciona = () => {
     const router = useRouter();

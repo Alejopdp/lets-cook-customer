@@ -39,12 +39,12 @@ const RecoverPasswordForm = (props) => {
     };
 
     const handleRedirect = () => {
-        router.push("/ingresar")
-    }
+        router.push("/ingresar");
+    };
 
     const handleRecover = () => {
-        alert("Password cambiada con éxito")
-    }
+        alert("Password cambiada con éxito");
+    };
 
     switch (true) {
         case currentStep === 0:

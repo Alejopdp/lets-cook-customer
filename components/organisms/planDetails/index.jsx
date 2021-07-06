@@ -69,7 +69,6 @@ const PlanDetails = ({ data }) => {
     };
 
     const theme = useTheme();
-    const classes = useStyles();
     // const router = useRouter();
     // const lang = langs[router.locale];
 

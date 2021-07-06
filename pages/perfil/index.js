@@ -14,8 +14,8 @@ import Hidden from "@material-ui/core/Hidden";
 import Carousel from "react-multi-carousel";
 
 // Internal components
-import InnerSectionLayout from "../../components/layout/publicLayout";
-import Layout from "../../components/layout/index";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
+import { Layout } from "../../components/layout/index";
 import BoxWithIconAndTextButton from "../../components/molecules/specificBox/boxWithIconAndTextButton";
 import TextButton from "../../components/atoms/textButton/textButton";
 import PlanRecoverModal from "../../components/molecules/planRecoverModal/planRecoverModal";
@@ -145,7 +145,7 @@ const Perfil = ({ data, error }) => {
                                         }}
                                     >
                                         {data.pendingActions.map((action, index) => (
-                                            <Grid item xs={12} style={{ marginRight: theme.spacing(2) }}>
+                                            <Grid key={index} item xs={12} style={{ marginRight: theme.spacing(2) }}>
                                                 {getPendingActionComponent(action)}
                                             </Grid>
                                         ))}
@@ -168,7 +168,7 @@ const Perfil = ({ data, error }) => {
                                         </Link>
                                     </Grid>
                                     {data.pendingActions.map((action, index) => (
-                                        <Grid item xs={12}>
+                                        <Grid key={index} item xs={12}>
                                             {getPendingActionComponent(action)}
                                         </Grid>
                                     ))}
@@ -191,7 +191,7 @@ const Perfil = ({ data, error }) => {
                                     <>
                                         {data.principalPlanSubscriptions.map((plan, index) => {
                                             return (
-                                                <Grid item sm={6} xs={12}>
+                                                <Grid key={index} item sm={6} xs={12}>
                                                     <PlanProfileCard
                                                         plan={plan}
                                                         handleClickOpenPlanRecoverModal={() =>
@@ -227,7 +227,7 @@ const Perfil = ({ data, error }) => {
                                         {data.additionalPlanSubscriptions.length > 0 ? (
                                             <>
                                                 {data.additionalPlanSubscriptions.map((plan, index) => (
-                                                    <Grid item sm={6} xs={12}>
+                                                    <Grid key={index} item sm={6} xs={12}>
                                                         <PlanProfileCard
                                                             plan={plan}
                                                             handleClickOpenPlanRecoverModal={() =>

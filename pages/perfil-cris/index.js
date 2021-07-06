@@ -10,8 +10,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 // Internal components
-import InnerSectionLayout from "../../components/layout/publicLayout";
-import Layout from "../../components/layout/index";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
+import { Layout } from "../../components/layout/index";
 import BoxWithIconAndTextButton from "../../components/molecules/specificBox/boxWithIconAndTextButton";
 import BoxWithTextButton from "../../components/molecules/specificBox/boxWithTextButton";
 import PlanInfoWithStatus from "../../components/molecules/planInfo/planInfoWithStatus";
@@ -31,15 +31,15 @@ const Perfil = () => {
 
     const handleClickOpenPlanRecoverModal = async () => {
         setOpenPlanRecoverModal(true);
-        const res = fetch(endpoint).then(async response => {
+        const res = fetch(endpoint).then(async (response) => {
             try {
-                const data = await response.json()
-                console.log('response data?', data)
+                const data = await response.json();
+                console.log("response data?", data);
             } catch (error) {
-                console.log('Error happened here!')
-                console.error(error)
+                console.log("Error happened here!");
+                console.error(error);
             }
-        })
+        });
         console.log(res);
     };
 

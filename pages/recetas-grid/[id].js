@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import Recipes from "../../components/organisms/recipes/recipes";
-import InnerSectionLayout from "../../components/layout/publicLayout";
-import Layout from "../../components/layout/index";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
+import { Layout } from "../../components/layout/index";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 import { getRecipesByCustomer } from "../../helpers/serverRequests/user-recipes";
 

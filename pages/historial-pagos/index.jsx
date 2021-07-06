@@ -10,8 +10,8 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 // Internal components
-import InnerSectionLayout from "../../components/layout/publicLayout";
-import Layout from "../../components/layout/index";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
+import { Layout } from "../../components/layout/index";
 import PaymentsTable from "../../components/molecules/paymentsTable/PaymentsTable";
 import PaymentDetailsModal from "../../components/molecules/paymentDetailsModal/PaymentDetailsModal";
 
