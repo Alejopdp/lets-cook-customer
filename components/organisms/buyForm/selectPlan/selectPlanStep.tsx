@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Grid, Typography } from "@material-ui/core";
 
@@ -8,66 +8,111 @@ import RecipesCalculation from "../../../molecules/recipesCalculation/recipesCal
 import RecipesSection from "../../sections/RecipesSection";
 import ReviewsSection from "../../sections/ReviewsSection";
 
-import { Plan, FAQS } from "@helpers";
+import { Plan, FAQS, PlanVariant, getPlanVariant } from "@helpers";
 import { useBuyFlow } from "@stores";
 import { faqsSection } from "@lang";
 import { useRouter } from "next/router";
 import { useStyles } from "./styles";
 import { SelectPlanProps, ARGS } from "./interfaces";
 import { PlansList } from "./planesList";
-import Slug from "pages/planes/[slug]";
 
 export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
-    const { push: navigateTo } = useRouter();
+    const { push: navigateTo, locale: lang } = useRouter();
     const classes = useStyles();
     const buyFlow = useBuyFlow();
+    const [planSize, setPlanSize] = useState({});
 
-    useEffect(() =>{
-        buyFlow.setPlanCode( props.initialPlanSettins.id, props.initialPlanSettins.slug);
-    },[])
+    const getPlanSize = useCallback((slug: string, plans: Plan[]) => {
+        const planSelect = plans.find(plan => plan.slug === slug)
+
+        const peopleLabels = planSelect.variants?.reduce((planSize, variant) => {
+
+            const valueIsIncluded = (planSize[variant.numberOfPersons] || [])
+                .includes(variant.numberOfRecipes)
+
+            if (valueIsIncluded) { return planSize; }
+
+            planSize[variant.numberOfPersons] = [
+                ...(planSize[variant.numberOfPersons] || []),
+                variant.numberOfRecipes
+            ];
+            return planSize;
+        }, {});
+        return peopleLabels;
+    }, [])
 
     const handleOnSelectPeopleQty = (qty: ARGS) => {
-        buyFlow.setPeopleQty(qty.value);
-        navigateTo({
-            pathname: "/planes/[slug]",
-            query: {
-                slug: buyFlow.form.planSlug,
-                personas: qty.value,
-                recetas: buyFlow.form.recipesQty || props.initialPlanSettins.recipeQty,
-            },
-        }, undefined, {
-            shallow: true
-        });
+        // buyFlow.setPeopleQty(qty.value);
+        // navigateTo({
+        //     pathname: "/planes/[slug]",
+        //     query: {
+        //         slug: buyFlow.form.planSlug,
+        //         personas: qty.value,
+        //         recetas: buyFlow.form.recipesQty || props.initialPlanSettings.recipeQty,
+        //     },
+        // }, undefined, {
+        //     shallow: true
+        // });
     };
 
     const handleOnSelectRecipeQty = (qty: { name: string; value: string }) => {
-        buyFlow.setRecipesQty(qty.value);
-        navigateTo({
-            pathname: "/planes/[slug]",
-            query: {
-                slug: buyFlow.form.planSlug,
-                personas: buyFlow.form.peopleQty || props.initialPlanSettins.personQty,
-                recetas: qty.value,
-            },
-        }, undefined, {
-            shallow: true
-        });
+        // buyFlow.setRecipesQty(qty.value);
+        // navigateTo({
+        //     pathname: "/planes/[slug]",
+        //     query: {
+        //         slug: buyFlow.form.planSlug,
+        //         personas: buyFlow.form.peopleQty || props.initialPlanSettings.personQty,
+        //         recetas: qty.value,
+        //     },
+        // }, undefined, {
+        //     shallow: true
+        // });
     };
 
     const handleOnSelectPlan = (plan: Plan) => {
         buyFlow.setPlanCode(plan.id, plan.slug);
+        const planSize = getPlanSize(plan.slug, props.plans)
+        setPlanSize(planSize)
+
+        const recipesQty = planSize[buyFlow.form.variant?.numberOfPersons]
+        const recipeQtyExist = (recipesQty || []).includes(`${buyFlow.form.variant?.numberOfRecipes}`)
+
+        const peopleQty: number = recipesQty ?
+            (buyFlow.form.variant?.numberOfPersons || parseInt(props.initialPlanSettings.personQty)) :
+            (parseInt(Object.keys(planSize)[0]) || 0);
+
+        const recipeQty = recipeQtyExist ?
+            (buyFlow.form.variant?.numberOfRecipes || props.initialPlanSettings.recipeQty) :
+            Object.values(planSize)[0][0]
+
+        const {variant} = getPlanVariant({
+            slug: plan.slug,
+            recipeQty,
+            peopleQty
+        }, props.plans);
+       // buyFlow.setPlanVariant(variant);
+
+        console.log('***-Variant: ', variant?.name[lang]);
+
         navigateTo({
             pathname: "/planes/[slug]",
             query: {
                 slug: plan.slug,
-                personas: buyFlow.form.peopleQty || props.initialPlanSettins.personQty,
-                recetas: buyFlow.form.recipesQty || props.initialPlanSettins.recipeQty
+                personas: peopleQty,
+                recetas: recipeQty
             }
         }, undefined, {
             shallow: true
         });
     };
+
+    useEffect(() => {
+        buyFlow.setPlanCode(props.initialPlanSettings.id, props.initialPlanSettings.slug);
+        buyFlow.setPlanVariant(props.variant);
+        const planSize = getPlanSize(props.initialPlanSettings.slug, props.plans)
+        setPlanSize(planSize)
+    }, [])
 
     return (
         <Grid container direction="column" justify="center" alignItems="center" spacing={3}>
@@ -84,14 +129,12 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                             isSelected={buyFlow.form.planSlug === plan.slug}
                             onClick={handleOnSelectPlan}
                         />
-
-                    }
-                    )}
+                    })}
                 </div>
             </Grid>
 
             <Grid className={clsx(classes.smDownHide)} item container direction="row" justify="center">
-                <PlansList 
+                <PlansList
                     plans={props.plans}
                     slug={buyFlow.form.planSlug}
                     handleOnSelectPlan={handleOnSelectPlan}
@@ -107,12 +150,12 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                     <Typography variant="h5">2. Elige el tamaño de tu plan</Typography>
                 </Grid>
                 <Grid item xs={10}>
+                    {console.log('***-> Variant Value: ', buyFlow.form.variant?.numberOfPersons, buyFlow.form.variant?.numberOfRecipes)}
                     <PlanSize
                         name="peopleQty"
-                        subtitle="Cantidad de personas"
-                        fromNumber={2}
-                        numberItems={4}
-                        valueSelected={props.initialPlanSettins.personQty}
+                        subtitle={"Cantidad de personas"}
+                        fromArray={Object.keys(planSize)}
+                        // valueSelected={`${buyFlow.form.variant?.numberOfPersons}` || `${props.variant?.numberOfPersons}`}
                         handleOnChange={handleOnSelectPeopleQty}
                     />
                 </Grid>
@@ -120,14 +163,22 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                     <PlanSize
                         name="recipeQty"
                         subtitle="Cantidad de recetas por semana"
-                        fromNumber={2}
-                        numberItems={5}
-                        valueSelected={props.initialPlanSettins.recipeQty}
+                        fromArray={planSize[buyFlow.form.variant?.numberOfPersons]}
+                        // valueSelected={`${buyFlow.form.variant?.numberOfRecipes}` || `${props.variant?.numberOfRecipes}`}
                         handleOnChange={handleOnSelectRecipeQty}
                     />
                 </Grid>
                 <Grid item xs={10}>
-                    <RecipesCalculation recipesQty={4} peopleQty={3} totalPrice={40} />
+                    <RecipesCalculation
+                        recipesQty={buyFlow.form.variant?.numberOfRecipes ||
+                            props.variant?.numberOfRecipes}
+                        peopleQty={buyFlow.form.variant?.numberOfPersons ||
+                            props.variant?.numberOfPersons}
+                        totalPrice={buyFlow.form.variant?.priceWithOffer ||
+                            buyFlow.form.variant?.price ||
+                            props.variant?.priceWithOffer ||
+                            props.variant?.price
+                        } />
                 </Grid>
             </Grid>
 
@@ -154,6 +205,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                     </Typography>
                 </div>
                 {props.faqs.map((faq, index) => (
+                    // TODO: what is the origin for FAQS? {faqsSection[lang].sections}
                     <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                 ))}
             </Grid>

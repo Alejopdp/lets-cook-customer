@@ -10,33 +10,57 @@ import { memo } from 'react';
 
 const _cards:Plan[] = [
     {
-        name: "Plan familiar",
+        name: {
+            es: "Plan familiar",
+            en: "Plan familiar",
+            ca: "Plan familiar"
+        },
         description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
         imageUrl: "unnamed.jpg",
-        slug: "plan-familiar"
+        slug: "plan-familiar",
+        id: '',
+        sku: ''
     },
     {
-        name: "Plan gourmet",
+        name: {
+            es: "Plan gourmet",
+            en: "Plan gourmet",
+            ca: "Plan gourmet"
+        },
         description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
         imageUrl: "unnamed.jpg",
-        slug: "plan-gourmet"
+        slug: "plan-gourmet",
+        id: '',
+        sku: ''
     },
     {
-        name: "Plan vegetariano/vegano",
+        name: {
+            es: "Plan vegetariano/vegano",
+            en: "Plan vegetariano/vegano",
+            ca: "Plan vegetariano/vegano"
+        },
         description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
         imageUrl: "unnamed.jpg",
-        slug: "plan-vegetariano"
+        slug: "plan-vegetariano",
+        id: '',
+        sku: ''
     },
     {
-        name: "Plan ahorro",
+        name: {
+            es: "Plan ahorro",
+            en: "Plan ahorro",
+            ca: "Plan ahorro"
+        },
         description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
         imageUrl: "unnamed.jpg",
-        slug: "plan-ahorro"
+        slug: "plan-ahorro",
+        id: '',
+        sku: ''
     },
 ];
 
 export const PlansSection = memo(({cards = _cards}: PlansSectionProps) => {
-    const {push: navigateTo} = useRouter();
+    const {push: navigateTo, locale} = useRouter();
     
     const classes = useStyles();
 
@@ -57,7 +81,7 @@ export const PlansSection = memo(({cards = _cards}: PlansSectionProps) => {
                                     <Typography
                                         className={classes.paddingCardTitle}
                                         variant="subtitle1"
-                                        color="initial">{card.name}</Typography>
+                                        color="initial">{card.name[locale]}</Typography>
                                     <Typography
                                         variant="body2"
                                         color="initial">{card.description}</Typography>

@@ -1,3 +1,4 @@
+import { Plan, PlanVariant } from "@helpers";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
@@ -18,11 +19,10 @@ export interface BuyFlowStore {
     showRegister: boolean;
     form: {
         planCode: string;
-        planSlug?: string;
-        peopleQty: string;
-        recipesQty: string;
-        deliveryForm: DeliveryForm;
-        paymentMethods: PaymentMethods[];
+        planSlug: string;
+        variant?: PlanVariant;
+        deliveryForm?: DeliveryForm;
+        paymentMethods?: PaymentMethods[];
         recipes: Recipes[];
     };
 }
@@ -30,12 +30,11 @@ export interface BuyFlowStore {
 export interface Store extends BuyFlowStore {
     setRegisterState: (isVisible: boolean) => void;
     forward: () => void;
-    setDeliveryInfo: (deliveryForm: DeliveryForm) => void;
-    setPaymentMetods: (paymentMethods: PaymentMethods) => void;
+    setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => void;
+    setPaymentMetods: (paymentMethods: Partial<PaymentMethods>) => void;
     selectRecipes: (recipes: Recipes[]) => void;
-    setPeopleQty: (qty: string) => void;
-    setRecipesQty: (qty: string) => void;
-    setPlanCode: (code: string) => void;
+    setPlanCode: (code: string, slug: string) => void;
+    setPlanVariant: (variant: Partial<PlanVariant>) => void;
 }
 
 export const BuyFlowInitialStore: BuyFlowStore = {
@@ -44,8 +43,14 @@ export const BuyFlowInitialStore: BuyFlowStore = {
     form: {
         planCode: "",
         planSlug: "",
-        peopleQty: "2",
-        recipesQty: "3",
+        variant: {
+            id: "",
+            sku: "",
+            name: {},
+            numberOfPersons: 0,
+            numberOfRecipes: 0,
+            attributes: [] 
+        },
         deliveryForm: {
             address: "",
             addressDesc: "",
@@ -57,6 +62,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
         paymentMethods: [],
         recipes: [],
     },
+
 };
 
 const store = devtools<Store>((set, get) => ({
@@ -82,19 +88,9 @@ const store = devtools<Store>((set, get) => ({
         form.planSlug = slug;
         set({ form });
     },
-    setRecipesQty: (qty: string) => {
+    setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => {
         const form = get().form;
-        form.recipesQty = qty;
-        set({ form });
-    },
-    setPeopleQty: (qty: string) => {
-        const form = get().form;
-        form.peopleQty = qty;
-        set({ form });
-    },
-    setDeliveryInfo: (deliveryForm: DeliveryForm) => {
-        const form = get().form;
-        form.deliveryForm = deliveryForm;
+        Object.keys(deliveryForm).forEach(key => form.deliveryForm[key] = deliveryForm[key]);
         set({ form });
     },
     setPaymentMetods: (paymentMethods: PaymentMethods) => {
@@ -107,6 +103,11 @@ const store = devtools<Store>((set, get) => ({
         form.recipes = recipes;
         set({ form });
     },
+    setPlanVariant: (variant: Partial<PlanVariant>) => {
+        const form = get().form;
+        Object.keys(variant).forEach(key => form.variant[key] = variant[key]);
+        set({ form });
+    }
 }));
 
 export const useBuyFlow = create(store);

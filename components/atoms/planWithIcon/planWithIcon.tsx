@@ -10,9 +10,11 @@ import { Box } from '@material-ui/core';
 import { Plan } from '@helpers';
 import { PlanWithIconProp } from './interfaces';
 import useStyles from "./styles";
+import { useRouter } from 'next/router';
 
 export const PlanWithIcon = (props: PlanWithIconProp) => {
     const { box, text, checkedBox } = useStyles();
+    const { locale } = useRouter();
 
     return (
         <Box className={clsx(box, { [checkedBox]: props.isSelected })}>
@@ -23,12 +25,12 @@ export const PlanWithIcon = (props: PlanWithIconProp) => {
                         color="primary"
                         icon={<img src={props.plan.icon} height={50} width={50} />}
                         checkedIcon={<img src={props.plan.iconWithColor} height={50} width={50} />}
-                        name={props.plan.name}
+                        name={props.plan.name[locale]}
                         checked={props.isSelected}
                     />}
                 label={
                     <Typography variant="subtitle1" className={text}>
-                        {props.plan.name}
+                        {props.plan.name[locale]}
                     </Typography>
                 }
                 labelPlacement="bottom"

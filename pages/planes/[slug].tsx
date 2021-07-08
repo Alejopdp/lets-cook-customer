@@ -1,9 +1,9 @@
 // Utils & Config
 import React, { memo, useState } from "react";
-import { getPlans, getRecipes, Plan, Recipe, FAQS, getFAQS } from "@helpers";
+import { getPlans, getRecipes, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant } from "@helpers";
 import { useBuyFlow } from "@stores";
 import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
-import {createSubscription} from "../../helpers/serverRequests/subscription"
+import { createSubscription } from "../../helpers/serverRequests/subscription"
 import { useSnackbar } from "notistack";
 
 // Internal components
@@ -20,7 +20,7 @@ export interface PlanUrlParams {
     personQty: string;
     recipeQty: string;
     slug: string;
-    id?:any;
+    id?: any;
 };
 
 export interface PlanesPageProps {
@@ -29,15 +29,17 @@ export interface PlanesPageProps {
     recipes: Recipe[];
     faqs: FAQS[];
     planUrlParams: PlanUrlParams;
+    variant: PlanVariant;
     errors?: PlansErrors;
+    displayName?: string;
 }
 
-const PlanesPage = (props: PlanesPageProps) => {
+const PlanesPage = memo((props: PlanesPageProps) => {
     const step = useBuyFlow(({ step }) => step);
     const stripe = useStripe();
     const elements = useElements();
-    const [isLoadingPayment, setisLoadingPayment] = useState(false)
-    const {enqueueSnackbar} = useSnackbar()
+    const [, setisLoadingPayment] = useState(false)
+    const { enqueueSnackbar } = useSnackbar()
 
     const handleStripePaymentMethod = async () => {
         const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -85,21 +87,25 @@ const PlanesPage = (props: PlanesPageProps) => {
     };
     return (
         <BuyFlowLayout>
-            {step === 0 && <SelectPlanStep initialPlanSettins={props.planUrlParams} plans={props.plans} faqs={props.faqs} />}
+            {step === 0 && <SelectPlanStep
+                initialPlanSettings={props.planUrlParams}
+                plans={props.plans}
+                variant={props.variant}
+                faqs={props.faqs}
+            />}
             {step === 1 && <RegisterUserStep />}
-            {step === 2 && <CheckoutStep handleSubmitPayment={handleSubmitPayment}/>}
+            {step === 2 && <CheckoutStep handleSubmitPayment={handleSubmitPayment} />}
             {step === 3 && <RecipeChoiseStep recipes={props.recipes} />}
         </BuyFlowLayout>
     );
-};
+});
 
-export async function getServerSideProps({ locale, query, params }) {
+export async function getServerSideProps({ locale, query }) {
 
-    let redirect = undefined;
-    let slug = query.slug || '';
-    let id = query.id || '';
-    const personQty = query.personas || '2';
-    const recipeQty = query.recetas || '3';
+    const _slug = query.slug || '';
+    const mainPlans: Plan[]= [];
+    const aditionalsPlans: Plan[] = [];
+
 
     const [_plans, _recipes, _faqs] = await Promise.all([
         getPlans(locale),
@@ -113,22 +119,23 @@ export async function getServerSideProps({ locale, query, params }) {
         _faqs.error
     ].filter(e => !!e)
 
-    const isSlugvalid = _plans.data?.some(({ slug: _slug }) => _slug === slug);
+    console.warn('***-> Errors: ', errors);
 
-    if (!isSlugvalid && Array.isArray(_plans.data)) {
-        slug = _plans.data[0]?.slug; // TODO: What happen when is undefined??
-        id = _plans.data[0]?.id; // TODO: What happen when is undefined??
-        redirect = {
-            destination: `/planes/${slug}?personas=${personQty}&recetas=${recipeQty}`,
-            permanent: true,
+    _plans.data?.forEach( (plan, index) => {
+        if( plan.type === 'Main' || plan.type === 'Principal') {
+            mainPlans.push(plan);
+        } else {
+            aditionalsPlans.push(plan)
         }
-    } else {
-         // TODO: What happen with slug when no have plans??
-    }
+    });
+
+    const { id, slug, variant, redirect, errors: _errors } = getPlanVariant({ slug:_slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
+
+    console.info('***-> Variant Info: ', variant);
 
     const planUrlParams: PlanUrlParams = {
-        personQty,
-        recipeQty,
+        personQty: `${variant?.numberOfPersons || 0}`,
+        recipeQty: `${variant?.numberOfRecipes || 0}`,
         slug,
         id
     }
@@ -136,14 +143,16 @@ export async function getServerSideProps({ locale, query, params }) {
     return {
         props: {
             isLogged: true,
-            plans: _plans.data || [],
+            plans: mainPlans,
+            aditionalsPlans,
             recipes: _recipes.data || [],
             faqs: _faqs.data || [],
             planUrlParams,
-            errors
+            variant,
+            errors: [...errors, ..._errors]
         },
         redirect
     };
 }
 
-export default memo(PlanesPage);
+export default PlanesPage;
