@@ -27,8 +27,8 @@ import ReferalActionBox from "./pendingActionsComponents/referalActionBox";
 import EmptyState from "../../components/molecules/emptyState/emptyState";
 
 export async function getServerSideProps(context) {
-    const customerWithoutPlans = "2fc469f0-0f3e-4658-8370-185735985da9";
     const customerWithPlans = "f031ca8c-647e-4d0b-8afc-28e982068fd5";
+    const customerWithoutPlans = "";
     const customerId = customerWithPlans;
 
     const locale = context.locale;
@@ -204,12 +204,12 @@ const Perfil = ({ data, error }) => {
                                         })}
                                     </>
                                 ) : (
-                                    <EmptyState
-                                        image="/emptyStatePlans.png"
-                                        title="Aún no tienes planes"
-                                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                                    />
-                                )}
+                                        <EmptyState
+                                            image="/emptyStatePlans.png"
+                                            title="Aún no tienes planes"
+                                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                        />
+                                    )}
                             </Grid>
                             {data.principalPlanSubscriptions.length > 0 && (
                                 <>
@@ -239,12 +239,12 @@ const Perfil = ({ data, error }) => {
                                                 ))}
                                             </>
                                         ) : (
-                                            <EmptyState
-                                                image="/emptyStatePlans.png"
-                                                title="Aún no tienes acompañamientos"
-                                                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                                            />
-                                        )}
+                                                <EmptyState
+                                                    image="/emptyStatePlans.png"
+                                                    title="Aún no tienes acompañamientos"
+                                                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                                />
+                                            )}
                                     </Grid>
                                 </>
                             )}

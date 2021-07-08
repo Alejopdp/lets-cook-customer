@@ -33,7 +33,7 @@ const data = Array<Review>(10)
         date: `Hace ${index} días`,
     }));
 
-export const ReviewsSection = ({reviews = data}: ReviewsSectionProps) => {
+export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
     const theme = useTheme();
 
     const responsive = {

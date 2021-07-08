@@ -9,7 +9,7 @@ import { useRecipesStyles as useStyles } from "./styles";
 import { RecipesSectionProps } from "./interfaces";
 import { memo } from 'react';
 
-const _recipes = Array<Recipe>(4).fill({
+const _recipes = Array<Recipe>(10).fill({
     imageUrl: 'https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg',
     imageTags: ["Más vendido", "Vegano"],
     cookDuration: "15 min",
