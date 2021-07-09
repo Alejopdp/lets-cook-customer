@@ -18,7 +18,7 @@ const HowItWorksExtendedSection = () => {
   */
     }
     return (
-        <>
+<>
             <HowItWorksExtended
                 title={lang.step1.howTitle}
                 subtitle={lang.step1.howSubtitle}
@@ -42,7 +42,7 @@ const HowItWorksExtendedSection = () => {
                 subtitle={lang.step1.howSubtitle}
                 direction="row"
             />
-        </>
+</>
     );
 };
 

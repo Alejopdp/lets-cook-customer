@@ -6,5 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     border: {
         borderRadius: theme.spacing(2)
+    },
+    mt1: {
+        marginTop: theme.spacing(1)
     }
 }));

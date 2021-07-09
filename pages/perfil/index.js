@@ -98,7 +98,7 @@ const Perfil = ({ data, error }) => {
 
     return (
         <>
-            <Layout>
+            <Layout disableCallToActionSection>
                 <InnerSectionLayout containerMaxWidth="lg">
                     <Grid container spacing={5}>
                         <Grid item xs={12} md={4}>

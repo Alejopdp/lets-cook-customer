@@ -42,15 +42,11 @@ const MailStep = (props) => {
 
     return (
         <>
-            <TextInput label={lang.emailInput} name="email" value={props.email} onChange={props.handleChange} />
-
-            <CustomButton disabled={!isEmail(props.email)} text={lang.buttonText} onClick={() => props.handleSubmit(1)} />
-
-            <Divider />
-
             <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} />
-
             <AcceptLegalTerms />
+            <Divider />
+            <TextInput label={lang.emailInput} name="email" value={props.email} onChange={props.handleChange} />
+            <CustomButton disabled={!isEmail(props.email)} text={lang.buttonText} onClick={() => props.handleSubmit(1)} />
         </>
     );
 };

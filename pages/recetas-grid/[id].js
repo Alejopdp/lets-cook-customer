@@ -28,7 +28,7 @@ export const getStaticProps = async (context) => {
 
 const RecetasLayout = ({ recipes }) => {
     return (
-        <Layout>
+        <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <BackButtonTitle url="/" title="Valorar recetas" />
                 <Recipes recipes={recipes} />

@@ -38,9 +38,10 @@ interface LayoutProps {
     menuOptions: IMenuOptions
 }
 
-export const Layout = memo(({ children: Component }: LayoutProps) => {
+// export const Layout = memo(({ children: Component }: LayoutProps ) => {
+export const Layout = props => {
     const classes = useStyles();
-    const isAuthenticated = useAuthStore(({isAuthenticated}) => isAuthenticated);
+    const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
     const [openDrawerMenu, setOpenDrawerMenu] = useState(false);
 
     const _toggleOpeningDrawer = () => {
@@ -53,21 +54,25 @@ export const Layout = memo(({ children: Component }: LayoutProps) => {
             {isAuthenticated ? (
                 <LoggedInNavbar toggleOpeningDrawer={_toggleOpeningDrawer} />
             ) : (
-                <NavbarContent toggleOpeningDrawer={_toggleOpeningDrawer} />
-            )}
+                    <NavbarContent toggleOpeningDrawer={_toggleOpeningDrawer} />
+                )}
             <nav className={classes.drawer} aria-label="mailbox folders">
                 <Hidden smUp implementation="css">
                     <NavbarDrawer open={openDrawerMenu} toggleOpeningDrawer={_toggleOpeningDrawer} />
                 </Hidden>
             </nav>
             <main className={classes.content}>
-                {Component}
-                <CallToActionSection />
+                {props.children}
+                {!props.disableCallToActionSection && (
+                    <CallToActionSection />
+                )}
             </main>
-            <footer>
-                <Footer />
-            </footer>
+            {!props.disableFooterSection && (
+                <footer>
+                    <Footer />
+                </footer>
+            )}
         </div>
     );
-});
+};
 export default Layout;

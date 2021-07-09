@@ -11,6 +11,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Typography from '@material-ui/core/Typography';
 
 export const TextInput = (props: TextInputProps) => {
     const { textField, border } = useStyles();
@@ -25,13 +26,15 @@ export const TextInput = (props: TextInputProps) => {
                 placeholder={props.placeholder}
                 onChange={props.onChange}
                 labelWidth={props.labelWidth || 210}
+                inputProps={{ ...props.inputProps }}
             />
         </FormControl>
     )
 };
 
 export const PasswordInput = (props: PasswordInputProps) => {
-    const { textField, border } = useStyles();
+
+    const { textField, border, mt1 } = useStyles();
 
     const [values, setValues] = React.useState({
         showPassword: false,
@@ -62,6 +65,11 @@ export const PasswordInput = (props: PasswordInputProps) => {
                 }
                 labelWidth={props.labelWidth || 160}
             />
+            {props.helperText && (
+                <Typography variant='caption' className={mt1}>
+                    {props.helperText}
+                </Typography>
+            )}
         </FormControl>
     )
 };

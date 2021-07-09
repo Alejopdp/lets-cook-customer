@@ -1,6 +1,7 @@
 import { makeStyles, Box, useTheme, Typography, Container, Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { RoundedButton } from "@atoms";
+import { useRouter } from "next/router";
 
 import BenefitsCard from "../../molecules/benefits/benefits";
 import { useBenefitsStyle as useStyles } from "./styles";
@@ -29,12 +30,13 @@ const _cards: Benefit[] = [
     },
 ];
 
-export const BenefitsSection = ({ cards = _cards }: BenefitsSectionProps) => {
+export const BenefitsSection = ({ cards = _cards, backgroundColor, removeCallToAction }: BenefitsSectionProps) => {
     const classes = useStyles();
     const theme = useTheme();
+    const router = useRouter();
 
     return (
-        <Box style={{ backgroundColor: "white", padding: `${theme.spacing(8)}px 0px` }}>
+        <Box style={{ backgroundColor: backgroundColor ? backgroundColor: "white" , padding: `${theme.spacing(8)}px 0px` }}>
             <Container maxWidth="lg">
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6} style={{ alignSelf: "center" }}>
@@ -49,7 +51,7 @@ export const BenefitsSection = ({ cards = _cards }: BenefitsSectionProps) => {
                                     <img src={card.image} className={classes.icon}></img>
                                 </div>
                                 <div>
-                                    <Typography variant="subtitle1" color="initial">
+                                    <Typography variant="h5" color="initial" style={{ marginBottom: theme.spacing(1) }} >
                                         {card.title}
                                     </Typography>
                                     <Typography variant="body1" color="initial">
@@ -60,14 +62,16 @@ export const BenefitsSection = ({ cards = _cards }: BenefitsSectionProps) => {
                         ))}
                     </Grid>
                 </Grid>
-                <Grid container style={{ marginTop: theme.spacing(4) }}>
-                    <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
-                        <RoundedButton label="Ver planes" />
-                        <Typography className={classes.smallText} variant="caption">
-                            Podrás pausar, cambiar o cancelar el plan cuando quieras
-                        </Typography>
+                {!removeCallToAction && (
+                    <Grid container style={{ marginTop: theme.spacing(4) }}>
+                        <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
+                            <RoundedButton label="Ver planes" onClick={() => router.push("/planes")}/>
+                            <Typography className={classes.smallText} variant="caption">
+                                Podrás pausar, cambiar o cancelar el plan cuando quieras
+                            </Typography>
+                        </Grid>
                     </Grid>
-                </Grid>
+                )}
             </Container>
         </Box>
     );

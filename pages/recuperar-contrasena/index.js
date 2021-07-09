@@ -8,7 +8,7 @@ import RecoverPasswordForm from "../../components/organisms/recoverPassword/reco
 
 const Signup = () => {
     return (
-        <Layout>
+        <Layout disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <RecoverPasswordForm />
             </InnerSectionLayout>

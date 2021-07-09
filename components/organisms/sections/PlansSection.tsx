@@ -105,43 +105,6 @@ export const PlansSection = memo(({ cards = _cards }: PlansSectionProps) => {
     };
 
     return (
-        // <Container maxWidth='lg'>
-        //     <Grid container spacing={2}>
-        //         <Title
-        //             title="Encuentra el plan indicado para tí"
-        //             subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
-        //         />
-        //         {cards.map((card, index) => (
-        //             <Grid item xs={12} md={3}>
-        //                 <div key={index} className={classes.card} style={{
-        //                     backgroundImage: `url(${classes.img})`
-        //                 }}>
-        //                     <div className={classes.overlay} >
-        //                         <div className={classes.cardContent}>
-        //                             <Typography
-        //                                 className={classes.paddingCardTitle}
-        //                                 variant="subtitle1"
-        //                                 color="initial">{card.name}</Typography>
-        //                             <Typography
-        //                                 variant="body2"
-        //                                 color="initial">{card.description}</Typography>
-        //                         </div>
-        //                         <div className={classes.cardAction}>
-        //                             <RoundedButton label="¡QUIERO ESTE PLAN!" onClick={() => navigateTo({
-        //                                 pathname: "/planes/[slug]",
-        //                                 query: {
-        //                                     slug: card.slug,
-        //                                     personas: 2,
-        //                                     recetas: 2
-        //                                 }
-        //                             })} />
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </Grid>
-        //         ))}
-        //     </Grid>
-        // </Container>
         <>
             <Container maxWidth='xl'>
                 <Grid container spacing={2}>
@@ -206,75 +169,7 @@ export const PlansSection = memo(({ cards = _cards }: PlansSectionProps) => {
                     </Carousel>
                 </div>
             )}
-
         </>
-
-
-        //  <>
-        //         <Container maxWidth='lg' style={{ marginBottom: theme.spacing(3) }}>
-        //             <Grid container spacing={2}>
-        //                 <Title
-        //                     title="Encuentra el plan indicado para tí"
-        //                     subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
-        //                 />
-        //             </Grid>
-        //         </Container>
-        //         <div style={{ paddingLeft: theme.spacing(2) }}>
-        // <Carousel
-        //     additionalTransfrom={0}
-        //     arrows
-        //     autoPlaySpeed={3000}
-        //     centerMode={false}
-        //     className=""
-        //     containerClass="container"
-        //     dotListClass=""
-        //     draggable
-        //     focusOnSelect={false}
-        //     // infinite
-        //     itemClass=""
-        //     keyBoardControl
-        //     responsive={responsive}
-        //     minimumTouchDrag={80}
-        //     partialVisible
-        //     renderButtonGroupOutside={false}
-        //     renderDotsOutside={false}
-        //     showDots={false}
-        //     sliderClass=""
-        //     slidesToSlide={1}
-        //     swipeable
-        // >
-
-        //     {cards.map((card, index) => (
-        //         <div key={index} className={classes.card} style={{
-        //             backgroundImage: `url(${classes.img})`,
-        //             marginRight: theme.spacing(2)
-        //         }}>
-        //             <div className={classes.overlay} >
-        //                 <div className={classes.cardContent}>
-        //                     <Typography
-        //                         className={classes.paddingCardTitle}
-        //                         variant="subtitle1"
-        //                         color="initial">{card.name}</Typography>
-        //                     <Typography
-        //                         variant="body2"
-        //                         color="initial">{card.description}</Typography>
-        //                 </div>
-        //                 <div className={classes.cardAction}>
-        //                     <RoundedButton label="¡QUIERO ESTE PLAN!" onClick={() => navigateTo({
-        //                         pathname: "/planes/[slug]",
-        //                         query: {
-        //                             slug: card.slug,
-        //                             personas: 2,
-        //                             recetas: 2
-        //                         }
-        //                     })} />
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     ))}
-        // </Carousel>
-        //         </div>
-        //     </>
     )
 })
 

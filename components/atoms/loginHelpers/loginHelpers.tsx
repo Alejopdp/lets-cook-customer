@@ -15,8 +15,8 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export const ForgotPassword = (props: ForgotPasswordProps) => {
     return (
-        <Link href="/recuperar-contrasena">
-            <Typography variant="subtitle2" color="primary">
+        <Link href="/recuperar-contrasena" style={{textDecoration: 'none'}}>
+            <Typography variant="subtitle2" color="primary" style={{fontSize: '14px', fontWeight: '600'}}>
                 {props.text}
             </Typography>
         </Link>

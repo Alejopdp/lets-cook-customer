@@ -46,8 +46,8 @@ export const usePlansStyles = makeStyles(theme => ({
         textAlign: "left"
     },
     cardAction: {
-        paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2),
+        padding: theme.spacing(2),
+        width: '100%'
     },
     img: {},
     paddingCardTitle: {},

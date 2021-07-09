@@ -26,7 +26,7 @@ const TitleOtherPages = (props) => {
     return (
         <Grid container direction="column" alignItems={props.align || "center"} className={clsx(classes.padd4, classes.align)}>
             <Grid item xs={12} sm={12}>
-                <Typography variant="h4" color={props.color || "primary"} className={classes.padd2}>
+                <Typography variant="h2" color={props.color || "primary"} className={classes.padd2}>
                     {props.title}
                 </Typography>
             </Grid>

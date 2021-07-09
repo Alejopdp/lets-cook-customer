@@ -13,7 +13,8 @@ export const LoginButton = (props: LoginButtonProps) => {
             focusRipple
             className={classes.loginButton}
             style={{
-                border: props.border ? "solid 1px gray" : "none"
+                border: props.border ? "solid 1px gray" : "none",
+                ...props.style
             }}
             onClick={() => router.push("/ingresar")}
         >

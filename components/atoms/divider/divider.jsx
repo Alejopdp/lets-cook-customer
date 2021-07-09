@@ -13,7 +13,7 @@ export const Divider = () => {
             <Box className={lines}></Box>
 
             <Typography variant="body1">
-                ó
+                o
             </Typography>
 
             <Box className={lines}></Box>

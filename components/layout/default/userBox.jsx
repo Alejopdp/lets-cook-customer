@@ -60,7 +60,7 @@ const UserBox = (props) => {
                 style={{ marginLeft: "16px" }}
                 onClick={_toggleOpen}
             >
-                {userInfo.firstName || "User name"}
+                {userInfo.firstName || "MI CUENTA"}
             </Button>
             <Menu id="simple-menu" anchorEl={anchorRef.current} keepMounted open={open} onClose={_toggleOpen} style={{ marginTop: "40px" }}>
                 {options["es"].map((item, index) => (

@@ -9,7 +9,7 @@ import { verifyToken } from "../../helpers/serverRequests/customer";
 
 const Signup = () => {
     return (
-        <Layout>
+        <Layout disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <SignUpForm />
             </InnerSectionLayout>
