@@ -1,17 +1,18 @@
 // Utils & Config
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import { useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core";
+
 import Link from "next/link";
 // const langs = require("../../lang").comoFunciona;
 import { getProfileInfo } from "../../helpers/serverRequests/userProfile";
-import "react-multi-carousel/lib/styles.css";
 
 // External Components
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Hidden from "@material-ui/core/Hidden";
 import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 // Internal components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
@@ -96,73 +97,131 @@ const Perfil = ({ data, error }) => {
         carouselWidth = window.innerWidth;
     }
 
+    const responsive = {
+        superLargeDesktop: {
+            breakpoint: {
+                max: 3000,
+                min: 1280
+            },
+            items: 5,
+            partialVisibilityGutter: 40
+        },
+        desktop: {
+            breakpoint: {
+                max: 1280,
+                min: 960
+            },
+            items: 3,
+            partialVisibilityGutter: 40
+        },
+        tablet: {
+            breakpoint: {
+                max: 960,
+                min: 600
+            },
+            items: 2,
+            partialVisibilityGutter: 30
+        },
+        mobile: {
+            breakpoint: {
+                max: 600,
+                min: 0
+            },
+            items: 1,
+            partialVisibilityGutter: 30
+        },
+    };
+
+
     return (
         <>
             <Layout disableCallToActionSection>
                 <InnerSectionLayout containerMaxWidth="lg">
                     <Grid container spacing={5}>
                         <Grid item xs={12} md={4}>
-                            <Grid container direction="column" alignItems="left" spacing={2}>
-                                <Hidden mdUp>
-                                    <Grid
-                                        container
-                                        direction="row"
-                                        alignItems="center"
-                                        justify="space-between"
-                                        style={{ marginBottom: theme.spacing(5) }}
-                                    >
-                                        <Grid container xs={9}>
-                                            <Grid item>
-                                                <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                                    Hola Alejo
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid container xs={3} direction="row">
-                                            <Grid item style={{ marginRight: theme.spacing(2) }}>
-                                                <Link href="/historial-pagos">
-                                                    <TextButton
-                                                        style={{ marginRight: "14px" }}
-                                                        noColor
-                                                        icon="time"
-                                                        btnText="Historial de pagos"
-                                                    />
-                                                </Link>
-                                            </Grid>
-                                            <Grid item>
-                                                <Link href="/configuracion">
-                                                    <TextButton noColor icon="settings" btnText="Configuración" />
-                                                </Link>
-                                            </Grid>
-                                        </Grid>
+                            {/* Greeting & Pending Actions Mobile */}
+                            <Hidden mdUp>
+                                <Grid
+                                    container
+                                    direction="row"
+                                    alignItems="center"
+                                    justify="space-between"
+                                    style={{ marginBottom: theme.spacing(5) }}
+                                >
+                                    <Grid item xs={9}>
+                                        {/* <Grid item> */}
+                                        <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
+                                            Hola Alejo
+                                            </Typography>
+                                        {/* </Grid> */}
                                     </Grid>
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            width: carouselWidth,
-                                            overflowX: "scroll",
-                                        }}
-                                    >
-                                        {data.pendingActions.map((action, index) => (
-                                            <Grid key={index} item xs={12} style={{ marginRight: theme.spacing(2) }}>
-                                                {getPendingActionComponent(action)}
-                                            </Grid>
-                                        ))}
-                                    </div>
-                                </Hidden>
-                                <Hidden smDown>
-                                    <Grid item style={{ marginBottom: theme.spacing(3) }}>
+                                    <Grid item xs={3} style={{ textAlign: 'right' }}>
+                                        {/* <Grid item style={{ marginRight: theme.spacing(2) }}> */}
+                                        <Link href="/historial-pagos">
+                                            <TextButton
+                                                style={{ marginRight: theme.spacing(2)}}
+                                                noColor
+                                                icon="time"
+                                                btnText="Historial de pagos"
+                                            />
+                                        </Link>
+                                        {/* </Grid> */}
+                                        {/* <Grid item> */}
+                                        <Link href="/configuracion">
+                                            <TextButton noColor icon="settings" btnText="Configuración" />
+                                        </Link>
+                                        {/* </Grid> */}
+                                    </Grid>
+                                </Grid>
+                                <Carousel
+                                    additionalTransfrom={0}
+                                    arrows={false}
+                                    autoPlaySpeed={3000}
+                                    centerMode={false}
+                                    className=""
+                                    containerClass="container"
+                                    dotListClass=""
+                                    draggable
+                                    focusOnSelect={false}
+                                    // infinite
+                                    itemClass=""
+                                    keyBoardControl
+                                    responsive={responsive}
+                                    minimumTouchDrag={80}
+                                    partialVisible
+                                    renderButtonGroupOutside={false}
+                                    renderDotsOutside={false}
+                                    showDots={false}
+                                    sliderClass=""
+                                    slidesToSlide={1}
+                                    swipeable
+                                >
+                                    {data.pendingActions.map((action, index) => (
+                                        <div key={index} style={{ marginRight: theme.spacing(2) }}>
+                                            {getPendingActionComponent(action)}
+                                        </div>
+                                    ))}
+                                </Carousel>
+                            </Hidden>
+                            {/* Greeting & Pending Actions Desktop */}
+                            <Hidden smDown>
+                                <Grid
+                                    container
+                                    direction="column"
+                                    alignItems="left"
+                                    spacing={2}
+                                >
+                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(3) }}>
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
                                             Hola Alejo
                                         </Typography>
                                     </Grid>
-                                    <Grid item style={{ marginBottom: theme.spacing(1) }}>
+                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                                         <Link href="/historial-pagos">
                                             <TextButton style={{ marginRight: "14px" }} noColor icon="time" btnText="Historial de pagos" />
                                         </Link>
                                     </Grid>
-                                    <Grid item style={{ marginBottom: theme.spacing(5) }}>
+                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(5) }}>
                                         <Link href="/configuracion">
                                             <TextButton noColor icon="settings" btnText="Configuración" />
                                         </Link>
@@ -172,9 +231,10 @@ const Perfil = ({ data, error }) => {
                                             {getPendingActionComponent(action)}
                                         </Grid>
                                     ))}
-                                </Hidden>
-                            </Grid>
+                                </Grid>
+                            </Hidden>
                         </Grid>
+
                         <Grid item xs={12} md={8}>
                             <Grid
                                 container
