@@ -1,4 +1,8 @@
-import React from "react";
+// Utils & config
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 
 // Internal Components
 import InnerSectionLayout from "../../components/layout/publicLayout";
@@ -7,27 +11,35 @@ import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTi
 import UserInfoDetail from "../../components/organisms/userInfo";
 import { getUserInfo } from "../../helpers/serverRequests/user-info";
 
-export async function getStaticPaths() {
-    return {
-        paths: [{ params: { id: "60950bca50eb513944a77b68" } }],
-        fallback: false,
-    };
-}
+const UserInfo = (props) => {
+    const router = useRouter();
+    const [isLoading, setisLoading] = useState(true);
+    const [initialCustomerInfo, setinitialCustomerInfo] = useState({});
+    // const { enqueueSnackbar } = useSnackbar();
 
-export const getStaticProps = async (context) => {
-    const test = context.params.id;
-    const res = await getUserInfo(test, context.locale);
-    return {
-        props: {},
-    };
-};
+    useEffect(() => {
+        const getData = async () => {
+            if (!router.isReady) return;
+            const res = await getUserInfo(router.query.id, router.locale);
 
-const UserInfo = () => {
+            if (res.status === 200) {
+                setinitialCustomerInfo(res.data);
+            } else {
+                // enqueueSnackbar("Error al buscar la información", { variant: "error" });
+                alert("error");
+            }
+
+            setisLoading(false);
+        };
+
+        getData();
+    }, [router.isReady]);
+
     return (
         <Layout>
             <InnerSectionLayout containerMaxWidth="lg">
                 <BackButtonTitle url="/" title="Configuracion de la cuenta" />
-                <UserInfoDetail />
+                <UserInfoDetail customer={initialCustomerInfo} isLoading={isLoading} />
             </InnerSectionLayout>
         </Layout>
     );
