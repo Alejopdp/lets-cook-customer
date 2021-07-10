@@ -2,6 +2,7 @@ import Typography from '@material-ui/core/Typography';
 import { useTheme, Container, Grid } from '@material-ui/core';
 import Title from "../../molecules/titleOtherPages/titleOtherPages";
 import { RoundedButton } from '@atoms';
+import { useRouter } from "next/router";
 
 import { useHowItWorksStyles as useStyles } from "./styles";
 import { HowItWorksSectionProps, HowItWorks } from "./interfaces";
@@ -33,6 +34,7 @@ const _cards: HowItWorks[] = [
 const HowItWorksSection = memo(({cards = _cards}: HowItWorksSectionProps) => {
     const theme = useTheme();
     const classes = useStyles();
+    const router = useRouter();
 
     return (
         <Container maxWidth='lg'>
@@ -56,7 +58,7 @@ const HowItWorksSection = memo(({cards = _cards}: HowItWorksSectionProps) => {
             </Grid>
             <Grid container style={{ marginTop: theme.spacing(4) }}>
                 <Grid item xs={12} style={{ display: 'flex', flexDirection: 'column' }}>
-                    <RoundedButton label="Ver planes" />
+                    <RoundedButton label="Ver planes" onClick={() => router.push("/planes")} />
                     <Typography className={classes.smallText} variant="caption">
                         Podrás pausar, cambiar o cancelar el plan cuando quieras
                     </Typography>

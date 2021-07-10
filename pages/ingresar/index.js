@@ -5,12 +5,15 @@ import React from "react";
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import LoginBox from "../../components/organisms/loginBox/loginBox";
 import { verifyToken } from "../../helpers/serverRequests/customer";
+import { Layout } from "../../components/layout/index";
 
 const Login = (props) => {
     return (
-        <InnerSectionLayout containerMaxWidth="lg">
-            <LoginBox redirect />
-        </InnerSectionLayout>
+        <Layout disableCallToActionSection disableFooterSection>
+            <InnerSectionLayout containerMaxWidth="lg">
+                <LoginBox redirect />
+            </InnerSectionLayout>
+        </Layout>
     );
 };
 

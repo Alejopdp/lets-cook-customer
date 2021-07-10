@@ -7,7 +7,9 @@ export interface Benefit {
     image: string;
 }
 export interface BenefitsSectionProps {
-    cards: Benefit[]
+    cards: Benefit[],
+    backgroundColor: string,
+    removeCallToAction: boolean,
 }
 
 export interface CallToActionSectionProps { }

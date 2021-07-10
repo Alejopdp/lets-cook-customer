@@ -1,7 +1,7 @@
 // Utils & Config
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@material-ui/core';
+import { useTheme, useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 
 // External Components
@@ -33,10 +33,20 @@ const data = Array<Review>(10)
         date: `Hace ${index} días`,
     }));
 
-export const ReviewsSection = ({reviews = data}: ReviewsSectionProps) => {
+export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
     const theme = useTheme();
+    const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
+
 
     const responsive = {
+        superLargeDesktop: {
+            breakpoint: {
+                max: 6000,
+                min: 1280
+            },
+            items: 4,
+            partialVisibilityGutter: 40
+        },
         desktop: {
             breakpoint: {
                 max: 3000,
@@ -87,7 +97,7 @@ export const ReviewsSection = ({reviews = data}: ReviewsSectionProps) => {
             <div style={{ paddingLeft: theme.spacing(2) }}>
                 <Carousel
                     additionalTransfrom={0}
-                    arrows
+                    arrows={isSmDown ? false : true}
                     autoPlaySpeed={3000}
                     centerMode={false}
                     className=""

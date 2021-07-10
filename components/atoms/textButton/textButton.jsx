@@ -1,8 +1,7 @@
 // Utils & Config
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import { useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme, useMediaQuery } from "@material-ui/core";
 
 // import clsx from "clsx";
 
@@ -32,37 +31,32 @@ const useStyles = makeStyles((theme) => ({
 
 const TextButton = (props) => {
     const theme = useTheme();
+    const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
     const classes = useStyles();
-    let onlyIcon = false;
+    
     let content = (
         <Button size="small" className={classes.textButton} style={props.style} onClick={props.handleClick}>
             {props.icon === "plus-circle-outline" ? (
-                <AddCircleOutlineIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+                <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : null} />
             ) : props.icon === "settings" ? (
-                <SettingsIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+                <SettingsIcon style={!isSmDown ? { marginRight: "6px" } : null} />
             ) : props.icon === "time" ? (
-                <RestoreIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+                <RestoreIcon style={!isSmDown ? { marginRight: "6px" } : null} />
             ) : null}
             {props.btnText}
         </Button>
     );
 
-    if (process.browser) {
-        if (window.innerWidth < 500) {
-            onlyIcon = true;
-        }
-    }
 
-    if (onlyIcon && props.icon) {
-        console.log("jey");
+    if (isSmDown && props.icon) {
         content = (
-            <IconButton size="small">
+            <IconButton size="small" style={props.style}>
                 {props.icon === "plus-circle-outline" ? (
-                    <AddCircleOutlineIcon style={!onlyIcon ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
+                    <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
                 ) : props.icon === "settings" ? (
-                    <SettingsIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+                    <SettingsIcon style={!isSmDown ? { marginRight: "6px" } : null} />
                 ) : props.icon === "time" ? (
-                    <RestoreIcon style={!onlyIcon ? { marginRight: "6px" } : null} />
+                    <RestoreIcon style={!isSmDown ? { marginRight: "6px" } : null} />
                 ) : null}
             </IconButton>
         );

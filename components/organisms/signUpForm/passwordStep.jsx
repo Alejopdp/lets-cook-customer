@@ -18,11 +18,14 @@ const PasswordStep = (props) => {
 
     return (
         <>
+            <SocialNetworksButtons />
+            <Divider />
             <PasswordInput
                 label={lang.passwordInput}
                 name="password"
                 value={props.password}
                 onChange={props.handleChange}
+                helperText='La contraseña debe tener al menos 8 caracteres, 1 mayúscula y 1 número'
             />
 
             <CustomCheckbox
@@ -49,9 +52,7 @@ const PasswordStep = (props) => {
                 onClick={props.handleSubmit}
             />
 
-            <Divider />
 
-            <SocialNetworksButtons />
         </>
     )
 }

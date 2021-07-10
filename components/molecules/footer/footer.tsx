@@ -50,7 +50,7 @@ const _links: ILink[] = [
     },
 ];
 
-export const Footer = memo(({links = _links}: FooterProps) => {
+export const Footer = memo(({ links = _links }: FooterProps) => {
     const classes = useStyles();
     const { root, footer, marg1 } = classes;
 
@@ -59,7 +59,7 @@ export const Footer = memo(({links = _links}: FooterProps) => {
             <Grid container justify="space-between" className={footer}>
                 <Grid item>
                     <Link href='/'>
-                        <Image src="/logo.png" width={190} height={60} />
+                        <Image src="/logo.png" width={174} height={60} />
                     </Link>
                     <Grid style={{ marginTop: '16px' }}>
                         <InstagramIcon

@@ -7,7 +7,6 @@ export const recoverPassword = {
         register: {
             text: "¿Aún no tienes cuenta?",
             boldText: "Regístrate aquí",
-            redirectTo: "/registrarme"
         }
     },
     en: {
@@ -18,7 +17,6 @@ export const recoverPassword = {
         register: {
             text: "No account yet?",
             boldText: "Sign up here",
-            redirectTo: "/registrarme"
         }
     },
     ca: {
@@ -29,7 +27,6 @@ export const recoverPassword = {
         register: {
             text: "No account yet?",
             boldText: "Sign up here",
-            redirectTo: "/registrarme"
         }
     },
 }

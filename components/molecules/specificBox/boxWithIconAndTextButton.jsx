@@ -52,7 +52,6 @@ const BoxWithIconAndTextButton = (props) => {
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: "310px",
                 }}
             >
                 <div

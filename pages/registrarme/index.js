@@ -15,7 +15,7 @@ const Signup = () => {
         router.push("/");
     };
     return (
-        <Layout>
+        <Layout disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <SignUpForm handleSignUp={handleSignUp} />
             </InnerSectionLayout>

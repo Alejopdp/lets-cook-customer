@@ -104,7 +104,6 @@ const SignUpForm = (props) => {
     return (
         <FormPaper title={lang.title}>
             {currentInputs}
-
             <Register
                 text={lang.register.text}
                 boldText={lang.register.boldText}

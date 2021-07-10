@@ -34,7 +34,7 @@ const HistorialPagos = (props) => {
 
     return (
         <>
-            <Layout>
+            <Layout disableCallToActionSection>
                 <InnerSectionLayout containerMaxWidth="lg">
                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: theme.spacing(3) }}>
                         <Link href="/perfil">

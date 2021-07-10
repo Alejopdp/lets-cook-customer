@@ -24,7 +24,7 @@ export const getStaticProps = async (context) => {
 
 const UserInfo = () => {
     return (
-        <Layout>
+        <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <BackButtonTitle url="/" title="Configuracion de la cuenta" />
                 <UserInfoDetail />
