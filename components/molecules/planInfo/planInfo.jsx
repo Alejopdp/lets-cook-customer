@@ -8,15 +8,13 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Image from "next/image";
 
-
-
 const useStyles = makeStyles((theme) => ({
     container: {
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
     },
     text: {
-        fontSize: '18px',
+        fontSize: "18px",
         fontWeight: 600,
         marginLeft: theme.spacing(1.5),
     },

@@ -4,38 +4,39 @@ import { getPostBySlug, getPosts } from "../../../helpers/serverRequests/blog";
 
 // Internal componentss
 import BlogPostCardDetail from "../../../components/organisms/blogPostCardDetail/blogPostCardDetail";
-import InnerSectionLayout from "../../../components/layout/publicLayout";
+import InnerSectionLayout from "../../../components/layout/innerSectionLayout";
 import BackButtonTitle from "../../../components/atoms/backButtonTitle/backButtonTitle";
-import Layout from '../../../components/layout/index';
+import { Layout } from "../../../components/layout/index";
 
-export const getStaticPaths = async (context) => {
-    const response = await getPosts(context.locale);
-    const paths = response.data.map((post, index) => ({
-        params: {
-            slug: post.slug,
-        },
-    }));
+// export const getStaticPaths = async (context) => {
+//     const response = await getPosts(context.locale);
 
-    return {
-        // incremental static generation
-        // Statically generate all paths
-        paths: paths,
-        // Everything else falls for 404
-        fallback: false,
-    };
-};
+//     const paths = response.data.map((post, index) => ({
+//         params: {
+//             slug: post.slug,
+//         },
+//     }));
 
-export const getStaticProps = async (context) => {
-    const slug = context.params.slug;
-    const res = await getPostBySlug(slug, context.locale);
+//     return {
+//         // incremental static generation
+//         // Statically generate all paths
+//         paths: paths,
+//         // Everything else falls for 404
+//         fallback: false,
+//     };
+// };
 
-    return {
-        props: {
-            post: res.data || null,
-            error: res.status !== 200 ? "ERROR" : "",
-        },
-    };
-};
+// export const getStaticProps = async (context) => {
+//     const slug = context.params.slug;
+//     const res = await getPostBySlug(slug, context.locale);
+
+//     return {
+//         props: {
+//             post: res.data || null,
+//             error: res.status !== 200 ? "ERROR" : "",
+//         },
+//     };
+// };
 
 const BlogPostPage = ({ post, error }) => {
     return (
@@ -49,3 +50,15 @@ const BlogPostPage = ({ post, error }) => {
 };
 
 export default BlogPostPage;
+
+export const getServerSideProps = async (context) => {
+    const slug = context.params.slug;
+    const res = await getPostBySlug(slug, context.locale);
+
+    return {
+        props: {
+            pors: res.data || null,
+            error: res.status !== 200 ? "ERROR" : "",
+        },
+    };
+};

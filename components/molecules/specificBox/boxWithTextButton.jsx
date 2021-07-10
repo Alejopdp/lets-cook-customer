@@ -15,28 +15,29 @@ import TextButton from "../../atoms/textButton/textButton";
 
 // Icons & Images
 
+const useStyles = makeStyles((theme) => ({}));
 
-
-const useStyles = makeStyles((theme) => ({
-
-}));
-
-const BoxWithTitleAndTextButton = (props) => {
+const BoxWithTextButton = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
     return (
-        <GeneralBox variant='medium'>
-            <div>
-                {props.children}
-            </div>
-            <TextButton btnText={props.btnText} style={{ marginTop: theme.spacing(3) }} handleClick={props.handleClick} />
+        <GeneralBox variant="medium">
+            <div style={{ width: "100%" }}>{props.children}</div>
+            <TextButton
+                handleClick={props.handleClick}
+                btnText={props.btnText}
+                style={{
+                    marginTop: theme.spacing(3),
+                    color: props.status === "SUBSCRIPTION_EXPIRED" || props.status === "SUBSCRIPTION_CANCELLED" ? theme.palette.primary.main : null,
+                }}
+            />
         </GeneralBox>
     );
 };
 
-BoxWithTitleAndTextButton.propTypes = {
+BoxWithTextButton.propTypes = {
     btnText: PropTypes.string.isRequired,
 };
 
-export default BoxWithTitleAndTextButton;
+export default BoxWithTextButton;

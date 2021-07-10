@@ -1,6 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import clsx from "clsx";
-import Layout from "../../layout";
+import {Layout} from "@layouts";
 import ValuePropositionSection from "../sections/ValuePropositionSection";
 import BenefitsSection from "../sections/BenefitsSection";
 import CallToActionSection from "../sections/CallToActionSection";
@@ -8,7 +8,7 @@ import GoogleRatingSection from "../sections/GoogleRatingSection";
 import HowItWorksSection from "../sections/HowItWorksSection";
 import PlansSection from "../sections/PlansSection";
 import RecipesSection from "../sections/RecipesSection";
-import ReviewsSection from "../sections/ReviewsSection.jsx";
+import ReviewsSection from "../sections/ReviewsSection";
 
 const useStyles = makeStyles((theme) => ({
     // root: {

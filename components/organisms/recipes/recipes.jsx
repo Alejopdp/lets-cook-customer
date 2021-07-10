@@ -1,29 +1,21 @@
 import React, { useState, useEffect } from "react";
 
 import { Grid, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import RecipesModal from "../../molecules/valueRecipesModal/recipesModal";
 import FoodCard from "../../molecules/foodCard";
 import { deleteRecipe } from "../../../helpers/serverRequests/user-recipes";
 
 const useStyles = makeStyles((theme) => ({
-    typography: {
-        fontWeight: "500",
-        fontFamily: theme.typography.fontFamily,
-        marginBottom: ".5rem",
-    },
-    valueRecipes: {
-        fontWeight: "500",
-        fontFamily: theme.typography.fontFamily,
-        marginBottom: ".5rem",
-        marginTop: "1rem",
-    },
+
 }));
 
 const Recipes = ({ recipes }) => {
     const classes = useStyles();
 
+    const theme = useTheme();
+    // modal
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
 
     const [recipesToRate, setRecipesToRate] = useState([]);
@@ -67,18 +59,12 @@ const Recipes = ({ recipes }) => {
 
     return (
         <>
-            <Grid container style={{ marginBottom: "1rem" }}>
-                <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography variant="h6" className={classes.typography}>
-                                Recetas pendientes de valorar
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
             <Grid container spacing={2}>
+                <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                    <Typography variant="h6">
+                        Recetas pendientes de valorar
+                    </Typography>
+                </Grid>
                 {recipesToRate.map((recipeToRate) => {
                     return (
                         <Grid item xs={12} md={3} key={recipeToRate.id} onClick={() => setChosenRecipe(recipeToRate)}>
@@ -102,19 +88,11 @@ const Recipes = ({ recipes }) => {
                         </Grid>
                     );
                 })}
-            </Grid>
-            <Grid container style={{ marginBottom: "1rem" }}>
-                <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography variant="h6" className={classes.valueRecipes}>
-                                Recetas valoradas
-                            </Typography>
-                        </Grid>
-                    </Grid>
+                <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
+                    <Typography variant="h6">
+                        Recetas valoradas
+                    </Typography>
                 </Grid>
-            </Grid>
-            <Grid container spacing={2}>
                 {recipesWithRating.map((recipeWithRating) => {
                     return (
                         <Grid item xs={12} md={3} key={recipeWithRating.id} onClick={() => setChosenRecipe(recipeWithRating)}>
@@ -138,7 +116,6 @@ const Recipes = ({ recipes }) => {
                     );
                 })}
             </Grid>
-
             <RecipesModal
                 open={openRecipeModal}
                 handleClose={handleCloseRecipeModal}

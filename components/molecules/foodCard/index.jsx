@@ -6,7 +6,10 @@ import { CardActionArea, CardActions, CardContent, CardMedia, Button, Typography
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: "260px",
+        borderRadius: "8px",
+        boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
     },
     media: {
         height: "167px",
@@ -21,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.grey,
         fontFamily: theme.typography.fontFamily,
         fontWeight: "400",
-        marginTop: "-1rem",
+        marginTop: theme.spacing(1),
     },
 }));
 
@@ -36,6 +39,7 @@ export default function FoodCard({
     recipeToRate,
 }) {
     const classes = useStyles();
+    const theme = useTheme();
 
     return (
         <>

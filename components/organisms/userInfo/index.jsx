@@ -286,6 +286,7 @@ const UserInfoDetail = (props) => {
                 primaryButtonText="MODIFICAR DATOS PERSONALES"
                 secondaryButtonText="CANCELAR"
                 personalData={customerInfo.personalData}
+                handleSubmit={handleUpdatePersonalDataSubmit}
             />
             <BillingAddressModal
                 open={openBillingAddressModal}

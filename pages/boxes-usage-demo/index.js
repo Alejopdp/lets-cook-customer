@@ -9,8 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 // Internal components
-import InnerSectionLayout from "../../components/layout/publicLayout";
-import Layout from "../../components/layout/index";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
+import { Layout } from "../../components/layout/index";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 import GeneralBox from "../../components/atoms/generalBox/generalBox";
 import BoxWithTitle from "../../components/molecules/specificBox/boxWithTitle";

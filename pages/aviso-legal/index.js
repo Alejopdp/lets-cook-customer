@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 const langs = require("../../lang").avisoLegal;
 
 // Internal components
-import InnerSectionLayout from "../../components/layout/publicLayout";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
 import LegalTextSection from "../../components/atoms/LegalTextSection/LegalTextSection";
 import Footer from "../../components/molecules/footer/footer";
-import Layout from '../../components/layout/index';
+import { Layout } from "../../components/layout/index";
 
 const AvisoLegal = () => {
     const router = useRouter();

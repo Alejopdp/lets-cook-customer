@@ -50,6 +50,10 @@ const PersonalDataModal = (props) => {
         });
     };
 
+    const handleSubmit = () => {
+        props.handleSubmit(formData)
+    }
+
     return (
         <Modal
             open={props.open}

@@ -1,0 +1,101 @@
+{
+    "principalPlanSubscriptions": [
+        {
+            "id": "a65da149-08f4-42bc-8908-ede1a9bfd54e",
+            "planName": "Plan familiar",
+            "planVariantLabel": "4 recetas para 3 personas",
+            "nextShippment": "12 de Junio",
+            "frequency": "Semanal",
+            "stateTitle": "SUBSCRIPTION_ACTIVE",
+            "stateHumanTitle": "Activo",
+            "stateColor": "#00A555"
+        },
+        {
+            "id": "4719c06b-6a7e-4556-b93e-c628016d7a5a",
+            "planName": "Plan Gourmet",
+            "planVariantLabel": "3 recetas para 2 personas",
+            "nextShippment": "19 de Junio",
+            "frequency": "Semanal",
+            "stateTitle": "SUBSCRIPTION_CANCELLED",
+            "stateHumanTitle": "Inactivo",
+            "stateColor": "#00A555"
+        },
+        {
+            "id": "4c0b02db-1f7c-4be3-9d8b-1a7f83f64c11",
+            "planName": "Plan Fitness",
+            "planVariantLabel": "4 recetas para 2 personas",
+            "nextShippment": "19 de Junio",
+            "frequency": "Semanal",
+            "stateTitle": "SUBSCRIPTION_EXPIRED",
+            "stateHumanTitle": "Inactivo",
+            "stateColor": "#00A555"
+        },
+        {
+            "id": "298d8487-8c65-4f34-81de-7a7a1ca51623",
+            "planName": "Plan familiar",
+            "planVariantLabel": "4 recetas para 3 personas",
+            "nextShippment": "12 de Junio",
+            "frequency": "Semanal",
+            "stateTitle": "SUBSCRIPTION_ACTIVE",
+            "stateHumanTitle": "Activo",
+            "stateColor": "#00A555"
+        }
+    ],
+    "additionalPlanSubscriptions": [
+        {
+            "id": "b46989bc-71fb-4736-b726-6965bb2bf952",
+            "planName": "Plan Frutas",
+            "planVariantLabel": "4 recetas para 3 personas",
+            "nextShippment": "12 de Junio",
+            "frequency": "Semanal",
+            "stateTitle": "SUBSCRIPTION_ACTIVE",
+            "stateHumanTitle": "Activo",
+            "stateColor": "#00A555"
+        },
+        {
+            "id": "cd4bcd2b-632d-4409-b235-771e0eee72e3",
+            "planName": "Plan Vinos",
+            "planVariantLabel": "4 recetas para 3 personas",
+            "nextShippment": "12 de Junio",
+            "frequency": "Semanal",
+            "stateTitle": "SUBSCRIPTION_ACTIVE",
+            "stateHumanTitle": "Activo",
+            "stateColor": "#00A555"
+        },
+        {
+            "id": "795cbe6f-ddd9-48f6-b7d3-7ada2b7e214a",
+            "planName": "Plan Desayuno",
+            "planVariantLabel": "4 recetas para 3 personas",
+            "nextShippment": "12 de Junio",
+            "frequency": "Semanal",
+            "stateTitle": "SUBSCRIPTION_ACTIVE",
+            "stateHumanTitle": "Activo",
+            "stateColor": "#00A555"
+        }
+    ],
+    "pendingActions": [
+        {
+            "type": "choose_recipes",
+            "planName": "Plan Familiar",
+            "shippment": "12 de Junio"
+        },
+        {
+            "type": "choose_recipes",
+            "planName": "Plan Vegetariano",
+            "shippment": "12 de Junio"
+        },
+        {
+            "type": "choose_recipes",
+            "planName": "Plan Gourmet",
+            "shippment": "12 de Junio"
+        },
+        {
+            "type": "rate_recipes"
+        },
+        {
+            "type": "invite_code",
+            "couponCode": "ALEJOAMIGOS",
+            "discountValue": "5%"
+        }
+    ]
+}
