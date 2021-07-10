@@ -13,7 +13,6 @@ import PhoneNumberInput from "../../atoms/phoneNumberInput/phoneNumberInput";
 import PreferedLanguageInput from "../../atoms/preferedLanguageInput/preferedLanguageInput";
 import DatePicker from "../../atoms/datePickerInput/datePickerInput";
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         "& > *": {
@@ -35,8 +34,21 @@ const PersonalDataModal = (props) => {
     const isMdUp = useMediaQuery("(min-width:960px)");
     const classes = useStyles();
 
-    const [valuePhoneInput, setValuePhoneInput] = useState(null);
-    const [valuePhoneInput2, setValuePhoneInput2] = useState(null);
+    const [formData, setformData] = useState({
+        name: props.personalData.name,
+        lastName: props.personalData.lastName,
+        birthDate: props.personalData.birthDate,
+        preferredLanguage: props.personalData.preferredLanguage,
+        phone1: props.personalData.phone1,
+        phone2: props.personalData.phone2,
+    });
+
+    const handleChange = (e) => {
+        setformData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
 
     return (
         <Modal
@@ -69,6 +81,8 @@ const PersonalDataModal = (props) => {
                                     label="Nombre"
                                     variant="outlined"
                                     style={{ marginBottom: "-1rem" }}
+                                    value={formData.name}
+                                    onChange={handleChange}
                                 />
                             </form>
                         </Grid>
@@ -78,7 +92,14 @@ const PersonalDataModal = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <form noValidate autoComplete="off">
-                                <TextField className={classes.root} id="outlined-basic" label="Apellido" variant="outlined" />
+                                <TextField
+                                    className={classes.root}
+                                    id="outlined-basic"
+                                    label="Apellido"
+                                    variant="outlined"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                />
                             </form>
                         </Grid>
                     </Grid>
@@ -89,14 +110,25 @@ const PersonalDataModal = (props) => {
                 <Grid item xs={12} md={6}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <PhoneNumberInput value={valuePhoneInput} handleChange={setValuePhoneInput} placeholder="Telefono (1)" />
+                            <PhoneNumberInput
+                                handleChange={handleChange}
+                                placeholder="Telefono (1)"
+                                value={formData.phone1}
+                                name="phone1"
+                            />
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <PhoneNumberInput value={valuePhoneInput2} handleChange={setValuePhoneInput2} placeholder="Telefono (2)" />
+                            <PhoneNumberInput
+                                value={formData.phone2}
+                                handleChange={handleChange}
+                                placeholder="Telefono (2)"
+                                value={formData.phone2}
+                                name="phone2"
+                            />
                         </Grid>
                     </Grid>
                 </Grid>

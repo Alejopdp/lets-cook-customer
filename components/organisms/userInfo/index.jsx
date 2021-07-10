@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 // External Components
 import Grid from "@material-ui/core/Grid";
@@ -15,15 +15,31 @@ import PersonalDataModal from "../../molecules/userInfo/personalDataModal";
 import BillingAddressModal from "../../molecules/userInfo/billingAddressModal";
 import DeliveryAddressModal from "../../molecules/userInfo/deliveryAddressModal";
 import PaymentMethodModal from "../../molecules/userInfo/paymentMethod";
+import DataPaperSkeleton from "./dataPaperSkeleton";
+import WithSkeleton from "../../molecules/withSkeleton/withSkeleton";
+import { updatePersonalData } from "../../../helpers/serverRequests/customer";
 
-const UserInfoDetail = () => {
+const UserInfoDetail = (props) => {
     const theme = useTheme();
+    const [customerInfo, setcustomerInfo] = useState({
+        id: props.customer.id || "",
+        email: props.customer.email || "",
+        personalData: props.customer.personalData || {},
+        shippingAddress: props.customer.shippingAddress || {},
+        billingData: props.customer.billingData || {},
+        paymentMethods: props.customer.paymentMethods || [],
+    });
     const [openEmailModal, setEmailModal] = useState(false);
     const [openPasswordModal, setPasswordModal] = useState(false);
     const [openPersonalDataModal, setPersonalDataModal] = useState(false);
     const [openBillingAddressModal, setBillingAddressModal] = useState(false);
     const [openDeliveryAddressModal, setDeliveryAddressModal] = useState(false);
     const [openPaymentMethod, setPaymentMethod] = useState(false);
+
+    const defaultPaymentMethod = useMemo(() => {
+        return customerInfo.paymentMethods.find((method) => method.isDefault) || {};
+    }, [customerInfo.paymentMethods]);
+
     //EMAIL
     const handleClickOpenEmailModal = () => {
         setEmailModal(true);
@@ -77,72 +93,151 @@ const UserInfoDetail = () => {
     const handleClickClosePaymentMethodModal = () => {
         setPaymentMethod(false);
     };
+
+    const handleUpdatePersonalDataSubmit = async (newData) => {
+        const res = await updatePersonalData(customerInfo.id, newData);
+
+        if (res.status === 200) {
+            setcustomerInfo({
+                ...customerInfo,
+                personalData: newData
+            })
+
+        } else {
+            alert("Error")
+        }
+    };
+
     return (
         <>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <BoxWithTitleAndTextButton
-                                title="Datos Personales"
-                                btnText="MODIFICAR DATOS PERSONALES"
-                                handleClick={() => handleClickOpenPersonalDataModal()}
-                            >
-                                <DataDisplay title="Nombre completo" text="Alejo Scotti" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay title="Telefono (1)" text="3794-749124" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay title="Telefono (2)" text="Sin indicar" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay title="Fecha de Nacimiento" text="Sin indicar" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay title="Idioma de preferencia" text="Ingles" />
-                            </BoxWithTitleAndTextButton>
+                            {props.isLoading ? (
+                                <DataPaperSkeleton />
+                            ) : (
+                                <BoxWithTitleAndTextButton
+                                    title="Datos Personales"
+                                    btnText="MODIFICAR DATOS PERSONALES"
+                                    handleClick={() => handleClickOpenPersonalDataModal()}
+                                >
+                                    <DataDisplay
+                                        title="Nombre completo"
+                                        text={customerInfo.personalData.fullName}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay
+                                        title="Telefono (1)"
+                                        text={customerInfo.personalData.phone1}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay
+                                        title="Telefono (2)"
+                                        text={customerInfo.personalData.phone1}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay
+                                        title={"Fecha de Nacimiento"}
+                                        text={customerInfo.personalData.birthDate}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay title="Idioma de preferencia" text={customerInfo.personalData.preferredLanguage} />
+                                </BoxWithTitleAndTextButton>
+                            )}
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <BoxWithTitleAndTextButton
-                                title="Direccion de Entrega"
-                                btnText="MODIFICAR DIRECCION DE ENTREGA"
-                                handleClick={() => handleClickOpenDeliveryAddressModal()}
-                            >
-                                <DataDisplay title="Direccion de Entrega" text="Belgrano" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay title="Piso / Puerta / Aclaraciones" text="1558" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay
-                                    title="Horario de preferencia de entrega"
-                                    text="Sin indicar"
-                                    style={{ marginBottom: "8.3rem" }}
-                                />
-                            </BoxWithTitleAndTextButton>
+                            {props.isLoading ? (
+                                <DataPaperSkeleton />
+                            ) : (
+                                <BoxWithTitleAndTextButton
+                                    title="Direccion de Entrega"
+                                    btnText="MODIFICAR DIRECCION DE ENTREGA"
+                                    handleClick={() => handleClickOpenDeliveryAddressModal()}
+                                >
+                                    <DataDisplay
+                                        title="Direccion de Entrega"
+                                        text={customerInfo.shippingAddress.name}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay
+                                        title="Piso / Puerta / Aclaraciones"
+                                        text={customerInfo.shippingAddress.details}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay
+                                        title="Horario de preferencia de entrega"
+                                        text={customerInfo.shippingAddress.preferredShippingHour}
+                                        style={{ marginBottom: "8.3rem" }}
+                                    />
+                                </BoxWithTitleAndTextButton>
+                            )}
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <BoxWithTitleAndTextButton
-                                title="Datos de Facturacion"
-                                btnText="MODIFICAR DATOS DE FACTURACION"
-                                handleClick={() => handleClickOpenBillingAddressModal()}
-                            >
-                                <DataDisplay title="Direccion de Entrega" text="Belgrano" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay title="Piso / Puerta / Aclaraciones" text="1558" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay title="Nombre Completo" text="Alejo Scotti" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay title="DNI/NIE/CIF" text="39518815" style={{ marginBottom: "4.1rem" }} />
-                            </BoxWithTitleAndTextButton>
+                            {props.isLoading ? (
+                                <DataPaperSkeleton />
+                            ) : (
+                                <BoxWithTitleAndTextButton
+                                    title="Datos de Facturacion"
+                                    btnText="MODIFICAR DATOS DE FACTURACION"
+                                    handleClick={() => handleClickOpenBillingAddressModal()}
+                                >
+                                    <DataDisplay
+                                        title="Direccion de Entrega"
+                                        text={customerInfo.billingData.address}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay
+                                        title="Piso / Puerta / Aclaraciones"
+                                        text={customerInfo.billingData.addressDetails}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay
+                                        title="Nombre Completo"
+                                        text={customerInfo.billingData.fullName}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay
+                                        title="DNI/NIE/CIF"
+                                        text={customerInfo.billingData.documentNumber}
+                                        style={{ marginBottom: "4.1rem" }}
+                                    />
+                                </BoxWithTitleAndTextButton>
+                            )}
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <BoxWithTitleAndTextButton
-                                title="Metodo de Pago"
-                                btnText="MODIFICAR METODO DE PAGO"
-                                handleClick={() => handleClickOpenPaymentMethodModal()}
-                            >
-                                <DataDisplay title="Tarjeta" text="Belgrano" style={{ marginBottom: theme.spacing(2) }} />
-                                <DataDisplay title="Vencimiento" text="1558" style={{ marginBottom: theme.spacing(2) }} />
-                            </BoxWithTitleAndTextButton>
+                            {props.isLoading ? (
+                                <DataPaperSkeleton />
+                            ) : (
+                                <BoxWithTitleAndTextButton
+                                    title="Metodo de Pago"
+                                    btnText="MODIFICAR METODO DE PAGO"
+                                    handleClick={() => handleClickOpenPaymentMethodModal()}
+                                >
+                                    <DataDisplay
+                                        title="Tarjeta"
+                                        text={defaultPaymentMethod.card}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <DataDisplay
+                                        title="Vencimiento"
+                                        text={defaultPaymentMethod.expirationDate}
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                </BoxWithTitleAndTextButton>
+                            )}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -150,20 +245,24 @@ const UserInfoDetail = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Grid item xs={12}>
-                                <BoxWithTitle title="Datos de la Cuenta">
-                                    <DataDisplayEditable
-                                        title="Correo electrónico"
-                                        text="alejo@novolabs.xyz"
-                                        handleClick={() => handleClickOpenEmailModal()}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplayEditable
-                                        title="Correo electrónico"
-                                        text="alejo@novolabs.xyz"
-                                        handleClick={() => handleClickOpenPasswordModal()}
-                                        style={{ marginBottom: "2.2rem" }}
-                                    />
-                                </BoxWithTitle>
+                                {props.isLoading ? (
+                                    <DataPaperSkeleton />
+                                ) : (
+                                    <BoxWithTitle title="Datos de la Cuenta">
+                                        <DataDisplayEditable
+                                            title="Correo electrónico"
+                                            text="alejo@novolabs.xyz"
+                                            handleClick={() => handleClickOpenEmailModal()}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplayEditable
+                                            title="Contraseña"
+                                            text="********"
+                                            handleClick={() => handleClickOpenPasswordModal()}
+                                            style={{ marginBottom: "2.2rem" }}
+                                        />
+                                    </BoxWithTitle>
+                                )}
                             </Grid>
                         </Grid>
                     </Grid>
@@ -186,6 +285,7 @@ const UserInfoDetail = () => {
                 handleClose={handleClickClosePersonalDataModal}
                 primaryButtonText="MODIFICAR DATOS PERSONALES"
                 secondaryButtonText="CANCELAR"
+                personalData={customerInfo.personalData}
             />
             <BillingAddressModal
                 open={openBillingAddressModal}
