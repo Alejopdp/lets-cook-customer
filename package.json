@@ -15,6 +15,7 @@
         "@material-ui/lab": "^4.0.0-alpha.58",
         "@stripe/react-stripe-js": "^1.4.1",
         "@stripe/stripe-js": "^1.15.1",
+        "autosuggest-highlight": "^3.1.1",
         "axios": "^0.21.1",
         "firebase": "^8.6.7",
         "html-react-parser": "^1.2.7",
@@ -24,13 +25,12 @@
         "notistack": "^1.0.9",
         "react": "17.0.2",
         "react-dom": "17.0.2",
+        "react-geocode": "^0.2.3",
         "react-multi-carousel": "^2.6.3",
         "react-phone-input-2": "^2.14.0",
-<<<<<<< HEAD
-        "swr": "^0.5.6"
-=======
+        "react-places-autocomplete": "^7.3.0",
+        "swr": "^0.5.6",
         "zustand": "^3.5.5"
->>>>>>> integrationSprint5
     },
     "devDependencies": {
         "eslint": "^7.29.0",

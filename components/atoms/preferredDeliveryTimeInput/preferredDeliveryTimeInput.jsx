@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function PreferredDeliveryTimeInput() {
+export default function PreferredDeliveryTimeInput(props) {
     const classes = useStyles();
 
     return (
@@ -21,6 +21,7 @@ export default function PreferredDeliveryTimeInput() {
             <TextField
                 id="time"
                 label="Horario de Preferencia de Entrega"
+                name={props.name}
                 type="time"
                 defaultValue="07:30"
                 className={classes.textField}

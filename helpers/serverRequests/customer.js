@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import Axios from "axios";
-const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/customer`;
-
-export const updatePersonalData = async (id, data) => {
-    try {
-        const res = await Axios({
-            method: "PUT",
-            url: `${apiUrl}/update-info/${id}`,
-            data,
-        });
-=======
 import axios from "axios";
 const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/customer`;
 const userApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/user`;
@@ -66,7 +54,48 @@ export const signUp = async (email, password) => {
             data: { email, password },
         });
 
->>>>>>> integrationSprint5
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};
+
+export const updatePersonalData = async (id, data) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/update-info/${id}`,
+            data,
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};
+
+export const updateShippingAddress = async (id, data) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/update-shipping/${id}`,
+            data,
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};
+
+export const updateBillingData = async (id, data) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/update-billing/${id}`,
+            data,
+        });
+
         return res;
     } catch (error) {
         return error.response;

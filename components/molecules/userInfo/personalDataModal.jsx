@@ -37,7 +37,7 @@ const PersonalDataModal = (props) => {
     const [formData, setformData] = useState({
         name: props.personalData.name,
         lastName: props.personalData.lastName,
-        birthDate: props.personalData.birthDate,
+        birthDateValue: props.personalData.birthDateValue,
         preferredLanguage: props.personalData.preferredLanguage,
         phone1: props.personalData.phone1,
         phone2: props.personalData.phone2,
@@ -51,8 +51,8 @@ const PersonalDataModal = (props) => {
     };
 
     const handleSubmit = () => {
-        props.handleSubmit(formData)
-    }
+        props.handleSubmit(formData);
+    };
 
     return (
         <Modal
@@ -61,6 +61,7 @@ const PersonalDataModal = (props) => {
             fullScreen={isMdUp ? false : true}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
+            handlePrimaryButtonClick={handleSubmit}
         >
             <Grid container>
                 <Grid item xs={12}>
@@ -84,6 +85,7 @@ const PersonalDataModal = (props) => {
                                     id="outlined-basic"
                                     label="Nombre"
                                     variant="outlined"
+                                    name="name"
                                     style={{ marginBottom: "-1rem" }}
                                     value={formData.name}
                                     onChange={handleChange}
@@ -99,6 +101,7 @@ const PersonalDataModal = (props) => {
                                 <TextField
                                     className={classes.root}
                                     id="outlined-basic"
+                                    name="lastName"
                                     label="Apellido"
                                     variant="outlined"
                                     value={formData.lastName}
@@ -130,7 +133,6 @@ const PersonalDataModal = (props) => {
                                 value={formData.phone2}
                                 handleChange={handleChange}
                                 placeholder="Telefono (2)"
-                                value={formData.phone2}
                                 name="phone2"
                             />
                         </Grid>
@@ -142,7 +144,12 @@ const PersonalDataModal = (props) => {
                 <Grid item xs={12} md={6}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <DatePicker />
+                            <DatePicker
+                                label="Fecha de Nacimiento"
+                                value={formData.birthDateValue}
+                                handleChange={handleChange}
+                                name="birthDateValue"
+                            />
                         </Grid>
                     </Grid>
                 </Grid>

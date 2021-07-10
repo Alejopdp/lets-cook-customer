@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useMediaQuery } from "@material-ui/core";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import StripeForm from "../../molecules/stripeForm/stripeForm";
 
 import { Typography, Radio, RadioGroup, FormControlLabel, FormControl, Grid, makeStyles, TextField } from "@material-ui/core";
 
@@ -38,6 +39,7 @@ const PaymentMethodModal = (props) => {
     const [value, setValue] = useState("");
     const [card, setCard] = useState(false);
     const [newPaymentMethod, setNewPaymentMethod] = useState(false);
+    const [selectedSavedCard, setselectedSavedCard] = useState("visa");
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -63,90 +65,37 @@ const PaymentMethodModal = (props) => {
         >
             <Grid container>
                 <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
-                                Modificar metodo de pago
-                            </Typography>
-                        </Grid>
-                    </Grid>
+                    <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
+                        Modificar metodo de pago
+                    </Typography>
                 </Grid>
             </Grid>
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" style={{ width: "100%" }}>
                 <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
                     <FormControlLabel value="card" control={<Radio />} label="Mis tarjetas guardadas" onClick={() => handleClickCard()} />
-                    {card ? (
-                        <div style={{ marginLeft: "2rem" }}>
+                    {value === "card" ? (
+                        <RadioGroup
+                            aria-label="gender"
+                            name="savedCards"
+                            value={selectedSavedCard}
+                            onChange={(e) => setselectedSavedCard(e.target.value)}
+                            style={{ marginLeft: "2rem" }}
+                        >
                             <FormControlLabel value="visa" control={<Radio />} label="Visa terminada en 1234 - Expira el 12/25" />
                             <FormControlLabel
                                 value="mastercard"
                                 control={<Radio />}
                                 label="MasterCard terminada en 1234 - Expira el 12/25"
                             />
-                        </div>
+                        </RadioGroup>
                     ) : null}
                     <FormControlLabel
-                        value="newPaymentMehod"
+                        value="newPaymentMethod"
                         control={<Radio />}
                         label="Ingresar nuevo metodo de pago"
                         onClick={() => handleClickPaymentMethod()}
                     />
-                    {newPaymentMethod ? (
-                        <>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} md={6}>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12}>
-                                            boton 1
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12}>
-                                            boton 2
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12}>
-                                            <form className={classes.textfield} noValidate autoComplete="off">
-                                                <TextField id="outlined-basic" label="Direccion de Entrega" variant="outlined" />
-                                            </form>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} md={6}>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12}>
-                                            <form noValidate autoComplete="off">
-                                                <TextField
-                                                    className={classes.root}
-                                                    id="outlined-basic"
-                                                    label="Fecha de Vencimiento (MM/AA)"
-                                                    variant="outlined"
-                                                />
-                                            </form>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12}>
-                                            <form noValidate autoComplete="off">
-                                                <TextField className={classes.root} id="outlined-basic" label="CVC" variant="outlined" />
-                                            </form>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </>
-                    ) : null}
+                    {value === "newPaymentMethod" ? <StripeForm /> : null}
                 </RadioGroup>
             </FormControl>
             <div style={{ display: "flex", marginTop: ".7rem", alignItems: "center" }}>
@@ -158,3 +107,34 @@ const PaymentMethodModal = (props) => {
 };
 
 export default PaymentMethodModal;
+
+{
+    /* <>
+                            <Grid item xs={12}>
+                                boton 1
+                            </Grid>
+                            <Grid item xs={12}>
+                                boton 2
+                            </Grid>
+                            <Grid item xs={12}>
+                                <form className={classes.textfield} noValidate autoComplete="off">
+                                    <TextField id="outlined-basic" label="Direccion de Entrega" variant="outlined" />
+                                </form>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <form noValidate autoComplete="off">
+                                    <TextField
+                                        className={classes.root}
+                                        id="outlined-basic"
+                                        label="Fecha de Vencimiento (MM/AA)"
+                                        variant="outlined"
+                                    />
+                                </form>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <form noValidate autoComplete="off">
+                                    <TextField className={classes.root} id="outlined-basic" label="CVC" variant="outlined" />
+                                </form>
+                            </Grid>
+                        </> */
+}

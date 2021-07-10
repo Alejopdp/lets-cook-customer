@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { useSnackbar } from "notistack";
 
 // External Components
 import Grid from "@material-ui/core/Grid";
@@ -17,17 +18,18 @@ import DeliveryAddressModal from "../../molecules/userInfo/deliveryAddressModal"
 import PaymentMethodModal from "../../molecules/userInfo/paymentMethod";
 import DataPaperSkeleton from "./dataPaperSkeleton";
 import WithSkeleton from "../../molecules/withSkeleton/withSkeleton";
-import { updatePersonalData } from "../../../helpers/serverRequests/customer";
+import { updateBillingData, updatePersonalData, updateShippingAddress } from "../../../helpers/serverRequests/customer";
 
 const UserInfoDetail = (props) => {
     const theme = useTheme();
+    const { enqueueSnackbar } = useSnackbar();
     const [customerInfo, setcustomerInfo] = useState({
-        id: props.customer.id || "",
-        email: props.customer.email || "",
-        personalData: props.customer.personalData || {},
-        shippingAddress: props.customer.shippingAddress || {},
-        billingData: props.customer.billingData || {},
-        paymentMethods: props.customer.paymentMethods || [],
+        id: "",
+        email: "",
+        personalData: {},
+        shippingAddress: {},
+        billingData: {},
+        paymentMethods: [],
     });
     const [openEmailModal, setEmailModal] = useState(false);
     const [openPasswordModal, setPasswordModal] = useState(false);
@@ -35,6 +37,17 @@ const UserInfoDetail = (props) => {
     const [openBillingAddressModal, setBillingAddressModal] = useState(false);
     const [openDeliveryAddressModal, setDeliveryAddressModal] = useState(false);
     const [openPaymentMethod, setPaymentMethod] = useState(false);
+
+    useEffect(() => {
+        setcustomerInfo({
+            id: props.customer.id || "",
+            email: props.customer.email || "",
+            personalData: props.customer.personalData || {},
+            shippingAddress: props.customer.shippingAddress || {},
+            billingData: props.customer.billingData || {},
+            paymentMethods: props.customer.paymentMethods || [],
+        });
+    }, [props.customer]);
 
     const defaultPaymentMethod = useMemo(() => {
         return customerInfo.paymentMethods.find((method) => method.isDefault) || {};
@@ -100,11 +113,49 @@ const UserInfoDetail = (props) => {
         if (res.status === 200) {
             setcustomerInfo({
                 ...customerInfo,
-                personalData: newData
-            })
-
+                personalData: {
+                    ...newData,
+                    fullName: !!!newData.name && !!!newData.lastName ? "" : `${newData.name || ""} ${newData.lastName || ""}`,
+                },
+            });
+            handleClickClosePersonalDataModal();
+            enqueueSnackbar("Datos modificados correctamente", { variant: "success" });
         } else {
-            alert("Error")
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+    };
+
+    const handleShippingAddressSubmit = async (newData) => {
+        const res = await updateShippingAddress(customerInfo.id, newData);
+
+        if (res.status === 200) {
+            setcustomerInfo({
+                ...customerInfo,
+                shippingAddress: {
+                    ...newData,
+                },
+            });
+            handleClickCloseDeliveryAddressModal();
+            enqueueSnackbar("Datos modificados correctamente", { variant: "success" });
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+    };
+
+    const handleBillingDataSubmit = async (newData) => {
+        const res = await updateBillingData(customerInfo.id, newData);
+
+        if (res.status === 200) {
+            setcustomerInfo({
+                ...customerInfo,
+                billingData: {
+                    ...newData,
+                },
+            });
+            handleClickCloseBillingAddressModal();
+            enqueueSnackbar("Datos modificados correctamente", { variant: "success" });
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
         }
     };
 
@@ -115,7 +166,7 @@ const UserInfoDetail = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             {props.isLoading ? (
-                                <DataPaperSkeleton />
+                                <DataPaperSkeleton boxTitle="Datos Personales" buttonLabel="MODIFICAR DATOS PERSONALES" />
                             ) : (
                                 <BoxWithTitleAndTextButton
                                     title="Datos Personales"
@@ -139,7 +190,7 @@ const UserInfoDetail = (props) => {
                                     />
                                     <DataDisplay
                                         title={"Fecha de Nacimiento"}
-                                        text={customerInfo.personalData.birthDate}
+                                        text={customerInfo.personalData.birthDateValue}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay title="Idioma de preferencia" text={customerInfo.personalData.preferredLanguage} />
@@ -152,7 +203,7 @@ const UserInfoDetail = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             {props.isLoading ? (
-                                <DataPaperSkeleton />
+                                <DataPaperSkeleton boxTitle="Direccion de Entrega" buttonLabel="MODIFICAR DIRECCION DE ENTREGA" />
                             ) : (
                                 <BoxWithTitleAndTextButton
                                     title="Direccion de Entrega"
@@ -183,31 +234,31 @@ const UserInfoDetail = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             {props.isLoading ? (
-                                <DataPaperSkeleton />
+                                <DataPaperSkeleton boxTitle="Datos de FacturaciÓn" buttonLabel="MODIFICAR DATOS DE FACTURACIÓN" />
                             ) : (
                                 <BoxWithTitleAndTextButton
-                                    title="Datos de Facturacion"
-                                    btnText="MODIFICAR DATOS DE FACTURACION"
+                                    title="Datos de FacturaciÓn"
+                                    btnText="MODIFICAR DATOS DE FACTURACIÓN"
                                     handleClick={() => handleClickOpenBillingAddressModal()}
                                 >
                                     <DataDisplay
                                         title="Direccion de Entrega"
-                                        text={customerInfo.billingData.address}
+                                        text={customerInfo.billingData.addressName}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay
                                         title="Piso / Puerta / Aclaraciones"
-                                        text={customerInfo.billingData.addressDetails}
+                                        text={customerInfo.billingData.details}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay
                                         title="Nombre Completo"
-                                        text={customerInfo.billingData.fullName}
+                                        text={customerInfo.billingData.customerName}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay
                                         title="DNI/NIE/CIF"
-                                        text={customerInfo.billingData.documentNumber}
+                                        text={customerInfo.billingData.identification}
                                         style={{ marginBottom: "4.1rem" }}
                                     />
                                 </BoxWithTitleAndTextButton>
@@ -219,7 +270,7 @@ const UserInfoDetail = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             {props.isLoading ? (
-                                <DataPaperSkeleton />
+                                <DataPaperSkeleton boxTitle="Metodo de Pago" buttonLabel="MODIFICAR METODO DE PAGO" />
                             ) : (
                                 <BoxWithTitleAndTextButton
                                     title="Metodo de Pago"
@@ -246,7 +297,7 @@ const UserInfoDetail = (props) => {
                         <Grid item xs={12}>
                             <Grid item xs={12}>
                                 {props.isLoading ? (
-                                    <DataPaperSkeleton />
+                                    <DataPaperSkeleton boxTitle="Datos de la Cuenta" buttonLabel="MODIFICAR DATOS DE CUENTA" />
                                 ) : (
                                     <BoxWithTitle title="Datos de la Cuenta">
                                         <DataDisplayEditable
@@ -280,44 +331,42 @@ const UserInfoDetail = (props) => {
                 primaryButtonText="MODIFICAR CONTRASEÑA"
                 secondaryButtonText="CANCELAR"
             />
-            <PersonalDataModal
-                open={openPersonalDataModal}
-                handleClose={handleClickClosePersonalDataModal}
-                primaryButtonText="MODIFICAR DATOS PERSONALES"
-                secondaryButtonText="CANCELAR"
-                personalData={customerInfo.personalData}
-                handleSubmit={handleUpdatePersonalDataSubmit}
-            />
-            <BillingAddressModal
-                open={openBillingAddressModal}
-                handleClose={handleClickCloseBillingAddressModal}
-                primaryButtonText="MODIFICAR DIRECCION DE FACTURACION"
-                secondaryButtonText="CANCELAR"
-            />
-            <DeliveryAddressModal
-                open={openDeliveryAddressModal}
-                handleClose={handleClickCloseDeliveryAddressModal}
-                primaryButtonText="MODIFICAR DIRECCION DE ENTREGA"
-                secondaryButtonText="CANCELAR"
-            />
+            {openPersonalDataModal && (
+                <PersonalDataModal
+                    open={openPersonalDataModal}
+                    handleClose={handleClickClosePersonalDataModal}
+                    primaryButtonText="MODIFICAR DATOS PERSONALES"
+                    secondaryButtonText="CANCELAR"
+                    personalData={customerInfo.personalData}
+                    handleSubmit={handleUpdatePersonalDataSubmit}
+                />
+            )}
+            {openBillingAddressModal && (
+                <BillingAddressModal
+                    open={openBillingAddressModal}
+                    handleClose={handleClickCloseBillingAddressModal}
+                    primaryButtonText="MODIFICAR DIRECCION DE FACTURACIÓN"
+                    secondaryButtonText="CANCELAR"
+                    billingData={customerInfo.billingData}
+                    handleSubmit={handleBillingDataSubmit}
+                />
+            )}
+            {openDeliveryAddressModal && (
+                <DeliveryAddressModal
+                    open={openDeliveryAddressModal}
+                    handleClose={handleClickCloseDeliveryAddressModal}
+                    primaryButtonText="MODIFICAR DIRECCION DE ENTREGA"
+                    secondaryButtonText="CANCELAR"
+                    shippingAddress={customerInfo.shippingAddress}
+                    handleSubmit={handleShippingAddressSubmit}
+                />
+            )}
             <PaymentMethodModal
                 open={openPaymentMethod}
                 handleClose={handleClickClosePaymentMethodModal}
                 primaryButtonText="MODIFICAR METODO DE PAGO"
                 secondaryButtonText="CANCELAR"
             />
-            {/* <RecipeModal
-                open={openRecipeModal}
-                handleClose={handleCloseRecipeModal}
-                descriptionElementRef={descriptionElementRefRecipeModal}
-                data={recipeSelectedIndex.period === 'actualWeek' ? data.recipesActualWeek[recipeSelectedIndex.index] : data.recipesNextWeek[recipeSelectedIndex.index]}
-            />
-            <ChangePlanModal
-                open={openChangePlanModal}
-                handleClose={handleCloseChangePlanModal}
-                handlePrimaryButtonClick={handlePrimaryButtonClickChangePlanModal}
-                data={changePlanData}
-            /> */}
         </>
     );
 };

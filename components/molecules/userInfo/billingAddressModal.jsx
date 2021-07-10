@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getGeometry } from "../../../helpers/utils/geocode";
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -9,27 +10,45 @@ import TextField from "@material-ui/core/TextField";
 
 // Internal Components
 import Modal from "../../atoms/modal/modal";
+import LocationSearchInput from "../../atoms/locationSearchInput/locationSearchiInput";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        "& > *": {
-            margin: theme.spacing(1),
-            width: "30ch",
-            [theme.breakpoints.down("sm")]: {
-                width: "35ch",
-            },
-        },
-        marginLeft: "-0.6rem",
-    },
-    phoneInput: {
-        marginTop: ".6rem",
-        height: "3.2rem",
-    },
+    root: {},
 }));
 
 const BillingAddressModal = (props) => {
     const isMdUp = useMediaQuery("(min-width:960px)");
     const classes = useStyles();
+    const [formData, setformData] = useState({
+        addressName: props.billingData.addressName,
+        details: props.billingData.details,
+        customerName: props.billingData.customerName,
+        identification: props.billingData.identification,
+        latitude: props.billingData.latitude,
+        longitude: props.billingData.longitude,
+    });
+
+    const handleChange = (e) => {
+        setformData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleGoogleInput = async (address) => {
+        const geometry = await getGeometry(address.structured_formatting.main_text);
+
+        setformData({
+            ...formData,
+            addressName: address.description,
+            latitude: geometry.lat,
+            longitude: geometry.lng,
+        });
+    };
+
+    const handleSubmit = () => {
+        props.handleSubmit(formData);
+    };
 
     return (
         <Modal
@@ -38,82 +57,58 @@ const BillingAddressModal = (props) => {
             fullScreen={isMdUp ? false : true}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
+            handlePrimaryButtonClick={handleSubmit}
         >
-            <Grid container>
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
-                                Modificar direccion de facturacion
-                            </Typography>
-                        </Grid>
-                    </Grid>
+                    <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
+                        Modificar direccion de facturacion
+                    </Typography>
                 </Grid>
-            </Grid>
 
-            <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <form className={classes.root} noValidate autoComplete="off">
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Direccion de Entrega"
-                                    variant="outlined"
-                                    style={{ width: "97%", marginTop: "1rem" }}
-                                />
-                            </form>
-                        </Grid>
-                    </Grid>
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <LocationSearchInput name="addressName" handleChange={handleGoogleInput} value={formData.addressName} />
+                    </form>
                 </Grid>
-            </Grid>
-            <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <form className={classes.root} noValidate autoComplete="off">
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Piso / Puerta / Aclaraciones"
-                                    variant="outlined"
-                                    style={{ width: "97%", marginTop: ".5rem" }}
-                                />
-                            </form>
-                        </Grid>
-                    </Grid>
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <TextField
+                            id="outlined-basic"
+                            label="Piso / Puerta / Aclaraciones"
+                            variant="outlined"
+                            name="details"
+                            fullWidth
+                            value={formData.details}
+                            onChange={handleChange}
+                        />
+                    </form>
                 </Grid>
-            </Grid>
-            <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            {" "}
-                            <form className={classes.root} noValidate autoComplete="off">
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Nombre Completo"
-                                    variant="outlined"
-                                    style={{ width: "97%", marginTop: ".5rem" }}
-                                />
-                            </form>
-                        </Grid>
-                    </Grid>
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <TextField
+                            id="outlined-basic"
+                            label="Nombre Completo"
+                            variant="outlined"
+                            fullWidth
+                            name="customerName"
+                            value={formData.customerName}
+                            onChange={handleChange}
+                        />
+                    </form>
                 </Grid>
-            </Grid>
-            <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <form className={classes.root} noValidate autoComplete="off">
-                                <TextField
-                                    id="outlined-basic"
-                                    label="DNI/NIE/CIF"
-                                    variant="outlined"
-                                    style={{ width: "97%", marginTop: ".5rem" }}
-                                />
-                            </form>
-                        </Grid>
-                    </Grid>
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <TextField
+                            id="outlined-basic"
+                            label="DNI/NIE/CIF"
+                            fullWidth
+                            variant="outlined"
+                            name="identification"
+                            value={formData.identification}
+                            onChange={handleChange}
+                        />
+                    </form>
                 </Grid>
             </Grid>
         </Modal>

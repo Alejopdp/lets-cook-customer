@@ -10,7 +10,7 @@ import BoxWithTitleAndTextButton from "../../molecules/specificBox/boxWithTitleA
 const DataPaperSkeleton = (props) => {
     const theme = useTheme();
     return (
-        <BoxWithTitleAndTextButton title="Datos Personales" btnText="MODIFICAR DATOS PERSONALES" handleClick={() => ""}>
+        <BoxWithTitleAndTextButton title={props.boxTitle} btnText={props.buttonLabel} handleClick={() => ""}>
             <Skeleton variant="text" width="100%" height={21} style={{ marginBottom: theme.spacing(1) }} />
             <Skeleton variant="text" width="100%" height={22} style={{ marginBottom: theme.spacing(2) }} />
             <Skeleton variant="text" width="100%" height={21} style={{ marginBottom: theme.spacing(1) }} />
@@ -25,6 +25,9 @@ const DataPaperSkeleton = (props) => {
     );
 };
 
-DataPaperSkeleton.propTypes = {};
+DataPaperSkeleton.propTypes = {
+    boxTitle: PropTypes.string.isRequired,
+    buttonLabel: PropTypes.string.isRequired
+};
 
 export default DataPaperSkeleton;
