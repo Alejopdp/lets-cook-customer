@@ -23,5 +23,5 @@ export const useStyles = makeStyles((theme) => ({
         // '& fieldset.MuiOutlinedInput-notchedOutline': {
         //     borderColor: 'transparent',
         // },
-    }
+    },
 }));

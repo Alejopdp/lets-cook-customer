@@ -13,4 +13,15 @@ export const useStyles = makeStyles((theme) => ({
     marg1: {
         marginBottom: theme.spacing(1),
     },
+    logoSection: {
+        [theme.breakpoints.down("md")]: {
+            marginBottom: theme.spacing(3),
+            textAlign: 'center'
+        },
+    },
+    paymentMethodsSection: {
+        [theme.breakpoints.down("md")]: {
+            marginTop: theme.spacing(3),
+        },
+    }
 }));

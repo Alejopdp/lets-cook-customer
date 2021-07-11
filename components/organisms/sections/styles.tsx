@@ -41,6 +41,7 @@ export const useBenefitsStyle = makeStyles(theme => ({
         alignItems: "center",
         margin: "auto"
     },
+
     row: {
         display: "flex",
         paddingBottom: theme.spacing(3)
@@ -67,6 +68,9 @@ export const useBenefitsStyle = makeStyles(theme => ({
         alignItems: "flex-start",
         maxWidth: 500,
         padding: theme.spacing(2),
+        [theme.breakpoints.down("md")]: {
+            padding: `${theme.spacing(2)}px 0px`,
+        },
     },
     cardIcon: {
         marginLeft: theme.spacing(1),
@@ -152,7 +156,10 @@ export const useHowItWorksStyles = makeStyles(theme => ({
         boxSizing: "border-box",
         paddingInline: theme.spacing(1),
         // margin: theme.spacing(1),
-        textAlign: "center"
+        textAlign: "center",
+        [theme.breakpoints.down("md")]: {
+            marginBottom: theme.spacing(3),
+        },
     },
     img: {
         borderRadius: 8,
@@ -160,7 +167,7 @@ export const useHowItWorksStyles = makeStyles(theme => ({
         width: "100%",
     },
     paddingCardTitle: {
-        paddingTop: theme.spacing(1),
+        paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(1),
     },
     smallText: {

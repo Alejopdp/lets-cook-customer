@@ -10,7 +10,8 @@ export const ValuePropositionSection = () => {
     const classes = useStyles();
     const router = useRouter();
 
-    return (<>
+
+    return (
         <div className={classes.root}>
             <div className={classes.overlay}>
                 <Container maxWidth='md' className={classes.container}>
@@ -29,8 +30,7 @@ export const ValuePropositionSection = () => {
                 </Container>
             </div>
         </div>
-
-    </>);
+    );
 }
 
 export default ValuePropositionSection;

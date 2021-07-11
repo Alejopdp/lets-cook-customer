@@ -36,7 +36,7 @@ export const BenefitsSection = ({ cards = _cards, backgroundColor, removeCallToA
     const router = useRouter();
 
     return (
-        <Box style={{ backgroundColor: backgroundColor ? backgroundColor: "white" , padding: `${theme.spacing(8)}px 0px` }}>
+        <Box style={{ backgroundColor: backgroundColor ? backgroundColor : "white", padding: `${theme.spacing(8)}px 0px` }}>
             <Container maxWidth="lg">
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6} style={{ alignSelf: "center" }}>
@@ -51,10 +51,10 @@ export const BenefitsSection = ({ cards = _cards, backgroundColor, removeCallToA
                                     <img src={card.image} className={classes.icon}></img>
                                 </div>
                                 <div>
-                                    <Typography variant="h5" color="initial" style={{ marginBottom: theme.spacing(1) }} >
+                                    <Typography variant="h5" color="textSecondary" style={{ marginBottom: theme.spacing(1) }} >
                                         {card.title}
                                     </Typography>
-                                    <Typography variant="body1" color="initial">
+                                    <Typography variant="body1" color="textSecondary">
                                         {card.content}
                                     </Typography>
                                 </div>
@@ -65,7 +65,7 @@ export const BenefitsSection = ({ cards = _cards, backgroundColor, removeCallToA
                 {!removeCallToAction && (
                     <Grid container style={{ marginTop: theme.spacing(4) }}>
                         <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
-                            <RoundedButton label="Ver planes" onClick={() => router.push("/planes")}/>
+                            <RoundedButton label="Ver planes" onClick={() => router.push("/planes")} />
                             <Typography className={classes.smallText} variant="caption">
                                 Podrás pausar, cambiar o cancelar el plan cuando quieras
                             </Typography>

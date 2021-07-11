@@ -31,7 +31,7 @@ const _cards: HowItWorks[] = [
     },
 ];
 
-const HowItWorksSection = memo(({cards = _cards}: HowItWorksSectionProps) => {
+const HowItWorksSection = memo(({ cards = _cards }: HowItWorksSectionProps) => {
     const theme = useTheme();
     const classes = useStyles();
     const router = useRouter();
@@ -41,7 +41,7 @@ const HowItWorksSection = memo(({cards = _cards}: HowItWorksSectionProps) => {
             <Grid container spacing={2}>
                 <Title title="¿Cómo funciona?" subtitle="" />
                 {cards.map((card, index) => (
-                    <Grid item xs={12} sm={6} md={3} style={{ textAlign: 'center' }} >
+                    <Grid item xs={12} sm={6} md={3} className={classes.card} >
                         <img
                             className={classes.img}
                             src={card.image} />
