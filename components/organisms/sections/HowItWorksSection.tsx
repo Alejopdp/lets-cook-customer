@@ -7,30 +7,7 @@ import { useHowItWorksStyles as useStyles } from "./styles";
 import { HowItWorksSectionProps, HowItWorks } from "./interfaces";
 import { memo } from 'react';
 
-const _cards: HowItWorks[] = [
-    {
-        title: "Lorem Ipsum dolor",
-        content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg"
-    },
-    {
-        title: "Lorem Ipsum dolor",
-        content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg"
-    },
-    {
-        title: "Lorem Ipsum dolor",
-        content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg"
-    },
-    {
-        title: "Lorem Ipsum dolor",
-        content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg"
-    },
-];
-
-const HowItWorksSection = memo(({cards = _cards}: HowItWorksSectionProps) => {
+const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
     const theme = useTheme();
     const classes = useStyles();
 
@@ -38,8 +15,8 @@ const HowItWorksSection = memo(({cards = _cards}: HowItWorksSectionProps) => {
         <Container maxWidth='lg'>
             <Grid container spacing={2}>
                 <Title title="¿Cómo funciona?" subtitle="" />
-                {cards.map((card, index) => (
-                    <Grid item xs={12} sm={6} md={3} style={{ textAlign: 'center' }} >
+                {(props.cards || []).map((card, index) => (
+                    <Grid key={index} item xs={12} sm={6} md={3} style={{ textAlign: 'center' }} >
                         <img
                             className={classes.img}
                             src={card.image} />

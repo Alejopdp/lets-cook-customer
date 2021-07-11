@@ -34,11 +34,11 @@ interface IMenuOptions {
 }
 
 interface LayoutProps {
-    children: React.Component;
-    menuOptions: IMenuOptions
+    children: React.ReactNode;
+    menuOptions?: IMenuOptions
 }
 
-export const Layout = memo(({ children: Component }: LayoutProps) => {
+export const Layout = memo(({ children: Component  }: LayoutProps) => {
     const classes = useStyles();
     const isAuthenticated = useAuthStore(({isAuthenticated}) => isAuthenticated);
     const [openDrawerMenu, setOpenDrawerMenu] = useState(false);

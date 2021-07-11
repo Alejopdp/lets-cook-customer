@@ -9,19 +9,19 @@ import { useRecipesStyles as useStyles } from "./styles";
 import { RecipesSectionProps } from "./interfaces";
 import { memo } from 'react';
 
-const _recipes = Array<Recipe>(4).fill({
-    imageUrl: 'https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg',
-    imageTags: ["Más vendido", "Vegano"],
-    cookDuration: "15 min",
-    difficultyLevel: "Fácil",
-    name: "Salmón con quinoa"
-}).map<Recipe>((recipe, index) => ({
-    ...recipe,
-    name: `(${index}) ${recipe.name}`,
-    id: `${index}`
-}));
+// const _recipes = Array<Recipe>(4).fill({
+//     imageUrl: 'https://cdn.shopify.com/s/files/1/0196/4330/1988/products/perfil1_26_1024x1024@2x.jpg',
+//     imageTags: ["Más vendido", "Vegano"],
+//     cookDuration: "15 min",
+//     difficultyLevel: "Fácil",
+//     name: "Salmón con quinoa"
+// }).map<Recipe>((recipe, index) => ({
+//     ...recipe,
+//     name: `(${index}) ${recipe.name}`,
+//     id: `${index}`
+// }));
 
-export const RecipesSection = memo(({ recipes = _recipes, ...props }: RecipesSectionProps) => {
+export const RecipesSection = memo((props: RecipesSectionProps) => {
     const classes = useStyles();
 
     const handleClickOpenModal = (recipe: Recipe) => {
@@ -71,7 +71,7 @@ export const RecipesSection = memo(({ recipes = _recipes, ...props }: RecipesSec
                     subtitle={props.subtitle}
                     align={props.titleAlign}
                 />
-                {recipes.map((recipe, key) => (
+                {(props.recipes || []).map((recipe, key) => (
                     <Grid key={key} item xs={12} sm={6} md={3} >
                         <RecipeCard
                             img={recipe.imageUrl}

@@ -8,60 +8,9 @@ import { usePlansStyles as useStyles } from "./styles";
 import { PlansSectionProps } from "./interfaces";
 import { memo } from 'react';
 
-const _cards:Plan[] = [
-    {
-        name: {
-            es: "Plan familiar",
-            en: "Plan familiar",
-            ca: "Plan familiar"
-        },
-        description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        imageUrl: "unnamed.jpg",
-        slug: "plan-familiar",
-        id: '',
-        sku: ''
-    },
-    {
-        name: {
-            es: "Plan gourmet",
-            en: "Plan gourmet",
-            ca: "Plan gourmet"
-        },
-        description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        imageUrl: "unnamed.jpg",
-        slug: "plan-gourmet",
-        id: '',
-        sku: ''
-    },
-    {
-        name: {
-            es: "Plan vegetariano/vegano",
-            en: "Plan vegetariano/vegano",
-            ca: "Plan vegetariano/vegano"
-        },
-        description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        imageUrl: "unnamed.jpg",
-        slug: "plan-vegetariano",
-        id: '',
-        sku: ''
-    },
-    {
-        name: {
-            es: "Plan ahorro",
-            en: "Plan ahorro",
-            ca: "Plan ahorro"
-        },
-        description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        imageUrl: "unnamed.jpg",
-        slug: "plan-ahorro",
-        id: '',
-        sku: ''
-    },
-];
+export const PlansSection = memo((props: PlansSectionProps) => {
 
-export const PlansSection = memo(({cards = _cards}: PlansSectionProps) => {
     const {push: navigateTo, locale} = useRouter();
-    
     const classes = useStyles();
 
     return (
@@ -71,10 +20,10 @@ export const PlansSection = memo(({cards = _cards}: PlansSectionProps) => {
                     title="Encuentra el plan indicado para tí"
                     subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
                 />
-                {cards.map((card, index) => (
-                    <Grid item xs={12} md={3}>
-                        <div key={index} className={classes.card} style={{
-                            backgroundImage: `url(${classes.img})`
+                {(props.cards || []).map((card, index) => (
+                    <Grid  key={index} item xs={12} md={3}>
+                        <div className={classes.card} style={{
+                            backgroundImage: `url(${card.imageUrl})`
                         }}>
                             <div className={classes.overlay} >
                                 <div className={classes.cardContent}>
@@ -91,8 +40,8 @@ export const PlansSection = memo(({cards = _cards}: PlansSectionProps) => {
                                         pathname:"/planes/[slug]",
                                         query: {
                                             slug: card.slug,
-                                            personas: 2,
-                                            recetas: 2
+                                            personas: card.variants[0]?.numberOfPersons  || '',
+                                            recetas: card.variants[0]?.numberOfRecipes || ''
                                         }
                                     })} />
                                 </div>

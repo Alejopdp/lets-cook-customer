@@ -46,10 +46,10 @@ export const BuyFlowInitialStore: BuyFlowStore = {
         variant: {
             id: "",
             sku: "",
-            name: {},
+            name: "",
             numberOfPersons: 0,
             numberOfRecipes: 0,
-            attributes: [] 
+            attributes: []
         },
         deliveryForm: {
             address: "",
@@ -88,9 +88,9 @@ const store = devtools<Store>((set, get) => ({
         form.planSlug = slug;
         set({ form });
     },
-    setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => {
+    setDeliveryInfo: (deliveryForm: DeliveryForm) => {
         const form = get().form;
-        Object.keys(deliveryForm).forEach(key => form.deliveryForm[key] = deliveryForm[key]);
+        form.deliveryForm = { ...deliveryForm }
         set({ form });
     },
     setPaymentMetods: (paymentMethods: PaymentMethods) => {
@@ -103,9 +103,9 @@ const store = devtools<Store>((set, get) => ({
         form.recipes = recipes;
         set({ form });
     },
-    setPlanVariant: (variant: Partial<PlanVariant>) => {
+    setPlanVariant: (variant: PlanVariant) => {
         const form = get().form;
-        Object.keys(variant).forEach(key => form.variant[key] = variant[key]);
+        form.variant = { ...variant }
         set({ form });
     }
 }));

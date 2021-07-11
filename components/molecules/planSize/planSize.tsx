@@ -4,16 +4,10 @@ import { QuantityBox } from "@atoms";
 import { PlanSizeProps, ARGS } from "./interfaces";
 
 export const PlanSize = (props: PlanSizeProps) => {
-    const [value, setValue] = useState('');
 
     const _handleOnChange = (args: ARGS) => {
-        setValue(args.value);
         props.handleOnChange(args);
     };
-
-    useEffect(() => {
-        setValue(props.valueSelected)
-    },[])
 
     return (
         <Grid item container direction="column">
@@ -23,9 +17,29 @@ export const PlanSize = (props: PlanSizeProps) => {
                         <Typography variant="body1">{props.subtitle}</Typography>
                     </FormLabel>
                     <div style={{ display: "flex" }}>
-                        {props.numberItems && props.fromNumber && Array(props.numberItems)
-                            .fill(props.fromNumber)
-                            .map((from, index) => {
+                        <>
+                            {props.numberItems && props.fromNumber && Array(props.numberItems)
+                                .fill(props.fromNumber)
+                                .map((from, index) => {
+                                    return (
+                                        <QuantityBox
+                                            name={props.name}
+                                            onChange={(_value) => {
+                                                _handleOnChange({
+                                                    name: props.name,
+                                                    value: _value,
+                                                });
+                                            }}
+                                            key={index}
+                                            label={`${index + from}`}
+                                            value={`${index + from}`}
+                                            state={`${index + from}` === props.valueSelected}
+                                        />
+                                    );
+                                })}
+                        </>
+                        <>
+                            {props.fromArray?.map((item, index) => {
                                 return (
                                     <QuantityBox
                                         name={props.name}
@@ -36,30 +50,13 @@ export const PlanSize = (props: PlanSizeProps) => {
                                             });
                                         }}
                                         key={index}
-                                        label={`${index + from}`}
-                                        value={`${index + from}`}
-                                        state={`${index + from}` === value}
+                                        label={`${item}`}
+                                        value={`${item}`}
+                                        state={`${item}` === props.valueSelected}
                                     />
                                 );
                             })}
-                        {props.fromArray?.map((item, index) => {
-                            console.log(`***-> item: ${item} === ${value}`)
-                            return (
-                                <QuantityBox
-                                    name={props.name}
-                                    onChange={(_value) => {
-                                        _handleOnChange({
-                                            name: props.name,
-                                            value: _value,
-                                        });
-                                    }}
-                                    key={index}
-                                    label={`${item}`}
-                                    value={`${item}`}
-                                    state={`${item}` === value}
-                                />
-                            );
-                        })}
+                        </>
                     </div>
                 </FormControl>
             </Grid>

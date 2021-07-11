@@ -29,10 +29,10 @@ export const getDemoPlans = async (locale: string): Promise<PlanResponse> => ({
     data
 })
 
-const data: Plan[] = Array(3)
+const data: Plan[] = Array<Plan>(20)
     .fill({
         "id": "a01f9820-adfa-41ee-823c-858c16c64a6b",
-        "name": "Plan Desayuno",
+        "name": "Plan #planName#",
         "sku": "PLDES",
         "description": "Plan para desayunar",
         "availablePlanFrecuencies": [
@@ -41,12 +41,12 @@ const data: Plan[] = Array(3)
             "Mensual"
         ],
         "isActive": true,
-        "type": "Adicional",
+        "type": "Principal",
         "imageUrl": "https://lets-cook-assets.s3.eu-west-3.amazonaws.com/development/plans/Plan_test/Plan_test.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZNRGZIDJTCFDYFOU%2F20210627%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20210627T154619Z&X-Amz-Expires=900&X-Amz-Signature=ad91aba8e7fc17e18986e5c7839eec7aef96e3a4363f8142f636293d6d399886&X-Amz-SignedHeaders=host",
         "hasRecipes": true,
         "variants": [
             {
-                "id": "ba3c8fbe-c7c3-491d-9819-a8625f645356",
+                "id": "v-1-1",
                 "sku": "PLDES1",
                 "name": "Desayuno para 1 persona",
                 "price": 30,
@@ -65,9 +65,9 @@ const data: Plan[] = Array(3)
                 ]
             },
             {
-                "id": "c1491c60-0a03-4ced-959f-719ba32510fc",
+                "id": "v-2-1",
                 "sku": "PLDES2",
-                "name": "Desayuno para 2 personas",
+                "name":"Desayuno para 2 personas",
                 "price": 30,
                 "priceWithOffer": 20,
                 "numberOfPersons": 2,
@@ -75,7 +75,7 @@ const data: Plan[] = Array(3)
                 "attributes": []
             },
             {
-                "id": "5c3b1fa5-2c4f-46c1-95d8-22b809007bda",
+                "id": "v-3-1",
                 "sku": "PLDES3",
                 "name": "Desayuno para 3 personas",
                 "price": 30,
@@ -88,11 +88,39 @@ const data: Plan[] = Array(3)
                         "Value 2"
                     ]
                 ]
+            },
+            {
+                "id": "v-2-2",
+                "sku": "PLDES3-2",
+                "name": "Desayuno para 2 personas, 2 raciones",
+                "price": 30,
+                "priceWithOffer": 20,
+                "numberOfPersons": 2,
+                "numberOfRecipes": 2,
+                "attributes": [
+                    [
+                        "Key 2",
+                        "Value 2"
+                    ]
+                ]
+            },
+            {
+                "id": "v-3-3",
+                "sku": "PLDES3-3",
+                "name": "Desayuno para 3 personas, 3 raciones",
+                "price": 30,
+                "priceWithOffer": 20,
+                "numberOfPersons": 3,
+                "numberOfRecipes": 3,
+                "attributes": [
+                    [
+                        "Key 2",
+                        "Value 2"
+                    ]
+                ]
             }
         ],
         "additionalPlans": [
-            "e99d6d5b-b724-492c-a74f-1f855105b98d",
-            "a01f9820-adfa-41ee-823c-858c16c64a6b"
         ],
         "abilityToChooseRecipes": true,
         "slug": "plan-desayuno",
@@ -149,8 +177,10 @@ const data: Plan[] = Array(3)
             }
         ]
     })
-    .map((plan, index) => ({
+    .map<Plan>((plan, index) => ({
         ...plan,
         id: plan.id + "-" + index,
-        name: plan.name + " " + index,
+        slug: plan.slug +  `-${index}`,
+        name: plan.name.replace('#planName#', index + ''),
+        type: index % 2 === 0 ? "Adicional" : "Principal"
     }));

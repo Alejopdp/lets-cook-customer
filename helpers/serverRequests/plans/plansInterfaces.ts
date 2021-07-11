@@ -3,17 +3,13 @@ import { ServerRequestRespose } from "../serverRequestInterfaces/response";
 
 export type PlanResponse = ServerRequestRespose<Plan[]>;
 export type AvailablePlanFrecuencies = string;
-export type AdditionalPlans = string;
+export type AdditionalPlans = Plan[];
 export type PlanVariantAttribute = string[];
 export type PlanType = 'Main' | 'Principal' | 'Additional' | 'Adicional';
 export interface PlanVariant {
     id: string;
     sku: string;
-    name: {
-        en?: string;
-        es?: string;
-        ca?: string;
-    };
+    name: string;
     price?: number;
     priceWithOffer?: number;
     numberOfPersons?: number;

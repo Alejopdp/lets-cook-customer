@@ -1,6 +1,6 @@
 // Utils & Config
-import React, { memo, useState } from "react";
-import { getPlans, getRecipes, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant } from "@helpers";
+import React, { memo, useEffect, useState } from "react";
+import { getPlans, getRecipes, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant, getDemoPlans } from "@helpers";
 import { useBuyFlow } from "@stores";
 import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
 import { createSubscription } from "../../helpers/serverRequests/subscription"
@@ -85,17 +85,25 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         }
         setisLoadingPayment(false);
     };
+
+    const steps = [
+        <SelectPlanStep
+            initialPlanSettings={props.planUrlParams}
+            plans={props.plans}
+            variant={props.variant}
+            faqs={props.faqs}
+            recipes={props.recipes}
+        />,
+        <RegisterUserStep />,
+        <CheckoutStep
+            handleSubmitPayment={handleSubmitPayment}
+        />,
+        <RecipeChoiseStep recipes={props.recipes} />
+    ];
+
     return (
         <BuyFlowLayout>
-            {step === 0 && <SelectPlanStep
-                initialPlanSettings={props.planUrlParams}
-                plans={props.plans}
-                variant={props.variant}
-                faqs={props.faqs}
-            />}
-            {step === 1 && <RegisterUserStep />}
-            {step === 2 && <CheckoutStep handleSubmitPayment={handleSubmitPayment} />}
-            {step === 3 && <RecipeChoiseStep recipes={props.recipes} />}
+            {steps[step]}
         </BuyFlowLayout>
     );
 });
@@ -103,35 +111,34 @@ const PlanesPage = memo((props: PlanesPageProps) => {
 export async function getServerSideProps({ locale, query }) {
 
     const _slug = query.slug || '';
-    const mainPlans: Plan[]= [];
+    const mainPlans: Plan[] = [];
     const aditionalsPlans: Plan[] = [];
 
-
-    const [_plans, _recipes, _faqs] = await Promise.all([
+    const [_plans, /*_recipes,*/ _faqs] = await Promise.all([
         getPlans(locale),
-        getRecipes(locale),
+        // getRecipes(locale),
         getFAQS(locale)
-    ])
+    ]);
 
     const errors = [
         _plans.error,
-        _recipes.error,
+        // _recipes.error,
         _faqs.error
-    ].filter(e => !!e)
+    ].filter(e => !!e);
 
-    console.warn('***-> Errors: ', errors);
+    if (errors.length) {
+        console.warn('***-> Errors: ', errors);
+    }
 
-    _plans.data?.forEach( (plan, index) => {
-        if( plan.type === 'Main' || plan.type === 'Principal') {
+    _plans.data?.forEach((plan, index) => {
+        if (plan.type === 'Main' || plan.type === 'Principal') {
             mainPlans.push(plan);
         } else {
             aditionalsPlans.push(plan)
         }
     });
 
-    const { id, slug, variant, redirect, errors: _errors } = getPlanVariant({ slug:_slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
-
-    console.info('***-> Variant Info: ', variant);
+    const { id, slug, variant, redirect, errors: _errors, recipes } = getPlanVariant({ slug: _slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
 
     const planUrlParams: PlanUrlParams = {
         personQty: `${variant?.numberOfPersons || 0}`,
@@ -143,12 +150,12 @@ export async function getServerSideProps({ locale, query }) {
     return {
         props: {
             isLogged: true,
+            faqs: _faqs.data || [],
             plans: mainPlans,
             aditionalsPlans,
-            recipes: _recipes.data || [],
-            faqs: _faqs.data || [],
-            planUrlParams,
             variant,
+            recipes,
+            planUrlParams,
             errors: [...errors, ..._errors]
         },
         redirect
