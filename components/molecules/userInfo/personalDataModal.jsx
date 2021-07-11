@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // External components
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { useMediaQuery } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
@@ -14,108 +13,85 @@ import PreferedLanguageInput from "../../atoms/preferedLanguageInput/preferedLan
 import DatePicker from "../../atoms/datePickerInput/datePickerInput";
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        "& > *": {
-            margin: theme.spacing(1),
-            width: "30ch",
-            [theme.breakpoints.down("sm")]: {
-                width: "36ch",
-            },
-        },
-        marginLeft: "-0.6rem",
-    },
-    phoneInput: {
-        marginTop: ".6rem",
-        height: "3.2rem",
-    },
-}));
 
 const PersonalDataModal = (props) => {
-    const isMdUp = useMediaQuery("(min-width:960px)");
-    const classes = useStyles();
 
-    const [valuePhoneInput, setValuePhoneInput] = useState(null);
-    const [valuePhoneInput2, setValuePhoneInput2] = useState(null);
+    const [formData, setFormData] = useState({
+        name: '',
+        surname: '',
+        phone1: '',
+        phone2: '',
+        birthdayDate: '',
+        preferedLanguage: ''
+    })
+
+    useEffect(() => {
+        setFormData({
+            name: props.initialData.clientName,
+            surname: props.initialData.clientSurname,
+            phone1: props.initialData.phone1,
+            phone2: props.initialData.phone2,
+            birthdayDate: props.initialData.birthdayDate,
+            preferedLanguage: props.initialData.preferedLanguage.value
+        })
+    }, [props.open]);
+
+
+    const handleChangeInput = (e) => {
+        let name = e.target.name;
+        let value = e.target.value;
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+    }
+
+    const handleChangePhone1 = (newValue) => {
+        setFormData({
+            ...formData,
+            phone1: newValue
+        })
+    }
+
+    const handleChangePhone2 = (newValue) => {
+        setFormData({
+            ...formData,
+            phone2: newValue
+        })
+    }
+
+    const handleChangePersonalData = () => {
+        props.handlePrimaryButtonClick(formData);
+    }
 
     return (
         <Modal
             open={props.open}
+            title='Modificar datos personales'
             handleClose={props.handleClose}
-            fullScreen={isMdUp ? false : true}
+            fullScreen
+            handlePrimaryButtonClick={handleChangePersonalData}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
         >
-            <Grid container>
-                <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
-                                Modificar datos personales
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
-
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <form noValidate autoComplete="off">
-                                <TextField
-                                    className={classes.root}
-                                    id="outlined-basic"
-                                    label="Nombre"
-                                    variant="outlined"
-                                    style={{ marginBottom: "-1rem" }}
-                                />
-                            </form>
-                        </Grid>
-                    </Grid>
+                    <TextField id="outlined-basic" label="Nombre" variant="outlined" name='name' value={formData.name} onChange={handleChangeInput} style={{ width: '100%' }} />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <form noValidate autoComplete="off">
-                                <TextField className={classes.root} id="outlined-basic" label="Apellido" variant="outlined" />
-                            </form>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
-
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <PhoneNumberInput value={valuePhoneInput} handleChange={setValuePhoneInput} placeholder="Telefono (1)" />
-                        </Grid>
-                    </Grid>
+                    <TextField id="outlined-basic" label="Apellido" variant="outlined" name='surname' value={formData.surname} onChange={handleChangeInput} style={{ width: '100%' }} />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <PhoneNumberInput value={valuePhoneInput2} handleChange={setValuePhoneInput2} placeholder="Telefono (2)" />
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
-
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <DatePicker />
-                        </Grid>
-                    </Grid>
+                    <PhoneNumberInput placeholder="Telefono (1)" name='phone1' value={formData.phone1} handleChange={handleChangePhone1} />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <PreferedLanguageInput />
-                        </Grid>
-                    </Grid>
+                    <PhoneNumberInput placeholder="Telefono (2)" name='phone2' value={formData.phone2} handleChange={handleChangePhone2} />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField id="date" label="Fecha de Nacimiento" name='birthdayDate' value={formData.birthdayDate} onChange={handleChangeInput} type="date" style={{ width: '100%' }} InputLabelProps={{ shrink: true }} variant="outlined" />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <PreferedLanguageInput name='preferedLanguage' value={formData.preferedLanguage} handleChange={handleChangeInput} />
                 </Grid>
             </Grid>
         </Modal>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Rating from "@material-ui/lab/Rating";
 import { Box } from "@material-ui/core";
 
-export default function SimpleRating({ handleClickOpenRecipeModal, isModal, fullScreen, selectedRecipe, starValue}) {
+export default function SimpleRating({ handleClickOpenRecipeModal, isModal, fullScreen, selectedRecipe, starValue }) {
     const [value, setValue] = useState(0);
 
     useEffect(() => {
@@ -13,23 +13,16 @@ export default function SimpleRating({ handleClickOpenRecipeModal, isModal, full
         <div>
             <Box
                 component="fieldset"
-                mb={-2}
-                mt={fullScreen ? 2 : isModal ? 1 : -1}
-                borderColor="transparent"
-                style={{ display: isModal ? "flex" : null, justifyContent: isModal ? "center" : null }}
+                // borderColor="transparent"
+                style={{ display: isModal ? "flex" : null, justifyContent: isModal ? "center" : null, margin: '0px', padding: '0px', border: 'none' }}
+
             >
                 <Rating
-                    name={`${selectedRecipe.id}`}
+                    name={selectedRecipe.id}
                     value={selectedRecipe.rating ? (isModal ? starValue : selectedRecipe.rating) : isModal ? starValue : 0}
-                    onChange={(event, newValue) => {
-                        setValue(newValue);
-                    }}
-                    onClick={(e) => {
-                        handleClickOpenRecipeModal(e.target.value);
-                    }}
+                    onChange={(e, newValue) => { setValue(newValue) }}
+                    onClick={isModal ? ((e, newValue) => { setValue(newValue) }) : ((e) => { handleClickOpenRecipeModal(e.target.value) })}
                     size="large"
-                    style={{ marginLeft: "-.8rem" }}
-                    readOnly={isModal ? true : false}
                 />
             </Box>
         </div>

@@ -20,6 +20,9 @@ const PhoneNumberInput = (props) => {
                 specialLabel={""}
                 onChange={(newValue) => props.handleChange(newValue)}
                 placeholder={props.placeholder}
+                inputProps={{
+                    name: props.name
+                }}
             />
         </>
     );

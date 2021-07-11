@@ -30,7 +30,7 @@ const RecetasLayout = ({ recipes }) => {
     return (
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
-                <BackButtonTitle url="/" title="Valorar recetas" />
+                <BackButtonTitle url="/perfil" title="Valorar recetas" />
                 <Recipes recipes={recipes} />
             </InnerSectionLayout>
         </Layout>

@@ -55,7 +55,7 @@ const Recipes = ({ recipes }) => {
         <>
             <Grid container spacing={2}>
                 <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                    <Typography variant="h6">
+                    <Typography variant="h5">
                         Recetas pendientes de valorar
                     </Typography>
                 </Grid>
@@ -77,7 +77,7 @@ const Recipes = ({ recipes }) => {
                     );
                 })}
                 <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
-                    <Typography variant="h6">
+                    <Typography variant="h5">
                         Recetas valoradas
                     </Typography>
                 </Grid>

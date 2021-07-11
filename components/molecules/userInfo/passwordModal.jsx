@@ -1,53 +1,65 @@
-import React from "react";
+// Utils & Config
+import React, { useState } from "react";
+import { isPassword, isEmpty } from "../../../helpers/regex/regex";
 
 // External components
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { useMediaQuery } from "@material-ui/core";
 import { useTheme, makeStyles } from '@material-ui/core/styles'
-import TextField from "@material-ui/core/TextField";
 
 // Internal Components
 import Modal from "../../atoms/modal/modal";
+import { PasswordInput } from "../../atoms/inputs/inputs";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        "& > *": {
-            margin: theme.spacing(1),
-            width: "67ch",
-            [theme.breakpoints.down("sm")]: {
-                width: "40ch",
-            },
-        },
-        marginLeft: "-0.6rem",
-        marginTop: "-1rem",
-    },
-}));
 
 const PasswordModal = (props) => {
-    const isMdUp = useMediaQuery("(min-width:960px)");
     const theme = useTheme();
-    const classes = useStyles();
+
+    const [newPassword, setNewPassword] = useState('')
+    const [repeatNewPassword, setRepeatNewPassword] = useState('')
+
+    const handleChangeNewPassword = (e) => {
+        setNewPassword(e.target.value)
+    }
+
+    const handleChangeRepeatNewPassword = (e) => {
+        setRepeatNewPassword(e.target.value)
+    }
+
+    const handleChangePassword = () => {
+        props.handlePrimaryButtonClick(newPassword);
+        setNewPassword('');
+        setRepeatNewPassword('');
+    }
+
     return (
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            fullScreen={isMdUp ? false : true}
+            title='Modificar correo electronico'
+            handlePrimaryButtonClick={handleChangePassword}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
+            fullScreen={true}
+            disabled={((!isPassword(newPassword)) || (newPassword !== repeatNewPassword) || (isEmpty(newPassword)))}
         >
-            <Grid container>
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Grid container alignItems="center" style={{ cursor: "pointer", marginBottom: theme.spacing(3) }}>
-                        <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
-                            Modificar contraseña
-                        </Typography>
-                    </Grid>
+                    <PasswordInput
+                        label='Nueva contraseña'
+                        name="newPassword"
+                        value={newPassword}
+                        onChange={handleChangeNewPassword}
+                    />
                 </Grid>
-                <form className={classes.root} noValidate autoComplete="off">
-                    <TextField id="outlined-basic" label="Nueva contraseña" variant="outlined" />
-                    <TextField id="outlined-basic" label="Repita su nueva contraseña" variant="outlined" />
-                </form>
+                <Grid item xs={12}>
+                    <PasswordInput
+                        label='Repita su nueva contraseña'
+                        name="repeatNewPassword"
+                        value={repeatNewPassword}
+                        onChange={handleChangeRepeatNewPassword}
+                        helperText='La contraseña debe tener al menos 8 caracteres, 1 mayúscula y 1 número'
+                    />
+                </Grid>
             </Grid>
         </Modal>
     );

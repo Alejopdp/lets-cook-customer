@@ -62,22 +62,18 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                         <Image src="/logo.png" width={174} height={60} />
                     </Link>
                     <Grid style={{ marginTop: '16px' }}>
-                        <InstagramIcon
-                            // fontSize="medium"
-                            style={{ margin: "8px" }}
-                        />
-                        <FacebookIcon
-                            // fontSize="medium"
-                            style={{ margin: "8px" }}
-                        />
-                        <PinterestIcon
-                            // fontSize="medium"
-                            style={{ margin: "8px" }}
-                        />
-                        <YouTubeIcon
-                            // fontSize="medium"
-                            style={{ margin: "8px" }}
-                        />
+                        <Link href='https://www.instagram.com/letscook.now/' target="_blank" rel="noreferrer noopener">
+                            <InstagramIcon style={{ margin: "8px" }} />
+                        </Link>
+                        <Link href='https://www.facebook.com/Lets-cook-2399683106933532/' target="_blank" rel="noreferrer noopener">
+                            <FacebookIcon style={{ margin: "8px" }} />
+                        </Link>
+                        <Link href='https://www.pinterest.es/letscooknowes/' target="_blank" rel="noreferrer noopener">
+                            <PinterestIcon style={{ margin: "8px" }} />
+                        </Link>
+                        <Link href='https://www.youtube.com/channel/UCWmWuYmsvW5H2BWykUCAmZg' target="_blank" rel="noreferrer noopener">
+                            <YouTubeIcon style={{ margin: "8px" }} />
+                        </Link>
                     </Grid>
                 </Grid>
 

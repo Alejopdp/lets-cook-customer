@@ -25,7 +25,7 @@ const CreatedByError = (props) => {
     return (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
-                Gracias por corregirlo. Cualquier consulta, no dudes en enviarnos un correo a info@letscooknow.es
+                Gracias por corregirlo. Cualquier consulta, no dudes en enviarnos un correo a <strong>info@letscooknow.es</strong>
             </Typography>
             <div className={classes.root}>
                 <TextField
