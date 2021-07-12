@@ -9,8 +9,7 @@ const useStyles = makeStyles((theme) => ({
         width: 250,
     },
     menuLogginButton: {
-        paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(1),
+        padding: theme.spacing(2),
         margin: "0 auto",
     },
 }));

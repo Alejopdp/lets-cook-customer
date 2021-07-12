@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     loginButton: {
         width: 150,
         padding: theme.spacing(1),
-        borderRadius: 50,
+        borderRadius: 8,
         margin: `0 auto`,
     }
 }));
