@@ -2,17 +2,14 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import clsx from "clsx";
 import { Divider, Grid, Typography } from "@material-ui/core";
-
 import { faqsSection } from "@lang";
 import { Plan, getPlanVariant, Recipe, PlanVariant } from "@helpers";
 import { useBuyFlow } from "@stores";
 import { PlanWithIcon, CustomButton, SimpleAccordion } from "@atoms";
 import { PlanSize, } from "@molecules";
-
 import RecipesCalculation from "../../../molecules/recipesCalculation/recipesCalculation";
 import RecipesSection from "../../sections/RecipesSection";
 import ReviewsSection from "../../sections/ReviewsSection";
-
 import { useStyles } from "./styles";
 import { SelectPlanProps, ARGS } from "./interfaces";
 import { PlansList } from "./planesList";
@@ -25,7 +22,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const buyFlow = useBuyFlow();
     const [planSize, setPlanSize] = useState({});
     const [recipesOfWeek, setRecipesOfWeek] = useState<Recipe[]>([]);
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar();
 
     const getPlanSize = useCallback((slug: string, plans: Plan[]) => {
         const planSelect = plans.find(plan => plan.slug === slug)

@@ -8,10 +8,11 @@ interface CheckoutStepProps {
 }
 export const CheckoutStep = memo((props: CheckoutStepProps) => {
     const gotToNextView = useBuyFlow(({ forward }) => forward);
+
     return (
         <Container maxWidth="lg">
             <button onClick={() => gotToNextView()}>Elegir recetas</button>
-            <ShipmentForm registeredUser />
+            <ShipmentForm />
             <PaymentForm savedCards handleSubmitPayment={props.handleSubmitPayment} />
             <IconsWithText />
         </Container>

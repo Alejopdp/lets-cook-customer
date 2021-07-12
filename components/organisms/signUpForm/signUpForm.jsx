@@ -47,7 +47,7 @@ const SignUpForm = (props) => {
             saveInLocalStorage("userInfo", res.data.userInfo);
             setUserInfo(res.data.userInfo);
             // setIsAuthenticated(true);
-            props.handleSignUp ? props.handleSignUp() : "";
+            props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }

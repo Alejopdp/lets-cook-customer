@@ -59,7 +59,7 @@ const LoginBox = (props) => {
         cookies.set("token", token);
         setIsAuthenticated(true);
         props.redirect ? router.push("/") : "";
-        props.handleLogin ? props.handleLogin() : "";
+        props.handleLogin ? props.handleLogin(userInfo) : "";
     };
 
     const router = useRouter();

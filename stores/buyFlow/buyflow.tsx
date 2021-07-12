@@ -2,15 +2,19 @@ import { Plan, PlanVariant } from "@helpers";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
-export type PaymentMethods = any;
+export type PaymentMethods = {
+    id: string
+    label: string
+    isDefault: string
+};
 export type Recipes = any;
 
 export interface DeliveryForm {
-    address: string;
-    addressDesc: string;
-    fristname: string;
-    secondName: string;
-    phone: string;
+    addressName: string;
+    addressDetails: string;
+    firstName: string;
+    lastName: string;
+    phone1: string;
     restrictions: string;
 }
 
@@ -52,11 +56,11 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             attributes: []
         },
         deliveryForm: {
-            address: "",
-            addressDesc: "",
-            fristname: "",
-            secondName: "",
-            phone: "",
+            addressName: "",
+            addressDetails: "",
+            firstName: "",
+            lastName: "",
+            phone1: "",
             restrictions: "",
         },
         paymentMethods: [],
@@ -93,7 +97,7 @@ const store = devtools<Store>((set, get) => ({
         form.deliveryForm = { ...deliveryForm }
         set({ form });
     },
-    setPaymentMetods: (paymentMethods: PaymentMethods) => {
+    setPaymentMetods: (paymentMethods: PaymentMethods[]) => {
         const form = get().form;
         form.paymentMethods = paymentMethods;
         set({ form });
