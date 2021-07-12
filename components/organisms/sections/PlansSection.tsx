@@ -10,6 +10,9 @@ import { PlansSectionProps } from "./interfaces";
 import { memo } from 'react';
 import PlanCard from '../../molecules/planCard';
 
+import { useSpring, animated } from 'react-spring'
+
+
 const _cards: Plan[] = [
     {
         name: "Plan familiar",
@@ -34,24 +37,6 @@ const _cards: Plan[] = [
         description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
         imageUrl: "unnamed.jpg",
         slug: "plan-vegetariano"
-    },
-    {
-        name: "Plan ahorro",
-        description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        imageUrl: "unnamed.jpg",
-        slug: "plan-ahorro"
-    },
-    {
-        name: "Plan ahorro",
-        description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        imageUrl: "unnamed.jpg",
-        slug: "plan-ahorro"
-    },
-    {
-        name: "Plan ahorro",
-        description: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        imageUrl: "unnamed.jpg",
-        slug: "plan-ahorro"
     },
     {
         name: "Plan ahorro",
@@ -104,8 +89,10 @@ export const PlansSection = memo(({ cards = _cards }: PlansSectionProps) => {
         },
     };
 
+    const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0.5 } })
+
     return (
-        <>
+        <animated.div style={props}>
             <Container maxWidth='xl'>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -169,7 +156,7 @@ export const PlansSection = memo(({ cards = _cards }: PlansSectionProps) => {
                     </Carousel>
                 </div>
             )}
-        </>
+        </animated.div>
     )
 })
 

@@ -26,7 +26,7 @@ const UserInfo = () => {
     return (
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
-                <BackButtonTitle url="/" title="Configuracion de la cuenta" />
+                <BackButtonTitle url="/perfil" title="Configuracion de la cuenta" />
                 <UserInfoDetail />
             </InnerSectionLayout>
         </Layout>

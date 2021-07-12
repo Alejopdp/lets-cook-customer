@@ -69,9 +69,6 @@ const SkipPlanModal = (props) => {
             fullScreen={true}
             maxWidth='lg'
         >
-            {/* <Typography variant='subtitle2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
-                Haga click a continuación sobre la semana que desea saltar
-            </Typography> */}
             <Grid container spacing={2}>
                 {weeksStore.map((week, index) => (
                     <Grid key={week.weekId} item xs={6} sm={3}>

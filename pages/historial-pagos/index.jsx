@@ -6,14 +6,14 @@ import Link from "next/link";
 // External components
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
 
 // Internal components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import { Layout } from "../../components/layout/index";
 import PaymentsTable from "../../components/molecules/paymentsTable/PaymentsTable";
 import PaymentDetailsModal from "../../components/molecules/paymentDetailsModal/PaymentDetailsModal";
+import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 
 const HistorialPagos = (props) => {
     const theme = useTheme();
@@ -36,16 +36,7 @@ const HistorialPagos = (props) => {
         <>
             <Layout disableCallToActionSection>
                 <InnerSectionLayout containerMaxWidth="lg">
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: theme.spacing(3) }}>
-                        <Link href="/perfil">
-                            <IconButton aria-label="close" style={{ marginRight: theme.spacing(1), color: theme.palette.text.black }}>
-                                <ArrowBackIcon />
-                            </IconButton>
-                        </Link>
-                        <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                            Historial de pagos
-                        </Typography>
-                    </div>
+                    <BackButtonTitle url="/perfil" title="Historial de pagos" />
                     <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} />
                 </InnerSectionLayout>
             </Layout>
