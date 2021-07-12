@@ -23,6 +23,7 @@ const columns = [
     { id: "ver", label: "", minWidth: 50 },
 ];
 
+
 function createData(fecha, orden, plan, variante, monto, estado, ver) {
     return { fecha, orden, plan, variante, monto, estado, ver };
 }
@@ -45,6 +46,23 @@ const rows = [
     createData("07/10/2021", "42284", "Plan Familiar", "4 recetas para 3 personas", "32€", "ACEPTADO", "Ver"),
 ];
 
+const columnsNewTable = [
+    { id: "paymentDate", label: "Fecha de pago", minWidth: 100 },
+    { id: "paymentOrderId", label: "Número de orden", minWidth: 100 },
+    { id: "plans", label: "Descripción", minWidth: 100 },
+    { id: "totalAmount", label: "Monto total", minWidth: 100 },
+    { id: "status", label: "Estado", minWidth: 100 },
+    { id: "seeMore", label: "", minWidth: 50 },
+]
+
+function createNewData(paymentDate, paymentOrderId, plans, totalAmount, status, seeMore) {
+    return { paymentDate, paymentOrderId, plans, totalAmount, status, seeMore };
+}
+
+const newRows = [
+    createData("01/08/2021", "42270", ["Plan Familiar - 2 recetas para 2 personas", "Plan Vinos - 3 vinos"], "30€", "ACEPTADO", "Ver"),
+];
+
 const useStyles = makeStyles({
     root: {
         width: "100%",
@@ -55,7 +73,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function PaymentsTable(props) {
+const PaymentsTable = (props) => {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -70,14 +88,80 @@ export default function PaymentsTable(props) {
         setPage(0);
     };
 
+    const getLabelDisplayedRows = ({ from, to, count }) => {
+        return `${from}-${to} de ${count !== -1 ? count : `más que ${to}`}`
+    }
+
     return (
+        // <>
+        //     <Paper className={classes.root}>
+        //         <TableContainer>
+        //             <Table aria-label="sticky table">
+        //                 <TableHead>
+        //                     <TableRow>
+        //                         {columns.map((column) => (
+        //                             <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
+        //                                 {column.label}
+        //                             </TableCell>
+        //                         ))}
+        //                     </TableRow>
+        //                 </TableHead>
+        //                 <TableBody>
+        //                     {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+        //                         return (
+        //                             <TableRow role="checkbox" tabIndex={-1} key={row.code}>
+        //                                 {columns.map((column) => {
+        //                                     let value = row[column.id];
+        //                                     if (value === "Ver") {
+        //                                         value = (
+        //                                             <IconButton size="small" aria-label="close" onClick={() => props.onClick(row)}>
+        //                                                 <VisibilityIcon />
+        //                                             </IconButton>
+        //                                         );
+        //                                     } else if (value === "ACEPTADO") {
+        //                                         value = (
+        //                                             <Chip
+        //                                                 label="ACEPTADO"
+        //                                                 style={{
+        //                                                     backgroundColor: theme.palette.primary.main,
+        //                                                     fontWeight: 500,
+        //                                                     color: "white",
+        //                                                 }}
+        //                                             />
+        //                                         );
+        //                                     }
+        //                                     return (
+        //                                         <TableCell key={column.id} align={column.align}>
+        //                                             {column.format && typeof value === "number" ? column.format(value) : value}
+        //                                         </TableCell>
+        //                                     );
+        //                                 })}
+        //                             </TableRow>
+        //                         );
+        //                     })}
+        //                 </TableBody>
+        //             </Table>
+        //         </TableContainer>
+        //         <TablePagination
+        //             rowsPerPageOptions={[10, 25, 100]}
+        //             component="div"
+        //             labelRowsPerPage='Filas por página'
+        //             labelDisplayedRows={getLabelDisplayedRows}
+        //             count={rows.length}
+        //             rowsPerPage={rowsPerPage}
+        //             page={page}
+        //             onChangePage={handleChangePage}
+        //             onChangeRowsPerPage={handleChangeRowsPerPage}
+        //         />
+        //     </Paper>
+        // </>
         <>
             <Paper className={classes.root}>
                 <TableContainer>
                     <Table aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                {columns.map((column) => (
+                                {columnsNewTable.map((column) => (
                                     <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
                                         {column.label}
                                     </TableCell>
@@ -85,9 +169,9 @@ export default function PaymentsTable(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            {newRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                                 return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                    <TableRow role="checkbox" tabIndex={-1} key={row.code}>
                                         {columns.map((column) => {
                                             let value = row[column.id];
                                             if (value === "Ver") {
@@ -123,6 +207,8 @@ export default function PaymentsTable(props) {
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
+                    labelRowsPerPage='Filas por página'
+                    labelDisplayedRows={getLabelDisplayedRows}
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
@@ -133,3 +219,5 @@ export default function PaymentsTable(props) {
         </>
     );
 }
+
+export default PaymentsTable;
