@@ -8,60 +8,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import Typography from "@material-ui/core/Typography";
 
 import IconButton from "@material-ui/core/IconButton";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import Chip from "@material-ui/core/Chip";
-
-const columns = [
-    { id: "fecha", label: "Fecha", minWidth: 100 },
-    { id: "orden", label: "Orden", minWidth: 100 },
-    { id: "plan", label: "Plan", minWidth: 100 },
-    { id: "variante", label: "Variante", minWidth: 170 },
-    { id: "monto", label: "Monto", minWidth: 100 },
-    { id: "estado", label: "Estado", minWidth: 100 },
-    { id: "ver", label: "", minWidth: 50 },
-];
-
-
-function createData(fecha, orden, plan, variante, monto, estado, ver) {
-    return { fecha, orden, plan, variante, monto, estado, ver };
-}
-
-const rows = [
-    createData("01/08/2021", "42270", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("08/08/2021", "42271", "Plan Familiar", "4 recetas para 3 personas", "24€", "ACEPTADO", "Ver"),
-    createData("15/08/2021", "42272", "Plan Familiar", "4 recetas para 3 personas", "21€", "ACEPTADO", "Ver"),
-    createData("22/08/2021", "42273", "Plan Familiar", "4 recetas para 3 personas", "22€", "ACEPTADO", "Ver"),
-    createData("29/08/2021", "42274", "Plan Familiar", "4 recetas para 3 personas", "32€", "ACEPTADO", "Ver"),
-    createData("04/09/2021", "42275", "Plan Familiar", "4 recetas para 3 personas", "28€", "ACEPTADO", "Ver"),
-    createData("11/09/2021", "42276", "Plan Familiar", "4 recetas para 3 personas", "27€", "ACEPTADO", "Ver"),
-    createData("18/09/2021", "42277", "Plan Familiar", "4 recetas para 3 personas", "35€", "ACEPTADO", "Ver"),
-    createData("25/09/2021", "42278", "Plan Familiar", "4 recetas para 3 personas", "31€", "ACEPTADO", "Ver"),
-    createData("02/09/2021", "42279", "Plan Familiar", "4 recetas para 3 personas", "25€", "ACEPTADO", "Ver"),
-    createData("09/09/2021", "42280", "Plan Familiar", "4 recetas para 3 personas", "20€", "ACEPTADO", "Ver"),
-    createData("16/09/2021", "42281", "Plan Familiar", "4 recetas para 3 personas", "30€", "ACEPTADO", "Ver"),
-    createData("23/09/2021", "42282", "Plan Familiar", "4 recetas para 3 personas", "29€", "ACEPTADO", "Ver"),
-    createData("30/09/2021", "42283", "Plan Familiar", "4 recetas para 3 personas", "27€", "ACEPTADO", "Ver"),
-    createData("07/10/2021", "42284", "Plan Familiar", "4 recetas para 3 personas", "32€", "ACEPTADO", "Ver"),
-];
-
-const columnsNewTable = [
-    { id: "paymentDate", label: "Fecha de pago", minWidth: 100 },
-    { id: "paymentOrderId", label: "Número de orden", minWidth: 100 },
-    { id: "plans", label: "Descripción", minWidth: 100 },
-    { id: "totalAmount", label: "Monto total", minWidth: 100 },
-    { id: "status", label: "Estado", minWidth: 100 },
-    { id: "seeMore", label: "", minWidth: 50 },
-]
-
-function createNewData(paymentDate, paymentOrderId, plans, totalAmount, status, seeMore) {
-    return { paymentDate, paymentOrderId, plans, totalAmount, status, seeMore };
-}
-
-const newRows = [
-    createData("01/08/2021", "42270", ["Plan Familiar - 2 recetas para 2 personas", "Plan Vinos - 3 vinos"], "30€", "ACEPTADO", "Ver"),
-];
+import PaymentOrderChip from "../../atoms/chips/paymentOrderChip";
 
 const useStyles = makeStyles({
     root: {
@@ -74,6 +26,27 @@ const useStyles = makeStyles({
 });
 
 const PaymentsTable = (props) => {
+    const columnsNewTable = [
+        { id: "paymentDate", label: "Fecha de pago", minWidth: 100 },
+        { id: "paymentOrderId", label: "Número de orden", minWidth: 100 },
+        { id: "plans", label: "Descripción", minWidth: 100 },
+        { id: "totalAmount", label: "Monto total", minWidth: 100 },
+        { id: "status", label: "Estado", minWidth: 100 },
+        { id: "seeMore", label: "", minWidth: 50 },
+    ]
+
+    function createNewData(paymentDate, paymentOrderId, plans, totalAmount, status, seeMore) {
+        return { paymentDate, paymentOrderId, plans, totalAmount, status, seeMore };
+    }
+
+    const newRows = [
+        createNewData("01/08/2021", "42270", "Plan Familiar - 2 recetas para 2 personas / Plan Vinos - 3 vinos", "30€", { status: "PAYMENT_ORDER_ACTIVE", humanStatus: "ACTIVO" }, "Ver"),
+        createNewData("01/08/2021", "42270", "Plan Familiar - 2 recetas para 2 personas / Plan Vinos - 3 vinos", "30€", { status: "PAYMENT_ORDER_BILLED", humanStatus: "PROCESADO" }, "Ver"),
+        createNewData("01/08/2021", "42270", "Plan Familiar - 2 recetas para 2 personas / Plan Vinos - 3 vinos", "30€", { status: "PAYMENT_ORDER_CANCELLED", humanStatus: "CANCELADO" }, "Ver"),
+        createNewData("01/08/2021", "42270", "Plan Familiar - 2 recetas para 2 personas / Plan Vinos - 3 vinos", "30€", { status: "PAYMENT_ORDER_REJECTED", humanStatus: "RECHAZADO" }, "Ver"),
+    ];
+
+
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -92,131 +65,61 @@ const PaymentsTable = (props) => {
         return `${from}-${to} de ${count !== -1 ? count : `más que ${to}`}`
     }
 
+
     return (
-        // <>
-        //     <Paper className={classes.root}>
-        //         <TableContainer>
-        //             <Table aria-label="sticky table">
-        //                 <TableHead>
-        //                     <TableRow>
-        //                         {columns.map((column) => (
-        //                             <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
-        //                                 {column.label}
-        //                             </TableCell>
-        //                         ))}
-        //                     </TableRow>
-        //                 </TableHead>
-        //                 <TableBody>
-        //                     {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-        //                         return (
-        //                             <TableRow role="checkbox" tabIndex={-1} key={row.code}>
-        //                                 {columns.map((column) => {
-        //                                     let value = row[column.id];
-        //                                     if (value === "Ver") {
-        //                                         value = (
-        //                                             <IconButton size="small" aria-label="close" onClick={() => props.onClick(row)}>
-        //                                                 <VisibilityIcon />
-        //                                             </IconButton>
-        //                                         );
-        //                                     } else if (value === "ACEPTADO") {
-        //                                         value = (
-        //                                             <Chip
-        //                                                 label="ACEPTADO"
-        //                                                 style={{
-        //                                                     backgroundColor: theme.palette.primary.main,
-        //                                                     fontWeight: 500,
-        //                                                     color: "white",
-        //                                                 }}
-        //                                             />
-        //                                         );
-        //                                     }
-        //                                     return (
-        //                                         <TableCell key={column.id} align={column.align}>
-        //                                             {column.format && typeof value === "number" ? column.format(value) : value}
-        //                                         </TableCell>
-        //                                     );
-        //                                 })}
-        //                             </TableRow>
-        //                         );
-        //                     })}
-        //                 </TableBody>
-        //             </Table>
-        //         </TableContainer>
-        //         <TablePagination
-        //             rowsPerPageOptions={[10, 25, 100]}
-        //             component="div"
-        //             labelRowsPerPage='Filas por página'
-        //             labelDisplayedRows={getLabelDisplayedRows}
-        //             count={rows.length}
-        //             rowsPerPage={rowsPerPage}
-        //             page={page}
-        //             onChangePage={handleChangePage}
-        //             onChangeRowsPerPage={handleChangeRowsPerPage}
-        //         />
-        //     </Paper>
-        // </>
-        <>
-            <Paper className={classes.root}>
-                <TableContainer>
-                    <Table aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columnsNewTable.map((column) => (
-                                    <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {newRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                return (
-                                    <TableRow role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            let value = row[column.id];
-                                            if (value === "Ver") {
-                                                value = (
-                                                    <IconButton size="small" aria-label="close" onClick={() => props.onClick(row)}>
-                                                        <VisibilityIcon />
-                                                    </IconButton>
-                                                );
-                                            } else if (value === "ACEPTADO") {
-                                                value = (
-                                                    <Chip
-                                                        label="ACEPTADO"
-                                                        style={{
-                                                            backgroundColor: theme.palette.primary.main,
-                                                            fontWeight: 500,
-                                                            color: "white",
-                                                        }}
-                                                    />
-                                                );
-                                            }
-                                            return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === "number" ? column.format(value) : value}
-                                                </TableCell>
+        <Paper className={classes.root}>
+            <TableContainer>
+                <Table aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            {columnsNewTable.map((column) => (
+                                <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth, fontWeight: 600 }}>
+                                    {column.label}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {newRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            return (
+                                <TableRow role="checkbox" tabIndex={-1} key={row.code}>
+                                    {columnsNewTable.map((column) => {
+                                        let value = row[column.id];
+                                        if (column.id === "seeMore") {
+                                            value = (
+                                                <IconButton size="small" aria-label="close" onClick={() => props.onClick(row.paymentOrderId)}>
+                                                    <VisibilityIcon />
+                                                </IconButton>
                                             );
-                                        })}
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    labelRowsPerPage='Filas por página'
-                    labelDisplayedRows={getLabelDisplayedRows}
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
-            </Paper>
-        </>
+                                        } else if (column.id === "status") {
+                                            value = (
+                                                <PaymentOrderChip label={value.humanStatus} variant={value.status} />
+                                            );
+                                        }
+                                        return (
+                                            <TableCell key={column.id} align={column.align}>
+                                                {column.format && typeof value === "number" ? column.format(value) : value}
+                                            </TableCell>
+                                        );
+                                    })}
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                labelRowsPerPage='Filas por página'
+                labelDisplayedRows={getLabelDisplayedRows}
+                count={newRows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+        </Paper>
     );
 }
 
