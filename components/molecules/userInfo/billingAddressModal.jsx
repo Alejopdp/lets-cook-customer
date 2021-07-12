@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { getGeometry } from "../../../helpers/utils/geocode";
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -8,63 +9,107 @@ import TextField from "@material-ui/core/TextField";
 
 // Internal Components
 import Modal from "../../atoms/modal/modal";
+import LocationSearchInput from "../../atoms/locationSearchInput/locationSearchiInput";
 
-
+const useStyles = makeStyles((theme) => ({
+    root: {},
+}));
 
 const BillingAddressModal = (props) => {
+    const isMdUp = useMediaQuery("(min-width:960px)");
+    const classes = useStyles();
+    const [formData, setformData] = useState({
+        addressName: props.billingData.addressName,
+        details: props.billingData.details,
+        customerName: props.billingData.customerName,
+        identification: props.billingData.identification,
+        latitude: props.billingData.latitude,
+        longitude: props.billingData.longitude,
+    });
 
-    const [formData, setFormData] = useState({
-        addressName: '',
-        addressDescription: '',
-        name: '',
-        document: '',
-    })
-
-    useEffect(() => {
-        setFormData({
-            addressName: props.initialData.addressName,
-            addressDescription: props.initialData.addressDescription,
-            name: props.initialData.name,
-            document: props.initialData.document
-        })
-    }, [props.open]);
-
-
-    const handleChangeInput = (e) => {
-        let name = e.target.name;
-        let value = e.target.value;
-        setFormData({
+    const handleChange = (e) => {
+        setformData({
             ...formData,
-            [name]: value
-        })
-    }
+            [e.target.name]: e.target.value,
+        });
+    };
 
-    const handleChangeBillingAddress = () => {
-        props.handlePrimaryButtonClick(formData);
-    }
+    const handleGoogleInput = async (address) => {
+        const geometry = await getGeometry(address.structured_formatting.main_text);
+
+        setformData({
+            ...formData,
+            addressName: address.description,
+            latitude: geometry.lat,
+            longitude: geometry.lng,
+        });
+    };
+
+    const handleSubmit = () => {
+        props.handleSubmit(formData);
+    };
 
     return (
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            title='Modificar direccion de facturacion'
+            title="Modificar direccion de facturacion"
             fullScreen
             handlePrimaryButtonClick={handleChangeBillingAddress}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
+            handlePrimaryButtonClick={handleSubmit}
         >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <TextField id="outlined-basic" label="Direccion de Entrega" name='addressName' value={formData.addressName} onChange={handleChangeInput} variant="outlined" style={{ width: "100%" }} />
+                    <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
+                        Modificar direccion de facturacion
+                    </Typography>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <LocationSearchInput name="addressName" handleChange={handleGoogleInput} value={formData.addressName} />
+                    </form>
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField id="outlined-basic" label="Piso / Puerta / Aclaraciones" name='addressDescription' value={formData.addressDescription} onChange={handleChangeInput} variant="outlined" style={{ width: "100%" }} />
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <TextField
+                            id="outlined-basic"
+                            label="Piso / Puerta / Aclaraciones"
+                            variant="outlined"
+                            name="details"
+                            fullWidth
+                            value={formData.details}
+                            onChange={handleChange}
+                        />
+                    </form>
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField id="outlined-basic" label="Nombre Completo" name='name' value={formData.name} onChange={handleChangeInput} variant="outlined" style={{ width: "100%" }} />
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <TextField
+                            id="outlined-basic"
+                            label="Nombre Completo"
+                            variant="outlined"
+                            fullWidth
+                            name="customerName"
+                            value={formData.customerName}
+                            onChange={handleChange}
+                        />
+                    </form>
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField id="outlined-basic" label="DNI/NIE/CIF" name='document' value={formData.document} onChange={handleChangeInput} variant="outlined" style={{ width: "100%" }} />
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <TextField
+                            id="outlined-basic"
+                            label="DNI/NIE/CIF"
+                            fullWidth
+                            variant="outlined"
+                            name="identification"
+                            value={formData.identification}
+                            onChange={handleChange}
+                        />
+                    </form>
                 </Grid>
             </Grid>
         </Modal>

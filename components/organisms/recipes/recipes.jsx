@@ -5,6 +5,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import RecipesModal from "../../molecules/valueRecipesModal/recipesModal";
 import FoodCard from "../../molecules/foodCard";
+import { deleteRecipe } from "../../../helpers/serverRequests/user-recipes";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -12,15 +13,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Recipes = ({ recipes }) => {
     const classes = useStyles();
+
     const theme = useTheme();
     // modal
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
 
-    // recipes from axios
     const [recipesToRate, setRecipesToRate] = useState([]);
     const [recipesWithRating, setRecipesWithRating] = useState([]);
 
-    // onClick
     const [chosenRecipe, setChosenRecipe] = useState({});
 
     const [starValue, setStarValue] = useState(0);
@@ -46,6 +46,12 @@ const Recipes = ({ recipes }) => {
         setOpenRecipeModal(false);
     };
 
+    const handleDeleteRecipe = async (x) => {
+        const res = await deleteRecipe(x.id);
+        const filteredArray = recipesToRate.filter((recipe) => recipe.id !== x.id);
+        setRecipesToRate(filteredArray);
+    };
+
     useEffect(() => {
         setRecipesToRate(recipes.recipesToRate);
         setRecipesWithRating(recipes.recipesWithRating);
@@ -61,18 +67,24 @@ const Recipes = ({ recipes }) => {
                 </Grid>
                 {recipesToRate.map((recipeToRate) => {
                     return (
-                        <Grid item xs={12} sm={6} md={3} key={recipeToRate.id} onClick={() => setChosenRecipe(recipeToRate)}>
-                            <FoodCard
-                                selectedRecipe={recipeToRate}
-                                isRated={false}
-                                handleClickOpenRecipeModal={handleClickOpenRecipeModal}
-                                starValue={starValue}
-                                setStarValue={setStarValue}
-                                chosenRecipe={chosenRecipe}
-                                recipesToRate={recipesToRate}
-                                setRecipesToRate={setRecipesToRate}
-
-                            />
+                        <Grid item xs={12} md={3} key={recipeToRate.id} onClick={() => setChosenRecipe(recipeToRate)}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <FoodCard
+                                        selectedRecipe={recipeToRate}
+                                        isRated={false}
+                                        height="339px"
+                                        handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                                        starValue={starValue}
+                                        setStarValue={setStarValue}
+                                        chosenRecipe={chosenRecipe}
+                                        recipesToRate={recipesToRate}
+                                        setRecipesToRate={setRecipesToRate}
+                                        handleDeleteRecipe={handleDeleteRecipe}
+                                        recipeToRate={recipeToRate}
+                                    />
+                                </Grid>
+                            </Grid>
                         </Grid>
                     );
                 })}
@@ -83,18 +95,23 @@ const Recipes = ({ recipes }) => {
                 </Grid>
                 {recipesWithRating.map((recipeWithRating) => {
                     return (
-                        <Grid item xs={12} sm={6} md={3} key={recipeWithRating.id} onClick={() => setChosenRecipe(recipeWithRating)}>
-                            <FoodCard
-                                selectedRecipe={recipeWithRating}
-                                isRated={true}
-                                handleClickOpenRecipeModal={handleClickOpenRecipeModal}
-                                starValue={starValue}
-                                setStarValue={setStarValue}
-                                chosenRecipe={chosenRecipe}
-                                recipesToRate={recipesToRate}
-                                setRecipesToRate={setRecipesToRate}
-
-                            />
+                        <Grid item xs={12} md={3} key={recipeWithRating.id} onClick={() => setChosenRecipe(recipeWithRating)}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <FoodCard
+                                        selectedRecipe={recipeWithRating}
+                                        isRated={true}
+                                        height="310px"
+                                        handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                                        starValue={starValue}
+                                        setStarValue={setStarValue}
+                                        chosenRecipe={chosenRecipe}
+                                        recipesToRate={recipesToRate}
+                                        setRecipesToRate={setRecipesToRate}
+                                        handleDeleteRecipe={handleDeleteRecipe}
+                                    />
+                                </Grid>
+                            </Grid>
                         </Grid>
                     );
                 })}

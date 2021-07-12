@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -8,20 +9,31 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function DatePicker() {
+export default function DatePicker(props) {
     const classes = useStyles();
 
     return (
-        <TextField
-            id="date"
-            label="Fecha de Nacimiento"
-            type="date"
-            defaultValue="2017-05-24"
-            className={classes.textField}
-            InputLabelProps={{
-                shrink: true,
-            }}
-            variant="outlined"
-        />
+        <form className={classes.container} noValidate>
+            <TextField
+                id="date"
+                label={props.label}
+                type="date"
+                value={props.value}
+                onChange={props.handleChange}
+                name={props.name}
+                className={classes.textField}
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                variant="outlined"
+            />
+        </form>
     );
 }
+
+DatePicker.propTypes = {
+    value: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+};

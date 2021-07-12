@@ -1,6 +1,7 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
-import { useTheme, makeStyles, Typography, Grid, TextField, Box, Button, DialogActions } from "@material-ui/core";
+
+import { useTheme, makeStyles, Typography, Grid, TextField, Button, DialogActions, useMediaQuery } from "@material-ui/core";
 
 // External Components
 import Modal from "../../atoms/modal/modal";
@@ -17,19 +18,16 @@ const useStyles = makeStyles((theme) => ({
         fontStyle: "italic",
     },
     boxRecipeDesc: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignSelf: 'center',
-        marginLeft: theme.spacing(3)
+        display: "flex",
+        flexDirection: "column",
+        alignSelf: "center",
+        marginLeft: theme.spacing(3),
     },
 }));
 
 const RecipesModal = (props) => {
     const theme = useTheme();
     const classes = useStyles();
-
-    const [comment, setComment] = useState("");
-
     const {
         chosenRecipe,
         starValue,
@@ -43,13 +41,19 @@ const RecipesModal = (props) => {
         setChosenRecipe,
     } = props;
 
+    const [comment, setComment] = useState("");
+
+    useEffect(() => {
+        if (chosenRecipe.comment === "") setComment("");
+    }, [chosenRecipe.id]);
+
+    useEffect(() => {
+        if (chosenRecipe.recipeName) setChosenRecipe({ ...chosenRecipe, comment });
+    }, [comment]);
+
     const handleChangeComment = (e) => {
         setComment(e.target.value);
     };
-
-    useEffect(() => {
-        setChosenRecipe({ ...chosenRecipe, comment });
-    }, [comment]);
 
     const handleQualificationClick = async (recipeId, rating, comment) => {
         setOpenRecipeModal(false);
@@ -65,8 +69,13 @@ const RecipesModal = (props) => {
         recipesWithRating.map((recipeWithRating, i) => {
             if (recipeWithRating.id === chosenRecipe.id) {
                 const recipe = recipesWithRating.splice(i, 1).shift();
-                let obj = { ...recipe, rating: parseInt(rating), comment };
-                setRecipesWithRating(recipesWithRating.concat(obj));
+                if (chosenRecipe.comment !== "") {
+                    let obj = { ...recipe, rating: parseInt(rating), comment: chosenRecipe.comment };
+                    setRecipesWithRating(recipesWithRating.concat(obj));
+                } else {
+                    let obj = { ...recipe, rating: parseInt(rating), comment };
+                    setRecipesWithRating(recipesWithRating.concat(obj));
+                }
             }
         });
     };
@@ -78,12 +87,15 @@ const RecipesModal = (props) => {
             handlePrimaryButtonClick={() => handleQualificationClick(chosenRecipe.id, starValue, comment)}
             title={chosenRecipe.rating ? "Modificar calificacion" : "Calificar receta"}
             primaryButtonText={chosenRecipe.rating ? "Modificar calificacion" : "Calificar receta"}
-            secondaryButtonText='cancelar'
+            secondaryButtonText="cancelar"
             fullScreen={true}
         >
             <Grid container spacing={2}>
-                <Grid item xs={12} style={{ display: 'flex' }}>
-                    <img src="https://st2.depositphotos.com/1053417/11818/i/950/depositphotos_118180400-stock-photo-chinese-food-on-wok.jpg" className={classes.img} />
+                <Grid item xs={12} style={{ display: "flex" }}>
+                    <img
+                        src="https://st2.depositphotos.com/1053417/11818/i/950/depositphotos_118180400-stock-photo-chinese-food-on-wok.jpg"
+                        className={classes.img}
+                    />
                     <Box className={classes.boxRecipeDesc}>
                         <Typography gutterBottom variant="h6">
                             {chosenRecipe.recipeName}
@@ -94,12 +106,7 @@ const RecipesModal = (props) => {
                     </Box>
                 </Grid>
                 <Grid item xs={12}>
-                    <SimpleRating
-                        setStarValue={setStarValue}
-                        starValue={starValue}
-                        selectedRecipe={chosenRecipe}
-                        isModal={true}
-                    />
+                    <SimpleRating setStarValue={setStarValue} starValue={starValue} selectedRecipe={chosenRecipe} isModal={true} />
                 </Grid>
                 <Grid item xs={12}>
                     <form className={classes.root} noValidate autoComplete="off" style={{ marginTop: "1rem" }}>

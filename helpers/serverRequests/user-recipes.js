@@ -1,6 +1,5 @@
 import Axios from "axios";
 
-
 export const getRecipesByCustomer = async (id, locale) => {
     try {
         const res = await Axios({
@@ -10,21 +9,22 @@ export const getRecipesByCustomer = async (id, locale) => {
                 locale,
             },
         });
-       
+
         return res;
     } catch (error) {
         return error.response;
     }
 };
 
-export const updateRecipeRating = async (recipeId, rating) => {
+export const updateRecipeRating = async (recipeId, rating, comment) => {
     try {
         const res = await Axios({
             method: "PUT",
             url: `${process.env.NEXT_PUBLIC_API_URL}/recipe-rating/rate/${recipeId}`,
             data: {
-                rating
-            }
+                rating,
+                comment,
+            },
         });
         return res;
     } catch (error) {
@@ -36,12 +36,10 @@ export const deleteRecipe = async (recipeId) => {
     try {
         const res = await Axios({
             method: "DELETE",
-            url: `${process.env.NEXT_PUBLIC_API_URL}/recipe-rating/${recipeId}`
+            url: `${process.env.NEXT_PUBLIC_API_URL}/recipe-rating/${recipeId}`,
         });
         return res;
     } catch (error) {
         return error.response;
     }
 };
-
-

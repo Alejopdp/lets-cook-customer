@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PreferredDeliveryTimeInput = (props) => {
+export default function PreferredDeliveryTimeInput(props) {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -22,24 +22,23 @@ const PreferredDeliveryTimeInput = (props) => {
     ]
 
     return (
-        <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel htmlFor="outlined-age-native-simple">Horario de preferencia de entrega</InputLabel>
-            <Select
-                native
+        <form className={classes.container} noValidate>
+            <TextField
+                id="time"
+                label="Horario de Preferencia de Entrega"
                 name={props.name}
-                value={props.value}
-                onChange={props.handleChange}
-                label="Horario de preferencia de entrega"
-                inputProps={{ name: props.name }}
-            >
-                <option key="0" value="" disabled></option>
-                {timeOptions.map((option, index) => (
-                    <option key={index} value={option.value}>
-                        {option.label}
-                    </option>
-                ))}
-            </Select>
-        </FormControl>
+                type="time"
+                defaultValue="07:30"
+                className={classes.textField}
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                inputProps={{
+                    step: 300, // 5 min
+                }}
+                variant="outlined"
+            />
+        </form>
     );
 }
 

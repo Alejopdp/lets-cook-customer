@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import Rating from "@material-ui/lab/Rating";
 import { Box } from "@material-ui/core";
 
@@ -14,14 +15,25 @@ export default function SimpleRating({ handleClickOpenRecipeModal, isModal, full
             <Box
                 component="fieldset"
                 // borderColor="transparent"
-                style={{ display: isModal ? "flex" : null, justifyContent: isModal ? "center" : null, margin: '0px', padding: '0px', border: 'none' }}
-
+                style={{
+                    display: isModal ? "flex" : null,
+                    justifyContent: isModal ? "center" : null,
+                    margin: "0px",
+                    padding: "0px",
+                    border: "none",
+                }}
             >
                 <Rating
-                    name={selectedRecipe.id}
-                    value={selectedRecipe.rating ? (isModal ? starValue : selectedRecipe.rating) : isModal ? starValue : 0}
-                    onChange={(e, newValue) => { setValue(newValue) }}
-                    onClick={isModal ? ((e, newValue) => { setValue(newValue) }) : ((e) => { handleClickOpenRecipeModal(e.target.value) })}
+                    name={`${selectedRecipe.id}`}
+                    value={
+                        selectedRecipe.rating ? (isModal ? parseInt(starValue) : selectedRecipe.rating) : isModal ? parseInt(starValue) : 0
+                    }
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}
+                    onClick={(e) => {
+                        handleClickOpenRecipeModal(e.target.value);
+                    }}
                     size="large"
                 />
             </Box>

@@ -18,11 +18,10 @@ const PhoneNumberInput = (props) => {
                 dropdownStyle={{ backgroundColor: theme.palette.background.secondary, color: "gray", width: props.width }}
                 containerStyle={{ width: "100%" }}
                 specialLabel={""}
-                onChange={(newValue) => props.handleChange(newValue)}
+                inputProps={{ name: props.name }}
+                onChange={(value, country, event, formattedValue) => props.handleChange(event)}
                 placeholder={props.placeholder}
-                inputProps={{
-                    name: props.name
-                }}
+                country="es"
             />
         </>
     );
@@ -31,6 +30,7 @@ const PhoneNumberInput = (props) => {
 PhoneNumberInput.propTypes = {
     value: PropTypes.string.isRequired,
     handleChange: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
 };
 
 export default PhoneNumberInput;
