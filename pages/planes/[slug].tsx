@@ -60,21 +60,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 type: defaultPaymentMethod ? "card" : "",
             });
         }
-
-        // const getShippingCostIfAddressExists = async () => {
-        //     if (!userInfo.shippingAddress) return;
-
-        //     const res = await getShippingCost(userInfo.shippingAddress?.latitude, userInfo.shippingAddress?.longitude);
-
-        //     if (res.status === 200) {
-        //         setDeliveryInfo({
-        //             ...form.deliveryForm,
-        //             shippingCost: res.data.cost,
-        //         });
-        //     }
-        // };
-
-        // getShippingCostIfAddressExists();
     }, []);
 
     const steps = [
