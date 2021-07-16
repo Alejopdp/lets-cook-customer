@@ -22,7 +22,7 @@ export const RecipeCard = (props: RecipeCardProps) => {
     return (
         <div
             className={gradient}
-            style={{ backgroundImage: `url(${props.img})`, cursor: 'pointer' }}
+            style={{ backgroundImage: `url(${props.img})`, cursor: 'pointer', ...props.style }}
             onClick={props.handleClickOpenModal}
         >
             <Card className={root} >

@@ -2,8 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export const useValuePropositionStyle = makeStyles((theme) => ({
     root: {
-        minWidth: "100vw",
-        minHeight: "100vh",
+        minHeight: "75vh",
         backgroundImage: "url(/assets/img-background-proposition-section.jpeg)",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -12,8 +11,7 @@ export const useValuePropositionStyle = makeStyles((theme) => ({
     overlay: {
         backgroundColor: "rgba(0,0,0,0.5)",
         display: "flex",
-        minWidth: "100vw",
-        minHeight: "100vh",
+        minHeight: "75vh",
         paddingTop: 64,
         boxSizing: "border-box",
         flexDirection: "column",
@@ -22,27 +20,20 @@ export const useValuePropositionStyle = makeStyles((theme) => ({
         textAlign: "center",
         color: theme.palette.primary.contrastText,
     },
-    textContent: {
-        display: "flex",
-        flex: 1,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyItems: "center",
-        justifyContent: "center",
-        maxWidth: 670,
+    container: {
+        margin: 'auto'
     },
-    marginBottom3: {
-        marginBottom: theme.spacing(3)
+    buttonWithCaptionGrid: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: theme.spacing(4)
     },
-    marginBottom1: {
-        marginBottom: theme.spacing(1)
-    },
-    marginToMiddle1: {
-        marginBottom: theme.spacing(0.5)
+    marginTop2: {
+        marginTop: theme.spacing(1)
     }
 }));
 
-export const  useBenefitsStyle = makeStyles(theme => ({
+export const useBenefitsStyle = makeStyles(theme => ({
     root: {
         display: "flex",
         flexDirection: "column",
@@ -106,7 +97,7 @@ export const useCallToActionStyle = makeStyles(theme => ({
     smallText: {
         paddingTop: theme.spacing(1),
     },
-    title:{},
+    title: {},
     subtitle: {}
 }));
 

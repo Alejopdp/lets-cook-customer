@@ -44,13 +44,13 @@ const PlanInfoWithStatus = (props) => {
 
     let chipBackgroundColor;
     switch (props.status.value) {
-        case 'active':
+        case 'SUBSCRIPTION_ACTIVE':
             chipBackgroundColor = classes.chipStatusActive;
             break;
-        case 'cancelled':
+        case 'SUBSCRIPTION_CANCELLED':
             chipBackgroundColor = classes.chipStatusCancelled;
             break;
-        case 'expired':
+        case 'SUBSCRIPTION_EXPIRED':
             chipBackgroundColor = classes.chipStatusExpired;
             break;
         default:

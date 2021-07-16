@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Divider, Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles } from "@material-ui/core";
 import Image from "next/image";
-import {LoginButton} from "@atoms";
+import { LoginButton } from "@atoms";
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -52,7 +52,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
             }}
         >
             <div className={classes.menuLogginButton}>
-                <LoginButton border />
+                <LoginButton border style={{ width: '100%' }} />
             </div>
             <List>
                 {menuOptions.top.map((option, index) => (

@@ -19,8 +19,8 @@ const DataDisplay = props => {
             <Typography variant='subtitle2' color='textSecondary' style={{ fontSize: '14px', marginBottom: theme.spacing(1) }}>
                 {props.title}
             </Typography>
-            <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
-                {props.text}
+            <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', fontStyle: props.text ? "normal" : "italic" }}>
+                {props.text || "Sin indicar"}
             </Typography>
         </Box>
     );

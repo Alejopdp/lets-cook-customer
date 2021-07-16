@@ -55,5 +55,3 @@ export const PlansSection = memo((props: PlansSectionProps) => {
 })
 
 export default PlansSection;
-
-

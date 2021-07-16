@@ -19,3 +19,4 @@ export * from './stepperBuy/index';
 export * from './titleBuyFlow/titleBuyFlow';
 export * from './titleOtherPages/titleOtherPages';
 export * from './paymentForm';
+export * from './planCard';

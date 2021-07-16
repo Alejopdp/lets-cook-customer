@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { isEmail, isPassword } from "../../../helpers/regex/regex";
+import { isEmail, isEmpty } from "../../../helpers/regex/regex";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").loginBox;
 import { loginWithEmail, loginWithSocialMedia } from "../../../helpers/serverRequests/customer";
@@ -26,6 +26,7 @@ const LoginBox = (props) => {
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const [serverError, setserverError] = useState("");
+
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
@@ -65,21 +66,19 @@ const LoginBox = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
 
+    const handleRedirectToSignUp = () => {
+        router.push("/registrarme");
+    };
+
     return (
         <FormPaper title={lang.title}>
-            <TextInput label={lang.emailInput} name="email" value={values.email} onChange={handleChange("email")} />
-
-            <PasswordInput label={lang.passwordInput} name="password" value={values.password} onChange={handleChange("password")} />
-
-            <ForgotPassword text={lang.forgotPassword} />
-
-            <CustomButton text={lang.buttonText} onClick={handleSubmit} disabled={!isEmail(values.email) || !isPassword(values.password)} />
-
-            <Divider />
-
             <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} />
-
-            <Register text={lang.register.text} boldText={lang.register.boldText} redirectTo={lang.register.redirectTo} />
+            <Divider />
+            <TextInput label={lang.emailInput} name="email" value={values.email} onChange={handleChange("email")} />
+            <PasswordInput label={lang.passwordInput} name="password" value={values.password} onChange={handleChange("password")} />
+            <ForgotPassword text={lang.forgotPassword} />
+            <CustomButton text={lang.buttonText} onClick={handleSubmit} disabled={!isEmail(values.email) || isEmpty(values.password)} />
+            <Register text={lang.register.text} boldText={lang.register.boldText} redirectTo="/registarme" />
         </FormPaper>
     );
 };

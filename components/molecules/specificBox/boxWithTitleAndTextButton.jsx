@@ -15,20 +15,16 @@ import TextButton from "../../atoms/textButton/textButton";
 
 // Icons & Images
 
-
-
-const useStyles = makeStyles((theme) => ({
-
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const BoxWithTitleAndTextButton = (props) => {
     const classes = useStyles();
     const theme = useTheme();
 
     return (
-        <GeneralBox variant='medium'>
-            <div style={{ width: '100%' }}>
-                <Typography variant='subtitle1' color='textSecondary' style={{ fontSize: '20px', marginBottom: theme.spacing(2) }}>
+        <GeneralBox variant="medium">
+            <div style={{ width: "100%" }}>
+                <Typography variant="subtitle1" color="textSecondary" style={{ fontSize: "20px", marginBottom: theme.spacing(2) }}>
                     {props.title}
                 </Typography>
                 {props.children}

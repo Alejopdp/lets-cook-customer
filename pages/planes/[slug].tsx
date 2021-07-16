@@ -1,10 +1,7 @@
 // Utils & Config
 import React, { memo, useEffect, useState } from "react";
-import { getPlans, getRecipes, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant, getDemoPlans } from "@helpers";
-import { useBuyFlow, useUserInfoStore } from "@stores";
-import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
-import { createSubscription } from "../../helpers/serverRequests/subscription"
-import { useSnackbar } from "notistack";
+import { getPlans, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant, getShippingCost } from "@helpers";
+import { IPaymentMethod, useBuyFlow, useUserInfoStore } from "@stores";
 
 // Internal components
 import { BuyFlowLayout } from "@layouts";
@@ -21,7 +18,7 @@ export interface PlanUrlParams {
     recipeQty: string;
     slug: string;
     id?: any;
-};
+}
 
 export interface PlanesPageProps {
     isLogged: boolean;
@@ -36,13 +33,12 @@ export interface PlanesPageProps {
 
 const PlanesPage = memo((props: PlanesPageProps) => {
     const step = useBuyFlow(({ step }) => step);
-    const stripe = useStripe();
-    const elements = useElements();
-    const [isLoadingPayment, setisLoadingPayment] = useState(false)
-    const { enqueueSnackbar } = useSnackbar()
-    const userInfo = useUserInfoStore(state => state.userInfo)
-    const buyForm = useBuyFlow(({form}) => form )
-    const {setDeliveryInfo, setPaymentMetods} = useBuyFlow(({setDeliveryInfo, setPaymentMetods}) => ({setDeliveryInfo, setPaymentMetods}))
+    const userInfo = useUserInfoStore((state) => state.userInfo);
+    const { setDeliveryInfo, setPaymentMethod, form } = useBuyFlow(({ setDeliveryInfo, setPaymentMethod, form }) => ({
+        setDeliveryInfo,
+        setPaymentMethod,
+        form,
+    }));
 
     useEffect(() => {
         setDeliveryInfo({
@@ -52,55 +48,34 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
             restrictions: "",
-        })
-
-        setPaymentMetods(userInfo.paymentMethods)
-    }, [])
-    
-    const handleStripePaymentMethod = async () => {
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: "card",
-            card: elements.getElement(CardNumberElement),
+            latitude: userInfo.shippingAddress?.latitude,
+            longitude: userInfo.shippingAddress?.longitude,
         });
 
-        return { error, paymentMethod };
-    };
-
-    const handleSubmitPayment = async () => {
-        setisLoadingPayment(true);
-        // TO DO: Send if it is a new payment method
-        const paymentMethodRes = await handleStripePaymentMethod();
-
-        if (!paymentMethodRes.error) {
-            const data = {
-                customerId: userInfo.id || "f031ca8c-647e-4d0b-8afc-28e982068fd5", // Get customer id from zustand
-                planId: "a01f9820-adfa-41ee-823c-858c16c64a6b",
-                planVariantId: "ba3c8fbe-c7c3-491d-9819-a8625f645356",
-                planFrequency: "Semanal",
-                restrictionComment: buyForm.deliveryForm.restrictions || "No puedo comer alimentos con lactosa", // Add restriction comment
-                couponId: "",
-                stripePaymentMethodId: paymentMethodRes.paymentMethod.id, // Add if it is a new payment method
-                paymentMethod: "", // Add if customer uses an already saved payment method
-            };
-
-            const res = await createSubscription(data);
-
-            if (res.status === 200) {
-                if (res.data.payment_status === "requires_action") {
-                    await stripe.confirmCardPayment(res.data.client_secret, {
-                        payment_method: paymentMethodRes.paymentMethod.id,
-                    });
-                }
-                enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
-
-            } else {
-                enqueueSnackbar(res.data.message, { variant: "error" });
-            }
-        } else {
-            enqueueSnackbar(paymentMethodRes.error.message, { variant: "error" });
+        if (Array.isArray(userInfo.paymentMethods)) {
+            const defaultPaymentMethod: IPaymentMethod | undefined = userInfo.paymentMethods.find((method) => method.isDefault);
+            setPaymentMethod({
+                id: defaultPaymentMethod?.id || "",
+                stripeId: "",
+                type: defaultPaymentMethod ? "card" : "",
+            });
         }
-        setisLoadingPayment(false);
-    };
+
+        // const getShippingCostIfAddressExists = async () => {
+        //     if (!userInfo.shippingAddress) return;
+
+        //     const res = await getShippingCost(userInfo.shippingAddress?.latitude, userInfo.shippingAddress?.longitude);
+
+        //     if (res.status === 200) {
+        //         setDeliveryInfo({
+        //             ...form.deliveryForm,
+        //             shippingCost: res.data.cost,
+        //         });
+        //     }
+        // };
+
+        // getShippingCostIfAddressExists();
+    }, []);
 
     const steps = [
         <SelectPlanStep
@@ -111,55 +86,49 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             recipes={props.recipes}
         />,
         <RegisterUserStep />,
-        <CheckoutStep
-            handleSubmitPayment={handleSubmitPayment}
-        />,
-        <RecipeChoiseStep recipes={props.recipes} />
+        <CheckoutStep />,
+        <RecipeChoiseStep recipes={props.recipes} />,
     ];
 
-    return (
-        <BuyFlowLayout>
-            {steps[step]}
-        </BuyFlowLayout>
-    );
+    return <BuyFlowLayout>{steps[step]}</BuyFlowLayout>;
 });
 
 export async function getServerSideProps({ locale, query }) {
-
-    const _slug = query.slug || '';
+    const _slug = query.slug || "";
     const mainPlans: Plan[] = [];
     const aditionalsPlans: Plan[] = [];
 
-    const [_plans, _faqs] = await Promise.all([
-        getPlans(locale),
-        getFAQS(locale)
-    ]);
+    const [_plans, _faqs] = await Promise.all([getPlans(locale), getFAQS(locale)]);
 
-    const errors = [
-        _plans.error,
-        _faqs.error
-    ].filter(e => !!e);
+    const errors = [_plans.error, _faqs.error].filter((e) => !!e);
 
     if (errors.length) {
-        console.warn('***-> Errors: ', errors);
+        console.warn("***-> Errors: ", errors);
     }
 
     _plans.data?.forEach((plan, index) => {
-        if (plan.type === 'Main' || plan.type === 'Principal') {
+        if (plan.type === "Main" || plan.type === "Principal") {
             mainPlans.push(plan);
         } else {
-            aditionalsPlans.push(plan)
+            aditionalsPlans.push(plan);
         }
     });
 
-    const { id, slug, variant, redirect, errors: _errors, recipes } = getPlanVariant({ slug: _slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
+    const {
+        id,
+        slug,
+        variant,
+        redirect,
+        errors: _errors,
+        recipes,
+    } = getPlanVariant({ slug: _slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
 
     const planUrlParams: PlanUrlParams = {
         personQty: `${variant?.numberOfPersons || 0}`,
         recipeQty: `${variant?.numberOfRecipes || 0}`,
         slug,
-        id
-    }
+        id,
+    };
 
     return {
         props: {
@@ -170,9 +139,9 @@ export async function getServerSideProps({ locale, query }) {
             variant,
             recipes,
             planUrlParams,
-            errors: [...errors, ..._errors]
+            errors: [...errors, ..._errors],
         },
-        redirect
+        redirect,
     };
 }
 

@@ -17,7 +17,7 @@ export const SimpleAccordion = (props: SimpleAccordionProps) => {
         <div className={classes.root}>
             <Accordion className={classes.accordionCard}>
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon color="error" fontSize="large" />}
+                    expandIcon={<ExpandMoreIcon color="textPrimary" fontSize="large" />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >

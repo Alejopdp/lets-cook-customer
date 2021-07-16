@@ -2,10 +2,10 @@ import { Plan, PlanVariant } from "@helpers";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
-export type PaymentMethods = {
-    id: string
-    label: string
-    isDefault: string
+export type PaymentMethodForm = {
+    id: string;
+    stripeId: string;
+    type: string; // card / newPaymentMethod
 };
 export type Recipes = any;
 
@@ -16,6 +16,9 @@ export interface DeliveryForm {
     lastName: string;
     phone1: string;
     restrictions: string;
+    latitude: number;
+    longitude: number;
+    shippingCost: number;
 }
 
 export interface BuyFlowStore {
@@ -26,7 +29,7 @@ export interface BuyFlowStore {
         planSlug: string;
         variant?: PlanVariant;
         deliveryForm?: DeliveryForm;
-        paymentMethods?: PaymentMethods[];
+        paymentMethod?: PaymentMethodForm;
         recipes: Recipes[];
     };
 }
@@ -35,7 +38,7 @@ export interface Store extends BuyFlowStore {
     setRegisterState: (isVisible: boolean) => void;
     forward: () => void;
     setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => void;
-    setPaymentMetods: (paymentMethods: Partial<PaymentMethods>) => void;
+    setPaymentMethod: (paymentMethod: Partial<PaymentMethodForm>) => void;
     selectRecipes: (recipes: Recipes[]) => void;
     setPlanCode: (code: string, slug: string) => void;
     setPlanVariant: (variant: Partial<PlanVariant>) => void;
@@ -53,7 +56,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             name: "",
             numberOfPersons: 0,
             numberOfRecipes: 0,
-            attributes: []
+            attributes: [],
         },
         deliveryForm: {
             addressName: "",
@@ -62,11 +65,17 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             lastName: "",
             phone1: "",
             restrictions: "",
+            latitude: null,
+            longitude: null,
+            shippingCost: 0,
         },
-        paymentMethods: [],
+        paymentMethod: {
+            id: "",
+            type: "",
+            stripeId: "",
+        },
         recipes: [],
     },
-
 };
 
 const store = devtools<Store>((set, get) => ({
@@ -86,7 +95,7 @@ const store = devtools<Store>((set, get) => ({
         set({ step: _step + 1 });
     },
 
-    setPlanCode: (code: string, slug: string = '') => {
+    setPlanCode: (code: string, slug: string = "") => {
         const form = get().form;
         form.planCode = code;
         form.planSlug = slug;
@@ -94,12 +103,12 @@ const store = devtools<Store>((set, get) => ({
     },
     setDeliveryInfo: (deliveryForm: DeliveryForm) => {
         const form = get().form;
-        form.deliveryForm = { ...deliveryForm }
+        form.deliveryForm = { ...deliveryForm };
         set({ form });
     },
-    setPaymentMetods: (paymentMethods: PaymentMethods[]) => {
+    setPaymentMethod: (paymentMethod: PaymentMethodForm) => {
         const form = get().form;
-        form.paymentMethods = paymentMethods;
+        form.paymentMethod = paymentMethod;
         set({ form });
     },
     selectRecipes: (recipes: Recipes[]) => {
@@ -109,9 +118,9 @@ const store = devtools<Store>((set, get) => ({
     },
     setPlanVariant: (variant: PlanVariant) => {
         const form = get().form;
-        form.variant = { ...variant }
+        form.variant = { ...variant };
         set({ form });
-    }
+    },
 }));
 
 export const useBuyFlow = create(store);

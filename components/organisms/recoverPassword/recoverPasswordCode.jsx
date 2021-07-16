@@ -26,6 +26,7 @@ const RecoverPasswordCode = (props) => {
                 name="code"
                 value={props.value}
                 onChange={props.handleChange}
+                inputProps={{ maxLength: 6 }}
             />
 
             <CustomButton

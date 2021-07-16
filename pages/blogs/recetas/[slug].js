@@ -4,9 +4,9 @@ import { getPostBySlug, getPosts } from "../../../helpers/serverRequests/blog";
 
 // Internal componentss
 import BlogPostCardDetail from "../../../components/organisms/blogPostCardDetail/blogPostCardDetail";
-import InnerSectionLayout from "../../../components/layout/publicLayout";
+import InnerSectionLayout from "../../../components/layout/innerSectionLayout";
 import BackButtonTitle from "../../../components/atoms/backButtonTitle/backButtonTitle";
-import Layout from "../../../components/layout/index";
+import { Layout } from "../../../components/layout/index";
 
 // export const getStaticPaths = async (context) => {
 //     const response = await getPosts(context.locale);

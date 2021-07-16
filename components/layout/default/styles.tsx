@@ -27,9 +27,8 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     menuLogginButton: {
-        paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(1),
-        margin: "0 auto"
+        padding: theme.spacing(2),
+        width:'100%',
     },
     logo: {
         display: "flex",

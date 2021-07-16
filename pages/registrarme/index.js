@@ -1,17 +1,23 @@
 // Utils & Config
 import React from "react";
+import { useRouter } from "next/router";
 
 // Internal Components
-import Layout from "../../components/layout/index";
-import InnerSectionLayout from "../../components/layout/publicLayout";
+import { Layout } from "../../components/layout/index";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import SignUpForm from "../../components/organisms/signUpForm/signUpForm";
 import { verifyToken } from "../../helpers/serverRequests/customer";
 
 const Signup = () => {
+    const router = useRouter();
+
+    const handleSignUp = () => {
+        router.push("/");
+    };
     return (
-        <Layout>
+        <Layout disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
-                <SignUpForm />
+                <SignUpForm handleSignUp={handleSignUp} />
             </InnerSectionLayout>
         </Layout>
     );

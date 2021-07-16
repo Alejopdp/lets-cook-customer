@@ -2,11 +2,11 @@
 import React from "react";
 
 // Internal Components
-import InnerSectionLayout from "../../../components/layout/publicLayout";
+import InnerSectionLayout from "../../../components/layout/innerSectionLayout";
 import TitleOtherPages from "../../../components/molecules/titleOtherPages/titleOtherPages";
 import BlogsGrid from "../../../components/organisms/blogGrid/blogGrid";
 import { getPosts } from "../../../helpers/serverRequests/blog";
-import Layout from "../../../components/layout/index";
+import { Layout } from "../../../components/layout/index";
 
 const BlogRecetas = (props) => {
     return (
@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            posts: res.status === 200 ? res.data : [],
+            posts: res?.status === 200 ? res?.data : [],
         },
     };
 }

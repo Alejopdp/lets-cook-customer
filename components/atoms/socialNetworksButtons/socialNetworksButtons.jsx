@@ -41,16 +41,13 @@ export const SocialNetworksButtons = (props) => {
     return (
         <Box>
             <Button className={clsx(button, facebook)} onClick={handleFacebookLogin}>
-                <Image src="/assets/facebook.png" width={32} height={32} />
-
+                <Image src="/assets/facebook.png" width={24} height={24} />
                 <Typography variant="subtitle1" className={txt}>
                     {lang.facebook}
                 </Typography>
             </Button>
-
             <Button className={clsx(button, google)} onClick={handleGoogleLogin}>
-                <Image src="/assets/google.png" width={32} height={32} />
-
+                <Image src="/assets/google.png" width={24} height={24} />
                 <Typography variant="subtitle1" className={txt}>
                     {lang.google}
                 </Typography>

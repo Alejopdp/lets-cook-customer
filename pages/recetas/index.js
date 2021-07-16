@@ -1,14 +1,14 @@
 // Utils & Config
 import React from "react";
 import { useRouter } from "next/router";
-import { getRecipes } from "../../helpers/serverRequests/recipe";
+import { getRecipes } from "../../helpers/serverRequests/recipes";
 const langs = require("../../lang").recetas;
 
 // Internal Components
-import InnerSectionLayout from "../../components/layout/publicLayout";
+import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
 import RecipesGrid from "../../components/organisms/recipesGrid/recipesGrid";
-import Layout from '../../components/layout/index';
+import { Layout } from "../../components/layout/";
 
 const Recetas = (props) => {
     const router = useRouter();
@@ -23,6 +23,7 @@ const Recetas = (props) => {
         </Layout>
     );
 };
+export default Recetas;
 
 export async function getStaticProps(context) {
     const res = await getRecipes(context.locale);
@@ -33,5 +34,3 @@ export async function getStaticProps(context) {
         },
     };
 }
-
-export default Recetas;

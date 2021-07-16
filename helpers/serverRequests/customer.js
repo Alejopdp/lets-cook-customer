@@ -59,3 +59,45 @@ export const signUp = async (email, password) => {
         return error.response;
     }
 };
+
+export const updatePersonalData = async (id, data) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/update-info/${id}`,
+            data,
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};
+
+export const updateShippingAddress = async (id, data) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/update-shipping/${id}`,
+            data,
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};
+
+export const updateBillingData = async (id, data) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/update-billing/${id}`,
+            data,
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};

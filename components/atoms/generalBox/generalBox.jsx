@@ -7,20 +7,18 @@ import clsx from "clsx";
 // External components
 import Box from "@material-ui/core/Box";
 
-
-
 const useStyles = makeStyles((theme) => ({
     box: {
         backgroundColor: theme.palette.background.paper,
         borderRadius: "8px",
-        boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        overflowWrap: 'anywhere',
+        boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        overflowWrap: "anywhere",
     },
     variantSmall: {
         padding: theme.spacing(2),
@@ -30,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down("md")]: {
             padding: theme.spacing(2),
         },
-    }
+    },
 }));
 
 const GeneralBox = (props) => {
@@ -38,10 +36,10 @@ const GeneralBox = (props) => {
 
     let variant;
     switch (props.variant) {
-        case 'small':
+        case "small":
             variant = classes.variantSmall;
             break;
-        case 'medium':
+        case "medium":
             variant = classes.variantMedium;
             break;
         default:
@@ -49,15 +47,9 @@ const GeneralBox = (props) => {
             break;
     }
 
-    return (
-        <Box className={clsx(classes.box, variant)}>
-            {props.children}
-        </Box>
-    );
+    return <Box className={clsx(classes.box, variant)}>{props.children}</Box>;
 };
 
-GeneralBox.propTypes = {
-
-};
+GeneralBox.propTypes = {};
 
 export default GeneralBox;

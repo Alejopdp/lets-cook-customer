@@ -1,5 +1,6 @@
 // Utils & config
 import React, { FormEvent } from "react";
+import { useRouter } from "next/router";
 
 // External components
 import { IconButton, Toolbar, AppBar, Hidden, makeStyles } from "@material-ui/core";
@@ -7,7 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Internal components
-import {LoginButton, RoundedButton} from "@atoms";
+import { LoginButton, RoundedButton } from "@atoms";
 import { LangSelector } from "@molecules";
 
 // Images and icons
@@ -45,6 +46,7 @@ interface NavbarContentProps {
 export const NavbarContent = (props: NavbarContentProps) => {
     const _handleOnChangeLang = (lang) => { };
     const classes = useStyles();
+    const router = useRouter();
 
     return (
         <AppBar position="fixed" color="default" className={classes.navbarClass}>
@@ -60,12 +62,12 @@ export const NavbarContent = (props: NavbarContentProps) => {
                 </IconButton>
                 <div className={classes.logo}>
                     <Link href="/">
-                        <Image src="/logo.png" width={135} height={40} alt="lets-cook-logo" className={classes.cursorPointer} />
+                        <Image src="/logo.png" width={115} height={40} alt="lets-cook-logo" className={classes.cursorPointer} />
                     </Link>
                 </div>
                 <Hidden xsDown implementation="css">
                     <LoginButton />
-                    <RoundedButton label="Ver planes" variant="content"></RoundedButton>
+                    <RoundedButton label="Ver planes" variant="content" onClick={() => router.push("/planes")}></RoundedButton>
                 </Hidden>
                 <LangSelector onChangeLang={_handleOnChangeLang} />
             </Toolbar>
