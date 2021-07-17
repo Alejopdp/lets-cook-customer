@@ -12,8 +12,6 @@ export const PlansSection = memo((props: PlansSectionProps) => {
     const { push: navigateTo, locale } = useRouter();
     const classes = useStyles();
 
-    const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0.5 } });
-
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
