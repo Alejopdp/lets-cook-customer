@@ -33,7 +33,7 @@ const MailStep = (props) => {
             setUserInfo(res.data.userInfo);
             cookies.set("token", res.data.token);
             props.signUpRedirect ? router.push("/") : "";
-            props.handleSignUp ? props.handleSignUp() : "";
+            props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
         } else {
             setserverError(res.data.message);
             alert("Error al querer ingresar");

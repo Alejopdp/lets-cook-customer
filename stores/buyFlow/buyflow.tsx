@@ -1,16 +1,24 @@
+import { Plan, PlanVariant } from "@helpers";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
-export type PaymentMethods = any;
+export type PaymentMethodForm = {
+    id: string;
+    stripeId: string;
+    type: string; // card / newPaymentMethod
+};
 export type Recipes = any;
 
 export interface DeliveryForm {
-    address: string;
-    addressDesc: string;
-    fristname: string;
-    secondName: string;
-    phone: string;
+    addressName: string;
+    addressDetails: string;
+    firstName: string;
+    lastName: string;
+    phone1: string;
     restrictions: string;
+    latitude: number;
+    longitude: number;
+    shippingCost: number;
 }
 
 export interface BuyFlowStore {
@@ -18,24 +26,53 @@ export interface BuyFlowStore {
     showRegister: boolean;
     form: {
         planCode: string;
-        planSlug?: string;
-        peopleQty: string;
-        recipesQty: string;
-        deliveryForm: DeliveryForm;
-        paymentMethods: PaymentMethods[];
+        planSlug: string;
+        variant?: PlanVariant;
+        deliveryForm?: DeliveryForm;
+        paymentMethod?: PaymentMethodForm;
+        coupon?: Coupon;
         recipes: Recipes[];
+        firstOrderId: string;
+        subscriptionId: string;
     };
 }
 
+export interface Coupon {
+    id: string;
+    code: string;
+    discount_type: {
+        type: string;
+        value: number;
+    };
+    minimum_requirement: {
+        type: string;
+        value: number;
+    };
+    apply_to: {
+        type: string;
+        value: string[];
+    };
+    limites: any[];
+    coupons_by_subscription: {
+        type: string;
+        value: number;
+    };
+    date_rage: {
+        start: string;
+        expire: string;
+    };
+}
 export interface Store extends BuyFlowStore {
     setRegisterState: (isVisible: boolean) => void;
     forward: () => void;
-    setDeliveryInfo: (deliveryForm: DeliveryForm) => void;
-    setPaymentMetods: (paymentMethods: PaymentMethods) => void;
+    setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => void;
+    setPaymentMethod: (paymentMethod: Partial<PaymentMethodForm>) => void;
     selectRecipes: (recipes: Recipes[]) => void;
-    setPeopleQty: (qty: string) => void;
-    setRecipesQty: (qty: string) => void;
-    setPlanCode: (code: string) => void;
+    setPlanCode: (code: string, slug: string) => void;
+    setPlanVariant: (variant: Partial<PlanVariant>) => void;
+    setCoupon: (coupon: Partial<Coupon>) => void;
+    setFirstOrderId: (firstOrderId: Partial<string>) => void;
+    setSubscriptionId: (subscriptionId: Partial<string>) => void;
 }
 
 export const BuyFlowInitialStore: BuyFlowStore = {
@@ -44,18 +81,59 @@ export const BuyFlowInitialStore: BuyFlowStore = {
     form: {
         planCode: "",
         planSlug: "",
-        peopleQty: "2",
-        recipesQty: "3",
-        deliveryForm: {
-            address: "",
-            addressDesc: "",
-            fristname: "",
-            secondName: "",
-            phone: "",
-            restrictions: "",
+        variant: {
+            id: "",
+            sku: "",
+            name: "",
+            numberOfPersons: 0,
+            numberOfRecipes: 0,
+            attributes: [],
         },
-        paymentMethods: [],
+        deliveryForm: {
+            addressName: "",
+            addressDetails: "",
+            firstName: "",
+            lastName: "",
+            phone1: "",
+            restrictions: "",
+            latitude: null,
+            longitude: null,
+            shippingCost: 0,
+        },
+        paymentMethod: {
+            id: "",
+            type: "",
+            stripeId: "",
+        },
+        coupon: {
+            id: "",
+            code: "",
+            discount_type: {
+                type: "",
+                value: null,
+            },
+            minimum_requirement: {
+                type: "none",
+                value: null,
+            },
+            apply_to: {
+                type: "all",
+                value: [],
+            },
+
+            limites: [],
+            coupons_by_subscription: {
+                type: "",
+                value: 0,
+            },
+            date_rage: {
+                start: "",
+                expire: "",
+            },
+        },
         recipes: [],
+        subscriptionId: "",
+        firstOrderId: "",
     },
 };
 
@@ -76,35 +154,45 @@ const store = devtools<Store>((set, get) => ({
         set({ step: _step + 1 });
     },
 
-    setPlanCode: (code: string, slug: string = '') => {
+    setPlanCode: (code: string, slug: string = "") => {
         const form = get().form;
         form.planCode = code;
         form.planSlug = slug;
         set({ form });
     },
-    setRecipesQty: (qty: string) => {
-        const form = get().form;
-        form.recipesQty = qty;
-        set({ form });
-    },
-    setPeopleQty: (qty: string) => {
-        const form = get().form;
-        form.peopleQty = qty;
-        set({ form });
-    },
     setDeliveryInfo: (deliveryForm: DeliveryForm) => {
         const form = get().form;
-        form.deliveryForm = deliveryForm;
+        form.deliveryForm = { ...deliveryForm };
         set({ form });
     },
-    setPaymentMetods: (paymentMethods: PaymentMethods) => {
+    setPaymentMethod: (paymentMethod: PaymentMethodForm) => {
         const form = get().form;
-        form.paymentMethods = paymentMethods;
+        form.paymentMethod = paymentMethod;
         set({ form });
     },
     selectRecipes: (recipes: Recipes[]) => {
         const form = get().form;
         form.recipes = recipes;
+        set({ form });
+    },
+    setPlanVariant: (variant: PlanVariant) => {
+        const form = get().form;
+        form.variant = { ...variant };
+        set({ form });
+    },
+    setCoupon: (coupon: Coupon) => {
+        const form = get().form;
+        form.coupon = { ...coupon };
+        set({ form });
+    },
+    setFirstOrderId: (firstOrderId: string) => {
+        const form = get().form;
+        form.firstOrderId = firstOrderId;
+        set({ form });
+    },
+    setSubscriptionId: (subscriptionId: string) => {
+        const form = get().form;
+        form.subscriptionId = subscriptionId;
         set({ form });
     },
 }));

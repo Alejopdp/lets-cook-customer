@@ -1,25 +1,23 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 import { CssBaseline } from "@material-ui/core";
-
 import { useFilterDrawer } from "@stores";
 import { DrawerMenu } from "@molecules";
-import { AppBarStepper } from '@organisms';
-
+import { AppBarStepper } from "@organisms";
 import { useStyles } from "./styles";
 
 interface IFilter {
-    label: string,
-    value: string 
+    label: string;
+    value: string;
 }
 
 interface IFilterOptions {
-    title: string,
-    items: IFilter[]
+    title: string;
+    items: IFilter[];
 }
 
 interface BuyFlowLayoutProps {
-    children: React.ReactNode,
-    filterOptions?: IFilterOptions[]
+    children: React.ReactNode;
+    filterOptions?: IFilterOptions[];
 }
 
 const _filterOptions: IFilterOptions[] = [
@@ -43,7 +41,6 @@ const _filterOptions: IFilterOptions[] = [
 ];
 
 export const BuyFlowLayout = memo(({ children: Component, filterOptions = _filterOptions }: BuyFlowLayoutProps) => {
-
     const classes = useStyles();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
 
@@ -72,4 +69,3 @@ export const BuyFlowLayout = memo(({ children: Component, filterOptions = _filte
         </div>
     );
 });
-

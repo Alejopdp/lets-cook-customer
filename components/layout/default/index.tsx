@@ -34,8 +34,8 @@ interface IMenuOptions {
 }
 
 interface LayoutProps {
-    children: React.Component;
-    menuOptions: IMenuOptions
+    children: React.ReactNode;
+    menuOptions?: IMenuOptions
 }
 
 // export const Layout = memo(({ children: Component }: LayoutProps ) => {

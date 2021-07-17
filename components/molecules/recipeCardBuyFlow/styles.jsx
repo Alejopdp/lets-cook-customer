@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        borderRadius: '8px',
-        // width: 300,
+        borderRadius: "8px",
+        width: "100%",
         height: 360,
     },
     cardCnt: {
@@ -27,11 +27,11 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(1),
     },
     titleText: {
-        marginTop: theme.spacing(2)
+        marginTop: theme.spacing(2),
     },
     visibilityBtn: {
-        marginLeft: "-16px"
-    }
+        marginLeft: "-16px",
+    },
 }));
 
 export default useStyles;

@@ -82,34 +82,3 @@ const PaymentMethodModal = (props) => {
 };
 
 export default PaymentMethodModal;
-
-{
-    /* <>
-                            <Grid item xs={12}>
-                                boton 1
-                            </Grid>
-                            <Grid item xs={12}>
-                                boton 2
-                            </Grid>
-                            <Grid item xs={12}>
-                                <form className={classes.textfield} noValidate autoComplete="off">
-                                    <TextField id="outlined-basic" label="Direccion de Entrega" variant="outlined" />
-                                </form>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <form noValidate autoComplete="off">
-                                    <TextField
-                                        className={classes.root}
-                                        id="outlined-basic"
-                                        label="Fecha de Vencimiento (MM/AA)"
-                                        variant="outlined"
-                                    />
-                                </form>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <form noValidate autoComplete="off">
-                                    <TextField className={classes.root} id="outlined-basic" label="CVC" variant="outlined" />
-                                </form>
-                            </Grid>
-                        </> */
-}

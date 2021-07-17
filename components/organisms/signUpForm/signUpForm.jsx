@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").signupForm;
 import { useUserInfoStore, useAuthStore } from "../../../stores/auth";
-import cookies from "js-cookie"
+import cookies from "js-cookie";
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -18,7 +18,7 @@ import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
 const SignUpForm = (props) => {
     const [currentStep, setcurrentStep] = useState(0);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
-    const setIsAuthenticated = useAuthStore((state) => state.isAuthenticated)
+    const setIsAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -51,7 +51,7 @@ const SignUpForm = (props) => {
             saveInLocalStorage("token", res.data.token);
             cookies.set("token", res.data.token);
             setIsAuthenticated(true);
-            props.handleSignUp ? props.handleSignUp() : "";
+            props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }

@@ -1,10 +1,12 @@
-import { FAQS, Plan } from "@helpers";
+import { FAQS, Plan, PlanVariant, Recipe } from "@helpers";
 import { PlanUrlParams } from "../../../../pages/planes/[slug]";
 
 export interface SelectPlanProps {
+    recipes: Recipe[];
     plans: Plan[];
     faqs: FAQS[];
-    initialPlanSettins: PlanUrlParams;
+    initialPlanSettings: PlanUrlParams;
+    variant?: PlanVariant;
 }
 
 export type ARGS = { name: string; value: string };

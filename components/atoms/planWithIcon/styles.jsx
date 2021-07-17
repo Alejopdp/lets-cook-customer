@@ -2,23 +2,30 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     box: {
-        backgroundColor: theme.palette.background.paper,
-        border: `1px solid ${theme.palette.text.primary}`,
-        borderRadius: theme.spacing(2),
+        height: 160,
+        width: 130,
         margin: theme.spacing(1),
-        height: "150px",
-        width: "200px",
+        padding: theme.spacing(2),
+        borderRadius: theme.spacing(2),
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
+        justifyContent: "flex-start",
         alignItems: "center",
+        border: `1px solid ${theme.palette.text.primary}`,
+        backgroundColor: theme.palette.background.paper,
     },
     checkedBox: {
         border: `1px solid ${theme.palette.primary.main}`,
         backgroundColor: "#F2FFF8"
     },
     text: {
-        textTransform: "none"
+        textTransform: "none",
     },
+    icon: {
+        width: 64,
+        height: 64,
+        marginBottom: theme.spacing(2),
+    }
 }));
 
 export default useStyles;

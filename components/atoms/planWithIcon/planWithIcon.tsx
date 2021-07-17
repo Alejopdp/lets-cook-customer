@@ -6,34 +6,29 @@ import clsx from "clsx";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core';
+import { Box, ButtonBase } from '@material-ui/core';
 import { Plan } from '@helpers';
 import { PlanWithIconProp } from './interfaces';
 import useStyles from "./styles";
+import { useRouter } from 'next/router';
 
 export const PlanWithIcon = (props: PlanWithIconProp) => {
-    const { box, text, checkedBox } = useStyles();
+    const { box, text, checkedBox, icon } = useStyles();
+    const image = props.isSelected ? props.plan.iconWithColor : props.plan.icon
+    const { locale } = useRouter();
 
     return (
-        <Box className={clsx(box, { [checkedBox]: props.isSelected })}>
-            <FormControlLabel
-                onClick={() => props.onClick(props.plan)}
-                control={
-                    <Checkbox
-                        color="primary"
-                        icon={<img src={props.plan.icon} height={50} width={50} />}
-                        checkedIcon={<img src={props.plan.iconWithColor} height={50} width={50} />}
-                        name={props.plan.name}
-                        checked={props.isSelected}
-                    />}
-                label={
-                    <Typography variant="subtitle1" className={text}>
-                        {props.plan.name}
-                    </Typography>
-                }
-                labelPlacement="bottom"
-            />
-        </Box>
+        <ButtonBase
+            focusRipple
+            className={clsx(box, { [checkedBox]: props.isSelected })}
+            onClick={() => props.onClick(props.plan)}
+        // focusVisibleClassName={classes.focusVisible}
+        >
+            <img src={image} className={icon} />
+            <Typography variant="subtitle2" className={text}>
+                {props.plan.name}
+            </Typography>
+        </ButtonBase>
     )
 }
 

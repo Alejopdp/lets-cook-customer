@@ -10,9 +10,13 @@
         "statements"
       ]
     },
+    "react": {
+        "class-name": false,
+        "display-name": [false, { "ignoreTranspilerName": false }]
+    },
+    "react/display-name": [false, { "ignoreTranspilerName": false }],
     "arrow-return-shorthand": true,
     "callable-types": true,
-    "class-name": true,
     "comment-format": [
       true,
       "check-space"

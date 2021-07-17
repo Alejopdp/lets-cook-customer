@@ -5,8 +5,8 @@ const PlansIndexPage = () => {
 
 export async function getServerSideProps({ locale, previewData }) {
     const defaultPlan = "default-plan";
-    const defaultPeopleQty = 2;
-    const defaultRecipesQty = 2;
+    const defaultPeopleQty = 0;
+    const defaultRecipesQty = 0;
 
     return {
         redirect: {

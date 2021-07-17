@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 import { CallMerge } from "@material-ui/icons";
+import { LocationSearchInputProps } from "./intertfaces";
 
 function loadScript(src, position, id) {
     if (!position) {
@@ -39,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function GoogleMaps(props) {
+
+const LocationSearchInput = (props: LocationSearchInputProps) => {
     const classes = useStyles();
     const [value, setValue] = React.useState(null);
     const [inputValue, setInputValue] = React.useState("");
@@ -69,8 +71,8 @@ export default function GoogleMaps(props) {
     React.useEffect(() => {
         let active = true;
 
-        if (!autocompleteService.current && window.google) {
-            autocompleteService.current = new window.google.maps.places.AutocompleteService();
+        if (!autocompleteService.current && window.google!) {
+            autocompleteService.current = new window.google!.maps.places.AutocompleteService();
         }
         if (!autocompleteService.current) {
             return undefined;
@@ -166,8 +168,10 @@ export default function GoogleMaps(props) {
     );
 }
 
-GoogleMaps.propTypes = {
+LocationSearchInput.propTypes = {
     value: PropTypes.string.isRequired,
     handleChange: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
 };
+
+export default LocationSearchInput
