@@ -33,6 +33,7 @@ function MyApp(props) {
 
             if (res.status === 200) {
                 setIsAuthenticated(true);
+                console.log("PASO EL RES STATUS");
                 const userInfo = getFromLocalStorage("userInfo");
                 setUserInfo(userInfo);
             } else {

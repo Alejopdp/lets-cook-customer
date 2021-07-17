@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { memo, useEffect, useState } from "react";
-import { getPlans, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant, getShippingCost } from "@helpers";
-import { IPaymentMethod, useBuyFlow, useUserInfoStore } from "@stores";
+import { getPlans, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant } from "@helpers";
+import { IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 
 // Internal components
 import { BuyFlowLayout } from "@layouts";
@@ -34,11 +34,14 @@ export interface PlanesPageProps {
 const PlanesPage = memo((props: PlanesPageProps) => {
     const step = useBuyFlow(({ step }) => step);
     const userInfo = useUserInfoStore((state) => state.userInfo);
-    const { setDeliveryInfo, setPaymentMethod, form } = useBuyFlow(({ setDeliveryInfo, setPaymentMethod, form }) => ({
-        setDeliveryInfo,
-        setPaymentMethod,
-        form,
-    }));
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+    const { setDeliveryInfo, setPaymentMethod, setRegisterState } = useBuyFlow(
+        ({ setDeliveryInfo, setPaymentMethod, setRegisterState }) => ({
+            setDeliveryInfo,
+            setPaymentMethod,
+            setRegisterState,
+        })
+    );
 
     useEffect(() => {
         setDeliveryInfo({
@@ -59,6 +62,10 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 stripeId: "",
                 type: defaultPaymentMethod ? "card" : "",
             });
+        }
+
+        if (isAuthenticated) {
+            setRegisterState(false);
         }
     }, []);
 

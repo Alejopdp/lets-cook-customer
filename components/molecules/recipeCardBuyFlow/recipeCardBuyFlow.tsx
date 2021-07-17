@@ -19,11 +19,11 @@ import AddCircleOutline from "@material-ui/icons/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { Box, Button, IconButton } from "@material-ui/core";
 import { useBuyFlow } from "@stores";
-import { RecipeCardBuyFlowProps } from './interfaces';
+import { RecipeCardBuyFlowProps } from "./interfaces";
 
 export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
     const { root, cardCnt, tag, marg, titleText, visibilityBtn } = useStyles();
-    const [recipes] = useBuyFlow((store) => [store.form.recipes, store.selectRecipes]);
+    const { recipes, variant } = useBuyFlow((store) => ({ recipes: store.form.recipes, variant: store.form.variant }));
 
     const hideAddButton = () => {
         const index = recipes.findIndex(({ id }) => id === props.id);
@@ -31,7 +31,7 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
     };
 
     return (
-        <Card className={root}>
+        <Card className={root} style={{ width: "100%" }}>
             <CardContent style={{ backgroundImage: `url(${props.imageUrl})` }} className={cardCnt}>
                 <RecipeImgTags imgTags={props.imageTags} />
             </CardContent>
@@ -67,7 +67,10 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
                         {hideAddButton() && (
                             <>
                                 <Grid item>
-                                    <IconButton onClick={() => props.handleClickAddRecipe()} disabled={recipes.length >= 3}>
+                                    <IconButton
+                                        onClick={() => props.handleClickAddRecipe()}
+                                        disabled={recipes.length >= variant.numberOfRecipes}
+                                    >
                                         <AddCircleOutline />
                                     </IconButton>
                                 </Grid>

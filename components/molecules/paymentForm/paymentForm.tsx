@@ -20,11 +20,14 @@ export const PaymentForm = (props) => {
     const { chckbox } = useStyles();
     const router = useRouter();
     const userInfo = useUserInfoStore(({ userInfo }) => userInfo);
+    const gotToNextView = useBuyFlow(({ forward }) => forward);
     const stripe = useStripe();
     const [isLoadingPayment, setisLoadingPayment] = useState(false);
     const elements = useElements();
     const { enqueueSnackbar } = useSnackbar();
-    const { setPaymentMethod, form } = useBuyFlow(({ setPaymentMethod, form }) => ({ setPaymentMethod, form }));
+    const { setPaymentMethod, form, setFirstOrderId, setSubscriptionId } = useBuyFlow(
+        ({ setPaymentMethod, form, setFirstOrderId, setSubscriptionId }) => ({ setPaymentMethod, form, setFirstOrderId, setSubscriptionId })
+    );
 
     const handleOnChange = () => {
         router.push("/aviso-legal");
@@ -64,8 +67,6 @@ export const PaymentForm = (props) => {
     };
 
     const handleSubmitPayment = async () => {
-        // console.log("El buy FORM: ", form);
-        // return;
         setisLoadingPayment(true);
         if (form.paymentMethod.type === "newPaymentMethod") {
             await handleStripePaymentMethod();
@@ -98,6 +99,9 @@ export const PaymentForm = (props) => {
                 });
             }
             enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
+            setSubscriptionId(res.data.subscriptionId);
+            setFirstOrderId(res.data.firstOrderId);
+            gotToNextView();
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }

@@ -10,7 +10,7 @@ import { RecipeCard } from "@molecules";
 import RecipeModal from "../../molecules/recipeModal/recipeModal";
 import RecipeCardBuyFlow from "../../molecules/recipeCardBuyFlow/recipeCardBuyFlow";
 import { useBuyFlow } from "@stores";
-import { RecipesGridProps } from './interfaces';
+import { RecipesGridProps } from "./interfaces";
 
 export const RecipesGrid = (props: RecipesGridProps) => {
     const [open, setOpen] = React.useState(false);
@@ -33,8 +33,8 @@ export const RecipesGrid = (props: RecipesGridProps) => {
     const handleClickRemoveRecipe = ({ id: _id }) => {
         const index = recipes.find(({ id }) => id !== _id);
         if (index === -1) return;
-        const newState = [...recipes]
-        newState.splice(index, 1)
+        const newState = [...recipes];
+        newState.splice(index, 1);
         selectRecipes(newState);
     };
 
@@ -51,7 +51,7 @@ export const RecipesGrid = (props: RecipesGridProps) => {
     return (
         <>
             {props.recipesPage && (
-                <Grid container direction="row" justify="left" alignItems="flex-start" spacing={2}>
+                <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={2}>
                     {props.recipes.map((recipe, index) => (
                         <Grid item xs={12} sm={6} md={4} key={index}>
                             <RecipeCard
@@ -61,6 +61,7 @@ export const RecipesGrid = (props: RecipesGridProps) => {
                                 difficultyTag={recipe.difficultyLevel}
                                 recipeName={recipe.name}
                                 handleClickOpenModal={() => handleClickOpenModal(recipe)}
+                                style={{ width: "100%" }}
                             />
                         </Grid>
                     ))}
@@ -68,9 +69,9 @@ export const RecipesGrid = (props: RecipesGridProps) => {
             )}
 
             {props.recipesSelection && (
-                <Grid container direction="row" justify="center" alignItems="flex-start" spacing={2}>
+                <Grid container item direction="row" justify="center" alignItems="flex-start" spacing={2}>
                     {props.recipes.map((recipe, index) => (
-                        <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                        <Grid item xs={12} key={index}>
                             <RecipeCardBuyFlow
                                 id={recipe.id}
                                 imageUrl={recipe.imageUrl}
@@ -80,7 +81,7 @@ export const RecipesGrid = (props: RecipesGridProps) => {
                                 name={recipe.name}
                                 handleClickOpenModal={() => handleClickOpenModal(recipe)}
                                 handleClickAddRecipe={() => handleClickAddRecipe(recipe)}
-                                handleClickRemoveRecipe={() => handleClickRemoveRecipe({id: recipe.id})}
+                                handleClickRemoveRecipe={() => handleClickRemoveRecipe({ id: recipe.id })}
                             />
                         </Grid>
                     ))}

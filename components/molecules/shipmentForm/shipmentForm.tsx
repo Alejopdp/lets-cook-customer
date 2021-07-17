@@ -24,7 +24,6 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
             if (!userInfo.shippingAddress) return;
 
             const res = await getShippingCost(userInfo.shippingAddress?.latitude, userInfo.shippingAddress?.longitude);
-            alert(res.data);
 
             if (res.status === 200) {
                 setDeliveryInfo({
@@ -35,7 +34,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
         };
 
         getShippingCostIfAddressExists();
-    }, []);
+    }, [form.deliveryForm?.latitude, form.deliveryForm?.longitude]);
 
     const handleChange = (event) => {
         setDeliveryInfo({

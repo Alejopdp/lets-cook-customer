@@ -30,10 +30,38 @@ export interface BuyFlowStore {
         variant?: PlanVariant;
         deliveryForm?: DeliveryForm;
         paymentMethod?: PaymentMethodForm;
+        coupon?: Coupon;
         recipes: Recipes[];
+        firstOrderId: string;
+        subscriptionId: string;
     };
 }
 
+export interface Coupon {
+    id: string;
+    code: string;
+    discount_type: {
+        type: string;
+        value: number;
+    };
+    minimum_requirement: {
+        type: string;
+        value: number;
+    };
+    apply_to: {
+        type: string;
+        value: string[];
+    };
+    limites: any[];
+    coupons_by_subscription: {
+        type: string;
+        value: number;
+    };
+    date_rage: {
+        start: string;
+        expire: string;
+    };
+}
 export interface Store extends BuyFlowStore {
     setRegisterState: (isVisible: boolean) => void;
     forward: () => void;
@@ -42,6 +70,9 @@ export interface Store extends BuyFlowStore {
     selectRecipes: (recipes: Recipes[]) => void;
     setPlanCode: (code: string, slug: string) => void;
     setPlanVariant: (variant: Partial<PlanVariant>) => void;
+    setCoupon: (coupon: Partial<Coupon>) => void;
+    setFirstOrderId: (firstOrderId: Partial<string>) => void;
+    setSubscriptionId: (subscriptionId: Partial<string>) => void;
 }
 
 export const BuyFlowInitialStore: BuyFlowStore = {
@@ -74,7 +105,35 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             type: "",
             stripeId: "",
         },
+        coupon: {
+            id: "",
+            code: "",
+            discount_type: {
+                type: "",
+                value: null,
+            },
+            minimum_requirement: {
+                type: "none",
+                value: null,
+            },
+            apply_to: {
+                type: "all",
+                value: [],
+            },
+
+            limites: [],
+            coupons_by_subscription: {
+                type: "",
+                value: 0,
+            },
+            date_rage: {
+                start: "",
+                expire: "",
+            },
+        },
         recipes: [],
+        subscriptionId: "",
+        firstOrderId: "",
     },
 };
 
@@ -119,6 +178,21 @@ const store = devtools<Store>((set, get) => ({
     setPlanVariant: (variant: PlanVariant) => {
         const form = get().form;
         form.variant = { ...variant };
+        set({ form });
+    },
+    setCoupon: (coupon: Coupon) => {
+        const form = get().form;
+        form.coupon = { ...coupon };
+        set({ form });
+    },
+    setFirstOrderId: (firstOrderId: string) => {
+        const form = get().form;
+        form.firstOrderId = firstOrderId;
+        set({ form });
+    },
+    setSubscriptionId: (subscriptionId: string) => {
+        const form = get().form;
+        form.subscriptionId = subscriptionId;
         set({ form });
     },
 }));

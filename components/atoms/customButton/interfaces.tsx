@@ -6,4 +6,5 @@ export interface CustomButtonProps {
     text: string;
     icon?: ReactNode;
     smallButton?: boolean;
+    style?: any;
 }
