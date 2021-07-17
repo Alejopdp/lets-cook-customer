@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexDirection: "column"
+        flexDirection: "column",
+        minHeight: '100vh'
     },
     drawer: {
         [theme.breakpoints.up('sm')]: {
@@ -28,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     menuLogginButton: {
         padding: theme.spacing(2),
-        width:'100%',
+        width: '100%',
     },
     logo: {
         display: "flex",

@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
         color: "inherit"
     },
     loginButton: {
-        minWidth: 250,
+        minWidth: 225,
         padding: `${theme.spacing(1.5)}px ${theme.spacing(6)}px`,
         borderRadius: 8,
         margin: `0 auto`,

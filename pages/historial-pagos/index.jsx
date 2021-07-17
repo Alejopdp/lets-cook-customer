@@ -18,20 +18,19 @@ import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTi
 const HistorialPagos = (props) => {
     const theme = useTheme();
     const [openPaymentDetailsModal, setOpenPaymentDetailsModal] = useState(false);
-    const [selectedPayment, setSelectedPayment] = useState(null);
+    const [selectedPaymentOrderId, setSelectedPaymentOrderId] = useState('');
 
-    const handleClickOpenPaymentDetailsModal = (data) => {
-        console.log("waaaaa");
-        console.log(data);
-        setSelectedPayment(data);
+    const handleClickOpenPaymentDetailsModal = (paymentOrderId) => {
+        setSelectedPaymentOrderId(paymentOrderId);
         setOpenPaymentDetailsModal(true);
     };
 
     const handleClosePaymentDetailsModal = () => {
         setOpenPaymentDetailsModal(false);
-        setSelectedPayment(null);
+        setSelectedPaymentOrderId('');
     };
 
+    
     return (
         <>
             <Layout disableCallToActionSection>
@@ -40,7 +39,7 @@ const HistorialPagos = (props) => {
                     <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} />
                 </InnerSectionLayout>
             </Layout>
-            <PaymentDetailsModal data={selectedPayment} open={openPaymentDetailsModal} handleClose={handleClosePaymentDetailsModal} />
+            <PaymentDetailsModal data={selectedPaymentOrderId} open={openPaymentDetailsModal} handleClose={handleClosePaymentDetailsModal} />
         </>
     );
 };

@@ -27,7 +27,7 @@ const theme = createMuiTheme({
     typography: {
         h1: { fontFamily: fonts.titleFont, fontWeight: 800, fontSize: '36px' },
         h2: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '32px' },
-        h3: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '28px'},
+        h3: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '28px' },
         h4: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '24px' },
         h5: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '20px' },
         h6: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '16px' },
@@ -35,7 +35,7 @@ const theme = createMuiTheme({
         subtitle2: { fontFamily: fonts.titleFont, fontWeight: 600, fontSize: '16px' },
         body1: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: '18px' },
         body2: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: '16px' },
-        button: { fontFamily: fonts.titleFont, fontWeight: 800 },
+        button: { fontFamily: fonts.titleFont, fontWeight: 800, fontSize: '14px' },
     },
 
     overrides: {
