@@ -26,31 +26,52 @@ import ChooseRecipesActionBox from "./pendingActionsComponents/chooseRecipesActi
 import RateRecipesActionBox from "./pendingActionsComponents/rateRecipesActionBox";
 import ReferalActionBox from "./pendingActionsComponents/referalActionBox";
 import EmptyState from "../../components/molecules/emptyState/emptyState";
+import { useUserInfoStore } from "../../stores/auth";
+import { useSnackbar } from "notistack";
 
-export async function getServerSideProps(context) {
-    const customerWithPlans = "f031ca8c-647e-4d0b-8afc-28e982068fd5";
-    const customerWithoutPlans = "";
-    const customerId = customerWithPlans;
+// export async function getServerSideProps(context) {
+//     const customerWithPlans = "f031ca8c-647e-4d0b-8afc-28e982068fd5";
+//     const customerWithoutPlans = "";
+//     const customerId = customerWithPlans;
 
-    const locale = context.locale;
-    const res = await getProfileInfo(customerId, locale);
+//     const locale = context.locale;
+//     const res = await getProfileInfo(customerId, locale);
 
-    return {
-        props: {
-            data: res.data || null,
-            error: res.status !== 200 ? "ERROR" : "",
-        },
-    };
-}
+//     return {
+//         props: {
+//             data: res.data || null,
+//             error: res.status !== 200 ? "ERROR" : "",
+//         },
+//     };
+// }
 
-const Perfil = ({ data, error }) => {
+const Perfil = (props) => {
     const theme = useTheme();
     const router = useRouter();
+    const { enqueueSnackbar } = useSnackbar();
     const [openPlanRecoverModal, setOpenPlanRecoverModal] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
+    const [data, setdata] = useState({
+        principalPlanSubscriptions: [],
+        additionalPlanSubscriptions: [],
+        pendingActions: [],
+    });
+    const userInfo = useUserInfoStore((state) => state.userInfo);
     // const lang = langs[router.locale];
 
-    const endpoint = "http://localhost:3001/api/v1/subscription/by-customer/1";
+    useEffect(() => {
+        const getProfile = async () => {
+            const res = await getProfileInfo(userInfo.id, router.locale);
+
+            if (res.status === 200) {
+                setdata(res.data);
+            } else {
+                enqueueSnackbar(res.data.message, { variant: "error" });
+            }
+        };
+
+        getProfile();
+    }, [userInfo]);
 
     const handleClickOpenPlanRecoverModal = async (id, type) => {
         const plan = data[type].find((el) => el.id === id);
@@ -101,37 +122,36 @@ const Perfil = ({ data, error }) => {
         superLargeDesktop: {
             breakpoint: {
                 max: 3000,
-                min: 1280
+                min: 1280,
             },
             items: 5,
-            partialVisibilityGutter: 40
+            partialVisibilityGutter: 40,
         },
         desktop: {
             breakpoint: {
                 max: 1280,
-                min: 960
+                min: 960,
             },
             items: 3,
-            partialVisibilityGutter: 40
+            partialVisibilityGutter: 40,
         },
         tablet: {
             breakpoint: {
                 max: 960,
-                min: 600
+                min: 600,
             },
             items: 2,
-            partialVisibilityGutter: 30
+            partialVisibilityGutter: 30,
         },
         mobile: {
             breakpoint: {
                 max: 600,
-                min: 0
+                min: 0,
             },
             items: 1,
-            partialVisibilityGutter: 30
+            partialVisibilityGutter: 30,
         },
     };
-
 
     return (
         <>
@@ -151,15 +171,15 @@ const Perfil = ({ data, error }) => {
                                     <Grid item xs={9}>
                                         {/* <Grid item> */}
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                            Hola Alejo
-                                            </Typography>
+                                            Hola {userInfo.firstName}
+                                        </Typography>
                                         {/* </Grid> */}
                                     </Grid>
-                                    <Grid item xs={3} style={{ textAlign: 'right' }}>
+                                    <Grid item xs={3} style={{ textAlign: "right" }}>
                                         {/* <Grid item style={{ marginRight: theme.spacing(2) }}> */}
                                         <Link href="/historial-pagos">
                                             <TextButton
-                                                style={{ marginRight: theme.spacing(2)}}
+                                                style={{ marginRight: theme.spacing(2) }}
                                                 noColor
                                                 icon="time"
                                                 btnText="Historial de pagos"
@@ -205,15 +225,10 @@ const Perfil = ({ data, error }) => {
                             </Hidden>
                             {/* Greeting & Pending Actions Desktop */}
                             <Hidden smDown>
-                                <Grid
-                                    container
-                                    direction="column"
-                                    alignItems="left"
-                                    spacing={2}
-                                >
+                                <Grid container direction="column" alignItems="left" spacing={2}>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(3) }}>
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                            Hola Alejo
+                                            Hola {userInfo.firstName || ""}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
@@ -264,12 +279,12 @@ const Perfil = ({ data, error }) => {
                                         })}
                                     </>
                                 ) : (
-                                        <EmptyState
-                                            image="/emptyStatePlans.png"
-                                            title="Aún no tienes planes"
-                                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                                        />
-                                    )}
+                                    <EmptyState
+                                        image="/emptyStatePlans.png"
+                                        title="Aún no tienes planes"
+                                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                    />
+                                )}
                             </Grid>
                             {data.principalPlanSubscriptions.length > 0 && (
                                 <>
@@ -299,12 +314,12 @@ const Perfil = ({ data, error }) => {
                                                 ))}
                                             </>
                                         ) : (
-                                                <EmptyState
-                                                    image="/emptyStatePlans.png"
-                                                    title="Aún no tienes acompañamientos"
-                                                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                                                />
-                                            )}
+                                            <EmptyState
+                                                image="/emptyStatePlans.png"
+                                                title="Aún no tienes acompañamientos"
+                                                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                            />
+                                        )}
                                     </Grid>
                                 </>
                             )}

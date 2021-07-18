@@ -13,39 +13,8 @@ import PreferredDeliveryTimeInput from "../../atoms/preferredDeliveryTimeInput/p
 import LocationSearchInput from "../../atoms/locationSearchInput/locationSearchiInput";
 import { getGeometry } from "../../../helpers/utils/geocode";
 
-const useStyles = makeStyles((theme) => ({
-    root: {},
-}));
-
 const DeliveryAddressModal = (props) => {
     const theme = useTheme();
-    const [formData, setFormData] = useState({
-        addressName: "",
-        addressDescription: "",
-        preferredTimeToDelivery: "",
-    });
-
-    useEffect(() => {
-        setFormData({
-            addressName: props.initialData.addressName,
-            addressDescription: props.initialData.addressDescription,
-            preferredTimeToDelivery: props.initialData.preferredTimeToDelivery.value,
-        });
-    }, [props.open]);
-
-    const handleChangeInput = (e) => {
-        let name = e.target.name;
-        let value = e.target.value;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    const handleChangeDeliveryAddress = () => {
-        props.handlePrimaryButtonClick(formData);
-    };
-
     const [formData, setformData] = useState({
         name: props.shippingAddress.name,
         details: props.shippingAddress.details,
@@ -53,6 +22,10 @@ const DeliveryAddressModal = (props) => {
         latitude: props.shippingAddress.latitude,
         longitude: props.shippingAddress.longitude,
     });
+
+    const handleChangeDeliveryAddress = () => {
+        props.handlePrimaryButtonClick(formData);
+    };
 
     const handleChange = (e) => {
         setformData({

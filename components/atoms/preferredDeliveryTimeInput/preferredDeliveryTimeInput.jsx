@@ -15,11 +15,11 @@ export default function PreferredDeliveryTimeInput(props) {
     const theme = useTheme();
 
     const timeOptions = [
-        { value: '10to12', label: 'De 10 a 12 hs' },
-        { value: '12to14', label: 'De 12 a 14 hs' },
-        { value: '14to16', label: 'De 14 a 16 hs' },
-        { value: '16to18', label: 'De 16 a 18 hs' }
-    ]
+        { value: "10to12", label: "De 10 a 12 hs" },
+        { value: "12to14", label: "De 12 a 14 hs" },
+        { value: "14to16", label: "De 14 a 16 hs" },
+        { value: "16to18", label: "De 16 a 18 hs" },
+    ];
 
     return (
         <form className={classes.container} noValidate>
@@ -41,5 +41,3 @@ export default function PreferredDeliveryTimeInput(props) {
         </form>
     );
 }
-
-export default PreferredDeliveryTimeInput

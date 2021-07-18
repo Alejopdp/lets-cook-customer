@@ -9,10 +9,10 @@ import Modal from "../../atoms/modal/modal";
 const PaymentMethodModal = (props) => {
     const theme = useTheme();
     const [value, setValue] = useState("card");
-    const [card, setCard] = useState("");
+    // const [card, setCard] = useState("");
 
-    const [value, setValue] = useState("");
-    const [card, setCard] = useState(false);
+    // const [value, setValue] = useState("");
+    // const [card, setCard] = useState(false);
     const [newPaymentMethod, setNewPaymentMethod] = useState(false);
     const [selectedSavedCard, setselectedSavedCard] = useState("visa");
 
@@ -20,9 +20,9 @@ const PaymentMethodModal = (props) => {
         setValue(event.target.value);
     };
 
-    const handleChangeCards = (event) => {
-        setCard(event.target.value);
-    };
+    // const handleChangeCards = (event) => {
+    //     setCard(event.target.value);
+    // };
 
     const handleClickChangePaymentMethod = () => {
         props.handlePrimaryButtonClick(card);
