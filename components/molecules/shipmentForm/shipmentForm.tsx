@@ -14,22 +14,29 @@ import { ShipmentFormProps } from "./interfaces";
 import { useBuyFlow, DeliveryForm, useUserInfoStore } from "@stores";
 import LocationSearchInput from "components/atoms/locationSearchInput/locationSearchiInput";
 import PhoneNumberInput from "components/atoms/phoneNumberInput/phoneNumberInput";
+import { useSnackbar } from "notistack";
 
 export const ShipmentForm = memo((props: ShipmentFormProps) => {
     const { setDeliveryInfo, form } = useBuyFlow(({ setDeliveryInfo, form }) => ({ setDeliveryInfo, form }));
     const userInfo = useUserInfoStore((state) => state.userInfo);
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         const getShippingCostIfAddressExists = async () => {
-            if (!userInfo.shippingAddress) return;
+            const newLatitude = form.deliveryForm?.latitude || userInfo.shippingAddress?.latitude;
+            const newLongitude = form.deliveryForm?.longitude || userInfo.shippingAddress?.longitude;
 
-            const res = await getShippingCost(userInfo.shippingAddress?.latitude, userInfo.shippingAddress?.longitude);
+            if (!!!newLatitude && !!!newLongitude) return;
+
+            const res = await getShippingCost(newLatitude, newLongitude);
 
             if (res.status === 200) {
                 setDeliveryInfo({
                     ...form.deliveryForm,
                     shippingCost: res.data,
                 });
+            } else {
+                enqueueSnackbar(res.data.message, { variant: "error" });
             }
         };
 

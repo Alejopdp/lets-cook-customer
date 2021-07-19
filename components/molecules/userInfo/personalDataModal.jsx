@@ -12,23 +12,6 @@ import PhoneNumberInput from "../../atoms/phoneNumberInput/phoneNumberInput";
 import PreferedLanguageInput from "../../atoms/preferedLanguageInput/preferedLanguageInput";
 import DatePicker from "../../atoms/datePickerInput/datePickerInput";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        "& > *": {
-            margin: theme.spacing(1),
-            width: "30ch",
-            [theme.breakpoints.down("sm")]: {
-                width: "36ch",
-            },
-        },
-        marginLeft: "-0.6rem",
-    },
-    phoneInput: {
-        marginTop: ".6rem",
-        height: "3.2rem",
-    },
-}));
-
 const PersonalDataModal = (props) => {
     const [formData, setformData] = useState({
         name: props.personalData.name,
@@ -56,85 +39,49 @@ const PersonalDataModal = (props) => {
             title="Modificar datos personales"
             handleClose={props.handleClose}
             fullScreen
-            handlePrimaryButtonClick={handleChangePersonalData}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
             handlePrimaryButtonClick={handleSubmit}
         >
             <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <form noValidate autoComplete="off">
-                                <TextField
-                                    className={classes.root}
-                                    id="outlined-basic"
-                                    label="Nombre"
-                                    variant="outlined"
-                                    name="name"
-                                    style={{ marginBottom: "-1rem" }}
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                />
-                            </form>
-                        </Grid>
-                    </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        id="outlined-basic"
+                        label="Nombre"
+                        variant="outlined"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        fullWidth
+                    />
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <form noValidate autoComplete="off">
-                                <TextField
-                                    className={classes.root}
-                                    id="outlined-basic"
-                                    name="lastName"
-                                    label="Apellido"
-                                    variant="outlined"
-                                    value={formData.lastName}
-                                    onChange={handleChange}
-                                />
-                            </form>
-                        </Grid>
-                    </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        id="outlined-basic"
+                        name="lastName"
+                        label="Apellido"
+                        variant="outlined"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        fullWidth
+                    />
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <PhoneNumberInput
-                                handleChange={handleChange}
-                                placeholder="Telefono (1)"
-                                value={formData.phone1}
-                                name="phone1"
-                            />
-                        </Grid>
-                    </Grid>
+                <Grid item xs={12}>
+                    <PhoneNumberInput handleChange={handleChange} placeholder="Telefono (1)" value={formData.phone1} name="phone1" />
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <PhoneNumberInput
-                                value={formData.phone2}
-                                handleChange={handleChange}
-                                placeholder="Telefono (2)"
-                                name="phone2"
-                            />
-                        </Grid>
-                    </Grid>
+                <Grid item xs={12}>
+                    <PhoneNumberInput value={formData.phone2} handleChange={handleChange} placeholder="Telefono (2)" name="phone2" />
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <DatePicker
-                                label="Fecha de Nacimiento"
-                                value={formData.birthDateValue}
-                                handleChange={handleChange}
-                                name="birthDateValue"
-                            />
-                        </Grid>
-                    </Grid>
+                <Grid item xs={12}>
+                    <DatePicker
+                        label="Fecha de Nacimiento"
+                        value={formData.birthDateValue}
+                        handleChange={handleChange}
+                        name="birthDateValue"
+                    />
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <PreferedLanguageInput name="preferedLanguage" value={formData.preferedLanguage} handleChange={handleChangeInput} />
+                <Grid item xs={12}>
+                    <PreferedLanguageInput name="preferedLanguage" value={formData.preferedLanguage} handleChange={handleChange} />
                 </Grid>
             </Grid>
         </Modal>

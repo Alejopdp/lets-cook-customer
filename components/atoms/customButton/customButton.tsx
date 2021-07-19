@@ -14,6 +14,7 @@ export const CustomButton = (props: CustomButtonProps) => {
             onClick={props.onClick}
             disabled={props.disabled}
             style={props.style}
+            fullWidth={props.fullWidth}
         >
             <Box className={box}>
                 {props.icon && (

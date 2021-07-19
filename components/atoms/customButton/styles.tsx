@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
     button: {
-        width: "100%",
+        // width: "100%",
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.background.paper,
         padding: theme.spacing(2),
@@ -13,8 +13,8 @@ export const useStyles = makeStyles((theme) => ({
             backgroundColor: theme.palette.primary.light,
         },
         "&:disabled": {
-            backgroundColor: theme.palette.background.default
-        }
+            backgroundColor: theme.palette.background.default,
+        },
     },
     slimButton: {
         padding: theme.spacing(0.5),
@@ -22,5 +22,5 @@ export const useStyles = makeStyles((theme) => ({
     box: {
         display: "flex",
         flexDirection: "row",
-    }
+    },
 }));

@@ -40,14 +40,14 @@ const PaymentMethodModal = (props) => {
         >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
+                    <Typography variant="h6" style={{ fontSize: 22 }}>
                         Modificar metodo de pago
                     </Typography>
                 </Grid>
             </Grid>
             <FormControl component="fieldset" style={{ width: "100%" }}>
-                <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                    <FormControlLabel value="card" control={<Radio />} label="Mis tarjetas guardadas" onClick={() => handleClickCard()} />
+                <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChangePaymentMethod}>
+                    <FormControlLabel value="card" control={<Radio />} label="Mis tarjetas guardadas" />
                     {value === "card" ? (
                         <RadioGroup
                             aria-label="gender"
@@ -68,7 +68,7 @@ const PaymentMethodModal = (props) => {
                         value="newPaymentMethod"
                         control={<Radio />}
                         label="Ingresar nuevo metodo de pago"
-                        onClick={() => handleClickPaymentMethod()}
+                        // onClick={() => handleClickPaymentMethod()}
                     />
                     {value === "newPaymentMethod" ? <StripeForm /> : null}
                 </RadioGroup>

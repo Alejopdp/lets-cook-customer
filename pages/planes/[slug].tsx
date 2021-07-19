@@ -6,6 +6,7 @@ import { IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@sto
 // Internal components
 import { BuyFlowLayout } from "@layouts";
 import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "@organisms";
+import CrossSellingStep from "components/organisms/buyForm/crossSellingStep";
 
 export interface PlansErrors {
     plans?: string;
@@ -80,6 +81,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         <RegisterUserStep />,
         <CheckoutStep />,
         <RecipeChoiseStep recipes={props.recipes} />,
+        <CrossSellingStep />,
     ];
 
     return <BuyFlowLayout>{steps[step]}</BuyFlowLayout>;

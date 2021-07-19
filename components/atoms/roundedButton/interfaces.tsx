@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export  type VariantsType = "content" | "flat" | "outline";
+export type VariantsType = "content" | "flat" | "outline";
 
 export interface RoundedButtonProps {
     variant?: VariantsType;
@@ -9,4 +9,5 @@ export interface RoundedButtonProps {
     style?: any;
     props?: any;
     onClick?: () => void;
+    disabled?: boolean;
 }

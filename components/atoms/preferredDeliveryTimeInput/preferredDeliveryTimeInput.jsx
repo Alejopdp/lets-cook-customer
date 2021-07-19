@@ -3,6 +3,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -37,6 +38,7 @@ export default function PreferredDeliveryTimeInput(props) {
                     step: 300, // 5 min
                 }}
                 variant="outlined"
+                fullWidth
             />
         </form>
     );

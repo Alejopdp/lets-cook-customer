@@ -55,37 +55,26 @@ const DeliveryAddressModal = (props) => {
             handleClose={props.handleClose}
             title="Modificar direccion de entrega"
             fullScreen
-            handlePrimaryButtonClick={handleChangeDeliveryAddress}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
             handlePrimaryButtonClick={handleSubmit}
         >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Typography variant="h6" style={{ fontSize: isMdUp ? "22px" : "20px" }}>
-                        Modificar direccion de entrega
-                    </Typography>
+                    <LocationSearchInput name="name" handleChange={handleGoogleInput} value={formData.name} />
                 </Grid>
 
                 <Grid item xs={12}>
-                    <form className={classes.root} noValidate autoComplete="off">
-                        <LocationSearchInput name="name" handleChange={handleGoogleInput} value={formData.name} />
-                    </form>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <form className={classes.root} noValidate autoComplete="off">
-                        <TextField
-                            name="details"
-                            fullWidth
-                            id="outlined-basic"
-                            label="Piso / Puerta / Aclaraciones"
-                            variant="outlined"
-                            value={formData.details}
-                            onChange={handleChange}
-                            // style={{ width: "97%", marginTop: ".5rem" }}
-                        />
-                    </form>
+                    <TextField
+                        name="details"
+                        fullWidth
+                        id="outlined-basic"
+                        label="Piso / Puerta / Aclaraciones"
+                        variant="outlined"
+                        value={formData.details}
+                        onChange={handleChange}
+                        // style={{ width: "97%", marginTop: ".5rem" }}
+                    />
                 </Grid>
 
                 <Grid item xs={12}>

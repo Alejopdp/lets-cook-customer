@@ -15,15 +15,31 @@ export const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        cursor: "pointer"
+        cursor: "pointer",
+        padding: 8,
+    },
+
+    boxSmall: {
+        backgroundColor: theme.palette.background.paper,
+        border: `1px solid ${theme.palette.text.primary}`,
+        borderRadius: theme.spacing(1),
+        margin: theme.spacing(1),
+        marginLeft: "0",
+        height: "32px",
+        // width: "70px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
+        padding: 8,
     },
     checkedBox: {
         border: `1px solid ${theme.palette.primary.main}`,
-        backgroundColor: "#F2FFF8"
+        backgroundColor: "#F2FFF8",
     },
     hidden: {
-        display: "none"
-    }
+        display: "none",
+    },
 }));
 
 export default useStyles;

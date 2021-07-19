@@ -106,22 +106,12 @@ const UserInfoDetail = (props) => {
         setBillingAddressModal(false);
     };
 
-    const handleClickChangeBillingAddress = (data) => {
-        alert(`billingAddress ${JSON.stringify(data)}`);
-        setBillingAddressModal(false);
-    };
-
     // DELIVERY ADDRESS
     const handleClickOpenDeliveryAddressModal = () => {
         setDeliveryAddressModal(true);
     };
 
     const handleClickCloseDeliveryAddressModal = () => {
-        setDeliveryAddressModal(false);
-    };
-
-    const handleClickChangeDeliveryAddress = (data) => {
-        alert(`deliveryAddress ${JSON.stringify(data)}`);
         setDeliveryAddressModal(false);
     };
 
@@ -393,10 +383,10 @@ const UserInfoDetail = (props) => {
             <PaymentMethodModal
                 open={openPaymentMethod}
                 handleClose={handleClickClosePaymentMethodModal}
-                handlePrimaryButtonClick={handleClickChangePaymentMethod}
+                // handlePrimaryButtonClick={handleClickChangePaymentMethod}
                 primaryButtonText="MODIFICAR METODO DE PAGO"
                 secondaryButtonText="CANCELAR"
-                initialData={data.paymentMethod}
+                // initialData={data.paymentMethod}
             />
         </>
     );
