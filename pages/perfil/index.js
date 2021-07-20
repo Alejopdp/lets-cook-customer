@@ -28,6 +28,7 @@ import ReferalActionBox from "./pendingActionsComponents/referalActionBox";
 import EmptyState from "../../components/molecules/emptyState/emptyState";
 import { useUserInfoStore } from "../../stores/auth";
 import { useSnackbar } from "notistack";
+import { reorderPlan } from "../../helpers/serverRequests/subscription";
 
 // export async function getServerSideProps(context) {
 //     const customerWithPlans = "f031ca8c-647e-4d0b-8afc-28e982068fd5";
@@ -110,6 +111,19 @@ const Perfil = (props) => {
             default:
                 return <p>unknown action</p>;
         }
+    };
+
+    const handleRecoverPlanSubmit = async () => {
+        const res = await reorderPlan(selectedPlan.id);
+
+        if (res.status === 200) {
+            enqueueSnackbar("Pedido correctamente realizado", { variant: "success" });
+            router.push(`/detalle-del-plan/${res.data.subscriptionId}`);
+        } else {
+            enqueueSnackbar("Error al volver a pedir el plan", { variant: "error" });
+        }
+
+        handleClosePlanRecoverModal();
     };
 
     let carouselWidth;
@@ -327,7 +341,12 @@ const Perfil = (props) => {
                     </Grid>
                 </InnerSectionLayout>
             </Layout>
-            <PlanRecoverModal data={selectedPlan} open={openPlanRecoverModal} handleClose={handleClosePlanRecoverModal} />
+            <PlanRecoverModal
+                data={selectedPlan}
+                open={openPlanRecoverModal}
+                handleClose={handleClosePlanRecoverModal}
+                handleSubmit={handleRecoverPlanSubmit}
+            />
         </>
     );
 };

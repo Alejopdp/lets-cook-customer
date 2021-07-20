@@ -1,6 +1,7 @@
 // Utils & Config
 import React, { useState, useEffect, useRef } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { cancelSubscription } from "../../../helpers/serverRequests/subscription";
 // import { useRouter } from "next/router";
 // const langs = require("../../lang").comoFunciona;
 
@@ -14,8 +15,9 @@ import CancelPlanModal from "../../molecules/managePlanModals/cancelPlanModal";
 import SkipPlanModal from "../../molecules/managePlanModals/skipPlanModal";
 import PlanDetailsDesktop from "./planDetailsDesktop/index";
 import PlanDetailsMobile from "./planDetailsMobile/index";
+import { useSnackbar } from "notistack";
 
-const PlanDetails = ({ data }) => {
+const PlanDetails = ({ data, subscriptionId }) => {
     const changePlanData = {
         plans: [
             { planId: "1", name: "Plan Familiar", active: true },
@@ -71,7 +73,7 @@ const PlanDetails = ({ data }) => {
     const theme = useTheme();
     // const router = useRouter();
     // const lang = langs[router.locale];
-
+    const { enqueueSnackbar } = useSnackbar();
     const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: -1, period: "" });
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
     const [openChangePlanModal, setOpenChangePlanModal] = useState(false);
@@ -103,8 +105,14 @@ const PlanDetails = ({ data }) => {
         setOpenCancelPlanModal(false);
     };
 
-    const handlePrimaryButtonClickCancelPlanModal = () => {
-        alert("primary click cancel plan modal");
+    const handlePrimaryButtonClickCancelPlanModal = async (reason, comment) => {
+        const res = await cancelSubscription(subscriptionId, reason, comment);
+
+        if (res.status === 200) {
+            enqueueSnackbar("El plan se canceló correctamente", { variant: "success" });
+        } else {
+            enqueueSnackbar("Error al cancelar el plan", { variant: "error" });
+        }
         setOpenCancelPlanModal(false);
     };
 

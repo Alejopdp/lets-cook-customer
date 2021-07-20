@@ -21,8 +21,6 @@ import Box from "@material-ui/core/Box";
 import Image from "next/image";
 
 // Icons & Images
-import TimerIcon from "@material-ui/icons/Timer";
-import SpeedIcon from "@material-ui/icons/Speed";
 import CloseIcon from "@material-ui/icons/Close";
 
 const styles = (theme) => ({
@@ -118,7 +116,7 @@ const PlanRecoverModal = withStyles(styles)((props) => {
                             </Grid>
                             <Grid item>
                                 <TextButton
-                                    handleClick={() => console.log("Pedido!")}
+                                    handleClick={props.handleSubmit}
                                     style={{ color: theme.palette.primary.main }}
                                     btnText="Volver a pedir"
                                 />
