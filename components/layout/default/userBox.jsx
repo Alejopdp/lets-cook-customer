@@ -6,7 +6,7 @@ import { useAuthStore, useUserInfoStore } from "@stores";
 import { useRouter } from "next/router";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import cookies from "js-cookie";
-import {useLocalStorage} from "@hooks";
+import { useLocalStorage } from "@hooks";
 
 const UserBox = (props) => {
     const router = useRouter();
@@ -35,9 +35,9 @@ const UserBox = (props) => {
 
     const options = {
         es: [
-            { title: "MIS PLANES", path: "/", handler: () => _handleOptionSelected("/") },
-            { title: "CONFIGURACIÓN DE CUENTA", path: "/", handler: () => _handleOptionSelected("/") },
-            { title: "HISTORIAL DE PAGOS", path: "/", handler: () => _handleOptionSelected("/") },
+            { title: "MIS PLANES", path: "/perfil", handler: () => _handleOptionSelected("/") },
+            { title: "CONFIGURACIÓN DE CUENTA", path: "/user-info", handler: () => _handleOptionSelected("/") },
+            { title: "HISTORIAL DE PAGOS", path: "/historial-pagos", handler: () => _handleOptionSelected("/") },
             { title: "CERRAR SESIÓN", path: "/", handler: handleSignOut },
         ],
         en: [
