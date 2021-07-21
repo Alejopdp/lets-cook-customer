@@ -16,8 +16,10 @@ import SkipPlanModal from "../../molecules/managePlanModals/skipPlanModal";
 import PlanDetailsDesktop from "./planDetailsDesktop/index";
 import PlanDetailsMobile from "./planDetailsMobile/index";
 import { useSnackbar } from "notistack";
+import { PlanDetailsProps, SkippableOrder } from "./interfaces";
+import { skipOrders } from "helpers/serverRequests/order";
 
-const PlanDetails = ({ data, subscriptionId }) => {
+const PlanDetails = (props: PlanDetailsProps) => {
     const changePlanData = {
         plans: [
             { planId: "1", name: "Plan Familiar", active: true },
@@ -106,7 +108,7 @@ const PlanDetails = ({ data, subscriptionId }) => {
     };
 
     const handlePrimaryButtonClickCancelPlanModal = async (reason, comment) => {
-        const res = await cancelSubscription(subscriptionId, reason, comment);
+        const res = await cancelSubscription(props.subscription.subscriptionId, reason, comment);
 
         if (res.status === 200) {
             enqueueSnackbar("El plan se canceló correctamente", { variant: "success" });
@@ -126,8 +128,14 @@ const PlanDetails = ({ data, subscriptionId }) => {
         setOpenSkipPlanModal(false);
     };
 
-    const handlePrimaryButtonClickSkipPlanModal = (weeksModified) => {
-        alert(JSON.stringify(weeksModified));
+    const handlePrimaryButtonClickSkipPlanModal = async (orders: SkippableOrder[]) => {
+        const res = await skipOrders(orders);
+
+        if (res.status === 200) {
+            enqueueSnackbar("Semanas salteadas correctamente", { variant: "success" });
+        } else {
+            enqueueSnackbar("Error al saltear las semanas", { variant: "error" });
+        }
         setOpenSkipPlanModal(false);
     };
 
@@ -136,9 +144,9 @@ const PlanDetails = ({ data, subscriptionId }) => {
     const handleClickOpenRecipeModal = (recipeId, period) => {
         let recipeIndex;
         if (period === "actualWeek") {
-            recipeIndex = data.actualWeekOrder.findIndex((recipe) => recipe.id === recipeId);
+            recipeIndex = props.subscription.actualWeekOrder.findIndex((recipe) => recipe.id === recipeId);
         } else {
-            recipeIndex = data.nextWeekOrder.findIndex((recipe) => recipe.id === recipeId);
+            recipeIndex = props.subscription.nextWeekOrder.findIndex((recipe) => recipe.id === recipeId);
         }
         setRecipeSelectedIndex({
             ...recipeSelectedIndex,
@@ -167,7 +175,7 @@ const PlanDetails = ({ data, subscriptionId }) => {
         <>
             <Hidden smDown>
                 <PlanDetailsDesktop
-                    data={data}
+                    subscription={props.subscription}
                     handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
                     handleClickOpenCancelPlanModal={handleClickOpenCancelPlanModal}
                     handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
@@ -176,7 +184,7 @@ const PlanDetails = ({ data, subscriptionId }) => {
             </Hidden>
             <Hidden mdUp>
                 <PlanDetailsMobile
-                    data={data}
+                    data={props.subscription}
                     handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
                     handleClickOpenCancelPlanModal={handleClickOpenCancelPlanModal}
                     handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
@@ -205,7 +213,7 @@ const PlanDetails = ({ data, subscriptionId }) => {
                 open={openSkipPlanModal}
                 handleClose={handleCloseSkipPlanModal}
                 handlePrimaryButtonClick={handlePrimaryButtonClickSkipPlanModal}
-                data={skipWeekData}
+                data={props.subscription.nextTwelveOrders}
             />
         </>
     );

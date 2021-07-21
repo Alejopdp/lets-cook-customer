@@ -37,7 +37,7 @@ const PlanDetailsPage = ({ subscription, error, subscriptionId }) => {
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <BackButtonTitle url="/perfil" title="Detalle del plan" />
-                <PlanDetails data={subscription} subscriptionId={subscriptionId} />
+                <PlanDetails subscription={subscription} subscriptionId={subscriptionId} />
             </InnerSectionLayout>
         </Layout>
     );
