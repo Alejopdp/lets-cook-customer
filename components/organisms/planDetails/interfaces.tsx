@@ -54,6 +54,7 @@ export interface PlanDetailasSubscription {
 
 export interface PlanDetailsProps {
     subscription: PlanDetailasSubscription;
+    swapPlanData: { plans: any; variants: any };
     handleClickOpenChangePlanModal: () => void;
     handleClickOpenCancelPlanModal: () => void;
     handleClickOpenSkipPlanModal: () => void;

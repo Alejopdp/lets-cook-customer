@@ -49,3 +49,21 @@ export const reorderPlan = async (subscriptionId: string) => {
         return error.response;
     }
 };
+
+export const swapPlan = async (subscriptionId: string, newPlanId: string, newPlanVariantId: string) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/swap-plan/${subscriptionId}`,
+            data: {
+                newPlanId,
+                newPlanVariantId,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};

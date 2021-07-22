@@ -17,7 +17,6 @@ import "react-multi-carousel/lib/styles.css";
 // Internal components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import { Layout } from "../../components/layout/index";
-import BoxWithIconAndTextButton from "../../components/molecules/specificBox/boxWithIconAndTextButton";
 import TextButton from "../../components/atoms/textButton/textButton";
 import PlanRecoverModal from "../../components/molecules/planRecoverModal/planRecoverModal";
 import PlanProfileCard from "./planProfileCard";
@@ -88,17 +87,6 @@ const Perfil = (props) => {
     const handleClickRedirectToPlanDetail = (subscriptionId) => {
         router.push({ pathname: `/detalle-del-plan/${subscriptionId}` });
     };
-
-    /* const descriptionElementRefRecipeModal = useRef(null);
-
-    useEffect(() => {
-        if (openPlanRecoverModal) {
-            const { current: descriptionElement } = descriptionElementRefRecipeModal;
-            if (descriptionElement !== null) {
-                descriptionElement.focus();
-            }
-        }
-    }, [openPlanRecoverModal]); */
 
     const getPendingActionComponent = (data) => {
         switch (data.type) {

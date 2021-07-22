@@ -2,6 +2,23 @@ import Axios from "axios";
 import { API_URL } from "../serverRequestInterfaces/response";
 import { Plan, PlanResponse } from "./plansInterfaces";
 
+export const getDataForSwappingAPlan = async (subscriptionId: string, locale?: string) => {
+    try {
+        const res = await Axios({
+            method: "GET",
+            url: `${API_URL}/plan/data-for-swapping/${subscriptionId}`,
+            params: {
+                locale,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};
+
 export async function getPlans(locale: string): Promise<PlanResponse> {
     try {
         const res = await Axios.request<Plan[]>({

@@ -2,7 +2,7 @@ import axios from "axios";
 import { SkippableOrder } from "components/organisms/planDetails/interfaces";
 const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/order`;
 
-export const chooseRecipes = async (orderId: string, recipeSelection: { recipeId: string; quantity: number }[], subscriptionId: string) => {
+export const chooseRecipes = async (orderId: string, recipeSelection: { recipeId: string; quantity: number }[]) => {
     try {
         const res = await axios({
             method: "PUT",

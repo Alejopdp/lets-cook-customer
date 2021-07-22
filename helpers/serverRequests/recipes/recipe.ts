@@ -24,6 +24,22 @@ export async function getRecipes(locale: string): Promise<RecipeResponse> {
     }
 }
 
+export const getRecipesForOrder = async (orderId: string, locale: string = "es") => {
+    try {
+        const res = await Axios.request<Recipe[]>({
+            method: "GET",
+            url: `${API_URL}/recipe/for-order/${orderId}`,
+            params: {
+                locale,
+            },
+        });
+        return res;
+    } catch (error) {
+        console.log("***-> Recipe Oops!: ", error);
+        return error.response;
+    }
+};
+
 export const getDemoRecipes = async (locale: string): Promise<RecipeResponse> => ({
     status: 200,
     data,

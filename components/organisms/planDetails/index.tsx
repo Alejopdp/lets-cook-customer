@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { useState, useEffect, useRef } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { cancelSubscription } from "../../../helpers/serverRequests/subscription";
+import { cancelSubscription, swapPlan } from "../../../helpers/serverRequests/subscription";
 // import { useRouter } from "next/router";
 // const langs = require("../../lang").comoFunciona;
 
@@ -20,45 +20,6 @@ import { PlanDetailsProps, SkippableOrder } from "./interfaces";
 import { skipOrders } from "helpers/serverRequests/order";
 
 const PlanDetails = (props: PlanDetailsProps) => {
-    const changePlanData = {
-        plans: [
-            { planId: "1", name: "Plan Familiar", active: true },
-            { planId: "2", name: "Plan Gourmet", active: false },
-            { planId: "3", name: "Plan Ahorro", active: false },
-            { planId: "4", name: "Plan Vegetariano", active: false },
-            { planId: "5", name: "Plan Vegano", active: false },
-        ],
-        variants: [
-            { planId: "1", planVariantId: "6", variantDescription: "4 recetas para 3 personas - 36 €/semana", active: true },
-            { planId: "1", planVariantId: "7", variantDescription: "3 recetas para 3 personas - 30 €/semana", active: false },
-            { planId: "1", planVariantId: "8", variantDescription: "2 recetas para 3 personas - 24 €/semana", active: false },
-            { planId: "2", planVariantId: "9", variantDescription: "4 recetas para 2 personas - 30 €/semana", active: false },
-            { planId: "2", planVariantId: "10", variantDescription: "3 recetas para 2 personas - 24 €/semana", active: false },
-            { planId: "2", planVariantId: "11", variantDescription: "2 recetas para 2 personas - 18 €/semana", active: false },
-            { planId: "3", planVariantId: "12", variantDescription: "3 recetas para 2 personas - 24 €/semana", active: false },
-            { planId: "3", planVariantId: "13", variantDescription: "2 recetas para 2 personas - 18 €/semana", active: false },
-            { planId: "4", planVariantId: "14", variantDescription: "2 recetas para 2 personas - 18 €/semana", active: false },
-            { planId: "5", planVariantId: "15", variantDescription: "2 recetas para 2 personas - 18 €/semana", active: false },
-        ],
-    };
-
-    const skipWeekData = {
-        weeks: [
-            { weekId: "1", text: "1 al 7 de marzo", skipped: false },
-            { weekId: "2", text: "8 al 15 de marzo", skipped: false },
-            { weekId: "3", text: "16 al 23 de marzo", skipped: false },
-            { weekId: "4", text: "24 al 31 de marzo", skipped: false },
-            { weekId: "5", text: "1 al 7 de abril", skipped: false },
-            { weekId: "6", text: "8 al 15 de abril", skipped: false },
-            { weekId: "7", text: "16 al 23 de abril", skipped: false },
-            { weekId: "8", text: "24 al 1 de mayo", skipped: false },
-            { weekId: "9", text: "2 al 8 de mayo", skipped: false },
-            { weekId: "10", text: "9 al 16 de mayo", skipped: true },
-            { weekId: "11", text: "17 al 24 de mayo", skipped: true },
-            { weekId: "12", text: "25 al 2 de junio", skipped: false },
-        ],
-    };
-
     const cancelPlanData = {
         reasons: [
             { id: 1, value: "created_by_error", text: "Se ha creado por error" },
@@ -92,9 +53,15 @@ const PlanDetails = (props: PlanDetailsProps) => {
         setOpenChangePlanModal(false);
     };
 
-    const handlePrimaryButtonClickChangePlanModal = (newPlan) => {
-        alert(JSON.stringify(newPlan));
-        setOpenChangePlanModal(false);
+    const handlePrimaryButtonClickChangePlanModal = async (newPlan: { planId: string; planVariantId: string }) => {
+        const res = await swapPlan(props.subscription.subscriptionId, newPlan.planId, newPlan.planVariantId);
+
+        if (res.status === 200) {
+            enqueueSnackbar("Plan cambiado con éxito", { variant: "success" });
+            setOpenChangePlanModal(false);
+        } else {
+            enqueueSnackbar(res.data, { variant: "error" });
+        }
     };
 
     // Cancel Plan Modal Functions
@@ -201,7 +168,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 open={openChangePlanModal}
                 handleClose={handleCloseChangePlanModal}
                 handlePrimaryButtonClick={handlePrimaryButtonClickChangePlanModal}
-                data={changePlanData}
+                data={props.swapPlanData}
             />
             <CancelPlanModal
                 open={openCancelPlanModal}
