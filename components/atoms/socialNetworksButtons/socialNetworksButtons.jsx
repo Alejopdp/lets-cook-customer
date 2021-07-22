@@ -13,7 +13,7 @@ import Image from "next/image";
 
 export const SocialNetworksButtons = (props) => {
     const { button, facebook, google, txt } = useStyles();
-    // const { enqueueSnackbar } = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar();
 
     const handleFacebookLogin = async () => {
         const token = await loginWithFacebookAndGetIdToken();

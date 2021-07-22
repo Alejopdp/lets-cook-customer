@@ -3,12 +3,13 @@ import firebase from "firebase";
 if (!!!firebase.apps || !firebase.apps.length) {
     firebase.initializeApp({
         apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY, // Auth / General Use
-        authDomain: "lets-cook-c282e.firebaseapp.com",
-        projectId: "lets-cook-c282e",
-        storageBucket: "lets-cook-c282e.appspot.com",
-        messagingSenderId: "804652515169",
-        appId: "1:804652515169:web:4f322cd02156c08ad48f20",
-        measurementId: "G-B0WMSRWW1P",
+        // apiKey: "AIzaSyA-ltZYFj5XA3oldGyjQ1ufxONNcdng7IA",
+        authDomain: "letscook-001.firebaseapp.com",
+        projectId: "letscook-001",
+        storageBucket: "letscook-001.appspot.com",
+        messagingSenderId: "859787193343",
+        appId: "1:859787193343:web:47f3d5d70f015f051b15ca",
+        measurementId: "G-H8MH6HPP8X",
     });
 } else {
     firebase.app(); // if already initialized, use that one
