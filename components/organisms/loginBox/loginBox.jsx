@@ -16,6 +16,7 @@ import { ForgotPassword, Register } from "../../atoms/loginHelpers/loginHelpers"
 import Divider from "../../atoms/divider/divider";
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
 import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
+import { useSnackbar } from "notistack";
 
 const LoginBox = (props) => {
     const [values, setValues] = useState({
@@ -26,6 +27,7 @@ const LoginBox = (props) => {
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const [serverError, setserverError] = useState("");
+    const { enqueueSnackbar } = useSnackbar();
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -38,7 +40,7 @@ const LoginBox = (props) => {
             saveLoginData(res.data.token, res.data.userInfo);
         } else {
             setserverError(res.data.message);
-            alert("Error al querer ingresar");
+            // alert("Error al querer ingresar");
         }
     };
 
@@ -49,7 +51,7 @@ const LoginBox = (props) => {
             saveLoginData(res.data.token, res.data.userInfo);
         } else {
             setserverError(res.data.message);
-            alert("Error al querer ingresar");
+            // enqueueSnackbar(res.data.message);
         }
     };
 

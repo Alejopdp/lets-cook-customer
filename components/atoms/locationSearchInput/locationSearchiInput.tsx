@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 const LocationSearchInput = (props: LocationSearchInputProps) => {
     const classes = useStyles();
     const [value, setValue] = React.useState(null);
@@ -51,7 +50,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
     if (typeof window !== "undefined" && !loaded.current) {
         if (!document.querySelector("#google-maps")) {
             loadScript(
-                "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjdaFuKAmhBmINwTignYPwQmzdVkld53Q&components=country:sp&strictbounds=true&libraries=places",
+                `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_KEY}&components=country:sp&strictbounds=true&libraries=places`,
                 document.querySelector("head"),
                 "google-maps"
             );
@@ -166,7 +165,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             }}
         />
     );
-}
+};
 
 LocationSearchInput.propTypes = {
     value: PropTypes.string.isRequired,
@@ -174,4 +173,4 @@ LocationSearchInput.propTypes = {
     name: PropTypes.string.isRequired,
 };
 
-export default LocationSearchInput
+export default LocationSearchInput;
