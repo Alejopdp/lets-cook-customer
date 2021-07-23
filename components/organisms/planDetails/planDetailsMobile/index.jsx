@@ -9,15 +9,20 @@ import Grid from "@material-ui/core/Grid";
 
 // Internal components
 import PlanCard from "../planCard/index";
-import ShippingAddressCard from "../ShippingAddressCard/index";
+import ShippingAddressCard from "../shippingAddressCard/index";
 import PaymentMethodCard from "../paymentMethodCard/index";
 import CalendarCard from "../calendarCard/index";
 import RecipesActualWeekCard from "../recipesActualWeekCard/index";
 import RecipesNextWeekCard from "../recipesNextWeekCard/index";
 import TextButton from "../../../atoms/textButton/textButton";
 
-
-const PlanDetailsMobile = ({ data, handleClickOpenChangePlanModal, handleClickOpenCancelPlanModal, handleClickOpenSkipPlanModal, handleClickOpenRecipeModal }) => {
+const PlanDetailsMobile = ({
+    data,
+    handleClickOpenChangePlanModal,
+    handleClickOpenCancelPlanModal,
+    handleClickOpenSkipPlanModal,
+    handleClickOpenRecipeModal,
+}) => {
     const theme = useTheme();
     return (
         <Grid container spacing={2}>
@@ -31,12 +36,19 @@ const PlanDetailsMobile = ({ data, handleClickOpenChangePlanModal, handleClickOp
                 <>
                     {data.actualWeekOrder !== null && (
                         <Grid item xs={12}>
-                            <RecipesActualWeekCard actualWeekOrder={data.actualWeekOrder} canChooseRecipes={data.canChooseRecipes} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
+                            <RecipesActualWeekCard
+                                actualWeekOrder={data.actualWeekOrder}
+                                canChooseRecipes={data.canChooseRecipes}
+                                handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                            />
                         </Grid>
                     )}
-                    {(data.nextWeekOrder !== null && data.canChooseRecipes) && (
+                    {data.nextWeekOrder !== null && data.canChooseRecipes && (
                         <Grid item xs={12}>
-                            <RecipesNextWeekCard nextWeekOrder={data.nextWeekOrder} handleClickOpenRecipeModal={handleClickOpenRecipeModal} />
+                            <RecipesNextWeekCard
+                                nextWeekOrder={data.nextWeekOrder}
+                                handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                            />
                         </Grid>
                     )}
                 </>
@@ -48,7 +60,11 @@ const PlanDetailsMobile = ({ data, handleClickOpenChangePlanModal, handleClickOp
                 <PaymentMethodCard paymentMethod={data.paymentMethod} />
             </Grid>
             <Grid item xs={12}>
-                <TextButton handleClick={handleClickOpenCancelPlanModal} btnText='cancelar plan' style={{ color: '#FC1919', marginTop: theme.spacing(2) }} />
+                <TextButton
+                    handleClick={handleClickOpenCancelPlanModal}
+                    btnText="cancelar plan"
+                    style={{ color: "#FC1919", marginTop: theme.spacing(2) }}
+                />
             </Grid>
         </Grid>
     );
