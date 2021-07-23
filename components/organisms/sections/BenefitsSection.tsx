@@ -22,7 +22,7 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                         </div>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        {(Array.isArray(props.cards) || []).map((card, index) => (
+                        {(Array.isArray(props.cards) ? props.cards : []).map((card, index) => (
                             <div key={index} className={classes.card}>
                                 <div className={classes.cardIcon}>
                                     <img src={card.image} className={classes.icon}></img>

@@ -99,6 +99,7 @@ export const PaymentForm = (props) => {
                 });
             }
             enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
+            console.log("RES: DATA: ", res.data);
             setSubscriptionId(res.data.subscriptionId);
             setFirstOrderId(res.data.firstOrderId);
             gotToNextView();
