@@ -7,18 +7,17 @@ import Link from "next/link";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-
 // Internal components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import { Layout } from "../../components/layout/index";
 import PaymentsTable from "../../components/molecules/paymentsTable/PaymentsTable";
-import PaymentDetailsModal from "../../components/molecules/paymentDetailsModal/PaymentDetailsModal";
+import PaymentDetailsModal from "../../components/molecules/paymentDetailsModal/paymentDetailsModal";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 
 const HistorialPagos = (props) => {
     const theme = useTheme();
     const [openPaymentDetailsModal, setOpenPaymentDetailsModal] = useState(false);
-    const [selectedPaymentOrderId, setSelectedPaymentOrderId] = useState('');
+    const [selectedPaymentOrderId, setSelectedPaymentOrderId] = useState("");
 
     const handleClickOpenPaymentDetailsModal = (paymentOrderId) => {
         setSelectedPaymentOrderId(paymentOrderId);
@@ -27,10 +26,9 @@ const HistorialPagos = (props) => {
 
     const handleClosePaymentDetailsModal = () => {
         setOpenPaymentDetailsModal(false);
-        setSelectedPaymentOrderId('');
+        setSelectedPaymentOrderId("");
     };
 
-    
     return (
         <>
             <Layout disableCallToActionSection>
@@ -39,7 +37,11 @@ const HistorialPagos = (props) => {
                     <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} />
                 </InnerSectionLayout>
             </Layout>
-            <PaymentDetailsModal data={selectedPaymentOrderId} open={openPaymentDetailsModal} handleClose={handleClosePaymentDetailsModal} />
+            <PaymentDetailsModal
+                data={selectedPaymentOrderId}
+                open={openPaymentDetailsModal}
+                handleClose={handleClosePaymentDetailsModal}
+            />
         </>
     );
 };
