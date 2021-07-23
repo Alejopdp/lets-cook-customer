@@ -13,7 +13,7 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
     const router = useRouter();
 
     return (
-        <Box style={{ backgroundColor: props.backgroundColor ? backgroundColor : "white", padding: `${theme.spacing(8)}px 0px` }}>
+        <Box style={{ backgroundColor: props.backgroundColor ? props.backgroundColor : "white", padding: `${theme.spacing(8)}px 0px` }}>
             <Container maxWidth="lg">
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6} style={{ alignSelf: "center" }}>
@@ -22,7 +22,7 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                         </div>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        {(props.cards || []).map((card, index) => (
+                        {(Array.isArray(props.cards) || []).map((card, index) => (
                             <div key={index} className={classes.card}>
                                 <div className={classes.cardIcon}>
                                     <img src={card.image} className={classes.icon}></img>

@@ -10,7 +10,7 @@ import SearchBar from "../../components/atoms/searchBar/searchBar";
 import FaqsSection from "../../components/organisms/faqsSection/faqsSection";
 import { Layout } from "../../components/layout/index";
 
-const preguntasFrecuentes = () => {
+const PreguntasFrecuentes = () => {
     const router = useRouter();
     const lang = langs[router.locale];
     const [searchValue, setsearchValue] = useState("");
@@ -26,4 +26,4 @@ const preguntasFrecuentes = () => {
     );
 };
 
-export default preguntasFrecuentes;
+export default PreguntasFrecuentes;

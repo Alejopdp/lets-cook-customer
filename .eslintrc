@@ -1,9 +1,9 @@
 {
-  "extends": "next",
-  "rules": {
-    "class-name": false,
-    "display-name": false,
-    "react/jsx-key": false,
-    "react/display-name": [false, { "ignoreTranspilerName": false }]
-  }
+    "extends": "next",
+    "rules": {
+        "class-name": 0,
+        "display-name": 0,
+        "react/jsx-key": 0,
+        "react/display-name": [0, { "ignoreTranspilerName": false }]
+    }
 }

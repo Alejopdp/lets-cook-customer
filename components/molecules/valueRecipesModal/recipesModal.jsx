@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
 
-import { useTheme, makeStyles, Typography, Grid, TextField, Button, DialogActions, useMediaQuery } from "@material-ui/core";
+import { useTheme, makeStyles, Typography, Grid, TextField, Button, DialogActions, useMediaQuery, Box } from "@material-ui/core";
 
 // External Components
 import Modal from "../../atoms/modal/modal";

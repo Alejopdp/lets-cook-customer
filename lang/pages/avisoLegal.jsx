@@ -7,4 +7,8 @@ export const avisoLegal = {
         title: "Legal advice",
         subtitle: "General conditions of the website's usage.",
     },
+    ca: {
+        title: "Legal advice",
+        subtitle: "General conditions of the website's usage.",
+    },
 };

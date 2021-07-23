@@ -7,4 +7,8 @@ export const preguntasFrecuentes = {
         title: "Frequently asked questions",
         subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     },
+    ca: {
+        title: "Preguntas frecuentes",
+        subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    },
 };

@@ -5,4 +5,7 @@ export const searchBar = {
     en: {
         placeholder: "Search...",
     },
+    ca: {
+        placeholder: "Search...",
+    },
 };

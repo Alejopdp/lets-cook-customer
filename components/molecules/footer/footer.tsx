@@ -12,7 +12,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import PinterestIcon from "@material-ui/icons/Pinterest";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import { Link } from "@material-ui/core";
-import { useStyles } from './styles';
+import { useStyles } from "./styles";
 
 interface ILink {
     name: string;
@@ -20,7 +20,7 @@ interface ILink {
 }
 
 interface FooterProps {
-    links?: ILink[]
+    links?: ILink[];
 }
 
 const _links: ILink[] = [
@@ -58,20 +58,20 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
         <div className={root}>
             <Grid container justify="space-between" className={footer}>
                 <Grid item xs={12} md={3} className={logoSection}>
-                    <Link href='/'>
-                        <Image src="/logo.png" width={174} height={60} />
+                    <Link href="/">
+                        <Image src="/logo.png" width={174} height={60} alt="Lets cook now" />
                     </Link>
-                    <Grid style={{ marginTop: '16px' }}>
-                        <Link href='https://www.instagram.com/letscook.now/' target="_blank" rel="noreferrer noopener">
+                    <Grid style={{ marginTop: "16px" }}>
+                        <Link href="https://www.instagram.com/letscook.now/" target="_blank" rel="noreferrer noopener">
                             <InstagramIcon style={{ margin: "8px" }} />
                         </Link>
-                        <Link href='https://www.facebook.com/Lets-cook-2399683106933532/' target="_blank" rel="noreferrer noopener">
+                        <Link href="https://www.facebook.com/Lets-cook-2399683106933532/" target="_blank" rel="noreferrer noopener">
                             <FacebookIcon style={{ margin: "8px" }} />
                         </Link>
-                        <Link href='https://www.pinterest.es/letscooknowes/' target="_blank" rel="noreferrer noopener">
+                        <Link href="https://www.pinterest.es/letscooknowes/" target="_blank" rel="noreferrer noopener">
                             <PinterestIcon style={{ margin: "8px" }} />
                         </Link>
-                        <Link href='https://www.youtube.com/channel/UCWmWuYmsvW5H2BWykUCAmZg' target="_blank" rel="noreferrer noopener">
+                        <Link href="https://www.youtube.com/channel/UCWmWuYmsvW5H2BWykUCAmZg" target="_blank" rel="noreferrer noopener">
                             <YouTubeIcon style={{ margin: "8px" }} />
                         </Link>
                     </Grid>
@@ -83,7 +83,7 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                     </Typography>
 
                     {links.map((link, index) => (
-                        <Link href={link.url} key={index} underline='none'>
+                        <Link href={link.url} key={index} underline="none">
                             <Typography variant="body1" color="textSecondary">
                                 {link.name}
                             </Typography>
@@ -95,11 +95,15 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                     <Typography variant="subtitle1" className={marg1}>
                         Soporte
                     </Typography>
-                    <Link href='mailto:info@letscooknow.es' underline='none' target="_blank" rel="noreferrer noopener">
-                        <Typography variant="body1" color='textSecondary'>info@letscooknow.es</Typography>
+                    <Link href="mailto:info@letscooknow.es" underline="none" target="_blank" rel="noreferrer noopener">
+                        <Typography variant="body1" color="textSecondary">
+                            info@letscooknow.es
+                        </Typography>
                     </Link>
-                    <Link href='https://wa.me/34686312132' underline='none' target="_blank" rel="noreferrer noopener">
-                        <Typography variant="body1" color='textSecondary'>+34 686 312 132</Typography>
+                    <Link href="https://wa.me/34686312132" underline="none" target="_blank" rel="noreferrer noopener">
+                        <Typography variant="body1" color="textSecondary">
+                            +34 686 312 132
+                        </Typography>
                     </Link>
                 </Grid>
 
@@ -107,21 +111,15 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                     <Typography variant="subtitle1" className={marg1}>
                         Medios de pago
                     </Typography>
-                    <Image src="/payment.png" width={300} height={160} />
+                    <Image src="/payment.png" width={300} height={160} alt="Pagos con tarjeta online" />
                 </Grid>
             </Grid>
 
-            <Grid
-                container
-                direction="row"
-                justify="space-between"
-                alignItems="flex-end"
-                className={footer}
-            >
-                <Typography variant="body2" style={{ fontSize: '13px' }}>
-                    Let's Cook 2021 - Todos los derechos reservados
+            <Grid container direction="row" justify="space-between" alignItems="flex-end" className={footer}>
+                <Typography variant="body2" style={{ fontSize: "13px" }}>
+                    Lets Cook 2021 - Todos los derechos reservados
                 </Typography>
-                <Image src="/enisa.png" width={50} height={100} />
+                <Image src="/enisa.png" width={50} height={100} alt="Lets cook now" />
             </Grid>
         </div>
     );

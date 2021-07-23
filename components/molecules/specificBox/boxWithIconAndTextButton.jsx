@@ -32,7 +32,7 @@ const BoxWithIconAndTextButton = (props) => {
             Icon = <Test width={50} heigth={50} />;
             break;
         case "recipe-book":
-            Icon = <ReceipeBook width={50} heigth={50} />;
+            Icon = <RecipeBook width={50} heigth={50} />;
             break;
         case "rating":
             Icon = <Rating width={50} heigth={50} />;

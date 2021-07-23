@@ -19,15 +19,15 @@ import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import { Layout } from "../../components/layout/index";
 import TextButton from "../../components/atoms/textButton/textButton";
 import PlanRecoverModal from "../../components/molecules/planRecoverModal/planRecoverModal";
-import PlanProfileCard from "./planProfileCard";
-import ProfileTitleWithButton from "./profileTitleWithButton";
-import ChooseRecipesActionBox from "./pendingActionsComponents/chooseRecipesActionBox";
-import RateRecipesActionBox from "./pendingActionsComponents/rateRecipesActionBox";
-import ReferalActionBox from "./pendingActionsComponents/referalActionBox";
+import ProfileTitleWithButton from "../../components/molecules/profileTitleWithButton";
+import ChooseRecipesActionBox from "../../components/molecules/pendingActionsComponents/chooseRecipesActionBox";
+import RateRecipesActionBox from "../../components/molecules/pendingActionsComponents/rateRecipesActionBox";
+import ReferalActionBox from "../../components/molecules/pendingActionsComponents/referalActionBox";
 import EmptyState from "../../components/molecules/emptyState/emptyState";
 import { useUserInfoStore } from "../../stores/auth";
 import { useSnackbar } from "notistack";
 import { reorderPlan } from "../../helpers/serverRequests/subscription";
+import PlanProfileCard from "../../components/molecules/planProfileCard/";
 
 // export async function getServerSideProps(context) {
 //     const customerWithPlans = "f031ca8c-647e-4d0b-8afc-28e982068fd5";

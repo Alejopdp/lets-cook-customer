@@ -25,7 +25,7 @@ const Recetas = (props) => {
 };
 export default Recetas;
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const res = await getRecipes(context.locale);
 
     return {
