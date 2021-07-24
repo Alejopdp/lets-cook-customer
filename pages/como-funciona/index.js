@@ -2,8 +2,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 const langs = require("../../lang").comoFunciona;
-import { useTheme } from '@material-ui/core';
-
+import { useTheme } from "@material-ui/core";
 
 // Internal components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";

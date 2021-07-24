@@ -1,17 +1,17 @@
 // Utils & Config
-import React from 'react'
+import React from "react";
 import { useStyles } from "./styles";
-import { TextInputProps, PasswordInputProps } from './interfaces';
+import { TextInputProps, PasswordInputProps } from "./interfaces";
 
 // External components
-import IconButton from '@material-ui/core/IconButton';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Typography from '@material-ui/core/Typography';
+import IconButton from "@material-ui/core/IconButton";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControl from "@material-ui/core/FormControl";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Typography from "@material-ui/core/Typography";
 
 export const TextInput = (props: TextInputProps) => {
     const { textField, border } = useStyles();
@@ -26,15 +26,14 @@ export const TextInput = (props: TextInputProps) => {
                 placeholder={props.placeholder}
                 onChange={props.onChange}
                 labelWidth={props.labelWidth || 210}
-                inputProps={{ ...props.inputProps }}
+                inputProps={{ ...props.inputsProps }}
             />
         </FormControl>
-    )
+    );
 };
 
 export const PasswordInput = (props: PasswordInputProps) => {
-
-    const { textField, border, mt1 } = useStyles();
+    const { textField, border } = useStyles();
 
     const [values, setValues] = React.useState({
         showPassword: false,
@@ -49,27 +48,20 @@ export const PasswordInput = (props: PasswordInputProps) => {
             <InputLabel>{props.label}</InputLabel>
             <OutlinedInput
                 className={border}
-                type={values.showPassword ? 'text' : 'password'}
+                type={values.showPassword ? "text" : "password"}
                 name={props.name}
                 value={props.value}
                 onChange={props.onChange}
                 endAdornment={
                     <InputAdornment position="end">
-                        <IconButton
-                            onClick={handleClickShowPassword}
-                            edge="end"
-                        >
+                        <IconButton onClick={handleClickShowPassword} edge="end">
                             {values.showPassword ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                     </InputAdornment>
                 }
                 labelWidth={props.labelWidth || 160}
             />
-            {props.helperText && (
-                <Typography variant='caption' className={mt1}>
-                    {props.helperText}
-                </Typography>
-            )}
+            {props.helperText && <Typography variant="caption">{props.helperText}</Typography>}
         </FormControl>
-    )
+    );
 };

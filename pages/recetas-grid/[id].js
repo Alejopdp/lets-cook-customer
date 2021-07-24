@@ -7,14 +7,14 @@ import { Layout } from "../../components/layout/index";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 import { getRecipesByCustomer } from "../../helpers/serverRequests/user-recipes";
 
-export async function getStaticPaths() {
-    return {
-        paths: [{ params: { id: "test" } }],
-        fallback: false,
-    };
-}
+// export async function getStaticPaths() {
+//     return {
+//         paths: [{ params: { id: "test" } }],
+//         fallback: false,
+//     };
+// }
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
     const test = context.params.id;
     const res = await getRecipesByCustomer(test, context.locale);
 

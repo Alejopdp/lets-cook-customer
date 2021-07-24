@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 
 // Internal components
 import PlanCard from "../planCard/index";
-import ShippingAddressCard from "../ShippingAddressCard/index";
+import ShippingAddressCard from "../shippingAddressCard/index";
 import PaymentMethodCard from "../paymentMethodCard/index";
 import CalendarCard from "../calendarCard/index";
 import RecipesActualWeekCard from "../recipesActualWeekCard/index";
