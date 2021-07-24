@@ -4,7 +4,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Parser from "html-react-parser";
 import { dateFromISO8601 } from "../../../helpers/utils/date";
 import { useRouter } from "next/router";
-// asd
+
 // External components
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
