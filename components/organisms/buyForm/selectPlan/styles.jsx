@@ -1,16 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
-    root: {
-        display: "flex",
-        maxWidth: "100vw",
-        flexDirection: "row",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        overflow: "hidden",
-        overflowX: "auto",
-        padding: theme.spacing(4),
-    },
     smUpHide: {
         display: "flex",
         [theme.breakpoints.down("sm")]: {
@@ -25,13 +15,16 @@ export const useStyles = makeStyles((theme) => ({
     },
     recipeSection: {
         backgroundColor: theme.palette.common.white,
-        marginTop: theme.spacing(3),
-        paddingTop: theme.spacing(16),
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8),
     },
-    faqsTitle: {
-        textAlign: "center",
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
+    faqsSection: {
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8),
+    },
+    reviewsSection: {
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8),    
     },
     footer: {
         marginTop: theme.spacing(5),
@@ -44,12 +37,9 @@ export const useStyles = makeStyles((theme) => ({
         paddingRight: theme.spacing(2),
     },
     divider: {
-        height:'100%',
-        width:1,
-        margin:'auto',
+        height: '100%',
+        width: 1,
+        margin: 'auto',
         backgroundImage: "url(\"data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='transparent' stroke='%23c7c7c7' stroke-width='1' stroke-dasharray='10' stroke-dashoffset='96' stroke-linecap='butt'/%3e%3c/svg%3e\")"
     },
-    separatorOffset: {
-        height: theme.spacing(8)
-    }
 }));

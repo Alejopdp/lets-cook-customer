@@ -1,5 +1,5 @@
-export interface RecipeCardProps  {
-    style: object,
+export interface RecipeCardProps {
+    style?: object,
     img: string,
     imgTags: string[],
     timeTag: string,

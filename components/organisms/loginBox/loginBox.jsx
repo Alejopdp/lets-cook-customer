@@ -17,6 +17,9 @@ import Divider from "../../atoms/divider/divider";
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
 import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
 import { useSnackbar } from "notistack";
+import { Grid, useTheme } from "@material-ui/core";
+import { RoundedButton } from "@atoms";
+
 
 const LoginBox = (props) => {
     const [values, setValues] = useState({
@@ -28,7 +31,7 @@ const LoginBox = (props) => {
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const [serverError, setserverError] = useState("");
     const { enqueueSnackbar } = useSnackbar();
-
+    const theme = useTheme()
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
@@ -76,11 +79,19 @@ const LoginBox = (props) => {
         <FormPaper title={lang.title}>
             <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} />
             <Divider />
-            <TextInput label={lang.emailInput} name="email" value={values.email} onChange={handleChange("email")} />
-            <PasswordInput label={lang.passwordInput} name="password" value={values.password} onChange={handleChange("password")} />
-            <ForgotPassword text={lang.forgotPassword} />
-            <CustomButton text={lang.buttonText} onClick={handleSubmit} disabled={!isEmail(values.email) || isEmpty(values.password)} />
-            <Register text={lang.register.text} boldText={lang.register.boldText} redirectTo="/registarme" />
+            <Grid item xs={12}>
+                <TextInput label={lang.emailInput} name="email" value={values.email} onChange={handleChange("email")} />
+            </Grid>
+            <Grid item xs={12}>
+                <PasswordInput label={lang.passwordInput} name="password" value={values.password} onChange={handleChange("password")} />
+            </Grid>
+            <Grid item xs={12}>
+                <ForgotPassword text={lang.forgotPassword} />
+            </Grid>
+            <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>
+                <RoundedButton disabled={!isEmail(values.email) || isEmpty(values.password)} label={lang.buttonText} onClick={handleSubmit} style={{ width: '100%' }} />
+            </Grid>
+            <Register text={lang.register.text} boldText={lang.register.boldText} redirectTo={handleRedirectToSignUp} />
         </FormPaper>
     );
 };

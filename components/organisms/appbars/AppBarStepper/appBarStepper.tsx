@@ -46,7 +46,7 @@ export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
             <Toolbar>
                 <div className={classes.logo}>
                     <a href="/">
-                        <Image src="/logo.png" width={131} height={37} />
+                        <Image src="/logo.png" width={115} height={40} />
                     </a>
                 </div>
                 <StepperBuy smDowmHide steps={steps} />
