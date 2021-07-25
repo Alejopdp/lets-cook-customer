@@ -13,11 +13,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     card: {
         display: "flex",
-        height: 400,
-        width: 260,
+        height: 430,
         boxSizing: "border-box",
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
         textAlign: "center",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -30,28 +27,42 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: "rgba(0,0,0,0.5)",
         boxSizing: "border-box",
         flexDirection: "column",
-        // alignItems: "center",
-        // justifyItems: "center",
         textAlign: "left",
         color: theme.palette.primary.contrastText,
         borderRadius: 8,
-        padding: theme.spacing(1),
+        padding: '32px 24px 24px 24px',
+    },
+    overlayWhite: {
+        display: "flex",
+        flex: 1,
+        backgroundColor: "white",
+        boxSizing: "border-box",
+        flexDirection: "column",
+        textAlign: "left",
+        color: theme.palette.text.secondary,
+        borderRadius: 8,
+        padding: '32px 24px 24px 24px',
+        boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
     },
     cardContent: {
         display: "flex",
         flex: 1,
         flexDirection: "column",
-        padding: theme.spacing(2),
-        paddingTop: theme.spacing(4),
         textAlign: "left",
     },
     cardAction: {
-        padding: theme.spacing(2),
         width: "100%",
         marginTop: "auto",
     },
-    img: {},
-    paddingCardTitle: {},
-    title: {},
-    content: {},
+}));
+
+
+export const useStylesVariantContent = makeStyles((theme) => ({
+    formControlRadio: {
+        '& span.MuiFormControlLabel-label': {
+            fontSize: '16px'
+        }
+    }
 }));

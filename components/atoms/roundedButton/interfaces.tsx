@@ -10,4 +10,5 @@ export interface RoundedButtonProps {
     props?: any;
     onClick?: () => void;
     disabled?: boolean;
+    textStyle?: object
 }

@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useBuyFlow, useFilterDrawer } from "@stores";
 
 // External components
-import { Container, Grid, Chip, Icon } from "@material-ui/core";
+import { Container, Grid, Chip, Icon, useTheme } from "@material-ui/core";
 import { HighlightOff } from "@material-ui/icons";
 import { FilterIcon } from "@atoms";
 
@@ -19,6 +19,7 @@ interface RecipeChoiseStepProps {
 }
 
 export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
+    const theme = useTheme();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
     const { recipes, firstOrderId, subscriptionId } = useBuyFlow(({ form }) => ({
         recipes: form.recipes,
@@ -55,27 +56,27 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
 
     return (
         <Container maxWidth="lg">
-            <Grid container spacing={1} style={{ marginBottom: 150 }}>
-                <Grid item container justify="center">
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
                     <TitleBuyFlow
                         title="El pago ha sido exitoso. ¡Muchas gracias por tu compra!"
                         subtitle="Elige las 3 recetas que recibirás el martes 18"
                     />
                 </Grid>
-                <Grid item container direction="column" spacing={2}>
-                    <Grid item xs={3}>
-                        <RoundedButton
-                            variant="outline"
-                            label="Filtrar recetas"
-                            style={{ backgroundColor: "white" }}
-                            onClick={() => {
-                                setDrawerOpen(!drawerIsOpen);
-                            }}
-                        >
-                            <Icon component={FilterIcon} />
-                        </RoundedButton>
-                    </Grid>
-                    <Grid item container spacing={2}>
+                <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                    <Grid container spacing={2} alignItems='center'>
+                        <Grid item>
+                            <RoundedButton
+                                variant="outline"
+                                label="Filtrar recetas"
+                                style={{ backgroundColor: "white", padding:'8px'}}
+                                onClick={() => {
+                                    setDrawerOpen(!drawerIsOpen);
+                                }}
+                            >
+                                <Icon fontSize='small' component={FilterIcon} />
+                            </RoundedButton>
+                        </Grid>
                         {filters.map((filter, index) => (
                             <Grid key={index} item>
                                 <Chip
@@ -90,7 +91,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                         ))}
                     </Grid>
                 </Grid>
-                <Grid item>
+                <Grid item xs={12}>
                     <RecipesGrid recipesSelection={true} recipes={props.recipes} />
                 </Grid>
             </Grid>

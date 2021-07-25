@@ -7,6 +7,7 @@ import "react-multi-carousel/lib/styles.css";
 import AdditionalPlanCard from "components/molecules/additionalPlanCard/additionalPlanCard";
 import { AdditionalPlansGridProps } from "./interface";
 import { useStyles } from "./styles";
+import { GoogleReviewBox } from "@molecules";
 
 // External components
 
@@ -23,7 +24,7 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                 max: 3000,
                 min: 1280,
             },
-            items: 5,
+            items: 4,
             partialVisibilityGutter: 40,
         },
         desktop: {
@@ -55,11 +56,12 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
     return (
         // <div style={{ paddingLeft: theme.spacing(2) }}>
         <Carousel
+            style={{ justifyContent: 'center' }}
             additionalTransfrom={0}
             arrows={isSmDown ? false : true}
             autoPlaySpeed={3000}
             centerMode={false}
-            className=""
+            className={classes.reactListCarousel}
             containerClass="container"
             dotListClass=""
             draggable

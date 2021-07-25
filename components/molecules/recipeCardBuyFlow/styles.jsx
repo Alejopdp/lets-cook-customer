@@ -4,10 +4,13 @@ const useStyles = makeStyles((theme) => ({
     root: {
         borderRadius: "8px",
         width: "100%",
-        height: 360,
+        // height: 360,
+        boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
     },
     cardCnt: {
-        height: "200px",
+        height: "150px",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -25,9 +28,6 @@ const useStyles = makeStyles((theme) => ({
     },
     marg: {
         marginRight: theme.spacing(1),
-    },
-    titleText: {
-        marginTop: theme.spacing(2),
     },
     visibilityBtn: {
         marginLeft: "-16px",

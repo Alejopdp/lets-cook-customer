@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useStyles } from "./styles";
 
 // External components
-import { Typography } from "@material-ui/core";
+import { Typography, Box, useTheme } from "@material-ui/core";
 
 // Internal components
 import { RoundedButton } from "@atoms";
@@ -23,6 +23,7 @@ enum CardView {
 
 const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
     const classes = useStyles();
+    const theme = useTheme();
     const [cardView, setcardView] = useState(CardView.FIRST_CONTENT);
     const [selectedVariant, setselectedVariant] = useState<PlanVariant>({
         attributes: [],
@@ -38,7 +39,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
         setselectedPlans,
     }));
 
-    const { actualView, actualButton } = useMemo(() => {
+    const { actualView, actualButton, hasBgImg } = useMemo(() => {
         switch (cardView) {
             case CardView.FIRST_CONTENT:
                 return {
@@ -46,16 +47,19 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                         <FirstContent
                             name={props.additionalPlan.name}
                             description={props.additionalPlan.description}
-                            minPrice={props.additionalPlan.description}
+                            // minPrice no lo recibo todavía del endpoint
+                            minPrice=''
                         />
                     ),
                     actualButton: (
                         <RoundedButton
                             label="VER OPCIONES"
-                            style={{ width: "100%" }}
+                            style={{ width: "100%", backgroundColor: 'white', padding: theme.spacing(1) }}
+                            textStyle={{ color: theme.palette.primary.main }}
                             onClick={() => setcardView(CardView.SELECT_ATTRIBUTE)}
                         />
                     ),
+                    hasBgImg: true
                 };
             case CardView.SELECT_ATTRIBUTE:
                 return {
@@ -73,20 +77,27 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                         <RoundedButton
                             label="SELECCIONAR"
                             disabled={!!!selectedFrequency || !!!selectedVariant.id}
-                            style={{ width: "100%" }}
+                            style={{ width: "100%", padding: theme.spacing(1) }}
                             onClick={() => {
                                 addPlanToCart();
                                 setcardView(CardView.ATTRIBUTE_SELECTED);
                             }}
                         />
                     ),
+                    hasBgImg: false
                 };
             case CardView.ATTRIBUTE_SELECTED:
                 return {
                     actualView: <VariantSelectedContent selectedFrequency={selectedFrequency} variant={selectedVariant} />,
                     actualButton: (
-                        <RoundedButton label="REMOVER" style={{ width: "100%" }} onClick={() => setcardView(CardView.FIRST_CONTENT)} />
+                        <RoundedButton
+                            label="REMOVER"
+                            style={{ width: "100%", backgroundColor: 'white', border: `1px solid ${theme.palette.secondary.main}`, padding: theme.spacing(1) }}
+                            textStyle={{ color: theme.palette.secondary.main }}
+                            onClick={() => setcardView(CardView.FIRST_CONTENT)}
+                        />
                     ),
+                    hasBgImg: false
                 };
             default:
                 return {
@@ -100,10 +111,11 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                     actualButton: (
                         <RoundedButton
                             label="VER OPCIONES"
-                            style={{ width: "100%" }}
+                            style={{ width: "100%", padding: theme.spacing(1) }}
                             onClick={() => setcardView(CardView.SELECT_ATTRIBUTE)}
                         />
                     ),
+                    hasBgImg: true
                 };
         }
     }, [cardView, selectedVariant, selectedFrequency]);
@@ -117,16 +129,21 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
         });
     };
 
+    
     return (
-        <div className={classes.card} style={{ backgroundImage: `url(${classes.img})` }}>
-            <div className={classes.overlay}>
-                <Typography className={classes.paddingCardTitle} variant="subtitle1" color="initial" style={{ marginBottom: 24 }}>
-                    {props.additionalPlan.name}
-                </Typography>
-                {actualView}
-                <div className={classes.cardAction}>{actualButton}</div>
+        <Box style={{ marginRight: '24px' }}>
+            <div className={classes.card} style={{ backgroundImage: `url(${props.additionalPlan.imageUrl})` }}>
+                <div className={hasBgImg ? classes.overlay : classes.overlayWhite}>
+                    <Typography variant="subtitle1" color="initial" style={{ marginBottom: 8 }}>
+                        {props.additionalPlan.name}
+                    </Typography>
+                    {actualView}
+                    <div className={classes.cardAction}>
+                        {actualButton}
+                    </div>
+                </div>
             </div>
-        </div>
+        </Box>
     );
 };
 

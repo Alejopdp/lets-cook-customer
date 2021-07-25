@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     loginButton: {
         minWidth: 225,
-        padding: `${theme.spacing(1.5)}px ${theme.spacing(6)}px`,
+        padding: `${theme.spacing(1.5)}px ${theme.spacing(3)}px`,
         borderRadius: 8,
         margin: `0 auto`,
     },

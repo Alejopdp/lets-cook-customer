@@ -57,7 +57,7 @@ export const NavbarContent = (props: ToggleOpeningDrawerProps) => {
                 </IconButton>
                 <div className={classes.logo}>
                     <Link href="/">
-                        <Image src="/logo.png" width={135} height={40} className={classes.cursorPointer} />
+                        <Image src="/logo.png" width={115} height={40} className={classes.cursorPointer} />
                     </Link>
                 </div>
                 <UserBox />

@@ -1,6 +1,8 @@
 // Utils & config
 import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import { useStylesVariantContent } from './styles';
+import { useTheme } from "@material-ui/core";
 
 // External components
 import Box from "@material-ui/core/Box";
@@ -11,6 +13,8 @@ import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@m
 // Internal components
 
 const SelectVariantContent = (props: SelectVariantContentProps) => {
+    const theme = useTheme();
+    const classes = useStylesVariantContent();
     const [selectedAttributes, setselectedAttributes] = useState<{ [key: string]: string }>({});
     const [selectedFrequency, setselectedFrequency] = useState("");
 
@@ -63,9 +67,10 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                 ))}
             </Box>
 
-            <Typography color="primary" style={{ fontSize: 16, fontWeight: "bold", marginBottom: 16 }}>
-                Valor: {actualValue} E
+            <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold", marginBottom: theme.spacing(3) }}>
+                Valor: {actualValue} €
             </Typography>
+            <Typography variant='body2' style={{fontSize:'14px', fontWeight: 600, marginBottom: theme.spacing(1)}}>Frecuencia:</Typography>
             <FormControl component="fieldset" style={{ width: "100%" }}>
                 <RadioGroup
                     aria-label="frequency"
@@ -73,17 +78,16 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                     value={props.selectedFrequency}
                     onChange={(e, value) => props.setselectedFrequency(value)}
                 >
-                    {props.frequencies ? (
+                    {props.frequencies && (
                         props.frequencies.map((freq) => (
                             <FormControlLabel
+                                className={classes.formControlRadio}
                                 checked={freq === props.selectedFrequency}
                                 value={freq}
-                                control={<Radio checked={freq === props.selectedFrequency} />}
+                                control={<Radio size='small' checked={freq === props.selectedFrequency} />}
                                 label={freq}
                             />
                         ))
-                    ) : (
-                        <></>
                     )}
                 </RadioGroup>
             </FormControl>
