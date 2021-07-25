@@ -69,6 +69,7 @@ const BoxWithIconAndTextButton = (props) => {
                     <div>{props.children}</div>
                     <TextButton
                         btnText={props.btnText}
+                        handleClick={props.handleClick}
                         style={{ marginTop: theme.spacing(3), color: props.noColor ? null : theme.palette.secondary.main }}
                     />
                 </div>
@@ -80,6 +81,7 @@ const BoxWithIconAndTextButton = (props) => {
 BoxWithIconAndTextButton.propTypes = {
     title: PropTypes.string.isRequired,
     btnText: PropTypes.string.isRequired,
+    handleClick: PropTypes.func,
 };
 
 export default BoxWithIconAndTextButton;

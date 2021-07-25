@@ -18,6 +18,11 @@ import MoveAbroad from "../cancellationReasonComponents/moveAbroad";
 import OtherReason from "../cancellationReasonComponents/otherReason";
 import PriceTooHigh from "../cancellationReasonComponents/priceTooHigh";
 import SpecialDiet from "../cancellationReasonComponents/specialDiet";
+import { skippOrdersFromCancellationModal } from "helpers/serverRequests/order";
+import { useSnackbar } from "notistack";
+import { CancelPlanModalProps } from "./interface";
+import { useRouter } from "next/router";
+import { updateRestriction } from "helpers/serverRequests/subscription";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -25,25 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CancelPlanModal = (props) => {
-    // Data for CantGetKitsNextWeek
-    const skipWeekData = {
-        weeks: [
-            { weekId: "1", text: "1 al 7 de marzo", skipped: true },
-            { weekId: "2", text: "8 al 15 de marzo", skipped: true },
-            { weekId: "3", text: "16 al 23 de marzo", skipped: false },
-            { weekId: "4", text: "24 al 31 de marzo", skipped: false },
-            { weekId: "5", text: "1 al 7 de abril", skipped: false },
-            { weekId: "6", text: "8 al 15 de abril", skipped: false },
-            { weekId: "7", text: "16 al 23 de abril", skipped: false },
-            { weekId: "8", text: "24 al 1 de mayo", skipped: false },
-            { weekId: "9", text: "2 al 8 de mayo", skipped: false },
-            { weekId: "10", text: "9 al 16 de mayo", skipped: false },
-            { weekId: "11", text: "17 al 24 de mayo", skipped: false },
-            { weekId: "12", text: "25 al 2 de junio", skipped: false },
-        ],
-    };
-
+const CancelPlanModal = (props: CancelPlanModalProps) => {
     // Data for PriceTooHigh
 
     const plan = {
@@ -64,23 +51,20 @@ const CancelPlanModal = (props) => {
 
     const classes = useStyles();
     const theme = useTheme();
-
+    const router = useRouter();
+    const { enqueueSnackbar } = useSnackbar();
     const [reasonSelected, setReason] = useState();
     const [cancellationComments, setCancellationComments] = useState("");
     const [weeksToSkip, setWeeksToSkip] = useState([]);
-    const [specialDiet, setSpecialDiet] = useState({ value: "", comments: "" });
+    const [specialDiet, setSpecialDiet] = useState({ id: "", value: "", comments: "" });
     // PriceTooHigh States
     const [planVariantIdSelected, setPlanVariantIdSelected] = useState(plan.planVariantId);
-
-    // useEffect(() => {
-    //     setReason("");
-    // }, [props.open]);
 
     const handleChangeReason = (event) => {
         let newReason = props.data.reasons.filter((reason) => reason.value === event.target.value)[0];
         setCancellationComments("");
         setWeeksToSkip([]);
-        setSpecialDiet({ value: "", comments: "" });
+        setSpecialDiet({ value: "", comments: "", id: "" });
         setPlanVariantIdSelected(plan.planVariantId);
         setReason(newReason);
     };
@@ -96,14 +80,16 @@ const CancelPlanModal = (props) => {
         props.handleClose();
     };
 
-    const handleRecoverCustomerClick = () => {
-        alert("cliente recuperado!!!");
-    };
-
     // Skip Weeks Functions
     // Tengo un bug dentro de CantGetKitsNextWeeks, no me marca el checked de la semana elegida.
-    const handleClickRecoverSkipWeeks = () => {
-        alert(JSON.stringify(weeksToSkip));
+    const handleClickRecoverSkipWeeks = async () => {
+        const res = await skippOrdersFromCancellationModal(weeksToSkip);
+
+        if (res.status === 200) {
+            enqueueSnackbar("Semanas salteadas correctamente", { variant: "success" });
+        } else {
+            enqueueSnackbar("Error al saltear las semanas", { variant: "error" });
+        }
         props.handleClose();
     };
 
@@ -113,9 +99,15 @@ const CancelPlanModal = (props) => {
 
     // Special Diet Functions
 
-    const handleClickRecoverSpecialDiet = () => {
-        alert(JSON.stringify(specialDiet));
-        props.handleClose();
+    const handleClickRecoverSpecialDiet = async () => {
+        const res = await updateRestriction(props.subscriptionId, specialDiet.value);
+
+        if (res.status === 200) {
+            enqueueSnackbar("Dieta actualizada correctamente", { variant: "success" });
+            props.handleClose();
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "success" });
+        }
     };
 
     const handleChangeSelectSpecialDiet = (event) => {
@@ -162,7 +154,7 @@ const CancelPlanModal = (props) => {
                 break;
             case "cant_get_kits_next_week":
                 cancellationReasonComponent = (
-                    <CantGetKitsNextWeek handleChange={handleChangeSkipWeeks} weeks={skipWeekData.weeks} value={weeksToSkip} />
+                    <CantGetKitsNextWeek handleChange={handleChangeSkipWeeks} weeks={props.orders} value={weeksToSkip} />
                 );
                 handleSecondaryBtnClick = handleClickCancel;
                 secondaryBtnColor = "#FC1919";
@@ -178,6 +170,7 @@ const CancelPlanModal = (props) => {
                         valueSelect={specialDiet.value}
                         handleChangeComments={handleChangeCommentsSpecialDiet}
                         valueComments={specialDiet.comments}
+                        restrictions={props.restrictions}
                     />
                 );
                 handleSecondaryBtnClick = handleClickCancel;

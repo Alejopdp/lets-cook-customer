@@ -1,11 +1,15 @@
 // Utils & Config
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "@material-ui/core/styles";
 import Link from "next/link";
 
 // External components
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import { useUserInfoStore } from "../../stores/auth";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
+import { getCustomerPaymentOrders, getPaymentOrderById } from "../../helpers/serverRequests/paymentOrder";
 
 // Internal components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
@@ -16,17 +20,41 @@ import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTi
 
 const HistorialPagos = (props) => {
     const theme = useTheme();
+    const router = useRouter();
+    const { enqueueSnackbar } = useSnackbar();
     const [openPaymentDetailsModal, setOpenPaymentDetailsModal] = useState(false);
-    const [selectedPaymentOrderId, setSelectedPaymentOrderId] = useState("");
+    const [selectedPaymentOrder, setSelectedPaymentOrder] = useState({});
+    const [orders, setorders] = useState([]);
+    const userInfo = useUserInfoStore((state) => state.userInfo);
 
-    const handleClickOpenPaymentDetailsModal = (paymentOrderId) => {
-        setSelectedPaymentOrderId(paymentOrderId);
-        setOpenPaymentDetailsModal(true);
+    useEffect(() => {
+        const getCustomerOrders = async () => {
+            const res = await getCustomerPaymentOrders(userInfo.id, router.locale);
+
+            if (res.status === 200) {
+                setorders(res.data.paymentOrders);
+            } else {
+                enqueueSnackbar(res.data.message, { variant: "error" });
+            }
+        };
+
+        getCustomerOrders();
+    }, []);
+
+    const handleClickOpenPaymentDetailsModal = async (paymentOrderId) => {
+        const res = await getPaymentOrderById(paymentOrderId, router.locale);
+
+        if (res.status === 200) {
+            setSelectedPaymentOrder(res.data);
+            setOpenPaymentDetailsModal(true);
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
     };
 
     const handleClosePaymentDetailsModal = () => {
         setOpenPaymentDetailsModal(false);
-        setSelectedPaymentOrderId("");
+        setSelectedPaymentOrder({});
     };
 
     return (
@@ -34,14 +62,10 @@ const HistorialPagos = (props) => {
             <Layout disableCallToActionSection>
                 <InnerSectionLayout containerMaxWidth="lg">
                     <BackButtonTitle url="/perfil" title="Historial de pagos" />
-                    <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} />
+                    <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} paymentOrders={orders} />
                 </InnerSectionLayout>
             </Layout>
-            <PaymentDetailsModal
-                data={selectedPaymentOrderId}
-                open={openPaymentDetailsModal}
-                handleClose={handleClosePaymentDetailsModal}
-            />
+            <PaymentDetailsModal data={selectedPaymentOrder} open={openPaymentDetailsModal} handleClose={handleClosePaymentDetailsModal} />
         </>
     );
 };

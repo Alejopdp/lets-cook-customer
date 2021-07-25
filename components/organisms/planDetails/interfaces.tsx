@@ -1,3 +1,9 @@
+export interface Restriction {
+    id: string;
+    value: string;
+    text: string;
+}
+
 export interface SkippableOrder {
     id: string;
     weekLabel: string;
@@ -55,6 +61,7 @@ export interface PlanDetailasSubscription {
 export interface PlanDetailsProps {
     subscription: PlanDetailasSubscription;
     swapPlanData: { plans: any; variants: any };
+    restrictions: Restriction[];
     handleClickOpenChangePlanModal: () => void;
     handleClickOpenCancelPlanModal: () => void;
     handleClickOpenSkipPlanModal: () => void;

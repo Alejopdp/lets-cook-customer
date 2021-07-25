@@ -70,19 +70,32 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         }
     }, []);
 
-    const steps = [
-        <SelectPlanStep
-            initialPlanSettings={props.planUrlParams}
-            plans={props.plans}
-            variant={props.variant}
-            faqs={props.faqs}
-            recipes={props.recipes}
-        />,
-        <RegisterUserStep />,
-        <CheckoutStep />,
-        <RecipeChoiseStep recipes={props.recipes} />,
-        <CrossSellingStep />,
-    ];
+    const steps = isAuthenticated
+        ? [
+              <SelectPlanStep
+                  initialPlanSettings={props.planUrlParams}
+                  plans={props.plans}
+                  variant={props.variant}
+                  faqs={props.faqs}
+                  recipes={props.recipes}
+              />,
+              <CheckoutStep />,
+              <RecipeChoiseStep recipes={props.recipes} />,
+              <CrossSellingStep />,
+          ]
+        : [
+              <SelectPlanStep
+                  initialPlanSettings={props.planUrlParams}
+                  plans={props.plans}
+                  variant={props.variant}
+                  faqs={props.faqs}
+                  recipes={props.recipes}
+              />,
+              <RegisterUserStep />,
+              <CheckoutStep />,
+              <RecipeChoiseStep recipes={props.recipes} />,
+              <CrossSellingStep />,
+          ];
 
     return <BuyFlowLayout>{steps[step]}</BuyFlowLayout>;
 });

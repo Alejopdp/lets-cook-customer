@@ -3,6 +3,7 @@ import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { getSubscriptionById } from "../../helpers/serverRequests/userProfile";
 import { getDataForSwappingAPlan } from "../../helpers/serverRequests/plans";
+import { getRestrictions } from "../../helpers/serverRequests/restriction";
 // import { useRouter } from "next/router";
 // const langs = require("../../lang").comoFunciona;
 
@@ -19,6 +20,7 @@ export async function getServerSideProps(context) {
     const locale = context.locale;
     const res = await getSubscriptionById(subscriptionId, locale);
     const swapPlanDataRes = await getDataForSwappingAPlan(subscriptionId, locale);
+    const restrictionsRes = await getRestrictions(locale);
 
     return {
         props: {
@@ -26,11 +28,12 @@ export async function getServerSideProps(context) {
             error: res.status !== 200 || swapPlanDataRes.status !== 200 ? "ERROR" : "",
             subscriptionId: subscriptionId,
             swapPlanData: swapPlanDataRes.data || null,
+            restrictions: restrictionsRes.data || null,
         },
     };
 }
 
-const PlanDetailsPage = ({ subscription, error, subscriptionId, swapPlanData }) => {
+const PlanDetailsPage = ({ subscription, error, subscriptionId, swapPlanData, restrictions }) => {
     const theme = useTheme();
     // const lang = langs[router.locale];
 
@@ -38,7 +41,12 @@ const PlanDetailsPage = ({ subscription, error, subscriptionId, swapPlanData }) 
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <BackButtonTitle url="/perfil" title="Detalle del plan" />
-                <PlanDetails subscription={subscription} subscriptionId={subscriptionId} swapPlanData={swapPlanData} />
+                <PlanDetails
+                    subscription={subscription}
+                    subscriptionId={subscriptionId}
+                    swapPlanData={swapPlanData}
+                    restrictions={restrictions}
+                />
             </InnerSectionLayout>
         </Layout>
     );
