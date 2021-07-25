@@ -51,7 +51,7 @@ const AccordionDetails = withStyles((theme) => ({
 }))(MuiAccordionDetails);
 
 export default function CustomizedAccordions(props: CouponInputAccordionProps) {
-    const [expanded, setExpanded] = React.useState("panel1");
+    const [expanded, setExpanded] = React.useState("");
     const [couponValue, setcouponValue] = React.useState("");
     const theme = useTheme();
 
@@ -66,7 +66,7 @@ export default function CustomizedAccordions(props: CouponInputAccordionProps) {
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Box display="flex" alignItems="center">
                             <ConfirmationNumber style={{ marginRight: theme.spacing(1) }} />
-                            <Typography style={{ fontWeight: 600 }}>¿Tienes un cupón de descuento?</Typography>
+                            <Typography variant='body1' style={{ fontWeight: 600, fontSize:'16px' }}>¿Tienes un cupón de descuento?</Typography>
                         </Box>
                         {/* <KeyboardArrowDown /> */}
                     </Box>

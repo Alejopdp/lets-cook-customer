@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme) => ({
         flex: 1,
         justifyContent: "center",
         paddingInline: theme.spacing(2),
-        marginBottom: theme.spacing(1),
     },
     visited: {
         color: theme.palette.primary.main,

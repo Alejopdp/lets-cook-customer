@@ -4,7 +4,6 @@ export const useStyles = makeStyles((theme) => ({
     logo: {
         flex: 1,
         textAlign: "center",
-        cursor: "pointer",
         [theme.breakpoints.up("sm")]: {
             display: "contents",
             textAlign: "left",

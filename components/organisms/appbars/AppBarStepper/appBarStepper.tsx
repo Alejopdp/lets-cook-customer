@@ -45,9 +45,7 @@ export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
         <AppBar position="fixed" color="default" className={classes.navbarClass}>
             <Toolbar>
                 <div className={classes.logo}>
-                    <a href="/">
                         <Image src="/logo.png" width={115} height={40} />
-                    </a>
                 </div>
                 <StepperBuy smDowmHide steps={steps} />
                 <LangSelector />
