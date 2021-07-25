@@ -7,26 +7,33 @@ const langs = require("../../../lang").recoverPasswordMail;
 
 // Internal components
 import { TextInput } from "../../atoms/inputs/inputs";
-import CustomButton from "../../atoms/customButton/customButton";
+import { RoundedButton } from "@atoms";
+import { useTheme, Grid } from '@material-ui/core';
+
 
 const RecoverPasswordMail = (props) => {
     const router = useRouter();
+    const theme = useTheme();
     const lang = langs[router.locale];
 
     return (
         <>
-            <TextInput
-                label={lang.emailInput}
-                name="email"
-                value={props.value}
-                onChange={props.handleChange}
-            />
-
-            <CustomButton
-                text={lang.buttonText}
-                onClick={() => props.handleSubmit(1)}
-                disabled={!isEmail(props.value)}
-            />
+            <Grid item xs={12}>
+                <TextInput
+                    label={lang.emailInput}
+                    name="email"
+                    value={props.value}
+                    onChange={props.handleChange}
+                />
+            </Grid>
+            <Grid item xs={12}>
+                <RoundedButton
+                    label={lang.buttonText}
+                    onClick={() => props.handleSubmit(1)}
+                    disabled={!isEmail(props.value)}
+                    style={{ width: '100%' }}
+                />
+            </Grid>
         </>
     );
 };

@@ -8,15 +8,15 @@ import { acceptLegalTerms as langs } from "@lang";
 // External components
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "@material-ui/core";
+import { Link, Grid } from "@material-ui/core";
 
 // Icons & Images
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export const ForgotPassword = (props: ForgotPasswordProps) => {
     return (
-        <Link href="/recuperar-contrasena" style={{textDecoration: 'none'}}>
-            <Typography variant="subtitle2" color="primary" style={{fontSize: '14px', fontWeight: '600'}}>
+        <Link href="/recuperar-contrasena" style={{ textDecoration: 'none' }}>
+            <Typography variant="subtitle2" color="primary" style={{ fontSize: '14px', fontWeight: '600' }}>
                 {props.text}
             </Typography>
         </Link>
@@ -28,7 +28,7 @@ export const Register = (props: RegisterProps) => {
     return (
         // <Link href={redirectTo}>
         <Button className={btn} onClick={props.handleRedirect}>
-            <ExitToAppIcon />
+            <ExitToAppIcon fontSize='small' />
             <Typography variant="body1" className={register}>
                 {props.text} <b>{props.boldText}</b>
             </Typography>
@@ -38,21 +38,23 @@ export const Register = (props: RegisterProps) => {
 };
 
 export const AcceptLegalTerms = () => {
-    const { margin, link } = useStyles();
+    const { link } = useStyles();
 
     const router = useRouter();
     const lang = langs[router.locale];
 
     return (
-        <Typography variant="body2" className={margin}>
-            {lang.continuing}
-            <Link href="/aviso-legal" className={link}>
-                <b> {lang.terms} </b>
-            </Link>
-            {lang.and}
-            <Link href="/aviso-legal" className={link}>
-                <b> {lang.politics}</b>
-            </Link>
-        </Typography>
+        <Grid item xs={12}>
+            <Typography variant="body2" style={{ fontSize: '14px' }}>
+                {lang.continuing}
+                <Link href="/aviso-legal" className={link}>
+                    <b> {lang.terms} </b>
+                </Link>
+                {lang.and}
+                <Link href="/aviso-legal" className={link}>
+                    <b> {lang.politics}</b>
+                </Link>
+            </Typography>
+        </Grid>
     );
 };

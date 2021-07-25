@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 const langs = require("../../../lang").mailStep;
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
 import cookies from "js-cookie";
+import { useTheme } from "@material-ui/core";
 
 // External components
 import { TextInput } from "../../atoms/inputs/inputs";
@@ -15,6 +16,9 @@ import { AcceptLegalTerms } from "../../atoms/loginHelpers/loginHelpers";
 import Divider from "../../atoms/divider/divider";
 import { loginWithSocialMedia } from "../../../helpers/serverRequests/customer";
 import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
+import { RoundedButton } from "@atoms";
+import { Grid } from "@material-ui/core";
+
 
 const MailStep = (props) => {
     const router = useRouter();
@@ -23,6 +27,7 @@ const MailStep = (props) => {
     const { saveInLocalStorage } = useLocalStorage();
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+    const theme = useTheme();
 
     const handleSocialMediaSubmit = async (token) => {
         const res = await loginWithSocialMedia(token);
@@ -45,8 +50,12 @@ const MailStep = (props) => {
             <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} />
             <AcceptLegalTerms />
             <Divider />
-            <TextInput label={lang.emailInput} name="email" value={props.email} onChange={props.handleChange} />
-            <CustomButton disabled={!isEmail(props.email)} text={lang.buttonText} onClick={() => props.handleSubmit(1)} />
+            <Grid item xs={12}>
+                <TextInput label={lang.emailInput}  name="email" value={props.email} onChange={props.handleChange} />
+            </Grid>
+            <Grid item xs={12}>
+                <RoundedButton disabled={!isEmail(props.email)} label={lang.buttonText} onClick={() => props.handleSubmit(1)} style={{ width: '100%' }} />
+            </Grid>
         </>
     );
 };
