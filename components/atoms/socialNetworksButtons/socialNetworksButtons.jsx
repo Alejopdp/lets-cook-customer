@@ -3,17 +3,19 @@ import React from "react";
 import useStyles from "./styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-import { socialNetworksButtons as langs } from "@lang";
+
 import { loginWithFacebookAndGetIdToken, loginWithGoogleAndGetIdToken } from "../../../helpers/firebase";
 import { useSnackbar } from "notistack";
 
 // External components
 import { Box, Button, Typography, Grid } from "@material-ui/core";
 import Image from "next/image";
+import { useLang } from "@hooks";
 
 export const SocialNetworksButtons = (props) => {
     const { button, facebook, google, txt } = useStyles();
     const { enqueueSnackbar } = useSnackbar();
+    const [lang] = useLang("socialNetworksButtons");
 
     const handleFacebookLogin = async () => {
         const token = await loginWithFacebookAndGetIdToken();
@@ -21,7 +23,7 @@ export const SocialNetworksButtons = (props) => {
         if (!!token) {
             props.handleSubmit(token);
         } else {
-            enqueueSnackbar("Error al querer ingresar con Facebook");
+            enqueueSnackbar(lang.facebookError);
         }
     };
 
@@ -31,12 +33,9 @@ export const SocialNetworksButtons = (props) => {
         if (!!token) {
             props.handleSubmit(token);
         } else {
-            enqueueSnackbar("Error al querer ingresar con Google");
+            enqueueSnackbar(lang.googleError);
         }
     };
-
-    const router = useRouter();
-    const lang = langs[router.locale];
 
     return (
         <>

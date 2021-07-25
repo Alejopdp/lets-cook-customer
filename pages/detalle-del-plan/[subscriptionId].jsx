@@ -4,8 +4,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { getSubscriptionById } from "../../helpers/serverRequests/userProfile";
 import { getDataForSwappingAPlan } from "../../helpers/serverRequests/plans";
 import { getRestrictions } from "../../helpers/serverRequests/restriction";
-// import { useRouter } from "next/router";
-// const langs = require("../../lang").comoFunciona;
+import { useLang } from "@hooks";
 
 // External Components
 
@@ -35,12 +34,12 @@ export async function getServerSideProps(context) {
 
 const PlanDetailsPage = ({ subscription, error, subscriptionId, swapPlanData, restrictions }) => {
     const theme = useTheme();
-    // const lang = langs[router.locale];
+    const [lang] = useLang('planDetails');
 
     return (
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
-                <BackButtonTitle url="/perfil" title="Detalle del plan" />
+                <BackButtonTitle url="/perfil" title={lang.backButton} />
                 <PlanDetails
                     subscription={subscription}
                     subscriptionId={subscriptionId}

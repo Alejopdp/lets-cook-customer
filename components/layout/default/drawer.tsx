@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Divider, Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles } from "@material-ui/core";
 import Image from "next/image";
 import { LoginButton } from "@atoms";
+import { useLang } from "@hooks";
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -14,21 +15,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const menuOptions = {
-    top: [
-        { label: "Inicio", path: "#" },
-        { label: "Planes", path: "#" },
-        { label: "Recetas", path: "#" },
-        { label: "Cómo funciona", path: "#" },
-    ],
-    bottom: [
-        { label: "Blog", path: "#" },
-        { label: "Preguntas frecuentes", path: "#" },
-        { label: "Bono regalo", path: "#" },
-        { label: "Aviso legal", path: "#" },
-    ],
-};
-
 interface NavbarDrawerProps {
     toggleOpeningDrawer: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
     open: boolean;
@@ -36,6 +22,22 @@ interface NavbarDrawerProps {
 
 const NavbarDrawer = (props: NavbarDrawerProps) => {
     const classes = useStyles();
+    const [lang] = useLang("navbarDrawer");
+
+    const menuOptions = {
+        top: [
+            { label: lang.itemHome, path: "#" },
+            { label: lang.itemPlans, path: "#" },
+            { label: lang.itemRecipes, path: "#" },
+            { label: lang.itemHowItWork, path: "#" },
+        ],
+        bottom: [
+            { label: lang.itemBlog, path: "#" },
+            { label: lang.itemFAQ, path: "#" },
+            { label: lang.itemGif, path: "#" },
+            { label: lang.itemLegal, path: "#" },
+        ],
+    };
 
     return (
         <Drawer

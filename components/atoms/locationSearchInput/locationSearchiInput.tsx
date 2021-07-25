@@ -10,6 +10,8 @@ import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 import { CallMerge } from "@material-ui/icons";
 import { LocationSearchInputProps } from "./intertfaces";
+import { locationSearchInput as langs } from '@lang';
+import { useRouter } from "next/router";
 
 function loadScript(src, position, id) {
     if (!position) {
@@ -46,6 +48,8 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
     const [inputValue, setInputValue] = React.useState("");
     const [options, setOptions] = React.useState([]);
     const loaded = React.useRef(false);
+    const router = useRouter();
+    const lang = langs[router.locale];
 
     if (typeof window !== "undefined" && !loaded.current) {
         if (!document.querySelector("#google-maps")) {
@@ -116,7 +120,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             filterSelectedOptions
             value={props.value}
             noOptionsText={
-                !!props.value ? "No se encontró ninguna dirección" : "Comienze a escribir para ver las sugerencias de direcciones"
+                !!props.value ? lang.autoCompleteHintNotFound : lang.autoCompleteHint
             }
             onChange={(event, newValue) => {
                 setOptions(newValue ? [newValue, ...options] : options);

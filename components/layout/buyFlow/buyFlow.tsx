@@ -4,6 +4,7 @@ import { useFilterDrawer } from "@stores";
 import { DrawerMenu } from "@molecules";
 import { AppBarStepper } from "@organisms";
 import { useStyles } from "./styles";
+import { useLang } from "@hooks";
 
 interface IFilter {
     label: string;
@@ -20,29 +21,10 @@ interface BuyFlowLayoutProps {
     filterOptions?: IFilterOptions[];
 }
 
-const _filterOptions: IFilterOptions[] = [
-    {
-        title: "Nivel de dificultad",
-        items: [
-            { label: "Fácil", value: "Fácil" },
-            { label: "Medio", value: "Medio" },
-            { label: "Dificil", value: "Dificil" },
-        ],
-    },
-    {
-        title: "Tiempo de preparación",
-        items: [
-            { label: "Menos de 15 minutos", value: "Menos de 15 minutos" },
-            { label: "Entre 15 y 30 minutos", value: "Entre 15 y 30 minutos" },
-            { label: "Entre 30 y 60 minutos", value: "Entre 30 y 60 minutos" },
-            { label: "Más de 60 minutos", value: "Más de 60 minutos" },
-        ],
-    },
-];
-
-export const BuyFlowLayout = memo(({ children: Component, filterOptions = _filterOptions }: BuyFlowLayoutProps) => {
+export const BuyFlowLayout = memo(({ children: Component, filterOptions }: BuyFlowLayoutProps) => {
     const classes = useStyles();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
+    const [lang] = useLang("buyFlowLayout");
 
     const _toggleOpeningDrawer = () => {
         setDrawerOpen(!drawerIsOpen);
@@ -51,8 +33,27 @@ export const BuyFlowLayout = memo(({ children: Component, filterOptions = _filte
     const _handleClickApplyFilters = (_filters) => {
         setFilters(_filters);
         _toggleOpeningDrawer();
-        console.log("Filtros aplicados: ", filters);
     };
+
+    const _filterOptions: IFilterOptions[] = [
+        {
+            title: lang.difficultLevel,
+            items: [
+                { label: lang.itemEasy, value: lang.itemEasy },
+                { label: lang.itemMedium, value:  lang.itemMedium },
+                { label:  lang.itemHard, value:  lang.itemHard },
+            ],
+        },
+        {
+            title: lang.timeOfCook,
+            items: [
+                { label:  lang.item15Min, value:  lang.item15Min},
+                { label:  lang.item15To30, value:  lang.item15To30},
+                { label:  lang.item30To60, value:  lang.item30To60},
+                { label:  lang.itemUpperTo60, value:  lang.itemUpperTo60},
+            ],
+        },
+    ];
 
     return (
         <div className={classes.root}>
@@ -60,7 +61,7 @@ export const BuyFlowLayout = memo(({ children: Component, filterOptions = _filte
             <AppBarStepper />
             <DrawerMenu
                 open={drawerIsOpen}
-                items={filterOptions}
+                items={_filterOptions}
                 selectedItems={filters}
                 handleOnClose={() => setDrawerOpen(false)}
                 handleOnClickApplyButton={_handleClickApplyFilters}
