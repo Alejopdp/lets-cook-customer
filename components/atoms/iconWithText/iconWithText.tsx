@@ -1,6 +1,7 @@
 // Utils & Config
 import React from "react";
 import PropTypes from "prop-types";
+import { useTheme } from '@material-ui/core';
 
 // External components
 import { Box, Typography } from "@material-ui/core";
@@ -8,14 +9,15 @@ import Image from "next/image";
 import { IconWithTextProps } from "./interfaces";
 
 export const IconWithText = (props: IconWithTextProps) => {
-    return (
-        <Box width="200px">
-            <Image src={props.src} height={60} width={60} />
+    const theme = useTheme();
 
-            <Typography variant="body1">
-                <b>{props.text}</b>
+    return (
+        <>
+            <Image src={props.src} height={40} width={40} />
+            <Typography variant="subtitle2" style={{ fontSize: '14px', fontWeight: 600, marginTop: theme.spacing(1) }}>
+                {props.text}
             </Typography>
-        </Box>
+        </>
     );
 };
 export default IconWithText;

@@ -3,13 +3,13 @@ import { getGeometry } from "../../../helpers/utils/geocode";
 import { getShippingCost } from "@helpers";
 
 // External components
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography, useTheme } from "@material-ui/core";
 import ErrorIcon from "@material-ui/icons/Error";
 import Grid from "@material-ui/core/Grid";
 
 // Internal components
 import { FormPaperWithIcons } from "@molecules";
-import { TextInput, CustomButton } from "@atoms";
+import { TextInput, CustomButton, RoundedButton } from "@atoms";
 import { ShipmentFormProps } from "./interfaces";
 import { useBuyFlow, DeliveryForm, useUserInfoStore } from "@stores";
 import LocationSearchInput from "components/atoms/locationSearchInput/locationSearchiInput";
@@ -17,14 +17,15 @@ import PhoneNumberInput from "components/atoms/phoneNumberInput/phoneNumberInput
 import { useSnackbar } from "notistack";
 
 export const ShipmentForm = memo((props: ShipmentFormProps) => {
+    const theme = useTheme();
     const { setDeliveryInfo, form } = useBuyFlow(({ setDeliveryInfo, form }) => ({ setDeliveryInfo, form }));
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         const getShippingCostIfAddressExists = async () => {
-            const newLatitude = form.deliveryForm?.latitude || userInfo.shippingAddress?.latitude;
-            const newLongitude = form.deliveryForm?.longitude || userInfo.shippingAddress?.longitude;
+            const newLatitude = form.deliveryForm ?.latitude || userInfo.shippingAddress ?.latitude;
+            const newLongitude = form.deliveryForm ?.longitude || userInfo.shippingAddress ?.longitude;
 
             if (!!!newLatitude && !!!newLongitude) return;
 
@@ -41,7 +42,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
         };
 
         getShippingCostIfAddressExists();
-    }, [form.deliveryForm?.latitude, form.deliveryForm?.longitude]);
+    }, [form.deliveryForm ?.latitude, form.deliveryForm ?.longitude]);
 
     const handleChange = (event) => {
         setDeliveryInfo({
@@ -63,9 +64,9 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
 
     return (
         <FormPaperWithIcons title="Datos de entrega" initialIcon="/icons/checkout/informacion-de-envio.svg" finalIcons>
-            <Grid container spacing={4}>
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <LocationSearchInput value={form.deliveryForm?.addressName} handleChange={handleAddressChange} name="addressName" />
+                    <LocationSearchInput value={form.deliveryForm ?.addressName} handleChange={handleAddressChange} name="addressName" />
                 </Grid>
 
                 <Grid item xs={12}>
@@ -89,21 +90,19 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                     <PhoneNumberInput value={form.deliveryForm.phone1} name="phone1" handleChange={handleChange} />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                     <Box display="flex" alignItems="center" color="#F89719">
-                        <ErrorIcon style={{ marginRight: "8px" }} />
-
-                        <Typography variant="body1">
-                            <b>Luego podrás cambiar los datos de entrega desde tu perfil</b>
+                        <ErrorIcon fontSize='small' style={{ marginRight: "8px" }} />
+                        <Typography variant="body1" style={{ fontSize: '14px' }}>
+                            Luego podrás cambiar los datos de entrega desde tu perfil
                         </Typography>
                     </Box>
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Typography variant="body2" paragraph>
-                        <b>¿Tienes alguna restricción a la hora de ingerir algún tipo de alimento?</b>
+                    <Typography variant="body2" style={{ marginBottom: theme.spacing(1) }}>
+                        ¿Tienes alguna restricción a la hora de ingerir algún tipo de alimento?
                     </Typography>
-
                     <TextInput
                         name="restrictions"
                         label="Ingrese aquí sus restricciones (solo si aplica)"
@@ -111,8 +110,11 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         onChange={handleChange}
                     />
                 </Grid>
+
+                <Grid item xs={12}>
+                    <RoundedButton label="Continuar" onClick={props.onClick} style={{ width: '100%' }} />
+                </Grid>
             </Grid>
-            <CustomButton text="Continuar" onClick={props.onClick} />
         </FormPaperWithIcons>
     );
 });

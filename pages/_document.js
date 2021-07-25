@@ -10,7 +10,6 @@ export default class MyDocument extends Document {
                 <Head>
                     {/* PWA primary color */}
                     <meta name="theme-color" content={theme.palette.primary.main} />
-                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
                     <script async src="/script/ml.js"></script>
                     <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/20136870.js"></script>
                 </Head>

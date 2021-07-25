@@ -11,10 +11,11 @@ import HttpsOutlinedIcon from "@material-ui/icons/HttpsOutlined";
 // Internal components
 import { FormPaperWithIcons } from "@molecules";
 import StripeForm from "../../molecules/stripeForm/stripeForm";
-import { CustomCheckbox, CustomButton } from "@atoms";
+import { CustomCheckbox, CustomButton, RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
 import PaymentMethodForm from "../paymentMethodForm/paymentMethodForm";
 import { useBuyFlow, useUserInfoStore } from "@stores";
+import { Grid } from '@material-ui/core'
 
 export const PaymentForm = (props) => {
     const { chckbox } = useStyles();
@@ -111,6 +112,8 @@ export const PaymentForm = (props) => {
 
     return (
         <FormPaperWithIcons title="Métodos de pago" initialIcon="/icons/checkout/metodos-de-pago.svg">
+        <Grid container spacing={2}>
+            <Grid item xs={12}>
             <PaymentMethodForm
                 paymentMethods={userInfo.paymentMethods || []}
                 selectedOption={form.paymentMethod?.type}
@@ -118,10 +121,12 @@ export const PaymentForm = (props) => {
                 selectedSavedCard={form.paymentMethod?.id}
                 setselectedSavedCard={(e) => handleSelectedCardChange(e)}
             />
+            </Grid>
+            <Grid item xs={12}>
             <CustomCheckbox
                 name="acceptTerms"
                 label={
-                    <p>
+                    <p style={{fontSize:'13px'}}>
                         He leído y acepto las <b>condiciones generales de venta</b>
                     </p>
                 }
@@ -130,12 +135,13 @@ export const PaymentForm = (props) => {
                 handleChange={props.onChange}
                 // rediretTo='/aviso-legal'
             />
-
-            <CustomButton text="Realizar pago" icon={<HttpsOutlinedIcon />} disabled={props.disabled} onClick={handleSubmitPayment} />
+            </Grid>
+            <Grid item xs={12}>
+                <RoundedButton label="Realizar pago" disabled={props.disabled} onClick={handleSubmitPayment} style={{width:'100%'}}/>
+            </Grid>
+            </Grid>
         </FormPaperWithIcons>
     );
 };
 
 export default PaymentForm;
-
-//

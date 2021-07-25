@@ -26,13 +26,23 @@ function loadScript(src, position, id) {
 const autocompleteService = { current: null };
 
 const useStyles = makeStyles((theme) => ({
-    root: {},
+    root: {
+        '& label.MuiFormLabel-root': {
+            fontSize: '16px'
+        },
+        '& div.MuiInputBase-root': {
+            borderRadius: '8px',
+            fontSize: '16px',
+            paddingRight: '0px'
+        }
+    },
     icon: {
         color: theme.palette.text.secondary,
         marginRight: theme.spacing(2),
     },
     autocompleteRoot: {
         width: "100%",
+
     },
 
     endAdornment: {
@@ -115,6 +125,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             includeInputInList
             filterSelectedOptions
             value={props.value}
+            style={{}}
             noOptionsText={
                 !!props.value ? "No se encontró ninguna dirección" : "Comienze a escribir para ver las sugerencias de direcciones"
             }

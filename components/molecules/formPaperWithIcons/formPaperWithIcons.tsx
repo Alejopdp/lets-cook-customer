@@ -3,6 +3,8 @@ import React from "react";
 import useStyles from "./styles";
 import { FormPaperWithIconsProps } from "./interfaces";
 import clsx from "clsx";
+import { useTheme } from "@material-ui/core";
+
 
 // External components
 import Paper from "@material-ui/core/Paper";
@@ -15,15 +17,15 @@ import EditIcon from '@material-ui/icons/Edit';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 export const FormPaperWithIcons = (props: FormPaperWithIconsProps) => {
-
+    const theme = useTheme();
     const { paper, title, alignIcons, titleMargin } = useStyles();
 
     return (
         <Paper className={paper}>
-            <Grid item container justify="space-between" alignItems="center">
+            <Grid item container justify="space-between" alignItems="center" style={{ marginBottom: theme.spacing(3) }}>
                 <Grid item className={title}>
                     {props.initialIcon &&
-                        <Image src={props.initialIcon} height={40} width={40} />
+                        <Image src={props.initialIcon} height={32} width={32} />
                     }
                     <Typography variant="h6" color="textSecondary" className={titleMargin}>
                         {props.title}
@@ -33,9 +35,9 @@ export const FormPaperWithIcons = (props: FormPaperWithIconsProps) => {
                 {props.finalIcons &&
                     <Grid item className={alignIcons}>
                         <Button onClick={props.onClick}>
-                            <EditIcon fontSize="large" />
+                            <EditIcon fontSize="medium" />
                         </Button>
-                        <CheckCircleIcon fontSize="large" color="primary" />
+                        <CheckCircleIcon fontSize="medium" color="primary" />
                     </Grid>
                 }
             </Grid>
