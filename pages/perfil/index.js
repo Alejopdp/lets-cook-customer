@@ -173,7 +173,7 @@ const Perfil = (props) => {
                                     <Grid item xs={9}>
                                         {/* <Grid item> */}
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                            Hola {userInfo.firstName}
+                                            Hola {userInfo.firstName || ""}
                                         </Typography>
                                         {/* </Grid> */}
                                     </Grid>

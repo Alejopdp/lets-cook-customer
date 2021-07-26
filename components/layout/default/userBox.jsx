@@ -16,7 +16,7 @@ const UserBox = (props) => {
     const { resetLocalStorage } = useLocalStorage();
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const setuserInfo = useUserInfoStore((state) => state.setuserInfo);
-    const [lang] = useLang('userBox');
+    const [lang] = useLang("userBox");
 
     const _toggleOpen = () => {
         setOpen(!open);
@@ -32,19 +32,24 @@ const UserBox = (props) => {
         resetLocalStorage();
         setuserInfo({});
         setIsAuthenticated(false);
+        router.push("/");
     };
 
     const options = {
         es: [
-            { title: lang.titlePlans, path: "/perfil", handler: () => _handleOptionSelected("/") },
-            { title: lang.titleAccountSettings, path: "/user-info", handler: () => _handleOptionSelected("/") },
-            { title: lang.titleHistoryPayments, path: "/historial-pagos", handler: () => _handleOptionSelected("/") },
+            { title: lang.titlePlans, path: "/perfil", handler: () => _handleOptionSelected("/perfil") },
+            {
+                title: lang.titleAccountSettings,
+                path: `/configuracion/${userInfo.id}`,
+                handler: () => _handleOptionSelected(`/configuracion/${userInfo.id}`),
+            },
+            { title: lang.titleHistoryPayments, path: "/historial-pagos", handler: () => _handleOptionSelected("/historial-pagos") },
             { title: lang.titleCloseSession, path: "/", handler: handleSignOut },
         ],
         en: [
-            { title: lang.titlePlans, path: "/", handler: () => _handleOptionSelected("/") },
-            { title: lang.titleAccountSettings, path: "/", handler: () => _handleOptionSelected("/") },
-            { title: lang.titleHistoryPayments, path: "/", handler: () => _handleOptionSelected("/") },
+            { title: lang.titlePlans, path: "/perfil", handler: () => _handleOptionSelected("/") },
+            { title: lang.titleAccountSettings, path: `/configuracion/${userInfo.id}`, handler: () => _handleOptionSelected("/") },
+            { title: lang.titleHistoryPayments, path: "/historial-pagos", handler: () => _handleOptionSelected("/historial-pagos") },
             { title: lang.titleCloseSession, path: "/", handler: handleSignOut },
         ],
     };
