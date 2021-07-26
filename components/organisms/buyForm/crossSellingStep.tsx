@@ -55,31 +55,33 @@ const CrossSellingStep = (props) => {
     };
 
     return (
-        <Container maxWidth="lg">
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <TitleBuyFlow
-                        title="Ya has seleccionado las recetas correctamente"
-                        subtitle="¿Quieres agregar algún producto adicional?"
-                    />
+        <>
+            <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6) }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <TitleBuyFlow
+                            title="Ya has seleccionado las recetas correctamente"
+                            subtitle="¿Quieres agregar algún producto adicional?"
+                        />
+                    </Grid>
+                    <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
+                        <AdditionalPlansGrid additionalPlans={additionalPlans} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Box display="flex" flexDirection="column" alignItems="center">
+                            {totalValue > 0 && (
+                                <RoundedButton
+                                    label={`PAGAR PRODUCTOS ADICIONALES (${totalValue} €)`}
+                                    onClick={handleSubmitPayment}
+                                    style={{ marginBottom: theme.spacing(2) }}
+                                />
+                            )}
+                            <Button variant="text">No quiero agregar ningún producto adicional</Button>
+                        </Box>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
-                    <AdditionalPlansGrid additionalPlans={additionalPlans} />
-                </Grid>
-                <Grid item xs={12}>
-                    <Box display="flex" flexDirection="column" alignItems="center">
-                        {totalValue > 0 && (
-                            <RoundedButton
-                                label={`PAGAR PRODUCTOS ADICIONALES (${totalValue} €)`}
-                                onClick={handleSubmitPayment}
-                                style={{ marginBottom: theme.spacing(2) }}
-                            />
-                        )}
-                        <Button variant="text">No quiero agregar ningún producto adicional</Button>
-                    </Box>
-                </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </>
     );
 };
 

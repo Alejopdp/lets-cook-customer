@@ -13,6 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     card: {
         display: "flex",
+        width: '100%',
         height: 430,
         boxSizing: "border-box",
         textAlign: "center",
@@ -47,6 +48,7 @@ export const useStyles = makeStyles((theme) => ({
         mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
     },
     cardContent: {
+        width: '100%',
         display: "flex",
         flex: 1,
         flexDirection: "column",

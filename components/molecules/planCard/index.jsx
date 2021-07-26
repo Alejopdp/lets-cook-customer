@@ -9,7 +9,7 @@ const PlanCard = props => {
     const { push: navigateTo, locale } = useRouter();
     const theme = useTheme();
     const classes = useStyles();
-    console.log('props.card', props.card)
+
     return (
         <div key={props.index} className={classes.card} style={{ backgroundImage: `url(${props.card.imageUrl})`, ...props.style }}>
             <div className={classes.overlay} >

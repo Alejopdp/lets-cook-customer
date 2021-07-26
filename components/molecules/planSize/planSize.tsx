@@ -14,7 +14,7 @@ export const PlanSize = (props: PlanSizeProps) => {
             <Grid item>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">
-                        <Typography variant="body1">{props.subtitle}</Typography>
+                        <Typography variant='body2' style={{fontSize:'14px', fontWeight: 600}}>{props.subtitle}</Typography>
                     </FormLabel>
                     <div style={{ display: "flex" }}>
                         <>

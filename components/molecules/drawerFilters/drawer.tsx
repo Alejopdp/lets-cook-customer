@@ -1,11 +1,12 @@
-import { Checkbox, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from "@material-ui/core";
+import { Checkbox, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography, useTheme } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import CustomButton from "../../atoms/customButton/customButton";
 import useStyles from "./styles";
 
-export const DrawerMenu = ({ open = false, items = [], selectedItems=[],handleOnClose = () => {}, handleOnClickApplyButton = (e: any) => {} }) => {
+export const DrawerMenu = ({ open = false, items = [], selectedItems = [], handleOnClose = () => { }, handleOnClickApplyButton = (e: any) => { } }) => {
     const classes = useStyles();
+    const theme = useTheme();
     const [filtersSelected, setFilters] = useState(selectedItems);
 
     const handleOnClick = (filter) => {
@@ -37,13 +38,11 @@ export const DrawerMenu = ({ open = false, items = [], selectedItems=[],handleOn
                 ModalProps={{ keepMounted: true }}
             >
                 <div className={classes.drawerContentRoot}>
-                    <div className={classes.headerTitle}>
-                        <Typography variant="h5">Filtrar recetas</Typography>
-                    </div>
+                    <Typography variant="h5" style={{ textAlign: 'left' }}>Filtrar recetas</Typography>
                     <List>
                         {items.map((filterPart, keyPartTitle) => (
-                            <div key={keyPartTitle}>
-                                <Typography variant="subtitle1" className={classes.subtitle}>
+                            <div key={keyPartTitle} style={{ marginTop: theme.spacing(3) }}>
+                                <Typography variant="subtitle2" style={{ marginBottom: theme.spacing(1) }}>
                                     {filterPart.title}
                                 </Typography>
                                 {filterPart.items.map((filterItem, keyFilter) => (
@@ -70,9 +69,7 @@ export const DrawerMenu = ({ open = false, items = [], selectedItems=[],handleOn
                         ))}
                     </List>
                 </div>
-                <div className={classes.bottonApply}>
-                    <CustomButton text="Aplicar filtros" onClick={ () => handleOnClickApplyButton(filtersSelected)} />
-                </div>
+                <CustomButton text="Aplicar filtros" onClick={() => handleOnClickApplyButton(filtersSelected)} style={{ width: '100%' }} />
             </Drawer>
         </nav>
     );

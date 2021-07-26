@@ -3,6 +3,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Rating } from '@material-ui/lab';
+import { useMediaQuery } from '@material-ui/core';
 
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -28,6 +29,7 @@ export default function CheckoutDetails() {
     const { form, setCoupon } = useBuyFlow(({ form, setCoupon }) => ({ form, setCoupon }));
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
+    const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
 
     // useEffect(() => {
 
@@ -87,7 +89,7 @@ export default function CheckoutDetails() {
             flexDirection: 'column',
             backgroundColor: theme.palette.background.paper,
             height: '100%',
-            padding: `${theme.spacing(5)}px ${theme.spacing(6)}px`
+            padding: isSmDown ? `${theme.spacing(5)}px ${theme.spacing(2)}px` : `${theme.spacing(5)}px ${theme.spacing(6)}px`
         }}>
             <Typography variant="h5">Resumen de compra</Typography>
             <PlanSelector
@@ -146,7 +148,7 @@ export default function CheckoutDetails() {
                         src='/icons/checkout/informacion-de-envio.svg'
                     />
                     <Typography variant='body2' style={{ fontSize: '14px', paddingLeft: theme.spacing(2) }}>
-                        Tu primer pedido llegará este <strong>martes 25 de mayo</strong>. Recibirás un correo con el horario de entrega. Luego, todas las entregas se realizarán los martes.
+                        Tu primer pedido llegará este <strong>martes XX de YY</strong>. Recibirás un correo con el horario de entrega. Luego, todas las entregas se realizarán los martes.
                     </Typography>
                 </div>
                 <img src='/assets/empty-image-checkout.png' alt='checkout-image' style={{ width: '100%', borderRadius: '8px', marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }} />

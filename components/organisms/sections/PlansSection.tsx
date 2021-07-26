@@ -48,55 +48,11 @@ export const PlansSection = memo((props: PlansSectionProps) => {
                 min: 0
             },
             items: 1,
-            partialVisibilityGutter: 30
+            partialVisibilityGutter: 100
         },
     };
 
     return (
-        // <Container maxWidth="lg">
-        //     <Grid container spacing={2}>
-        //         <Title
-        //             title="Encuentra el plan indicado para tí"
-        //             subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
-        //         />
-        //         {(props.cards || []).map((card, index) => (
-        //             <Grid key={index} item xs={12} md={3}>
-        //                 <div
-        //                     className={classes.card}
-        //                     style={{
-        //                         backgroundImage: `url(${card.imageUrl})`,
-        //                     }}
-        //                 >
-        //                     <div className={classes.overlay}>
-        //                         <div className={classes.cardContent}>
-        //                             <Typography className={classes.paddingCardTitle} variant="subtitle1" color="initial">
-        //                                 {card.name[locale]}
-        //                             </Typography>
-        //                             <Typography variant="body2" color="initial">
-        //                                 {card.description}
-        //                             </Typography>
-        //                         </div>
-        //                         <div className={classes.cardAction}>
-        //                             <RoundedButton
-        //                                 label="¡QUIERO ESTE PLAN!"
-        //                                 onClick={() =>
-        //                                     navigateTo({
-        //                                         pathname: "/planes/[slug]",
-        //                                         query: {
-        //                                             slug: card.slug,
-        //                                             personas: card.variants[0]?.numberOfPersons || "",
-        //                                             recetas: card.variants[0]?.numberOfRecipes || "",
-        //                                         },
-        //                                     })
-        //                                 }
-        //                             />
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </Grid>
-        //         ))}
-        //     </Grid>
-        // </Container>
         <>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -113,7 +69,6 @@ export const PlansSection = memo((props: PlansSectionProps) => {
                                     <PlanCard
                                         index={index}
                                         card={card}
-                                        style={{ marginRight: theme.spacing(2) }}
                                     />
                                 </Grid>
                             )}
@@ -150,7 +105,7 @@ export const PlansSection = memo((props: PlansSectionProps) => {
                             <PlanCard
                                 index={index}
                                 card={card}
-                                style={{ marginRight: theme.spacing(2) }}
+                                style={{ paddingRight: theme.spacing(2) }}
                             />
                         ))}
                     </Carousel>

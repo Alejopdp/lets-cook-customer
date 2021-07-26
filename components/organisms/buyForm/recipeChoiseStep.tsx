@@ -55,7 +55,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     };
 
     return (
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6), paddingBottom: '200px' }}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TitleBuyFlow
@@ -63,13 +63,13 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                         subtitle="Elige las 3 recetas que recibirás el martes 18"
                     />
                 </Grid>
-                <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                <Grid item xs={12} style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
                     <Grid container spacing={2} alignItems='center'>
                         <Grid item>
                             <RoundedButton
                                 variant="outline"
                                 label="Filtrar recetas"
-                                style={{ backgroundColor: "white", padding:'8px'}}
+                                style={{ backgroundColor: "white", padding: '8px' }}
                                 onClick={() => {
                                     setDrawerOpen(!drawerIsOpen);
                                 }}

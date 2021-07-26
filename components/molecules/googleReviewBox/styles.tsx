@@ -19,7 +19,15 @@ export const useStyles = makeStyles(theme => ({
     },
     flexCenter: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+    },
+    flexCenterRating: {
+        display: 'flex',
+        alignItems: 'center',
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: 'column',
+            alignItems: 'flex-start'
+        }
     },
     marginLeft2: {
         marginLeft: theme.spacing(2)

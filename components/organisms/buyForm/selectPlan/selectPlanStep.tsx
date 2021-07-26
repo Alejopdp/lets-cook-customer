@@ -14,6 +14,8 @@ import { useStyles } from "./styles";
 import { SelectPlanProps, ARGS } from "./interfaces";
 import { PlansList } from "./planesList";
 import { useSnackbar } from "notistack";
+import SectionTitleBuyFlow from "components/molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
+import WeekPlanRecipesSection from "./sections/weekPlanRecipesSection/weekPlanRecipesSection";
 
 export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const { push: navigateTo, locale: lang } = useRouter();
@@ -137,34 +139,31 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
     return (
         <>
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6) }}>
                 <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
                     {/* PLAN CARRUSEL */}
                     <Grid item xs={12}>
                         <Typography variant="h5">1. Elige tu plan</Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                        <div className={classes.smUpHide}>
-                            {props.plans.map((plan, index) => {
-                                return (
+                    <Grid container spacing={2} style={{ marginTop: theme.spacing(2), justifyContent: 'center' }}>
+                        {props.plans.map((plan, index) => {
+                            return (
+                                <Grid item xs={6} md={2}>
                                     <PlanWithIcon
                                         key={index}
                                         plan={plan}
                                         isSelected={buyFlow.form.planSlug === plan.slug}
                                         onClick={handleOnSelectPlan}
                                     />
-                                );
-                            })}
-                        </div>
+                                </Grid>
+                            );
+                        })}
                     </Grid>
-                    <Grid item xs={12} direction="row" justify="center" className={clsx(classes.smDownHide)}>
-                        <PlansList plans={props.plans} slug={buyFlow.form.planSlug} handleOnSelectPlan={handleOnSelectPlan} />
-                    </Grid>
-                    <Grid item xs={12} style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(6) }}>
+                    <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(6) }}>
                         <Typography variant="body1">Descripción del producto seleccionado</Typography>
                     </Grid>
                     <Grid container spacing={2} justifyContent='center'>
-                        <Grid item xs={4}>
+                        <Grid item xs={12} md={4}>
                             {!!Object.keys(planSize).length && (
                                 <Grid container spacing={2}>
                                     <Grid item xs={12}>
@@ -191,10 +190,10 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                                 </Grid>
                             )}
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={12} md={2}>
                             <div className={classes.divider} />
                         </Grid>
-                        <Grid item xs={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <Grid item xs={12} md={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                             <RecipesCalculation
                                 recipesQty={buyFlow.form.variant ?.numberOfRecipes}
                                 peopleQty={buyFlow.form.variant ?.numberOfPersons}
@@ -203,7 +202,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} style={{ textAlign: 'center', marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
-                        <RoundedButton label="Seleccionar plan" onClick={() => buyFlow.forward()} />
+                        <RoundedButton label="Seleccionar plan" onClick={() => buyFlow.forward()} style={{ padding: `${theme.spacing(2.5)}px ${theme.spacing(8)}px` }} />
                         <Typography variant="body2" color='textSecondary' style={{ marginTop: theme.spacing(2) }}>Podrás elegir las recetas en el último paso. Cada semana cambiamos las recetas.</Typography>
                     </Grid>
                 </Grid>
@@ -212,7 +211,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             {/* RECIPES SECTION */}
             {!!recipesOfWeek.length && (
                 <div className={classes.recipeSection} >
-                    <RecipesSection
+                    <WeekPlanRecipesSection
                         title="Hecha un vistazo a las recetas de esta semana"
                         subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
                         titleAlign="center"
@@ -225,13 +224,11 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             <Container maxWidth="lg">
                 <Grid container spacing={2} className={classes.faqsSection}>
                     <Grid item xs={12}>
-                        <Typography variant="h4" align='center' style={{ marginBottom: theme.spacing(2) }}>
-                            Preguntas frecuentes
-                        </Typography>
-                        <Typography variant="body1" align='center'>
-                            ¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat
-                        </Typography>
-                        <Grid item xs={12} sm={8} style={{ margin: `${theme.spacing(4)}px auto 0px auto` }}>
+                        <SectionTitleBuyFlow
+                            title='Preguntas frecuentes'
+                            subtitle='¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat'
+                        />
+                        <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>
                                 {props.faqs.map((faq, index) => (
                                     // TODO: what is the origin for FAQS? {faqsSection[lang].sections}

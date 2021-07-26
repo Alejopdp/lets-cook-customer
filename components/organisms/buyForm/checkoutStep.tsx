@@ -8,6 +8,7 @@ import CheckoutDetails from "../checkoutDetails";
 interface CheckoutStepProps {
     handleSubmitPayment: () => void;
 }
+
 export const CheckoutStep = memo((props: CheckoutStepProps) => {
     const theme = useTheme();
 
@@ -15,7 +16,6 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
 
     const handleChangeAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
         setExpanded(isExpanded ? panel : (expanded === 'panel2') ? 'panel2' : 'panel1');
-        // setExpanded(isExpanded ? panel : false);
     };
 
     const changeToSecondStep = () => {
@@ -25,7 +25,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     return (
         <>
             <Grid container spacing={2}>
-                <Grid item xs={12} md={8}>
+                <Grid item xs={12} md={8} style={{ paddingTop: theme.spacing(8), paddingBottom: theme.spacing(6), }}>
                     <Container style={{ maxWidth: '650px' }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>

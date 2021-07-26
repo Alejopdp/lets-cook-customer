@@ -16,6 +16,7 @@ export const useStyles = makeStyles((theme) => ({
         borderRadius: 4,
         width: 64,
         height: 64,
+        marginRight: theme.spacing(2)
     },
     recipeSelectedMock: {
         backgroundColor: theme.palette.grey[500]
@@ -27,6 +28,42 @@ export const useStyles = makeStyles((theme) => ({
     },
     marginRight: {
         marginRight: theme.spacing(1),
+    },
+    gridCta: {
+        [theme.breakpoints.down('xs')]: {
+            width: '100%'
+        },
+    },
+    recipesQtySelected: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        [theme.breakpoints.down('xs')]: {
+            justifyContent: 'center'
+        },
+    },
+    gridRecipesQty: {
+        [theme.breakpoints.down('xs')]: {
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(2)
+        },
+    },
+    generalContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column',
+        },
+    },
+    boxContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        [theme.breakpoints.down('xs')]: {
+            justifyContent: 'center',
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(2),
+        },
     }
 }));
+
 export default useStyles;

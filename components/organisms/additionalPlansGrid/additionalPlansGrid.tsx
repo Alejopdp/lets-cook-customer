@@ -1,7 +1,7 @@
 // Utils & config
 import React from "react";
 import PropTypes from "prop-types";
-import { useMediaQuery, useTheme } from "@material-ui/core";
+import { useMediaQuery, useTheme, Grid } from "@material-ui/core";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import AdditionalPlanCard from "components/molecules/additionalPlanCard/additionalPlanCard";
@@ -15,8 +15,10 @@ import { GoogleReviewBox } from "@molecules";
 
 const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
     const theme = useTheme();
-    const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
     const classes = useStyles();
+    const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
+    const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
+    const isLgDown = useMediaQuery(theme.breakpoints.down("md"));
 
     const responsive = {
         superLargeDesktop: {
@@ -38,52 +40,70 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
         tablet: {
             breakpoint: {
                 max: 960,
-                min: 600,
+                min: 720,
             },
             items: 2,
-            partialVisibilityGutter: 30,
+            partialVisibilityGutter: 40,
         },
         mobile: {
             breakpoint: {
-                max: 600,
+                max: 720,
                 min: 0,
             },
             items: 1,
-            partialVisibilityGutter: 30,
+            partialVisibilityGutter: 120,
         },
     };
 
     return (
-        // <div style={{ paddingLeft: theme.spacing(2) }}>
-        <Carousel
-            style={{ justifyContent: 'center' }}
-            additionalTransfrom={0}
-            arrows={isSmDown ? false : true}
-            autoPlaySpeed={3000}
-            centerMode={false}
-            className={classes.reactListCarousel}
-            containerClass="container"
-            dotListClass=""
-            draggable
-            focusOnSelect={false}
-            // infinite
-            itemClass={classes.listItem}
-            keyBoardControl
-            responsive={responsive}
-            minimumTouchDrag={80}
-            partialVisible
-            renderButtonGroupOutside={false}
-            renderDotsOutside={false}
-            showDots={false}
-            sliderClass=""
-            slidesToSlide={1}
-            swipeable
-        >
-            {props.additionalPlans.map((plan, index) => (
-                <AdditionalPlanCard key={index} additionalPlan={plan} />
-            ))}
-        </Carousel>
-        // </div>
+        <>
+            {(props.additionalPlans.length <= 3 && isLgUp) && (
+                <Grid item xs={12}>
+                    <Grid container spacing={2} style={{ justifyContent: 'center' }}>
+                        {props.additionalPlans.map((plan, index) =>
+                            <Grid item xs={12} lg={4}>
+                                <AdditionalPlanCard key={index} additionalPlan={plan} />
+                            </Grid>
+                        )}
+                    </Grid>
+                </Grid>
+            )}
+            {(props.additionalPlans.length > 3 || isLgDown) && (
+                <Carousel
+                    additionalTransfrom={0}
+                    arrows={isSmDown ? false : true}
+                    autoPlaySpeed={3000}
+                    centerMode={false}
+                    containerClass="container"
+                    dotListClass=""
+                    draggable
+                    focusOnSelect={false}
+                    // infinite
+                    itemClass={classes.listItem}
+                    keyBoardControl
+                    responsive={responsive}
+                    minimumTouchDrag={80}
+                    partialVisible
+                    renderButtonGroupOutside={false}
+                    renderDotsOutside={false}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable
+                >
+                    {props.additionalPlans.map((plan, index) => (
+                        <AdditionalPlanCard key={index} additionalPlan={plan} />
+                    ))}
+                </Carousel>
+            )}
+
+
+
+
+
+
+        </>
+
     );
 };
 

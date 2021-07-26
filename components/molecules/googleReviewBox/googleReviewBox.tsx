@@ -19,9 +19,9 @@ export const GoogleReviewBox = (props: GoogleReviewBoxProps) => {
                         <Typography variant='subtitle1' color='textPrimary'>
                             {props.review.name}
                         </Typography>
-                        <div className={classes.flexCenter}>
+                        <div className={classes.flexCenterRating}>
                             <Rating className={classes.item} name="read-only" value={props.review.stars} readOnly />
-                            <Typography variant='body2' color='textSecondary'>
+                            <Typography variant='body2' color='textSecondary' style={{fontSize:'13px'}}>
                                 {props.review.date}
                             </Typography>
                         </div>

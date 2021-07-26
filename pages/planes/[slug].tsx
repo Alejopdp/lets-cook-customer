@@ -49,20 +49,20 @@ const PlanesPage = memo((props: PlanesPageProps) => {
 
     useEffect(() => {
         setDeliveryInfo({
-            addressDetails: userInfo.shippingAddress?.addressDetails,
-            addressName: userInfo.shippingAddress?.addressName,
+            addressDetails: userInfo.shippingAddress ?.addressDetails,
+            addressName: userInfo.shippingAddress ?.addressName,
             phone1: userInfo.phone1,
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
             restrictions: "",
-            latitude: userInfo.shippingAddress?.latitude,
-            longitude: userInfo.shippingAddress?.longitude,
+            latitude: userInfo.shippingAddress ?.latitude,
+            longitude: userInfo.shippingAddress ?.longitude,
         });
 
         if (Array.isArray(userInfo.paymentMethods)) {
             const defaultPaymentMethod: IPaymentMethod | undefined = userInfo.paymentMethods.find((method) => method.isDefault);
             setPaymentMethod({
-                id: defaultPaymentMethod?.id || "",
+                id: defaultPaymentMethod ?.id || "",
                 stripeId: "",
                 type: defaultPaymentMethod ? "card" : "",
             });
@@ -89,7 +89,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
 
     return (
         <BuyFlowLayout>
-                {steps[step]}
+            {steps[step]}
         </BuyFlowLayout>
     );
 });
@@ -107,7 +107,7 @@ export async function getServerSideProps({ locale, query }) {
         console.warn("***-> Errors: ", errors);
     }
 
-    _plans.data?.forEach((plan, index) => {
+    _plans.data ?.forEach((plan, index) => {
         if (plan.type === "Main" || plan.type === "Principal") {
             mainPlans.push(plan);
         } else {
@@ -125,8 +125,8 @@ export async function getServerSideProps({ locale, query }) {
     } = getPlanVariant({ slug: _slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
 
     const planUrlParams: PlanUrlParams = {
-        personQty: `${variant?.numberOfPersons || 0}`,
-        recipeQty: `${variant?.numberOfRecipes || 0}`,
+        personQty: `${variant ?.numberOfPersons || 0}`,
+        recipeQty: `${variant ?.numberOfRecipes || 0}`,
         slug,
         id,
     };
