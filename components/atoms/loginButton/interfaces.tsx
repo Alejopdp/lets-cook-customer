@@ -1,3 +1,4 @@
 export interface LoginButtonProps {
-    border?: boolean
+    border?: boolean,
+    style?: any
 }

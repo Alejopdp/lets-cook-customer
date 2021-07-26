@@ -17,7 +17,7 @@ import { Layout } from "../../components/layout/index";
 import PaymentsTable from "../../components/molecules/paymentsTable/PaymentsTable";
 import PaymentDetailsModal from "../../components/molecules/paymentDetailsModal/paymentDetailsModal";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
-
+import { useLang } from '@hooks';
 const HistorialPagos = (props) => {
     const theme = useTheme();
     const router = useRouter();
@@ -26,6 +26,8 @@ const HistorialPagos = (props) => {
     const [selectedPaymentOrder, setSelectedPaymentOrder] = useState({});
     const [orders, setorders] = useState([]);
     const userInfo = useUserInfoStore((state) => state.userInfo);
+    const [lang] = useLang('historialPagos');
+
 
     useEffect(() => {
         const getCustomerOrders = async () => {
@@ -61,7 +63,7 @@ const HistorialPagos = (props) => {
         <>
             <Layout disableCallToActionSection>
                 <InnerSectionLayout containerMaxWidth="lg">
-                    <BackButtonTitle url="/perfil" title="Historial de pagos" />
+                    <BackButtonTitle url="/perfil" title={lang.title} />
                     <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} paymentOrders={orders} />
                 </InnerSectionLayout>
             </Layout>

@@ -26,9 +26,9 @@ export const LegalTextSection = () => {
                 </Typography>
                 <Typography paragraph variant="body1">
                     {lang.firstParagraph.adress} <br />
-                    Passeig de Sant Joan, 93 <br />
-                    08009 Barcelona <br />
-                    {lang.firstParagraph.email} info@letscooknow.es <br />
+                    {lang.info.address1} <br />
+                    {lang.info.address2} <br />
+                    {lang.firstParagraph.email} {lang.info.email} <br />
                 </Typography>
 
                 {/* Párrafo 2 */}
@@ -119,9 +119,9 @@ export const LegalTextSection = () => {
                 </Typography>
                 <Typography paragraph variant="body1">
                     {lang.seventhParagraph.adress} <br />
-                    Passeig de Sant Joan, 93 <br />
-                    08009 Barcelona <br />
-                    {lang.seventhParagraph.email} info@letscooknow.es <br />
+                    {lang.info.address1} <br />
+                    {lang.info.address2} <br />
+                    {lang.seventhParagraph.email} {lang.info.email} <br />
                 </Typography>
 
                 {/* Párrafo 8 */}
@@ -275,9 +275,9 @@ export const LegalTextSection = () => {
                 </Typography>
                 <Typography paragraph variant="body1">
                     {lang.firstParagraph.adress} <br />
-                    Passeig de Sant Joan, 93 <br />
-                    08009 Barcelona <br />
-                    {lang.firstParagraph.email} info@letscooknow.es <br />
+                    {lang.info.address1} <br />
+                    {lang.info.address2} <br />
+                    {lang.firstParagraph.email} {lang.info.email} <br />
                 </Typography>
 
                 {/* Párrafo 18 */}

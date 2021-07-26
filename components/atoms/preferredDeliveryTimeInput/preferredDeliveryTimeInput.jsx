@@ -4,6 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
+import { useLang } from "../../../hooks";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PreferredDeliveryTimeInput(props) {
     const classes = useStyles();
-    const theme = useTheme();
+    const [lang] = useLang("preferredDeliveryTimeInput");
 
     const timeOptions = [
         { value: "10to12", label: "De 10 a 12 hs" },
@@ -26,7 +27,7 @@ export default function PreferredDeliveryTimeInput(props) {
         <form className={classes.container} noValidate>
             <TextField
                 id="time"
-                label="Horario de Preferencia de Entrega"
+                label={lang.deliveryTime}
                 name={props.name}
                 type="time"
                 defaultValue="07:30"

@@ -6,7 +6,7 @@ import { useAuthStore, useUserInfoStore } from "@stores";
 import { useRouter } from "next/router";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import cookies from "js-cookie";
-import { useLocalStorage } from "@hooks";
+import { useLang, useLocalStorage } from "@hooks";
 
 const UserBox = (props) => {
     const router = useRouter();
@@ -16,6 +16,7 @@ const UserBox = (props) => {
     const { resetLocalStorage } = useLocalStorage();
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const setuserInfo = useUserInfoStore((state) => state.setuserInfo);
+    const [lang] = useLang('userBox');
 
     const _toggleOpen = () => {
         setOpen(!open);
@@ -35,16 +36,16 @@ const UserBox = (props) => {
 
     const options = {
         es: [
-            { title: "MIS PLANES", path: "/perfil", handler: () => _handleOptionSelected("/") },
-            { title: "CONFIGURACIÓN DE CUENTA", path: "/user-info", handler: () => _handleOptionSelected("/") },
-            { title: "HISTORIAL DE PAGOS", path: "/historial-pagos", handler: () => _handleOptionSelected("/") },
-            { title: "CERRAR SESIÓN", path: "/", handler: handleSignOut },
+            { title: lang.titlePlans, path: "/perfil", handler: () => _handleOptionSelected("/") },
+            { title: lang.titleAccountSettings, path: "/user-info", handler: () => _handleOptionSelected("/") },
+            { title: lang.titleHistoryPayments, path: "/historial-pagos", handler: () => _handleOptionSelected("/") },
+            { title: lang.titleCloseSession, path: "/", handler: handleSignOut },
         ],
         en: [
-            { title: "MIS PLANES", path: "/", handler: () => _handleOptionSelected("/") },
-            { title: "CONFIGURACIÓN DE CUENTA", path: "/", handler: () => _handleOptionSelected("/") },
-            { title: "HISTORIAL DE PAGOS", path: "/", handler: () => _handleOptionSelected("/") },
-            { title: "CERRAR SESIÓN", path: "/", handler: handleSignOut },
+            { title: lang.titlePlans, path: "/", handler: () => _handleOptionSelected("/") },
+            { title: lang.titleAccountSettings, path: "/", handler: () => _handleOptionSelected("/") },
+            { title: lang.titleHistoryPayments, path: "/", handler: () => _handleOptionSelected("/") },
+            { title: lang.titleCloseSession, path: "/", handler: handleSignOut },
         ],
     };
 
@@ -60,7 +61,7 @@ const UserBox = (props) => {
                 style={{ marginLeft: "16px" }}
                 onClick={_toggleOpen}
             >
-                {userInfo.firstName || "MI CUENTA"}
+                {userInfo.firstName || lang.myAccount}
             </Button>
             <Menu id="simple-menu" anchorEl={anchorRef.current} keepMounted open={open} onClose={_toggleOpen} style={{ marginTop: "40px" }}>
                 {options["es"].map((item, index) => (
