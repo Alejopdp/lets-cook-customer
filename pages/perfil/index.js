@@ -178,20 +178,19 @@ const Perfil = (props) => {
                                         {/* </Grid> */}
                                     </Grid>
                                     <Grid item xs={3} style={{ textAlign: "right" }}>
-                                        {/* <Grid item style={{ marginRight: theme.spacing(2) }}> */}
-                                        <Link href="/historial-pagos">
-                                            <TextButton
-                                                style={{ marginRight: theme.spacing(2) }}
-                                                noColor
-                                                icon="time"
-                                                btnText="Historial de pagos"
-                                            />
-                                        </Link>
-                                        {/* </Grid> */}
-                                        {/* <Grid item> */}
-                                        <Link href="/configuracion">
-                                            <TextButton noColor icon="settings" btnText="Configuración" />
-                                        </Link>
+                                        <TextButton
+                                            style={{ marginRight: theme.spacing(2) }}
+                                            noColor
+                                            icon="time"
+                                            btnText="Historial de pagos"
+                                            handleClick={() => router.push("/historial-pagos")}
+                                        />
+                                        <TextButton
+                                            noColor
+                                            icon="settings"
+                                            btnText="Configuración"
+                                            handleClick={() => router.push("/configuracion")}
+                                        />
                                         {/* </Grid> */}
                                     </Grid>
                                 </Grid>
@@ -234,14 +233,21 @@ const Perfil = (props) => {
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                                        <Link href="/historial-pagos">
-                                            <TextButton style={{ marginRight: "14px" }} noColor icon="time" btnText="Historial de pagos" />
-                                        </Link>
+                                        <TextButton
+                                            style={{ marginRight: "14px" }}
+                                            noColor
+                                            icon="time"
+                                            btnText="Historial de pagos"
+                                            handleClick={() => router.push("/historial-pagos")}
+                                        />
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(5) }}>
-                                        <Link href="/configuracion">
-                                            <TextButton noColor icon="settings" btnText="Configuración" />
-                                        </Link>
+                                        <TextButton
+                                            noColor
+                                            icon="settings"
+                                            btnText="Configuración"
+                                            handleClick={() => router.push("/configuracion")}
+                                        />
                                     </Grid>
                                     {data.pendingActions.map((action, index) => (
                                         <Grid key={index} item xs={12}>
@@ -261,7 +267,11 @@ const Perfil = (props) => {
                                 spacing={2}
                                 style={{ marginBottom: theme.spacing(3) }}
                             >
-                                <ProfileTitleWithButton title="Mis planes" btnText="Nuevo plan" />
+                                <ProfileTitleWithButton
+                                    title="Mis planes"
+                                    btnText="Nuevo plan"
+                                    handleClick={() => router.push("/planes")}
+                                />
                             </Grid>
                             <Grid container spacing={2} style={{ marginBottom: theme.spacing(5) }}>
                                 {data.principalPlanSubscriptions.length > 0 ? (
@@ -298,7 +308,11 @@ const Perfil = (props) => {
                                         spacing={2}
                                         style={{ marginBottom: theme.spacing(3) }}
                                     >
-                                        <ProfileTitleWithButton title="Mis acompañamientos" btnText="Nuevo acompañamiento" />
+                                        <ProfileTitleWithButton
+                                            title="Mis acompañamientos"
+                                            btnText="Nuevo acompañamiento"
+                                            handleClick={() => router.push("/nuevo-acompanamiento")}
+                                        />
                                     </Grid>
                                     <Grid container spacing={2} style={{ marginBottom: theme.spacing(5) }}>
                                         {data.additionalPlanSubscriptions.length > 0 ? (

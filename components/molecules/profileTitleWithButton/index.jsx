@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 // Internal components
 import TextButton from "../../../components/atoms/textButton/textButton";
 
-const ProfileTitleWithButton = props => {
+const ProfileTitleWithButton = (props) => {
     const theme = useTheme();
 
     return (
@@ -24,6 +24,7 @@ const ProfileTitleWithButton = props => {
                     style={{ color: theme.palette.primary.main }}
                     icon="plus-circle-outline"
                     btnText={props.btnText}
+                    handleClick={props.handleClick}
                 />
             </Grid>
         </>

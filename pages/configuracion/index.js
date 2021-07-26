@@ -10,17 +10,19 @@ import { Layout } from "../../components/layout/index";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 import UserInfoDetail from "../../components/organisms/userInfo";
 import { getUserInfo } from "../../helpers/serverRequests/user-info";
+import { useUserInfoStore } from "../../stores/auth";
 
 const UserInfo = (props) => {
     const router = useRouter();
     const [isLoading, setisLoading] = useState(true);
     const [initialCustomerInfo, setinitialCustomerInfo] = useState({});
+    const userInfo = useUserInfoStore((state) => state.userInfo);
     // const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         const getData = async () => {
             if (!router.isReady) return;
-            const res = await getUserInfo(router.query.id, router.locale);
+            const res = await getUserInfo(userInfo.id, router.locale);
 
             if (res.status === 200) {
                 setinitialCustomerInfo(res.data);
