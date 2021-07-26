@@ -51,14 +51,16 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
     };
 
     const handleAddressChange = async (newAddress) => {
-        const geometry = await getGeometry(newAddress.structured_formatting.main_text);
+        if (newAddress) {
+            const geometry = await getGeometry(newAddress.structured_formatting.main_text);
 
-        setDeliveryInfo({
-            ...form.deliveryForm,
-            addressName: newAddress.description,
-            latitude: geometry.lat,
-            longitude: geometry.lng,
-        });
+            setDeliveryInfo({
+                ...form.deliveryForm,
+                addressName: newAddress.description,
+                latitude: geometry.lat,
+                longitude: geometry.lng,
+            });
+        }
     };
 
     return (

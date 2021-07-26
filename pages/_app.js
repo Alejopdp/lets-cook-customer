@@ -27,6 +27,7 @@ function MyApp(props) {
             const token = await getFromLocalStorage("token");
 
             if (!token) {
+                setisLoading(false);
                 return;
             }
 
@@ -37,7 +38,7 @@ function MyApp(props) {
                 const userInfo = getFromLocalStorage("userInfo");
                 setUserInfo(userInfo);
             } else {
-                await resetLocalStorage();
+                resetLocalStorage();
             }
 
             setisLoading(false);
