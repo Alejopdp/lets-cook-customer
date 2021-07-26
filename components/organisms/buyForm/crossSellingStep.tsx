@@ -75,7 +75,9 @@ const CrossSellingStep = (props) => {
                                 style={{ marginBottom: theme.spacing(2) }}
                             />
                         )}
-                        <Button variant="text">No quiero agregar ningún producto adicional</Button>
+                        <Button variant="text" onClick={() => router.push(`/detalle-del-plan/${form.subscriptionId}`)}>
+                            No quiero agregar ningún producto adicional
+                        </Button>
                     </Box>
                 </Grid>
             </Grid>
