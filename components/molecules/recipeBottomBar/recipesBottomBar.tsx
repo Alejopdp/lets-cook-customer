@@ -13,7 +13,11 @@ type RecipesBottomBarProps = {
 export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
     const classes = useStyles();
     const theme = useTheme();
-    const { recipes, variant } = useBuyFlow((store) => ({ recipes: store.form.recipes, variant: store.form.variant }));
+    const { recipes, variant, forward } = useBuyFlow((store) => ({
+        recipes: store.form.recipes,
+        variant: store.form.variant,
+        forward: store.forward,
+    }));
     const isOpen = useRecipesBottomBar(({ isOpen }) => isOpen);
 
     if (!isOpen) {
@@ -49,13 +53,18 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                         {recipes.length >= variant.numberOfRecipes && (
                             <Grid container>
                                 <CheckCircleOutline color="primary" className={classes.marginRight} />
-                                <Typography variant='body2' color='textSecondary' style={{ fontSize: '14px' }}>¡Ha seleccionado todas las recetas!</Typography>
+                                <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
+                                    ¡Ha seleccionado todas las recetas!
+                                </Typography>
                             </Grid>
                         )}
                         {recipes.length < variant.numberOfRecipes && (
                             <Grid container>
                                 <ErrorOutlineOutlined color="secondary" className={classes.marginRight} />
-                                <Typography variant='body2' color='textSecondary' style={{ fontSize: '14px' }}> Aún te quedan {variant.numberOfRecipes - recipes.length} recetas por seleccionar</Typography>
+                                <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
+                                    {" "}
+                                    Aún te quedan {variant.numberOfRecipes - recipes.length} recetas por seleccionar
+                                </Typography>
                             </Grid>
                         )}
                     </Grid>
@@ -69,7 +78,12 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                             />
                         </Grid>
                         <Grid item>
-                            <Button variant="text" color="default" style={{ fontSize: '13px', marginTop: theme.spacing(0.5) }}>
+                            <Button
+                                variant="text"
+                                color="default"
+                                style={{ fontSize: "13px", marginTop: theme.spacing(0.5) }}
+                                onClick={() => forward()}
+                            >
                                 Elegir recetas luego
                             </Button>
                         </Grid>

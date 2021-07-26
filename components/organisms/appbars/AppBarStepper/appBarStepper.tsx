@@ -26,6 +26,12 @@ const _steps: Step[] = [
     { label: "Elegir recetas", icon: "/icons/appbar/img-header-select-recipes.svg", state: "inactive" },
 ];
 
+const loggedInSteps: Step[] = [
+    { label: "Seleccionar plan", icon: "/icons/appbar/img-header-select-plan.svg", state: "active" },
+    { label: "Checkout", icon: "/icons/appbar/img-header-checkout.svg", state: "inactive" },
+    { label: "Elegir recetas", icon: "/icons/appbar/img-header-select-recipes.svg", state: "inactive" },
+];
+
 export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const { showRegister, setRegisterState: toggleRegister } = useBuyFlow(({ setRegisterState, showRegister }) => ({
@@ -45,12 +51,12 @@ export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
         <AppBar position="fixed" color="default" className={classes.navbarClass}>
             <Toolbar>
                 <div className={classes.logo}>
-                        <Image src="/logo.png" width={115} height={40} />
+                    <Image src="/logo.png" width={115} height={40} />
                 </div>
                 <StepperBuy smDowmHide steps={steps} />
                 <LangSelector />
             </Toolbar>
-            <StepperBuy smUpHide steps={steps} />
+            <StepperBuy smUpHide steps={isAuthenticated ? loggedInSteps : steps} />
         </AppBar>
     );
 };
