@@ -25,9 +25,11 @@ const _icons: IconsType[] = [
 
 export const IconsWithText = ({ icons = _icons }: IconsWithTextProps) => {
     return (
-        <Grid item container justify="space-around" style={{ marginTop: "16px" }}>
+        <Grid container spacing={2}>
             {icons.map((icon, index) => (
-                <IconWithText key={index} src={icon.src} text={icon.text} />
+                <Grid item xs={4}>
+                    <IconWithText key={index} src={icon.src} text={icon.text} />
+                </Grid>
             ))}
         </Grid>
     );

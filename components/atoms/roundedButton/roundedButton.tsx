@@ -22,7 +22,7 @@ export const RoundedButton = ({ variant = "content", label, children: Component,
             {...props}
         >
             <div style={{ marginRight: 4 }}>{Component}</div>
-            <Typography variant="button" className={clsx({ [classes.contentTypography]: variant === "content" })}>
+            <Typography variant="button" style={{ ...props.textStyle }} className={clsx({ [classes.contentTypography]: variant === "content" })}>
                 {label}
             </Typography>
         </ButtonBase>

@@ -3,11 +3,15 @@ export const useStyles = makeStyles((theme) => ({
     appBar: {
         top: "auto",
         bottom: 0,
+        backgroundColor: theme.palette.background.paper
     },
     textCenter: {
         textAlign: "center",
     },
-    paddingBottom: { paddingBottom: 16 },
+    paddingBottom: {
+        paddingTop: '16px',
+        paddingBottom: '16px',
+    },
     recipeSelectedRoot: {
         borderRadius: 4,
         width: 64,
@@ -22,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
         backgroundSize: "cover",
     },
     marginRight: {
-        marginRight: theme.spacing(2),
+        marginRight: theme.spacing(1),
     }
 }));
 export default useStyles;

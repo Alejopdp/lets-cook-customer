@@ -8,8 +8,8 @@ export interface Benefit {
 }
 export interface BenefitsSectionProps {
     cards: Benefit[],
-    backgroundColor: string,
-    removeCallToAction: boolean,
+    backgroundColor?: string,
+    removeCallToAction?: boolean,
 }
 
 export interface CallToActionSectionProps { }

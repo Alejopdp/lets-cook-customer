@@ -20,6 +20,7 @@ export const TextInput = (props: TextInputProps) => {
         <FormControl variant="outlined" className={textField}>
             <InputLabel style={{ fontSize: '16px' }}>{props.label}</InputLabel>
             <OutlinedInput
+                style={{ fontSize: '16px' }}
                 className={border}
                 name={props.name}
                 value={props.value}
@@ -47,6 +48,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
         <FormControl variant="outlined" className={textField}>
             <InputLabel style={{ fontSize: '16px' }}>{props.label}</InputLabel>
             <OutlinedInput
+                style={{ fontSize: '16px' }}
                 className={border}
                 type={values.showPassword ? "text" : "password"}
                 name={props.name}

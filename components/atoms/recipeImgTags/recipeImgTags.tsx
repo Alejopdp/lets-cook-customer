@@ -13,7 +13,7 @@ export const RecipeImgTags = (props: RecipeImgTagsProps) => {
     return (
         <Box style={{ display: 'flex' }}>
             {props.imgTags.map((tag, index) => (
-                <Typography key={index} variant="subtitle2" style={{ marginRight: '4px' }} className={clsx(imgTag, textWhite)}>
+                <Typography key={index} variant="subtitle2" style={{ marginRight: '4px', fontSize:'12px' }} className={clsx(imgTag, textWhite)}>
                     {tag}
                 </Typography>
             ))}

@@ -42,7 +42,7 @@ const PlanSelector = (props: PlanSelectorProps) => {
     const classes = useStyles();
     const theme = useTheme();
     return (
-        <Box display="flex" paddingY={4} borderBottom="2px dashed #E5E5E5">
+        <Box display="flex" paddingY={4}>
             <Box marginRight={3}>
                 <Image src={props.planIcon} alt={props.planName} width={32} height={32} />
             </Box>

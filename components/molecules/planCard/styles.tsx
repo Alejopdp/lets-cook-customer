@@ -13,8 +13,9 @@ export const usePlansStyles = makeStyles(theme => ({
     },
     card: {
         display: "flex",
+        width: '100%',
         // width: 260,
-        height: 400,
+        height: 360,
         boxSizing: "border-box",
         // marginLeft: theme.spacing(1),
         // marginRight: theme.spacing(1),
@@ -35,22 +36,18 @@ export const usePlansStyles = makeStyles(theme => ({
         textAlign: "center",
         color: theme.palette.primary.contrastText,
         borderRadius: 8,
-        padding: theme.spacing(1),
+        // padding: theme.spacing(1),
     },
     cardContent: {
+        width: '100%',
         display: "flex",
         flex: 1,
         flexDirection: "column",
-        padding: theme.spacing(2),
-        paddingTop: theme.spacing(4),
+        padding: `${theme.spacing(4)}px ${theme.spacing(2)}px ${theme.spacing(2)}px ${theme.spacing(2)}px`,
         textAlign: "left"
     },
     cardAction: {
         padding: theme.spacing(2),
         width: '100%'
     },
-    img: {},
-    paddingCardTitle: {},
-    title: {},
-    content: {},
 }));

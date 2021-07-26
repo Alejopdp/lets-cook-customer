@@ -69,9 +69,9 @@ export const RecipesGrid = (props: RecipesGridProps) => {
             )}
 
             {props.recipesSelection && (
-                <Grid container item direction="row" justify="center" alignItems="flex-start" spacing={2}>
+                <Grid container spacing={2}>
                     {props.recipes.map((recipe, index) => (
-                        <Grid item xs={12} key={index}>
+                        <Grid key={index} item xs={12} sm={6} md={3}>
                             <RecipeCardBuyFlow
                                 id={recipe.id}
                                 imageUrl={recipe.imageUrl}
