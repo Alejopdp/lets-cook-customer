@@ -56,7 +56,7 @@ function MyApp(props) {
                     <Elements stripe={stripePromise}>
                         <CssBaseline />
                         {/* TODO: IMPORTANT!!! Restore by down line */}
-                        {/* {console.error("\n\nTODO: IMPORTANT!!! Restore by down line...\n\n")} */}
+                        {console.error("\n\nTODO: IMPORTANT!!! Restore by line below...\n\n")}
                         {<Component {...pageProps} />}
                         {/* {!isLoading && <Component {...pageProps} />} */}
                     </Elements>
