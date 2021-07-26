@@ -1,0 +1,47 @@
+export const selectPlanStep = {
+    es: {
+        selectPlan: "1. Elige tu plan",
+        productDescription: "Descripción del producto seleccionado",
+        selectPlanSize: "2. Elige el tamaño de tu plan",
+        amountOfPeople: "Cantidad de personas",
+        amountOfRecipes: "Cantidad de recetas por semanas",
+        paragraph0: "Podrás elegir las recetas en el último paso. Cada semana cambiamos las recetas.",
+        recipeSectionTitle: "Hecha un vistazo a las recetas de esta semana",
+        recipeSectionSubtitle: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam",
+        faqs: "Preguntas frecuentes",
+        paragraph1: "¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat",
+        right: "Let's Cook 2021 © Todos los derechos reservados",
+        terms: "Términos y condiciones",
+        privacy: "Política de privacidad"
+    },
+    en: {
+        selectPlan: "1. Elige tu plan",
+        productDescription: "Descripción del producto seleccionado",
+        selectPlanSize: "2. Elige el tamaño de tu plan",
+        amountOfPeople: "Cantidad de personas",
+        amountOfRecipes: "Cantidad de recetas por semanas",
+        paragraph0: "Podrás elegir las recetas en el último paso. Cada semana cambiamos las recetas.",
+        recipeSectionTitle: "Hecha un vistazo a las recetas de esta semana",
+        recipeSectionSubtitle: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam",
+        faqs: "Preguntas frecuentes",
+        paragraph1: "¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat",
+        right: "Let's Cook 2021 © Todos los derechos reservados",
+        terms: "Términos y condiciones",
+        privacy: "Política de privacidad"
+    },
+    ca: {
+        selectPlan: "1. Elige tu plan",
+        productDescription: "Descripción del producto seleccionado",
+        selectPlanSize: "2. Elige el tamaño de tu plan",
+        amountOfPeople: "Cantidad de personas",
+        amountOfRecipes: "Cantidad de recetas por semanas",
+        paragraph0: "Podrás elegir las recetas en el último paso. Cada semana cambiamos las recetas.",
+        recipeSectionTitle: "Hecha un vistazo a las recetas de esta semana",
+        recipeSectionSubtitle: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam",
+        faqs: "Preguntas frecuentes",
+        paragraph1: "¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat",
+        right: "Let's Cook 2021 © Todos los derechos reservados",
+        terms: "Términos y condiciones",
+        privacy: "Política de privacidad"
+    },
+}

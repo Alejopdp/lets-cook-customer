@@ -2,3 +2,8 @@ export * from "./avisoLegal";
 export * from "./comoFunciona";
 export * from "./preguntasFrecuentes";
 export * from "./recetas";
+export * from './blogs';
+export * from './planDetails';
+export * from './historialPagos';
+export * from './perfil';
+export * from './recetasLayout';

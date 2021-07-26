@@ -1,0 +1,32 @@
+export const passSignup = {
+    es: {
+        createAccount: "Crear tu cuenta",
+        password: "Ingrese su contraseña",
+        auth: "Autorizo a Let's Cook a tratar mis datos para poder gestionar el alta como usuario en su web. Puedes obtener más información",
+        tapHere: "pulsando aquí.",
+        sendInfo: "Quiero recibir información por correo electrónico sobre los productos de Let's Cook y cualquier otra información que pudiera ser de mi interés como promociones y ofertas. Puedes obtener mas información",
+        signIn: "Ingresar",
+        hasAccount: "¿Ya tienes cuenta?",
+        singInHere: "Ingresa aquí",
+    },
+    en: {
+        createAccount: "Crear tu cuenta",
+        password: "Ingrese su contraseña",
+        auth: "Autorizo a Let's Cook a tratar mis datos para poder gestionar el alta como usuario en su web. Puedes obtener más información",
+        tapHere: "pulsando aquí.",
+        sendInfo: "Quiero recibir información por correo electrónico sobre los productos de Let's Cook y cualquier otra información que pudiera ser de mi interés como promociones y ofertas. Puedes obtener mas información",
+        signIn: "Ingresar",
+        hasAccount: "¿Ya tienes cuenta?",
+        singInHere: "Ingresa aquí",
+    },
+    ca: {
+        createAccount: "Crear tu cuenta",
+        password: "Ingrese su contraseña",
+        auth: "Autorizo a Let's Cook a tratar mis datos para poder gestionar el alta como usuario en su web. Puedes obtener más información",
+        tapHere: "pulsando aquí.",
+        sendInfo: "Quiero recibir información por correo electrónico sobre los productos de Let's Cook y cualquier otra información que pudiera ser de mi interés como promociones y ofertas. Puedes obtener mas información",
+        signIn: "Ingresar",
+        hasAccount: "¿Ya tienes cuenta?",
+        singInHere: "Ingresa aquí",
+    },
+}

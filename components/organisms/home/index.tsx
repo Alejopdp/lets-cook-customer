@@ -11,11 +11,13 @@ import ReviewsSection from "../sections/ReviewsSection";
 
 import { useStyles } from './styles';
 import { HomePageProps } from './interfaces';
+import { useLang } from "@hooks";
 /**
  * TODO: IMPORTANT!!! is needly add all values to container, the idea is go to controlling the spaces o margins for the differents sections.
  */
 const HomePage = (props: HomePageProps) => {
     const classes = useStyles();
+    const [lang] = useLang('home')
     return (
         <Layout>
             <ValuePropositionSection />
@@ -33,8 +35,8 @@ const HomePage = (props: HomePageProps) => {
             </div>
             <div className={classes.paddingY8}>
                 <RecipesSection recipes={props.recipes}
-                    title="Hecha un vistazo a las recetas de esta semana"
-                    subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
+                    title={lang.title}
+                    subtitle={lang.subtitle}
                     titleAlign="flex-start"
                 />
             </div>

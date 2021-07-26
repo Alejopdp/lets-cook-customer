@@ -13,6 +13,7 @@ import { RoundedButton } from "@atoms";
 import { TitleBuyFlow, RecipesBottomBar } from "@molecules";
 import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
+import { useLang } from "@hooks";
 
 interface RecipeChoiseStepProps {
     recipes: any[];
@@ -27,6 +28,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     }));
     const gotToNextView = useBuyFlow(({ forward }) => forward);
     const { enqueueSnackbar } = useSnackbar();
+    const [lang] = useLang('recipeChoiseStep');
 
     const handleRemoveFilter = (filter) => {
         const newFilterState = filters.filter((f) => filter !== f);
@@ -47,7 +49,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
 
         if (res.status === 200) {
             gotToNextView();
-            enqueueSnackbar("Changed correctly", { variant: "success" });
+            enqueueSnackbar(lang.changeSuccess, { variant: "success" });
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
@@ -58,15 +60,15 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
             <Grid container spacing={1} style={{ marginBottom: 150 }}>
                 <Grid item container justify="center">
                     <TitleBuyFlow
-                        title="El pago ha sido exitoso. ¡Muchas gracias por tu compra!"
-                        subtitle="Elige las 3 recetas que recibirás el martes 18"
+                        title={lang.title}
+                        subtitle={lang.subtitle}
                     />
                 </Grid>
                 <Grid item container direction="column" spacing={2}>
                     <Grid item xs={3}>
                         <RoundedButton
                             variant="outline"
-                            label="Filtrar recetas"
+                            label={lang.filter}
                             style={{ backgroundColor: "white" }}
                             onClick={() => {
                                 setDrawerOpen(!drawerIsOpen);

@@ -28,7 +28,7 @@ import { useUserInfoStore } from "../../stores/auth";
 import { useSnackbar } from "notistack";
 import { reorderPlan } from "../../helpers/serverRequests/subscription";
 import PlanProfileCard from "../../components/molecules/planProfileCard/";
-
+import { useLang } from "@hooks";
 // export async function getServerSideProps(context) {
 //     const customerWithPlans = "f031ca8c-647e-4d0b-8afc-28e982068fd5";
 //     const customerWithoutPlans = "";
@@ -57,7 +57,7 @@ const Perfil = (props) => {
         pendingActions: [],
     });
     const userInfo = useUserInfoStore((state) => state.userInfo);
-    // const lang = langs[router.locale];
+    const [lang] = useLang("perfil");
 
     useEffect(() => {
         const getProfile = async () => {
@@ -97,7 +97,7 @@ const Perfil = (props) => {
             case "invite_code":
                 return <ReferalActionBox data={data} />;
             default:
-                return <p>unknown action</p>;
+                return <p>{lang.unknowError}</p>;
         }
     };
 
@@ -105,10 +105,10 @@ const Perfil = (props) => {
         const res = await reorderPlan(selectedPlan.id);
 
         if (res.status === 200) {
-            enqueueSnackbar("Pedido correctamente realizado", { variant: "success" });
+            enqueueSnackbar(lang.success, { variant: "success" });
             router.push(`/detalle-del-plan/${res.data.subscriptionId}`);
         } else {
-            enqueueSnackbar("Error al volver a pedir el plan", { variant: "error" });
+            enqueueSnackbar(lang.error, { variant: "error" });
         }
 
         handleClosePlanRecoverModal();
@@ -173,7 +173,7 @@ const Perfil = (props) => {
                                     <Grid item xs={9}>
                                         {/* <Grid item> */}
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                            Hola {userInfo.firstName}
+                                            {lang.hellow + " " + userInfo.firstName}
                                         </Typography>
                                         {/* </Grid> */}
                                     </Grid>
@@ -184,13 +184,13 @@ const Perfil = (props) => {
                                                 style={{ marginRight: theme.spacing(2) }}
                                                 noColor
                                                 icon="time"
-                                                btnText="Historial de pagos"
+                                                btnText={lang.paymentHistory}
                                             />
                                         </Link>
                                         {/* </Grid> */}
                                         {/* <Grid item> */}
                                         <Link href="/configuracion">
-                                            <TextButton noColor icon="settings" btnText="Configuración" />
+                                            <TextButton noColor icon="settings" btnText={lang.settings} />
                                         </Link>
                                         {/* </Grid> */}
                                     </Grid>
@@ -230,17 +230,17 @@ const Perfil = (props) => {
                                 <Grid container direction="column" alignItems="left" spacing={2}>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(3) }}>
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                            Hola {userInfo.firstName || ""}
+                                            {lang.hellow + " " + (userInfo.firstName || "")}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                                         <Link href="/historial-pagos">
-                                            <TextButton style={{ marginRight: "14px" }} noColor icon="time" btnText="Historial de pagos" />
+                                            <TextButton style={{ marginRight: "14px" }} noColor icon="time" btnText={lang.paymentHistory} />
                                         </Link>
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(5) }}>
                                         <Link href="/configuracion">
-                                            <TextButton noColor icon="settings" btnText="Configuración" />
+                                            <TextButton noColor icon="settings" btnText={lang.settings} />
                                         </Link>
                                     </Grid>
                                     {data.pendingActions.map((action, index) => (
@@ -261,7 +261,7 @@ const Perfil = (props) => {
                                 spacing={2}
                                 style={{ marginBottom: theme.spacing(3) }}
                             >
-                                <ProfileTitleWithButton title="Mis planes" btnText="Nuevo plan" />
+                                <ProfileTitleWithButton title={lang.myPlans} btnText={lang.newPlan} />
                             </Grid>
                             <Grid container spacing={2} style={{ marginBottom: theme.spacing(5) }}>
                                 {data.principalPlanSubscriptions.length > 0 ? (
@@ -283,8 +283,8 @@ const Perfil = (props) => {
                                 ) : (
                                     <EmptyState
                                         image="/emptyStatePlans.png"
-                                        title="Aún no tienes planes"
-                                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                        title={lang.emptyStateTitle}
+                                        text={lang.emptyStateText}
                                     />
                                 )}
                             </Grid>
@@ -298,7 +298,7 @@ const Perfil = (props) => {
                                         spacing={2}
                                         style={{ marginBottom: theme.spacing(3) }}
                                     >
-                                        <ProfileTitleWithButton title="Mis acompañamientos" btnText="Nuevo acompañamiento" />
+                                        <ProfileTitleWithButton title={lang.myAccompaniments} btnText={lang.myAccompanimentsButton} />
                                     </Grid>
                                     <Grid container spacing={2} style={{ marginBottom: theme.spacing(5) }}>
                                         {data.additionalPlanSubscriptions.length > 0 ? (
@@ -318,8 +318,8 @@ const Perfil = (props) => {
                                         ) : (
                                             <EmptyState
                                                 image="/emptyStatePlans.png"
-                                                title="Aún no tienes acompañamientos"
-                                                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                                title={lang.myAccompanimentsTitle}
+                                                text={lang.myAccompanimentsText}
                                             />
                                         )}
                                     </Grid>

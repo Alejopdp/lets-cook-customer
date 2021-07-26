@@ -8,8 +8,10 @@ import CustomButton from "../../atoms/customButton/customButton";
 import SocialNetworksButtons from '../../atoms/socialNetworksButtons/socialNetworksButtons';
 import { Register, AcceptLegalTerms } from '../../atoms/loginHelpers/loginHelpers';
 import Divider from '../../atoms/divider/divider';
+import { useLang } from "@hooks";
 
 const MailSignup = () => {
+    const [lang] = useLang('mailSignup');
     const [values, setValues] = React.useState({
         email: '',
     });
@@ -25,16 +27,16 @@ const MailSignup = () => {
     console.log(values)
 
     return (
-        <FormPaper title="Crear tu cuenta">
+        <FormPaper title={lang.title}>
             <TextInput
-                label="Ingrese su correo electrónico"
+                label={lang.email}
                 name="email"
                 value={values.email}
                 onChange={handleChange("email")}
             />
 
             <CustomButton
-                text={"Continuar"}
+                text={lang.next}
                 onClick={handleSubmit}
             />
 
@@ -44,7 +46,7 @@ const MailSignup = () => {
 
             <AcceptLegalTerms />
 
-            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/ingresar" />
+            <Register text={lang.hasAccount} boldText={lang.inHere} redirectTo="/ingresar" />
         </FormPaper>
     )
 }

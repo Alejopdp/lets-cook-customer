@@ -9,6 +9,7 @@ import ConfirmationNumber from "@material-ui/icons/ConfirmationNumber";
 import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 import Input from "../couponInput/couponInput";
 import { CouponInputAccordionProps } from "./interface";
+import { useLang } from "@hooks";
 
 const Accordion = withStyles({
     root: {
@@ -54,6 +55,7 @@ export default function CustomizedAccordions(props: CouponInputAccordionProps) {
     const [expanded, setExpanded] = React.useState("panel1");
     const [couponValue, setcouponValue] = React.useState("");
     const theme = useTheme();
+    const [lang] = useLang('customizedAccordions');
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -66,7 +68,7 @@ export default function CustomizedAccordions(props: CouponInputAccordionProps) {
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Box display="flex" alignItems="center">
                             <ConfirmationNumber style={{ marginRight: theme.spacing(1) }} />
-                            <Typography style={{ fontWeight: 600 }}>¿Tienes un cupón de descuento?</Typography>
+                            <Typography style={{ fontWeight: 600 }}>{lang.hasdiscount}</Typography>
                         </Box>
                         {/* <KeyboardArrowDown /> */}
                     </Box>

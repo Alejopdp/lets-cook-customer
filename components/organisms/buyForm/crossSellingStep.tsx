@@ -17,10 +17,12 @@ import { useRouter } from "next/router";
 // Images & icons
 import Payment from "@material-ui/icons/Payment";
 import { CustomButton } from "@atoms";
+import { useLang } from "@hooks";
 
 const CrossSellingStep = (props) => {
     const form = useBuyFlow((state) => state.form);
     const router = useRouter();
+    const [lang] = useLang('crossSellingStep');
     const { enqueueSnackbar } = useSnackbar();
     const [additionalPlans, setadditionalPlans] = useState<Plan[]>([]);
     const selectedPlans = useCrossSellingStore((state) => state.selectedPlans);
@@ -58,8 +60,8 @@ const CrossSellingStep = (props) => {
             <Grid container spacing={1}>
                 <Grid item container justify="center">
                     <TitleBuyFlow
-                        title="Ya has seleccionado las recetas correctamente"
-                        subtitle="¿Quieres agregar algún producto adicional?"
+                        title={lang.title}
+                        subtitle={lang.subtitle}
                     />
                 </Grid>
 
@@ -70,12 +72,12 @@ const CrossSellingStep = (props) => {
                     <Box display="flex" flexDirection="column" alignItems="center">
                         {totalValue && (
                             <CustomButton
-                                text={`PAGAR PRODUCTOS ADICIONALES (${totalValue} €)`}
+                                text={lang.additionalProduct.replace(/totalValue/gi,totalValue)}
                                 icon={<Payment />}
                                 onClick={handleSubmitPayment}
                             />
                         )}
-                        <Button variant="text">No quiero agregar ningún producto adicional</Button>
+                        <Button variant="text">{lang.button}</Button>
                     </Box>
                 </Grid>
             </Grid>

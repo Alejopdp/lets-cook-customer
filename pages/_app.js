@@ -55,7 +55,10 @@ function MyApp(props) {
                 <SnackbarProvider maxSnack={3}>
                     <Elements stripe={stripePromise}>
                         <CssBaseline />
-                        {!isLoading && <Component {...pageProps} />}
+                        {/* TODO: IMPORTANT!!! Restore by down line */}
+                        {/* {console.error("\n\nTODO: IMPORTANT!!! Restore by down line...\n\n")} */}
+                        {<Component {...pageProps} />}
+                        {/* {!isLoading && <Component {...pageProps} />} */}
                     </Elements>
                 </SnackbarProvider>
             </ThemeProvider>

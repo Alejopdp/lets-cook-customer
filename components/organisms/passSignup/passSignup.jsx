@@ -9,6 +9,7 @@ import SocialNetworksButtons from '../../atoms/socialNetworksButtons/socialNetwo
 import { Register } from '../../atoms/loginHelpers/loginHelpers';
 import Divider from '../../atoms/divider/divider';
 import CustomCheckbox from '../../atoms/customCheckbox/customCheckbox';
+import { useLang } from '@hooks';
 
 const PassSignup = () => {
     const [values, setValues] = React.useState({
@@ -27,10 +28,12 @@ const PassSignup = () => {
 
     console.log(values)
 
+    const [lang] = useLang('passSignup')
+
     return (
-        <FormPaper title="Crear tu cuenta">
+        <FormPaper title={lang.createAccount}>
             <PasswordInput
-                label="Ingrese su contraseña"
+                label={lang.password}
                 name="password"
                 value={values.password}
                 onChange={handleChange("password")}
@@ -40,8 +43,8 @@ const PassSignup = () => {
                 name="authorize"
                 checked={values.authorize}
                 onChange={handleChange("authorize")}
-                label="Autorizo a Let's Cook a tratar mis datos para poder gestionar el alta como usuario en su web. Puedes obtener más información"
-                boldText="pulsando aquí."
+                label={lang.auth}
+                boldText={lang.tapHere}
                 redirectTo={"/aviso-legal"}
             />
 
@@ -49,14 +52,14 @@ const PassSignup = () => {
                 name="sendInfo"
                 checked={values.sendInfo}
                 onChange={handleChange("sendInfo")}
-                label="Quiero recibir información por correo electrónico sobre los productos de Let's Cook y cualquier otra información que pudiera ser de mi interés como promociones y ofertas. Puedes obtener mas información"
-                boldText="pulsando aquí."
+                label={lang.sendInfo}
+                boldText={lang.tapHere}
                 redirectTo={"/aviso-legal"}
             />
 
             <CustomButton
                 disabled={values.authorize === true ? false : true }
-                text={"Ingresar"}
+                text={lang.signIn}
                 onClick={handleSubmit}
             />
 
@@ -64,7 +67,7 @@ const PassSignup = () => {
 
             <SocialNetworksButtons />
 
-            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/ingresar" />
+            <Register text={lang.hasAccount} boldText={lang.singInHere} redirectTo="/ingresar" />
         </FormPaper>
     )
 }

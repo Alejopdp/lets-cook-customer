@@ -8,6 +8,7 @@ import { AppBar, Toolbar } from "@material-ui/core";
 import { StepperBuy, LangSelector } from "@molecules";
 import { useAuthStore, useBuyFlow } from "@stores";
 import { useStyles } from "./styles";
+import { useLang } from "@hooks";
 
 interface Step {
     label: string;
@@ -19,26 +20,21 @@ interface AppBarStepperProps {
     steps?: Step[];
 }
 
-const _steps: Step[] = [
-    { label: "Seleccionar plan", icon: "/icons/appbar/img-header-select-plan.svg", state: "active" },
-    { label: "Registrarse", icon: "/icons/appbar/img-header-register.svg", state: "inactive" },
-    { label: "Checkout", icon: "/icons/appbar/img-header-checkout.svg", state: "inactive" },
-    { label: "Elegir recetas", icon: "/icons/appbar/img-header-select-recipes.svg", state: "inactive" },
-];
-
-export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
+export const AppBarStepper = (props: AppBarStepperProps) => {
+    const [lang] = useLang('appBarStepper');
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const { showRegister, setRegisterState: toggleRegister } = useBuyFlow(({ setRegisterState, showRegister }) => ({
         setRegisterState,
         showRegister,
     }));
 
-    // useEffect(() => {
-    //     console.log("STEPPER: ", isAuthenticated);
-    //     if (isAuthenticated) {
-    //         toggleRegister(false);
-    //     }
-    // }, []);
+    const steps: Step[] = [
+        { label: lang.selectPlan, icon: "/icons/appbar/img-header-select-plan.svg", state: "active" },
+        { label: lang.register, icon: "/icons/appbar/img-header-register.svg", state: "inactive" },
+        { label: lang.checkout, icon: "/icons/appbar/img-header-checkout.svg", state: "inactive" },
+        { label: lang.choiseRecipe, icon: "/icons/appbar/img-header-select-recipes.svg", state: "inactive" },
+    ];
+
     const classes = useStyles();
 
     return (
