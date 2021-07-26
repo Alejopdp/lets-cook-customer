@@ -175,6 +175,9 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 handleClose={handleCloseCancelPlanModal}
                 handlePrimaryButtonClick={handlePrimaryButtonClickCancelPlanModal}
                 data={cancelPlanData}
+                orders={props.subscription.nextTwelveOrders}
+                restrictions={props.restrictions}
+                subscriptionId={props.subscription.subscriptionId}
             />
             <SkipPlanModal
                 open={openSkipPlanModal}

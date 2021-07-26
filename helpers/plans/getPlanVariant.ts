@@ -1,3 +1,4 @@
+import { getLang } from "@hooks";
 import { Plan, PlanVariant, Recipe } from "helpers/serverRequests";
 
 export interface PlanVarianResult {
@@ -12,13 +13,15 @@ export interface PlanVarianResult {
     errors: string[];
 }
 
-export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQty: 0 }, plans?: Plan[]): PlanVarianResult {
+export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQty: 0 }, plans?: Plan[], locale = 'es'): PlanVarianResult {
+    
     let variant: PlanVariant;
     let slug: string = params.slug;
     let id: string;
     let redirect: any;
     let recipes: Recipe[] = [];
     const errors: string[] = [];
+    const [lang] = getLang('getPlansVarians', locale)
 
     /**
      * Verification of the params for variant selection.
@@ -80,7 +83,7 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
 
     if (!recipes.length) {
         // TODO: Move to lang messages
-        errors.push("The current plan hasn't recipes for this week.");
+        errors.push(lang.error);
     }
 
     return {

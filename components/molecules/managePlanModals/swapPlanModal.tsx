@@ -25,9 +25,9 @@ const SwapPlanModal = (props) => {
     });
 
     useEffect(() => {
-        const activePlan = props.data.plans.filter((plan) => plan.active === true)[0];
-        let activePlanId = activePlan ? activePlan.planId : props.data.plans.length === 1 ? props.data.plans[0].planId : "";
-        let activePlanVariantId = props.data.variants.filter((variant) => variant.active === true)[0]?.planVariantId;
+        const activePlan = props.data?.plans?.filter((plan) => plan.active === true)[0];
+        let activePlanId = activePlan ? activePlan.planId : props.data?.plans?.length === 1 ? props.data.plans[0].planId : "";
+        let activePlanVariantId = props.data?.variants?.filter((variant) => variant.active === true)[0]?.planVariantId;
 
         setPlanSelected({
             planId: activePlanId,
@@ -49,7 +49,7 @@ const SwapPlanModal = (props) => {
     }, [planSelected.planId]);
 
     const handleDisableButton = () => {
-        let currentPlanVariantId = props.data.variants.find((variant) => variant.active === true)?.planVariantId || "";
+        let currentPlanVariantId = props.data?.variants?.find((variant) => variant.active === true)?.planVariantId || "";
         if (planSelected.planVariantId === currentPlanVariantId) {
             return true;
         } else {
@@ -98,7 +98,7 @@ const SwapPlanModal = (props) => {
                     label="Plan"
                     inputProps={{ name: "planId", id: "planDropdown" }}
                 >
-                    {props.data.plans.map((plan) => (
+                    {props.data?.plans?.map((plan) => (
                         <option key={plan.planId} value={plan.planId}>
                             {plan.name}
                         </option>
@@ -117,13 +117,17 @@ const SwapPlanModal = (props) => {
                     label="Variante"
                     inputProps={{ name: "planVariantId", id: "variantDropdown" }}
                 >
-                    {props.data.variants
-                        .filter((variant) => variant.planId === planSelected.planId)
-                        .map((variant) => (
-                            <option key={variant.planVariantId} value={variant.planVariantId}>
-                                {variant.variantDescription}
-                            </option>
-                        ))}
+                    {props.data?.variants ? (
+                        props.data.variants
+                            .filter((variant) => variant.planId === planSelected.planId)
+                            .map((variant) => (
+                                <option key={variant.planVariantId} value={variant.planVariantId}>
+                                    {variant.variantDescription}
+                                </option>
+                            ))
+                    ) : (
+                        <></>
+                    )}
                 </Select>
             </FormControl>
         </Modal>

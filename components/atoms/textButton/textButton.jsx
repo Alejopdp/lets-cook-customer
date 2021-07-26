@@ -33,7 +33,7 @@ const TextButton = (props) => {
     const theme = useTheme();
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
     const classes = useStyles();
-    
+
     let content = (
         <Button size="small" className={classes.textButton} style={props.style} onClick={props.handleClick}>
             {props.icon === "plus-circle-outline" ? (
@@ -47,10 +47,9 @@ const TextButton = (props) => {
         </Button>
     );
 
-
     if (isSmDown && props.icon) {
         content = (
-            <IconButton size="small" style={props.style}>
+            <IconButton size="small" style={props.style} onClick={props.handleClick}>
                 {props.icon === "plus-circle-outline" ? (
                     <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
                 ) : props.icon === "settings" ? (
@@ -67,6 +66,7 @@ const TextButton = (props) => {
 
 TextButton.propTypes = {
     btnText: PropTypes.string.isRequired,
+    handleClick: PropTypes.func,
 };
 
 export default TextButton;

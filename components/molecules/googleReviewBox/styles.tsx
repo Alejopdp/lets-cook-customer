@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles(theme => ({
     reviewBox: {
-        borderRadius: "15px",
+        borderRadius: "8px",
         padding: theme.spacing(3),
         backgroundColor: theme.palette.background.paper,
         boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',

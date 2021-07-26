@@ -39,7 +39,7 @@ const RecoverPasswordForm = (props) => {
     };
 
     const handleRedirect = () => {
-        router.push("/ingresar");
+        router.push("/registrarme");
     };
 
     const handleRecover = () => {
@@ -66,11 +66,9 @@ const RecoverPasswordForm = (props) => {
     return (
         <FormPaper title={lang.title}>
             {currentInputs}
-
             <Register
                 text={lang.register.text}
                 boldText={lang.register.boldText}
-                // redirectTo={lang.register.redirectTo}
                 handleRedirect={props.handleRedirect || handleRedirect}
             />
         </FormPaper>

@@ -9,10 +9,11 @@ import { getPosts } from "../../../helpers/serverRequests/blog";
 import { Layout } from "../../../components/layout/index";
 
 const BlogRecetas = (props) => {
+    const [lang] = useLang('recipesBlog');
     return (
         <Layout>
             <InnerSectionLayout containerMaxWidth="md">
-                <TitleOtherPages title="Blog" subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <BlogsGrid posts={props.posts} />
             </InnerSectionLayout>
         </Layout>

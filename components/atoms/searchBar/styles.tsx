@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
         textAlign: "center",
     },
     searchBar: {
-        borderRadius: "15px",
+        borderRadius: "8px",
         backgroundColor: "white",
         boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
         webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',

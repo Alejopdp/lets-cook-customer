@@ -42,3 +42,20 @@ export const skipOrders = async (orders: SkippableOrder[]) => {
         return error.response;
     }
 };
+
+export const skippOrdersFromCancellationModal = async (orders: SkippableOrder[]) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/skip`,
+            data: {
+                ordersToSkip: orders.map((order) => order.id),
+                ordersToReactivate: [],
+            },
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};

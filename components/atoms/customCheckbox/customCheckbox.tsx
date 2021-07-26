@@ -28,7 +28,7 @@ export const CustomCheckbox = (props: CustomCheckboxProps) => {
           />
         }
         label={
-          <Typography variant="body2">
+          <Typography variant="body2" style={{ fontSize: '14px' }}>
             {props.label}
             {props.redirectTo &&
               <Link href={props.redirectTo}>

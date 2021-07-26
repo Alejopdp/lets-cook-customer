@@ -3,6 +3,9 @@ import React, { memo, useEffect, useState } from "react";
 import { getPlans, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant } from "@helpers";
 import { IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 
+// External components
+
+
 // Internal components
 import { BuyFlowLayout } from "@layouts";
 import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "@organisms";
@@ -70,21 +73,38 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         }
     }, []);
 
-    const steps = [
-        <SelectPlanStep
-            initialPlanSettings={props.planUrlParams}
-            plans={props.plans}
-            variant={props.variant}
-            faqs={props.faqs}
-            recipes={props.recipes}
-        />,
-        <RegisterUserStep />,
-        <CheckoutStep />,
-        <RecipeChoiseStep recipes={props.recipes} />,
-        <CrossSellingStep />,
-    ];
+    const steps = isAuthenticated
+        ? [
+              <SelectPlanStep
+                  initialPlanSettings={props.planUrlParams}
+                  plans={props.plans}
+                  variant={props.variant}
+                  faqs={props.faqs}
+                  recipes={props.recipes}
+              />,
+              <CheckoutStep />,
+              <RecipeChoiseStep recipes={props.recipes} />,
+              <CrossSellingStep />,
+          ]
+        : [
+              <SelectPlanStep
+                  initialPlanSettings={props.planUrlParams}
+                  plans={props.plans}
+                  variant={props.variant}
+                  faqs={props.faqs}
+                  recipes={props.recipes}
+              />,
+              <RegisterUserStep />,
+              <CheckoutStep />,
+              <RecipeChoiseStep recipes={props.recipes} />,
+              <CrossSellingStep />,
+          ];
 
-    return <BuyFlowLayout>{steps[step]}</BuyFlowLayout>;
+    return (
+        <BuyFlowLayout>
+                {steps[step]}
+        </BuyFlowLayout>
+    );
 });
 
 export async function getServerSideProps({ locale, query }) {

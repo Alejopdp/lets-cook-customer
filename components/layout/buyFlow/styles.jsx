@@ -4,7 +4,6 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
         flexDirection: "column",
-        paddingBottom: theme.spacing(2)
     },
     content: {
         flex: 1,

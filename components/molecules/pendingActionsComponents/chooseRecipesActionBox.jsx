@@ -7,13 +7,14 @@ import Typography from "@material-ui/core/Typography";
 
 // Internal components
 import BoxWithIconAndTextButton from "../../../components/molecules/specificBox/boxWithIconAndTextButton";
-
+import { useRouter } from "next/router";
 
 const ChooseRecipesActionBox = ({ data }) => {
     const theme = useTheme();
+    const router = useRouter();
 
     return (
-        <BoxWithIconAndTextButton icon="test" btnText="Elegir recetas">
+        <BoxWithIconAndTextButton handleClick={() => router.push(`/elegir-recetas/${data.orderId}`)} icon="test" btnText="Elegir recetas">
             <Typography variant="body2" style={{ fontSize: "16px" }}>
                 {data.shippment}
             </Typography>

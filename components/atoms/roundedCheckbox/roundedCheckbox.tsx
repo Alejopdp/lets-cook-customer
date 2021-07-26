@@ -14,7 +14,6 @@ import { Typography } from "@material-ui/core";
 import { RoundedCheckboxProps } from './interfaces';
 
 export const RoundedCheckbox = (props: RoundedCheckboxProps) => {
-    const theme = useTheme();
 
     return (
         <FormControlLabel
@@ -29,9 +28,7 @@ export const RoundedCheckbox = (props: RoundedCheckboxProps) => {
                 />
             }
             label={
-                // <Typography variant="body1">
-                    props.label
-                // </Typography>
+                props.label
             }
         />
     );

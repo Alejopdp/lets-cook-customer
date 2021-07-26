@@ -10,6 +10,8 @@ import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 import { CallMerge } from "@material-ui/icons";
 import { LocationSearchInputProps } from "./intertfaces";
+import { locationSearchInput as langs } from '@lang';
+import { useRouter } from "next/router";
 
 function loadScript(src, position, id) {
     if (!position) {
@@ -46,6 +48,8 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
     const [inputValue, setInputValue] = React.useState("");
     const [options, setOptions] = React.useState([]);
     const loaded = React.useRef(false);
+    const router = useRouter();
+    const lang = langs[router.locale];
 
     if (typeof window !== "undefined" && !loaded.current) {
         if (!document.querySelector("#google-maps")) {
@@ -116,7 +120,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             filterSelectedOptions
             value={props.value}
             noOptionsText={
-                !!props.value ? "No se encontró ninguna dirección" : "Comienze a escribir para ver las sugerencias de direcciones"
+                !!props.value ? lang.autoCompleteHintNotFound : lang.autoCompleteHint
             }
             onChange={(event, newValue) => {
                 setOptions(newValue ? [newValue, ...options] : options);
@@ -138,11 +142,15 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                 />
             )}
             renderOption={(option) => {
-                const matches = option.structured_formatting.main_text_matched_substrings;
-                const parts = parse(
-                    option.structured_formatting.main_text,
-                    matches.map((match) => [match.offset, match.offset + match.length])
-                );
+                var matches;
+                var parts;
+                if (option) {
+                    matches = option.structured_formatting.main_text_matched_substrings;
+                    parts = parse(
+                        option.structured_formatting.main_text,
+                        matches.map((match) => [match.offset, match.offset + match.length])
+                    );
+                }
 
                 return (
                     <Grid container alignItems="center">
@@ -150,14 +158,14 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                             <LocationOnIcon className={classes.icon} />
                         </Grid>
                         <Grid item xs>
-                            {parts.map((part, index) => (
+                            {parts?.map((part, index) => (
                                 <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
                                     {part.text}
                                 </span>
                             ))}
 
                             <Typography variant="body2" color="textSecondary">
-                                {option.structured_formatting.secondary_text}
+                                {option?.structured_formatting.secondary_text || ""}
                             </Typography>
                         </Grid>
                     </Grid>

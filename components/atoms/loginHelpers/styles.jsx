@@ -4,12 +4,10 @@ const useStyles = makeStyles((theme) => ({
     register: {
         textTransform: "none",
         marginLeft: theme.spacing(1),
+        fontSize: '14px'
     },
     btn: {
         marginTop: theme.spacing(4)
-    },
-    margin: {
-        marginTop: theme.spacing(3)
     },
     link: {
         color: "#707070"

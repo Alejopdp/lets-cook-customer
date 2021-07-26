@@ -67,3 +67,20 @@ export const swapPlan = async (subscriptionId: string, newPlanId: string, newPla
         return error.response;
     }
 };
+
+export const updateRestriction = async (subscriptionId: string, restrictionId: string) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/update-restriction/${subscriptionId}`,
+            data: {
+                restrictionId,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};

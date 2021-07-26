@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         width: "100%",
     },
     border: {
-        borderRadius: theme.spacing(2),
+        borderRadius: '8px',
     },
     // mt1: {
     //     marginTop: theme.spacing(1)

@@ -13,7 +13,7 @@ import useStyles from "./styles";
 import { useRouter } from 'next/router';
 
 export const PlanWithIcon = (props: PlanWithIconProp) => {
-    const { box, text, checkedBox, icon } = useStyles();
+    const { box, checkedBox, icon } = useStyles();
     const image = props.isSelected ? props.plan.iconWithColor : props.plan.icon
     const { locale } = useRouter();
 
@@ -25,7 +25,7 @@ export const PlanWithIcon = (props: PlanWithIconProp) => {
         // focusVisibleClassName={classes.focusVisible}
         >
             <img src={image} className={icon} />
-            <Typography variant="subtitle2" className={text}>
+            <Typography variant="subtitle2" color='textSecondary'>
                 {props.plan.name}
             </Typography>
         </ButtonBase>

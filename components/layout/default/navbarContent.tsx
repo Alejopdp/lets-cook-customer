@@ -13,6 +13,7 @@ import { LangSelector } from "@molecules";
 
 // Images and icons
 import MenuIcon from "@material-ui/icons/Menu";
+import { useLang } from "@hooks";
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -47,6 +48,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
     const _handleOnChangeLang = (lang) => { };
     const classes = useStyles();
     const router = useRouter();
+    const [lang] = useLang('navbarContent')
 
     return (
         <AppBar position="fixed" color="default" className={classes.navbarClass}>
@@ -67,7 +69,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
                 </div>
                 <Hidden xsDown implementation="css">
                     <LoginButton />
-                    <RoundedButton label="Ver planes" variant="content" onClick={() => router.push("/planes")}></RoundedButton>
+                    <RoundedButton label={lang.seePlans} variant="content" onClick={() => router.push("/planes")}></RoundedButton>
                 </Hidden>
                 <LangSelector onChangeLang={_handleOnChangeLang} />
             </Toolbar>

@@ -5,11 +5,12 @@ import { useRouter } from "next/router";
 const langs = require("../../../lang").recoverPasswordCode;
 
 // External components
-import { Typography } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 
 // Internal components
 import { TextInput } from "../../atoms/inputs/inputs";
 import CustomButton from "../../atoms/customButton/customButton";
+import { RoundedButton } from '@atoms';
 
 const RecoverPasswordCode = (props) => {
     const router = useRouter();
@@ -17,23 +18,28 @@ const RecoverPasswordCode = (props) => {
 
     return (
         <>
-            <Typography variant="body2" paragraph>
-                {lang.paragraph}
-            </Typography>
-
-            <TextInput
-                label={lang.codeInput}
-                name="code"
-                value={props.value}
-                onChange={props.handleChange}
-                inputProps={{ maxLength: 6 }}
-            />
-
-            <CustomButton
-                text={lang.buttonText}
-                disabled={props.value.length !== 6}
-                onClick={() => props.handleSubmit(1)}
-            />
+            <Grid item xs={12}>
+                <Typography variant="body2" >
+                    {lang.paragraph}
+                </Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <TextInput
+                    label={lang.codeInput}
+                    name="code"
+                    value={props.value}
+                    onChange={props.handleChange}
+                    inputProps={{ maxLength: 6 }}
+                />
+            </Grid>
+            <Grid item xs={12}>
+                <RoundedButton
+                    label={lang.buttonText}
+                    disabled={props.value.length !== 6}
+                    onClick={() => props.handleSubmit(1)}
+                    style={{ width: '100%' }}
+                />
+            </Grid>
         </>
     )
 }

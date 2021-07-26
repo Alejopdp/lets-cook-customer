@@ -5,7 +5,10 @@ export const useStyles = makeStyles((theme) => ({
     default: {
         backgroundColor: "transparent",
         border: "none",
-        color: "inherit"
+        color: "inherit",
+        "&:disabled": {
+            opacity: 0.6
+        }
     },
     loginButton: {
         minWidth: 225,

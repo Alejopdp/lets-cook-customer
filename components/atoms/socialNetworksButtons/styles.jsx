@@ -5,16 +5,16 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         // backgroundColor: theme.palette.primary.main,
         border: "1px solid red",
-        padding: theme.spacing(1),
-        borderRadius: theme.spacing(4),
-        marginTop: theme.spacing(2),
+        padding: theme.spacing(1.5),
+        borderRadius: '8px',
         // marginBottom: theme.spacing(2),
         // display: "flex",
         // justifyContent: "space-evenly"
     },
     txt: {
         marginLeft: theme.spacing(2),
-        textTransform: "none"
+        textTransform: "none",
+        fontSize: '14px'
     },
     facebook: {
         border: "2px solid #35569C",

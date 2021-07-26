@@ -1,6 +1,6 @@
 // External components
 import "../styles/globals.scss";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -18,6 +18,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 function MyApp(props) {
     const { Component, pageProps } = props;
     const { getFromLocalStorage, resetLocalStorage } = useLocalStorage();
+    const [isLoading, setisLoading] = useState(true);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
 
@@ -26,6 +27,7 @@ function MyApp(props) {
             const token = await getFromLocalStorage("token");
 
             if (!token) {
+                setisLoading(false);
                 return;
             }
 
@@ -33,12 +35,13 @@ function MyApp(props) {
 
             if (res.status === 200) {
                 setIsAuthenticated(true);
-                console.log("PASO EL RES STATUS");
                 const userInfo = getFromLocalStorage("userInfo");
                 setUserInfo(userInfo);
             } else {
-                await resetLocalStorage();
+                resetLocalStorage();
             }
+
+            setisLoading(false);
         };
         verifyAuthentication();
     }, []);
@@ -53,7 +56,7 @@ function MyApp(props) {
                 <SnackbarProvider maxSnack={3}>
                     <Elements stripe={stripePromise}>
                         <CssBaseline />
-                        <Component {...pageProps} />
+                        {!isLoading && <Component {...pageProps} />}
                     </Elements>
                 </SnackbarProvider>
             </ThemeProvider>

@@ -5,7 +5,7 @@ import { ShipmentForm, PaymentForm, IconsWithText } from "@molecules";
 import CheckoutDetails from "../checkoutDetails";
 
 interface CheckoutStepProps {
-    handleSubmitPayment: () => void;
+    // handleSubmitPayment: () => void;
 }
 export const CheckoutStep = memo((props: CheckoutStepProps) => {
     return (

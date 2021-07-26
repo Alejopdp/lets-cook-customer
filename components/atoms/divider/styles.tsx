@@ -1,18 +1,18 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
-    box: {
+    grid: {
         display: "flex",
-        flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between",
-        marginTop: theme.spacing(4),
-        marginBottom: theme.spacing(4)
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2)
     },
     lines: {
         height: "1px",
-        // backgroundColor: theme.palette.text.primary,
         backgroundColor: "lightGrey",
-        width: "45%"
+        width: "50%"
+    },
+    text: {
+        padding: '0px 8px 0px 8px'
     }
 }));
