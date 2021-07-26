@@ -10,6 +10,18 @@ interface CheckoutStepProps {
 }
 export const CheckoutStep = memo((props: CheckoutStepProps) => {
     const theme = useTheme();
+
+    const [expanded, setExpanded] = React.useState<string | false>('panel1');
+
+    const handleChangeAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
+        setExpanded(isExpanded ? panel : (expanded === 'panel2') ? 'panel2' : 'panel1');
+        // setExpanded(isExpanded ? panel : false);
+    };
+
+    const changeToSecondStep = () => {
+        setExpanded('panel2');
+    }
+
     return (
         <>
             <Grid container spacing={2}>
@@ -23,12 +35,12 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                 </div>
                             </Grid>
                             <Grid item xs={12}>
-                                <ShipmentForm onClick={() => ""} />
+                                <ShipmentForm expanded={expanded} handleChangeAccordion={handleChangeAccordion} handleChangeStep={changeToSecondStep} />
                             </Grid>
                             <Grid item xs={12}>
-                                <PaymentForm savedCards />
+                                <PaymentForm expanded={expanded} handleChangeAccordion={handleChangeAccordion} />
                             </Grid>
-                            <Grid item xs={12} style={{marginTop: theme.spacing(4)}}>
+                            <Grid item xs={12} style={{ marginTop: theme.spacing(4) }}>
                                 <IconsWithText />
                             </Grid>
                         </Grid>

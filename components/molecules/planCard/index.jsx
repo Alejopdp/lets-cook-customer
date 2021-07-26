@@ -29,7 +29,7 @@ const PlanCard = props => {
                         query: {
                             slug: props.card.slug,
                             personas: props.card.variants[0] ?.numberOfPersons || "",
-                            recetas: card.variants[0] ?.numberOfRecipes || "",
+                            recetas: props.card.variants[0] ?.numberOfRecipes || "",
                         }
                     })} />
                 </div>
