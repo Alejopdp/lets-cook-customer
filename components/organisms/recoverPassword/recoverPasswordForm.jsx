@@ -1,8 +1,6 @@
 // Utils & Config
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useRouter } from "next/router";
-const langs = require("../../../lang").recoverPassword;
 
 // Internal components
 import RecoverPasswordMail from "./recoverPasswordMail";
@@ -10,10 +8,12 @@ import RecoverPasswordCode from "./recoverPasswordCode";
 import RecoverPassword from "./recoverPassword";
 import FormPaper from "../../molecules/formPaper/formPaper";
 import { Register } from "../../atoms/loginHelpers/loginHelpers";
+import { useLang } from "@hooks";
 
 const stepsQty = 3;
 
 const RecoverPasswordForm = (props) => {
+    const [lang] = useLang('recoverPassword')
     const [currentStep, setcurrentStep] = useState(0);
     const [formData, setFormData] = useState({
         email: "",
@@ -22,7 +22,6 @@ const RecoverPasswordForm = (props) => {
     });
 
     const router = useRouter();
-    const lang = langs[router.locale];
 
     var currentInputs = <></>;
 
@@ -43,7 +42,7 @@ const RecoverPasswordForm = (props) => {
     };
 
     const handleRecover = () => {
-        alert("Password cambiada con éxito");
+        alert(lang.successPasswordChange);
     };
 
     switch (true) {

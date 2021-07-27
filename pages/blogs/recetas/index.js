@@ -7,7 +7,7 @@ import TitleOtherPages from "../../../components/molecules/titleOtherPages/title
 import BlogsGrid from "../../../components/organisms/blogGrid/blogGrid";
 import { getPosts } from "../../../helpers/serverRequests/blog";
 import { Layout } from "../../../components/layout/index";
-
+import { useLang } from '@hooks';
 const BlogRecetas = (props) => {
     const [lang] = useLang('recipesBlog');
     return (

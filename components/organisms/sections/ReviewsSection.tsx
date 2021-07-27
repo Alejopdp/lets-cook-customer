@@ -15,6 +15,7 @@ import GoogleReviewBox from '../../molecules/googleReviewBox/googleReviewBox';
 import { Review } from "@helpers";
 import { ReviewsSectionProps } from './interfaces';
 import { useReviewsStyles } from './styles';
+import { useLang } from '@hooks';
 
 
 const data = Array<Review>(10)
@@ -36,7 +37,7 @@ const data = Array<Review>(10)
 export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
     const theme = useTheme();
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
-
+    const [lang] = useLang('homeSession');
 
     const responsive = {
         superLargeDesktop: {
@@ -82,14 +83,14 @@ export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
                     <Grid item xs={12} md={6}>
                         <div className={classes.googleRatingRow}>
                             <img className={clsx(classes.item, classes.img)} src="/assets/img-google-logo.png" />
-                            <Typography className={classes.item} variant="subtitle1">Rating</Typography>
+                            <Typography className={classes.item} variant="subtitle1">{lang.rating}</Typography>
                         </div>
                     </Grid>
                     <Grid item xs={12} md={6} style={{ alignSelf: 'center' }}>
                         <div className={classes.textRatingRow}>
                             <Typography className={classes.item} variant="h6"><b>5.0</b></Typography>
                             <Rating className={classes.item} name="read-only" value={5} readOnly />
-                            <Typography className={classes.item} variant="caption">108 opiniones</Typography>
+                            <Typography className={classes.item} variant="caption">108{" " + lang.opinions}</Typography>
                         </div>
                     </Grid>
                 </Grid>

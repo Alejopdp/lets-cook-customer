@@ -9,24 +9,24 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // Internal components
 import BoxWithTitle from "../../../molecules/specificBox/boxWithTitle";
 import DataDisplay from "../../../molecules/dataDisplay/dataDisplay";
+import { useLang } from "@hooks";
 
 const useStyles = makeStyles((theme) => ({}));
 
 const ShippingAddressCard = (props) => {
     const theme = useTheme();
     const classes = useStyles();
-    // const router = useRouter();
-    // const lang = langs[router.locale];
+    const [lang] = useLang('shippingAddressCard');
 
     return (
-        <BoxWithTitle title="Dirección de entrega">
-            <DataDisplay title="Dirección" text={props.shippingAddress.addressName} style={{ marginBottom: theme.spacing(2) }} />
+        <BoxWithTitle title={lang.deliveryAddress}>
+            <DataDisplay title={lang.address} text={props.shippingAddress.addressName} style={{ marginBottom: theme.spacing(2) }} />
             <DataDisplay
-                title="Piso / Puerta / Aclaraciones"
+                title={lang.titleDescription}
                 text={props.shippingAddress.addressDetails}
                 style={{ marginBottom: theme.spacing(2) }}
             />
-            <DataDisplay title="Horario de preferencia" text={props.shippingAddress.preferredSchedule} />
+            <DataDisplay title={lang.timeOfPreference} text={props.shippingAddress.preferredSchedule} />
         </BoxWithTitle>
     );
 };

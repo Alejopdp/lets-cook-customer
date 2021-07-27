@@ -7,16 +7,17 @@ import { useRouter } from "next/router";
 import { useHowItWorksStyles as useStyles } from "./styles";
 import { HowItWorksSectionProps, HowItWorks } from "./interfaces";
 import { memo } from "react";
+import { useLang } from "@hooks";
 
 const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
     const theme = useTheme();
     const classes = useStyles();
     const router = useRouter();
-
+    const [lang] = useLang('homeSession');
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
-                <Title title="¿Cómo funciona?" subtitle="" />
+                <Title title={lang.howItsWork} subtitle="" />
                 {(props.cards || []).map((card, index) => (
                     <Grid key={index} item xs={12} sm={6} md={3} style={{ textAlign: "center" }}>
                         <img className={classes.img} src={card.image} />
@@ -31,9 +32,9 @@ const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
             </Grid>
             <Grid container style={{ marginTop: theme.spacing(4) }}>
                 <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
-                    <RoundedButton label="Ver planes" onClick={() => router.push("/planes")} />
+                    <RoundedButton label={lang.seePlans} onClick={() => router.push("/planes")} />
                     <Typography className={classes.smallText} variant="caption">
-                        Podrás pausar, cambiar o cancelar el plan cuando quieras
+                       {lang.couldPauseOrCancelPlan}
                     </Typography>
                 </Grid>
             </Grid>

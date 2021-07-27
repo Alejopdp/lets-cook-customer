@@ -6,11 +6,13 @@ import { useRouter } from "next/router";
 import BenefitsCard from "../../molecules/benefits/benefits";
 import { useBenefitsStyle as useStyles } from "./styles";
 import { Benefit, BenefitsSectionProps } from "./interfaces";
+import { useLang } from "@hooks";
 
 export const BenefitsSection = (props: BenefitsSectionProps) => {
     const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();
+    const [lang] = useLang('homeSession');
 
     return (
         <Box style={{ backgroundColor: props.backgroundColor ? props.backgroundColor : "white", padding: `${theme.spacing(8)}px 0px` }}>
@@ -44,7 +46,7 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                         <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
                             <RoundedButton label="Ver planes" onClick={() => router.push("/planes")} />
                             <Typography className={classes.smallText} variant="caption">
-                                Podrás pausar, cambiar o cancelar el plan cuando quieras
+                                {lang.couldPauseOrCancelPlan}
                             </Typography>
                         </Grid>
                     </Grid>

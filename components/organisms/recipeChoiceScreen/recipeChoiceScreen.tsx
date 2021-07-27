@@ -17,9 +17,11 @@ import { useFilterDrawer } from "@stores";
 import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
 import { useRouter } from "next/router";
+import { useLang } from "@hooks";
 
 const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
     const router = useRouter();
+    const [lang] = useLang('recipeChoiceScreen')
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
     const { enqueueSnackbar } = useSnackbar();
 
@@ -41,7 +43,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
         const res = await chooseRecipes(router.query.orderId as string, recipeSelection);
 
         if (res.status === 200) {
-            enqueueSnackbar("Changed correctly", { variant: "success" });
+            enqueueSnackbar(lang.success, { variant: "success" });
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
@@ -53,7 +55,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                 <Grid item container justify="center">
                     <TitleBuyFlow
                         // title={`Elige las ${} recetas que recibirás el ${}`}
-                        title={`Elige las X recetas que recibirás el DDDD`}
+                        title={lang.titleBuyFlow}
                         subtitle=""
                     />
                 </Grid>
@@ -61,7 +63,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                     <Grid item xs={3}>
                         <RoundedButton
                             variant="outline"
-                            label="Filtrar recetas"
+                            label={lang.filterRecipe}
                             style={{ backgroundColor: "white" }}
                             onClick={() => {
                                 setDrawerOpen(!drawerIsOpen);

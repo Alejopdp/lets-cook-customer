@@ -41,7 +41,7 @@ const MailStep = (props) => {
             props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
         } else {
             setserverError(res.data.message);
-            alert("Error al querer ingresar");
+            alert(lang.error);
         }
     };
 

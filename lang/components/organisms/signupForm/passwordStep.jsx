@@ -9,7 +9,8 @@ export const passwordStep = {
             label: "Quiero recibir información por correo electrónico sobre los productos de Let's Cook y cualquier otra información que pudiera ser de mi interés como promociones y ofertas. Puedes obtener mas información",
             boldText: "pulsando aquí",
         },
-        buttonText: "Registrarme"
+        buttonText: "Registrarme",
+        helperText: "La contraseña debe tener al menos 8 caracteres, 1 mayúscula y 1 número"
     },
     en: {
         passwordInput: "Enter your password",
@@ -21,7 +22,8 @@ export const passwordStep = {
             label: "I want to receive information via email about Let's Cook's products and any other information that may be of interest, such as offers and coupons. You can get more information",
             boldText: "clicking here",
         },
-        buttonText: "Register"
+        buttonText: "Register",
+        helperText: "La contraseña debe tener al menos 8 caracteres, 1 mayúscula y 1 número"
     },
     ca: {
         passwordInput: "[CA] Enter your password",
@@ -33,6 +35,7 @@ export const passwordStep = {
             label: "I want to receive information via email about Let's Cook's products and any other information that may be of interest, such as offers and coupons. You can get more information",
             boldText: "clicking here",
         },
-        buttonText: "Register"
+        buttonText: "Register",
+        helperText: "La contraseña debe tener al menos 8 caracteres, 1 mayúscula y 1 número"
     },
 }

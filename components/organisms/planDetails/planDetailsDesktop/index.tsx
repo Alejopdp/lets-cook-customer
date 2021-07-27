@@ -16,6 +16,7 @@ import RecipesActualWeekCard from "../recipesActualWeekCard/index";
 import RecipesNextWeekCard from "../recipesNextWeekCard/index";
 import TextButton from "../../../atoms/textButton/textButton";
 import { PlanDetailsProps } from "../interfaces";
+import { useLang } from "@hooks";
 
 const PlanDetailsDesktop = ({
     subscription,
@@ -25,7 +26,9 @@ const PlanDetailsDesktop = ({
     handleClickOpenRecipeModal,
 }: PlanDetailsProps) => {
     const theme = useTheme();
+    const [lang] = useLang('planDetailsDesktop')
     return (
+
         <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
                 <Grid container spacing={2}>
@@ -41,7 +44,7 @@ const PlanDetailsDesktop = ({
                     <Grid item xs={12}>
                         <TextButton
                             handleClick={handleClickOpenCancelPlanModal}
-                            btnText="cancelar plan"
+                            btnText={lang.planDetailsDesktop}
                             style={{ color: "#FC1919", marginTop: theme.spacing(2) }}
                         />
                     </Grid>

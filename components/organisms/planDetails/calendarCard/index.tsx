@@ -13,6 +13,7 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 // Internal components
 import BoxWithTitleAndTextButton from "../../../molecules/specificBox/boxWithTitleAndTextButton";
 import DataDisplay from "../../../molecules/dataDisplay/dataDisplay";
+import { useLang } from "@hooks";
 
 const useStyles = makeStyles((theme) => ({
     nextChargeGrid: {
@@ -29,17 +30,16 @@ const useStyles = makeStyles((theme) => ({
 const CalendarCard = (props: CalendarCardProps) => {
     const theme = useTheme();
     const classes = useStyles();
-    // const router = useRouter();
-    // const lang = langs[router.locale];
+    const [lang] = useLang('calendarCard');
 
     return (
-        <BoxWithTitleAndTextButton title="Calendario" btnText="saltar semana" handleClick={props.handleClick}>
+        <BoxWithTitleAndTextButton title={lang.calendar} btnText={lang.jumpNextWeeks} handleClick={props.handleClick}>
             <Grid container>
                 <Grid item xs={12} sm={6}>
-                    <DataDisplay title="Próxima entrega" text={props.schedule.nextDelivery} />
+                    <DataDisplay title={lang.nextTitle} text={props.schedule.nextDelivery} />
                 </Grid>
                 <Grid item xs={12} sm={6} className={classes.nextChargeGrid}>
-                    <DataDisplay title="Próximo cargo" text={props.schedule.nextPayment} />
+                    <DataDisplay title={lang.nextCharge} text={props.schedule.nextPayment} />
                 </Grid>
                 {props.skippedOrders.length > 0 && (
                     <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
@@ -49,8 +49,7 @@ const CalendarCard = (props: CalendarCardProps) => {
                                 variant="body2"
                                 color="textSecondary"
                                 style={{ fontSize: "14px", opacity: 0.7, marginLeft: theme.spacing(0.5) }}
-                            >
-                                Has saltado las siguientes semanas: {props.skippedOrders.map((order) => `${order.weekLabel}, `)}
+                            >{lang.jumpNextWeeks + " " + props.skippedOrders.map((order) => `${order.weekLabel}, `)}
                             </Typography>
                         </div>
                     </Grid>

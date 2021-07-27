@@ -7,17 +7,19 @@ import { Plan } from "@helpers";
 import { usePlansStyles as useStyles } from "./styles";
 import { PlansSectionProps } from "./interfaces";
 import { memo } from "react";
+import { useLang } from "@hooks";
 
 export const PlansSection = memo((props: PlansSectionProps) => {
     const { push: navigateTo, locale } = useRouter();
     const classes = useStyles();
+    const [lang] = useLang('homeSession');
 
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Title
-                    title="Encuentra el plan indicado para tí"
-                    subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
+                    title={lang.foundPlansForYou}
+                    subtitle={lang.foundPlansForYouSubtitle}
                 />
                 {(props.cards || []).map((card, index) => (
                     <Grid key={index} item xs={12} md={3}>

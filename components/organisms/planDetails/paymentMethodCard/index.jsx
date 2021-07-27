@@ -9,6 +9,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // Internal components
 import BoxWithTitle from "../../../molecules/specificBox/boxWithTitle";
 import DataDisplay from "../../../molecules/dataDisplay/dataDisplay";
+import { useLang } from "@hooks";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -17,13 +18,12 @@ const useStyles = makeStyles((theme) => ({
 const PaymentMethodCard = props => {
     const theme = useTheme();
     const classes = useStyles();
-    // const router = useRouter();
-    // const lang = langs[router.locale];
+    const [lang] = useLang('paymentMethodCard')
 
     return (
-        <BoxWithTitle title='Método de pago'>
-            <DataDisplay title='Tarjeta' text={props.paymentMethod.cardLabel} style={{ marginBottom: theme.spacing(2) }} />
-            <DataDisplay title='Vencimiento' text={props.paymentMethod.expirationDateLabel} />
+        <BoxWithTitle title={lang.title}>
+            <DataDisplay title={lang.card} text={props.paymentMethod.cardLabel} style={{ marginBottom: theme.spacing(2) }} />
+            <DataDisplay title={lang.expiration} text={props.paymentMethod.expirationDateLabel} />
         </BoxWithTitle>
     );
 };

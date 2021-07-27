@@ -14,6 +14,7 @@ import BoxWithTitleAndTextButton from "../../../molecules/specificBox/boxWithTit
 import BoxWithTitle from "../../../molecules/specificBox/boxWithTitle";
 import ChosenRecipes from "../chosenRecipes/index";
 import RoundedButton from "../../../atoms/roundedButton/roundedButton";
+import { useLang } from "@hooks";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -21,12 +22,12 @@ const RecipesNextWeekCard = (props) => {
     const theme = useTheme();
     const classes = useStyles();
     const router = useRouter();
-    // const lang = langs[router.locale];
+    const [lang] = useLang("recipesActualWeekCard");
 
     return (
         <>
             {!props.hasChosenRecipesForNextWeek ? (
-                <BoxWithTitle title="Recetas de la próxima semana">
+                <BoxWithTitle title={lang.nextWeek}>
                     <Box style={{ textAlign: "center", marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
                         <Image src="/assets/userProfile/recipesEmptyState.svg" width="80" height="80" />
                         <Typography
@@ -34,15 +35,15 @@ const RecipesNextWeekCard = (props) => {
                             color="textSecondary"
                             style={{ fontSize: "16px", marginTop: theme.spacing(1), marginBottom: theme.spacing(2) }}
                         >
-                            Ya puedes elegir tus recetas para la entrega del {props.nextWeekOrder.shippingDate}
+                            {lang.choiseYouRecipes + " " + props.nextWeekOrder.shippingDate}
                         </Typography>
-                        <RoundedButton label="Elegir recetas" onClick={() => router.push(`/elegir-recetas/${props.nextWeekOrder.id}`)} />
+                        <RoundedButton label={lang.choiseRecipe} onClick={() => router.push(`/elegir-recetas/${props.nextWeekOrder.id}`)} />
                     </Box>
                 </BoxWithTitle>
             ) : (
-                <BoxWithTitleAndTextButton title="Recetas de la próxima semana" btnText="modificar recetas">
+                <BoxWithTitleAndTextButton title={lang.nextWeek} btnText="modificar recetas">
                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px" }}>
-                        Estas son las recetas que recibirás el {props.nextWeekOrder.shippingDate}
+                        {lang.deliveryOn + " " + props.nextWeekOrder.shippingDate}
                     </Typography>
                     <ChosenRecipes
                         recipes={props.nextWeekOrder.recipes}

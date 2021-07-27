@@ -7,7 +7,8 @@ export const recoverPassword = {
         register: {
             text: "¿Aún no tienes cuenta?",
             boldText: "Regístrate aquí",
-        }
+        },
+        successPasswordChange: "Clave cambiada con éxito"
     },
     en: {
         title: "Recover password",
@@ -17,7 +18,8 @@ export const recoverPassword = {
         register: {
             text: "No account yet?",
             boldText: "Sign up here",
-        }
+        },
+        successPasswordChange: "Clave cambiada con éxito"
     },
     ca: {
         title: "[CA] Recover password",
@@ -27,6 +29,7 @@ export const recoverPassword = {
         register: {
             text: "No account yet?",
             boldText: "Sign up here",
-        }
+        },
+        successPasswordChange: "Clave cambiada con éxito"
     },
 }
