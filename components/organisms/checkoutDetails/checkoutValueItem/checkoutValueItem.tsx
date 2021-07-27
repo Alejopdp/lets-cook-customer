@@ -9,7 +9,7 @@ const CheckoutValueItem = (props: CheckoutValueItemProps) => {
                 {props.title}
             </Typography>
             <Typography style={{ fontSize: 18, fontWeight: 600 }} color="primary">
-                {props.value} $/semana
+                {props.value} €/semana
             </Typography>
         </Box>
     );

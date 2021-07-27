@@ -10,6 +10,6 @@ export const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         position: "relative",
-        paddingTop: theme.mixins.toolbar.minHeight + theme.spacing(5),
+        paddingTop: theme.mixins.toolbar.minHeight
     }
 }));

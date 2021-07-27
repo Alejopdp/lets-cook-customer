@@ -55,7 +55,7 @@ const CrossSellingStep = (props) => {
     };
 
     return (
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6) }}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TitleBuyFlow
@@ -75,7 +75,7 @@ const CrossSellingStep = (props) => {
                                 style={{ marginBottom: theme.spacing(2) }}
                             />
                         )}
-                        <Button variant="text" onClick={() => router.push(`/detalle-del-plan/${form.subscriptionId}`)}>
+                        <Button variant="text" onClick={() => router.push("/perfil")}>
                             No quiero agregar ningún producto adicional
                         </Button>
                     </Box>
@@ -86,5 +86,4 @@ const CrossSellingStep = (props) => {
 };
 
 CrossSellingStep.propTypes = {};
-
 export default CrossSellingStep;

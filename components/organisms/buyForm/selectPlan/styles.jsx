@@ -1,18 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
-    smUpHide: {
-        display: "flex",
-        [theme.breakpoints.down("sm")]: {
-            display: "none",
-        },
-    },
-    smDownHide: {
-        display: "none",
-        [theme.breakpoints.down("sm")]: {
-            display: "flex",
-        },
-    },
     recipeSection: {
         backgroundColor: theme.palette.common.white,
         paddingTop: theme.spacing(8),

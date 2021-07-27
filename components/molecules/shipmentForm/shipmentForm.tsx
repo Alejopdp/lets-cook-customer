@@ -32,7 +32,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 const useStylesAccordion = makeStyles((theme: Theme) =>
     createStyles({
         accordionContainer: {
-            padding: `${theme.spacing(2)}px ${theme.spacing(2)}px`,
+            padding: `${theme.spacing(1)}px ${theme.spacing(1)}px`,
             borderRadius: '8px !important',
             boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
             webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
