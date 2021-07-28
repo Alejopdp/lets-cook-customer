@@ -26,7 +26,9 @@ export interface BuyFlowStore {
     showRegister: boolean;
     form: {
         planCode: string;
+        planName: string;
         planSlug: string;
+        weekLabel: string;
         variant?: PlanVariant;
         deliveryForm?: DeliveryForm;
         paymentMethod?: PaymentMethodForm;
@@ -68,11 +70,12 @@ export interface Store extends BuyFlowStore {
     setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => void;
     setPaymentMethod: (paymentMethod: Partial<PaymentMethodForm>) => void;
     selectRecipes: (recipes: Recipes[]) => void;
-    setPlanCode: (code: string, slug: string) => void;
+    setPlanCode: (code: string, slug: string, name: string) => void;
     setPlanVariant: (variant: Partial<PlanVariant>) => void;
     setCoupon: (coupon: Partial<Coupon>) => void;
     setFirstOrderId: (firstOrderId: Partial<string>) => void;
     setSubscriptionId: (subscriptionId: Partial<string>) => void;
+    setWeekLabel: (weekLabel: Partial<string>) => void;
 }
 
 export const BuyFlowInitialStore: BuyFlowStore = {
@@ -80,7 +83,9 @@ export const BuyFlowInitialStore: BuyFlowStore = {
     showRegister: true,
     form: {
         planCode: "",
+        planName: "",
         planSlug: "",
+        weekLabel: "",
         variant: {
             id: "",
             sku: "",
@@ -154,10 +159,19 @@ const store = devtools<Store>((set, get) => ({
         set({ step: _step + 1 });
     },
 
-    setPlanCode: (code: string, slug: string = "") => {
+    setWeekLabel: (weekLabel: string) => {
+        const form = get().form;
+
+        form.weekLabel = weekLabel;
+
+        set({ form });
+    },
+
+    setPlanCode: (code: string, slug: string = "", name: string = "") => {
         const form = get().form;
         form.planCode = code;
         form.planSlug = slug;
+        form.planName = name;
         set({ form });
     },
     setDeliveryInfo: (deliveryForm: DeliveryForm) => {

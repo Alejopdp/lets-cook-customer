@@ -1,11 +1,11 @@
 import { Recipe } from "../recipes";
 import { ServerRequestRespose } from "../serverRequestInterfaces/response";
 
-export type PlanResponse = ServerRequestRespose<Plan[]>;
+export type PlanResponse = ServerRequestRespose<{ plans: Plan[]; weekLabel: string }>;
 export type AvailablePlanFrecuencies = string;
 export type AdditionalPlans = Plan[];
 export type PlanVariantAttribute = string[];
-export type PlanType = 'Main' | 'Principal' | 'Additional' | 'Adicional';
+export type PlanType = "Main" | "Principal" | "Additional" | "Adicional";
 export interface PlanVariant {
     id: string;
     sku: string;
@@ -30,5 +30,5 @@ export interface Plan extends PlanVariant {
     imageUrl?: string;
     icon?: string;
     iconWithColor?: string;
-    recipes?: Recipe[]
+    recipes?: Recipe[];
 }

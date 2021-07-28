@@ -26,25 +26,26 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const [recipesOfWeek, setRecipesOfWeek] = useState<Recipe[]>([]);
     const { enqueueSnackbar } = useSnackbar();
 
-    const getPlanSize = useCallback((slug: string, plans: Plan[]) => {
+    const getPlanData = useCallback((slug: string, plans: Plan[]): { peopleLabels: string; planName: string } => {
         const planSelect = plans.find((plan) => plan.slug === slug);
 
-        const peopleLabels = planSelect.variants ?.reduce((_planSize, _variant) => {
+        const peopleLabels = planSelect.variants?.reduce((_planSize, _variant) => {
             const valueIsIncluded = (_planSize[_variant.numberOfPersons] || []).includes(_variant.numberOfRecipes);
 
-            if (valueIsIncluded || !_variant ?.numberOfPersons) {
+            if (valueIsIncluded || !_variant?.numberOfPersons) {
                 return _planSize;
             }
 
             _planSize[_variant.numberOfPersons] = [...(_planSize[_variant.numberOfPersons] || []), _variant.numberOfRecipes];
             return _planSize;
         }, {});
-        return peopleLabels;
+
+        return { peopleLabels, planName: planSelect.name };
     }, []);
 
     const handleOnSelectPlan = (plan: Plan) => {
-        const recipeQty = buyFlow.form.variant ?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty);
-        const peopleQty = buyFlow.form.variant ?.numberOfPersons || parseInt(props.initialPlanSettings.personQty);
+        const recipeQty = buyFlow.form.variant?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty);
+        const peopleQty = buyFlow.form.variant?.numberOfPersons || parseInt(props.initialPlanSettings.personQty);
 
         const { variant, errors, slug, id, recipes } = getPlanVariant(
             {
@@ -62,10 +63,10 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             });
         }
 
-        const planSize = getPlanSize(plan.slug, props.plans);
-        setPlanSize(planSize);
+        const { peopleLabels, planName } = getPlanData(plan.slug, props.plans);
+        setPlanSize(peopleLabels);
         setRecipesOfWeek(recipes);
-        buyFlow.setPlanCode(plan.id, plan.slug);
+        buyFlow.setPlanCode(plan.id, plan.slug, plan.name);
         navigate(variant, id, slug);
     };
 
@@ -73,7 +74,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         const { variant, errors, slug, id } = getPlanVariant(
             {
                 peopleQty: parseInt(qty.value),
-                recipeQty: buyFlow.form.variant ?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty),
+                recipeQty: buyFlow.form.variant?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty),
                 slug: buyFlow.form.planSlug,
             },
             props.plans
@@ -93,7 +94,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         const { variant, errors, slug, id } = getPlanVariant(
             {
                 recipeQty: parseInt(qty.value),
-                peopleQty: buyFlow.form.variant ?.numberOfPersons || parseInt(props.initialPlanSettings.personQty),
+                peopleQty: buyFlow.form.variant?.numberOfPersons || parseInt(props.initialPlanSettings.personQty),
                 slug: buyFlow.form.planSlug,
             },
             props.plans
@@ -111,7 +112,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
     const navigate = (variant: PlanVariant, planId: string, slug?: string) => {
         buyFlow.setPlanVariant(variant);
-        buyFlow.setPlanCode(planId, slug);
+        buyFlow.setPlanCode(planId, slug, buyFlow.form.planName);
 
         navigateTo(
             {
@@ -130,10 +131,10 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     };
 
     useEffect(() => {
-        buyFlow.setPlanCode(props.initialPlanSettings.id, props.initialPlanSettings.slug);
+        const { peopleLabels, planName } = getPlanData(props.initialPlanSettings.slug, props.plans);
+        buyFlow.setPlanCode(props.initialPlanSettings.id, props.initialPlanSettings.slug, planName);
         buyFlow.setPlanVariant(props.variant);
-        const _planSize = getPlanSize(props.initialPlanSettings.slug, props.plans);
-        setPlanSize(_planSize);
+        setPlanSize(peopleLabels);
         setRecipesOfWeek(props.recipes);
     }, []);
 
@@ -145,7 +146,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                     <Grid item xs={12}>
                         <Typography variant="h5">1. Elige tu plan</Typography>
                     </Grid>
-                    <Grid container spacing={2} style={{ marginTop: theme.spacing(2), justifyContent: 'center' }}>
+                    <Grid container spacing={2} style={{ marginTop: theme.spacing(2), justifyContent: "center" }}>
                         {props.plans.map((plan, index) => {
                             return (
                                 <Grid item xs={6} md={2}>
@@ -162,7 +163,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                     <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(6) }}>
                         <Typography variant="body1">Descripción del producto seleccionado</Typography>
                     </Grid>
-                    <Grid container spacing={2} justifyContent='center'>
+                    <Grid container spacing={2} justifyContent="center">
                         <Grid item xs={12} md={4}>
                             {!!Object.keys(planSize).length && (
                                 <Grid container spacing={2}>
@@ -174,7 +175,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                                             name="peopleQty"
                                             subtitle={"Cantidad de personas"}
                                             fromArray={Object.keys(planSize)}
-                                            valueSelected={`${buyFlow.form.variant ?.numberOfPersons}`}
+                                            valueSelected={`${buyFlow.form.variant?.numberOfPersons}`}
                                             handleOnChange={handleOnSelectPeopleQty}
                                         />
                                     </Grid>
@@ -182,8 +183,8 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                                         <PlanSize
                                             name="recipeQty"
                                             subtitle="Cantidad de recetas por semana"
-                                            fromArray={planSize[buyFlow.form.variant ?.numberOfPersons]}
-                                            valueSelected={`${buyFlow.form.variant ?.numberOfRecipes}`}
+                                            fromArray={planSize[buyFlow.form.variant?.numberOfPersons]}
+                                            valueSelected={`${buyFlow.form.variant?.numberOfRecipes}`}
                                             handleOnChange={handleOnSelectRecipeQty}
                                         />
                                     </Grid>
@@ -193,24 +194,30 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         <Grid item xs={12} md={2}>
                             <div className={classes.divider} />
                         </Grid>
-                        <Grid item xs={12} md={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <Grid item xs={12} md={4} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
                             <RecipesCalculation
-                                recipesQty={buyFlow.form.variant ?.numberOfRecipes}
-                                peopleQty={buyFlow.form.variant ?.numberOfPersons}
-                                totalPrice={buyFlow.form.variant ?.priceWithOffer || buyFlow.form.variant ?.price}
+                                recipesQty={buyFlow.form.variant?.numberOfRecipes}
+                                peopleQty={buyFlow.form.variant?.numberOfPersons}
+                                totalPrice={buyFlow.form.variant?.priceWithOffer || buyFlow.form.variant?.price}
                             />
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} style={{ textAlign: 'center', marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
-                        <RoundedButton label="Seleccionar plan" onClick={() => buyFlow.forward()} style={{ padding: `${theme.spacing(2.5)}px ${theme.spacing(8)}px` }} />
-                        <Typography variant="body2" color='textSecondary' style={{ marginTop: theme.spacing(2) }}>Podrás elegir las recetas en el último paso. Cada semana cambiamos las recetas.</Typography>
+                    <Grid item xs={12} style={{ textAlign: "center", marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
+                        <RoundedButton
+                            label="Seleccionar plan"
+                            onClick={() => buyFlow.forward()}
+                            style={{ padding: `${theme.spacing(2.5)}px ${theme.spacing(8)}px` }}
+                        />
+                        <Typography variant="body2" color="textSecondary" style={{ marginTop: theme.spacing(2) }}>
+                            Podrás elegir las recetas en el último paso. Cada semana cambiamos las recetas.
+                        </Typography>
                     </Grid>
                 </Grid>
             </Container>
 
             {/* RECIPES SECTION */}
             {!!recipesOfWeek.length && (
-                <div className={classes.recipeSection} >
+                <div className={classes.recipeSection}>
                     <WeekPlanRecipesSection
                         title="Hecha un vistazo a las recetas de esta semana"
                         subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
@@ -225,8 +232,8 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                 <Grid container spacing={2} className={classes.faqsSection}>
                     <Grid item xs={12}>
                         <SectionTitleBuyFlow
-                            title='Preguntas frecuentes'
-                            subtitle='¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat'
+                            title="Preguntas frecuentes"
+                            subtitle="¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat"
                         />
                         <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>

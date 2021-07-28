@@ -5,7 +5,6 @@ import { IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@sto
 
 // External components
 
-
 // Internal components
 import { BuyFlowLayout } from "@layouts";
 import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "@organisms";
@@ -30,6 +29,7 @@ export interface PlanesPageProps {
     recipes: Recipe[];
     faqs: FAQS[];
     planUrlParams: PlanUrlParams;
+    weekLabel: string;
     variant: PlanVariant;
     errors?: PlansErrors;
     displayName?: string;
@@ -39,30 +39,32 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     const step = useBuyFlow(({ step }) => step);
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-    const { setDeliveryInfo, setPaymentMethod, setRegisterState } = useBuyFlow(
-        ({ setDeliveryInfo, setPaymentMethod, setRegisterState }) => ({
+    const { setDeliveryInfo, setPaymentMethod, setRegisterState, setWeekLabel } = useBuyFlow(
+        ({ setDeliveryInfo, setPaymentMethod, setRegisterState, setWeekLabel }) => ({
             setDeliveryInfo,
             setPaymentMethod,
             setRegisterState,
+            setWeekLabel,
         })
     );
 
     useEffect(() => {
+        setWeekLabel(props.weekLabel);
         setDeliveryInfo({
-            addressDetails: userInfo.shippingAddress ?.addressDetails,
-            addressName: userInfo.shippingAddress ?.addressName,
+            addressDetails: userInfo.shippingAddress?.addressDetails,
+            addressName: userInfo.shippingAddress?.addressName,
             phone1: userInfo.phone1,
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
             restrictions: "",
-            latitude: userInfo.shippingAddress ?.latitude,
-            longitude: userInfo.shippingAddress ?.longitude,
+            latitude: userInfo.shippingAddress?.latitude,
+            longitude: userInfo.shippingAddress?.longitude,
         });
 
         if (Array.isArray(userInfo.paymentMethods)) {
             const defaultPaymentMethod: IPaymentMethod | undefined = userInfo.paymentMethods.find((method) => method.isDefault);
             setPaymentMethod({
-                id: defaultPaymentMethod ?.id || "",
+                id: defaultPaymentMethod?.id || "",
                 stripeId: "",
                 type: defaultPaymentMethod ? "card" : "",
             });
@@ -100,11 +102,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
               <CrossSellingStep />,
           ];
 
-    return (
-        <BuyFlowLayout>
-            {steps[step]}
-        </BuyFlowLayout>
-    );
+    return <BuyFlowLayout>{steps[step]}</BuyFlowLayout>;
 });
 
 export async function getServerSideProps({ locale, query }) {
@@ -120,7 +118,7 @@ export async function getServerSideProps({ locale, query }) {
         console.warn("***-> Errors: ", errors);
     }
 
-    _plans.data ?.forEach((plan, index) => {
+    _plans.data?.plans.forEach((plan, index) => {
         if (plan.type === "Main" || plan.type === "Principal") {
             mainPlans.push(plan);
         } else {
@@ -138,8 +136,8 @@ export async function getServerSideProps({ locale, query }) {
     } = getPlanVariant({ slug: _slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
 
     const planUrlParams: PlanUrlParams = {
-        personQty: `${variant ?.numberOfPersons || 0}`,
-        recipeQty: `${variant ?.numberOfRecipes || 0}`,
+        personQty: `${variant?.numberOfPersons || 0}`,
+        recipeQty: `${variant?.numberOfRecipes || 0}`,
         slug,
         id,
     };
@@ -150,6 +148,7 @@ export async function getServerSideProps({ locale, query }) {
             faqs: _faqs.data || [],
             plans: mainPlans,
             aditionalsPlans,
+            weekLabel: _plans.data.weekLabel,
             variant,
             recipes,
             planUrlParams,
