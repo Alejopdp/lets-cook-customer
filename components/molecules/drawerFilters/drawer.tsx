@@ -1,19 +1,32 @@
+import { IFilter } from "@layouts";
 import { Checkbox, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography, useTheme } from "@material-ui/core";
+import { useFilterDrawer } from "@stores";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import CustomButton from "../../atoms/customButton/customButton";
 import useStyles from "./styles";
 
-export const DrawerMenu = ({ open = false, items = [], selectedItems = [], handleOnClose = () => { }, handleOnClickApplyButton = (e: any) => { } }) => {
+export const DrawerMenu = ({
+    open = false,
+    items = [],
+    selectedItems = [],
+    handleOnClose = () => {},
+    handleOnClickApplyButton = (e: any) => {},
+}) => {
     const classes = useStyles();
     const theme = useTheme();
-    const [filtersSelected, setFilters] = useState(selectedItems);
+    const [filtersSelected, setFilters] = useState<IFilter[]>(selectedItems);
+    const { storeFilters, setStoreFilters, toggleDrawer } = useFilterDrawer((state) => ({
+        storeFilters: state.filters,
+        setStoreFilters: state.setFilters,
+        toggleDrawer: state.setDrawerOpen,
+    }));
 
-    const handleOnClick = (filter) => {
-        const isApplied = filtersSelected.some((f) => filter === f);
+    const handleOnClick = (filter: IFilter) => {
+        const isApplied = filtersSelected.some((f) => filter.isEqualToFilterValue(f.value));
         if (isApplied) {
             let newFilterState = [];
-            newFilterState = filtersSelected.filter((f) => filter !== f);
+            newFilterState = filtersSelected.filter((f) => !filter.isEqualToFilterValue(f.value));
             setFilters(newFilterState);
         } else {
             setFilters([...filtersSelected, filter]);
@@ -21,8 +34,14 @@ export const DrawerMenu = ({ open = false, items = [], selectedItems = [], handl
     };
 
     const _handleOnClose = (x) => {
-        setFilters(selectedItems)
+        setFilters(selectedItems);
         handleOnClose();
+    };
+
+    const _handleOnClickApplyButton = () => {
+        setStoreFilters([...filtersSelected]);
+        setFilters([]);
+        toggleDrawer(false);
     };
 
     return (
@@ -38,7 +57,9 @@ export const DrawerMenu = ({ open = false, items = [], selectedItems = [], handl
                 ModalProps={{ keepMounted: true }}
             >
                 <div className={classes.drawerContentRoot}>
-                    <Typography variant="h5" style={{ textAlign: 'left' }}>Filtrar recetas</Typography>
+                    <Typography variant="h5" style={{ textAlign: "left" }}>
+                        Filtrar recetas
+                    </Typography>
                     <List>
                         {items.map((filterPart, keyPartTitle) => (
                             <div key={keyPartTitle} style={{ marginTop: theme.spacing(3) }}>
@@ -50,13 +71,16 @@ export const DrawerMenu = ({ open = false, items = [], selectedItems = [], handl
                                         key={keyFilter}
                                         dense
                                         button
-                                        checked={filtersSelected.some((filter) => filter === filterItem.value)}
-                                        onClick={() => handleOnClick(filterItem.value)}
+                                        checked={
+                                            filtersSelected.some((filter) => filter.isEqualToFilterValue(filterItem.value)) ||
+                                            storeFilters.some((filter) => filter.isEqualToFilterValue(filterItem.value))
+                                        }
+                                        onClick={() => handleOnClick(filterItem)}
                                     >
                                         <ListItemIcon>
                                             <Checkbox
                                                 edge="start"
-                                                checked={filtersSelected.some((filter) => filter === filterItem.value)}
+                                                checked={filtersSelected.some((filter) => filter.isEqualToFilterValue(filterItem.value))}
                                                 tabIndex={-1}
                                                 disableRipple
                                                 inputProps={{ "aria-labelledby": filterItem.value }}
@@ -69,7 +93,7 @@ export const DrawerMenu = ({ open = false, items = [], selectedItems = [], handl
                         ))}
                     </List>
                 </div>
-                <CustomButton text="Aplicar filtros" onClick={() => handleOnClickApplyButton(filtersSelected)} style={{ width: '100%' }} />
+                <CustomButton text="Aplicar filtros" onClick={() => _handleOnClickApplyButton()} style={{ width: "100%" }} />
             </Drawer>
         </nav>
     );

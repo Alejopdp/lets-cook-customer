@@ -7,7 +7,26 @@ export type PaymentMethodForm = {
     stripeId: string;
     type: string;
 };
-export type Recipes = any;
+export type Recipes = {
+    id: string;
+    name: string;
+    sku: string;
+    shortDescription: string;
+    longDescription: string;
+    cookDuration: string;
+    cookDurationNumberValue: number;
+    difficultyLevel: string;
+    imageUrl: string;
+    weight: string;
+    weightNumberValue: number;
+    backOfficeTags: string[];
+    imageTags: string[];
+    availableWeeks: { id: string; label: string }[];
+    availableMonths: string[];
+    relatedPlans: string[];
+    tools: string[];
+    recipeVariants: { ingredients: string[]; restriction: { id: string; value: string; label: string }; sku: string }[];
+};
 
 export interface DeliveryForm {
     addressName: string;

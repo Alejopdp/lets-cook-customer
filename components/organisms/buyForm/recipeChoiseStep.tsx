@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 // Utils & Config
 import { useBuyFlow, useFilterDrawer } from "@stores";
 
@@ -13,6 +13,7 @@ import { RoundedButton } from "@atoms";
 import { TitleBuyFlow, RecipesBottomBar } from "@molecules";
 import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
+import { IFilter } from "@layouts";
 
 interface RecipeChoiseStepProps {
     recipes: any[];
@@ -31,8 +32,8 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const gotToNextView = useBuyFlow(({ forward }) => forward);
     const { enqueueSnackbar } = useSnackbar();
 
-    const handleRemoveFilter = (filter) => {
-        const newFilterState = filters.filter((f) => filter !== f);
+    const handleRemoveFilter = (filter: IFilter) => {
+        const newFilterState = filters.filter((f) => !filter.isEqualToFilterValue(f.value));
         setFilters(newFilterState);
     };
 
@@ -55,6 +56,14 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
     };
+
+    const filteredRecipes = useMemo(() => {
+        return filters.length > 0
+            ? props.recipes.filter((recipe) =>
+                  filters.some((filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqual(recipe.difficultyLevel))
+              )
+            : props.recipes;
+    }, [filters]);
 
     return (
         <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6), paddingBottom: "200px" }}>
@@ -83,7 +92,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                             <Grid key={index} item>
                                 <Chip
                                     key={index}
-                                    label={filter}
+                                    label={filter.label}
                                     onDelete={() => handleRemoveFilter(filter)}
                                     color="secondary"
                                     style={{ color: "white" }}
@@ -94,7 +103,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <RecipesGrid recipesSelection={true} recipes={props.recipes} />
+                    <RecipesGrid recipesSelection={true} recipes={filteredRecipes} />
                 </Grid>
             </Grid>
             <RecipesBottomBar handleSubmit={handleSubmit} />

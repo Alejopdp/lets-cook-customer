@@ -1,35 +1,34 @@
+import { IFilter } from "@layouts";
 import create from "zustand";
-import { devtools } from 'zustand/middleware';
+import { devtools } from "zustand/middleware";
 
-type RecipeFilter = string;
 interface FilterDrawerStore {
     drawerIsOpen: boolean;
-    filters: RecipeFilter[];
+    filters: IFilter[];
 }
 
 interface Store extends FilterDrawerStore {
     setDrawerOpen: (drawerIsOpen: boolean) => void;
-    setFilters: (filters: RecipeFilter[]) => void;
+    setFilters: (filters: IFilter[]) => void;
 }
 
 const FilterDrawerInitialState: FilterDrawerStore = {
     drawerIsOpen: false,
     filters: [],
-}
+};
 
 const store = devtools<Store>((set, get) => ({
     ...FilterDrawerInitialState,
-    setDrawerOpen: (drawerIsOpen: boolean) => set((state) => ({
-        ...state,
-        drawerIsOpen
-    })),
-    setFilters: (filters: RecipeFilter[]) => set((state) => ({
-        ...state,
-        filters
-    })),
-}))
+    setDrawerOpen: (drawerIsOpen: boolean) =>
+        set((state) => ({
+            ...state,
+            drawerIsOpen,
+        })),
+    setFilters: (filters: IFilter[]) =>
+        set((state) => ({
+            ...state,
+            filters,
+        })),
+}));
 
 export const useFilterDrawer = create(store);
-
-
-
