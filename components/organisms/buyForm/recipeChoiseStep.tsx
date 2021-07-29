@@ -62,7 +62,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                 <Grid item xs={12}>
                     <TitleBuyFlow
                         title="El pago ha sido exitoso. ¡Muchas gracias por tu compra!"
-                        subtitle={`Elige las ${variant.numberOfRecipes} recetas que recibirás el ${firstOrderShippingDate}`} // TO DO !!!!!!!!!!!!!!! AGREAGAR LA CANTIDAD MAX DE ECTAS AL BUY FLOW
+                        subtitle={`Elige las ${variant.numberOfRecipes} recetas que recibirás el ${firstOrderShippingDate}`}
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>

@@ -17,20 +17,18 @@ import { useSnackbar } from "notistack";
 import { getCouponValidation } from "helpers/serverRequests/coupon";
 import AppliedCouponBox from "./appliedCouponBox/appliedCouponBox";
 import CheckoutValueItem from "./checkoutValueItem/checkoutValueItem";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({}));
 
 export default function CheckoutDetails() {
     const classes = useStyles();
     const theme = useTheme();
-    const { form, setCoupon } = useBuyFlow(({ form, setCoupon }) => ({ form, setCoupon }));
+    const { form, setCoupon, toFirstStep } = useBuyFlow(({ form, setCoupon, toFirstStep }) => ({ form, setCoupon, toFirstStep }));
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
-
-    // useEffect(() => {
-
-    // }, [])
+    const router = useRouter();
 
     const totalValue = useMemo(() => {
         const shippingCost = form.deliveryForm?.shippingCost || 0;
@@ -94,6 +92,7 @@ export default function CheckoutDetails() {
                 planIcon="http://localhost:3000/development/plans/Plan_test/Plan_test.png"
                 planName={form.planName}
                 planVariantLabel={form.variant.label}
+                onClick={() => toFirstStep()}
             />
             <Box paddingTop={4} borderTop="2px dashed #E5E5E5" borderBottom="2px solid #E5E5E5">
                 <CheckoutDetailItem title="Valor del plan" value={`${form.variant?.price} €/ semana`} />

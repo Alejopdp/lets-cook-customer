@@ -66,6 +66,7 @@ export const PaymentForm = (props) => {
             setFirstOrderShippingDate,
         })
     );
+    const [areTermsAccepted, setareTermsAccepted] = useState(false);
 
     const handleOnChange = () => {
         router.push("/aviso-legal");
@@ -107,7 +108,8 @@ export const PaymentForm = (props) => {
     const handleSubmitPayment = async () => {
         setisLoadingPayment(true);
         if (form.paymentMethod.type === "newPaymentMethod") {
-            await handleStripePaymentMethod();
+            const stripeRes = await handleStripePaymentMethod();
+            if (stripeRes.error) return;
         }
 
         const data = {
@@ -145,6 +147,25 @@ export const PaymentForm = (props) => {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
         setisLoadingPayment(false);
+    };
+
+    const isPayButtonDisabled = () => {
+        return isDeliveryFormIncomplete() || isPaymentFormIncomplete() || !!!areTermsAccepted;
+    };
+
+    const isDeliveryFormIncomplete = () => {
+        return (
+            !!!form.deliveryForm?.addressName ||
+            !!!form.deliveryForm?.firstName ||
+            !!!form.deliveryForm?.lastName ||
+            !!!form.deliveryForm?.latitude ||
+            !!!form.deliveryForm?.longitude ||
+            !!!form.deliveryForm?.phone1
+        );
+    };
+
+    const isPaymentFormIncomplete = () => {
+        return !!!form.paymentMethod;
     };
 
     return (
@@ -201,15 +222,15 @@ export const PaymentForm = (props) => {
                                     </p>
                                 }
                                 className={chckbox}
-                                checked={props.checked}
-                                handleChange={props.onChange}
+                                checked={areTermsAccepted}
+                                handleChange={() => setareTermsAccepted(!areTermsAccepted)}
                                 // rediretTo='/aviso-legal'
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <RoundedButton
                                 label="Realizar pago"
-                                disabled={props.disabled}
+                                disabled={isPayButtonDisabled() || isLoadingPayment}
                                 onClick={handleSubmitPayment}
                                 style={{ width: "100%" }}
                             />

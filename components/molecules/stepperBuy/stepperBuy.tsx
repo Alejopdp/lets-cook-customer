@@ -7,15 +7,14 @@ import useStyles from "./styles";
 
 interface StepperBuyProps {
     steps: {
-        icon: string,
-        label: string,
+        icon: string;
+        label: string;
     }[];
     smUpHide?: boolean;
     smDowmHide?: boolean;
 }
 
 export const StepperBuy = memo(({ steps, smUpHide, smDowmHide }: StepperBuyProps) => {
-    
     const classes = useStyles();
     const { step, showRegister } = useBuyFlow(({ step, showRegister }) => ({
         step,
@@ -28,7 +27,7 @@ export const StepperBuy = memo(({ steps, smUpHide, smDowmHide }: StepperBuyProps
             className={clsx(classes.root, { [classes.smDowmHide]: smDowmHide }, { [classes.smUpHide]: smUpHide })}
         >
             {steps.reduce((items, item, key) => {
-                if (!showRegister && key === 1) return items;
+                // if (!showRegister && key === 1) return items;
                 return [
                     ...items,
                     <div className={clsx({ [classes.active]: step === key }, classes.breadcrumbContainer)} key={key}>

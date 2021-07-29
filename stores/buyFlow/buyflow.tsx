@@ -5,7 +5,7 @@ import { combine, devtools } from "zustand/middleware";
 export type PaymentMethodForm = {
     id: string;
     stripeId: string;
-    type: string; // card / newPaymentMethod
+    type: string;
 };
 export type Recipes = any;
 
@@ -68,8 +68,9 @@ export interface Coupon {
     };
 }
 export interface Store extends BuyFlowStore {
-    setRegisterState: (isVisible: boolean) => void;
+    setShowRegister: (isVisible: boolean) => void;
     forward: () => void;
+    toFirstStep: () => void;
     setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => void;
     setPaymentMethod: (paymentMethod: Partial<PaymentMethodForm>) => void;
     selectRecipes: (recipes: Recipes[]) => void;
@@ -97,6 +98,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             numberOfPersons: 0,
             numberOfRecipes: 0,
             attributes: [],
+            label: "",
         },
         deliveryForm: {
             addressName: "",
@@ -152,18 +154,22 @@ export const BuyFlowInitialStore: BuyFlowStore = {
 const store = devtools<Store>((set, get) => ({
     ...BuyFlowInitialStore,
 
-    setRegisterState: (isVisible: boolean) => set({ showRegister: isVisible }),
+    setShowRegister: (isVisible: boolean) => set({ showRegister: isVisible }),
 
     // TODO: Optimize this part the idea is controller
     // the steps during buy process.
-    forward: () => {
-        const indexStepToOmmit = 2;
+    forward: (stepsToMove: number = 2) => {
+        const indexStepToOmmit = 1;
         const _step = get().step;
         if (!get().showRegister && _step === indexStepToOmmit - 1) {
-            set({ step: _step + 2 });
+            set({ step: _step + stepsToMove });
             return;
         }
         set({ step: _step + 1 });
+    },
+
+    toFirstStep: () => {
+        set({ step: 0 });
     },
 
     setWeekLabel: (weekLabel: string) => {

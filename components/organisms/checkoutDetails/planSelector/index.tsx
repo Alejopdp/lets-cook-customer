@@ -55,7 +55,7 @@ const PlanSelector = (props: PlanSelectorProps) => {
                         {props.planVariantLabel}
                     </Typography>
                 </Box>
-                <IconButton style={{ marginRight: -12, marginTop: -12 }}>
+                <IconButton style={{ marginRight: -12, marginTop: -12 }} onClick={props.onClick}>
                     <EditIcon fontSize="small" />
                 </IconButton>
             </Box>

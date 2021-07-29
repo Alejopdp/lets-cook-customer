@@ -39,14 +39,15 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     const step = useBuyFlow(({ step }) => step);
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-    const { setDeliveryInfo, setPaymentMethod, setRegisterState, setWeekLabel } = useBuyFlow(
-        ({ setDeliveryInfo, setPaymentMethod, setRegisterState, setWeekLabel }) => ({
+    const { setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel } = useBuyFlow(
+        ({ setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel }) => ({
             setDeliveryInfo,
             setPaymentMethod,
-            setRegisterState,
+            setShowRegister,
             setWeekLabel,
         })
     );
+    console.log("ESTA AUTENTICADO: ", isAuthenticated);
 
     useEffect(() => {
         setWeekLabel(props.weekLabel);
@@ -71,7 +72,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         }
 
         if (isAuthenticated) {
-            setRegisterState(false);
+            setShowRegister(false);
         }
     }, []);
 

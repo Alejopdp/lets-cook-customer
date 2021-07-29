@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useMemo } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -34,10 +34,14 @@ const loggedInSteps: Step[] = [
 
 export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-    const { showRegister, setRegisterState: toggleRegister } = useBuyFlow(({ setRegisterState, showRegister }) => ({
-        setRegisterState,
+    const { showRegister, setShowRegister: toggleRegister } = useBuyFlow(({ setShowRegister, showRegister }) => ({
+        setShowRegister,
         showRegister,
     }));
+
+    const showLoggedInSteps = useMemo(() => {
+        return isAuthenticated;
+    }, []);
 
     // useEffect(() => {
     //     console.log("STEPPER: ", isAuthenticated);
@@ -53,10 +57,10 @@ export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
                 <div className={classes.logo}>
                     <Image src="/logo.png" width={115} height={40} />
                 </div>
-                <StepperBuy smDowmHide steps={steps} />
+                <StepperBuy smDowmHide steps={showLoggedInSteps ? loggedInSteps : steps} />
                 <LangSelector />
             </Toolbar>
-            <StepperBuy smUpHide steps={isAuthenticated ? loggedInSteps : steps} />
+            <StepperBuy smUpHide steps={showLoggedInSteps ? loggedInSteps : steps} />
         </AppBar>
     );
 };
