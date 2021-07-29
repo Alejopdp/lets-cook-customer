@@ -21,10 +21,12 @@ interface RecipeChoiseStepProps {
 export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const theme = useTheme();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
-    const { recipes, firstOrderId, subscriptionId } = useBuyFlow(({ form }) => ({
+    const { recipes, firstOrderId, subscriptionId, firstOrderShippingDate, variant } = useBuyFlow(({ form }) => ({
         recipes: form.recipes,
         firstOrderId: form.firstOrderId,
         subscriptionId: form.subscriptionId,
+        firstOrderShippingDate: form.firstOrderShippingDate,
+        variant: form.variant,
     }));
     const gotToNextView = useBuyFlow(({ forward }) => forward);
     const { enqueueSnackbar } = useSnackbar();
@@ -44,7 +46,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                 recipeSelection = [{ recipeId: recipe.id, quantity: 1 }, ...recipeSelection];
             }
         }
-        const res = await chooseRecipes(firstOrderId, recipeSelection, subscriptionId);
+        const res = await chooseRecipes(firstOrderId, recipeSelection);
 
         if (res.status === 200) {
             gotToNextView();
@@ -55,26 +57,26 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     };
 
     return (
-        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6), paddingBottom: '200px' }}>
+        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6), paddingBottom: "200px" }}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TitleBuyFlow
                         title="El pago ha sido exitoso. ¡Muchas gracias por tu compra!"
-                        subtitle="Elige las 3 recetas que recibirás el martes 18"
+                        subtitle={`Elige las ${variant.numberOfRecipes} recetas que recibirás el ${firstOrderShippingDate}`} // TO DO !!!!!!!!!!!!!!! AGREAGAR LA CANTIDAD MAX DE ECTAS AL BUY FLOW
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
-                    <Grid container spacing={2} alignItems='center'>
+                    <Grid container spacing={2} alignItems="center">
                         <Grid item>
                             <RoundedButton
                                 variant="outline"
                                 label="Filtrar recetas"
-                                style={{ backgroundColor: "white", padding: '8px' }}
+                                style={{ backgroundColor: "white", padding: "8px" }}
                                 onClick={() => {
                                     setDrawerOpen(!drawerIsOpen);
                                 }}
                             >
-                                <Icon fontSize='small' component={FilterIcon} />
+                                <Icon fontSize="small" component={FilterIcon} />
                             </RoundedButton>
                         </Grid>
                         {filters.map((filter, index) => (

@@ -19,6 +19,8 @@ export interface DeliveryForm {
     latitude: number;
     longitude: number;
     shippingCost: number;
+    shippingDayLabel: string;
+    nextShippingDate: string;
 }
 
 export interface BuyFlowStore {
@@ -36,6 +38,7 @@ export interface BuyFlowStore {
         recipes: Recipes[];
         firstOrderId: string;
         subscriptionId: string;
+        firstOrderShippingDate: string;
     };
 }
 
@@ -76,6 +79,7 @@ export interface Store extends BuyFlowStore {
     setFirstOrderId: (firstOrderId: Partial<string>) => void;
     setSubscriptionId: (subscriptionId: Partial<string>) => void;
     setWeekLabel: (weekLabel: Partial<string>) => void;
+    setFirstOrderShippingDate: (shippingDate: Partial<string>) => void;
 }
 
 export const BuyFlowInitialStore: BuyFlowStore = {
@@ -104,6 +108,8 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             latitude: null,
             longitude: null,
             shippingCost: 0,
+            shippingDayLabel: "",
+            nextShippingDate: "",
         },
         paymentMethod: {
             id: "",
@@ -139,6 +145,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
         recipes: [],
         subscriptionId: "",
         firstOrderId: "",
+        firstOrderShippingDate: "",
     },
 };
 
@@ -207,6 +214,11 @@ const store = devtools<Store>((set, get) => ({
     setSubscriptionId: (subscriptionId: string) => {
         const form = get().form;
         form.subscriptionId = subscriptionId;
+        set({ form });
+    },
+    setFirstOrderShippingDate: (shippingDate: string) => {
+        const form = get().form;
+        form.firstOrderShippingDate = shippingDate;
         set({ form });
     },
 }));

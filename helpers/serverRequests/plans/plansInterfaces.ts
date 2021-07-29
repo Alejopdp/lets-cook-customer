@@ -10,6 +10,7 @@ export interface PlanVariant {
     id: string;
     sku: string;
     name: string;
+    label: string;
     price?: number;
     priceWithOffer?: number;
     numberOfPersons?: number;

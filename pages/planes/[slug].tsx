@@ -1,5 +1,5 @@
 // Utils & Config
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { getPlans, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant } from "@helpers";
 import { IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 
@@ -75,32 +75,36 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         }
     }, []);
 
-    const steps = isAuthenticated
-        ? [
-              <SelectPlanStep
-                  initialPlanSettings={props.planUrlParams}
-                  plans={props.plans}
-                  variant={props.variant}
-                  faqs={props.faqs}
-                  recipes={props.recipes}
-              />,
-              <CheckoutStep />,
-              <RecipeChoiseStep recipes={props.recipes} />,
-              <CrossSellingStep />,
-          ]
-        : [
-              <SelectPlanStep
-                  initialPlanSettings={props.planUrlParams}
-                  plans={props.plans}
-                  variant={props.variant}
-                  faqs={props.faqs}
-                  recipes={props.recipes}
-              />,
-              <RegisterUserStep />,
-              <CheckoutStep />,
-              <RecipeChoiseStep recipes={props.recipes} />,
-              <CrossSellingStep />,
-          ];
+    const steps = useMemo(
+        () =>
+            isAuthenticated
+                ? [
+                      <SelectPlanStep
+                          initialPlanSettings={props.planUrlParams}
+                          plans={props.plans}
+                          variant={props.variant}
+                          faqs={props.faqs}
+                          recipes={props.recipes}
+                      />,
+                      <CheckoutStep />,
+                      <RecipeChoiseStep recipes={props.recipes} />,
+                      <CrossSellingStep />,
+                  ]
+                : [
+                      <SelectPlanStep
+                          initialPlanSettings={props.planUrlParams}
+                          plans={props.plans}
+                          variant={props.variant}
+                          faqs={props.faqs}
+                          recipes={props.recipes}
+                      />,
+                      <RegisterUserStep />,
+                      <CheckoutStep />,
+                      <RecipeChoiseStep recipes={props.recipes} />,
+                      <CrossSellingStep />,
+                  ],
+        []
+    );
 
     return <BuyFlowLayout>{steps[step]}</BuyFlowLayout>;
 });

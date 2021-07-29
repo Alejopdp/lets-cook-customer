@@ -16,12 +16,12 @@ import { useSnackbar } from "notistack";
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
 
 // External Components
-import { Grid } from "@material-ui/core"
+import { Grid } from "@material-ui/core";
 
 const SignUpForm = (props) => {
     const [currentStep, setcurrentStep] = useState(0);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
-    const setIsAuthenticated = useAuthStore((state) => state.isAuthenticated);
+    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
