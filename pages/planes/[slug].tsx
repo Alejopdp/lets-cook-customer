@@ -6,9 +6,11 @@ import { IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@sto
 // External components
 
 // Internal components
-import { BuyFlowLayout } from "@layouts";
+import { BuyFlowLayout, Layout } from "@layouts";
+import LoggedInNavbar from "../../components/layout/default/loggedInNavbarContent";
 import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "@organisms";
 import CrossSellingStep from "components/organisms/buyForm/crossSellingStep";
+import { Box } from "@material-ui/core";
 
 export interface PlansErrors {
     plans?: string;
@@ -95,7 +97,14 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         []
     );
 
-    return <BuyFlowLayout>{steps[step]}</BuyFlowLayout>;
+    return step === steps.length - 1 ? (
+        <Box paddingY={4}>
+            <LoggedInNavbar toggleOpeningDrawer={() => ""} />
+            <CrossSellingStep />
+        </Box>
+    ) : (
+        <BuyFlowLayout>{steps[step]}</BuyFlowLayout>
+    );
 });
 
 export async function getServerSideProps({ locale, query }) {
