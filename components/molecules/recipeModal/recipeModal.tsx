@@ -1,5 +1,5 @@
 // Utils
-import React from "react";
+import React, { useMemo } from "react";
 import { withStyles, useTheme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 
@@ -72,6 +72,10 @@ const DialogTitle = withStyles(styles)((props) => {
 const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
     const theme = useTheme();
     const isMdUp = useMediaQuery("(min-width:960px)");
+
+    const tools = useMemo(() => {
+        return props.recipe.tools.join(", ");
+    }, []);
 
     return (
         <>
@@ -165,7 +169,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
                                             Herramientas necesarias
                                         </Typography>
-                                        <Typography variant="body2">{props.recipe.tools}</Typography>
+                                        <Typography variant="body2">{tools}</Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
