@@ -22,6 +22,7 @@ import { useRouter } from "next/router";
 import PaymentMethodForm from "../paymentMethodForm/paymentMethodForm";
 import { useBuyFlow, useUserInfoStore } from "@stores";
 import { Grid, Typography, useTheme } from "@material-ui/core";
+import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
 
 const useStylesAccordion = makeStyles((theme: Theme) =>
     createStyles({
@@ -49,21 +50,43 @@ const useStylesAccordion = makeStyles((theme: Theme) =>
 export const PaymentForm = (props) => {
     const { chckbox } = useStyles();
     const classes = useStylesAccordion();
+    const { getFromLocalStorage, saveInLocalStorage } = useLocalStorage();
     const theme = useTheme();
     const router = useRouter();
-    const userInfo = useUserInfoStore(({ userInfo }) => userInfo);
-    const gotToNextView = useBuyFlow(({ forward }) => forward);
+    const { userInfo, setuserInfo } = useUserInfoStore(({ userInfo, setuserInfo }) => ({ userInfo, setuserInfo }));
+    // const gotToNextView = useBuyFlow(({ forward }) => forward);
     const stripe = useStripe();
     const [isLoadingPayment, setisLoadingPayment] = useState(false);
     const elements = useElements();
     const { enqueueSnackbar } = useSnackbar();
-    const { setPaymentMethod, form, setFirstOrderId, setSubscriptionId, setFirstOrderShippingDate } = useBuyFlow(
-        ({ setPaymentMethod, form, setFirstOrderId, setSubscriptionId, setFirstOrderShippingDate }) => ({
+    const {
+        setPaymentMethod,
+        form,
+        setFirstOrderId,
+        setSubscriptionId,
+        setFirstOrderShippingDate,
+        setDeliveryInfo,
+        forward: goToNextView,
+        moveNSteps,
+    } = useBuyFlow(
+        ({
             setPaymentMethod,
             form,
             setFirstOrderId,
             setSubscriptionId,
             setFirstOrderShippingDate,
+            setDeliveryInfo,
+            forward,
+            moveNSteps,
+        }) => ({
+            setPaymentMethod,
+            form,
+            setFirstOrderId,
+            setSubscriptionId,
+            setFirstOrderShippingDate,
+            setDeliveryInfo,
+            forward,
+            moveNSteps,
         })
     );
     const [areTermsAccepted, setareTermsAccepted] = useState(false);
@@ -117,17 +140,17 @@ export const PaymentForm = (props) => {
             planId: form.planCode,
             planVariantId: form.variant?.id,
             planFrequency: "Semanal",
-            restrictionComment: form.deliveryForm.restrictions || "No puedo comer alimentos con lactosa", // Add restriction comment
+            restrictionComment: props.deliveryData.restrictions || "No puedo comer alimentos con lactosa", // Add restriction comment
             couponId: "",
             stripePaymentMethodId: form.paymentMethod?.stripeId, // Add if it is a new payment method
             paymentMethodId: form.paymentMethod?.id, // Add if customer uses an already saved payment method
-            addressName: form.deliveryForm?.addressName,
-            addressDetails: form.deliveryForm?.addressDetails,
-            latitude: form.deliveryForm?.latitude,
-            longitude: form.deliveryForm?.longitude,
-            customerFirstName: form.deliveryForm?.firstName,
-            customerLastName: form.deliveryForm?.lastName,
-            phone1: form.deliveryForm?.phone1,
+            addressName: props.deliveryData.addressName,
+            addressDetails: props.deliveryData.addressDetails,
+            latitude: props.deliveryData.latitude,
+            longitude: props.deliveryData.longitude,
+            customerFirstName: props.deliveryData.firstName,
+            customerLastName: props.deliveryData.lastName,
+            phone1: props.deliveryData.phone1,
         };
 
         const res = await createSubscription(data);
@@ -142,26 +165,52 @@ export const PaymentForm = (props) => {
             setSubscriptionId(res.data.subscriptionId);
             setFirstOrderId(res.data.firstOrderId);
             setFirstOrderShippingDate(res.data.firstOrderShippingDate);
-            gotToNextView();
+            setDeliveryInfo({
+                ...form.deliveryForm,
+                ...props.deliveryData,
+            });
+            updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
+            form.canChooseRecipes ? goToNextView() : moveNSteps(2);
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
         setisLoadingPayment(false);
     };
 
-    const isPayButtonDisabled = () => {
-        return isDeliveryFormIncomplete() || isPaymentFormIncomplete() || !!!areTermsAccepted;
+    const updateUserInfoStoreIfNecessary = (paymentMethods) => {
+        if (!!!userInfo.shippingAddress || !!!userInfo.paymentMethods || userInfo.paymentMethods.length === 0) {
+            setuserInfo({
+                ...userInfo,
+                firstName: props.deliveryData.firstName,
+                lastName: props.deliveryData.lastName,
+                phone1: props.deliveryData.phone1,
+                shippingAddress: !!userInfo.shippingAddress
+                    ? { ...userInfo.shippingAddress }
+                    : {
+                          addressDetails: props.deliveryData.addressDetails,
+                          addressName: props.deliveryData.addressName,
+                          latitude: props.deliveryData.latitude,
+                          longitude: props.deliveryData.longitude,
+                      },
+                paymentMethods,
+            });
+
+            const oldUserInfo = getFromLocalStorage(LOCAL_STORAGE_KEYS.userInfo);
+            const newUserInfo = {
+                ...oldUserInfo,
+                firstName: props.deliveryData.firstName,
+                lastName: props.deliveryData.lastName,
+                phone1: props.deliveryData.phone1,
+                shippingAddress: { ...props.deliveryData },
+                paymentMethods,
+            };
+            saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, newUserInfo);
+        }
     };
 
-    const isDeliveryFormIncomplete = () => {
-        return (
-            !!!form.deliveryForm?.addressName ||
-            !!!form.deliveryForm?.firstName ||
-            !!!form.deliveryForm?.lastName ||
-            !!!form.deliveryForm?.latitude ||
-            !!!form.deliveryForm?.longitude ||
-            !!!form.deliveryForm?.phone1
-        );
+    const isPayButtonDisabled = () => {
+        // return isDeliveryFormIncomplete() || isPaymentFormIncomplete() || !!!areTermsAccepted;
+        return isPaymentFormIncomplete() || !!!areTermsAccepted;
     };
 
     const isPaymentFormIncomplete = () => {

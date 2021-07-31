@@ -60,8 +60,8 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
 
     useEffect(() => {
         const getShippingCostIfAddressExists = async () => {
-            const newLatitude = form.deliveryForm?.latitude || userInfo.shippingAddress?.latitude;
-            const newLongitude = form.deliveryForm?.longitude || userInfo.shippingAddress?.longitude;
+            const newLatitude = props.deliveryData?.latitude || userInfo.shippingAddress?.latitude;
+            const newLongitude = props.deliveryData?.longitude || userInfo.shippingAddress?.longitude;
 
             if (!!!newLatitude && !!!newLongitude) return;
 
@@ -80,27 +80,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
         };
 
         getShippingCostIfAddressExists();
-    }, [form.deliveryForm?.latitude, form.deliveryForm?.longitude]);
-
-    const handleChange = (event) => {
-        setDeliveryInfo({
-            ...form.deliveryForm,
-            [event.target.name]: event.target.value,
-        });
-    };
-
-    const handleAddressChange = async (newAddress) => {
-        if (newAddress) {
-            const geometry = await getGeometry(newAddress.structured_formatting.main_text);
-
-            setDeliveryInfo({
-                ...form.deliveryForm,
-                addressName: newAddress.description,
-                latitude: geometry.lat,
-                longitude: geometry.lng,
-            });
-        }
-    };
+    }, [props.deliveryData?.latitude, props.deliveryData?.longitude]);
 
     return (
         <>
@@ -139,8 +119,9 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <LocationSearchInput
-                                value={form.deliveryForm?.addressName}
-                                handleChange={handleAddressChange}
+                                disabled={!!form.deliveryForm?.addressName}
+                                value={props.deliveryData.addressName}
+                                handleChange={props.handleAddressChange}
                                 name="addressName"
                             />
                         </Grid>
@@ -148,27 +129,47 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                             <TextInput
                                 name="addressDetails"
                                 label="Piso / puerta / aclaraciones"
-                                value={form.deliveryForm.addressDetails}
-                                onChange={handleChange}
+                                disabled={!!form.deliveryForm?.addressName}
+                                value={props.deliveryData.addressDetails}
+                                onChange={props.handleChange}
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <TextInput name="firstName" label="Nombre" value={form.deliveryForm.firstName} onChange={handleChange} />
+                            <TextInput
+                                name="firstName"
+                                label="Nombre"
+                                value={props.deliveryData.firstName}
+                                onChange={props.handleChange}
+                                disabled={!!form.deliveryForm?.firstName}
+                            />
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <TextInput name="lastName" label="Apellido/s" value={form.deliveryForm.lastName} onChange={handleChange} />
+                            <TextInput
+                                name="lastName"
+                                label="Apellido/s"
+                                value={props.deliveryData?.lastName}
+                                onChange={props.handleChange}
+                                disabled={!!form.deliveryForm?.lastName}
+                            />
                         </Grid>
                         <Grid item xs={12}>
-                            <PhoneNumberInput value={form.deliveryForm.phone1} name="phone1" handleChange={handleChange} />
+                            <PhoneNumberInput
+                                value={props.deliveryData?.phone1}
+                                name="phone1"
+                                handleChange={props.handleChange}
+                                disabled={!!form.deliveryForm?.phone1}
+                            />
                         </Grid>
-                        <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                            <Box display="flex" alignItems="center" color="#F89719">
-                                <ErrorIcon fontSize="small" style={{ marginRight: "8px" }} />
-                                <Typography variant="body1" style={{ fontSize: "14px" }}>
-                                    Luego podrás cambiar los datos de entrega desde tu perfil
-                                </Typography>
-                            </Box>
-                        </Grid>
+                        {form.deliveryForm?.addressName && (
+                            <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                                <Box display="flex" alignItems="center" color="#F89719">
+                                    <ErrorIcon fontSize="small" style={{ marginRight: "8px" }} />
+                                    <Typography variant="body1" style={{ fontSize: "14px" }}>
+                                        Luego podrás cambiar los datos de entrega desde tu perfil
+                                    </Typography>
+                                </Box>
+                            </Grid>
+                        )}
                         <Grid item xs={12}>
                             <Typography variant="body2" style={{ marginBottom: theme.spacing(1) }}>
                                 ¿Tienes alguna restricción a la hora de ingerir algún tipo de alimento?
@@ -176,12 +177,17 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                             <TextInput
                                 name="restrictions"
                                 label="Ingrese aquí sus restricciones (solo si aplica)"
-                                value={form.deliveryForm.restrictions}
-                                onChange={handleChange}
+                                value={props.deliveryData?.restrictions}
+                                onChange={props.handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <RoundedButton label="Continuar" onClick={props.handleChangeStep} style={{ width: "100%" }} />
+                            <RoundedButton
+                                label="Continuar"
+                                onClick={props.handleChangeStep}
+                                style={{ width: "100%" }}
+                                disabled={!props.isFormCompleted()}
+                            />
                         </Grid>
                     </Grid>
                 </AccordionDetails>
@@ -197,21 +203,21 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <TextInput
                             name="addressDetails"
                             label="Piso / puerta / aclaraciones"
-                            value={form.deliveryForm.addressDetails}
-                            onChange={handleChange}
+                            value={form.deliveryForm?.addressDetails}
+                            onChange={props.handleChange}
                         />
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                        <TextInput name="firstName" label="Nombre" value={form.deliveryForm.firstName} onChange={handleChange} />
+                        <TextInput name="firstName" label="Nombre" value={form.deliveryForm?.firstName} onChange={props.handleChange} />
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                        <TextInput name="lastName" label="Apellido/s" value={form.deliveryForm.lastName} onChange={handleChange} />
+                        <TextInput name="lastName" label="Apellido/s" value={form.deliveryForm?.lastName} onChange={props.handleChange} />
                     </Grid>
 
                     <Grid item xs={12}>
-                        <PhoneNumberInput value={form.deliveryForm.phone1} name="phone1" handleChange={handleChange} />
+                        <PhoneNumberInput value={form.deliveryForm?.phone1} name="phone1" handleChange={handleChange} />
                     </Grid>
 
                     <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
@@ -230,8 +236,8 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <TextInput
                             name="restrictions"
                             label="Ingrese aquí sus restricciones (solo si aplica)"
-                            value={form.deliveryForm.restrictions}
-                            onChange={handleChange}
+                            value={form.deliveryForm?.restrictions}
+                            onChange={props.handleChange}
                         />
                     </Grid>
 

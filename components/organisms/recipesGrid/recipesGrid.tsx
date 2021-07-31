@@ -14,7 +14,7 @@ import { RecipesGridProps } from "./interfaces";
 
 export const RecipesGrid = (props: RecipesGridProps) => {
     const [open, setOpen] = React.useState(false);
-    const [recipeToView, setRecipeToView] = React.useState();
+    const [recipeToView, setRecipeToView] = React.useState(null);
     const { recipes, selectRecipes } = useBuyFlow(({ form: { recipes }, selectRecipes }) => ({ recipes, selectRecipes }));
 
     const handleClickOpenModal = (recipe) => {
@@ -88,9 +88,7 @@ export const RecipesGrid = (props: RecipesGridProps) => {
                 </Grid>
             )}
 
-            {open && (
-                <RecipeModal open={open} handleClose={handleClose} descriptionElementRef={descriptionElementRef} data={recipeToView} />
-            )}
+            {open && <RecipeModal open={open} handleClose={handleClose} recipe={recipeToView} />}
         </>
     );
 };

@@ -1,4 +1,4 @@
-import { Typography, Container, Grid, useTheme, useMediaQuery } from '@material-ui/core/';
+import { Typography, Container, Grid, useTheme, useMediaQuery } from "@material-ui/core/";
 import Title from "../../molecules/titleOtherPages/titleOtherPages";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import { Plan } from "@helpers";
 import { usePlansStyles as useStyles } from "./styles";
 import { PlansSectionProps } from "./interfaces";
 import { memo } from "react";
-import PlanCard from '../../molecules/planCard';
+import PlanCard from "../../molecules/planCard";
 
 export const PlansSection = memo((props: PlansSectionProps) => {
     const classes = useStyles();
@@ -21,34 +21,34 @@ export const PlansSection = memo((props: PlansSectionProps) => {
         superLargeDesktop: {
             breakpoint: {
                 max: 3000,
-                min: 1800
+                min: 1800,
             },
             items: 5,
-            partialVisibilityGutter: 40
+            partialVisibilityGutter: 40,
         },
         desktop: {
             breakpoint: {
                 max: 1800,
-                min: 960
+                min: 960,
             },
             items: 3,
-            partialVisibilityGutter: 40
+            partialVisibilityGutter: 40,
         },
         tablet: {
             breakpoint: {
                 max: 960,
-                min: 600
+                min: 600,
             },
             items: 2,
-            partialVisibilityGutter: 30
+            partialVisibilityGutter: 30,
         },
         mobile: {
             breakpoint: {
                 max: 600,
-                min: 0
+                min: 0,
             },
             items: 1,
-            partialVisibilityGutter: 100
+            partialVisibilityGutter: 100,
         },
     };
 
@@ -61,17 +61,14 @@ export const PlansSection = memo((props: PlansSectionProps) => {
                         subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
                     />
                 </Grid>
-                {(props.cards.length <= 6 && isLgUp) && (
+                {props.cards.length <= 6 && isLgUp && (
                     <Grid item xs={12}>
-                        <Grid container spacing={2} style={{ justifyContent: 'center' }}>
-                            {props.cards.map((card, index) =>
+                        <Grid container spacing={2} style={{ justifyContent: "center" }}>
+                            {(props.cards || []).map((card, index) => (
                                 <Grid item xs={12} lg={2}>
-                                    <PlanCard
-                                        index={index}
-                                        card={card}
-                                    />
+                                    <PlanCard index={index} card={card} />
                                 </Grid>
-                            )}
+                            ))}
                         </Grid>
                     </Grid>
                 )}
@@ -101,12 +98,8 @@ export const PlansSection = memo((props: PlansSectionProps) => {
                         slidesToSlide={1}
                         swipeable
                     >
-                        {props.cards.map((card, index) => (
-                            <PlanCard
-                                index={index}
-                                card={card}
-                                style={{ paddingRight: theme.spacing(2) }}
-                            />
+                        {(props.cards || []).map((card, index) => (
+                            <PlanCard index={index} card={card} style={{ paddingRight: theme.spacing(2) }} />
                         ))}
                     </Carousel>
                 </div>

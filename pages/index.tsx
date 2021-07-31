@@ -14,11 +14,7 @@ export default function Home(props: HomePageProps) {
 }
 
 export async function getServerSideProps({ locale }) {
-
-    const [_plans, _recipes] = await Promise.all([
-        getPlans(locale),
-        getRecipes(locale),
-    ]);
+    const [_plans, _recipes] = await Promise.all([getPlans(locale), getRecipes(locale)]);
 
     const errors = [_plans.error, _recipes.error].filter((e) => !!e);
 
@@ -28,11 +24,11 @@ export async function getServerSideProps({ locale }) {
 
     return {
         props: {
-            plans: _plans.data || [],
+            plans: _plans.data.plans || [],
             recipes: _recipes.data || [],
             howItWorks,
             benefits,
-            errors
+            errors,
         },
     };
 }
@@ -41,25 +37,24 @@ const howItWorks: HowItWorks[] = [
     {
         title: "Lorem Ipsum dolor",
         content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg"
+        image: "unnamed.jpg",
     },
     {
         title: "Lorem Ipsum dolor",
         content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg"
+        image: "unnamed.jpg",
     },
     {
         title: "Lorem Ipsum dolor",
         content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg"
+        image: "unnamed.jpg",
     },
     {
         title: "Lorem Ipsum dolor",
         content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg"
+        image: "unnamed.jpg",
     },
 ];
-
 
 const benefits: Benefit[] = [
     {
@@ -83,4 +78,3 @@ const benefits: Benefit[] = [
         image: "/assets/icon-test.svg",
     },
 ];
-

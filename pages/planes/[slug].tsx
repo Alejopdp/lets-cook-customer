@@ -67,43 +67,31 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             setPaymentMethod({
                 id: defaultPaymentMethod?.id || "",
                 stripeId: "",
-                type: defaultPaymentMethod ? "card" : "",
+                type: defaultPaymentMethod ? "card" : "newPaymentMethod",
             });
-        }
-
-        if (isAuthenticated) {
-            setShowRegister(false);
         }
     }, []);
 
+    useEffect(() => {
+        if (isAuthenticated) {
+            setShowRegister(false);
+        }
+    }, [isAuthenticated]);
+
     const steps = useMemo(
-        () =>
-            isAuthenticated
-                ? [
-                      <SelectPlanStep
-                          initialPlanSettings={props.planUrlParams}
-                          plans={props.plans}
-                          variant={props.variant}
-                          faqs={props.faqs}
-                          recipes={props.recipes}
-                      />,
-                      <CheckoutStep />,
-                      <RecipeChoiseStep recipes={props.recipes} />,
-                      <CrossSellingStep />,
-                  ]
-                : [
-                      <SelectPlanStep
-                          initialPlanSettings={props.planUrlParams}
-                          plans={props.plans}
-                          variant={props.variant}
-                          faqs={props.faqs}
-                          recipes={props.recipes}
-                      />,
-                      <RegisterUserStep />,
-                      <CheckoutStep />,
-                      <RecipeChoiseStep recipes={props.recipes} />,
-                      <CrossSellingStep />,
-                  ],
+        () => [
+            <SelectPlanStep
+                initialPlanSettings={props.planUrlParams}
+                plans={props.plans}
+                variant={props.variant}
+                faqs={props.faqs}
+                recipes={props.recipes}
+            />,
+            <RegisterUserStep />,
+            <CheckoutStep />,
+            <RecipeChoiseStep recipes={props.recipes} />,
+            <CrossSellingStep />,
+        ],
         []
     );
 

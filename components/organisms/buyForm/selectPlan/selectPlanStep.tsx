@@ -26,22 +26,30 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const [recipesOfWeek, setRecipesOfWeek] = useState<Recipe[]>([]);
     const { enqueueSnackbar } = useSnackbar();
 
-    const getPlanData = useCallback((slug: string, plans: Plan[]): { peopleLabels: string; planName: string } => {
-        const planSelect = plans.find((plan) => plan.slug === slug);
+    const getPlanData = useCallback(
+        (slug: string, plans: Plan[]): { peopleLabels: string; planName: string; planDescription: string; canChooseRecipes: string } => {
+            const planSelect = plans.find((plan) => plan.slug === slug);
 
-        const peopleLabels = planSelect.variants?.reduce((_planSize, _variant) => {
-            const valueIsIncluded = (_planSize[_variant.numberOfPersons] || []).includes(_variant.numberOfRecipes);
+            const peopleLabels = planSelect.variants?.reduce((_planSize, _variant) => {
+                const valueIsIncluded = (_planSize[_variant.numberOfPersons] || []).includes(_variant.numberOfRecipes);
 
-            if (valueIsIncluded || !_variant?.numberOfPersons) {
+                if (valueIsIncluded || !_variant?.numberOfPersons) {
+                    return _planSize;
+                }
+
+                _planSize[_variant.numberOfPersons] = [...(_planSize[_variant.numberOfPersons] || []), _variant.numberOfRecipes];
                 return _planSize;
-            }
+            }, {});
 
-            _planSize[_variant.numberOfPersons] = [...(_planSize[_variant.numberOfPersons] || []), _variant.numberOfRecipes];
-            return _planSize;
-        }, {});
-
-        return { peopleLabels, planName: planSelect.name };
-    }, []);
+            return {
+                peopleLabels,
+                planName: planSelect.name,
+                planDescription: planSelect.description,
+                canChooseRecipes: planSelect.abilityToChooseRecipes,
+            };
+        },
+        []
+    );
 
     const handleOnSelectPlan = (plan: Plan) => {
         const recipeQty = buyFlow.form.variant?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty);
@@ -66,7 +74,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         const { peopleLabels, planName } = getPlanData(plan.slug, props.plans);
         setPlanSize(peopleLabels);
         setRecipesOfWeek(recipes);
-        buyFlow.setPlanCode(plan.id, plan.slug, plan.name);
+        buyFlow.setPlanCode(plan.id, plan.slug, plan.name, plan.description, plan.abilityToChooseRecipes);
         navigate(variant, id, slug);
     };
 
@@ -112,7 +120,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
     const navigate = (variant: PlanVariant, planId: string, slug?: string) => {
         buyFlow.setPlanVariant(variant);
-        buyFlow.setPlanCode(planId, slug, buyFlow.form.planName);
+        buyFlow.setPlanCode(planId, slug, buyFlow.form.planName, buyFlow.form.planDescription, buyFlow.form.canChooseRecipes);
 
         navigateTo(
             {
@@ -131,8 +139,8 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     };
 
     useEffect(() => {
-        const { peopleLabels, planName } = getPlanData(props.initialPlanSettings.slug, props.plans);
-        buyFlow.setPlanCode(props.initialPlanSettings.id, props.initialPlanSettings.slug, planName);
+        const { peopleLabels, planName, planDescription, canChooseRecipes } = getPlanData(props.initialPlanSettings.slug, props.plans);
+        buyFlow.setPlanCode(props.initialPlanSettings.id, props.initialPlanSettings.slug, planName, planDescription, canChooseRecipes);
         buyFlow.setPlanVariant(props.variant);
         setPlanSize(peopleLabels);
         setRecipesOfWeek(props.recipes);
@@ -161,7 +169,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         })}
                     </Grid>
                     <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(6) }}>
-                        <Typography variant="body1">Descripción del producto seleccionado</Typography>
+                        <Typography variant="body1">{buyFlow.form.planDescription}</Typography>
                     </Grid>
                     <Grid container spacing={2} justifyContent="center">
                         <Grid item xs={12} md={4}>
@@ -205,11 +213,13 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                     <Grid item xs={12} style={{ textAlign: "center", marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
                         <RoundedButton
                             label="Seleccionar plan"
-                            onClick={() => buyFlow.forward(1)}
+                            onClick={() => buyFlow.forward()}
                             style={{ padding: `${theme.spacing(2.5)}px ${theme.spacing(8)}px` }}
                         />
                         <Typography variant="body2" color="textSecondary" style={{ marginTop: theme.spacing(2) }}>
-                            Podrás elegir las recetas en el último paso. Cada semana cambiamos las recetas.
+                            {buyFlow.form.canChooseRecipes
+                                ? "Podrás elegir las recetas en el último paso. Cada semana cambiamos las recetas."
+                                : "Te enviaremos las recetas más elegidas de la semana. Cada semana cambiamos las recetas"}
                         </Typography>
                     </Grid>
                 </Grid>

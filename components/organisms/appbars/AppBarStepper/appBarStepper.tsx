@@ -28,6 +28,7 @@ const _steps: Step[] = [
 
 const loggedInSteps: Step[] = [
     { label: "Seleccionar plan", icon: "/icons/appbar/img-header-select-plan.svg", state: "active" },
+    { label: "Registrarse", icon: "/icons/appbar/img-header-register.svg", state: "inactive" },
     { label: "Checkout", icon: "/icons/appbar/img-header-checkout.svg", state: "inactive" },
     { label: "Elegir recetas", icon: "/icons/appbar/img-header-select-recipes.svg", state: "inactive" },
 ];

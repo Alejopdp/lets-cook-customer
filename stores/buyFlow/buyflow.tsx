@@ -7,6 +7,8 @@ export type PaymentMethodForm = {
     stripeId: string;
     type: string;
 };
+
+export type RecipeVariant = { id: string; ingredients: string[]; restriction: { id: string; value: string; label: string }; sku: string };
 export type Recipes = {
     id: string;
     name: string;
@@ -25,7 +27,7 @@ export type Recipes = {
     availableMonths: string[];
     relatedPlans: string[];
     tools: string[];
-    recipeVariants: { ingredients: string[]; restriction: { id: string; value: string; label: string }; sku: string }[];
+    recipeVariants: RecipeVariant[];
 };
 
 export interface DeliveryForm {
@@ -49,6 +51,7 @@ export interface BuyFlowStore {
         planCode: string;
         planName: string;
         planSlug: string;
+        planDescription: string;
         weekLabel: string;
         variant?: PlanVariant;
         deliveryForm?: DeliveryForm;
@@ -58,6 +61,7 @@ export interface BuyFlowStore {
         firstOrderId: string;
         subscriptionId: string;
         firstOrderShippingDate: string;
+        canChooseRecipes: boolean;
     };
 }
 
@@ -89,11 +93,12 @@ export interface Coupon {
 export interface Store extends BuyFlowStore {
     setShowRegister: (isVisible: boolean) => void;
     forward: () => void;
+    moveNSteps: (stepsToMove: number) => void;
     toFirstStep: () => void;
     setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => void;
     setPaymentMethod: (paymentMethod: Partial<PaymentMethodForm>) => void;
     selectRecipes: (recipes: Recipes[]) => void;
-    setPlanCode: (code: string, slug: string, name: string) => void;
+    setPlanCode: (code: string, slug: string, name: string, description: string, canChooseRecipes: boolean) => void;
     setPlanVariant: (variant: Partial<PlanVariant>) => void;
     setCoupon: (coupon: Partial<Coupon>) => void;
     setFirstOrderId: (firstOrderId: Partial<string>) => void;
@@ -108,6 +113,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
     form: {
         planCode: "",
         planName: "",
+        planDescription: "",
         planSlug: "",
         weekLabel: "",
         variant: {
@@ -167,6 +173,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
         subscriptionId: "",
         firstOrderId: "",
         firstOrderShippingDate: "",
+        canChooseRecipes: true,
     },
 };
 
@@ -179,12 +186,18 @@ const store = devtools<Store>((set, get) => ({
     // the steps during buy process.
     forward: (stepsToMove: number = 2) => {
         const indexStepToOmmit = 1;
+        const previousStepToOmmit = indexStepToOmmit - 1;
         const _step = get().step;
-        if (!get().showRegister && _step === indexStepToOmmit - 1) {
+        if (!get().showRegister && _step === previousStepToOmmit) {
             set({ step: _step + stepsToMove });
             return;
         }
         set({ step: _step + 1 });
+    },
+
+    moveNSteps: (stepsToMove: number) => {
+        const _step = get().step;
+        set({ step: _step + stepsToMove });
     },
 
     toFirstStep: () => {
@@ -199,11 +212,13 @@ const store = devtools<Store>((set, get) => ({
         set({ form });
     },
 
-    setPlanCode: (code: string, slug: string = "", name: string = "") => {
+    setPlanCode: (code: string, slug: string = "", name: string = "", description: string = "", canChooseRecipes: boolean) => {
         const form = get().form;
         form.planCode = code;
         form.planSlug = slug;
         form.planName = name;
+        form.planDescription = description;
+        form.canChooseRecipes = canChooseRecipes;
         set({ form });
     },
     setDeliveryInfo: (deliveryForm: DeliveryForm) => {

@@ -9,8 +9,8 @@ import PlansSection from "../sections/PlansSection";
 import RecipesSection from "../sections/RecipesSection";
 import ReviewsSection from "../sections/ReviewsSection";
 
-import { useStyles } from './styles';
-import { HomePageProps } from './interfaces';
+import { useStyles } from "./styles";
+import { HomePageProps } from "./interfaces";
 /**
  * TODO: IMPORTANT!!! is needly add all values to container, the idea is go to controlling the spaces o margins for the differents sections.
  */
@@ -32,7 +32,8 @@ const HomePage = (props: HomePageProps) => {
                 <BenefitsSection cards={props.benefits} />
             </div>
             <div className={classes.paddingY8}>
-                <RecipesSection recipes={props.recipes}
+                <RecipesSection
+                    recipes={props.recipes}
                     title="Hecha un vistazo a las recetas de esta semana"
                     subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
                     titleAlign="flex-start"
@@ -46,5 +47,3 @@ const HomePage = (props: HomePageProps) => {
 };
 
 export default HomePage;
-
-

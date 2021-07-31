@@ -9,7 +9,7 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
     return (
         <FormControl component="fieldset" style={{ width: "100%" }}>
             <RadioGroup aria-label="gender" name="gender1" value={props.selectedOption} onChange={props.setselectedOption}>
-                <FormControlLabel value="card" control={<Radio />} label="Mis tarjetas guardadas" />
+                {props.paymentMethods.length > 0 && <FormControlLabel value="card" control={<Radio />} label="Mis tarjetas guardadas" />}
                 {props.selectedOption === "card" ? (
                     <RadioGroup
                         aria-label="paymentMethods"
@@ -19,7 +19,11 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                         style={{ marginLeft: "2rem" }}
                     >
                         {props.paymentMethods.map((paymentMethod: IPaymentMethod) => (
-                            <FormControlLabel value={paymentMethod.id} control={<Radio />} label={paymentMethod.label} />
+                            <FormControlLabel
+                                value={paymentMethod.id}
+                                control={<Radio />}
+                                label={paymentMethod.label || paymentMethod.card}
+                            />
                         ))}
                     </RadioGroup>
                 ) : null}

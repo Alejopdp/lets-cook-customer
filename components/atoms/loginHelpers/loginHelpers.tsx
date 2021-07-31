@@ -15,8 +15,8 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export const ForgotPassword = (props: ForgotPasswordProps) => {
     return (
-        <Link href="/recuperar-contrasena" style={{ textDecoration: 'none' }}>
-            <Typography variant="subtitle2" color="primary" style={{ fontSize: '14px', fontWeight: '600' }}>
+        <Link href="/recuperar-contrasena" style={{ textDecoration: "none" }}>
+            <Typography variant="subtitle2" color="primary" style={{ fontSize: "14px", fontWeight: "600" }}>
                 {props.text}
             </Typography>
         </Link>
@@ -28,7 +28,7 @@ export const Register = (props: RegisterProps) => {
     return (
         // <Link href={redirectTo}>
         <Button className={btn} onClick={props.handleRedirect}>
-            <ExitToAppIcon fontSize='small' />
+            <ExitToAppIcon fontSize="small" />
             <Typography variant="body1" className={register}>
                 {props.text} <b>{props.boldText}</b>
             </Typography>
@@ -45,7 +45,7 @@ export const AcceptLegalTerms = () => {
 
     return (
         <Grid item xs={12}>
-            <Typography variant="body2" style={{ fontSize: '14px' }}>
+            <Typography variant="body2" style={{ fontSize: "14px" }}>
                 {lang.continuing}
                 <Link href="/aviso-legal" className={link}>
                     <b> {lang.terms} </b>
