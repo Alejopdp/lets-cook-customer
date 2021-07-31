@@ -64,7 +64,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     };
 
     return (
-        <>
+        <Container>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={8} style={{ paddingTop: theme.spacing(8), paddingBottom: theme.spacing(6) }}>
                     <Container style={{ maxWidth: "650px" }}>
@@ -106,7 +106,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                     <CheckoutDetails />
                 </Grid>
             </Grid>
-        </>
+        </Container>
     );
 });
 
