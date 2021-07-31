@@ -66,9 +66,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
         if (errors.length) {
             console.log("***->Oops!", errors);
-            errors.forEach((errorMessage) => {
-                enqueueSnackbar(errorMessage, { variant: "warning" });
-            });
         }
 
         const { peopleLabels, planName } = getPlanData(plan.slug, props.plans);
@@ -90,9 +87,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
         if (errors.length) {
             console.log("***->Oops!", errors);
-            errors.forEach((errorMessage) => {
-                enqueueSnackbar(errorMessage, { variant: "warning" });
-            });
         }
 
         navigate(variant, id, slug);
@@ -110,9 +104,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
         if (errors.length) {
             console.log("***->Oops!", errors);
-            errors.forEach((errorMessage) => {
-                enqueueSnackbar(errorMessage, { variant: "warning" });
-            });
         }
 
         navigate(variant, id, slug);

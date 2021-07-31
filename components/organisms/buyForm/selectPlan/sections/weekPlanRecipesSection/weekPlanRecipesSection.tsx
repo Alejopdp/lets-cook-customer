@@ -1,6 +1,5 @@
 // Utils & config
 import React, { memo } from "react";
-import PropTypes from "prop-types";
 import { Recipe } from "@helpers";
 import { useRecipesStyles as useStyles } from "./styles";
 import { RecipesSectionProps } from "./interfaces";
@@ -12,9 +11,7 @@ import { GridList, makeStyles, Typography, Container, Grid, useMediaQuery, useTh
 import Carousel from "react-multi-carousel";
 
 // Internal components
-import RoundedButton from "../../../../../atoms/roundedButton/roundedButton";
 import RecipeCard from "../../../../../molecules/recipeCard/recipeCard";
-import TitleOtherPages from "../../../../../molecules/titleOtherPages/titleOtherPages";
 import SectionTitleBuyFlow from "../../../../../molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
 import RecipeModal from "components/molecules/recipeModal/recipeModal";
 
