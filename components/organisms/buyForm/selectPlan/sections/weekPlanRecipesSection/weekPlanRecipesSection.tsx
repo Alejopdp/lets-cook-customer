@@ -1,65 +1,76 @@
-import { GridList, makeStyles, Typography, Container, Grid, useMediaQuery, useTheme } from "@material-ui/core";
+// Utils & config
+import React, { memo } from "react";
 import PropTypes from "prop-types";
+import { Recipe } from "@helpers";
+import { useRecipesStyles as useStyles } from "./styles";
+import { RecipesSectionProps } from "./interfaces";
+import "react-multi-carousel/lib/styles.css";
+import { useBuyFlow } from "@stores";
+
+// External components
+import { GridList, makeStyles, Typography, Container, Grid, useMediaQuery, useTheme } from "@material-ui/core";
+import Carousel from "react-multi-carousel";
+
+// Internal components
 import RoundedButton from "../../../../../atoms/roundedButton/roundedButton";
 import RecipeCard from "../../../../../molecules/recipeCard/recipeCard";
 import TitleOtherPages from "../../../../../molecules/titleOtherPages/titleOtherPages";
 import SectionTitleBuyFlow from "../../../../../molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
+import RecipeModal from "components/molecules/recipeModal/recipeModal";
 
-import { Recipe } from "@helpers";
-import { useRecipesStyles as useStyles } from "./styles";
-import { RecipesSectionProps } from "./interfaces";
-import { memo } from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { useBuyFlow } from "@stores";
+const responsive = {
+    superLargeDesktop: {
+        breakpoint: {
+            max: 3000,
+            min: 1280,
+        },
+        items: 4,
+        partialVisibilityGutter: 40,
+    },
+    desktop: {
+        breakpoint: {
+            max: 1280,
+            min: 960,
+        },
+        items: 3,
+        partialVisibilityGutter: 40,
+    },
+    tablet: {
+        breakpoint: {
+            max: 960,
+            min: 600,
+        },
+        items: 2,
+        partialVisibilityGutter: 30,
+    },
+    mobile: {
+        breakpoint: {
+            max: 600,
+            min: 0,
+        },
+        items: 1,
+        partialVisibilityGutter: 30,
+    },
+};
 
 export const WeekPlanRecipesSection = memo((props: RecipesSectionProps) => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
     const theme = useTheme();
+    const [recipeToView, setRecipeToView] = React.useState(null);
     const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
     const isLgDown = useMediaQuery(theme.breakpoints.down("md"));
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
     const { form } = useBuyFlow((state) => ({ form: state.form }));
 
-    const handleClickOpenModal = (recipe: Recipe) => {
-        console.log("***-> Recipe: ", recipe.name);
+    const handleClickOpenModal = (recipe) => {
+        setRecipeToView(recipe);
+        setOpen(true);
     };
 
-    const responsive = {
-        superLargeDesktop: {
-            breakpoint: {
-                max: 3000,
-                min: 1280,
-            },
-            items: 4,
-            partialVisibilityGutter: 40,
-        },
-        desktop: {
-            breakpoint: {
-                max: 1280,
-                min: 960,
-            },
-            items: 3,
-            partialVisibilityGutter: 40,
-        },
-        tablet: {
-            breakpoint: {
-                max: 960,
-                min: 600,
-            },
-            items: 2,
-            partialVisibilityGutter: 30,
-        },
-        mobile: {
-            breakpoint: {
-                max: 600,
-                min: 0,
-            },
-            items: 1,
-            partialVisibilityGutter: 30,
-        },
+    const handleClose = () => {
+        setOpen(false);
     };
-
     return (
         <>
             <Container maxWidth="xl">
@@ -133,6 +144,7 @@ export const WeekPlanRecipesSection = memo((props: RecipesSectionProps) => {
                     </Carousel>
                 </div>
             )}
+            {open && <RecipeModal open={open} handleClose={handleClose} recipe={recipeToView} />}
         </>
     );
 });
