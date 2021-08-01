@@ -11,6 +11,7 @@ import RecipeModal from "../../molecules/recipeModal/recipeModal";
 import RecipeCardBuyFlow from "../../molecules/recipeCardBuyFlow/recipeCardBuyFlow";
 import { useBuyFlow } from "@stores";
 import { RecipesGridProps } from "./interfaces";
+import { useMemo } from "react";
 
 export const RecipesGrid = (props: RecipesGridProps) => {
     const [open, setOpen] = React.useState(false);
@@ -26,17 +27,21 @@ export const RecipesGrid = (props: RecipesGridProps) => {
         setOpen(false);
     };
 
-    const handleClickAddRecipe = (recipe) => {
-        selectRecipes([...recipes, recipe]);
-    };
+    // const handleClickAddRecipe = (recipe) => {
+    //     selectRecipes([...recipes, recipe]);
+    // };
 
-    const handleClickRemoveRecipe = ({ id: _id }) => {
-        const index = recipes.find(({ id }) => id !== _id);
-        if (index === -1) return;
-        const newState = [...recipes];
-        newState.splice(index, 1);
-        selectRecipes(newState);
-    };
+    // const handleClickRemoveRecipe = ({ id: _id }) => {
+    //     const index = recipes.find(({ id }) => id !== _id);
+    //     if (index === undefined) return;
+    //     const newState = [...recipes];
+    //     newState.splice(index, 1);
+    //     selectRecipes(newState);
+    // };
+
+    const selectedRecipesQty = useMemo(() => {
+        return props.selectedRecipes.length;
+    }, [props.selectedRecipes]);
 
     const descriptionElementRef = React.useRef(null);
     React.useEffect(() => {
@@ -79,9 +84,12 @@ export const RecipesGrid = (props: RecipesGridProps) => {
                                 cookDuration={recipe.cookDuration}
                                 difficultyLevel={recipe.difficultyLevel}
                                 name={recipe.name}
+                                selectedRecipes={props.selectedRecipes}
+                                maxRecipesQty={props.maxRecipesQty}
                                 handleClickOpenModal={() => handleClickOpenModal(recipe)}
-                                handleClickAddRecipe={() => handleClickAddRecipe(recipe)}
-                                handleClickRemoveRecipe={() => handleClickRemoveRecipe({ id: recipe.id })}
+                                handleClickAddRecipe={() => props.handleClickAddRecipe(recipe)}
+                                handleClickRemoveRecipe={() => props.handleClickRemoveRecipe({ id: recipe.id as string })}
+                                isAddable={selectedRecipesQty < props.maxRecipesQty}
                             />
                         </Grid>
                     ))}

@@ -8,7 +8,7 @@ import { useSnackbar } from "notistack";
 import { Box, Button, Container, Grid, Icon } from "@material-ui/core";
 import TitleBuyFlow from "components/molecules/titleBuyFlow/titleBuyFlow";
 import AdditionalPlansGrid from "../additionalPlansGrid/additionalPlansGrid";
-import { useBuyFlow, useCrossSellingStore } from "@stores";
+import { useBuyFlow, useCrossSellingStore, useUserInfoStore } from "@stores";
 import { Plan } from "types/plan";
 import { useRouter } from "next/router";
 import { useTheme } from "@material-ui/core";
@@ -17,14 +17,18 @@ import { useTheme } from "@material-ui/core";
 // Images & icons
 import Payment from "@material-ui/icons/Payment";
 import { CustomButton, RoundedButton } from "@atoms";
+import { PlanVariant } from "types/planVariant";
+import { createManySubscriptions } from "helpers/serverRequests/subscription";
 
 const CrossSellingStep = (props) => {
     const theme = useTheme();
     const form = useBuyFlow((state) => state.form);
     const router = useRouter();
+    const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
     const [additionalPlans, setadditionalPlans] = useState<Plan[]>([]);
-    const selectedPlans = useCrossSellingStore((state) => state.selectedPlans);
+    const [selectedVariants, setselectedVariants] = useState<PlanVariant[]>([]);
+    // const selectedPlans = useCrossSellingStore((state) => state.selectedPlans);
 
     useEffect(() => {
         const getAdditionalPlansByPlanId = async () => {
@@ -41,17 +45,30 @@ const CrossSellingStep = (props) => {
     }, []);
 
     const totalValue = useMemo(() => {
-        if (selectedPlans) {
-            const entries = Object.entries(selectedPlans);
+        // if (selectedPlans) {
+        //     const entries = Object.entries(selectedPlans);
 
-            return entries.reduce((acc, entry) => entry[1].variant.price + acc, 0);
+        //     return entries.reduce((acc, entry) => entry[1].variant.price + acc, 0);
+        // } else {
+        //     return undefined;
+        // }
+
+        return selectedVariants.reduce((acc, variant) => acc + variant.price, 0);
+    }, [selectedVariants]);
+
+    const handleSubmitPayment = async () => {
+        const variants = selectedVariants.map((variant) => ({
+            planId: variant.planId,
+            variant: { id: variant.id },
+            frequency: variant.frequency,
+        }));
+        const res = await createManySubscriptions(userInfo.id, variants);
+
+        if (res.status === 200) {
+            router.push("/perfil");
         } else {
-            return undefined;
+            enqueueSnackbar(res.data.message, { variant: "error" });
         }
-    }, [selectedPlans]);
-
-    const handleSubmitPayment = () => {
-        enqueueSnackbar("Not implemented yet", { variant: "info" });
     };
 
     return (
@@ -64,7 +81,11 @@ const CrossSellingStep = (props) => {
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
-                    <AdditionalPlansGrid additionalPlans={additionalPlans} />
+                    <AdditionalPlansGrid
+                        selectedVariants={selectedVariants}
+                        setselectedVariants={setselectedVariants}
+                        additionalPlans={additionalPlans}
+                    />
                 </Grid>
                 <Grid item xs={12}>
                     <Box display="flex" flexDirection="column" alignItems="center">

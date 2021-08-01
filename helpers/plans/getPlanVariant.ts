@@ -1,11 +1,12 @@
 import { getLang } from "@hooks";
-import { Plan, PlanVariant, Recipe } from "helpers/serverRequests";
+import { Plan, Recipe } from "helpers/serverRequests";
+import { PlanVariant } from "types/planVariant";
 
 export interface PlanVarianResult {
     slug: string;
     id?: string;
     variant?: PlanVariant;
-    recipes: Recipe[],
+    recipes: Recipe[];
     redirect?: {
         destination: string;
         permanent: boolean;
@@ -13,15 +14,14 @@ export interface PlanVarianResult {
     errors: string[];
 }
 
-export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQty: 0 }, plans?: Plan[], locale = 'es'): PlanVarianResult {
-    
+export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQty: 0 }, plans?: Plan[], locale = "es"): PlanVarianResult {
     let variant: PlanVariant;
     let slug: string = params.slug;
     let id: string;
     let redirect: any;
     let recipes: Recipe[] = [];
     const errors: string[] = [];
-    const [lang] = getLang('getPlansVarians', locale)
+    const [lang] = getLang("getPlansVarians", locale);
 
     /**
      * Verification of the params for variant selection.
@@ -33,24 +33,26 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
         // Find the variant coincident, if the variant in not found so
         // is  selected the first variant into plan.
         variant = plansBySlug.variants?.find(
-            ({ numberOfPersons = '', numberOfRecipes = '' }) => numberOfPersons == params.peopleQty && numberOfRecipes == params.recipeQty
+            ({ numberOfPersons = "", numberOfRecipes = "" }) => numberOfPersons == params.peopleQty && numberOfRecipes == params.recipeQty
         );
 
         if (!variant) {
             redirect = {
-                destination: `/planes/${slug}?personas=${plansBySlug.variants[0]?.numberOfPersons || ''}&recetas=${plansBySlug.variants[0]?.numberOfRecipes || ''}`,
+                destination: `/planes/${slug}?personas=${plansBySlug.variants[0]?.numberOfPersons || ""}&recetas=${
+                    plansBySlug.variants[0]?.numberOfRecipes || ""
+                }`,
                 permanent: true,
             };
             variant = plansBySlug.variants[0];
         }
 
-        id = plansBySlug?.id || '';
+        id = plansBySlug?.id || "";
         recipes = plansBySlug?.recipes || [];
     }
 
     if (!plansBySlug) {
         // If slug-plan is not found so is selected the first plan for default.
-        id = plans[0]?.id || '';
+        id = plans[0]?.id || "";
         slug = plans[0]?.slug || "no-plan";
         variant = plans[0]?.variants[0];
         recipes = plans[0]?.recipes || [];
@@ -76,8 +78,8 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
         // TODO: Move to lang messages
         errors.push(
             "The information for the current variants has #numberPeople# people and #numberRecipes# recipes."
-            .replace('#numberPeople#', `${ variant?.numberOfPersons || 0}`)
-            .replace('#numberRecipes#', `${ variant?.numberOfRecipes || 0}`)
+                .replace("#numberPeople#", `${variant?.numberOfPersons || 0}`)
+                .replace("#numberRecipes#", `${variant?.numberOfRecipes || 0}`)
         );
     }
 
@@ -94,4 +96,20 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
         redirect,
         errors,
     };
+}
+
+export function getPlanVariantWithAttributes(
+    selectedAttributes: { [key: string]: string },
+    planVariants: PlanVariant[]
+): PlanVariant | undefined {
+    const variant: PlanVariant | undefined = planVariants?.find(
+        ({ numberOfPersons = "", numberOfRecipes = "", attributes = [] }) =>
+            (!!!numberOfPersons || numberOfPersons === selectedAttributes["Personas"]) &&
+            (!!!numberOfRecipes || numberOfRecipes === selectedAttributes["Recetas"]) &&
+            attributes.every(
+                (attr: [string, string]) => attr[0] === "Personas" || attr[0] === "Recetas" || selectedAttributes[attr[0]] === attr[1]
+            )
+    );
+
+    return variant;
 }

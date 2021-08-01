@@ -57,14 +57,19 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
 
     return (
         <>
-            {(props.additionalPlans.length <= 3 && isLgUp) && (
+            {props.additionalPlans.length <= 3 && isLgUp && (
                 <Grid item xs={12}>
-                    <Grid container spacing={2} style={{ justifyContent: 'center' }}>
-                        {props.additionalPlans.map((plan, index) =>
+                    <Grid container spacing={2} style={{ justifyContent: "center" }}>
+                        {props.additionalPlans.map((plan, index) => (
                             <Grid item xs={12} lg={4}>
-                                <AdditionalPlanCard key={index} additionalPlan={plan} />
+                                <AdditionalPlanCard
+                                    selectedVariants={props.selectedVariants}
+                                    setselectedVariants={props.setselectedVariants}
+                                    key={index}
+                                    additionalPlan={plan}
+                                />
                             </Grid>
-                        )}
+                        ))}
                     </Grid>
                 </Grid>
             )}
@@ -92,18 +97,16 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                     swipeable
                 >
                     {props.additionalPlans.map((plan, index) => (
-                        <AdditionalPlanCard key={index} additionalPlan={plan} />
+                        <AdditionalPlanCard
+                            selectedVariants={props.selectedVariants}
+                            setselectedVariants={props.setselectedVariants}
+                            key={index}
+                            additionalPlan={plan}
+                        />
                     ))}
                 </Carousel>
             )}
-
-
-
-
-
-
         </>
-
     );
 };
 

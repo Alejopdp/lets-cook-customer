@@ -84,3 +84,25 @@ export const updateRestriction = async (subscriptionId: string, restrictionId: s
         return error.response;
     }
 };
+
+export const createManySubscriptions = async (
+    customerId: string,
+    variants: { planId: string; frequency: string; variant: { id: string } }[]
+) => {
+    console.log("A VER LAS VARIANTS: ", variants);
+    try {
+        const res = await axios({
+            method: "POST",
+            url: `${apiUrl}/many`,
+            data: {
+                customerId,
+                plans: variants,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};

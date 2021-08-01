@@ -23,11 +23,11 @@ import { RecipeCardBuyFlowProps } from "./interfaces";
 
 export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
     const theme = useTheme();
-    const { root, cardCnt, tag, marg, titleText, visibilityBtn } = useStyles();
-    const { recipes, variant } = useBuyFlow((store) => ({ recipes: store.form.recipes, variant: store.form.variant }));
+    const { root, cardCnt, tag, marg } = useStyles();
+    // const { recipes, variant } = useBuyFlow((store) => ({ recipes: store.form.recipes, variant: store.form.variant }));
 
     const hideAddButton = () => {
-        const index = recipes.findIndex(({ id }) => id === props.id);
+        const index = props.selectedRecipes.findIndex(({ id }) => id === props.id);
         return index !== -1;
     };
 
@@ -38,54 +38,63 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
             </CardContent>
             <CardContent>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} style={{ display: 'flex' }}>
+                    <Grid item xs={12} style={{ display: "flex" }}>
                         <Box className={tag}>
-                            <TimerIcon fontSize='small' color="primary" className={marg} />
-                            <Typography variant="subtitle2" style={{ fontSize: '13px' }}>{props.cookDuration}</Typography>
+                            <TimerIcon fontSize="small" color="primary" className={marg} />
+                            <Typography variant="subtitle2" style={{ fontSize: "13px" }}>
+                                {props.cookDuration}
+                            </Typography>
                         </Box>
                         <Box className={tag}>
-                            <SpeedIcon fontSize='small' color="primary" className={marg} />
-                            <Typography variant="subtitle2" style={{ fontSize: '13px' }}>{props.difficultyLevel}</Typography>
+                            <SpeedIcon fontSize="small" color="primary" className={marg} />
+                            <Typography variant="subtitle2" style={{ fontSize: "13px" }}>
+                                {props.difficultyLevel}
+                            </Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
-                        <Typography variant="subtitle1" style={{ fontSize: '16px' }}>
+                        <Typography variant="subtitle1" style={{ fontSize: "16px" }}>
                             {props.name}
                         </Typography>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <Grid container spacing={2} justifyContent='space-between'>
+                        <Grid container spacing={2} justifyContent="space-between">
                             <Grid item xs={hideAddButton()}>
-                                <IconButton style={{ padding: '0px' }} onClick={() => props.handleClickOpenModal()}>
+                                <IconButton style={{ padding: "0px" }} onClick={() => props.handleClickOpenModal()}>
                                     <Visibility />
                                 </IconButton>
                             </Grid>
                             {hideAddButton() && (
                                 <>
                                     <Grid item>
-                                        <IconButton style={{ padding: '0px' }} onClick={() => props.handleClickRemoveRecipe()}>
+                                        <IconButton style={{ padding: "0px" }} onClick={() => props.handleClickRemoveRecipe()}>
                                             <RemoveCircleOutlineIcon />
                                         </IconButton>
                                     </Grid>
-                                    <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-                                        <Typography>{recipes.filter(({ id }) => id === props.id).length}</Typography>
+                                    <Grid item style={{ display: "flex", alignItems: "center" }}>
+                                        <Typography>{props.selectedRecipes.filter(({ id }) => id === props.id).length}</Typography>
                                     </Grid>
                                     <Grid item>
-                                        <IconButton style={{ padding: '0px' }} color='primary' onClick={() => props.handleClickAddRecipe()} disabled={recipes.length >= variant.numberOfRecipes}>
+                                        <IconButton
+                                            style={{ padding: "0px" }}
+                                            color="primary"
+                                            onClick={() => props.handleClickAddRecipe()}
+                                            disabled={!props.isAddable}
+                                        >
                                             <AddCircleOutline />
                                         </IconButton>
                                     </Grid>
                                 </>
                             )}
-                            {!hideAddButton() && (
+                            {!hideAddButton() && props.isAddable && (
                                 <CustomButton
                                     smallButton
                                     icon={<AddCircle />}
-                                    disabled={recipes.length >= 3}
+                                    disabled={!props.isAddable}
                                     text="Agregar"
                                     onClick={props.handleClickAddRecipe}
-                                    style={{ padding: '6px 16px' }}
+                                    style={{ padding: "6px 16px" }}
                                 />
                             )}
                         </Grid>

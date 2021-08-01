@@ -10,23 +10,30 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
     const theme = useTheme();
     return (
         <Box>
-            <Box marginBottom={3}>
-                {props.variant.attributes.map((attr, index) => (
-                    <>
-                    <Typography variant='body2' style={{fontSize:'14px', fontWeight: 600, marginBottom: theme.spacing(1)}}>
-                        {attr[0]}
+            {props.variant && (
+                <>
+                    <Box marginBottom={3}>
+                        {props.variant.attributes.map((attr, index) => (
+                            <>
+                                <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}>
+                                    {attr[0]}
+                                </Typography>
+                                <Typography key={index} variant="body2">
+                                    {attr[1]}
+                                </Typography>
+                            </>
+                        ))}
+                    </Box>
+                    <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold", marginBottom: theme.spacing(3) }}>
+                        Valor: {props.variant.price} €
                     </Typography>
-                    <Typography key={index} variant="body2">
-                        {attr[1]}
-                    </Typography>
-                    </>
-                ))}
-            </Box>
-            <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold", marginBottom: theme.spacing(3) }}>
-                Valor: {props.variant.price} €
-            </Typography>
+                </>
+            )}
             <Box display="flex" alignItems="center">
-                <RotateRight style={{ marginRight: 8 }} /> <Typography variant='body2' style={{fontSize:'16px'}}>Plan {props.selectedFrequency}</Typography>
+                <RotateRight style={{ marginRight: 8 }} />{" "}
+                <Typography variant="body2" style={{ fontSize: "16px" }}>
+                    Plan {props.selectedFrequency}
+                </Typography>
             </Box>
         </Box>
     );

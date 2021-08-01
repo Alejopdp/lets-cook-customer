@@ -22,13 +22,16 @@ interface RecipeChoiseStepProps {
 export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const theme = useTheme();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
-    const { recipes, firstOrderId, subscriptionId, firstOrderShippingDate, variant } = useBuyFlow(({ form }) => ({
-        recipes: form.recipes,
-        firstOrderId: form.firstOrderId,
-        subscriptionId: form.subscriptionId,
-        firstOrderShippingDate: form.firstOrderShippingDate,
-        variant: form.variant,
-    }));
+    const { recipes, firstOrderId, subscriptionId, firstOrderShippingDate, variant, selectRecipes } = useBuyFlow(
+        ({ form, selectRecipes }) => ({
+            recipes: form.recipes,
+            selectRecipes: selectRecipes,
+            firstOrderId: form.firstOrderId,
+            subscriptionId: form.subscriptionId,
+            firstOrderShippingDate: form.firstOrderShippingDate,
+            variant: form.variant,
+        })
+    );
     const gotToNextView = useBuyFlow(({ forward }) => forward);
     const { enqueueSnackbar } = useSnackbar();
 
@@ -64,6 +67,18 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
               )
             : props.recipes;
     }, [filters]);
+
+    const handleClickAddRecipe = (recipe) => {
+        selectRecipes([...recipes, recipe]);
+    };
+
+    const handleClickRemoveRecipe = ({ id: _id }) => {
+        const index = recipes.find(({ id }) => id !== _id);
+        if (index === -1) return;
+        const newState = [...recipes];
+        newState.splice(index, 1);
+        selectRecipes(newState);
+    };
 
     return (
         <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6), paddingBottom: "200px" }}>
@@ -103,10 +118,22 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <RecipesGrid recipesSelection={true} recipes={filteredRecipes} />
+                    <RecipesGrid
+                        handleClickAddRecipe={handleClickAddRecipe}
+                        handleClickRemoveRecipe={handleClickRemoveRecipe}
+                        selectedRecipes={recipes}
+                        maxRecipesQty={variant.numberOfRecipes}
+                        recipesSelection={true}
+                        recipes={filteredRecipes}
+                    />
                 </Grid>
             </Grid>
-            <RecipesBottomBar handleSubmit={handleSubmit} />
+            <RecipesBottomBar
+                handleSecondaryButtonClick={gotToNextView}
+                maxRecipesQty={variant.numberOfRecipes}
+                selectedRecipes={recipes}
+                handleSubmit={handleSubmit}
+            />
         </Container>
     );
 };

@@ -9,9 +9,6 @@ import Hidden from "@material-ui/core/Hidden";
 
 type RecipesBottomBarProps = {
     handleSubmit: () => void;
-    selectedRecipes: any[];
-    maxRecipesQty: number;
-    handleSecondaryButtonClick: () => void;
 };
 
 export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
@@ -36,21 +33,21 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                     <Grid item xs={12} className={classes.generalContainer}>
                         <Box className={classes.boxContainer}>
                             <Hidden smDown>
-                                {props.selectedRecipes.map((recipe, index) => (
+                                {recipes.map((recipe, index) => (
                                     <div
                                         key={index}
                                         className={clsx(classes.recipeSelectedRoot, classes.recipeSelected)}
                                         style={{ backgroundImage: `url(${recipe.imageUrl})` }}
                                     />
                                 ))}
-                                {props.selectedRecipes.length < props.maxRecipesQty &&
-                                    Array(props.maxRecipesQty - props.selectedRecipes.length)
+                                {recipes.length < variant.numberOfRecipes &&
+                                    Array(variant.numberOfRecipes - recipes.length)
                                         .fill()
                                         .map((_, index) => (
                                             <div key={index} className={clsx(classes.recipeSelectedRoot, classes.recipeSelectedMock)} />
                                         ))}
                             </Hidden>
-                            {props.selectedRecipes.length >= props.maxRecipesQty && (
+                            {recipes.length >= variant.numberOfRecipes && (
                                 <div className={classes.recipesQtySelected}>
                                     <CheckCircleOutline color="primary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
@@ -58,12 +55,12 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                     </Typography>
                                 </div>
                             )}
-                            {props.selectedRecipes.length < props.maxRecipesQty && (
+                            {recipes.length < variant.numberOfRecipes && (
                                 <div className={classes.recipesQtySelected}>
                                     <ErrorOutlineOutlined color="secondary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
                                         {" "}
-                                        Aún te quedan {props.maxRecipesQty - props.selectedRecipes.length} recetas por seleccionar
+                                        Aún te quedan {variant.numberOfRecipes - recipes.length} recetas por seleccionar
                                     </Typography>
                                 </div>
                             )}
@@ -72,14 +69,14 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                             <RoundedButton
                                 label="Finalizar"
                                 onClick={props.handleSubmit}
-                                disabled={props.maxRecipesQty > props.selectedRecipes.length}
+                                disabled={variant.numberOfRecipes > recipes.length}
                                 style={isXsDown && { width: "100%" }}
                             />
                             <Button
                                 variant="text"
                                 color="default"
                                 style={{ fontSize: "13px", marginTop: theme.spacing(0.5) }}
-                                onClick={() => handleSecondaryButtonClick()}
+                                onClick={() => forward()}
                             >
                                 Elegir recetas luego
                             </Button>

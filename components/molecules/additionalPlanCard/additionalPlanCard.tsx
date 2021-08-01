@@ -1,5 +1,5 @@
 // Utils & config
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useStyles } from "./styles";
 
@@ -39,6 +39,13 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
         setselectedPlans,
     }));
 
+    const handleRemoveVariant = (additionalPlanId: string) => {
+        const newVariants = props.selectedVariants.filter((variant) => variant.planId !== additionalPlanId);
+        console.log("New variants after removal: ", newVariants);
+        props.setselectedVariants(newVariants);
+        setcardView(CardView.FIRST_CONTENT);
+    };
+
     const { actualView, actualButton, hasBgImg } = useMemo(() => {
         switch (cardView) {
             case CardView.FIRST_CONTENT:
@@ -48,35 +55,36 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                             name={props.additionalPlan.name}
                             description={props.additionalPlan.description}
                             // minPrice no lo recibo todavía del endpoint
-                            minPrice=''
+                            minPrice=""
                         />
                     ),
                     actualButton: (
                         <RoundedButton
                             label="VER OPCIONES"
-                            style={{ width: "100%", backgroundColor: 'white', padding: theme.spacing(1) }}
+                            style={{ width: "100%", backgroundColor: "white", padding: theme.spacing(1) }}
                             textStyle={{ color: theme.palette.primary.main }}
                             onClick={() => setcardView(CardView.SELECT_ATTRIBUTE)}
                         />
                     ),
-                    hasBgImg: true
+                    hasBgImg: true,
                 };
             case CardView.SELECT_ATTRIBUTE:
                 return {
                     actualView: (
                         <SelectVariantContent
                             variants={props.additionalPlan.variants}
-                            selectedVariant={selectedVariant}
-                            setselectedVariant={setselectedVariant}
+                            selectedVariants={props.selectedVariants}
+                            setselectedVariants={props.setselectedVariants}
                             frequencies={props.additionalPlan.availableFrequencies!}
                             selectedFrequency={selectedFrequency}
                             setselectedFrequency={setselectedFrequency}
+                            planId={props.additionalPlan.id}
                         />
                     ),
                     actualButton: (
                         <RoundedButton
                             label="SELECCIONAR"
-                            disabled={!!!selectedFrequency || !!!selectedVariant.id}
+                            disabled={props.selectedVariants.length === 0}
                             style={{ width: "100%", padding: theme.spacing(1) }}
                             onClick={() => {
                                 addPlanToCart();
@@ -84,20 +92,30 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                             }}
                         />
                     ),
-                    hasBgImg: false
+                    hasBgImg: false,
                 };
             case CardView.ATTRIBUTE_SELECTED:
                 return {
-                    actualView: <VariantSelectedContent selectedFrequency={selectedFrequency} variant={selectedVariant} />,
+                    actualView: (
+                        <VariantSelectedContent
+                            selectedFrequency={selectedFrequency}
+                            variant={props.selectedVariants.find((variant) => variant.planId === props.additionalPlan.id)}
+                        />
+                    ),
                     actualButton: (
                         <RoundedButton
                             label="REMOVER"
-                            style={{ width: "100%", backgroundColor: 'white', border: `1px solid ${theme.palette.secondary.main}`, padding: theme.spacing(1) }}
+                            style={{
+                                width: "100%",
+                                backgroundColor: "white",
+                                border: `1px solid ${theme.palette.secondary.main}`,
+                                padding: theme.spacing(1),
+                            }}
                             textStyle={{ color: theme.palette.secondary.main }}
-                            onClick={() => setcardView(CardView.FIRST_CONTENT)}
+                            onClick={() => handleRemoveVariant(props.additionalPlan.id)}
                         />
                     ),
-                    hasBgImg: false
+                    hasBgImg: false,
                 };
             default:
                 return {
@@ -115,7 +133,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                             onClick={() => setcardView(CardView.SELECT_ATTRIBUTE)}
                         />
                     ),
-                    hasBgImg: true
+                    hasBgImg: true,
                 };
         }
     }, [cardView, selectedVariant, selectedFrequency]);
@@ -129,18 +147,15 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
         });
     };
 
-    
     return (
-        <Box style={{ marginRight: '24px' }}>
+        <Box style={{ marginRight: "24px" }}>
             <div className={classes.card} style={{ backgroundImage: `url(${props.additionalPlan.imageUrl})` }}>
                 <div className={hasBgImg ? classes.overlay : classes.overlayWhite}>
                     <Typography variant="subtitle1" color="initial" style={{ marginBottom: 8 }}>
                         {props.additionalPlan.name}
                     </Typography>
                     {actualView}
-                    <div className={classes.cardAction}>
-                        {actualButton}
-                    </div>
+                    <div className={classes.cardAction}>{actualButton}</div>
                 </div>
             </div>
         </Box>

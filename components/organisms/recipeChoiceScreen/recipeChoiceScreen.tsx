@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { RecipeChoiceScreenProps } from "./interfaces";
 
@@ -22,6 +22,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
     const router = useRouter();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
     const { enqueueSnackbar } = useSnackbar();
+    const [selectedRecipes, setselectedRecipes] = useState([]);
 
     const handleRemoveFilter = (filter) => {
         const newFilterState = filters.filter((f) => filter !== f);
@@ -47,13 +48,25 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
         }
     };
 
+    const handleClickAddRecipe = (recipe) => {
+        setselectedRecipes([...selectedRecipes, recipe]);
+    };
+
+    const handleClickRemoveRecipe = ({ id: _id }) => {
+        const index = selectedRecipes.find(({ id }) => id !== _id);
+        if (index === -1) return;
+        const newState = [...selectedRecipes];
+        newState.splice(index, 1);
+        setselectedRecipes(newState);
+    };
+
     return (
         <Container maxWidth="lg">
             <Grid container spacing={1} style={{ marginBottom: 150 }}>
                 <Grid item container justify="center">
                     <TitleBuyFlow
-                        // title={`Elige las ${} recetas que recibirás el ${}`}
-                        title={`Elige las X recetas que recibirás el DDDD`}
+                        title={`Elige las ${props.maxRecipesQty} recetas que recibirás el ${props.nextDeliveryLabel}`}
+                        // title={`Elige las X recetas que recibirás el DDDD`}
                         subtitle=""
                     />
                 </Grid>
@@ -86,10 +99,17 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <RecipesGrid recipesSelection={true} recipes={props.recipes} />
+                    <RecipesGrid
+                        handleClickAddRecipe={handleClickAddRecipe}
+                        handleClickRemoveRecipe={handleClickRemoveRecipe}
+                        recipesSelection={true}
+                        recipes={props.recipes}
+                        selectedRecipes={selectedRecipes}
+                        maxRecipesQty={props.maxRecipesQty}
+                    />
                 </Grid>
             </Grid>
-            <RecipesBottomBar handleSubmit={handleSubmit} />
+            <RecipesBottomBar selectedRecipes={selectedRecipes} maxRecipesQty={props.maxRecipesQty} handleSubmit={handleSubmit} />
         </Container>
     );
 };

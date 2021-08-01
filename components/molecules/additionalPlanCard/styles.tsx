@@ -13,8 +13,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     card: {
         display: "flex",
-        width: '100%',
-        height: 430,
+        width: "100%",
+        minHeight: 430,
+        height: "100%",
         boxSizing: "border-box",
         textAlign: "center",
         backgroundRepeat: "no-repeat",
@@ -31,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         color: theme.palette.primary.contrastText,
         borderRadius: 8,
-        padding: '32px 24px 24px 24px',
+        padding: "32px 24px 24px 24px",
     },
     overlayWhite: {
         display: "flex",
@@ -42,13 +43,13 @@ export const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         color: theme.palette.text.secondary,
         borderRadius: 8,
-        padding: '32px 24px 24px 24px',
-        boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        padding: "32px 24px 24px 24px",
+        boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
     },
     cardContent: {
-        width: '100%',
+        width: "100%",
         display: "flex",
         flex: 1,
         flexDirection: "column",
@@ -60,11 +61,10 @@ export const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 export const useStylesVariantContent = makeStyles((theme) => ({
     formControlRadio: {
-        '& span.MuiFormControlLabel-label': {
-            fontSize: '16px'
-        }
-    }
+        "& span.MuiFormControlLabel-label": {
+            fontSize: "16px",
+        },
+    },
 }));
