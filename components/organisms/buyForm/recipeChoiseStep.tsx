@@ -42,8 +42,9 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
 
     const handleSubmit = async () => {
         var recipeSelection: { recipeId: string; quantity: number }[] = [];
+        const ordererSelectedRecipes = _.orderBy(recipes, ["id"], ["asc"]);
 
-        for (let recipe of recipes) {
+        for (let recipe of ordererSelectedRecipes) {
             if (recipeSelection[0] && recipeSelection[0].recipeId === recipe.id) {
                 recipeSelection[0] = { ...recipeSelection[0], quantity: recipeSelection[0].quantity + 1 };
             } else {

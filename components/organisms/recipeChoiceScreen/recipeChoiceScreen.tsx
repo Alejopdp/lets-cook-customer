@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { RecipeChoiceScreenProps } from "./interfaces";
 import { useLang } from "@hooks";
+import _ from "lodash";
 
 // External components
 import { Chip, Container, Grid, Icon, useTheme } from "@material-ui/core";
@@ -100,8 +101,9 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
 
     const handleSubmit = async () => {
         var recipeSelection: { recipeId: string; quantity: number }[] = [];
+        const ordererSelectedRecipes = _.orderBy(selectedRecipes, ["id"], ["asc"]);
 
-        for (let recipe of props.recipes) {
+        for (let recipe of ordererSelectedRecipes) {
             if (recipeSelection[0] && recipeSelection[0].recipeId === recipe.id) {
                 recipeSelection[0] = { ...recipeSelection[0], quantity: recipeSelection[0].quantity + 1 };
             } else {
@@ -186,7 +188,12 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                     />
                 </Grid>
             </Grid>
-            <RecipesBottomBar selectedRecipes={selectedRecipes} maxRecipesQty={props.maxRecipesQty} handleSubmit={handleSubmit} />
+            <RecipesBottomBar
+                selectedRecipes={selectedRecipes}
+                maxRecipesQty={props.maxRecipesQty}
+                handleSubmit={handleSubmit}
+                handleSecondaryButtonClick={() => router.back()}
+            />
             {drawerIsOpen && (
                 <DrawerMenu
                     open={drawerIsOpen}

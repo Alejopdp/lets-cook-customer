@@ -15,7 +15,7 @@ export interface WeekOrder {
     id: string;
     weekLabel: string;
     weekId: string;
-    recipes: string;
+    recipes: Recipes[];
     shippingDate: string;
 }
 

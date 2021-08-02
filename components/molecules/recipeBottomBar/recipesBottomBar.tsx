@@ -79,7 +79,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                 variant="text"
                                 color="default"
                                 style={{ fontSize: "13px", marginTop: theme.spacing(0.5) }}
-                                onClick={() => handleSecondaryButtonClick()}
+                                onClick={props.handleSecondaryButtonClick}
                             >
                                 Elegir recetas luego
                             </Button>
