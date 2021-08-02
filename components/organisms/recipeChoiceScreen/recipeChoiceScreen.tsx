@@ -4,7 +4,7 @@ import { RecipeChoiceScreenProps } from "./interfaces";
 import { useLang } from "@hooks";
 
 // External components
-import { Chip, Container, Grid, Icon } from "@material-ui/core";
+import { Chip, Container, Grid, Icon, useTheme } from "@material-ui/core";
 
 // Internal components
 import { DrawerMenu, RecipesBottomBar } from "@molecules";
@@ -27,6 +27,7 @@ interface IFilterOptions {
 
 const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
     const router = useRouter();
+    const theme = useTheme();
     const [lang] = useLang("buyFlowLayout");
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
     const { enqueueSnackbar } = useSnackbar();
@@ -110,7 +111,8 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
         const res = await chooseRecipes(router.query.orderId as string, recipeSelection);
 
         if (res.status === 200) {
-            enqueueSnackbar("Changed correctly", { variant: "success" });
+            enqueueSnackbar("Recetas elegidas correctamente", { variant: "success" });
+            router.replace({ pathname: `/detalle-del-plan/${props.subscriptionId}` });
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
@@ -137,8 +139,8 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
     }, [filters]);
 
     return (
-        <Container maxWidth="lg">
-            <Grid container spacing={1} style={{ marginBottom: 150 }}>
+        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6), paddingBottom: "200px" }}>
+            <Grid container spacing={2}>
                 <Grid item container justify="center">
                     <TitleBuyFlow
                         title={`Elige las ${props.maxRecipesQty} recetas que recibirás el ${props.nextDeliveryLabel}`}
@@ -173,7 +175,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                         ))}
                     </Grid>
                 </Grid>
-                <Grid item>
+                <Grid item xs={12}>
                     <RecipesGrid
                         handleClickAddRecipe={handleClickAddRecipe}
                         handleClickRemoveRecipe={handleClickRemoveRecipe}

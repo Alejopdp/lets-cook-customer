@@ -162,6 +162,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 open={openRecipeModal}
                 handleClose={handleCloseRecipeModal}
                 descriptionElementRef={descriptionElementRefRecipeModal}
+                recipe={recipeSelectedIndex}
                 // data={recipeSelectedIndex.period === 'actualWeek' ? data.actualWeekOrder[recipeSelectedIndex.index] : data.nextWeekOrder[recipeSelectedIndex.index]}
             />
             <SwapPlanModal

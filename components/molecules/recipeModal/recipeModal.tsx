@@ -74,7 +74,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
     const isMdUp = useMediaQuery("(min-width:960px)");
 
     const tools = useMemo(() => {
-        return props.recipe.tools.join(", ");
+        return (props.recipe.tools || []).join(", ");
     }, []);
 
     return (
@@ -141,7 +141,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                         xs={12}
                                         style={{ display: "flex", alignItems: "center", margin: `${theme.spacing(3)}px 0px` }}
                                     >
-                                        {props.recipe.recipeVariants.map((option, index) => (
+                                        {(props.recipe.recipeVariants || []).map((option, index) => (
                                             <Typography key={index} style={{ marginRight: theme.spacing(2), fontSize: 14 }}>
                                                 Hay opción {option.restriction.label}
                                             </Typography>

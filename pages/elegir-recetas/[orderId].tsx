@@ -23,6 +23,7 @@ export async function getServerSideProps(context) {
             recipes: res.data.recipes || null,
             nextDeliveryLabel: res.data.nextDeliveryLabel || null,
             maxRecipesQty: res.data.maxRecipesQty || null,
+            subscriptionId: res.data.subscriptionId,
         },
     };
 }
@@ -55,6 +56,7 @@ const ChooseRecipes = (props) => {
                     nextDeliveryLabel={props.nextDeliveryLabel}
                     recipes={props.recipes}
                     maxRecipesQty={props.maxRecipesQty}
+                    subscriptionId={props.subscriptionId}
                 />
             </InnerSectionLayout>
         </Layout>
