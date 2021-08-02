@@ -9,16 +9,17 @@ import Hidden from "@material-ui/core/Hidden";
 
 type RecipesBottomBarProps = {
     handleSubmit: () => void;
+    maxRecipesQty: number;
 };
+
+// export interface RecipeChoiceScreenProps {
+//     recipes: any[];
+//     nextDeliveryLabel: string;
+// }
 
 export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
     const classes = useStyles();
     const theme = useTheme();
-    const { recipes, variant, forward } = useBuyFlow((store) => ({
-        recipes: store.form.recipes,
-        variant: store.form.variant,
-        forward: store.forward,
-    }));
     const isOpen = useRecipesBottomBar(({ isOpen }) => isOpen);
     const isXsDown = useMediaQuery(theme.breakpoints.down("xs"));
 
@@ -40,14 +41,14 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                         style={{ backgroundImage: `url(${recipe.imageUrl})` }}
                                     />
                                 ))}
-                                {recipes.length < variant.numberOfRecipes &&
-                                    Array(variant.numberOfRecipes - recipes.length)
+                                {recipes.length < props.maxRecipesQty &&
+                                    Array(props.maxRecipesQty - recipes.length)
                                         .fill()
                                         .map((_, index) => (
                                             <div key={index} className={clsx(classes.recipeSelectedRoot, classes.recipeSelectedMock)} />
                                         ))}
                             </Hidden>
-                            {recipes.length >= variant.numberOfRecipes && (
+                            {recipes.length >= props.maxRecipesQty && (
                                 <div className={classes.recipesQtySelected}>
                                     <CheckCircleOutline color="primary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
@@ -55,12 +56,12 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                     </Typography>
                                 </div>
                             )}
-                            {recipes.length < variant.numberOfRecipes && (
+                            {recipes.length < props.maxRecipesQty && (
                                 <div className={classes.recipesQtySelected}>
                                     <ErrorOutlineOutlined color="secondary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
                                         {" "}
-                                        Aún te quedan {variant.numberOfRecipes - recipes.length} recetas por seleccionar
+                                        Aún te quedan {props. - recipes.length} recetas por seleccionar
                                     </Typography>
                                 </div>
                             )}
@@ -69,7 +70,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                             <RoundedButton
                                 label="Finalizar"
                                 onClick={props.handleSubmit}
-                                disabled={variant.numberOfRecipes > recipes.length}
+                                disabled={props.maxRecipesQty > recipes.length}
                                 style={isXsDown && { width: "100%" }}
                             />
                             <Button

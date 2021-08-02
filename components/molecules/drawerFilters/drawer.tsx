@@ -15,12 +15,12 @@ export const DrawerMenu = ({
 }) => {
     const classes = useStyles();
     const theme = useTheme();
-    const [filtersSelected, setFilters] = useState<IFilter[]>(selectedItems);
     const { storeFilters, setStoreFilters, toggleDrawer } = useFilterDrawer((state) => ({
         storeFilters: state.filters,
         setStoreFilters: state.setFilters,
         toggleDrawer: state.setDrawerOpen,
     }));
+    const [filtersSelected, setFilters] = useState<IFilter[]>(storeFilters);
 
     const handleOnClick = (filter: IFilter) => {
         const isApplied = filtersSelected.some((f) => filter.isEqualToFilterValue(f.value));
@@ -34,7 +34,7 @@ export const DrawerMenu = ({
     };
 
     const _handleOnClose = (x) => {
-        setFilters(selectedItems);
+        // setFilters(selectedItems);
         handleOnClose();
     };
 
@@ -43,6 +43,9 @@ export const DrawerMenu = ({
         setFilters([]);
         toggleDrawer(false);
     };
+
+    console.log("SELECTED ITEMS DRAWER: ", selectedItems);
+    console.log("STORE ITEMS DRAWER: ", storeFilters);
 
     return (
         <nav className={classes.drawer} aria-label="apply filters">
@@ -71,10 +74,10 @@ export const DrawerMenu = ({
                                         key={keyFilter}
                                         dense
                                         button
-                                        checked={
-                                            filtersSelected.some((filter) => filter.isEqualToFilterValue(filterItem.value)) ||
-                                            storeFilters.some((filter) => filter.isEqualToFilterValue(filterItem.value))
-                                        }
+                                        // checked={
+                                        //     filtersSelected.some((filter) => filter.isEqualToFilterValue(filterItem.value)) ||
+                                        //     storeFilters.some((filter) => filter.isEqualToFilterValue(filterItem.value))
+                                        // }
                                         onClick={() => handleOnClick(filterItem)}
                                     >
                                         <ListItemIcon>

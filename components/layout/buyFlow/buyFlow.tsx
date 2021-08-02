@@ -96,13 +96,15 @@ export const BuyFlowLayout = memo(({ children: Component, filterOptions }: BuyFl
         <div className={classes.root}>
             <CssBaseline />
             <AppBarStepper />
-            <DrawerMenu
-                open={drawerIsOpen}
-                items={_filterOptions}
-                selectedItems={filters}
-                handleOnClose={() => setDrawerOpen(false)}
-                handleOnClickApplyButton={_handleClickApplyFilters}
-            />
+            {drawerIsOpen && (
+                <DrawerMenu
+                    open={drawerIsOpen}
+                    items={_filterOptions}
+                    selectedItems={filters}
+                    handleOnClose={() => setDrawerOpen(false)}
+                    handleOnClickApplyButton={_handleClickApplyFilters}
+                />
+            )}
             <main className={classes.content}>{Component}</main>
         </div>
     );

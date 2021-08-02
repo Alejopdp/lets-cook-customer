@@ -49,7 +49,7 @@ const ChooseRecipes = (props) => {
     // }, []);
 
     return (
-        <Layout disableCallToActionSection>
+        <Layout disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <RecipeChoiceScreen
                     nextDeliveryLabel={props.nextDeliveryLabel}
