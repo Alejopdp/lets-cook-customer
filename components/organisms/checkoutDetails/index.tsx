@@ -82,6 +82,8 @@ export default function CheckoutDetails() {
             style={{
                 // display: "flex",
                 position: "fixed",
+                maxWidth: 500,
+                right: 0,
                 // flexDirection: "column",
                 backgroundColor: theme.palette.background.paper,
                 minHeight: "100vh",
