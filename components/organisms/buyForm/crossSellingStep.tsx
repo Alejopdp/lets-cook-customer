@@ -62,6 +62,7 @@ const CrossSellingStep = (props) => {
             variant: { id: variant.id },
             frequency: variant.frequency,
         }));
+        console.log("SELECTED VARIANTS: ", selectedVariants);
         const res = await createManySubscriptions(userInfo.id, variants);
 
         if (res.status === 200) {
