@@ -27,7 +27,7 @@ export const Register = (props: RegisterProps) => {
     const { register, btn } = useStyles();
     return (
         // <Link href={redirectTo}>
-        <Button className={btn} onClick={props.handleRedirect}>
+        <Button className={btn} onClick={props.handleRedirect} disabled={props.isSubmitting}>
             <ExitToAppIcon fontSize="small" />
             <Typography variant="body1" className={register}>
                 {props.text} <b>{props.boldText}</b>

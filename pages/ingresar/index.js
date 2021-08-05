@@ -28,7 +28,7 @@ export const getInitialProps = async (context) => {
     const res = await verifyToken(token);
 
     if (res.status === 200) {
-        return { redirect: { destination: "/", permanent: true } };
+        return { redirect: { destination: "/", permanent: false } };
     } else {
         return { props: { isLogged: false } };
     }

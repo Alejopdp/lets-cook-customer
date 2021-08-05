@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
+import cookies from "js-cookie";
 const langs = require("../../../lang").recoverPassword;
 
 // Internal components
@@ -10,8 +11,10 @@ import RecoverPasswordCode from "./recoverPasswordCode";
 import RecoverPassword from "./recoverPassword";
 import FormPaper from "../../molecules/formPaper/formPaper";
 import { ForgotPassword, Register } from "../../atoms/loginHelpers/loginHelpers";
-import { forgotPassword, resetPassword, validateRecoverPasswordCode } from "helpers/serverRequests/customer";
+import { forgotPassword, loginWithEmail, resetPassword, validateRecoverPasswordCode } from "helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
+import { useAuthStore, useUserInfoStore } from "@stores";
+import { useLocalStorage } from "@hooks";
 
 const stepsQty = 3;
 
@@ -23,6 +26,10 @@ const RecoverPasswordForm = (props) => {
         password: "",
     });
     const { enqueueSnackbar } = useSnackbar();
+    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+    const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
+    const { saveInLocalStorage } = useLocalStorage();
+    const [isResetingPassword, setisResetingPassword] = useState(false);
 
     const router = useRouter();
     const lang = langs[router.locale];
@@ -50,14 +57,35 @@ const RecoverPasswordForm = (props) => {
     };
 
     const handleSubmitNewPassword = async () => {
+        setisResetingPassword(true);
         const res = await resetPassword(formData.password, formData.email, formData.code);
 
         if (res.status === 200) {
-            // setcurrentStep(currentStep + 1);
-            props.handlePasswordRecoveredSuccesfully();
+            if (props.handlePasswordRecoveredSuccesfully) {
+                props.handlePasswordRecoveredSuccesfully();
+            } else {
+                const res = await loginWithEmail(formData.email, formData.password);
+
+                if (res.status === 200) {
+                    saveLoginData(res.data.token, res.data.userInfo);
+                } else {
+                    // setserverError(res.data.message);
+                    enqueueSnackbar(res.data.message, { variant: "error" });
+                }
+            }
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
+        setisResetingPassword(false);
+    };
+
+    const saveLoginData = (token, userInfo) => {
+        saveInLocalStorage("token", token);
+        saveInLocalStorage("userInfo", userInfo);
+        setUserInfo(userInfo);
+        cookies.set("token", token);
+        setIsAuthenticated(true);
+        router.push("/perfil");
     };
 
     const handleChange = (e) => {
@@ -93,7 +121,12 @@ const RecoverPasswordForm = (props) => {
     return (
         <FormPaper title={lang.title}>
             {currentInputs}
-            <Register text={lang.register.text} boldText={lang.register.boldText} handleRedirect={props.handleRedirect || handleRedirect} />
+            <Register
+                text={lang.register.text}
+                boldText={lang.register.boldText}
+                handleRedirect={props.handleRedirect || handleRedirect}
+                isSubmitting={isResetingPassword}
+            />
         </FormPaper>
     );
 };
