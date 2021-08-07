@@ -30,7 +30,7 @@ const _links: ILink[] = [
     },
     {
         name: "Bono regalo",
-        url: "/",
+        url: "/bono-regalo",
     },
     {
         name: "¿Cómo funciona?",
