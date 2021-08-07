@@ -73,12 +73,15 @@ const DeliveryAddressModal = (props) => {
                         variant="outlined"
                         value={formData.details}
                         onChange={handleChange}
-                        // style={{ width: "97%", marginTop: ".5rem" }}
                     />
                 </Grid>
 
                 <Grid item xs={12}>
-                    <PreferredDeliveryTimeInput />
+                    <PreferredDeliveryTimeInput
+                        handleChange={handleChange}
+                        value={formData.preferredShippingHour}
+                        name="preferredShippingHour"
+                    />
                 </Grid>
             </Grid>
 

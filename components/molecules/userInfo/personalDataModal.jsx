@@ -23,8 +23,6 @@ const PersonalDataModal = (props) => {
     });
 
     const handleChange = (e) => {
-        console.log("E target Data: ", e.target.name);
-        console.log("E target Value: ", e.target.value);
         setformData({
             ...formData,
             [e.target.name]: e.target.value,
