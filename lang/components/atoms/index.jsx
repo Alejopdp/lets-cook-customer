@@ -5,3 +5,4 @@ export * from "./acceptLegalTerms";
 export * from "./locationSearchInput";
 export * from "./loginButton";
 export * from "./preferredDeliveryTimeInput";
+export * from "./simpleSelect";

@@ -23,6 +23,8 @@ const PersonalDataModal = (props) => {
     });
 
     const handleChange = (e) => {
+        console.log("E target Data: ", e.target.name);
+        console.log("E target Value: ", e.target.value);
         setformData({
             ...formData,
             [e.target.name]: e.target.value,
@@ -81,7 +83,7 @@ const PersonalDataModal = (props) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <PreferedLanguageInput name="preferedLanguage" value={formData.preferedLanguage} handleChange={handleChange} />
+                    <PreferedLanguageInput name="preferredLanguage" value={formData.preferedLanguage} handleChange={handleChange} />
                 </Grid>
             </Grid>
         </Modal>
