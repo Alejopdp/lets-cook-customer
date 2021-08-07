@@ -102,18 +102,6 @@ const CrossSellingStep = (props) => {
                         secondaryButtonLabel="No quiero agregar ningún producto adicional"
                         totalValue={totalValue}
                     />
-                    {/* <Box display="flex" flexDirection="column" alignItems="center">
-                        {totalValue > 0 && (
-                            <RoundedButton
-                                label={`PAGAR PRODUCTOS ADICIONALES (${totalValue} €)`}
-                                onClick={handleSubmitPayment}
-                                style={{ marginBottom: theme.spacing(2) }}
-                            />
-                        )}
-                        <Button variant="text" onClick={handleNotAddingAdditionalPlans}>
-                            No quiero agregar ningún producto adicional
-                        </Button>
-                    </Box> */}
                 </Grid>
             </Grid>
         </Container>

@@ -40,7 +40,7 @@ export const RecipesGrid = (props: RecipesGridProps) => {
     // };
 
     const selectedRecipesQty = useMemo(() => {
-        return props.selectedRecipes.length;
+        return props.recipesPage ? 0 : props.selectedRecipes.length;
     }, [props.selectedRecipes]);
 
     const descriptionElementRef = React.useRef(null);
