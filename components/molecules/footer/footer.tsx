@@ -100,11 +100,11 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                             info@letscooknow.es
                         </Typography>
                     </Link>
-                    <Link href="https://wa.me/34686312132" underline="none" target="_blank" rel="noreferrer noopener">
+                    {/* <Link href="https://wa.me/34686312132" underline="none" target="_blank" rel="noreferrer noopener">
                         <Typography variant="body1" color="textSecondary">
                             +34 686 312 132
                         </Typography>
-                    </Link>
+                    </Link> */}
                 </Grid>
 
                 <Grid item xs={6} md={3} className={paymentMethodsSection}>
