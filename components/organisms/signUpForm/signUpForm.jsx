@@ -41,7 +41,14 @@ const SignUpForm = (props) => {
     const handleChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value || e.target.checked,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleCheckboxesChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: !formData[e.target.name],
         });
     };
 
@@ -87,6 +94,7 @@ const SignUpForm = (props) => {
                     authorize={formData.authorize}
                     sendInfo={formData.sendInfo}
                     handleChange={handleChange}
+                    handleCheckboxesChange={handleCheckboxesChange}
                     handleSubmit={props.handleCreateAccount || handleCreateAccount}
                 />
             );
