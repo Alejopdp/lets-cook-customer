@@ -34,7 +34,7 @@ const TextButton = (props) => {
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
     const classes = useStyles();
 
-    return isSmDown && porops.icon ? (
+    return isSmDown && props.icon ? (
         <IconButton size="small" style={props.style} onClick={props.handleClick}>
             {props.icon === "plus-circle-outline" ? (
                 <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
