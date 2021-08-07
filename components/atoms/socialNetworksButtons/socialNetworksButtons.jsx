@@ -18,22 +18,33 @@ export const SocialNetworksButtons = (props) => {
     const [lang] = useLang("socialNetworksButtons");
 
     const handleFacebookLogin = async () => {
-        const token = await loginWithFacebookAndGetIdToken();
+        const { token, error } = await loginWithFacebookAndGetIdToken();
 
         if (!!token) {
             props.handleSubmit(token);
         } else {
-            enqueueSnackbar(lang.facebookError);
+            enqueueSnackbar(
+                error.code === "auth/account-exists-with-different-credential"
+                    ? "El email ha sido registrado con otro autenticador. Por favor, pruebe iniciando sesión de otra manera"
+                    : error.message,
+                { variant: "error" }
+            );
         }
     };
 
     const handleGoogleLogin = async () => {
-        const token = await loginWithGoogleAndGetIdToken();
+        const { token, error } = await loginWithGoogleAndGetIdToken();
 
         if (!!token) {
             props.handleSubmit(token);
         } else {
-            enqueueSnackbar(lang.googleError);
+            enqueueSnackbar(
+                error.code === "auth/account-exists-with-different-credential"
+                    ? "El email ha sido registrado con otro autenticador. Por favor, pruebe iniciando sesión de otra manera"
+                    : error.message,
+                { variant: "error" }
+            );
+            // enqueueSnackbar(lang.googleError);
         }
     };
 
