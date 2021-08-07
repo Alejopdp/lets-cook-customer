@@ -27,12 +27,12 @@ const UserBox = (props) => {
         router.push(pathToRedirect);
     };
 
-    const handleSignOut = () => {
+    const handleSignOut = async () => {
+        await router.push("/");
         cookies.remove("token");
         resetLocalStorage();
         setuserInfo({});
         setIsAuthenticated(false);
-        router.push("/");
     };
 
     const options = {
