@@ -11,7 +11,7 @@ const PlanCard = props => {
     const classes = useStyles();
 
     return (
-        <div key={props.index} className={classes.card} style={{ backgroundImage: `url(${props.card.imageUrl})`, ...props.style }}>
+        <div key={props.index} className={classes.card} style={{ backgroundImage: `url(${props.card.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', ...props.style }}>
             <div className={classes.overlay} >
                 <div className={classes.cardContent}>
                     <Typography

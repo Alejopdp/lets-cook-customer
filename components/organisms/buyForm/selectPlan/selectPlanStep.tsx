@@ -27,13 +27,13 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const { enqueueSnackbar } = useSnackbar();
 
     const getPlanData = useCallback(
-        (slug: string, plans: Plan[]): { peopleLabels: string; planName: string; planDescription: string; canChooseRecipes: string } => {
+        (slug: string, plans: Plan[]): { peopleLabels: string; planName: string; planDescription: string; canChooseRecipes: boolean } => {
             const planSelect = plans.find((plan) => plan.slug === slug);
 
-            const peopleLabels = planSelect.variants?.reduce((_planSize, _variant) => {
+            const peopleLabels = planSelect.variants ?.reduce((_planSize, _variant) => {
                 const valueIsIncluded = (_planSize[_variant.numberOfPersons] || []).includes(_variant.numberOfRecipes);
 
-                if (valueIsIncluded || !_variant?.numberOfPersons) {
+                if (valueIsIncluded || !_variant ?.numberOfPersons) {
                     return _planSize;
                 }
 
@@ -52,8 +52,8 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     );
 
     const handleOnSelectPlan = (plan: Plan) => {
-        const recipeQty = buyFlow.form.variant?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty);
-        const peopleQty = buyFlow.form.variant?.numberOfPersons || parseInt(props.initialPlanSettings.personQty);
+        const recipeQty = buyFlow.form.variant ?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty);
+        const peopleQty = buyFlow.form.variant ?.numberOfPersons || parseInt(props.initialPlanSettings.personQty);
 
         const { variant, errors, slug, id, recipes } = getPlanVariant(
             {
@@ -79,7 +79,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         const { variant, errors, slug, id } = getPlanVariant(
             {
                 peopleQty: parseInt(qty.value),
-                recipeQty: buyFlow.form.variant?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty),
+                recipeQty: buyFlow.form.variant ?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty),
                 slug: buyFlow.form.planSlug,
             },
             props.plans
@@ -96,7 +96,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         const { variant, errors, slug, id } = getPlanVariant(
             {
                 recipeQty: parseInt(qty.value),
-                peopleQty: buyFlow.form.variant?.numberOfPersons || parseInt(props.initialPlanSettings.personQty),
+                peopleQty: buyFlow.form.variant ?.numberOfPersons || parseInt(props.initialPlanSettings.personQty),
                 slug: buyFlow.form.planSlug,
             },
             props.plans
@@ -174,7 +174,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                                             name="peopleQty"
                                             subtitle={"Cantidad de personas"}
                                             fromArray={Object.keys(planSize)}
-                                            valueSelected={`${buyFlow.form.variant?.numberOfPersons}`}
+                                            valueSelected={`${buyFlow.form.variant ?.numberOfPersons}`}
                                             handleOnChange={handleOnSelectPeopleQty}
                                         />
                                     </Grid>
@@ -182,8 +182,8 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                                         <PlanSize
                                             name="recipeQty"
                                             subtitle="Cantidad de recetas por semana"
-                                            fromArray={planSize[buyFlow.form.variant?.numberOfPersons]}
-                                            valueSelected={`${buyFlow.form.variant?.numberOfRecipes}`}
+                                            fromArray={planSize[buyFlow.form.variant ?.numberOfPersons]}
+                                            valueSelected={`${buyFlow.form.variant ?.numberOfRecipes}`}
                                             handleOnChange={handleOnSelectRecipeQty}
                                         />
                                     </Grid>
@@ -195,9 +195,9 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         </Grid>
                         <Grid item xs={12} md={4} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
                             <RecipesCalculation
-                                recipesQty={buyFlow.form.variant?.numberOfRecipes}
-                                peopleQty={buyFlow.form.variant?.numberOfPersons}
-                                totalPrice={buyFlow.form.variant?.priceWithOffer || buyFlow.form.variant?.price}
+                                recipesQty={buyFlow.form.variant ?.numberOfRecipes}
+                                peopleQty={buyFlow.form.variant ?.numberOfPersons}
+                                totalPrice={buyFlow.form.variant ?.priceWithOffer || buyFlow.form.variant ?.price}
                             />
                         </Grid>
                     </Grid>
@@ -258,7 +258,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             {/* FOOTER SECTION */}
             <Grid item container direction="row" component="nav" xs={12} className={classes.footer}>
                 <Grid item className={classes.footerItem} xs>
-                    Let's Cook 2021 © Todos los derechos reservados
+                    Let's Cook 2021 © - Todos los derechos reservados
                 </Grid>
                 <Grid item className={classes.footerItem}>
                     Términos y condiciones
