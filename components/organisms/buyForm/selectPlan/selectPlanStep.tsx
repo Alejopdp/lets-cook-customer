@@ -258,7 +258,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             {/* FOOTER SECTION */}
             <Grid item container direction="row" component="nav" xs={12} className={classes.footer}>
                 <Grid item className={classes.footerItem} xs>
-                    Let's Cook 2021 © Todos los derechos reservados
+                    Let's Cook 2021 © - Todos los derechos reservados
                 </Grid>
                 <Grid item className={classes.footerItem}>
                     Términos y condiciones

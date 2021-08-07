@@ -117,7 +117,7 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
 
             <Grid container direction="row" justify="space-between" alignItems="flex-end" className={footer}>
                 <Typography variant="body2" style={{ fontSize: "13px" }}>
-                    Lets Cook 2021 - Todos los derechos reservados
+                    Lets Cook 2021 © - Todos los derechos reservados
                 </Typography>
                 <Image src="/enisa.png" width={50} height={100} alt="Lets cook now" />
             </Grid>
