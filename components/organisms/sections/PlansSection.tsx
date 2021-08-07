@@ -52,6 +52,7 @@ export const PlansSection = memo((props: PlansSectionProps) => {
         },
     };
 
+    console.log('cards', props.cards)
     return (
         <>
             <Grid container spacing={2}>
@@ -99,7 +100,9 @@ export const PlansSection = memo((props: PlansSectionProps) => {
                         swipeable
                     >
                         {(props.cards || []).map((card, index) => (
-                            <PlanCard index={index} card={card} style={{ paddingRight: theme.spacing(2) }} />
+                            <div style={{ paddingRight: theme.spacing(2) }}>
+                                <PlanCard index={index} card={card} />
+                            </div>
                         ))}
                     </Carousel>
                 </div>
