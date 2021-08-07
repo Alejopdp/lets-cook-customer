@@ -49,7 +49,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             setWeekLabel,
         })
     );
-    console.log("ESTA AUTENTICADO: ", isAuthenticated);
 
     useEffect(() => {
         setWeekLabel(props.weekLabel);

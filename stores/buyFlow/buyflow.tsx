@@ -105,6 +105,7 @@ export interface Store extends BuyFlowStore {
     setSubscriptionId: (subscriptionId: Partial<string>) => void;
     setWeekLabel: (weekLabel: Partial<string>) => void;
     setFirstOrderShippingDate: (shippingDate: Partial<string>) => void;
+    resetBuyFlowState: () => void;
 }
 
 export const BuyFlowInitialStore: BuyFlowStore = {
@@ -260,6 +261,9 @@ const store = devtools<Store>((set, get) => ({
         const form = get().form;
         form.firstOrderShippingDate = shippingDate;
         set({ form });
+    },
+    resetBuyFlowState: () => {
+        set({ form: BuyFlowInitialStore.form, step: 0, showRegister: BuyFlowInitialStore.showRegister });
     },
 }));
 

@@ -61,11 +61,10 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                 <Grid item xs={12}>
                     <Grid container spacing={2} style={{ justifyContent: "center" }}>
                         {props.additionalPlans.map((plan, index) => (
-                            <Grid item xs={12} lg={4}>
+                            <Grid item xs={12} lg={4} key={index}>
                                 <AdditionalPlanCard
                                     selectedVariants={props.selectedVariants}
                                     setselectedVariants={props.setselectedVariants}
-                                    key={index}
                                     additionalPlan={plan}
                                 />
                             </Grid>

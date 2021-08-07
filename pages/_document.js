@@ -13,10 +13,10 @@ export default class MyDocument extends Document {
                     <meta name="theme-color" content={theme.palette.primary.main} />
                     <script async src="/script/facebook.js"></script>
                     <noscript>
-                        <Image
+                        <img
                             height={1}
                             width={1}
-                            style="display:none"
+                            style={{ display: "none" }}
                             src="https://www.facebook.com/tr?id=817476268618042&ev=PageView&noscript=1"
                             alt="facebook-pixel"
                         />

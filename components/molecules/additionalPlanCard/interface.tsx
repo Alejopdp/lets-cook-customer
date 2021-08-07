@@ -21,6 +21,7 @@ export interface SelectVariantContentProps {
 export interface AttributePickerProps {
     title: string;
     values: string[];
+    selectedAttributes: { [key: string]: string };
     handleAttributeClick: (attrName: string, attrValue: string) => void;
 }
 

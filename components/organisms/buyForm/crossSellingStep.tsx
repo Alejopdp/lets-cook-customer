@@ -19,10 +19,11 @@ import Payment from "@material-ui/icons/Payment";
 import { CustomButton, RoundedButton } from "@atoms";
 import { PlanVariant } from "types/planVariant";
 import { createManySubscriptions } from "helpers/serverRequests/subscription";
+import AdditionalPlansBuyButtons from "components/molecules/additionalPlansBuyButtons/additionalPlansBuyButtons";
 
 const CrossSellingStep = (props) => {
     const theme = useTheme();
-    const form = useBuyFlow((state) => state.form);
+    const { form, resetBuyFlowState } = useBuyFlow((state) => ({ form: state.form, resetBuyFlowState: state.resetBuyFlowState }));
     const router = useRouter();
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
@@ -66,10 +67,16 @@ const CrossSellingStep = (props) => {
         const res = await createManySubscriptions(userInfo.id, variants);
 
         if (res.status === 200) {
-            router.push("/perfil");
+            await router.push("/perfil");
+            resetBuyFlowState();
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
+    };
+
+    const handleNotAddingAdditionalPlans = async () => {
+        await router.push("/perfil");
+        resetBuyFlowState();
     };
 
     return (
@@ -89,7 +96,13 @@ const CrossSellingStep = (props) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Box display="flex" flexDirection="column" alignItems="center">
+                    <AdditionalPlansBuyButtons
+                        handleSecondaryButtonClick={handleNotAddingAdditionalPlans}
+                        handleSubmitPayment={handleSubmitPayment}
+                        secondaryButtonLabel="No quiero agregar ningún producto adicional"
+                        totalValue={totalValue}
+                    />
+                    {/* <Box display="flex" flexDirection="column" alignItems="center">
                         {totalValue > 0 && (
                             <RoundedButton
                                 label={`PAGAR PRODUCTOS ADICIONALES (${totalValue} €)`}
@@ -97,10 +110,10 @@ const CrossSellingStep = (props) => {
                                 style={{ marginBottom: theme.spacing(2) }}
                             />
                         )}
-                        <Button variant="text" onClick={() => router.push("/perfil")}>
+                        <Button variant="text" onClick={handleNotAddingAdditionalPlans}>
                             No quiero agregar ningún producto adicional
                         </Button>
-                    </Box>
+                    </Box> */}
                 </Grid>
             </Grid>
         </Container>
