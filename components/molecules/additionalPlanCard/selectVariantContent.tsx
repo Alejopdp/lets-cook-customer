@@ -11,11 +11,14 @@ import AttributePicker from "./attributePicker";
 import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@material-ui/core";
 import { getPlanVariantWithAttributes } from "@helpers";
 import { PlanVariant } from "types/planVariant";
+import { translateFrequency } from "helpers/utils/i18n";
+import { useRouter } from "next/router";
 
 // Internal components
 
 const SelectVariantContent = (props: SelectVariantContentProps) => {
     const theme = useTheme();
+    const router = useRouter();
     const classes = useStylesVariantContent();
     const [selectedAttributes, setselectedAttributes] = useState<{ [key: string]: string }>({});
     const [selectedFrequency, setselectedFrequency] = useState("");
@@ -122,7 +125,7 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                                 checked={freq === props.selectedFrequency}
                                 value={freq}
                                 control={<Radio size="small" checked={freq === props.selectedFrequency} />}
-                                label={freq}
+                                label={translateFrequency(freq, router.locale)}
                             />
                         ))}
                 </RadioGroup>

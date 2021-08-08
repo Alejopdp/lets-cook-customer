@@ -2,12 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Box, Typography, useTheme } from "@material-ui/core";
 import { VariantSelectedContentProps } from "./interface";
+import { translateFrequency } from "helpers/utils/i18n";
 
 // Icons & Images
 import RotateRight from "@material-ui/icons/RotateRight";
+import { useRouter } from "next/router";
 
 const VariantSelectedContent = (props: VariantSelectedContentProps) => {
     const theme = useTheme();
+    const router = useRouter();
     return (
         <Box>
             {props.variant && (
@@ -32,7 +35,7 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
             <Box display="flex" alignItems="center">
                 <RotateRight style={{ marginRight: 8 }} />{" "}
                 <Typography variant="body2" style={{ fontSize: "16px" }}>
-                    Plan {props.selectedFrequency}
+                    Plan {translateFrequency(props.selectedFrequency, router.locale)}
                 </Typography>
             </Box>
         </Box>

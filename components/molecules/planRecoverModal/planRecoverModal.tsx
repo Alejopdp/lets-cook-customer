@@ -2,6 +2,8 @@
 import React from "react";
 import { withStyles, useTheme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
+import { translateFrequency } from "helpers/utils/i18n";
+import { useRouter } from "next/router";
 
 // Internal Components
 import PlanInfo from "../planInfo/planInfo";
@@ -54,6 +56,7 @@ const styles = (theme) => ({
 const DialogTitle = withStyles(styles)((props) => {
     const theme = useTheme();
     const { children, classes, onClose, ...other } = props;
+    const router = useRouter();
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
             <Typography variant="h5" style={{ color: theme.palette.text.black }}>
@@ -71,6 +74,7 @@ const DialogTitle = withStyles(styles)((props) => {
 const PlanRecoverModal = withStyles(styles)((props) => {
     const theme = useTheme();
     const isMdUp = useMediaQuery("(min-width:960px)");
+    const router = useRouter();
 
     let freq = props.data ? props.data.frequency : "";
     let icon = props.data ? "/assets/plan-test-color.svg" /* props.data.planIcon */ : "/assets/plan-test-color.svg";
@@ -103,7 +107,7 @@ const PlanRecoverModal = withStyles(styles)((props) => {
                                     {label}
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
-                                    Frecuencia: {freq}
+                                    Frecuencia: {translateFrequency(freq, router.locale)}
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1), fontWeight: 900 }}>
                                     Valor total: 36 €
