@@ -139,7 +139,7 @@ export const PaymentForm = (props) => {
             customerId: userInfo.id || "f031ca8c-647e-4d0b-8afc-28e982068fd5", // Get customer id from zustand
             planId: form.planCode,
             planVariantId: form.variant?.id,
-            planFrequency: "Semanal",
+            planFrequency: "weekly",
             restrictionComment: props.deliveryData.restrictions || "No puedo comer alimentos con lactosa", // Add restriction comment
             couponId: "",
             stripePaymentMethodId: form.paymentMethod?.stripeId, // Add if it is a new payment method
