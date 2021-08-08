@@ -16,7 +16,7 @@ const PreguntasFrecuentes = () => {
     const [searchValue, setsearchValue] = useState("");
 
     return (
-        <Layout>
+        <Layout seoTitle="Preguntas frecuentes - Let's cook: Productos frescos y recetas">
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <SearchBar searchValue={searchValue} setsearchValue={setsearchValue} />

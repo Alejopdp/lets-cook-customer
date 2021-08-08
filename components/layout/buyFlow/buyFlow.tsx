@@ -5,6 +5,7 @@ import { DrawerMenu } from "@molecules";
 import { AppBarStepper } from "@organisms";
 import { useStyles } from "./styles";
 import { useLang } from "@hooks";
+import Head from 'next/head'
 
 export interface IFilter {
     label: string;
@@ -93,19 +94,35 @@ export const BuyFlowLayout = memo(({ children: Component, filterOptions }: BuyFl
     ];
 
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBarStepper />
-            {drawerIsOpen && (
-                <DrawerMenu
-                    open={drawerIsOpen}
-                    items={_filterOptions}
-                    selectedItems={filters}
-                    handleOnClose={() => setDrawerOpen(false)}
-                    handleOnClickApplyButton={_handleClickApplyFilters}
-                />
-            )}
-            <main className={classes.content}>{Component}</main>
-        </div>
+        <>
+            <Head>
+                <title>Let's cook: Productos frescos y recetas</title>
+                <meta name="description" content='Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos.' />
+                <meta property="og:site_name" content="Let's cook: Productos frescos y recetas" />
+                <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
+                <meta property="og:title" content="Let's cook: Productos frescos y recetas" />
+                <meta property="og:description" content='Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos.' />
+                <meta property="og:url" content="https://letscooknow.es/" />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Let's cook: Productos frescos y recetas" />
+                <meta name="twitter:description" content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos" />
+                <link rel="icon" href="/favicon.png" />
+            </Head>
+            <div className={classes.root}>
+                <CssBaseline />
+                <AppBarStepper />
+                {drawerIsOpen && (
+                    <DrawerMenu
+                        open={drawerIsOpen}
+                        items={_filterOptions}
+                        selectedItems={filters}
+                        handleOnClose={() => setDrawerOpen(false)}
+                        handleOnClickApplyButton={_handleClickApplyFilters}
+                    />
+                )}
+                <main className={classes.content}>{Component}</main>
+            </div>
+        </>
     );
 });

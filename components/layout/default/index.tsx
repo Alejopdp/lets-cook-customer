@@ -22,6 +22,7 @@ import { Footer } from "@molecules";
 import { CallToActionSection } from "@organisms";
 import { useStyles } from "./styles";
 import { useAuthStore } from "@stores";
+import Head from 'next/head'
 
 interface IOption {
     label: string;
@@ -49,30 +50,46 @@ export const Layout = props => {
     };
 
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            {isAuthenticated ? (
-                <LoggedInNavbar toggleOpeningDrawer={_toggleOpeningDrawer} />
-            ) : (
-                    <NavbarContent toggleOpeningDrawer={_toggleOpeningDrawer} />
+        <>
+            <Head>
+                <title>{props.seoTitle ? props.seoTitle : 'Let\'s cook: Productos frescos y recetas'}</title>
+                <meta name="description" content={props.seoDescriptionContent ? props.seoDescriptionContent : 'Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos.'} />
+                <meta property="og:site_name" content="Let\'s cook: Productos frescos y recetas" />
+                <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
+                <meta property="og:title" content={props.seoOgTitle ? props.seoOgTitle : 'Let\'s cook: Productos frescos y recetas'} />
+                <meta property="og:description" content={props.seoOgDescription ? props.seoOgDescription : 'Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos.'} />
+                <meta property="og:url" content={props.seoOgUrl ? `https://letscooknow.es/${seoOgUrl}` : 'https://letscooknow.es/'} />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Let's cook: Productos frescos y recetas" />
+                <meta name="twitter:description" content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos" />
+                <link rel="icon" href="/favicon.png" />
+            </Head>
+            <div className={classes.root}>
+                <CssBaseline />
+                {isAuthenticated ? (
+                    <LoggedInNavbar toggleOpeningDrawer={_toggleOpeningDrawer} />
+                ) : (
+                        <NavbarContent toggleOpeningDrawer={_toggleOpeningDrawer} />
+                    )}
+                <nav className={classes.drawer} aria-label="mailbox folders">
+                    <Hidden smUp implementation="css">
+                        <NavbarDrawer open={openDrawerMenu} toggleOpeningDrawer={_toggleOpeningDrawer} />
+                    </Hidden>
+                </nav>
+                <main className={classes.content}>
+                    {props.children}
+                    {!props.disableCallToActionSection && (
+                        <CallToActionSection />
+                    )}
+                </main>
+                {!props.disableFooterSection && (
+                    <footer>
+                        <Footer />
+                    </footer>
                 )}
-            <nav className={classes.drawer} aria-label="mailbox folders">
-                <Hidden smUp implementation="css">
-                    <NavbarDrawer open={openDrawerMenu} toggleOpeningDrawer={_toggleOpeningDrawer} />
-                </Hidden>
-            </nav>
-            <main className={classes.content}>
-                {props.children}
-                {!props.disableCallToActionSection && (
-                    <CallToActionSection />
-                )}
-            </main>
-            {!props.disableFooterSection && (
-                <footer>
-                    <Footer />
-                </footer>
-            )}
-        </div>
+            </div>
+        </>
     );
 };
 export default Layout;

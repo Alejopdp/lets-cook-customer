@@ -17,7 +17,7 @@ const ComoFunciona = () => {
     const theme = useTheme();
 
     return (
-        <Layout>
+        <Layout seoTitle="Cómo funciona - Let's cook: Productos frescos y recetas">
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <HowItWorksExtendedSection />

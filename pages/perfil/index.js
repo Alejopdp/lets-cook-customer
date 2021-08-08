@@ -291,12 +291,12 @@ const Perfil = (props) => {
                                         })}
                                     </>
                                 ) : (
-                                    <EmptyState
-                                        image="/emptyStatePlans.png"
-                                        title="Aún no tienes planes"
-                                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                                    />
-                                )}
+                                        <EmptyState
+                                            image="/emptyStatePlans.png"
+                                            title="Aún no tienes planes"
+                                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                        />
+                                    )}
                             </Grid>
                             {data.principalPlanSubscriptions.length > 0 && (
                                 <>
@@ -330,12 +330,12 @@ const Perfil = (props) => {
                                                 ))}
                                             </>
                                         ) : (
-                                            <EmptyState
-                                                image="/emptyStatePlans.png"
-                                                title="Aún no tienes acompañamientos"
-                                                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                                            />
-                                        )}
+                                                <EmptyState
+                                                    image="/emptyStatePlans.png"
+                                                    title="Aún no tienes acompañamientos"
+                                                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                                />
+                                            )}
                                     </Grid>
                                 </>
                             )}
