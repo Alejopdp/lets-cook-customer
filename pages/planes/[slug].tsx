@@ -1,6 +1,6 @@
 // Utils & Config
 import React, { memo, useEffect, useMemo, useState } from "react";
-import { getPlans, Plan, Recipe, FAQS, getFAQS, PlanVariant, getPlanVariant } from "@helpers";
+import { getPlans, Plan, Recipe, PlanVariant, getPlanVariant } from "@helpers";
 import { IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 
 // External components
@@ -15,7 +15,6 @@ import { Box } from "@material-ui/core";
 export interface PlansErrors {
     plans?: string;
     recipes?: string;
-    faqs?: string;
 }
 
 export interface PlanUrlParams {
@@ -29,7 +28,6 @@ export interface PlanesPageProps {
     isLogged: boolean;
     plans: Plan[];
     recipes: Recipe[];
-    faqs: FAQS[];
     planUrlParams: PlanUrlParams;
     weekLabel: string;
     variant: PlanVariant;
@@ -53,20 +51,20 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     useEffect(() => {
         setWeekLabel(props.weekLabel);
         setDeliveryInfo({
-            addressDetails: userInfo.shippingAddress?.addressDetails,
-            addressName: userInfo.shippingAddress?.addressName,
+            addressDetails: userInfo.shippingAddress ?.addressDetails,
+            addressName: userInfo.shippingAddress ?.addressName,
             phone1: userInfo.phone1,
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
             restrictions: "",
-            latitude: userInfo.shippingAddress?.latitude,
-            longitude: userInfo.shippingAddress?.longitude,
+            latitude: userInfo.shippingAddress ?.latitude,
+            longitude: userInfo.shippingAddress ?.longitude,
         });
 
         if (Array.isArray(userInfo.paymentMethods)) {
             const defaultPaymentMethod: IPaymentMethod | undefined = userInfo.paymentMethods.find((method) => method.isDefault);
             setPaymentMethod({
-                id: defaultPaymentMethod?.id || "",
+                id: defaultPaymentMethod ?.id || "",
                 stripeId: "",
                 type: defaultPaymentMethod ? "card" : "newPaymentMethod",
             });
@@ -85,7 +83,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 initialPlanSettings={props.planUrlParams}
                 plans={props.plans}
                 variant={props.variant}
-                faqs={props.faqs}
                 recipes={props.recipes}
             />,
             <RegisterUserStep />,
@@ -102,8 +99,8 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             <CrossSellingStep />
         </Box>
     ) : (
-        <BuyFlowLayout>{steps[step]}</BuyFlowLayout>
-    );
+            <BuyFlowLayout>{steps[step]}</BuyFlowLayout>
+        );
 });
 
 export async function getServerSideProps({ locale, query }) {
@@ -111,15 +108,15 @@ export async function getServerSideProps({ locale, query }) {
     const mainPlans: Plan[] = [];
     const aditionalsPlans: Plan[] = [];
 
-    const [_plans, _faqs] = await Promise.all([getPlans(locale), getFAQS(locale)]);
+    const [_plans,] = await Promise.all([getPlans(locale)]);
 
-    const errors = [_plans.error, _faqs.error].filter((e) => !!e);
+    const errors = [_plans.error].filter((e) => !!e);
 
     if (errors.length) {
         console.warn("***-> Errors: ", errors);
     }
 
-    _plans.data?.plans.forEach((plan, index) => {
+    _plans.data ?.plans.forEach((plan, index) => {
         if (plan.type === "Main" || plan.type === "Principal") {
             mainPlans.push(plan);
         } else {
@@ -137,8 +134,8 @@ export async function getServerSideProps({ locale, query }) {
     } = getPlanVariant({ slug: _slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
 
     const planUrlParams: PlanUrlParams = {
-        personQty: `${variant?.numberOfPersons || 0}`,
-        recipeQty: `${variant?.numberOfRecipes || 0}`,
+        personQty: `${variant ?.numberOfPersons || 0}`,
+        recipeQty: `${variant ?.numberOfRecipes || 0}`,
         slug,
         id,
     };
@@ -146,7 +143,6 @@ export async function getServerSideProps({ locale, query }) {
     return {
         props: {
             isLogged: true,
-            faqs: _faqs.data || [],
             plans: mainPlans,
             aditionalsPlans,
             weekLabel: _plans.data.weekLabel,
