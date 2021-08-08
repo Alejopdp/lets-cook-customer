@@ -106,3 +106,17 @@ export const createManySubscriptions = async (
         return error.response;
     }
 };
+
+export const handle3dSecureFailure = async (subscriptionId: string) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/handle-3dsecure-failure/${subscriptionId}`,
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};

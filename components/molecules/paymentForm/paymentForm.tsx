@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import useStyles from "./styles";
 import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
-import { createSubscription } from "../../../helpers/serverRequests/subscription";
+import { createSubscription, handle3dSecureFailure } from "../../../helpers/serverRequests/subscription";
 import { useSnackbar } from "notistack";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
@@ -23,6 +23,8 @@ import PaymentMethodForm from "../paymentMethodForm/paymentMethodForm";
 import { useBuyFlow, useUserInfoStore } from "@stores";
 import { Grid, Typography, useTheme } from "@material-ui/core";
 import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
+import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
+import { PaymentOrderState } from "types/paymentOrderState";
 
 const useStylesAccordion = makeStyles((theme: Theme) =>
     createStyles({
@@ -157,20 +159,45 @@ export const PaymentForm = (props) => {
 
         if (res.status === 200) {
             if (res.data.payment_status === "requires_action") {
-                await stripe.confirmCardPayment(res.data.client_secret, {
+                const confirmationResponse = await stripe.confirmCardPayment(res.data.client_secret, {
                     payment_method: form.paymentMethod?.stripeId,
                 });
+
+                if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
+                    // TO DO: Confirm payments in DB
+                    await updatePaymentOrderState(res.data.paymentOrderId, PaymentOrderState.PAYMENT_ORDER_BILLED);
+                    enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
+                    setSubscriptionId(res.data.subscriptionId);
+                    setFirstOrderId(res.data.firstOrderId);
+                    setFirstOrderShippingDate(res.data.firstOrderShippingDate);
+                    setDeliveryInfo({
+                        ...form.deliveryForm,
+                        ...props.deliveryData,
+                    });
+                    updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
+                    form.canChooseRecipes ? goToNextView() : moveNSteps(2);
+                } else {
+                    // TO DO: Reject payment in DB
+                    await handle3dSecureFailure(res.data.subscriptionId);
+                    enqueueSnackbar(
+                        confirmationResponse.error ? confirmationResponse.error.message : "Error al autenticar el método de pago",
+                        { variant: "error" }
+                    );
+                }
+            } else if (res.data.payment_status === "succeeded") {
+                enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
+                setSubscriptionId(res.data.subscriptionId);
+                setFirstOrderId(res.data.firstOrderId);
+                setFirstOrderShippingDate(res.data.firstOrderShippingDate);
+                setDeliveryInfo({
+                    ...form.deliveryForm,
+                    ...props.deliveryData,
+                });
+                updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
+                form.canChooseRecipes ? goToNextView() : moveNSteps(2);
+            } else {
+                enqueueSnackbar("Error al completar el pago", { variant: "error" });
             }
-            enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
-            setSubscriptionId(res.data.subscriptionId);
-            setFirstOrderId(res.data.firstOrderId);
-            setFirstOrderShippingDate(res.data.firstOrderShippingDate);
-            setDeliveryInfo({
-                ...form.deliveryForm,
-                ...props.deliveryData,
-            });
-            updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
-            form.canChooseRecipes ? goToNextView() : moveNSteps(2);
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
