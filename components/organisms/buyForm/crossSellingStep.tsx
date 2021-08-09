@@ -3,6 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { getAdditionalPlans } from "@helpers";
 import { useSnackbar } from "notistack";
+import { useStripe } from "@stripe/react-stripe-js";
 
 // External components
 import { Box, Button, Container, Grid, Icon } from "@material-ui/core";
@@ -18,8 +19,14 @@ import { useTheme } from "@material-ui/core";
 import Payment from "@material-ui/icons/Payment";
 import { CustomButton, RoundedButton } from "@atoms";
 import { PlanVariant } from "types/planVariant";
-import { createManySubscriptions } from "helpers/serverRequests/subscription";
+import {
+    createManySubscriptions,
+    handle3dSecureFailure,
+    handle3dSecureFailureForManySubscriptions,
+} from "helpers/serverRequests/subscription";
 import AdditionalPlansBuyButtons from "components/molecules/additionalPlansBuyButtons/additionalPlansBuyButtons";
+import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
+import { PaymentOrderState } from "types/paymentOrderState";
 
 const CrossSellingStep = (props) => {
     const theme = useTheme();
@@ -30,6 +37,7 @@ const CrossSellingStep = (props) => {
     const [additionalPlans, setadditionalPlans] = useState<Plan[]>([]);
     const [selectedVariants, setselectedVariants] = useState<PlanVariant[]>([]);
     // const selectedPlans = useCrossSellingStore((state) => state.selectedPlans);
+    const stripe = useStripe();
 
     useEffect(() => {
         const getAdditionalPlansByPlanId = async () => {
@@ -63,12 +71,36 @@ const CrossSellingStep = (props) => {
             variant: { id: variant.id },
             frequency: variant.frequency,
         }));
+
         console.log("SELECTED VARIANTS: ", selectedVariants);
         const res = await createManySubscriptions(userInfo.id, variants);
 
         if (res.status === 200) {
-            await router.push("/perfil");
-            resetBuyFlowState();
+            if (res.data.payment_status === "requires_action") {
+                const confirmationResponse = await stripe.confirmCardPayment(res.data.client_secret, {
+                    payment_method: form.paymentMethod?.stripeId,
+                });
+
+                if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
+                    // TO DO: Confirm payments in DB
+                    await updatePaymentOrderState(res.data.paymentOrderId, PaymentOrderState.PAYMENT_ORDER_BILLED);
+                    await router.push("/perfil");
+                    resetBuyFlowState();
+                } else {
+                    console.log("A VER : ", res.data);
+                    await handle3dSecureFailureForManySubscriptions(res.data.subscriptionsIds);
+                    enqueueSnackbar(
+                        confirmationResponse.error ? confirmationResponse.error.message : "Error al autenticar el método de pago",
+                        { variant: "error" }
+                    );
+                }
+            } else if (res.data.payment_status === "succeeded") {
+                enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
+                await router.push("/perfil");
+                resetBuyFlowState();
+            } else {
+                enqueueSnackbar("Error al completar el pago", { variant: "error" });
+            }
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }

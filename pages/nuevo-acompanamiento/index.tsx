@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import { useStripe } from "@stripe/react-stripe-js";
 import { Layout } from "@layouts";
 import InnerSectionLayout from "components/layout/innerSectionLayout";
 import BackButtonTitle from "components/atoms/backButtonTitle/backButtonTitle";
@@ -10,8 +11,10 @@ import AdditionalPlansBuyButtons from "components/molecules/additionalPlansBuyBu
 import { getAdditionalPlans, PlanVariant } from "@helpers";
 import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
-import { createManySubscriptions } from "helpers/serverRequests/subscription";
+import { createManySubscriptions, handle3dSecureFailureForManySubscriptions } from "helpers/serverRequests/subscription";
 import { useUserInfoStore } from "@stores";
+import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
+import { PaymentOrderState } from "types/paymentOrderState";
 
 const NuevoAcompañamientoPage = (props) => {
     const theme = useTheme();
@@ -21,6 +24,7 @@ const NuevoAcompañamientoPage = (props) => {
     const { enqueueSnackbar } = useSnackbar();
     const [selectedVariants, setselectedVariants] = useState<PlanVariant[]>([]);
     const userInfo = useUserInfoStore((state) => state.userInfo);
+    const stripe = useStripe();
 
     useEffect(() => {
         const getAdditionalPlanList = async () => {
@@ -49,7 +53,27 @@ const NuevoAcompañamientoPage = (props) => {
         const res = await createManySubscriptions(userInfo.id, variants);
 
         if (res.status === 200) {
-            router.push("/perfil");
+            if (res.data.payment_status === "requires_action") {
+                const confirmationResponse = await stripe.confirmCardPayment(res.data.client_secret, {
+                    payment_method: res.data.paymentMethodId,
+                });
+
+                if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
+                    await updatePaymentOrderState(res.data.paymentOrderId, PaymentOrderState.PAYMENT_ORDER_BILLED);
+                    await router.push("/perfil");
+                } else {
+                    await handle3dSecureFailureForManySubscriptions(res.data.subscriptionsIds);
+                    enqueueSnackbar(
+                        confirmationResponse.error ? confirmationResponse.error.message : "Error al autenticar el método de pago",
+                        { variant: "error" }
+                    );
+                }
+            } else if (res.data.payment_status === "succeeded") {
+                enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
+                await router.push("/perfil");
+            } else {
+                enqueueSnackbar("Error al completar el pago", { variant: "error" });
+            }
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }

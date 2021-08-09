@@ -120,3 +120,20 @@ export const handle3dSecureFailure = async (subscriptionId: string) => {
         return error.response;
     }
 };
+
+export const handle3dSecureFailureForManySubscriptions = async (subscriptionsIds: string[]) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/handle-3dsecure-failure-for-many-subscriptions`,
+            data: {
+                subscriptionsIds,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};
