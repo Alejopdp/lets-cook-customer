@@ -15,7 +15,7 @@ const Recetas = (props) => {
     const lang = langs[router.locale];
 
     return (
-        <Layout>
+        <Layout seoTitle="Recetas - Let's cook: Productos frescos y recetas">
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <RecipesGrid recipesPage recipes={props.recipes} />

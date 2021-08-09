@@ -2,7 +2,6 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import clsx from "clsx";
 import { Divider, Grid, Typography, useTheme, Container } from "@material-ui/core";
-import { faqsSection } from "@lang";
 import { Plan, getPlanVariant, Recipe, PlanVariant } from "@helpers";
 import { useBuyFlow } from "@stores";
 import { PlanWithIcon, CustomButton, SimpleAccordion, RoundedButton } from "@atoms";
@@ -16,9 +15,12 @@ import { PlansList } from "./planesList";
 import { useSnackbar } from "notistack";
 import SectionTitleBuyFlow from "components/molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
 import WeekPlanRecipesSection from "./sections/weekPlanRecipesSection/weekPlanRecipesSection";
+const langs = require("../../../../lang").selectPlanStep;
 
 export const SelectPlanStep = memo((props: SelectPlanProps) => {
-    const { push: navigateTo, locale: lang } = useRouter();
+    // const { push: navigateTo, locale: lang } = useRouter();
+    const router = useRouter();
+    const lang = langs[router.locale];
     const classes = useStyles();
     const theme = useTheme();
     const buyFlow = useBuyFlow();
@@ -113,7 +115,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         buyFlow.setPlanVariant(variant);
         buyFlow.setPlanCode(planId, slug, buyFlow.form.planName, buyFlow.form.planDescription, buyFlow.form.canChooseRecipes);
 
-        navigateTo(
+        router.push(
             {
                 pathname: "/planes/[slug]",
                 query: {
@@ -137,6 +139,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         setRecipesOfWeek(props.recipes);
     }, []);
 
+    console.log('lang', lang)
     return (
         <>
             <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6) }}>
@@ -238,7 +241,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         />
                         <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>
-                                {props.faqs.map((faq, index) => (
+                                {lang.faqs.map((faq, index) => (
                                     // TODO: what is the origin for FAQS? {faqsSection[lang].sections}
                                     <Grid item xs={12}>
                                         <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />

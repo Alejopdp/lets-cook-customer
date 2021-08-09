@@ -25,11 +25,15 @@ export const SimpleAccordion = (props: SimpleAccordionProps) => {
                         {props.question}
                     </Typography>
                 </AccordionSummary>
-
-                <AccordionDetails>
-                    <Typography variant="body2" color="textSecondary">
-                        {props.answer}
-                    </Typography>
+                <AccordionDetails style={{ flexDirection: 'column' }}>
+                    {props.answer.split('\n').map((item, key) => {
+                        return (
+                            <>
+                                <Typography variant="body2" color="textSecondary" style={{ marginBottom: '8px' }}>
+                                    {item}
+                                </Typography>
+                            </>)
+                    })}
                 </AccordionDetails>
             </Accordion>
         </div>
