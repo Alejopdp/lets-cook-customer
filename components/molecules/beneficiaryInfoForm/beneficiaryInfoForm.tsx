@@ -18,11 +18,12 @@ import IconButton from "@material-ui/core/IconButton";
 // Internal components
 import { FormPaperWithIcons } from "@molecules";
 import { TextInput, CustomButton, RoundedButton } from "@atoms";
-import { ShipmentFormProps } from "./interfaces";
+import { BuyerInfoFormProps } from "./interfaces";
 import { useBuyFlow, DeliveryForm, useUserInfoStore } from "@stores";
-import LocationSearchInput from "components/atoms/locationSearchInput/locationSearchiInput";
-import PhoneNumberInput from "components/atoms/phoneNumberInput/phoneNumberInput";
+import PhoneNumberInput from "../../atoms/phoneNumberInput/phoneNumberInput";
 import { useSnackbar } from "notistack";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 // Icons & Images
 import EditIcon from "@material-ui/icons/Edit";
@@ -51,7 +52,7 @@ const useStylesAccordion = makeStyles((theme: Theme) =>
     })
 );
 
-export const ShipmentForm = memo((props: ShipmentFormProps) => {
+export const BeneficiaryInfoForm = memo((props: BeneficiaryInfoFormProps) => {
     const theme = useTheme();
     const classes = useStylesAccordion();
     const { setDeliveryInfo, form } = useBuyFlow(({ setDeliveryInfo, form }) => ({ setDeliveryInfo, form }));
@@ -60,8 +61,8 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
 
     useEffect(() => {
         const getShippingCostIfAddressExists = async () => {
-            const newLatitude = props.deliveryData?.latitude || userInfo.shippingAddress?.latitude;
-            const newLongitude = props.deliveryData?.longitude || userInfo.shippingAddress?.longitude;
+            const newLatitude = props.deliveryData ?.latitude || userInfo.shippingAddress ?.latitude;
+            const newLongitude = props.deliveryData ?.longitude || userInfo.shippingAddress ?.longitude;
 
             if (!!!newLatitude && !!!newLongitude) return;
 
@@ -80,14 +81,14 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
         };
 
         getShippingCostIfAddressExists();
-    }, [props.deliveryData?.latitude, props.deliveryData?.longitude]);
+    }, [props.deliveryData ?.latitude, props.deliveryData ?.longitude]);
 
     return (
         <>
             <Accordion
                 className={classes.accordionContainer}
-                expanded={props.expanded === "panel1"}
-                onChange={props.handleChangeAccordion("panel1")}
+                expanded={props.expanded === props.panelNumber}
+                onChange={props.handleChangeAccordion(props.panelNumber)}
             >
                 <AccordionSummary
                     aria-controls="panel1bh-content"
@@ -98,10 +99,10 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <Grid item className={classes.title}>
                             <Image src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} />
                             <Typography variant="h6" color="textSecondary" className={classes.titleMargin}>
-                                Datos de entrega
+                                Datos del beneficiario
                             </Typography>
                         </Grid>
-                        {props.expanded !== "panel1" && (
+                        {props.expanded !== props.panelNumber && (
                             <Grid item className={classes.alignIcons}>
                                 <IconButton style={{ padding: "0px", marginRight: theme.spacing(2) }}>
                                     <EditIcon fontSize="medium" />
@@ -113,68 +114,53 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <LocationSearchInput
-                                disabled={!!form.deliveryForm?.addressName}
-                                value={props.deliveryData.addressName}
-                                handleChange={props.handleAddressChange}
-                                name="addressName"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <TextInput
-                                name="addressDetails"
-                                label="Piso / puerta / aclaraciones"
-                                disabled={!!form.deliveryForm?.addressName}
+                                name="buyerName"
+                                label="Nombre"
+                                disabled={!!form.deliveryForm ?.addressName}
                                 value={props.deliveryData.addressDetails}
                                 onChange={props.handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={6}>
                             <TextInput
-                                name="firstName"
-                                label="Nombre"
-                                value={props.deliveryData.firstName}
-                                onChange={props.handleChange}
-                                disabled={!!form.deliveryForm?.firstName}
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextInput
-                                name="lastName"
+                                name="buyerSurname"
                                 label="Apellido/s"
-                                value={props.deliveryData?.lastName}
+                                disabled={!!form.deliveryForm ?.addressName}
+                                value={props.deliveryData.addressDetails}
                                 onChange={props.handleChange}
-                                disabled={!!form.deliveryForm?.lastName}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <PhoneNumberInput
-                                value={props.deliveryData?.phone1}
+                                value={props.deliveryData ?.phone1}
                                 name="phone1"
                                 handleChange={props.handleChange}
-                                disabled={!!form.deliveryForm?.phone1}
+                                disabled={!!form.deliveryForm ?.phone1}
                             />
                         </Grid>
-                        {form.deliveryForm?.addressName && (
-                            <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                                <Box display="flex" alignItems="center" color="#F89719">
-                                    <ErrorIcon fontSize="small" style={{ marginRight: "8px" }} />
-                                    <Typography variant="body1" style={{ fontSize: "14px" }}>
-                                        Luego podrás cambiar los datos de entrega desde tu perfil
-                                    </Typography>
-                                </Box>
-                            </Grid>
-                        )}
                         <Grid item xs={12}>
-                            <Typography variant="body2" style={{ marginBottom: theme.spacing(1) }}>
-                                ¿Tienes alguna restricción a la hora de ingerir algún tipo de alimento?
-                            </Typography>
                             <TextInput
-                                name="restrictions"
-                                label="Ingrese aquí sus restricciones (solo si aplica)"
-                                value={props.deliveryData?.restrictions}
+                                name="buyerSurname"
+                                label="Correo electrónico"
+                                disabled={!!form.deliveryForm ?.addressName}
+                                value={props.deliveryData.addressDetails}
                                 onChange={props.handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={true}
+                                        value={props.value}
+                                        onChange={props.handleChange}
+                                        color="primary"
+                                        name={props.name}
+                                    />
+                                }
+                                label='Quiero enviarle al beneficiario un correo electrónico con la información del plan y las instrucciones de uso'
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -192,4 +178,4 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
     );
 });
 
-export default ShipmentForm;
+export default BeneficiaryInfoForm;

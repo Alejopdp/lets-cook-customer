@@ -29,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
             padding: theme.spacing(2),
         },
     },
+    variantLarge: {
+        padding: theme.spacing(6),
+        [theme.breakpoints.down("md")]: {
+            padding: theme.spacing(2),
+        },
+    },
 }));
 
 const GeneralBox = (props) => {
@@ -41,6 +47,9 @@ const GeneralBox = (props) => {
             break;
         case "medium":
             variant = classes.variantMedium;
+            break;
+        case "large":
+            variant = classes.variantLarge;
             break;
         default:
             variant = classes.variantMedium;

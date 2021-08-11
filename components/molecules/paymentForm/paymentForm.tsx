@@ -138,12 +138,12 @@ export const PaymentForm = (props) => {
         const data = {
             customerId: userInfo.id || "f031ca8c-647e-4d0b-8afc-28e982068fd5", // Get customer id from zustand
             planId: form.planCode,
-            planVariantId: form.variant?.id,
+            planVariantId: form.variant ?.id,
             planFrequency: "Semanal",
             restrictionComment: props.deliveryData.restrictions || "No puedo comer alimentos con lactosa", // Add restriction comment
             couponId: "",
-            stripePaymentMethodId: form.paymentMethod?.stripeId, // Add if it is a new payment method
-            paymentMethodId: form.paymentMethod?.id, // Add if customer uses an already saved payment method
+            stripePaymentMethodId: form.paymentMethod ?.stripeId, // Add if it is a new payment method
+            paymentMethodId: form.paymentMethod ?.id, // Add if customer uses an already saved payment method
             addressName: props.deliveryData.addressName,
             addressDetails: props.deliveryData.addressDetails,
             latitude: props.deliveryData.latitude,
@@ -158,7 +158,7 @@ export const PaymentForm = (props) => {
         if (res.status === 200) {
             if (res.data.payment_status === "requires_action") {
                 await stripe.confirmCardPayment(res.data.client_secret, {
-                    payment_method: form.paymentMethod?.stripeId,
+                    payment_method: form.paymentMethod ?.stripeId,
                 });
             }
             enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
@@ -187,11 +187,11 @@ export const PaymentForm = (props) => {
                 shippingAddress: !!userInfo.shippingAddress
                     ? { ...userInfo.shippingAddress }
                     : {
-                          addressDetails: props.deliveryData.addressDetails,
-                          addressName: props.deliveryData.addressName,
-                          latitude: props.deliveryData.latitude,
-                          longitude: props.deliveryData.longitude,
-                      },
+                        addressDetails: props.deliveryData.addressDetails,
+                        addressName: props.deliveryData.addressName,
+                        latitude: props.deliveryData.latitude,
+                        longitude: props.deliveryData.longitude,
+                    },
                 paymentMethods,
             });
 
@@ -221,8 +221,8 @@ export const PaymentForm = (props) => {
         <>
             <Accordion
                 className={classes.accordionContainer}
-                expanded={props.expanded === "panel2"}
-                onChange={props.handleChangeAccordion("panel2")}
+                expanded={props.expanded === props.panelNumber}
+                onChange={props.handleChangeAccordion(props.panelNumber)}
             >
                 <AccordionSummary
                     // expandIcon={<ExpandMoreIcon />}
@@ -256,9 +256,9 @@ export const PaymentForm = (props) => {
                         <Grid item xs={12}>
                             <PaymentMethodForm
                                 paymentMethods={userInfo.paymentMethods || []}
-                                selectedOption={form.paymentMethod?.type}
+                                selectedOption={form.paymentMethod ?.type}
                                 setselectedOption={(e) => handlePaymentMethodTypeChange(e)}
-                                selectedSavedCard={form.paymentMethod?.id}
+                                selectedSavedCard={form.paymentMethod ?.id}
                                 setselectedSavedCard={(e) => handleSelectedCardChange(e)}
                             />
                         </Grid>
@@ -273,7 +273,7 @@ export const PaymentForm = (props) => {
                                 className={chckbox}
                                 checked={areTermsAccepted}
                                 handleChange={() => setareTermsAccepted(!areTermsAccepted)}
-                                // rediretTo='/aviso-legal'
+                            // rediretTo='/aviso-legal'
                             />
                         </Grid>
                         <Grid item xs={12}>

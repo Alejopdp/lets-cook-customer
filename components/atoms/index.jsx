@@ -22,3 +22,4 @@ export * from "./roundedCheckbox";
 export * from "./searchBar";
 export * from "./socialNetworksButtons";
 export * from "./locationSearchInput";
+export * from "./generalBox/generalBox";
