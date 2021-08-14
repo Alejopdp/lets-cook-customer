@@ -48,10 +48,10 @@ const MailStep = (props) => {
     return (
         <>
             <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} />
-            <AcceptLegalTerms />
+            <AcceptLegalTerms handleOpenTycModal={props.handleOpenTycModal} handleOpenPrivacyPolicyModal={props.handleOpenPrivacyPolicyModal} />
             <Divider />
             <Grid item xs={12}>
-                <TextInput label={lang.emailInput}  name="email" value={props.email} onChange={props.handleChange} />
+                <TextInput label={lang.emailInput} name="email" value={props.email} onChange={props.handleChange} />
             </Grid>
             <Grid item xs={12}>
                 <RoundedButton disabled={!isEmail(props.email)} label={lang.buttonText} onClick={() => props.handleSubmit(1)} style={{ width: '100%' }} />

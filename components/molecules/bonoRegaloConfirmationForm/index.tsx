@@ -13,6 +13,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Image from "next/image";
+import Checkbox from "@material-ui/core/Checkbox";
 
 // Internal components
 import { FormPaperWithIcons } from "@molecules";
@@ -318,18 +319,12 @@ const BonoRegaloConfirmationForm = (props) => {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <CustomCheckbox
-                                        name="acceptTerms"
-                                        label={
-                                            <p style={{ fontSize: "13px" }}>
-                                                He leído y acepto las <b>condiciones generales de venta</b>
-                                            </p>
-                                        }
-                                        className={chckbox}
-                                        checked={areTermsAccepted}
-                                        handleChange={() => setareTermsAccepted(!areTermsAccepted)}
-                                    // rediretTo='/aviso-legal'
-                                    />
+                                    <div style={{display:'flex', alignItems:'center'}}>
+                                        <Checkbox checked={areTermsAccepted} onChange={() => setareTermsAccepted(!areTermsAccepted)} color="primary" name='acceptTerms' />
+                                        <Typography variant='body2' color='textSecondary' style={{ fontSize: '13px', marginLeft: theme.spacing(0.5) }}>
+                                            He leído y acepto las <b onClick={props.handleOpenPurchaseConditionsModal} style={{ cursor: 'pointer' }}>condiciones generales de venta</b>
+                                        </Typography>
+                                    </div>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <RoundedButton

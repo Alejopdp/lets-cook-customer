@@ -4,6 +4,7 @@ import { Container, Grid, Typography, useTheme } from "@material-ui/core";
 import { ShipmentForm, PaymentForm, IconsWithText } from "@molecules";
 import CheckoutDetails from "../checkoutDetails";
 import { getGeometry } from "helpers/utils/geocode";
+import PurchaseConditionsModal from '../../molecules/legalModals/purchaseConditionsModal';
 
 interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
@@ -23,6 +24,8 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
         latitude: form.deliveryForm?.latitude || "",
         longitude: form.deliveryForm?.longitude || "",
     });
+    const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false)
+
 
     const handleChangeAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
         setExpanded(isExpanded ? panel : expanded === "panel2" ? "panel2" : "panel1");
@@ -63,7 +66,21 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
         );
     };
 
+
+
+        // Purchase Conditions Modal Functions
+
+        const handleOpenPurchaseConditionsModal = () => {
+            setOpenPurchaseConditionsModal(true);
+        };
+    
+        const handleClosePurchaseConditionsModal = () => {
+            setOpenPurchaseConditionsModal(false);
+        };
+
+        
     return (
+        <>
         <Container>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={8} style={{ paddingTop: theme.spacing(8), paddingBottom: theme.spacing(6) }}>
@@ -96,6 +113,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                     handleChangeAccordion={handleChangeAccordion}
                                     deliveryData={deliveryData}
                                     panelNumber='panel2'
+                                    handleOpenPurchaseConditionsModal={handleOpenPurchaseConditionsModal}
                                 />
                             </Grid>
                             <Grid item xs={12} style={{ marginTop: theme.spacing(4) }}>
@@ -109,6 +127,11 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                 </Grid>
             </Grid>
         </Container>
+        <PurchaseConditionsModal
+                open={openPurchaseConditionsModal}
+                handleClose={handleClosePurchaseConditionsModal}
+            />
+        </>
     );
 });
 

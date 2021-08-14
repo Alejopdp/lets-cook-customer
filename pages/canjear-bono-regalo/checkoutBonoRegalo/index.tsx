@@ -7,6 +7,7 @@ import { getGeometry } from "helpers/utils/geocode";
 import { BuyerInfoForm } from "components/molecules/buyerInfoForm";
 import { BeneficiaryInfoForm } from "components/molecules/beneficiaryInfoForm";
 import BonoRegaloConfirmationForm from "components/molecules/bonoRegaloConfirmationForm";
+import PurchaseConditionsModal from '../../../components/molecules/legalModals/purchaseConditionsModal';
 
 interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
@@ -14,6 +15,7 @@ interface CheckoutStepProps {
 
 const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
     const theme = useTheme();
+    const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false)
 
     // let form = {
     //     planCode: "",
@@ -142,7 +144,18 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
         return true
     };
 
+
+        // Purchase Conditions Modal Functions
+
+        const handleOpenPurchaseConditionsModal = () => {
+            setOpenPurchaseConditionsModal(true);
+        };
+    
+        const handleClosePurchaseConditionsModal = () => {
+            setOpenPurchaseConditionsModal(false);
+        };
     return (
+        <>
         <Container>
             <Grid container spacing={2} justifyContent='center'>
                 <Grid item xs={12} md={6} style={{ paddingTop: theme.spacing(8), paddingBottom: theme.spacing(6) }}>
@@ -179,12 +192,18 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
                                 handleChangeAccordion={handleChangeAccordion}
                                 deliveryData={deliveryData}
                                 panelNumber='panel2'
+                                handleOpenPurchaseConditionsModal={handleOpenPurchaseConditionsModal}
                             />
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
         </Container>
+        <PurchaseConditionsModal
+                open={openPurchaseConditionsModal}
+                handleClose={handleClosePurchaseConditionsModal}
+            />
+        </>
     );
 });
 

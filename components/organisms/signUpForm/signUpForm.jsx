@@ -14,6 +14,8 @@ import PasswordStep from "./passwordStep";
 import { signUp } from "../../../helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
+import TermsAndConditionsModal from "../../molecules/legalModals/termsAndConditionsModal";
+import PrivacyPolicyModal from "../../molecules/legalModals/privacyPolicyModal";
 
 // External Components
 import { Grid } from "@material-ui/core";
@@ -28,6 +30,10 @@ const SignUpForm = (props) => {
         authorize: false,
         sendInfo: false,
     });
+    const [openTycModal, setOpenTycModal] = React.useState(false)
+    const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false)
+
+
     const { enqueueSnackbar } = useSnackbar();
     const { saveInLocalStorage } = useLocalStorage();
 
@@ -74,6 +80,27 @@ const SignUpForm = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
 
+    // TyC Modal Functions
+
+    const handleOpenTycModal = () => {
+        setOpenTycModal(true);
+    };
+
+    const handleCloseTycModal = () => {
+        setOpenTycModal(false);
+    };
+
+
+    // Privacy Policy Modal Functions
+
+    const handleOpenPrivacyPolicyModal = () => {
+        setOpenPrivacyPolicyModal(true);
+    };
+
+    const handleClosePrivacyPolicyModal = () => {
+        setOpenPrivacyPolicyModal(false);
+    };
+
     switch (true) {
         case currentStep === 0:
             currentInputs = (
@@ -83,6 +110,8 @@ const SignUpForm = (props) => {
                     email={formData.email}
                     signUpRedirect={props.redirect}
                     handleSignUp={props.handleSignUp}
+                    handleOpenTycModal={handleOpenTycModal}
+                    handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                 />
             );
             break;
@@ -96,6 +125,8 @@ const SignUpForm = (props) => {
                     handleChange={handleChange}
                     handleCheckboxesChange={handleCheckboxesChange}
                     handleSubmit={props.handleCreateAccount || handleCreateAccount}
+                    handleOpenTycModal={handleOpenTycModal}
+                    handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                 />
             );
             break;
@@ -108,20 +139,32 @@ const SignUpForm = (props) => {
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     email={formData.email}
+                    handleOpenTycModal={handleOpenTycModal}
+                    handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                 />
             );
     }
 
     return (
-        <FormPaper title={lang.title}>
-            {currentInputs}
-            <Register
-                text={lang.register.text}
-                boldText={lang.register.boldText}
-                // redirectTo={lang.register.redirectTo}
-                handleRedirect={props.handleRedirect || handleRedirect}
+        <>
+            <FormPaper title={lang.title}>
+                {currentInputs}
+                <Register
+                    text={lang.register.text}
+                    boldText={lang.register.boldText}
+                    // redirectTo={lang.register.redirectTo}
+                    handleRedirect={props.handleRedirect || handleRedirect}
+                />
+            </FormPaper>
+            <TermsAndConditionsModal
+                open={openTycModal}
+                handleClose={handleCloseTycModal}
             />
-        </FormPaper>
+            <PrivacyPolicyModal
+                open={openPrivacyPolicyModal}
+                handleClose={handleClosePrivacyPolicyModal}
+            />
+        </>
     );
 };
 

@@ -13,6 +13,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Image from "next/image";
+import Checkbox from "@material-ui/core/Checkbox";
 
 // Internal components
 import { FormPaperWithIcons } from "@molecules";
@@ -263,18 +264,12 @@ export const PaymentForm = (props) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <CustomCheckbox
-                                name="acceptTerms"
-                                label={
-                                    <p style={{ fontSize: "13px" }}>
-                                        He leído y acepto las <b>condiciones generales de venta</b>
-                                    </p>
-                                }
-                                className={chckbox}
-                                checked={areTermsAccepted}
-                                handleChange={() => setareTermsAccepted(!areTermsAccepted)}
-                            // rediretTo='/aviso-legal'
-                            />
+                            <div style={{display:'flex', alignItems:'center'}}>
+                                <Checkbox checked={areTermsAccepted} onChange={() => setareTermsAccepted(!areTermsAccepted)} color="primary" name='acceptTerms' />
+                                <Typography variant='body2' color='textSecondary' style={{ fontSize: '13px', marginLeft: theme.spacing(0.5) }}>
+                                    He leído y acepto las <b onClick={props.handleOpenPurchaseConditionsModal} style={{ cursor: 'pointer' }}>condiciones generales de venta</b>
+                                </Typography>
+                            </div>
                         </Grid>
                         <Grid item xs={12}>
                             <RoundedButton
@@ -287,45 +282,6 @@ export const PaymentForm = (props) => {
                     </Grid>
                 </AccordionDetails>
             </Accordion>
-            {/* <FormPaperWithIcons title="Métodos de pago" initialIcon="/icons/checkout/metodos-de-pago.svg">
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <HttpsOutlinedIcon fontSize='small' />
-                            <Typography variant='body2' style={{ fontSize: '14px', marginLeft: theme.spacing(1), marginRight: theme.spacing(2) }}>
-                                Pago seguro y garantizado
-                            </Typography>
-                            <img src='/icons/checkout/powered-by-stripe.png' alt='stripe' style={{ height: '24px' }} />
-                        </div>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <PaymentMethodForm
-                            paymentMethods={userInfo.paymentMethods || []}
-                            selectedOption={form.paymentMethod ?.type}
-                            setselectedOption={(e) => handlePaymentMethodTypeChange(e)}
-                            selectedSavedCard={form.paymentMethod ?.id}
-                            setselectedSavedCard={(e) => handleSelectedCardChange(e)}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomCheckbox
-                            name="acceptTerms"
-                            label={
-                                <p style={{ fontSize: '13px' }}>
-                                    He leído y acepto las <b>condiciones generales de venta</b>
-                                </p>
-                            }
-                            className={chckbox}
-                            checked={props.checked}
-                            handleChange={props.onChange}
-                        // rediretTo='/aviso-legal'
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <RoundedButton label="Realizar pago" disabled={props.disabled} onClick={handleSubmitPayment} style={{ width: '100%' }} />
-                    </Grid>
-                </Grid>
-            </FormPaperWithIcons> */}
         </>
     );
 };
