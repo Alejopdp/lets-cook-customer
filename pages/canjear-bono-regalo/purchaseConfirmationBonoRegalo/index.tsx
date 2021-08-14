@@ -16,7 +16,7 @@ const PurchaseConfirmationBonoRegalo = (props: PurchaseConfirmationBonoRegaloPro
                 <GeneralBox variant='large'>
                     <Grid container spacing={2} style={{ textAlign: 'center' }}>
                         <Grid item xs={12}>
-                            <img src='/purchase-confirmation.svg' style={{ height: '80px' }} />
+                            <img src='/icons/bonoregalo/bonoRegaloPurchaseConfirmation.png' style={{ height: '80px' }} />
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant='h3' color='textPrimary' >La compra ha sido exitosa</Typography>

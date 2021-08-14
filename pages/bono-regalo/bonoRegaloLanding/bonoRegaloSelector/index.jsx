@@ -85,7 +85,7 @@ export const BonoRegaloSelector = () => {
                                     <RoundedButton
                                         label="Seleccionar plan"
                                         // onClick={() => buyFlow.forward()}
-                                        style={{ padding: `${theme.spacing(2.5)}px ${theme.spacing(8)}px` }}
+                                        style={{ padding: `${theme.spacing(2.5)}px ${theme.spacing(8)}px`, width: '100%'  }}
                                     />
                                     <Typography variant="body2" color="textSecondary" style={{ marginTop: theme.spacing(2) }}>
                                         La entrega dentro del área metropolitana de Barcelona es gratuita. El bono tiene una validez de 6 meses a partir de la fecha de compra.

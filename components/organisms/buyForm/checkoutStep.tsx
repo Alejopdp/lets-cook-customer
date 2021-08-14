@@ -87,6 +87,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                     handleChangeAccordion={handleChangeAccordion}
                                     handleChangeStep={changeToSecondStep}
                                     setDeliveryData={setdeliveryData}
+                                    panelNumber='panel1'
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -94,6 +95,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                     expanded={expanded}
                                     handleChangeAccordion={handleChangeAccordion}
                                     deliveryData={deliveryData}
+                                    panelNumber='panel2'
                                 />
                             </Grid>
                             <Grid item xs={12} style={{ marginTop: theme.spacing(4) }}>

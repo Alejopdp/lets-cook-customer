@@ -1,24 +1,23 @@
 // import clsx from "clsx";
 import React, { useMemo, useState } from 'react'
 import { Layout } from "@layouts";
-import BonoRegaloLanding from './bonoRegaloLanding';
-import { RegisterUserStep } from "@organisms";
+import ExchangeBonoRegaloLanding from './exchangeBonoRegaloLanding';
+import { RegisterUserStep, RecipeChoiseStep } from "@organisms";
 import CheckoutBonoRegalo from './checkoutBonoRegalo';
-import PurchaseConfirmationBonoRegalo from './purchaseConfirmationBonoRegalo'
 
 /**
  * TODO: IMPORTANT!!! is needly add all values to container, the idea is go to controlling the spaces o margins for the differents sections.
  */
 
 const BonoRegalo = () => {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(0);
 
     const steps = useMemo(
         () => [
-            <BonoRegaloLanding />,
+            <ExchangeBonoRegaloLanding />,
             <RegisterUserStep />,
             <CheckoutBonoRegalo />,
-            <PurchaseConfirmationBonoRegalo />,
+            <RecipeChoiseStep recipes={[]} />,
         ],
         []
     );

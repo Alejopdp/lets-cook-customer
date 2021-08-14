@@ -86,8 +86,8 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
         <>
             <Accordion
                 className={classes.accordionContainer}
-                expanded={props.expanded === "panel1"}
-                onChange={props.handleChangeAccordion("panel1")}
+                expanded={props.expanded === props.panelNumber}
+                onChange={props.handleChangeAccordion(props.panelNumber)}
             >
                 <AccordionSummary
                     aria-controls="panel1bh-content"
@@ -101,7 +101,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 Datos de entrega
                             </Typography>
                         </Grid>
-                        {props.expanded !== "panel1" && (
+                        {props.expanded !== props.panelNumber && (
                             <Grid item className={classes.alignIcons}>
                                 <IconButton style={{ padding: "0px", marginRight: theme.spacing(2) }}>
                                     <EditIcon fontSize="medium" />
