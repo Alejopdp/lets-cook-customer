@@ -6,7 +6,7 @@ export const faqsSection = {
         },
         doubt: "¿Tienes más preguntas?",
         doubtAnswer:
-            "Utiliza el chat de la página web o mándanos un correo a info@letscoonknow.es",
+            "Utiliza el chat de la página web o mándanos un correo a info@letscooknow.es",
         sections: [
             {
                 title: "Planes semanales",
@@ -133,7 +133,7 @@ export const faqsSection = {
         },
         doubt: "¿Tienes más preguntas?",
         doubtAnswer:
-            "Utiliza el chat de la página web o mándanos un correo a info@letscoonknow.es",
+            "Utiliza el chat de la página web o mándanos un correo a info@letscooknow.es",
         sections: [
             {
                 title: "Planes semanales",
@@ -260,7 +260,7 @@ export const faqsSection = {
         },
         doubt: "¿Tienes más preguntas?",
         doubtAnswer:
-            "Utiliza el chat de la página web o mándanos un correo a info@letscoonknow.es",
+            "Utiliza el chat de la página web o mándanos un correo a info@letscooknow.es",
         sections: [
             {
                 title: "Planes semanales",

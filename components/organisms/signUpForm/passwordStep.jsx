@@ -13,6 +13,7 @@ import Divider from "../../atoms/divider/divider";
 import CustomCheckbox from "../../atoms/customCheckbox/customCheckbox";
 import { Grid, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
+import { AcceptLegalTerms } from "../../atoms/loginHelpers/loginHelpers";
 
 const PasswordStep = (props) => {
     const router = useRouter();
@@ -22,6 +23,7 @@ const PasswordStep = (props) => {
     return (
         <>
             <SocialNetworksButtons />
+            <AcceptLegalTerms handleOpenTycModal={props.handleOpenTycModal} handleOpenPrivacyPolicyModal={props.handleOpenPrivacyPolicyModal} />
             <Divider />
             <Grid item xs={12}>
                 <PasswordInput

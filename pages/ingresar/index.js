@@ -9,7 +9,7 @@ import { Layout } from "../../components/layout/index";
 
 const Login = (props) => {
     return (
-        <Layout disableCallToActionSection disableFooterSection>
+        <Layout seoTitle="Ingresar - Let's cook: Productos frescos y recetas" seoOgUrlSlug='ingresar' disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <LoginBox redirect />
             </InnerSectionLayout>

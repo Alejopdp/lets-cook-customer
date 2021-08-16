@@ -86,11 +86,10 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
         <>
             <Accordion
                 className={classes.accordionContainer}
-                expanded={props.expanded === "panel1"}
-                onChange={props.handleChangeAccordion("panel1")}
+                expanded={props.expanded === props.panelNumber}
+                onChange={props.handleChangeAccordion(props.panelNumber)}
             >
                 <AccordionSummary
-                    // expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                     style={{ cursor: "default" }}
@@ -102,11 +101,8 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 Datos de entrega
                             </Typography>
                         </Grid>
-                        {props.expanded !== "panel1" && (
+                        {props.expanded !== props.panelNumber && (
                             <Grid item className={classes.alignIcons}>
-                                {/* <Button onClick={props.onClick}>
-                                    <EditIcon fontSize="medium" />
-                                </Button> */}
                                 <IconButton style={{ padding: "0px", marginRight: theme.spacing(2) }}>
                                     <EditIcon fontSize="medium" />
                                 </IconButton>
@@ -192,60 +188,6 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                     </Grid>
                 </AccordionDetails>
             </Accordion>
-
-            {/* <FormPaperWithIcons title="Datos de entrega" initialIcon="/icons/checkout/informacion-de-envio.svg" finalIcons>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <LocationSearchInput value={form.deliveryForm ?.addressName} handleChange={handleAddressChange} name="addressName" />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextInput
-                            name="addressDetails"
-                            label="Piso / puerta / aclaraciones"
-                            value={form.deliveryForm?.addressDetails}
-                            onChange={props.handleChange}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} md={6}>
-                        <TextInput name="firstName" label="Nombre" value={form.deliveryForm?.firstName} onChange={props.handleChange} />
-                    </Grid>
-
-                    <Grid item xs={12} md={6}>
-                        <TextInput name="lastName" label="Apellido/s" value={form.deliveryForm?.lastName} onChange={props.handleChange} />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <PhoneNumberInput value={form.deliveryForm?.phone1} name="phone1" handleChange={handleChange} />
-                    </Grid>
-
-                    <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                        <Box display="flex" alignItems="center" color="#F89719">
-                            <ErrorIcon fontSize='small' style={{ marginRight: "8px" }} />
-                            <Typography variant="body1" style={{ fontSize: '14px' }}>
-                                Luego podrás cambiar los datos de entrega desde tu perfil
-                        </Typography>
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <Typography variant="body2" style={{ marginBottom: theme.spacing(1) }}>
-                            ¿Tienes alguna restricción a la hora de ingerir algún tipo de alimento?
-                    </Typography>
-                        <TextInput
-                            name="restrictions"
-                            label="Ingrese aquí sus restricciones (solo si aplica)"
-                            value={form.deliveryForm?.restrictions}
-                            onChange={props.handleChange}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <RoundedButton label="Continuar" onClick={props.onClick} style={{ width: '100%' }} />
-                    </Grid>
-                </Grid>
-            </FormPaperWithIcons> */}
         </>
     );
 });

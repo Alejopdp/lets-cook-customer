@@ -15,7 +15,7 @@ const Signup = () => {
         router.push("/");
     };
     return (
-        <Layout disableCallToActionSection disableFooterSection>
+        <Layout disableCallToActionSection disableFooterSection seoTitle="Registrarme - Let's cook: Productos frescos y recetas" seoOgUrlSlug='registrarme'>
             <InnerSectionLayout containerMaxWidth="lg">
                 <SignUpForm handleSignUp={handleSignUp} />
             </InnerSectionLayout>

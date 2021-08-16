@@ -15,6 +15,9 @@ import { PlansList } from "./planesList";
 import { useSnackbar } from "notistack";
 import SectionTitleBuyFlow from "components/molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
 import WeekPlanRecipesSection from "./sections/weekPlanRecipesSection/weekPlanRecipesSection";
+import TermsAndConditionsModal from "../../../molecules/legalModals/termsAndConditionsModal";
+import PrivacyPolicyModal from "../../../molecules/legalModals/privacyPolicyModal";
+
 const langs = require("../../../../lang").selectPlanStep;
 
 export const SelectPlanStep = memo((props: SelectPlanProps) => {
@@ -24,10 +27,14 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const classes = useStyles();
     const theme = useTheme();
     const buyFlow = useBuyFlow();
+    console.log('buyFlow', buyFlow)
     const [planSize, setPlanSize] = useState({});
+    console.log('planSize', planSize)
     const [recipesOfWeek, setRecipesOfWeek] = useState<Recipe[]>([]);
+    const [openTycModal, setOpenTycModal] = useState(false)
+    const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = useState(false)
     const { enqueueSnackbar } = useSnackbar();
-
+    
     const getPlanData = useCallback(
         (slug: string, plans: Plan[]): { peopleLabels: string; planName: string; planDescription: string; canChooseRecipes: boolean } => {
             const planSelect = plans.find((plan) => plan.slug === slug);
@@ -139,7 +146,30 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         setRecipesOfWeek(props.recipes);
     }, []);
 
-    console.log('lang', lang)
+
+
+    // TyC Modal Functions
+
+    const handleOpenTycModal = () => {
+        setOpenTycModal(true);
+    };
+
+    const handleCloseTycModal = () => {
+        setOpenTycModal(false);
+    };
+
+    
+    // Privacy Policy Modal Functions
+
+    const handleOpenPrivacyPolicyModal = () => {
+        setOpenPrivacyPolicyModal(true);
+    };
+
+    const handleClosePrivacyPolicyModal = () => {
+        setOpenPrivacyPolicyModal(false);
+    };
+    
+
     return (
         <>
             <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6) }}>
@@ -242,7 +272,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>
                                 {lang.faqs.map((faq, index) => (
-                                    // TODO: what is the origin for FAQS? {faqsSection[lang].sections}
                                     <Grid item xs={12}>
                                         <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                                     </Grid>
@@ -261,15 +290,29 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             {/* FOOTER SECTION */}
             <Grid item container direction="row" component="nav" xs={12} className={classes.footer}>
                 <Grid item className={classes.footerItem} xs>
-                    Let's Cook 2021 © - Todos los derechos reservados
+                    <Typography variant='body2' color='textSecondary' style={{ fontSize: '14px' }}>
+                        Let's Cook 2021 © - Todos los derechos reservados
+                    </Typography>
                 </Grid>
                 <Grid item className={classes.footerItem}>
-                    Términos y condiciones
+                    <Typography variant='body2' color='textSecondary' style={{ fontSize: '14px', cursor: 'pointer' }} onClick={handleOpenTycModal}>
+                        Términos y condiciones
+                    </Typography>
                 </Grid>
                 <Grid item className={classes.footerItem}>
-                    Política de privacidad
+                    <Typography variant='body2' color='textSecondary' style={{ fontSize: '14px', cursor: 'pointer' }} onClick={handleOpenPrivacyPolicyModal}>
+                        Política de privacidad
+                    </Typography>
                 </Grid>
             </Grid>
+            <TermsAndConditionsModal
+                open={openTycModal}
+                handleClose={handleCloseTycModal}
+            />
+            <PrivacyPolicyModal
+                open={openPrivacyPolicyModal}
+                handleClose={handleClosePrivacyPolicyModal}
+            />
         </>
     );
 });

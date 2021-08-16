@@ -69,7 +69,7 @@ export const RecipesSection = memo((props: RecipesSectionProps) => {
                     <Grid item xs={12}>
                         <TitleOtherPages
                             title="Hecha un vistazo a las recetas de esta semana"
-                            subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
+                            subtitle="Nuestros chefs preparan recetas variadas cada semana para mantener la llama viva"
                             titleAlign="center"
                         />
                     </Grid>

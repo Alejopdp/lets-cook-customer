@@ -9,6 +9,7 @@ import { acceptLegalTerms as langs } from "@lang";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Link, Grid } from "@material-ui/core";
+import TermsAndConditionsModal from "../../molecules/legalModals/termsAndConditionsModal";
 
 // Icons & Images
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -37,24 +38,19 @@ export const Register = (props: RegisterProps) => {
     );
 };
 
-export const AcceptLegalTerms = () => {
+export const AcceptLegalTerms = props => {
     const { link } = useStyles();
 
     const router = useRouter();
     const lang = langs[router.locale];
 
     return (
-        <Grid item xs={12}>
-            <Typography variant="body2" style={{ fontSize: "14px" }}>
-                {lang.continuing}
-                <Link href="/aviso-legal" className={link}>
-                    <b> {lang.terms} </b>
-                </Link>
-                {lang.and}
-                <Link href="/aviso-legal" className={link}>
-                    <b> {lang.politics}</b>
-                </Link>
-            </Typography>
-        </Grid>
+        <>
+            <Grid item xs={12}>
+                <Typography variant="body2" style={{ fontSize: "14px" }}>
+                    {lang.continuing} <b onClick={props.handleOpenTycModal} style={{ cursor: 'pointer' }}>{lang.terms}</b> {lang.and} <b onClick={props.handleOpenPrivacyPolicyModal} style={{ cursor: 'pointer' }}>{lang.politics}</b>
+                </Typography>
+            </Grid>
+        </>
     );
 };

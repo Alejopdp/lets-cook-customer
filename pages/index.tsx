@@ -35,46 +35,41 @@ export async function getServerSideProps({ locale }) {
 
 const howItWorks: HowItWorks[] = [
     {
-        title: "Lorem Ipsum dolor",
-        content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg",
+        title: "1) Apúntate",
+        content: "Elige el plan que más se ajuste a lo que quieres, cantidad de días y raciones por día que quieres que te llevemos cada semana. ¡No te aburrirás, tenemos muchas recetas!",
+        image: "/assets/home/home-cf1-apuntate.webp",
     },
     {
-        title: "Lorem Ipsum dolor",
-        content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg",
+        title: "2) Recibe",
+        content: "Cada martes recibirás con ilusión tus kits personalizados con los ingredientes frescos necesarios y exactos para preparar las recetas que has elegido.",
+        image: "/assets/home/home-cf2-recibe.webp",
     },
     {
-        title: "Lorem Ipsum dolor",
-        content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg",
+        title: "3) Cocina",
+        content: "Saca el chef que llevas dentro y tómate la calma para cocinar. Cuentas con la ayuda de nuestras recetas y videorecetas. ¡Son muy fáciles de preparar!",
+        image: "/assets/home/home-cf3-cocina.webp",
     },
     {
-        title: "Lorem Ipsum dolor",
-        content: "Lorem ipsum dolor sit consetetur dipscing elitr, sed diam nonumy",
-        image: "unnamed.jpg",
+        title: "4) Disfruta",
+        content: "¡A cenaaaaar! Disfruta de una cena deliciosa y diferente. El mejor premio para un día ajetreado, un manjar rico y saludable hecho para ti… ¡y por ti!",
+        image: "/assets/home/home-cf4-disfruta.webp",
     },
 ];
 
 const benefits: Benefit[] = [
     {
-        title: "Productos frescos y de proximidad",
-        content: "Lorem ipsum dolor sit amet, cetetur sadipscing elitr sed diam nonumy dolor sit amet, cetetur",
-        image: "/assets/icon-test.svg",
+        title: "Economiza tu tiempo",
+        content: "Sabemos que no está en nuestras manos parar el ritmo la sociedad en el que vivimos, pero si aportar una solución con la que podamos sacar momentos para cuidarnos día a día.",
+        image: "/assets/home/save-time.svg",
     },
     {
-        title: "Platos saludable y equilibrados",
-        content: "Lorem ipsum dolor sit amet, cetetur sadipscing elitr sed diam nonumy dolor sit amet, cetetur",
-        image: "/assets/icon-test.svg",
+        title: "Come saludable y variado",
+        content: "Queremos cuidarte en todo sentido, por eso seleccionamos cuidadosamente los ingredientes de tus recetas frescos y de proximidad y te sorprendemos cada semana con recetas variadas.",
+        image: "/assets/home/healthy-food.svg",
     },
     {
-        title: "Nuevas recetas, todas las semanas",
-        content: "Lorem ipsum dolor sit amet, cetetur sadipscing elitr sed diam nonumy dolor sit amet, cetetur",
-        image: "/assets/icon-test.svg",
-    },
-    {
-        title: "Cuidamos el medioambiente",
-        content: "Lorem ipsum dolor sit amet, cetetur sadipscing elitr sed diam nonumy dolor sit amet, cetetur",
-        image: "/assets/icon-test.svg",
-    },
+        title: "Combate el foodwaste",
+        content: "¡La comida no se tira! En Let’s Cook seleccionamos la cantidad de ingredientes exacta para que no queden excedentes, pero somos generosos con la ración para los más hambrientos.",
+        image: "/assets/home/foodwaste.svg",
+    }
 ];

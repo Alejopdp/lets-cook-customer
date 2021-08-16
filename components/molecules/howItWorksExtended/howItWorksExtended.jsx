@@ -17,7 +17,11 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(2),
     },
     img: {
-        borderRadius: "8px",
+        display: "flex",
+        flex: 1,
+        borderRadius: 8,
+        width: "100%",
+        maxWidth: 480,
     },
 }));
 
@@ -36,7 +40,7 @@ const HowItWorksExtended = (props) => {
             style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}
         >
             <Grid item xs={12} sm={6}>
-                <Image src="/unnamed.jpg" layout="responsive" width={222} height={151} className={classes.img} />
+                <img className={classes.img} src={props.image} alt={props.title} style={{ ...props.style }} />
             </Grid>
 
             <Grid item xs={12} sm={6}>
