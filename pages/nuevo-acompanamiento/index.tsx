@@ -41,7 +41,7 @@ const NuevoAcompañamientoPage = (props) => {
     }, []);
 
     const totalValue = useMemo(() => {
-        return selectedVariants.reduce((acc, variant) => acc + variant.price, 0);
+        return selectedVariants.reduce((acc, variant) => acc + variant.priceWithOffer || variant.price, 0);
     }, [selectedVariants]);
 
     const handleSubmitPayment = async () => {
