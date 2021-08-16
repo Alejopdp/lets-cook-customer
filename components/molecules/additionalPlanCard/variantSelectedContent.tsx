@@ -28,7 +28,7 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
                         ))}
                     </Box>
                     <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold", marginBottom: theme.spacing(3) }}>
-                        Valor: {props.variant.price} €
+                        Valor: {props.variant.priceWithOffer || props.variant.price} €
                     </Typography>
                 </>
             )}

@@ -76,13 +76,13 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
             if (!!variant) {
                 const withoutOldVariant = props.selectedVariants.filter((va) => va.planId !== variant.planId);
                 props.setselectedVariants([...withoutOldVariant, { ...variant, frequency: props.selectedFrequency }]);
-                return variant.price;
+                return variant.priceWithOffer || variant.price;
             }
         }
     };
 
     const getPlanVariantPrice = (variant: PlanVariant | undefined) => {
-        return variant ? variant.price : -1;
+        return variant ? variant.priceWithOffer || variant.price : -1;
     };
 
     const handleAttributeClick = (attrName: string, attrValue: string) => {
