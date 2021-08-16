@@ -31,13 +31,16 @@ export default function CheckoutDetails() {
     const router = useRouter();
 
     const totalValue = useMemo(() => {
+        const planVariantPrice = form.variant?.priceWithOffer || form.variant?.price;
         const shippingCost = form.deliveryForm?.shippingCost || 0;
-        if (!form.coupon?.id) return form.variant?.price + shippingCost;
+        if (!form.coupon?.id) return planVariantPrice + shippingCost;
 
-        return form.coupon?.discount_type.type === "percentage"
-            ? `${(form.variant?.price / form.coupon?.discount_type.value + shippingCost) * 100}€`
-            : `${form.variant?.price - form.coupon?.discount_type.value + shippingCost}€`;
-    }, [form.coupon, form.deliveryForm?.shippingCost]);
+        return form.coupon?.discount_type.type === "percent"
+            ? `${planVariantPrice - (planVariantPrice * form.coupon?.discount_type.value) / 100 + shippingCost}€`
+            : form.coupon?.discount_type.type === "fix"
+            ? `${planVariantPrice - form.coupon?.discount_type.value + shippingCost}€`
+            : planVariantPrice;
+    }, [form.coupon, form.deliveryForm?.shippingCost, form.variant?.priceWithOffer, form.variant?.price]);
 
     const handleCouponSubmit = async (couponCode: string) => {
         const res = await getCouponValidation(couponCode, userInfo.id, form.deliveryForm?.shippingCost, form.planCode, form.variant?.id);
@@ -77,6 +80,8 @@ export default function CheckoutDetails() {
         });
     };
 
+    const planVariantPrice = form.variant?.priceWithOffer || form.variant?.price;
+
     return (
         <Box
             style={{
@@ -106,19 +111,21 @@ export default function CheckoutDetails() {
                     onClick={() => toFirstStep()}
                 />
                 <Box paddingTop={4} borderTop="2px dashed #E5E5E5" borderBottom="2px solid #E5E5E5">
-                    <CheckoutDetailItem title="Valor del plan" value={`${form.variant?.price} €/ semana`} />
+                    <CheckoutDetailItem title="Valor del plan" value={`${planVariantPrice} €/ semana`} />
                     {!!form.deliveryForm.shippingCost && (
                         <CheckoutDetailItem title="Costes de envío" value={`${form.deliveryForm?.shippingCost}€` || "Envío gratis"} />
                     )}
                     {form.coupon?.id && (
                         <CheckoutDetailItem
-                            title={`Descuento ${form.coupon?.discount_type.type === "percentage" ? "del" : "de"} ${
-                                form.coupon?.discount_type.value
-                            } ${form.coupon?.discount_type.type === "percentage" ? "%" : "€"}`}
+                            title={`Descuento ${form.coupon?.discount_type.type === "percent" ? "del" : "de"} ${
+                                form.coupon?.discount_type.value || form.deliveryForm?.shippingCost || 0
+                            } ${form.coupon?.discount_type.type === "percent" ? "%" : "€"}`}
                             value={
-                                form.coupon?.discount_type.type === "percentage"
-                                    ? `- ${form.coupon?.discount_type.value}%`
-                                    : `- ${form.coupon?.discount_type.value}€`
+                                form.coupon?.discount_type.type === "percent"
+                                    ? `- ${(planVariantPrice * form.coupon?.discount_type.value) / 100}€`
+                                    : form.coupon?.discount_type.type === "fix"
+                                    ? `- ${form.coupon?.discount_type.value}€`
+                                    : `${form.deliveryForm?.shippingCost || 0}€`
                             }
                             isDiscountItem={true}
                         />
@@ -129,7 +136,7 @@ export default function CheckoutDetails() {
                         <CheckoutValueItem title="Valor del primer cargo" value={totalValue} />
                         <CheckoutValueItem
                             title="Valor a partir del segundo cargo"
-                            value={(form.variant?.price || 0) + form.deliveryForm?.shippingCost || 0}
+                            value={(planVariantPrice || 0) + form.deliveryForm?.shippingCost || 0}
                         />
                     </>
                 ) : form.coupon?.id && form.coupon.coupons_by_subscription.type === "more_one_fee" ? (
@@ -139,8 +146,8 @@ export default function CheckoutDetails() {
                             value={totalValue}
                         />
                         <CheckoutValueItem
-                            title="Valor a partir del XXX cargo"
-                            value={(form.variant?.price || 0) + form.deliveryForm?.shippingCost || 0}
+                            title={`Valor luego de los ${form.coupon?.coupons_by_subscription.value} cargos`}
+                            value={(planVariantPrice || 0) + form.deliveryForm?.shippingCost || 0}
                         />
                     </>
                 ) : (
