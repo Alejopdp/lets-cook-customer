@@ -100,7 +100,7 @@ export const WeekPlanRecipesSection = memo((props: RecipesSectionProps) => {
                     )}
                 </Grid>
             </Container>
-            {(props.recipes.length > 6 || isLgDown) && (
+            {(props.recipes.length > 4 || isLgDown) && (
                 <div style={{ paddingLeft: theme.spacing(2) }}>
                     <Carousel
                         additionalTransfrom={0}
