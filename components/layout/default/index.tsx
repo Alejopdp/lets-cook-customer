@@ -53,16 +53,16 @@ export const Layout = props => {
         <>
             <Head>
                 <title>{props.seoTitle ? props.seoTitle : 'Let\'s cook: Productos frescos y recetas'}</title>
-                <meta name="description" content={props.seoDescriptionContent ? props.seoDescriptionContent : 'Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos.'} />
-                <meta property="og:site_name" content="Let\'s cook: Productos frescos y recetas" />
+                <meta name="description" content={props.seoDescriptionContent ? props.seoDescriptionContent : 'Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana.'} />
+                <meta property="og:site_name" content={props.seoTitle ? props.seoTitle : 'Let\'s cook: Productos frescos y recetas'} />
                 <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
-                <meta property="og:title" content={props.seoOgTitle ? props.seoOgTitle : 'Let\'s cook: Productos frescos y recetas'} />
-                <meta property="og:description" content={props.seoOgDescription ? props.seoOgDescription : 'Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos.'} />
-                <meta property="og:url" content={props.seoOgUrl ? `https://letscooknow.es/${seoOgUrl}` : 'https://letscooknow.es/'} />
+                <meta property="og:title" content={props.seoTitle ? props.seoTitle : 'Let\'s cook: Productos frescos y recetas'} />
+                <meta property="og:description" content={props.seoDescriptionContent ? props.seoDescriptionContent : 'Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana.'} />
+                <meta property="og:url" content={props.seoOgUrl ? `https://letscooknow.es/${seoOgUrlSlug}` : 'https://letscooknow.es/'} />
                 <meta property="og:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Let's cook: Productos frescos y recetas" />
-                <meta name="twitter:description" content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos" />
+                <meta name="twitter:title" content={props.seoTitle ? props.seoTitle : 'Let\'s cook: Productos frescos y recetas'} />
+                <meta name="twitter:description" content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana." />
                 <link rel="icon" href="/favicon.png" />
             </Head>
             <div className={classes.root}>

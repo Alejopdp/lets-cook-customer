@@ -11,7 +11,7 @@ import PurchaseConfirmationBonoRegalo from './purchaseConfirmationBonoRegalo'
  */
 
 const BonoRegalo = () => {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(0);
 
     const steps = useMemo(
         () => [
@@ -24,7 +24,7 @@ const BonoRegalo = () => {
     );
 
     return (
-        <Layout seoTitle="Bono regalo - Let's cook: Productos frescos y recetas" disableCallToActionSection disableFooterSection={step === 0 ? false : true}>
+        <Layout seoTitle="Bono regalo - Let's cook: Productos frescos y recetas" seoOgUrlSlug='bono-regalo' disableCallToActionSection disableFooterSection={step === 0 ? false : true}>
             <div style={{ paddingTop: '48px' }}>
                 {steps[step]}
             </div>

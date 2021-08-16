@@ -96,17 +96,17 @@ export const BuyFlowLayout = memo(({ children: Component, filterOptions }: BuyFl
     return (
         <>
             <Head>
-                <title>Let's cook: Productos frescos y recetas</title>
-                <meta name="description" content='Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos.' />
-                <meta property="og:site_name" content="Let's cook: Productos frescos y recetas" />
+                <title>Planes semanales - Let's cook: Productos frescos y recetas</title>
+                <meta name="description" content='Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos' />
+                <meta property="og:site_name" content="Planes semanales - Let's cook: Productos frescos y recetas" />
                 <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
                 <meta property="og:title" content="Let's cook: Productos frescos y recetas" />
-                <meta property="og:description" content='Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos.' />
-                <meta property="og:url" content="https://letscooknow.es/" />
+                <meta property="og:description" content='Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos' />
+                <meta property="og:url" content="https://letscooknow.es/planes" />
                 <meta property="og:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Let's cook: Productos frescos y recetas" />
-                <meta name="twitter:description" content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos saludables y sabrosos" />
+                <meta name="twitter:description" content="Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos" />
                 <link rel="icon" href="/favicon.png" />
             </Head>
             <div className={classes.root}>

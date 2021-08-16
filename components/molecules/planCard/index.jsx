@@ -24,7 +24,7 @@ const PlanCard = props => {
                         color="initial">{props.card.description}</Typography>
                 </div>
                 <div className={classes.cardAction}>
-                    <RoundedButton label="¡QUIERO ESTE PLAN!" style={{ width: '100%', minWidth: '1px', padding: '8px' }} onClick={() => navigateTo({
+                    <RoundedButton label="¡LO QUIERO!" style={{ width: '100%', minWidth: '1px', padding: '8px' }} onClick={() => navigateTo({
                         pathname: "/planes/[slug]",
                         query: {
                             slug: props.card.slug,

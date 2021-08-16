@@ -32,12 +32,7 @@ const HomePage = (props: HomePageProps) => {
                 <BenefitsSection cards={props.benefits} />
             </div>
             <div className={classes.paddingY8}>
-                <RecipesSection
-                    recipes={props.recipes}
-                    title="Hecha un vistazo a las recetas de esta semana"
-                    subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
-                    titleAlign="flex-start"
-                />
+                <RecipesSection recipes={props.recipes} />
             </div>
             <div className={classes.paddingY8}>
                 <ReviewsSection />

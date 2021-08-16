@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
     divContainer: {
-        marginTop: '-250px',
+        marginTop: '-200px',
         [theme.breakpoints.down('lg')]: {
             marginTop: '-120px'
         },
