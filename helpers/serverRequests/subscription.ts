@@ -137,3 +137,17 @@ export const handle3dSecureFailureForManySubscriptions = async (subscriptionsIds
         return error.response;
     }
 };
+
+export const sendNewSubscriptionWelcomeEmail = async (subscriptionId) => {
+    try {
+        const res = await axios({
+            method: "POST",
+            url: `${apiUrl}/notify-new-subscription/${subscriptionId}`,
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};
