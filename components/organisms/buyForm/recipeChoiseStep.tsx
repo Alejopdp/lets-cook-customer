@@ -14,6 +14,7 @@ import { TitleBuyFlow, RecipesBottomBar } from "@molecules";
 import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
 import { IFilter } from "@layouts";
+import { sendNewSubscriptionWelcomeEmail } from "helpers/serverRequests/subscription";
 
 interface RecipeChoiseStepProps {
     recipes: any[];
@@ -55,10 +56,15 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
 
         if (res.status === 200) {
             gotToNextView();
-            enqueueSnackbar("Changed correctly", { variant: "success" });
+            sendWelcomeEmail();
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
+    };
+
+    const handleChooseRecipesLater = () => {
+        sendWelcomeEmail();
+        gotToNextView();
     };
 
     const filteredRecipes = useMemo(() => {
@@ -79,6 +85,14 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
         const newState = [...recipes];
         newState.splice(index, 1);
         selectRecipes(newState);
+    };
+
+    const sendWelcomeEmail = async () => {
+        const res = await sendNewSubscriptionWelcomeEmail(subscriptionId);
+
+        if (!!!res || res.status !== 200) {
+            enqueueSnackbar("Error al enviar email de bienvenida", { variant: "error" });
+        }
     };
 
     return (
@@ -130,7 +144,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                 </Grid>
             </Grid>
             <RecipesBottomBar
-                handleSecondaryButtonClick={gotToNextView}
+                handleSecondaryButtonClick={handleChooseRecipesLater}
                 maxRecipesQty={variant.numberOfRecipes}
                 selectedRecipes={recipes}
                 handleSubmit={handleSubmit}
