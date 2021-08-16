@@ -164,8 +164,13 @@ export const PaymentForm = (props) => {
                     payment_method: form.paymentMethod?.stripeId,
                 });
 
+                if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
                     // TO DO: Confirm payments in DB
                     await updatePaymentOrderState(res.data.paymentOrderId, PaymentOrderState.PAYMENT_ORDER_BILLED);
+                    enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
+                    setSubscriptionId(res.data.subscriptionId);
+                    setFirstOrderId(res.data.firstOrderId);
+                    setFirstOrderShippingDate(res.data.firstOrderShippingDate);
                     setDeliveryInfo({
                         ...form.deliveryForm,
                         ...props.deliveryData,
