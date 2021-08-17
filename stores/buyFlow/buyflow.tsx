@@ -28,6 +28,7 @@ export type Recipes = {
     relatedPlans: string[];
     tools: string[];
     recipeVariants: RecipeVariant[];
+    nutritionalInfo: { key: string; value: string }[];
 };
 
 export interface DeliveryForm {

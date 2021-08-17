@@ -26,6 +26,7 @@ import TimerIcon from "@material-ui/icons/Timer";
 import SpeedIcon from "@material-ui/icons/Speed";
 import CloseIcon from "@material-ui/icons/Close";
 import { RecipeModalProps } from "./interfaces";
+import NutritionalInfoTable from "./nutritionalInfoTable";
 
 const styles = (theme) => ({
     root: {
@@ -171,11 +172,11 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                         </Typography>
                                         <Typography variant="body2">{tools}</Typography>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                    <Grid item xs={12} md={6} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
                                             Información nutricional (cada 100 gramos)
                                         </Typography>
-                                        {/* <NutritionalInformationTable rows={props.recipe.} /> */}
+                                        <NutritionalInfoTable rows={props.recipe.nutritionalInfo || []} />
                                     </Grid>
                                 </Grid>
                             </DialogContentText>
