@@ -215,11 +215,11 @@ export const PaymentForm = (props) => {
                 shippingAddress: !!userInfo.shippingAddress
                     ? { ...userInfo.shippingAddress }
                     : {
-                        addressDetails: props.deliveryData.addressDetails,
-                        addressName: props.deliveryData.addressName,
-                        latitude: props.deliveryData.latitude,
-                        longitude: props.deliveryData.longitude,
-                    },
+                          addressDetails: props.deliveryData.addressDetails,
+                          addressName: props.deliveryData.addressName,
+                          latitude: props.deliveryData.latitude,
+                          longitude: props.deliveryData.longitude,
+                      },
                 paymentMethods,
             });
 
@@ -284,17 +284,29 @@ export const PaymentForm = (props) => {
                         <Grid item xs={12}>
                             <PaymentMethodForm
                                 paymentMethods={userInfo.paymentMethods || []}
-                                selectedOption={form.paymentMethod ?.type}
+                                selectedOption={form.paymentMethod?.type}
                                 setselectedOption={(e) => handlePaymentMethodTypeChange(e)}
-                                selectedSavedCard={form.paymentMethod ?.id}
+                                selectedSavedCard={form.paymentMethod?.id}
                                 setselectedSavedCard={(e) => handleSelectedCardChange(e)}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <div style={{display:'flex', alignItems:'center'}}>
-                                <Checkbox checked={areTermsAccepted} onChange={() => setareTermsAccepted(!areTermsAccepted)} color="primary" name='acceptTerms' />
-                                <Typography variant='body2' color='textSecondary' style={{ fontSize: '13px', marginLeft: theme.spacing(0.5) }}>
-                                    He leído y acepto las <b onClick={props.handleOpenPurchaseConditionsModal} style={{ cursor: 'pointer' }}>condiciones generales de venta</b>
+                            <div style={{ display: "flex", alignItems: "center" }}>
+                                <Checkbox
+                                    checked={areTermsAccepted}
+                                    onChange={() => setareTermsAccepted(!areTermsAccepted)}
+                                    color="primary"
+                                    name="acceptTerms"
+                                />
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                    style={{ fontSize: "13px", marginLeft: theme.spacing(0.5) }}
+                                >
+                                    He leído y acepto las{" "}
+                                    <b onClick={props.handleOpenPurchaseConditionsModal} style={{ cursor: "pointer" }}>
+                                        condiciones generales de venta
+                                    </b>
                                 </Typography>
                             </div>
                         </Grid>

@@ -70,10 +70,14 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const filteredRecipes = useMemo(() => {
         return filters.length > 0
             ? props.recipes.filter((recipe) =>
-                  filters.some((filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqual(recipe.difficultyLevel))
+                  filters.some(
+                      (filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqualToFilterValue(recipe.difficultyLevel)
+                  )
               )
             : props.recipes;
     }, [filters]);
+
+    console.log(filteredRecipes);
 
     const handleClickAddRecipe = (recipe) => {
         selectRecipes([...recipes, recipe]);

@@ -5,7 +5,7 @@ import { DrawerMenu } from "@molecules";
 import { AppBarStepper } from "@organisms";
 import { useStyles } from "./styles";
 import { useLang } from "@hooks";
-import Head from 'next/head'
+import Head from "next/head";
 
 export interface IFilter {
     label: string;
@@ -44,21 +44,21 @@ export const BuyFlowLayout = memo(({ children: Component, filterOptions }: BuyFl
             items: [
                 {
                     label: lang.itemEasy,
-                    value: lang.itemEasy,
+                    value: "Facil",
                     isEqual: (recipeDifficultLevel) => recipeDifficultLevel === lang.itemEasy,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemEasy,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === "Facil",
                 },
                 {
                     label: lang.itemMedium,
-                    value: lang.itemMedium,
+                    value: "Media",
                     isEqual: (recipeDifficultLevel) => recipeDifficultLevel === lang.itemMedium,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemMedium,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === "Media",
                 },
                 {
                     label: lang.itemHard,
-                    value: lang.itemHard,
+                    value: "Alta",
                     isEqual: (recipeDifficultLevel) => recipeDifficultLevel === lang.itemHard,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemHard,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === "Alta",
                 },
             ],
         },
@@ -97,16 +97,25 @@ export const BuyFlowLayout = memo(({ children: Component, filterOptions }: BuyFl
         <>
             <Head>
                 <title>Planes semanales - Let's cook: Productos frescos y recetas</title>
-                <meta name="description" content='Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos' />
+                <meta
+                    name="description"
+                    content="Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos"
+                />
                 <meta property="og:site_name" content="Planes semanales - Let's cook: Productos frescos y recetas" />
                 <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
                 <meta property="og:title" content="Let's cook: Productos frescos y recetas" />
-                <meta property="og:description" content='Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos' />
+                <meta
+                    property="og:description"
+                    content="Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos"
+                />
                 <meta property="og:url" content="https://letscooknow.es/planes" />
                 <meta property="og:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Let's cook: Productos frescos y recetas" />
-                <meta name="twitter:description" content="Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos" />
+                <meta
+                    name="twitter:description"
+                    content="Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos"
+                />
                 <link rel="icon" href="/favicon.png" />
             </Head>
             <div className={classes.root}>

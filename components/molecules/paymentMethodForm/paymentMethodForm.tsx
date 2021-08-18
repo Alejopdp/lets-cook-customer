@@ -35,7 +35,7 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                         // onClick={props.setselectedOption}
                     />
                 )}{" "}
-                {props.selectedOption === "newPaymentMethod" ? <StripeForm /> : null}
+                {props.selectedOption === "newPaymentMethod" || props.paymentMethods.length === 0 ? <StripeForm /> : null}
             </RadioGroup>
         </FormControl>
     );
