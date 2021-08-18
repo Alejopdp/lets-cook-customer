@@ -116,7 +116,7 @@ const CrossSellingStep = (props) => {
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TitleBuyFlow
-                        title="Ya has seleccionado las recetas correctamente"
+                        title={form.recipes.length > 0 ? "Ya has seleccionado las recetas correctamente" : "¡Gracias por suscribirte!"}
                         subtitle="¿Quieres agregar algún producto adicional?"
                     />
                 </Grid>
