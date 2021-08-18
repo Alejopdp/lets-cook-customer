@@ -33,6 +33,9 @@ export const loginWithFacebookAndGetIdToken = async () => {
         const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
         facebookAuthProvider.addScope("public_profile");
         facebookAuthProvider.addScope("email");
+        facebookAuthProvider.setCustomParameters({
+            auth_type: "rerequest",
+        });
         await firebase.auth().signInWithPopup(facebookAuthProvider);
         const token = await firebase.auth().currentUser.getIdToken(true);
 

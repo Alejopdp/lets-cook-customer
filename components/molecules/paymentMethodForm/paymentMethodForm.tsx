@@ -27,12 +27,14 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                         ))}
                     </RadioGroup>
                 ) : null}
-                <FormControlLabel
-                    value="newPaymentMethod"
-                    control={<Radio />}
-                    label="Ingresar nuevo metodo de pago"
-                    // onClick={props.setselectedOption}
-                />
+                {props.paymentMethods.length > 0 && (
+                    <FormControlLabel
+                        value="newPaymentMethod"
+                        control={<Radio />}
+                        label="Ingresar nuevo metodo de pago"
+                        // onClick={props.setselectedOption}
+                    />
+                )}{" "}
                 {props.selectedOption === "newPaymentMethod" ? <StripeForm /> : null}
             </RadioGroup>
         </FormControl>
