@@ -36,10 +36,10 @@ export const loginWithFacebookAndGetIdToken = async () => {
         facebookAuthProvider.setCustomParameters({
             auth_type: "rerequest",
         });
-        await firebase.auth().signInWithPopup(facebookAuthProvider);
+        const result = await firebase.auth().signInWithPopup(facebookAuthProvider);
         const token = await firebase.auth().currentUser.getIdToken(true);
 
-        return { token };
+        return { token, email: result.user.email };
     } catch (error) {
         console.log(error);
         return { error };

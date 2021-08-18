@@ -47,8 +47,8 @@ const LoginBox = (props) => {
         }
     };
 
-    const handleSocialMediaSubmit = async (token) => {
-        const res = await loginWithSocialMedia(token);
+    const handleSocialMediaSubmit = async (token, email = "") => {
+        const res = await loginWithSocialMedia(token, email);
 
         if (res.status === 200) {
             saveLoginData(res.data.token, res.data.userInfo);

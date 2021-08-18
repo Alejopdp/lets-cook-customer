@@ -18,10 +18,10 @@ export const SocialNetworksButtons = (props) => {
     const [lang] = useLang("socialNetworksButtons");
 
     const handleFacebookLogin = async () => {
-        const { token, error } = await loginWithFacebookAndGetIdToken();
+        const { token, error, email } = await loginWithFacebookAndGetIdToken();
 
         if (!!token) {
-            props.handleSubmit(token);
+            props.handleSubmit(token, email);
         } else {
             enqueueSnackbar(
                 error.code === "auth/account-exists-with-different-credential"
