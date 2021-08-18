@@ -133,7 +133,7 @@ export const PaymentForm = (props) => {
 
     const handleSubmitPayment = async () => {
         setisLoadingPayment(true);
-        if (form.paymentMethod.type === "newPaymentMethod") {
+        if (form.paymentMethod.type === "newPaymentMethod" || !!!userInfo.paymentMethods || userInfo.paymentMethods?.length === 0) {
             const stripeRes = await handleStripePaymentMethod();
             if (stripeRes.error) return;
         }
