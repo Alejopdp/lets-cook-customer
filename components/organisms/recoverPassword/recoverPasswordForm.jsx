@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
+import cookies from "js-cookie";
 const langs = require("../../../lang").recoverPassword;
 
 // Internal components
@@ -9,7 +10,11 @@ import RecoverPasswordMail from "./recoverPasswordMail";
 import RecoverPasswordCode from "./recoverPasswordCode";
 import RecoverPassword from "./recoverPassword";
 import FormPaper from "../../molecules/formPaper/formPaper";
-import { Register } from "../../atoms/loginHelpers/loginHelpers";
+import { ForgotPassword, Register } from "../../atoms/loginHelpers/loginHelpers";
+import { forgotPassword, loginWithEmail, resetPassword, validateRecoverPasswordCode } from "helpers/serverRequests/customer";
+import { useSnackbar } from "notistack";
+import { useAuthStore, useUserInfoStore } from "@stores";
+import { useLocalStorage } from "@hooks";
 
 const stepsQty = 3;
 
@@ -20,15 +25,67 @@ const RecoverPasswordForm = (props) => {
         code: "",
         password: "",
     });
+    const { enqueueSnackbar } = useSnackbar();
+    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+    const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
+    const { saveInLocalStorage } = useLocalStorage();
+    const [isResetingPassword, setisResetingPassword] = useState(false);
 
     const router = useRouter();
     const lang = langs[router.locale];
 
     var currentInputs = <></>;
 
-    const handleSubmit = (number) => {
-        if (currentStep + number < 0 || currentStep + number > 2) alert("");
-        setcurrentStep(currentStep + number);
+    const handleSubmitEmail = async () => {
+        const res = await forgotPassword(formData.email);
+
+        if (res.status === 200) {
+            setcurrentStep(currentStep + 1);
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+    };
+
+    const handleSubmitCode = async () => {
+        const res = await validateRecoverPasswordCode(formData.code, formData.email);
+
+        if (res.status === 200) {
+            setcurrentStep(currentStep + 1);
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+    };
+
+    const handleSubmitNewPassword = async () => {
+        setisResetingPassword(true);
+        const res = await resetPassword(formData.password, formData.email, formData.code);
+
+        if (res.status === 200) {
+            if (props.handlePasswordRecoveredSuccesfully) {
+                props.handlePasswordRecoveredSuccesfully();
+            } else {
+                const res = await loginWithEmail(formData.email, formData.password);
+
+                if (res.status === 200) {
+                    saveLoginData(res.data.token, res.data.userInfo);
+                } else {
+                    // setserverError(res.data.message);
+                    enqueueSnackbar(res.data.message, { variant: "error" });
+                }
+            }
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+        setisResetingPassword(false);
+    };
+
+    const saveLoginData = (token, userInfo) => {
+        saveInLocalStorage("token", token);
+        saveInLocalStorage("userInfo", userInfo);
+        setUserInfo(userInfo);
+        cookies.set("token", token);
+        setIsAuthenticated(true);
+        router.push("/perfil");
     };
 
     const handleChange = (e) => {
@@ -42,25 +99,23 @@ const RecoverPasswordForm = (props) => {
         router.push("/registrarme");
     };
 
-    const handleRecover = () => {
-        alert("Password cambiada con éxito");
-    };
-
     switch (true) {
         case currentStep === 0:
-            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmit} value={formData.email} />;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} />;
             break;
 
         case currentStep === 1:
-            currentInputs = <RecoverPasswordCode handleChange={handleChange} handleSubmit={handleSubmit} value={formData.code} />;
+            currentInputs = <RecoverPasswordCode handleChange={handleChange} handleSubmit={handleSubmitCode} value={formData.code} />;
             break;
 
         case currentStep === 2:
-            currentInputs = <RecoverPassword handleChange={handleChange} handleSubmit={handleRecover} value={formData.password} />;
+            currentInputs = (
+                <RecoverPassword handleChange={handleChange} handleSubmit={handleSubmitNewPassword} value={formData.password} />
+            );
             break;
 
         default:
-            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmit} value={formData.email} />;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} />;
     }
 
     return (
@@ -70,11 +125,14 @@ const RecoverPasswordForm = (props) => {
                 text={lang.register.text}
                 boldText={lang.register.boldText}
                 handleRedirect={props.handleRedirect || handleRedirect}
+                isSubmitting={isResetingPassword}
             />
         </FormPaper>
     );
 };
 
-RecoverPasswordForm.propTypes = {};
+RecoverPasswordForm.propTypes = {
+    handlePasswordRecoveredSuccesfully: PropTypes.func,
+};
 
 export default RecoverPasswordForm;

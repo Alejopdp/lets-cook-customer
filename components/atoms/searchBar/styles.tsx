@@ -7,6 +7,9 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down("md")]: {
             marginBottom: theme.spacing(5),
         },
+        "& div fieldset.MuiOutlinedInput-notchedOutline": {
+            borderColor: 'white',
+        },
     },
     padd2: {
         paddingBottom: theme.spacing(2),

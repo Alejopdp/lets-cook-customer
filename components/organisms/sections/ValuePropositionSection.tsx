@@ -17,10 +17,10 @@ export const ValuePropositionSection = () => {
                 <Container maxWidth='md' className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <Typography variant="h1">Llegó la hora de redescubrir tu cocina</Typography>
+                            <Typography variant="h1">Cocina bueno y rico cada semana</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="body1">Pensamos por ti <b>recetas sanas y equilibradas</b> con la mejor selección de <b>ingredientes frescos y naturales</b> y te las enviamos <b>semanalmente</b> a la puerta de tu casa</Typography>
+                            <Typography variant="body1">¿Qué hay para cenar? Enviamos ingredientes frescos en cantidades exactas con la receta para cocinar en casa.</Typography>
                         </Grid>
                         <Grid item xs={12} className={classes.buttonWithCaptionGrid}>
                             <RoundedButton label="Ver planes" onClick={() => router.push("/planes")} />

@@ -10,7 +10,7 @@ import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 import { CallMerge } from "@material-ui/icons";
 import { LocationSearchInputProps } from "./intertfaces";
-import { locationSearchInput as langs } from '@lang';
+import { locationSearchInput as langs } from "@lang";
 import { useRouter } from "next/router";
 
 function loadScript(src, position, id) {
@@ -28,7 +28,16 @@ function loadScript(src, position, id) {
 const autocompleteService = { current: null };
 
 const useStyles = makeStyles((theme) => ({
-    root: {},
+    root: {
+        "& label.MuiFormLabel-root": {
+            fontSize: "16px",
+        },
+        "& div.MuiInputBase-root": {
+            borderRadius: "8px",
+            fontSize: "16px",
+            paddingRight: "0px",
+        },
+    },
     icon: {
         color: theme.palette.text.secondary,
         marginRight: theme.spacing(2),
@@ -119,9 +128,8 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             includeInputInList
             filterSelectedOptions
             value={props.value}
-            noOptionsText={
-                !!props.value ? lang.autoCompleteHintNotFound : lang.autoCompleteHint
-            }
+            disabled={props.disabled}
+            noOptionsText={!!props.value ? lang.autoCompleteHintNotFound : lang.autoCompleteHint}
             onChange={(event, newValue) => {
                 setOptions(newValue ? [newValue, ...options] : options);
                 setValue(newValue);
@@ -139,6 +147,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                     label="Ingrese su dirección"
                     variant="outlined"
                     fullWidth
+                    disabled={props.disabled}
                 />
             )}
             renderOption={(option) => {

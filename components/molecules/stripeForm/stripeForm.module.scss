@@ -10,8 +10,8 @@
 
 .flex1,
 .cardElement {
-  border-radius: 5px;
-  border: solid 1px transparent;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.23);
 }
 
 .flex1:hover,
@@ -19,14 +19,14 @@
   border: solid 1px rgba($color: #000000, $alpha: 0.5);
 }
 
-.flex1:focus,
-.cardElement:focus,
-.flex1:active,
-.cardElement:active,
-.flex1:visited,
-.cardElement:visited {
-  border: solid 1px #ff5757;
-}
+// .flex1:focus,
+// .cardElement:focus,
+// .flex1:active,
+// .cardElement:active,
+// .flex1:visited,
+// .cardElement:visited {
+//   border: solid 1px #ff5757;
+// }
 
 .fullWidth {
   width: 100%;

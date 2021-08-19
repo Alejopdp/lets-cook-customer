@@ -1,3 +1,5 @@
+import { Recipes } from "@stores";
+
 export interface Restriction {
     id: string;
     value: string;
@@ -15,7 +17,7 @@ export interface WeekOrder {
     id: string;
     weekLabel: string;
     weekId: string;
-    recipes: string;
+    recipes: Recipes[];
     shippingDate: string;
 }
 

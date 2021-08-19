@@ -1,11 +1,12 @@
-import { ReactNode } from 'react';
+import { RecipeVariant } from "@stores";
+import { ReactNode } from "react";
 export interface TabPanelProps {
     id: string;
     children: ReactNode;
     index: any;
-    value: any;
-};
+    value: RecipeVariant;
+}
 export interface RecipeVariantsTabProps {
-    variants: string[];
+    variants: RecipeVariant[];
     ingredientsLists: string[];
 }

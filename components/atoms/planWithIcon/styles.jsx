@@ -2,9 +2,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     box: {
-        height: 160,
-        width: 200,
-        margin: theme.spacing(1),
+        // height: 160,
+        // width: 200,
+        width: '100%',
         padding: theme.spacing(2),
         borderRadius: '8px',
         display: "flex",

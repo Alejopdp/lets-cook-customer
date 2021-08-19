@@ -38,6 +38,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
     // const lang = langs[router.locale];
     const { enqueueSnackbar } = useSnackbar();
     const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: -1, period: "" });
+    const [selectedRecipe, setselectedRecipe] = useState({});
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
     const [openChangePlanModal, setOpenChangePlanModal] = useState(false);
     const [openCancelPlanModal, setOpenCancelPlanModal] = useState(false);
@@ -109,17 +110,21 @@ const PlanDetails = (props: PlanDetailsProps) => {
     // Recipes Modal Functions
 
     const handleClickOpenRecipeModal = (recipeId, period) => {
-        let recipeIndex;
+        let recipe;
         if (period === "actualWeek") {
-            recipeIndex = props.subscription.actualWeekOrder.findIndex((recipe) => recipe.id === recipeId);
+            recipe = props.subscription.actualWeekOrder.recipes.find((recipe) => recipe.id === recipeId);
         } else {
-            recipeIndex = props.subscription.nextWeekOrder.findIndex((recipe) => recipe.id === recipeId);
+            recipe = props.subscription.nextWeekOrder.recipes.find((recipe) => recipe.id === recipeId);
         }
-        setRecipeSelectedIndex({
-            ...recipeSelectedIndex,
-            index: recipeIndex,
-            period: period,
-        });
+
+        console.log("RECIPE A MOSTRAR: ", recipe);
+
+        setselectedRecipe(recipe);
+        // setRecipeSelectedIndex({
+        //     ...recipeSelectedIndex,
+        //     index: recipeIndex,
+        //     period: period,
+        // });
         setOpenRecipeModal(true);
     };
 
@@ -162,6 +167,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 open={openRecipeModal}
                 handleClose={handleCloseRecipeModal}
                 descriptionElementRef={descriptionElementRefRecipeModal}
+                recipe={selectedRecipe}
                 // data={recipeSelectedIndex.period === 'actualWeek' ? data.actualWeekOrder[recipeSelectedIndex.index] : data.nextWeekOrder[recipeSelectedIndex.index]}
             />
             <SwapPlanModal

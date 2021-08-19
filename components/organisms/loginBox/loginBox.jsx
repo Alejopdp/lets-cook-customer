@@ -17,9 +17,8 @@ import Divider from "../../atoms/divider/divider";
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
 import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
 import { useSnackbar } from "notistack";
-import { Grid, useTheme } from "@material-ui/core";
+import { Grid, Typography, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
-
 
 const LoginBox = (props) => {
     const [values, setValues] = useState({
@@ -31,7 +30,8 @@ const LoginBox = (props) => {
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const [serverError, setserverError] = useState("");
     const { enqueueSnackbar } = useSnackbar();
-    const theme = useTheme()
+    const theme = useTheme();
+
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
@@ -47,8 +47,8 @@ const LoginBox = (props) => {
         }
     };
 
-    const handleSocialMediaSubmit = async (token) => {
-        const res = await loginWithSocialMedia(token);
+    const handleSocialMediaSubmit = async (token, email = "") => {
+        const res = await loginWithSocialMedia(token, email);
 
         if (res.status === 200) {
             saveLoginData(res.data.token, res.data.userInfo);
@@ -83,15 +83,42 @@ const LoginBox = (props) => {
                 <TextInput label={lang.emailInput} name="email" value={values.email} onChange={handleChange("email")} />
             </Grid>
             <Grid item xs={12}>
-                <PasswordInput label={lang.passwordInput} name="password" value={values.password} onChange={handleChange("password")} />
+                <PasswordInput
+                    label={lang.passwordInput}
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange("password")}
+                    helperText={serverError}
+                    hasError={!!serverError}
+                />
             </Grid>
             <Grid item xs={12}>
-                <ForgotPassword text={lang.forgotPassword} />
+                {props.dontRedirectForgotPassword ? (
+                    <Typography
+                        variant="subtitle2"
+                        color="primary"
+                        style={{ fontSize: "14px", fontWeight: "600", cursor: "pointer" }}
+                        onClick={props.handleForgotPasswordClick}
+                    >
+                        Olvidé mi contraseña
+                    </Typography>
+                ) : (
+                    <ForgotPassword text={lang.forgotPassword} handleRedirect={props.handleRedirect} />
+                )}
             </Grid>
             <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>
-                <RoundedButton disabled={!isEmail(values.email) || isEmpty(values.password)} label={lang.buttonText} onClick={handleSubmit} style={{ width: '100%' }} />
+                <RoundedButton
+                    disabled={!isEmail(values.email) || isEmpty(values.password)}
+                    label={lang.buttonText}
+                    onClick={handleSubmit}
+                    style={{ width: "100%" }}
+                />
             </Grid>
-            <Register text={lang.register.text} boldText={lang.register.boldText} redirectTo={handleRedirectToSignUp} />
+            <Register
+                text={lang.register.text}
+                boldText={lang.register.boldText}
+                handleRedirect={props.handleSignUpClick ? props.handleSignUpClick : handleRedirectToSignUp}
+            />
         </FormPaper>
     );
 };
@@ -101,4 +128,6 @@ export default LoginBox;
 LoginBox.propTypes = {
     redirect: PropTypes.bool,
     handleLogin: PropTypes.func,
+    handleSignUpClick: PropTypes.func,
+    dontRedirectForgotPassword: PropTypes.bool,
 };

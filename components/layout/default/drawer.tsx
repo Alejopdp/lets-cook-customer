@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     menuLogginButton: {
         padding: theme.spacing(2),
         margin: "0 auto",
+        width: '100%'
     },
 }));
 
@@ -26,16 +27,16 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
 
     const menuOptions = {
         top: [
-            { label: lang.itemHome, path: "#" },
-            { label: lang.itemPlans, path: "#" },
-            { label: lang.itemRecipes, path: "#" },
-            { label: lang.itemHowItWork, path: "#" },
+            { label: lang.itemHome, path: "/", img: '/icons/checkout/home.svg' },
+            { label: lang.itemPlans, path: "/planes", img: '/icons/checkout/gestion-del-plan.svg' },
+            { label: lang.itemRecipes, path: "/recetas", img: '/icons/checkout/recetas-nuevas.svg' },
         ],
         bottom: [
-            { label: lang.itemBlog, path: "#" },
-            { label: lang.itemFAQ, path: "#" },
-            { label: lang.itemGif, path: "#" },
-            { label: lang.itemLegal, path: "#" },
+            { label: lang.itemHowItWork, path: "/como-funciona" },
+            { label: lang.itemFAQ, path: "/preguntas-frecuentes" },
+            { label: lang.itemBlog, path: "/blogs/recetas" },
+            { label: lang.itemGif, path: "/bono-regalo" },
+            { label: lang.itemLegal, path: "/aviso-legal" },
         ],
     };
 
@@ -59,7 +60,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
                 {menuOptions.top.map((option, index) => (
                     <ListItem button component="a" href={option.path} key={index}>
                         <ListItemIcon>
-                            <Image src="/assets/icon-test.svg" width={24} height={24} />
+                            <Image src={option.img} alt={option.label} width={24} height={24} />
                         </ListItemIcon>
                         <ListItemText primary={option.label} />
                     </ListItem>
@@ -68,7 +69,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
             <Divider />
             <List>
                 {menuOptions.bottom.map((option, index) => (
-                    <ListItem button key={index}>
+                    <ListItem button component="a" href={option.path} key={index}>
                         <ListItemText primary={option.label} />
                     </ListItem>
                 ))}

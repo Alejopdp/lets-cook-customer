@@ -11,10 +11,11 @@ import RecipeModal from "../../molecules/recipeModal/recipeModal";
 import RecipeCardBuyFlow from "../../molecules/recipeCardBuyFlow/recipeCardBuyFlow";
 import { useBuyFlow } from "@stores";
 import { RecipesGridProps } from "./interfaces";
+import { useMemo } from "react";
 
 export const RecipesGrid = (props: RecipesGridProps) => {
     const [open, setOpen] = React.useState(false);
-    const [recipeToView, setRecipeToView] = React.useState();
+    const [recipeToView, setRecipeToView] = React.useState(null);
     const { recipes, selectRecipes } = useBuyFlow(({ form: { recipes }, selectRecipes }) => ({ recipes, selectRecipes }));
 
     const handleClickOpenModal = (recipe) => {
@@ -26,17 +27,21 @@ export const RecipesGrid = (props: RecipesGridProps) => {
         setOpen(false);
     };
 
-    const handleClickAddRecipe = (recipe) => {
-        selectRecipes([...recipes, recipe]);
-    };
+    // const handleClickAddRecipe = (recipe) => {
+    //     selectRecipes([...recipes, recipe]);
+    // };
 
-    const handleClickRemoveRecipe = ({ id: _id }) => {
-        const index = recipes.find(({ id }) => id !== _id);
-        if (index === -1) return;
-        const newState = [...recipes];
-        newState.splice(index, 1);
-        selectRecipes(newState);
-    };
+    // const handleClickRemoveRecipe = ({ id: _id }) => {
+    //     const index = recipes.find(({ id }) => id !== _id);
+    //     if (index === undefined) return;
+    //     const newState = [...recipes];
+    //     newState.splice(index, 1);
+    //     selectRecipes(newState);
+    // };
+
+    const selectedRecipesQty = useMemo(() => {
+        return props.recipesPage ? 0 : props.selectedRecipes.length;
+    }, [props.selectedRecipes]);
 
     const descriptionElementRef = React.useRef(null);
     React.useEffect(() => {
@@ -53,7 +58,7 @@ export const RecipesGrid = (props: RecipesGridProps) => {
             {props.recipesPage && (
                 <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={2}>
                     {props.recipes.map((recipe, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Grid item xs={6} sm={6} md={4} key={index}>
                             <RecipeCard
                                 img={recipe.imageUrl}
                                 imgTags={recipe.imageTags}
@@ -69,9 +74,9 @@ export const RecipesGrid = (props: RecipesGridProps) => {
             )}
 
             {props.recipesSelection && (
-                <Grid container item direction="row" justify="center" alignItems="flex-start" spacing={2}>
+                <Grid container spacing={2}>
                     {props.recipes.map((recipe, index) => (
-                        <Grid item xs={12} key={index}>
+                        <Grid key={index} item xs={12} sm={6} md={3}>
                             <RecipeCardBuyFlow
                                 id={recipe.id}
                                 imageUrl={recipe.imageUrl}
@@ -79,18 +84,19 @@ export const RecipesGrid = (props: RecipesGridProps) => {
                                 cookDuration={recipe.cookDuration}
                                 difficultyLevel={recipe.difficultyLevel}
                                 name={recipe.name}
+                                selectedRecipes={props.selectedRecipes}
+                                maxRecipesQty={props.maxRecipesQty}
                                 handleClickOpenModal={() => handleClickOpenModal(recipe)}
-                                handleClickAddRecipe={() => handleClickAddRecipe(recipe)}
-                                handleClickRemoveRecipe={() => handleClickRemoveRecipe({ id: recipe.id })}
+                                handleClickAddRecipe={() => props.handleClickAddRecipe(recipe)}
+                                handleClickRemoveRecipe={() => props.handleClickRemoveRecipe({ id: recipe.id as string })}
+                                isAddable={selectedRecipesQty < props.maxRecipesQty}
                             />
                         </Grid>
                     ))}
                 </Grid>
             )}
 
-            {open && (
-                <RecipeModal open={open} handleClose={handleClose} descriptionElementRef={descriptionElementRef} data={recipeToView} />
-            )}
+            {open && <RecipeModal open={open} handleClose={handleClose} recipe={recipeToView} />}
         </>
     );
 };

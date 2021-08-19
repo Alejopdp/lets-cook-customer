@@ -34,8 +34,18 @@ const TextButton = (props) => {
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
     const classes = useStyles();
 
-    let content = (
-        <Button size="small" className={classes.textButton} style={props.style} onClick={props.handleClick}>
+    return isSmDown && props.icon ? (
+        <IconButton size="small" style={props.style} onClick={props.handleClick}>
+            {props.icon === "plus-circle-outline" ? (
+                <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
+            ) : props.icon === "settings" ? (
+                <SettingsIcon style={!isSmDown ? { marginRight: "6px" } : null} />
+            ) : props.icon === "time" ? (
+                <RestoreIcon style={!isSmDown ? { marginRight: "6px" } : null} />
+            ) : null}
+        </IconButton>
+    ) : (
+        <Button size="small" className={classes.textButton} variant="text" style={props.style} onClick={() => props.handleClick()}>
             {props.icon === "plus-circle-outline" ? (
                 <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : null} />
             ) : props.icon === "settings" ? (
@@ -46,22 +56,6 @@ const TextButton = (props) => {
             {props.btnText}
         </Button>
     );
-
-    if (isSmDown && props.icon) {
-        content = (
-            <IconButton size="small" style={props.style} onClick={props.handleClick}>
-                {props.icon === "plus-circle-outline" ? (
-                    <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
-                ) : props.icon === "settings" ? (
-                    <SettingsIcon style={!isSmDown ? { marginRight: "6px" } : null} />
-                ) : props.icon === "time" ? (
-                    <RestoreIcon style={!isSmDown ? { marginRight: "6px" } : null} />
-                ) : null}
-            </IconButton>
-        );
-    }
-
-    return content;
 };
 
 TextButton.propTypes = {

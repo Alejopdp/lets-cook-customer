@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { RecipeChoiceScreenProps } from "./interfaces";
+import { useLang } from "@hooks";
+import _ from "lodash";
 
 // External components
-import { Chip, Container, Grid, Icon } from "@material-ui/core";
+import { Chip, Container, Grid, Icon, useTheme } from "@material-ui/core";
 
 // Internal components
-import { RecipesBottomBar } from "@molecules";
+import { DrawerMenu, RecipesBottomBar } from "@molecules";
 import { RecipesGrid } from "../recipesGrid";
 import { FilterIcon, RoundedButton } from "@atoms";
 
@@ -17,21 +19,91 @@ import { useFilterDrawer } from "@stores";
 import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
 import { useRouter } from "next/router";
+import { IFilter } from "@layouts";
+
+interface IFilterOptions {
+    title: string;
+    items: IFilter[];
+}
 
 const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
     const router = useRouter();
+    const theme = useTheme();
+    const [lang] = useLang("buyFlowLayout");
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
     const { enqueueSnackbar } = useSnackbar();
+    const [selectedRecipes, setselectedRecipes] = useState([]);
+
+    const _filterOptions: IFilterOptions[] = [
+        {
+            title: lang.difficultLevel,
+            items: [
+                {
+                    label: lang.itemEasy,
+                    value: lang.itemEasy,
+                    isEqual: (recipeDifficultLevel) => recipeDifficultLevel === lang.itemEasy,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemEasy,
+                },
+                {
+                    label: lang.itemMedium,
+                    value: lang.itemMedium,
+                    isEqual: (recipeDifficultLevel) => recipeDifficultLevel === lang.itemMedium,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemMedium,
+                },
+                {
+                    label: lang.itemHard,
+                    value: lang.itemHard,
+                    isEqual: (recipeDifficultLevel) => recipeDifficultLevel === lang.itemHard,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemHard,
+                },
+            ],
+        },
+        {
+            title: lang.timeOfCook,
+            items: [
+                {
+                    label: lang.item15Min,
+                    value: lang.item15Min,
+                    isEqual: (recipeCookTime: number) => recipeCookTime < 15,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.item15Min,
+                },
+                {
+                    label: lang.item15To30,
+                    value: lang.item15To30,
+                    isEqual: (recipeCookTime: number) => 15 <= recipeCookTime && recipeCookTime < 30,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.item15To30,
+                },
+                {
+                    label: lang.item30To60,
+                    value: lang.item30To60,
+                    isEqual: (recipeCookTime: number) => 30 <= recipeCookTime && recipeCookTime < 60,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.item30To60,
+                },
+                {
+                    label: lang.itemUpperTo60,
+                    value: lang.itemUpperTo60,
+                    isEqual: (recipeCookTime: number) => recipeCookTime >= 60,
+                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemUpperTo60,
+                },
+            ],
+        },
+    ];
 
     const handleRemoveFilter = (filter) => {
         const newFilterState = filters.filter((f) => filter !== f);
         setFilters(newFilterState);
     };
 
+    const _handleClickApplyFilters = (_filters) => {
+        setFilters(_filters);
+        setDrawerOpen(!drawerIsOpen);
+    };
+
     const handleSubmit = async () => {
         var recipeSelection: { recipeId: string; quantity: number }[] = [];
+        const ordererSelectedRecipes = _.orderBy(selectedRecipes, ["id"], ["asc"]);
 
-        for (let recipe of props.recipes) {
+        for (let recipe of ordererSelectedRecipes) {
             if (recipeSelection[0] && recipeSelection[0].recipeId === recipe.id) {
                 recipeSelection[0] = { ...recipeSelection[0], quantity: recipeSelection[0].quantity + 1 };
             } else {
@@ -41,19 +113,39 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
         const res = await chooseRecipes(router.query.orderId as string, recipeSelection);
 
         if (res.status === 200) {
-            enqueueSnackbar("Changed correctly", { variant: "success" });
+            enqueueSnackbar("Recetas elegidas correctamente", { variant: "success" });
+            router.replace({ pathname: `/detalle-del-plan/${props.subscriptionId}` });
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
     };
 
+    const handleClickAddRecipe = (recipe) => {
+        setselectedRecipes([...selectedRecipes, recipe]);
+    };
+
+    const handleClickRemoveRecipe = ({ id: _id }) => {
+        const index = selectedRecipes.find(({ id }) => id !== _id);
+        if (index === -1) return;
+        const newState = [...selectedRecipes];
+        newState.splice(index, 1);
+        setselectedRecipes(newState);
+    };
+
+    const filteredRecipes = useMemo(() => {
+        return filters.length > 0
+            ? props.recipes.filter((recipe) =>
+                  filters.some((filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqual(recipe.difficultyLevel))
+              )
+            : props.recipes;
+    }, [filters]);
+
     return (
-        <Container maxWidth="lg">
-            <Grid container spacing={1} style={{ marginBottom: 150 }}>
+        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6), paddingBottom: "200px" }}>
+            <Grid container spacing={2}>
                 <Grid item container justify="center">
                     <TitleBuyFlow
-                        // title={`Elige las ${} recetas que recibirás el ${}`}
-                        title={`Elige las X recetas que recibirás el DDDD`}
+                        title={`Elige las ${props.maxRecipesQty} recetas que recibirás el ${props.nextDeliveryLabel}`}
                         subtitle=""
                     />
                 </Grid>
@@ -75,7 +167,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                             <Grid key={index} item>
                                 <Chip
                                     key={index}
-                                    label={filter}
+                                    label={filter.label}
                                     onDelete={() => handleRemoveFilter(filter)}
                                     color="secondary"
                                     style={{ color: "white" }}
@@ -85,11 +177,32 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                         ))}
                     </Grid>
                 </Grid>
-                <Grid item>
-                    <RecipesGrid recipesSelection={true} recipes={props.recipes} />
+                <Grid item xs={12}>
+                    <RecipesGrid
+                        handleClickAddRecipe={handleClickAddRecipe}
+                        handleClickRemoveRecipe={handleClickRemoveRecipe}
+                        recipesSelection={true}
+                        recipes={filteredRecipes}
+                        selectedRecipes={selectedRecipes}
+                        maxRecipesQty={props.maxRecipesQty}
+                    />
                 </Grid>
             </Grid>
-            <RecipesBottomBar handleSubmit={handleSubmit} />
+            <RecipesBottomBar
+                selectedRecipes={selectedRecipes}
+                maxRecipesQty={props.maxRecipesQty}
+                handleSubmit={handleSubmit}
+                handleSecondaryButtonClick={() => router.back()}
+            />
+            {drawerIsOpen && (
+                <DrawerMenu
+                    open={drawerIsOpen}
+                    items={_filterOptions}
+                    selectedItems={filters}
+                    handleOnClose={() => setDrawerOpen(false)}
+                    handleOnClickApplyButton={_handleClickApplyFilters}
+                />
+            )}
         </Container>
     );
 };

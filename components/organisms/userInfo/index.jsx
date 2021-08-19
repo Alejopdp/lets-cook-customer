@@ -19,11 +19,14 @@ import PaymentMethodModal from "../../molecules/userInfo/paymentMethod";
 import DataPaperSkeleton from "./dataPaperSkeleton";
 import WithSkeleton from "../../molecules/withSkeleton/withSkeleton";
 import { updateBillingData, updatePersonalData, updateShippingAddress } from "../../../helpers/serverRequests/customer";
+import { useUserInfoStore } from "../../../stores/auth";
+import { LOCAL_STORAGE_KEYS, useLocalStorage } from "../../../hooks";
 
 const UserInfoDetail = (props) => {
     const theme = useTheme();
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
-
+    const { setuserInfo, userInfo } = useUserInfoStore(({ setuserInfo, userInfo }) => ({ setuserInfo, userInfo }));
+    const { saveInLocalStorage } = useLocalStorage();
     const { enqueueSnackbar } = useSnackbar();
     const [customerInfo, setcustomerInfo] = useState({
         id: "",
@@ -152,6 +155,18 @@ const UserInfoDetail = (props) => {
                     ...newData,
                 },
             });
+            const newUserInfo = {
+                ...userInfo,
+                shippingAddress: {
+                    addressDetails: newData.details,
+                    latitude: newData.latitude,
+                    longitude: newData.longitude,
+                    name: newData.name,
+                    preferredShippingHour: newData.preferredShippingHour,
+                },
+            };
+            setuserInfo(newUserInfo);
+            saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, newUserInfo);
             handleClickCloseDeliveryAddressModal();
             enqueueSnackbar("Datos modificados correctamente", { variant: "success" });
         } else {

@@ -5,4 +5,7 @@ export type PlanVariant = {
     price: number;
     priceWithOffer: number;
     attributes: [string, string][];
+    numberOfRecipes?: number;
+    numberOfPersons?: number;
+    planId?: string;
 };

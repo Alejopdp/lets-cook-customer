@@ -84,3 +84,70 @@ export const updateRestriction = async (subscriptionId: string, restrictionId: s
         return error.response;
     }
 };
+
+export const createManySubscriptions = async (
+    customerId: string,
+    variants: { planId: string; frequency: string; variant: { id: string } }[]
+) => {
+    console.log("A VER LAS VARIANTS: ", variants);
+    try {
+        const res = await axios({
+            method: "POST",
+            url: `${apiUrl}/many`,
+            data: {
+                customerId,
+                plans: variants,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};
+
+export const handle3dSecureFailure = async (subscriptionId: string) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/handle-3dsecure-failure/${subscriptionId}`,
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};
+
+export const handle3dSecureFailureForManySubscriptions = async (subscriptionsIds: string[]) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/handle-3dsecure-failure-for-many-subscriptions`,
+            data: {
+                subscriptionsIds,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};
+
+export const sendNewSubscriptionWelcomeEmail = async (subscriptionId) => {
+    try {
+        const res = await axios({
+            method: "POST",
+            url: `${apiUrl}/notify-new-subscription/${subscriptionId}`,
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};

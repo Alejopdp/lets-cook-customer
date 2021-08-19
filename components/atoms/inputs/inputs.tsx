@@ -18,8 +18,9 @@ export const TextInput = (props: TextInputProps) => {
 
     return (
         <FormControl variant="outlined" className={textField}>
-            <InputLabel style={{ fontSize: '16px' }}>{props.label}</InputLabel>
+            <InputLabel style={{ fontSize: "16px" }}>{props.label}</InputLabel>
             <OutlinedInput
+                style={{ fontSize: "16px" }}
                 className={border}
                 name={props.name}
                 value={props.value}
@@ -27,6 +28,7 @@ export const TextInput = (props: TextInputProps) => {
                 onChange={props.onChange}
                 labelWidth={props.labelWidth || 210}
                 inputProps={{ ...props.inputsProps }}
+                disabled={props.disabled}
             />
         </FormControl>
     );
@@ -45,13 +47,15 @@ export const PasswordInput = (props: PasswordInputProps) => {
 
     return (
         <FormControl variant="outlined" className={textField}>
-            <InputLabel style={{ fontSize: '16px' }}>{props.label}</InputLabel>
+            <InputLabel style={{ fontSize: "16px" }}>{props.label}</InputLabel>
             <OutlinedInput
+                style={{ fontSize: "16px" }}
                 className={border}
                 type={values.showPassword ? "text" : "password"}
                 name={props.name}
                 value={props.value}
                 onChange={props.onChange}
+                disabled={props.disabled}
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton onClick={handleClickShowPassword} edge="end">
@@ -61,7 +65,11 @@ export const PasswordInput = (props: PasswordInputProps) => {
                 }
                 labelWidth={props.labelWidth || 160}
             />
-            {props.helperText && <Typography variant="caption">{props.helperText}</Typography>}
+            {props.helperText && (
+                <Typography variant="caption" color={props.hasError ? "error" : "textPrimary"}>
+                    {props.helperText}
+                </Typography>
+            )}
         </FormControl>
     );
 };

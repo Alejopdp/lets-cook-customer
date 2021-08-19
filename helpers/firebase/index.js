@@ -21,23 +21,29 @@ export const loginWithGoogleAndGetIdToken = async () => {
         googleAuthProvider.addScope("email");
         await firebase.auth().signInWithPopup(googleAuthProvider);
         const token = await firebase.auth().currentUser.getIdToken(true);
-
-        return token;
+        return { token };
     } catch (error) {
-        return undefined;
+        console.log(error);
+        return { error };
     }
 };
 
 export const loginWithFacebookAndGetIdToken = async () => {
     try {
         const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-        await firebase.auth().signInWithPopup(facebookAuthProvider);
+        facebookAuthProvider.addScope("public_profile");
+        facebookAuthProvider.addScope("email");
+        facebookAuthProvider.setCustomParameters({
+            auth_type: "rerequest",
+        });
+        const result = await firebase.auth().signInWithPopup(facebookAuthProvider);
         const token = await firebase.auth().currentUser.getIdToken(true);
+        console.log(result);
 
-        return token;
+        return { token, email: result.user.email };
     } catch (error) {
         console.log(error);
-        return undefined;
+        return { error };
     }
 };
 // a

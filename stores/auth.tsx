@@ -24,6 +24,7 @@ export interface IPaymentMethod {
     id: string;
     label: string;
     isDefault: string;
+    card?: string;
 }
 export interface IUserInfo {
     userInfo: IUserInfoFields;

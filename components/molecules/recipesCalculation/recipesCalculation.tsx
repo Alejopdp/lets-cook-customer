@@ -10,7 +10,7 @@ interface RecipesCalculationProps {
     totalPrice: number;
 }
 
-export const RecipesCalculation = (props: RecipesCalculationProps) => {
+const RecipesCalculation = (props: RecipesCalculationProps) => {
     var rations = props.recipesQty * props.peopleQty;
     var rationPrice = !!rations ? props.totalPrice / rations : props.totalPrice;
     var fixedRationPrice = !!rations ? Math.round(rationPrice * 100) / 100 : rationPrice;

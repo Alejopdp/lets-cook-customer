@@ -8,8 +8,9 @@ export interface Benefit {
 }
 export interface BenefitsSectionProps {
     cards: Benefit[],
-    backgroundColor: string,
-    removeCallToAction: boolean,
+    backgroundColor?: string,
+    removeCallToAction?: boolean,
+    enableTitleSection?: boolean,
 }
 
 export interface CallToActionSectionProps { }
@@ -29,9 +30,6 @@ export interface PlansSectionProps {
 
 export interface RecipesSectionProps {
     recipes?: Recipe[];
-    title: string;
-    subtitle: string;
-    titleAlign: string;
 }
 
 export interface ReviewsSectionProps {

@@ -5,9 +5,31 @@ import { combine, devtools } from "zustand/middleware";
 export type PaymentMethodForm = {
     id: string;
     stripeId: string;
-    type: string; // card / newPaymentMethod
+    type: string;
 };
-export type Recipes = any;
+
+export type RecipeVariant = { id: string; ingredients: string[]; restriction: { id: string; value: string; label: string }; sku: string };
+export type Recipes = {
+    id: string;
+    name: string;
+    sku: string;
+    shortDescription: string;
+    longDescription: string;
+    cookDuration: string;
+    cookDurationNumberValue: number;
+    difficultyLevel: string;
+    imageUrl: string;
+    weight: string;
+    weightNumberValue: number;
+    backOfficeTags: string[];
+    imageTags: string[];
+    availableWeeks: { id: string; label: string }[];
+    availableMonths: string[];
+    relatedPlans: string[];
+    tools: string[];
+    recipeVariants: RecipeVariant[];
+    nutritionalInfo: { key: string; value: string }[];
+};
 
 export interface DeliveryForm {
     addressName: string;
@@ -19,6 +41,8 @@ export interface DeliveryForm {
     latitude: number;
     longitude: number;
     shippingCost: number;
+    shippingDayLabel: string;
+    nextShippingDate: string;
 }
 
 export interface BuyFlowStore {
@@ -26,7 +50,10 @@ export interface BuyFlowStore {
     showRegister: boolean;
     form: {
         planCode: string;
+        planName: string;
         planSlug: string;
+        planDescription: string;
+        weekLabel: string;
         variant?: PlanVariant;
         deliveryForm?: DeliveryForm;
         paymentMethod?: PaymentMethodForm;
@@ -34,6 +61,8 @@ export interface BuyFlowStore {
         recipes: Recipes[];
         firstOrderId: string;
         subscriptionId: string;
+        firstOrderShippingDate: string;
+        canChooseRecipes: boolean;
     };
 }
 
@@ -63,16 +92,21 @@ export interface Coupon {
     };
 }
 export interface Store extends BuyFlowStore {
-    setRegisterState: (isVisible: boolean) => void;
+    setShowRegister: (isVisible: boolean) => void;
     forward: () => void;
+    moveNSteps: (stepsToMove: number) => void;
+    toFirstStep: () => void;
     setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => void;
     setPaymentMethod: (paymentMethod: Partial<PaymentMethodForm>) => void;
     selectRecipes: (recipes: Recipes[]) => void;
-    setPlanCode: (code: string, slug: string) => void;
+    setPlanCode: (code: string, slug: string, name: string, description: string, canChooseRecipes: boolean) => void;
     setPlanVariant: (variant: Partial<PlanVariant>) => void;
     setCoupon: (coupon: Partial<Coupon>) => void;
     setFirstOrderId: (firstOrderId: Partial<string>) => void;
     setSubscriptionId: (subscriptionId: Partial<string>) => void;
+    setWeekLabel: (weekLabel: Partial<string>) => void;
+    setFirstOrderShippingDate: (shippingDate: Partial<string>) => void;
+    resetBuyFlowState: () => void;
 }
 
 export const BuyFlowInitialStore: BuyFlowStore = {
@@ -80,7 +114,10 @@ export const BuyFlowInitialStore: BuyFlowStore = {
     showRegister: true,
     form: {
         planCode: "",
+        planName: "",
+        planDescription: "",
         planSlug: "",
+        weekLabel: "",
         variant: {
             id: "",
             sku: "",
@@ -88,6 +125,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             numberOfPersons: 0,
             numberOfRecipes: 0,
             attributes: [],
+            label: "",
         },
         deliveryForm: {
             addressName: "",
@@ -99,6 +137,8 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             latitude: null,
             longitude: null,
             shippingCost: 0,
+            shippingDayLabel: "",
+            nextShippingDate: "",
         },
         paymentMethod: {
             id: "",
@@ -134,30 +174,53 @@ export const BuyFlowInitialStore: BuyFlowStore = {
         recipes: [],
         subscriptionId: "",
         firstOrderId: "",
+        firstOrderShippingDate: "",
+        canChooseRecipes: true,
     },
 };
 
 const store = devtools<Store>((set, get) => ({
     ...BuyFlowInitialStore,
 
-    setRegisterState: (isVisible: boolean) => set({ showRegister: isVisible }),
+    setShowRegister: (isVisible: boolean) => set({ showRegister: isVisible }),
 
     // TODO: Optimize this part the idea is controller
     // the steps during buy process.
-    forward: () => {
-        const indexStepToOmmit = 2;
+    forward: (stepsToMove: number = 2) => {
+        const indexStepToOmmit = 1;
+        const previousStepToOmmit = indexStepToOmmit - 1;
         const _step = get().step;
-        if (!get().showRegister && _step === indexStepToOmmit - 1) {
-            set({ step: _step + 2 });
+        if (!get().showRegister && _step === previousStepToOmmit) {
+            set({ step: _step + stepsToMove });
             return;
         }
         set({ step: _step + 1 });
     },
 
-    setPlanCode: (code: string, slug: string = "") => {
+    moveNSteps: (stepsToMove: number) => {
+        const _step = get().step;
+        set({ step: _step + stepsToMove });
+    },
+
+    toFirstStep: () => {
+        set({ step: 0 });
+    },
+
+    setWeekLabel: (weekLabel: string) => {
+        const form = get().form;
+
+        form.weekLabel = weekLabel;
+
+        set({ form });
+    },
+
+    setPlanCode: (code: string, slug: string = "", name: string = "", description: string = "", canChooseRecipes: boolean) => {
         const form = get().form;
         form.planCode = code;
         form.planSlug = slug;
+        form.planName = name;
+        form.planDescription = description;
+        form.canChooseRecipes = canChooseRecipes;
         set({ form });
     },
     setDeliveryInfo: (deliveryForm: DeliveryForm) => {
@@ -194,6 +257,14 @@ const store = devtools<Store>((set, get) => ({
         const form = get().form;
         form.subscriptionId = subscriptionId;
         set({ form });
+    },
+    setFirstOrderShippingDate: (shippingDate: string) => {
+        const form = get().form;
+        form.firstOrderShippingDate = shippingDate;
+        set({ form });
+    },
+    resetBuyFlowState: () => {
+        set({ form: BuyFlowInitialStore.form, step: 0, showRegister: BuyFlowInitialStore.showRegister });
     },
 }));
 

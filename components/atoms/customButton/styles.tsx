@@ -6,9 +6,7 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.background.paper,
         padding: theme.spacing(2),
-        borderRadius: theme.spacing(4),
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
+        borderRadius: theme.spacing(1),
         "&:hover": {
             backgroundColor: theme.palette.primary.light,
         },

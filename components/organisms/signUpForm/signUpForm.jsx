@@ -14,20 +14,26 @@ import PasswordStep from "./passwordStep";
 import { signUp } from "../../../helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
+import TermsAndConditionsModal from "../../molecules/legalModals/termsAndConditionsModal";
+import PrivacyPolicyModal from "../../molecules/legalModals/privacyPolicyModal";
 
 // External Components
-import { Grid } from "@material-ui/core"
+import { Grid } from "@material-ui/core";
 
 const SignUpForm = (props) => {
     const [currentStep, setcurrentStep] = useState(0);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
-    const setIsAuthenticated = useAuthStore((state) => state.isAuthenticated);
+    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
         authorize: false,
         sendInfo: false,
     });
+    const [openTycModal, setOpenTycModal] = React.useState(false)
+    const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false)
+
+
     const { enqueueSnackbar } = useSnackbar();
     const { saveInLocalStorage } = useLocalStorage();
 
@@ -41,7 +47,14 @@ const SignUpForm = (props) => {
     const handleChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value || e.target.checked,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleCheckboxesChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: !formData[e.target.name],
         });
     };
 
@@ -67,6 +80,27 @@ const SignUpForm = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
 
+    // TyC Modal Functions
+
+    const handleOpenTycModal = () => {
+        setOpenTycModal(true);
+    };
+
+    const handleCloseTycModal = () => {
+        setOpenTycModal(false);
+    };
+
+
+    // Privacy Policy Modal Functions
+
+    const handleOpenPrivacyPolicyModal = () => {
+        setOpenPrivacyPolicyModal(true);
+    };
+
+    const handleClosePrivacyPolicyModal = () => {
+        setOpenPrivacyPolicyModal(false);
+    };
+
     switch (true) {
         case currentStep === 0:
             currentInputs = (
@@ -76,6 +110,8 @@ const SignUpForm = (props) => {
                     email={formData.email}
                     signUpRedirect={props.redirect}
                     handleSignUp={props.handleSignUp}
+                    handleOpenTycModal={handleOpenTycModal}
+                    handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                 />
             );
             break;
@@ -87,7 +123,10 @@ const SignUpForm = (props) => {
                     authorize={formData.authorize}
                     sendInfo={formData.sendInfo}
                     handleChange={handleChange}
+                    handleCheckboxesChange={handleCheckboxesChange}
                     handleSubmit={props.handleCreateAccount || handleCreateAccount}
+                    handleOpenTycModal={handleOpenTycModal}
+                    handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                 />
             );
             break;
@@ -100,20 +139,32 @@ const SignUpForm = (props) => {
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     email={formData.email}
+                    handleOpenTycModal={handleOpenTycModal}
+                    handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                 />
             );
     }
 
     return (
-        <FormPaper title={lang.title}>
-            {currentInputs}
-            <Register
-                text={lang.register.text}
-                boldText={lang.register.boldText}
-                // redirectTo={lang.register.redirectTo}
-                handleRedirect={props.handleRedirect || handleRedirect}
+        <>
+            <FormPaper title={lang.title}>
+                {currentInputs}
+                <Register
+                    text={lang.register.text}
+                    boldText={lang.register.boldText}
+                    // redirectTo={lang.register.redirectTo}
+                    handleRedirect={props.handleRedirect || handleRedirect}
+                />
+            </FormPaper>
+            <TermsAndConditionsModal
+                open={openTycModal}
+                handleClose={handleCloseTycModal}
             />
-        </FormPaper>
+            <PrivacyPolicyModal
+                open={openPrivacyPolicyModal}
+                handleClose={handleClosePrivacyPolicyModal}
+            />
+        </>
     );
 };
 

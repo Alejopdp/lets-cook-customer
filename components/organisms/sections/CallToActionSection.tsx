@@ -39,7 +39,7 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
                 </Grid>
                 <Grid container style={{ marginTop: theme.spacing(4) }}>
                     <Grid item xs={12} style={{ display: 'flex', flexDirection: 'column' }}>
-                        <RoundedButton label="Ver planes" onClick={() => router.push("/planes")} />
+                        <RoundedButton label="Nuestros planes" onClick={() => router.push("/planes")} />
                         <Typography className={classes.smallText} align='center' variant="caption">
                             Podrás pausar, cambiar o cancelar el plan cuando quieras
                     </Typography>

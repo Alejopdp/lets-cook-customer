@@ -9,5 +9,11 @@ export interface ShipmentFormProps {
     // registeredUser: boolean,
     // restrictions: string,
     // onChange: (e: FormEvent) => void,
-    onClick: () => void,
-};
+    expanded: any;
+    handleChangeAccordion: any;
+    handleChangeStep: any;
+    handleChange: any;
+    deliveryData: any;
+    handleAddressChange: any;
+    isFormComplete: () => boolean;
+}

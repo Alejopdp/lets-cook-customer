@@ -3,7 +3,10 @@ import { makeStyles } from "@material-ui/core";
 export const useValuePropositionStyle = makeStyles((theme) => ({
     root: {
         minHeight: "75vh",
-        backgroundImage: "url(/assets/img-background-proposition-section.jpeg)",
+        [theme.breakpoints.down('sm')]: {
+            backgroundImage: "url(/assets/home/home-principal-mobile.webp)",
+        },
+        backgroundImage: "url(/assets/home/home-principal-desktop.webp)",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",
@@ -66,19 +69,18 @@ export const useBenefitsStyle = makeStyles(theme => ({
         flexDirection: "row",
         display: "flex",
         alignItems: "flex-start",
-        maxWidth: 500,
         padding: theme.spacing(2),
         [theme.breakpoints.down("md")]: {
             padding: `${theme.spacing(2)}px 0px`,
         },
     },
     cardIcon: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1)
+        // marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(2)
     },
     icon: {
-        width: 24,
-        height: 24
+        width: 32,
+        height: 32
     }
 
 }));

@@ -30,7 +30,7 @@ const _links: ILink[] = [
     },
     {
         name: "Bono regalo",
-        url: "/",
+        url: "/bono-regalo",
     },
     {
         name: "¿Cómo funciona?",
@@ -100,11 +100,11 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                             info@letscooknow.es
                         </Typography>
                     </Link>
-                    <Link href="https://wa.me/34686312132" underline="none" target="_blank" rel="noreferrer noopener">
+                    {/* <Link href="https://wa.me/34686312132" underline="none" target="_blank" rel="noreferrer noopener">
                         <Typography variant="body1" color="textSecondary">
                             +34 686 312 132
                         </Typography>
-                    </Link>
+                    </Link> */}
                 </Grid>
 
                 <Grid item xs={6} md={3} className={paymentMethodsSection}>
@@ -117,7 +117,7 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
 
             <Grid container direction="row" justify="space-between" alignItems="flex-end" className={footer}>
                 <Typography variant="body2" style={{ fontSize: "13px" }}>
-                    Lets Cook 2021 - Todos los derechos reservados
+                    Lets Cook 2021 © - Todos los derechos reservados
                 </Typography>
                 <Image src="/enisa.png" width={50} height={100} alt="Lets cook now" />
             </Grid>

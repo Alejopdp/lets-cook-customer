@@ -1,5 +1,5 @@
-import React, { memo } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React, { memo, useMemo } from "react";
+import { useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -26,26 +26,39 @@ export const TabPanel = memo((props: TabPanelProps) => {
 
 export const RecipeVariantsTab = memo((props: RecipeVariantsTabProps) => {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+    const [selectedVariant, setselectedVariant] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    const handleChange = (value) => {
+        setselectedVariant(value);
     };
+
+    const ingredients = useMemo(() => {
+        return props.variants[selectedVariant].ingredients.join(", ");
+    }, [selectedVariant]);
 
     return (
         <div className={classes.root}>
             {/* <AppBar position="static"> */}
-            <Tabs value={value} onChange={handleChange} aria-label="ingredients tabs" scrollButtons="auto" variant="scrollable">
+            <Tabs
+                classes={{ indicator: classes.indicator }}
+                value={selectedVariant}
+                onChange={(e, value) => handleChange(value)}
+                aria-label="ingredients tabs"
+                scrollButtons="auto"
+                variant="scrollable"
+            >
                 {props.variants.map((variant, index) => (
-                    <Tab key={index} label={variant} {...a11yProps(index)} />
+                    <Tab
+                        classes={{ root: classes.tabRoot, selected: classes.selected, wrapper: classes.tabWrapper }}
+                        key={index}
+                        label={`OPCIÓN ${variant.restriction.label}`}
+                        value={variant.id}
+                        {...a11yProps(index)}
+                    />
                 ))}
             </Tabs>
             {/* </AppBar> */}
-            {props.ingredientsLists.map((list, index) => (
-                <TabPanel value={value} index={index} id={"tab-panel"}>
-                    {list}
-                </TabPanel>
-            ))}
+            <Typography variant="body2">{ingredients}</Typography>
         </div>
     );
 });

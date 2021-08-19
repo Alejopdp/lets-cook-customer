@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: "100vw",
         backgroundColor: theme.palette.background.default,
+        margin: 'auto'
     },
     padd1: {
         marginBottom: theme.spacing(1),
@@ -52,26 +53,26 @@ const FaqsSection = (props) => {
 
     const filteredSections = props.searchValue
         ? lang.sections
-              .filter((section) =>
-                  section.accordions
-                      .filter((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
-                      .some((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
-              )
-              .map((section) => {
-                  return {
-                      ...section,
-                      accordions: section.accordions.filter(
-                          (accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1
-                      ),
-                  };
-              })
+            .filter((section) =>
+                section.accordions
+                    .filter((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
+                    .some((accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1)
+            )
+            .map((section) => {
+                return {
+                    ...section,
+                    accordions: section.accordions.filter(
+                        (accordion) => accordion.question.toUpperCase().indexOf(props.searchValue.toUpperCase()) > -1
+                    ),
+                };
+            })
         : lang.sections;
 
     return (
         <div className={classes.root}>
             <Grid
                 container
-                spacing={3}
+                spacing={6}
                 justify="center"
                 alignItems="start"
                 // className={classes.margin0}
@@ -80,17 +81,23 @@ const FaqsSection = (props) => {
                 {filteredSections.length === 0 ? (
                     <EmptyState title={lang.emptyState.title} text={lang.emptyState.text} />
                 ) : (
-                    <>
-                        {filteredSections.map((section, index) => (
-                            <Grid item xs={12} sm={6} key={index} className={classes.faqsContainer}>
-                                <Typography variant="h6">{section.title}</Typography>
-                                {section.accordions.map((accordion, index) => (
-                                    <SimpleAccordion question={accordion.question} answer={accordion.answer} key={index} />
-                                ))}
-                            </Grid>
-                        ))}
-                    </>
-                )}
+                        <>
+                            {filteredSections.map((section, index) => (
+                                <Grid item xs={12} sm={6} key={index} className={classes.faqsContainer}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12}>
+                                            <Typography variant="h6">{section.title}</Typography>
+                                        </Grid>
+                                        {section.accordions.map((accordion, index) => (
+                                            <Grid item xs={12}>
+                                                <SimpleAccordion question={accordion.question} answer={accordion.answer} key={index} />
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                </Grid>
+                            ))}
+                        </>
+                    )}
             </Grid>
 
             <Grid container direction="column" align="center">

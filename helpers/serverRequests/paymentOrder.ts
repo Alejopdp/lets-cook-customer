@@ -1,5 +1,6 @@
 import { PaymentRounded } from "@material-ui/icons";
 import axios from "axios";
+import { PaymentOrderState } from "types/paymentOrderState";
 const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/payment-order`;
 
 export const getCustomerPaymentOrders = async (customerId: string, locale: string) => {
@@ -26,6 +27,23 @@ export const getPaymentOrderById = async (paymentOrderId: string, locale: string
             url: `${apiUrl}/${paymentOrderId}`,
             params: {
                 locale,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
+};
+
+export const updatePaymentOrderState = async (paymentOrderId: string, state: PaymentOrderState) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/update-state/${paymentOrderId}`,
+            data: {
+                state,
             },
         });
 

@@ -9,7 +9,7 @@ import { Layout } from "../../components/layout/index";
 
 const Login = (props) => {
     return (
-        <Layout disableCallToActionSection disableFooterSection>
+        <Layout seoTitle="Ingresar - Let's cook: Productos frescos y recetas" seoOgUrlSlug='ingresar' disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <LoginBox redirect />
             </InnerSectionLayout>
@@ -28,7 +28,7 @@ export const getInitialProps = async (context) => {
     const res = await verifyToken(token);
 
     if (res.status === 200) {
-        return { redirect: { destination: "/", permanent: true } };
+        return { redirect: { destination: "/", permanent: false } };
     } else {
         return { props: { isLogged: false } };
     }
