@@ -188,6 +188,8 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         buyFlow.forward()
     }
 
+    console.log('buyFlow.form', buyFlow.form)
+
     return (
         <>
             <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6) }}>
@@ -248,7 +250,9 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                             <RecipesCalculation
                                 recipesQty={buyFlow.form.variant ?.numberOfRecipes}
                                 peopleQty={buyFlow.form.variant ?.numberOfPersons}
-                                totalPrice={buyFlow.form.variant ?.priceWithOffer || buyFlow.form.variant ?.price}
+                                // totalPrice={buyFlow.form.variant ?.priceWithOffer || buyFlow.form.variant ?.price}
+                                price={buyFlow.form.variant ?.price}
+                                priceWithOffer={buyFlow.form.variant ?.priceWithOffer}
                             />
                         </Grid>
                     </Grid>

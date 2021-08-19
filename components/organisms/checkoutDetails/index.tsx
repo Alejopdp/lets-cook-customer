@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 
 import PlanSelector from "./planSelector";
 import CheckoutDetailItem from "./checkoutDetailItem/checkoutDetailItem";
+import CheckoutDetailPlanPrice from "./checkoutDetailItem/checkoutDetailPlanPrice";
 import { Box } from "@material-ui/core";
 import CouponInputAccordion from "./couponInputAccordion/couponInputAccordion";
 import { useBuyFlow, useUserInfoStore } from "@stores";
@@ -31,8 +32,9 @@ export default function CheckoutDetails() {
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
     const router = useRouter();
 
+    const planVariantPrice = form.variant ?.priceWithOffer || form.variant ?.price;
+
     const totalValue = useMemo(() => {
-        const planVariantPrice = form.variant ?.priceWithOffer || form.variant ?.price;
         const shippingCost = form.deliveryForm ?.shippingCost || 0;
         if (!form.coupon ?.id) return planVariantPrice + shippingCost;
 
@@ -42,6 +44,7 @@ export default function CheckoutDetails() {
                 ? `${planVariantPrice - form.coupon ?.discount_type.value + shippingCost}€`
                 : planVariantPrice;
     }, [form.coupon, form.deliveryForm ?.shippingCost, form.variant ?.priceWithOffer, form.variant ?.price]);
+
 
     const handleCouponSubmit = async (couponCode: string) => {
         ga.event({
@@ -88,8 +91,6 @@ export default function CheckoutDetails() {
         });
     };
 
-    const planVariantPrice = form.variant ?.priceWithOffer || form.variant ?.price;
-
     const handleClickEditPlan = () => {
         ga.event({
             action: 'clic en editar plan',
@@ -100,7 +101,7 @@ export default function CheckoutDetails() {
         })
         toFirstStep();
     }
-    
+
     return (
         <Box
             style={{
@@ -130,7 +131,7 @@ export default function CheckoutDetails() {
                     onClick={handleClickEditPlan}
                 />
                 <Box paddingTop={4} borderTop="2px dashed #E5E5E5" borderBottom="2px solid #E5E5E5">
-                    <CheckoutDetailItem title="Valor del plan" value={`${planVariantPrice} €/ semana`} />
+                    <CheckoutDetailPlanPrice title="Valor del plan" price={form.variant ?.price} priceWithOffer={form.variant ?.priceWithOffer} />
                     {!!form.deliveryForm.shippingCost && (
                         <CheckoutDetailItem title="Costes de envío" value={`${form.deliveryForm ?.shippingCost}€` || "Envío gratis"} />
                     )}
@@ -172,11 +173,13 @@ export default function CheckoutDetails() {
                 ) : (
                         <CheckoutValueItem title="Valor total" value={totalValue} />
                     )}
-                {form.coupon ?.id ? (
-                    <AppliedCouponBox couponCode={form.coupon.code} handleRemoveCoupon={handleRemoveCoupon} />
-                ) : (
-                        <CouponInputAccordion handleSubmit={handleCouponSubmit} />
-                    )}
+                <div style={{ marginTop: theme.spacing(3) }}>
+                    {form.coupon ?.id ? (
+                        <AppliedCouponBox couponCode={form.coupon.code} handleRemoveCoupon={handleRemoveCoupon} />
+                    ) : (
+                            <CouponInputAccordion handleSubmit={handleCouponSubmit} />
+                        )}
+                </div>
                 <Box marginTop={4} paddingTop={4} borderTop="2px dashed #E5E5E5">
                     {form.deliveryForm.shippingDayLabel && (
                         <div style={{ display: "flex" }}>

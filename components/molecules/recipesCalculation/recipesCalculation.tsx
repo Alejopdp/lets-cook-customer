@@ -7,7 +7,9 @@ import { Divider, Grid, Typography } from "@material-ui/core";
 interface RecipesCalculationProps {
     recipesQty: number;
     peopleQty: number;
-    totalPrice: number;
+    totalPrice?: number;
+    price: number;
+    priceWithOffer: number;
 }
 
 const RecipesCalculation = (props: RecipesCalculationProps) => {
@@ -36,9 +38,15 @@ const RecipesCalculation = (props: RecipesCalculationProps) => {
                     </Typography>
                 </Grid>
                 <Grid item>
-                    <Typography variant="body1" color="primary">
-                        <b>{props.totalPrice} €/semana</b>
-                    </Typography>
+                    {props.priceWithOffer ? (
+                        <Typography variant="body1" color="primary">
+                            <span style={{ textDecoration: 'line-through', fontSize: '14px', color: '#707070' }}>{props.price} €</span><b> {props.priceWithOffer} €/semana</b>
+                        </Typography>
+                    ) : (
+                            <Typography variant="body1" color="primary">
+                                <b>{props.price} €/semana</b>
+                            </Typography>
+                        )}
                 </Grid>
             </Grid>
         </>
