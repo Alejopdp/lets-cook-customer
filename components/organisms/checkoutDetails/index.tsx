@@ -4,6 +4,7 @@ import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Rating } from "@material-ui/lab";
 import { useMediaQuery } from "@material-ui/core";
+import * as ga from '../../../helpers/ga'
 
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -31,19 +32,26 @@ export default function CheckoutDetails() {
     const router = useRouter();
 
     const totalValue = useMemo(() => {
-        const planVariantPrice = form.variant?.priceWithOffer || form.variant?.price;
-        const shippingCost = form.deliveryForm?.shippingCost || 0;
-        if (!form.coupon?.id) return planVariantPrice + shippingCost;
+        const planVariantPrice = form.variant ?.priceWithOffer || form.variant ?.price;
+        const shippingCost = form.deliveryForm ?.shippingCost || 0;
+        if (!form.coupon ?.id) return planVariantPrice + shippingCost;
 
-        return form.coupon?.discount_type.type === "percent"
-            ? `${planVariantPrice - (planVariantPrice * form.coupon?.discount_type.value) / 100 + shippingCost}€`
-            : form.coupon?.discount_type.type === "fix"
-            ? `${planVariantPrice - form.coupon?.discount_type.value + shippingCost}€`
-            : planVariantPrice;
-    }, [form.coupon, form.deliveryForm?.shippingCost, form.variant?.priceWithOffer, form.variant?.price]);
+        return form.coupon ?.discount_type.type === "percent"
+            ? `${planVariantPrice - (planVariantPrice * form.coupon ?.discount_type.value) / 100 + shippingCost}€`
+            : form.coupon ?.discount_type.type === "fix"
+                ? `${planVariantPrice - form.coupon ?.discount_type.value + shippingCost}€`
+                : planVariantPrice;
+    }, [form.coupon, form.deliveryForm ?.shippingCost, form.variant ?.priceWithOffer, form.variant ?.price]);
 
     const handleCouponSubmit = async (couponCode: string) => {
-        const res = await getCouponValidation(couponCode, userInfo.id, form.deliveryForm?.shippingCost, form.planCode, form.variant?.id);
+        ga.event({
+            action: 'clic en aplicar cupon',
+            params: {
+                event_category: 'checkout',
+                event_label: 'cupon de descuento',
+            }
+        })
+        const res = await getCouponValidation(couponCode, userInfo.id, form.deliveryForm ?.shippingCost, form.planCode, form.variant ?.id);
 
         if (res.status === 200) {
             setCoupon(res.data);
@@ -80,8 +88,19 @@ export default function CheckoutDetails() {
         });
     };
 
-    const planVariantPrice = form.variant?.priceWithOffer || form.variant?.price;
+    const planVariantPrice = form.variant ?.priceWithOffer || form.variant ?.price;
 
+    const handleClickEditPlan = () => {
+        ga.event({
+            action: 'clic en editar plan',
+            params: {
+                event_category: 'checkout',
+                event_label: form.planSlug,
+            }
+        })
+        toFirstStep();
+    }
+    
     return (
         <Box
             style={{
@@ -108,56 +127,56 @@ export default function CheckoutDetails() {
                     planIcon="http://localhost:3000/development/plans/Plan_test/Plan_test.png"
                     planName={form.planName}
                     planVariantLabel={form.variant.label}
-                    onClick={() => toFirstStep()}
+                    onClick={handleClickEditPlan}
                 />
                 <Box paddingTop={4} borderTop="2px dashed #E5E5E5" borderBottom="2px solid #E5E5E5">
                     <CheckoutDetailItem title="Valor del plan" value={`${planVariantPrice} €/ semana`} />
                     {!!form.deliveryForm.shippingCost && (
-                        <CheckoutDetailItem title="Costes de envío" value={`${form.deliveryForm?.shippingCost}€` || "Envío gratis"} />
+                        <CheckoutDetailItem title="Costes de envío" value={`${form.deliveryForm ?.shippingCost}€` || "Envío gratis"} />
                     )}
-                    {form.coupon?.id && (
+                    {form.coupon ?.id && (
                         <CheckoutDetailItem
-                            title={`Descuento ${form.coupon?.discount_type.type === "percent" ? "del" : "de"} ${
-                                form.coupon?.discount_type.value || form.deliveryForm?.shippingCost || 0
-                            } ${form.coupon?.discount_type.type === "percent" ? "%" : "€"}`}
+                            title={`Descuento ${form.coupon ?.discount_type.type === "percent" ? "del" : "de"} ${
+                                form.coupon ?.discount_type.value || form.deliveryForm ?.shippingCost || 0
+                            } ${form.coupon ?.discount_type.type === "percent" ? "%" : "€"}`}
                             value={
-                                form.coupon?.discount_type.type === "percent"
-                                    ? `- ${(planVariantPrice * form.coupon?.discount_type.value) / 100}€`
-                                    : form.coupon?.discount_type.type === "fix"
-                                    ? `- ${form.coupon?.discount_type.value}€`
-                                    : `${form.deliveryForm?.shippingCost || 0}€`
+                                form.coupon ?.discount_type.type === "percent"
+                                    ? `- ${(planVariantPrice * form.coupon ?.discount_type.value) / 100}€`
+                                    : form.coupon ?.discount_type.type === "fix"
+                                        ? `- ${form.coupon ?.discount_type.value}€`
+                                        : `${form.deliveryForm ?.shippingCost || 0}€`
                             }
                             isDiscountItem={true}
                         />
                     )}
                 </Box>
-                {form.coupon?.id && form.coupon.coupons_by_subscription.type === "only_fee" ? (
+                {form.coupon ?.id && form.coupon.coupons_by_subscription.type === "only_fee" ? (
                     <>
                         <CheckoutValueItem title="Valor del primer cargo" value={totalValue} />
                         <CheckoutValueItem
                             title="Valor a partir del segundo cargo"
-                            value={(planVariantPrice || 0) + form.deliveryForm?.shippingCost || 0}
+                            value={(planVariantPrice || 0) + form.deliveryForm ?.shippingCost || 0}
                         />
                     </>
-                ) : form.coupon?.id && form.coupon.coupons_by_subscription.type === "more_one_fee" ? (
+                ) : form.coupon ?.id && form.coupon.coupons_by_subscription.type === "more_one_fee" ? (
                     <>
                         <CheckoutValueItem
-                            title={`Valor de los primeros ${form.coupon?.coupons_by_subscription.value} cargos`}
+                            title={`Valor de los primeros ${form.coupon ?.coupons_by_subscription.value} cargos`}
                             value={totalValue}
                         />
                         <CheckoutValueItem
-                            title={`Valor luego de los ${form.coupon?.coupons_by_subscription.value} cargos`}
-                            value={(planVariantPrice || 0) + form.deliveryForm?.shippingCost || 0}
+                            title={`Valor luego de los ${form.coupon ?.coupons_by_subscription.value} cargos`}
+                            value={(planVariantPrice || 0) + form.deliveryForm ?.shippingCost || 0}
                         />
                     </>
                 ) : (
-                    <CheckoutValueItem title="Valor total" value={totalValue} />
-                )}
-                {form.coupon?.id ? (
+                        <CheckoutValueItem title="Valor total" value={totalValue} />
+                    )}
+                {form.coupon ?.id ? (
                     <AppliedCouponBox couponCode={form.coupon.code} handleRemoveCoupon={handleRemoveCoupon} />
                 ) : (
-                    <CouponInputAccordion handleSubmit={handleCouponSubmit} />
-                )}
+                        <CouponInputAccordion handleSubmit={handleCouponSubmit} />
+                    )}
                 <Box marginTop={4} paddingTop={4} borderTop="2px dashed #E5E5E5">
                     {form.deliveryForm.shippingDayLabel && (
                         <div style={{ display: "flex" }}>

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import cookies from "js-cookie";
 const langs = require("../../../lang").recoverPassword;
+import * as ga from '../../../helpers/ga'
 
 // Internal components
 import RecoverPasswordMail from "./recoverPasswordMail";
@@ -37,6 +38,14 @@ const RecoverPasswordForm = (props) => {
     var currentInputs = <></>;
 
     const handleSubmitEmail = async () => {
+        ga.event({
+            action: 'clic en recuperar contrasena',
+            params: {
+                event_category: `recupero de contrasena - ${props.source}`,
+                event_label: 'ingreso de email',
+            }
+        })
+
         const res = await forgotPassword(formData.email);
 
         if (res.status === 200) {
@@ -47,6 +56,14 @@ const RecoverPasswordForm = (props) => {
     };
 
     const handleSubmitCode = async () => {
+        ga.event({
+            action: 'clic en continuar',
+            params: {
+                event_category: `recupero de contrasena - ${props.source}`,
+                event_label: 'ingreso del codigo',
+            }
+        })
+
         const res = await validateRecoverPasswordCode(formData.code, formData.email);
 
         if (res.status === 200) {
@@ -57,6 +74,14 @@ const RecoverPasswordForm = (props) => {
     };
 
     const handleSubmitNewPassword = async () => {
+        ga.event({
+            action: 'clic en continuar',
+            params: {
+                event_category: `recupero de contrasena - ${props.source}`,
+                event_label: 'ingreso de nueva contrasena',
+            }
+        })
+
         setisResetingPassword(true);
         const res = await resetPassword(formData.password, formData.email, formData.code);
 

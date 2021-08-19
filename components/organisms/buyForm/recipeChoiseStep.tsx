@@ -2,6 +2,8 @@ import { memo, useMemo } from "react";
 // Utils & Config
 import { useBuyFlow, useFilterDrawer } from "@stores";
 import _ from "lodash";
+import * as ga from '../../../helpers/ga'
+
 // External components
 import { Container, Grid, Chip, Icon, useTheme } from "@material-ui/core";
 import { HighlightOff } from "@material-ui/icons";
@@ -37,11 +39,25 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const { enqueueSnackbar } = useSnackbar();
 
     const handleRemoveFilter = (filter: IFilter) => {
+        ga.event({
+            action: 'clic en remover filtro',
+            params: {
+                event_category: 'elegir recetas',
+                event_label: filter.value.toLowerCase(),
+            }
+        })
         const newFilterState = filters.filter((f) => !filter.isEqualToFilterValue(f.value));
         setFilters(newFilterState);
     };
 
     const handleSubmit = async () => {
+        ga.event({
+            action: 'clic en finalizar',
+            params: {
+                event_category: 'elegir recetas',
+                event_label: 'finalizar'
+            }
+        })
         var recipeSelection: { recipeId: string; quantity: number }[] = [];
         const ordererSelectedRecipes = _.orderBy(recipes, ["id"], ["asc"]);
 
@@ -63,6 +79,13 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     };
 
     const handleChooseRecipesLater = () => {
+        ga.event({
+            action: 'clic en elegir recetas luego',
+            params: {
+                event_category: 'elegir recetas',
+                event_label: 'elegir recetas luego'
+            }
+        })
         sendWelcomeEmail();
         gotToNextView();
     };
@@ -70,16 +93,30 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const filteredRecipes = useMemo(() => {
         return filters.length > 0
             ? props.recipes.filter((recipe) =>
-                  filters.some((filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqual(recipe.difficultyLevel))
-              )
+                filters.some((filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqual(recipe.difficultyLevel))
+            )
             : props.recipes;
     }, [filters]);
 
     const handleClickAddRecipe = (recipe) => {
+        ga.event({
+            action: 'clic en agregar receta',
+            params: {
+                event_category: 'elegir recetas',
+                event_label: recipe.name.toLowerCase()
+            }
+        })
         selectRecipes([...recipes, recipe]);
     };
 
     const handleClickRemoveRecipe = ({ id: _id }) => {
+        ga.event({
+            action: 'clic en remover receta',
+            params: {
+                event_category: 'elegir recetas',
+                event_label: 'remover receta'
+            }
+        })
         const index = recipes.find(({ id }) => id !== _id);
         if (index === -1) return;
         const newState = [...recipes];
@@ -94,6 +131,18 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
             enqueueSnackbar("Error al enviar email de bienvenida", { variant: "error" });
         }
     };
+
+    const handleClickOpenFilters = () => {
+        ga.event({
+            action: 'clic en filtrar recetas',
+            params: {
+                event_category: 'elegir recetas',
+                event_label: 'visualizar filtros',
+            }
+        })
+        setDrawerOpen(!drawerIsOpen);
+
+    }
 
     return (
         <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6), paddingBottom: "200px" }}>
@@ -111,9 +160,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                                 variant="outline"
                                 label="Filtrar recetas"
                                 style={{ backgroundColor: "white", padding: "8px" }}
-                                onClick={() => {
-                                    setDrawerOpen(!drawerIsOpen);
-                                }}
+                                onClick={handleClickOpenFilters}
                             >
                                 <Icon fontSize="small" component={FilterIcon} />
                             </RoundedButton>

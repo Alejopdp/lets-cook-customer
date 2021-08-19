@@ -3,7 +3,7 @@ import React from "react";
 import useStyles from "./styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-
+import * as ga from '../../../helpers/ga'
 import { loginWithFacebookAndGetIdToken, loginWithGoogleAndGetIdToken } from "../../../helpers/firebase";
 import { useSnackbar } from "notistack";
 
@@ -18,6 +18,14 @@ export const SocialNetworksButtons = (props) => {
     const [lang] = useLang("socialNetworksButtons");
 
     const handleFacebookLogin = async () => {
+        ga.event({
+            action: 'clic en continuar con rrss',
+            params: {
+                event_category: `registrarse - ${props.source}`,
+                event_label: 'facebook',
+            }
+        })
+
         const { token, error, email } = await loginWithFacebookAndGetIdToken();
 
         if (!!token) {
@@ -33,6 +41,14 @@ export const SocialNetworksButtons = (props) => {
     };
 
     const handleGoogleLogin = async () => {
+        ga.event({
+            action: 'clic en continuar con rrss',
+            params: {
+                event_category: `registrarse - ${props.source}`,
+                event_label: 'google',
+            }
+        })
+
         const { token, error } = await loginWithGoogleAndGetIdToken();
 
         if (!!token) {

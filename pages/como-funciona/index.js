@@ -35,7 +35,7 @@ const ComoFunciona = () => {
     ];
 
     return (
-        <Layout seoTitle="Cómo funciona - Let's cook: Productos frescos y recetas" seoOgUrlSlug='como-funciona'>
+        <Layout seoTitle="Cómo funciona - Let's cook: Productos frescos y recetas" seoOgUrlSlug='como-funciona' page='como funciona'>
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <HowItWorksExtendedSection />

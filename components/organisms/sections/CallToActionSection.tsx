@@ -6,12 +6,24 @@ import { useRouter } from "next/router";
 
 import { useCallToActionStyle as useStyles } from "./styles";
 import { CallToActionSectionProps } from "./interfaces";
+import * as ga from '../../../helpers/ga'
 
 
 export const CallToActionSection = memo((props: CallToActionSectionProps) => {
     const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();
+
+    const goToPlans = () => {
+        ga.event({
+            action: "clic en nuestros planes",
+            params: {
+                event_category: props.page ? props.page : 'undefined page',
+                event_label: 'call to action',
+            }
+        })
+        router.push("/planes")
+    }
 
     return (
         <div className={classes.root}>
@@ -39,7 +51,7 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
                 </Grid>
                 <Grid container style={{ marginTop: theme.spacing(4) }}>
                     <Grid item xs={12} style={{ display: 'flex', flexDirection: 'column' }}>
-                        <RoundedButton label="Nuestros planes" onClick={() => router.push("/planes")} />
+                        <RoundedButton label="Nuestros planes" onClick={goToPlans} />
                         <Typography className={classes.smallText} align='center' variant="caption">
                             Podrás pausar, cambiar o cancelar el plan cuando quieras
                     </Typography>
