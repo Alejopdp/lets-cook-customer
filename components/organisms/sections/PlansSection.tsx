@@ -55,58 +55,58 @@ export const PlansSection = memo((props: PlansSectionProps) => {
     console.log('cards', props.cards)
     return (
         <>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Title
-                        title="Encuentra el plan indicado para tí"
-                        subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
-                    />
-                </Grid>
-                {props.cards.length <= 6 && isLgUp && (
+            <Container maxWidth='none'>
+                <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Grid container spacing={2} style={{ justifyContent: "center" }}>
-                            {(props.cards || []).map((card, index) => (
-                                <Grid item xs={12} lg={2}>
-                                    <PlanCard index={index} card={card} />
-                                </Grid>
-                            ))}
-                        </Grid>
+                        <Title
+                            title="Encuentra el plan indicado para tí"
+                            subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
+                        />
                     </Grid>
+                    {props.cards.length <= 6 && isLgUp && (
+                        <Grid item xs={12}>
+                            <Grid container spacing={2} style={{ justifyContent: "center" }}>
+                                {(props.cards || []).map((card, index) => (
+                                    <Grid item xs={12} lg={2}>
+                                        <PlanCard index={index} card={card} />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Grid>
+                    )}
+                </Grid>
+                {(props.cards.length > 6 || isLgDown) && (
+                        <Carousel
+                            additionalTransfrom={0}
+                            arrows={isSmDown ? false : true}
+                            autoPlaySpeed={3000}
+                            centerMode={false}
+                            className=""
+                            containerClass="container"
+                            dotListClass=""
+                            draggable
+                            focusOnSelect={false}
+                            // infinite
+                            itemClass=""
+                            keyBoardControl
+                            responsive={responsive}
+                            minimumTouchDrag={80}
+                            partialVisible
+                            renderButtonGroupOutside={false}
+                            renderDotsOutside={false}
+                            showDots={false}
+                            sliderClass=""
+                            slidesToSlide={1}
+                            swipeable
+                        >
+                            {(props.cards || []).map((card, index) => (
+                                <div style={{ paddingRight: theme.spacing(2) }}>
+                                    <PlanCard index={index} card={card} />
+                                </div>
+                            ))}
+                        </Carousel>
                 )}
-            </Grid>
-            {(props.cards.length > 6 || isLgDown) && (
-                <div style={{ paddingLeft: theme.spacing(2) }}>
-                    <Carousel
-                        additionalTransfrom={0}
-                        arrows={isSmDown ? false : true}
-                        autoPlaySpeed={3000}
-                        centerMode={false}
-                        className=""
-                        containerClass="container"
-                        dotListClass=""
-                        draggable
-                        focusOnSelect={false}
-                        // infinite
-                        itemClass=""
-                        keyBoardControl
-                        responsive={responsive}
-                        minimumTouchDrag={80}
-                        partialVisible
-                        renderButtonGroupOutside={false}
-                        renderDotsOutside={false}
-                        showDots={false}
-                        sliderClass=""
-                        slidesToSlide={1}
-                        swipeable
-                    >
-                        {(props.cards || []).map((card, index) => (
-                            <div style={{ paddingRight: theme.spacing(2) }}>
-                                <PlanCard index={index} card={card} />
-                            </div>
-                        ))}
-                    </Carousel>
-                </div>
-            )}
+            </Container>
         </>
     );
 });

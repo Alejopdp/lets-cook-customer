@@ -73,8 +73,6 @@ const CrossSellingStep = (props) => {
             frequency: variant.frequency,
         }));
 
-        console.log('variants', variants)
-
         ga.event({
             action: 'clic en pagar productos adicionales',
             params: {
@@ -82,6 +80,24 @@ const CrossSellingStep = (props) => {
                 event_label: 'agregar productos adicionales',
             }
         })
+
+        // ga.purchase({
+        //     transaction_id: res.data.subscriptionId,
+        //     affiliation: "Let's cook website",
+        //     value: 0,
+        //     currency: "EUR",
+        //     tax: 0,
+        //     shipping: 0,
+        //     items: [
+        //         {
+        //             id: "",
+        //             name: "",
+        //             category: "",
+        //             quantity: 0,
+        //             price: 0
+        //         }
+        //     ]
+        // })
 
         const res = await createManySubscriptions(userInfo.id, variants);
 
@@ -93,6 +109,7 @@ const CrossSellingStep = (props) => {
 
                 if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
                     // TO DO: Confirm payments in DB
+
                     await updatePaymentOrderState(res.data.paymentOrderId, PaymentOrderState.PAYMENT_ORDER_BILLED);
                     await router.push("/perfil");
                     resetBuyFlowState();
