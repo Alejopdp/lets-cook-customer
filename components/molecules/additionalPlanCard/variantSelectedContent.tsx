@@ -13,7 +13,7 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
     const router = useRouter();
     return (
         <Box>
-            <Typography variant="subtitle1" color="initial" style={{ marginBottom: 8 }}>
+            <Typography variant="h5" color="initial" style={{ marginBottom: theme.spacing(2) }}>
                 {props.additionalPlanName}
             </Typography>
             {props.variant && (
@@ -30,15 +30,18 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
                             </>
                         ))}
                     </Box>
-                    <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold", marginBottom: theme.spacing(3) }}>
-                        Valor: {props.variant.priceWithOffer || props.variant.price} €
-                    </Typography>
+                    <div style={{ marginBottom: theme.spacing(3) }}>
+                        <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
+                            Precio: {props.variant.priceWithOffer || props.variant.price} €
+                        </Typography>
+                        <Typography variant="caption" color='textSecondary'>Impuestos incluidos</Typography>
+                    </div>
                 </>
             )}
             <Box display="flex" alignItems="center">
-                <RotateRight style={{ marginRight: 8 }} />{" "}
+                <RotateRight style={{ marginRight: 8 }} />
                 <Typography variant="body2" style={{ fontSize: "16px" }}>
-                    Plan {translateFrequency(props.selectedFrequency, router.locale)}
+                    Frequencia {translateFrequency(props.selectedFrequency, router.locale).toLowerCase()}
                 </Typography>
             </Box>
         </Box>

@@ -148,7 +148,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     };
 
     return (
-        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6), paddingBottom: "200px" }}>
+        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(8), paddingBottom: "200px" }}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TitleBuyFlow

@@ -94,9 +94,9 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
 
     return (
         <Box>
-            <Box style={{ cursor: "pointer", display: 'flex', alignItems: 'center', marginBottom: theme.spacing(1) }} onClick={props.handleClickBackToFirstContent}>
+            <Box style={{ cursor: "pointer", display: 'flex', alignItems: 'center', marginBottom: theme.spacing(2) }} onClick={props.handleClickBackToFirstContent}>
                 <ArrowBackIcon style={{ marginRight: theme.spacing(1), color: "#515151" }} />
-                <Typography variant="subtitle1" color="initial">
+                <Typography variant="h5" color="initial">
                     {props.additionalPlanName}
                 </Typography>
             </Box>
@@ -111,10 +111,6 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                     />
                 ))}
             </Box>
-
-            <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold", marginBottom: theme.spacing(3) }}>
-                {actualValue === -1 ? "" : `Valor: € ${actualValue}`}
-            </Typography>
             <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}>
                 Frecuencia:
             </Typography>
@@ -137,6 +133,14 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                         ))}
                 </RadioGroup>
             </FormControl>
+            {actualValue !== -1 && (
+                <div style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(3) }}>
+                    <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
+                        {`Precio: ${actualValue} €`}
+                    </Typography>
+                    <Typography variant="caption" color='textSecondary'>Impuestos incluidos</Typography>
+                </div>
+            )}
         </Box>
     );
 };

@@ -122,7 +122,7 @@ export const RegisterUserStep = () => {
     }
 
     return (
-        <div style={{ paddingTop: theme.spacing(6) }}>
+        <div style={{ paddingTop: theme.spacing(8) }}>
             {actualView === View.SIGN_IN ? (
                 <LoginBox
                     handleLogin={handleLogin}
