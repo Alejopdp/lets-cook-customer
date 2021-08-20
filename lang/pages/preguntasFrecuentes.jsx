@@ -1,14 +1,14 @@
 export const preguntasFrecuentes = {
     es: {
         title: "Preguntas frecuentes",
-        subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        subtitle: "¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat",
     },
     en: {
         title: "Frequently asked questions",
-        subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        subtitle: "¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat",
     },
     ca: {
         title: "Preguntas frecuentes",
-        subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        subtitle: "¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat",
     },
 };

@@ -69,7 +69,7 @@ export const SocialNetworksButtons = (props) => {
             <Grid item xs={12}>
                 <Button className={clsx(button, facebook)} onClick={handleFacebookLogin}>
                     <Image src="/assets/facebook.png" width={20} height={20} />
-                    <Typography variant="subtitle1" className={txt}>
+                    <Typography variant="h6" className={txt}>
                         {lang.facebook}
                     </Typography>
                 </Button>
@@ -77,7 +77,7 @@ export const SocialNetworksButtons = (props) => {
             <Grid item xs={12}>
                 <Button className={clsx(button, google)} onClick={handleGoogleLogin}>
                     <Image src="/assets/google.png" width={20} height={20} />
-                    <Typography variant="subtitle1" className={txt}>
+                    <Typography variant="h6" className={txt}>
                         {lang.google}
                     </Typography>
                 </Button>

@@ -20,7 +20,7 @@ const PurchaseConditionsModal = (props) => {
         <ModalWithoutActions
             open={props.open}
             handleClose={props.handleClose}
-            title="Condiciones de compra"
+            title="Condiciones generales de venta"
             fullScreen={true}
             maxWidth="sm"
         >

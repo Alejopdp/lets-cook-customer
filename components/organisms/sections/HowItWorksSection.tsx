@@ -30,7 +30,7 @@ const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
             <Grid container spacing={2}>
                 <Title title="¿Cómo funciona?" />
                 {(props.cards || []).map((card, index) => (
-                    <Grid key={index} item xs={12} sm={6} md={3} style={{ textAlign: "center" }}>
+                    <Grid key={index} item xs={12} sm={6} md={3} style={{ textAlign: "center" }} className={classes.gridCard}>
                         <img className={classes.img} src={card.image} />
                         <Typography className={classes.paddingCardTitle} variant="subtitle1" color="initial">
                             {card.title}

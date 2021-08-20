@@ -200,7 +200,7 @@ export default function CheckoutDetails() {
                         alt="checkout-image"
                         style={{ width: "100%", borderRadius: "8px", marginTop: theme.spacing(4) }}
                     /> */}
-                    <Grid container spacing={2} alignItems="center" style={{marginTop: theme.spacing(4)}}>
+                    <Grid container spacing={2} alignItems="center" style={{ marginTop: theme.spacing(4) }}>
                         <Grid item xs={12} sm={6}>
                             <div style={{ display: "flex", marginBottom: theme.spacing(1) }}>
                                 <img src="/assets/img-google-logo.png" style={{ width: "80px", marginRight: theme.spacing(1) }} />
@@ -217,7 +217,7 @@ export default function CheckoutDetails() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Typography variant="body2" style={{ fontSize: "13px" }}>
-                                Tenemos una calificación excelente en <strong>108 opiniones</strong>
+                                Tenemos una calificación excelente en <strong>149 opiniones</strong>
                             </Typography>
                         </Grid>
                     </Grid>

@@ -60,7 +60,7 @@ export const PlansSection = memo((props: PlansSectionProps) => {
                     <Grid item xs={12}>
                         <Title
                             title="Encuentra el plan indicado para tí"
-                            subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
+                            subtitle="..."
                         />
                     </Grid>
                     {props.cards.length <= 6 && isLgUp && (

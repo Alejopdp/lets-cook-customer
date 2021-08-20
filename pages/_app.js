@@ -77,6 +77,9 @@ function MyApp(props) {
                 <meta name="twitter:title" content="Let's cook: Productos frescos y recetas" />
                 <meta name="twitter:description" content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana." />
                 <link rel="icon" href="/favicon.png" />
+                <link rel="preload" href="/fonts/avenirNextLtPro/AvenirNextLTPro-Regular.otf" as="font" crossOrigin="" />
+                <link rel="preload" href="/fonts/avenirNextLtPro/AvenirNextLTPro-Medium.otf" as="font" crossOrigin="" />
+                <link rel="preload" href="/fonts/avenirNextLtPro/AvenirNextLTPro-Bold.otf" as="font" crossOrigin="" />
             </Head>
             <ThemeProvider theme={theme}>
                 <SnackbarProvider maxSnack={3}>

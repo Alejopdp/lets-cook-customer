@@ -5,22 +5,22 @@ export const howItWorksExtendedSection = {
         step1: {
             title: "Apúntate",
             content: "Elige el plan que más se adapte a ti. Escoge la cantidad de días y raciones por día que quieres que te llevemos cada semana. ¡No te aburrirás, tenemos muchas recetas!",
-            image: "/assets/home/home-cf1-apuntate.webp",
+            image: "/assets/home/home-cf1-apuntate.jpg",
         },
         step2: {
             title: "Recibe",
             content: "Cada martes recibirás con ilusión tus kits personalizados con los ingredientes frescos necesarios y exactos para preparar las recetas que has elegido.",
-            image: "/assets/home/home-cf2-recibe.webp",
+            image: "/assets/home/home-cf2-recibe.jpg",
         },
         step3: {
             title: "Cocina",
             content: "Saca el chef que llevas dentro y tómate la calma para cocinar. Cuentas con la ayuda de nuestras recetas y videorecetas. ¡Son muy fáciles de preparar!",
-            image: "/assets/home/home-cf3-cocina.webp",
+            image: "/assets/home/home-cf3-cocina.jpg",
         },
         step4: {
             title: "Disfruta",
             content: "¡A cenaaaaar! Disfruta de una cena deliciosa y diferente. El mejor premio para un día ajetreado, un manjar rico y saludable hecho para ti… ¡y por ti!",
-            image: "/assets/home/home-cf4-disfruta.webp",
+            image: "/assets/home/home-cf4-disfruta.jpg",
         },
     },
     en: {
@@ -29,22 +29,22 @@ export const howItWorksExtendedSection = {
         step1: {
             title: "Apúntate",
             content: "Elige el plan que más se adapte a ti. Escoge la cantidad de días y raciones por día que quieres que te llevemos cada semana. ¡No te aburrirás, tenemos muchas recetas!",
-            image: "/assets/home/home-cf1-apuntate.webp",
+            image: "/assets/home/home-cf1-apuntate.jpg",
         },
         step2: {
             title: "Recibe",
             content: "Cada martes recibirás con ilusión tus kits personalizados con los ingredientes frescos necesarios y exactos para preparar las recetas que has elegido.",
-            image: "/assets/home/home-cf2-recibe.webp",
+            image: "/assets/home/home-cf2-recibe.jpg",
         },
         step3: {
             title: "Cocina",
             content: "Saca el chef que llevas dentro y tómate la calma para cocinar. Cuentas con la ayuda de nuestras recetas y videorecetas. ¡Son muy fáciles de preparar!",
-            image: "/assets/home/home-cf3-cocina.webp",
+            image: "/assets/home/home-cf3-cocina.jpg",
         },
         step4: {
             title: "Disfruta",
             content: "¡A cenaaaaar! Disfruta de una cena deliciosa y diferente. El mejor premio para un día ajetreado, un manjar rico y saludable hecho para ti… ¡y por ti!",
-            image: "/assets/home/home-cf4-disfruta.webp",
+            image: "/assets/home/home-cf4-disfruta.jpg",
         },
     },
     ca: {
@@ -53,22 +53,22 @@ export const howItWorksExtendedSection = {
         step1: {
             title: "Apúntate",
             content: "Elige el plan que más se adapte a ti. Escoge la cantidad de días y raciones por día que quieres que te llevemos cada semana. ¡No te aburrirás, tenemos muchas recetas!",
-            image: "/assets/home/home-cf1-apuntate.webp",
+            image: "/assets/home/home-cf1-apuntate.jpg",
         },
         step2: {
             title: "Recibe",
             content: "Cada martes recibirás con ilusión tus kits personalizados con los ingredientes frescos necesarios y exactos para preparar las recetas que has elegido.",
-            image: "/assets/home/home-cf2-recibe.webp",
+            image: "/assets/home/home-cf2-recibe.jpg",
         },
         step3: {
             title: "Cocina",
             content: "Saca el chef que llevas dentro y tómate la calma para cocinar. Cuentas con la ayuda de nuestras recetas y videorecetas. ¡Son muy fáciles de preparar!",
-            image: "/assets/home/home-cf3-cocina.webp",
+            image: "/assets/home/home-cf3-cocina.jpg",
         },
         step4: {
             title: "Disfruta",
             content: "¡A cenaaaaar! Disfruta de una cena deliciosa y diferente. El mejor premio para un día ajetreado, un manjar rico y saludable hecho para ti… ¡y por ti!",
-            image: "/assets/home/home-cf4-disfruta.webp",
+            image: "/assets/home/home-cf4-disfruta.jpg",
         },
     },
 };
