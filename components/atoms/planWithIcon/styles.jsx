@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
         border: `1px solid ${theme.palette.primary.main}`,
         backgroundColor: "#F2FFF8"
     },
+    hoverBox: {
+        backgroundColor: '#F9F9F9'
+    },
     icon: {
         width: 64,
         height: 64,
