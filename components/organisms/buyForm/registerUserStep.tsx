@@ -79,7 +79,7 @@ export const RegisterUserStep = () => {
 
     const goToSignIn = () => {
         ga.event({
-            action: 'clic en ingresa aqui',
+            action: 'clic en iniciar sesion',
             params: {
                 event_category: `registrarse - buyflow`,
                 event_label: 'ya tienes cuenta',

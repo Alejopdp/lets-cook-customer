@@ -144,7 +144,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                     {...params}
                     name={props.name}
                     classes={{ root: classes.root }}
-                    label="Ingrese su dirección"
+                    label={props.label}
                     variant="outlined"
                     fullWidth
                     disabled={props.disabled}
@@ -167,14 +167,14 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                             <LocationOnIcon className={classes.icon} />
                         </Grid>
                         <Grid item xs>
-                            {parts?.map((part, index) => (
+                            {parts ?.map((part, index) => (
                                 <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
                                     {part.text}
                                 </span>
                             ))}
 
                             <Typography variant="body2" color="textSecondary">
-                                {option?.structured_formatting.secondary_text || ""}
+                                {option ?.structured_formatting.secondary_text || ""}
                             </Typography>
                         </Grid>
                     </Grid>

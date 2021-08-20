@@ -102,6 +102,7 @@ export default function CheckoutDetails() {
         toFirstStep();
     }
 
+    console.log('form', form)
     return (
         <Box
             style={{
@@ -153,26 +154,29 @@ export default function CheckoutDetails() {
                 </Box>
                 {form.coupon ?.id && form.coupon.coupons_by_subscription.type === "only_fee" ? (
                     <>
-                        <CheckoutValueItem title="Valor del primer cargo" value={totalValue} />
+                        <CheckoutValueItem title="Precio final primer entrega" value={totalValue} />
                         <CheckoutValueItem
-                            title="Valor a partir del segundo cargo"
+                            title="Precio a partir de la segunda entrega"
                             value={(planVariantPrice || 0) + form.deliveryForm ?.shippingCost || 0}
                         />
                     </>
                 ) : form.coupon ?.id && form.coupon.coupons_by_subscription.type === "more_one_fee" ? (
                     <>
                         <CheckoutValueItem
-                            title={`Valor de los primeros ${form.coupon ?.coupons_by_subscription.value} cargos`}
+                            title={`Precio final de las primeras ${form.coupon ?.coupons_by_subscription.value} entregas`}
                             value={totalValue}
                         />
                         <CheckoutValueItem
-                            title={`Valor luego de los ${form.coupon ?.coupons_by_subscription.value} cargos`}
+                            title={`Precio luego de las ${form.coupon ?.coupons_by_subscription.value} entregas`}
                             value={(planVariantPrice || 0) + form.deliveryForm ?.shippingCost || 0}
                         />
                     </>
                 ) : (
-                        <CheckoutValueItem title="Valor total" value={totalValue} />
+                        <CheckoutValueItem title="Precio final" value={totalValue} />
                     )}
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: theme.spacing(0.5) }}>
+                    <Typography variant="caption" color='textSecondary'>Impuestos incluidos</Typography>
+                </div>
                 <div style={{ marginTop: theme.spacing(3) }}>
                     {form.coupon ?.id ? (
                         <AppliedCouponBox couponCode={form.coupon.code} handleRemoveCoupon={handleRemoveCoupon} />
@@ -190,12 +194,13 @@ export default function CheckoutDetails() {
                             </Typography>
                         </div>
                     )}
-                    <img
+                    {/* Agregar foto del plan seleccionado */}
+                    {/* <img
                         src="/assets/empty-image-checkout.png"
                         alt="checkout-image"
-                        style={{ width: "100%", borderRadius: "8px", marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}
-                    />
-                    <Grid container spacing={2} alignItems="center">
+                        style={{ width: "100%", borderRadius: "8px", marginTop: theme.spacing(4) }}
+                    /> */}
+                    <Grid container spacing={2} alignItems="center" style={{marginTop: theme.spacing(4)}}>
                         <Grid item xs={12} sm={6}>
                             <div style={{ display: "flex", marginBottom: theme.spacing(1) }}>
                                 <img src="/assets/img-google-logo.png" style={{ width: "80px", marginRight: theme.spacing(1) }} />

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#F2FFF8"
     },
     hoverBox: {
-        backgroundColor: '#F9F9F9'
+        // backgroundColor: '#F9F9F9'
     },
     icon: {
         width: 64,

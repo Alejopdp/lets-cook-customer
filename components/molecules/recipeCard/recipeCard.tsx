@@ -26,22 +26,22 @@ export const RecipeCard = (props: RecipeCardProps) => {
             onClick={props.handleClickOpenModal}
         >
             <Card className={root} >
-                <CardContent style={{ height: "60%" }}>
+                <CardContent style={{ height: "20%" }}>
                     <RecipeImgTags imgTags={props.imgTags} />
                 </CardContent>
 
-                <CardContent style={{ height: "40%" }}>
+                <CardContent style={{ height: "80%", display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
                     <Grid container>
                         <Grid item className={tag}>
-                            <TimerIcon color="primary" className={marg} />
-                            <Typography variant="subtitle2">
+                            <TimerIcon color="primary" className={marg} style={{ fontSize: '20px' }} />
+                            <Typography variant="subtitle2" style={{ fontSize: '13px' }}>
                                 {props.timeTag}
                             </Typography>
                         </Grid>
 
                         <Grid item className={tag}>
-                            <SpeedIcon color="primary" className={marg} />
-                            <Typography variant="subtitle2">
+                            <SpeedIcon color="primary" className={marg} style={{ fontSize: '20px' }} />
+                            <Typography variant="subtitle2" style={{ fontSize: '13px' }}>
                                 {props.difficultyTag}
                             </Typography>
                         </Grid>

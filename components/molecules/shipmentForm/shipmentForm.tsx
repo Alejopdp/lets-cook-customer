@@ -134,10 +134,11 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                     <Grid container spacing={2} className={classes.shipmentFormContainer}>
                         <Grid item xs={12}>
                             <LocationSearchInput
+                                name="addressName"
+                                label='Dirección'
                                 disabled={!!form.deliveryForm ?.addressName}
                                 value={props.deliveryData.addressName}
                                 handleChange={props.handleAddressChange}
-                                name="addressName"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -169,8 +170,9 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         </Grid>
                         <Grid item xs={12}>
                             <PhoneNumberInput
-                                value={props.deliveryData ?.phone1}
                                 name="phone1"
+                                label='WhatsApp o móvil'
+                                value={props.deliveryData ?.phone1}
                                 handleChange={props.handleChange}
                                 disabled={!!form.deliveryForm ?.phone1}
                             />
@@ -180,18 +182,18 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 <Box display="flex" alignItems="center" className={classes.boxChangeProfileDataLater} >
                                     <ErrorIcon fontSize="small" style={{ marginRight: "8px" }} />
                                     <Typography variant="body1" style={{ fontSize: "14px" }}>
-                                        Luego podrás cambiar los datos de entrega desde tu perfil
+                                        Podrás actualizar los datos en tu perfil
                                     </Typography>
                                 </Box>
                             </Grid>
                         )}
                         <Grid item xs={12}>
                             <Typography variant="body2" style={{ marginBottom: theme.spacing(1) }}>
-                                ¿Tienes alguna restricción a la hora de ingerir algún tipo de alimento?
+                                ¿Tienes alguna restricción con algún tipo de ingrediente?
                             </Typography>
                             <TextInput
                                 name="restrictions"
-                                label="Ingrese aquí sus restricciones (solo si aplica)"
+                                label="Indica aquí tus restricciones (solo si aplica)"
                                 value={props.deliveryData ?.restrictions}
                                 onChange={props.handleChange}
                             />

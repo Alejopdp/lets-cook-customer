@@ -82,8 +82,8 @@ export const WeekPlanRecipesSection = memo((props: RecipesSectionProps) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <SectionTitleBuyFlow
-                            title={`Recetas del ${form.planName} del ${form.weekLabel}`}
-                            subtitle="Déjate sorprender por nuestras deliciosas recetas preparadas por chefs y aprende cocinando"
+                            title={`Recetas del ${form.planName} de esta semana`}
+                            subtitle="Nuestros chefs preparan recetas variadas cada semana para mantener la llama viva."
                         />
                     </Grid>
                     {props.recipes.length <= 4 && isLgUp && (
