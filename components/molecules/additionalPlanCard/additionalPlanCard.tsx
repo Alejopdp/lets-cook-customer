@@ -41,12 +41,105 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
 
     const handleRemoveVariant = (additionalPlanId: string) => {
         const newVariants = props.selectedVariants.filter((variant) => variant.planId !== additionalPlanId);
-        console.log("New variants after removal: ", newVariants);
         props.setselectedVariants(newVariants);
+        props.setvariantsToPay(props.variantsToPay.filter((variant) => variant.planId !== additionalPlanId));
         setcardView(CardView.FIRST_CONTENT);
     };
+    console.log("SELECTED VARIANTS: ", props.selectedVariants);
+    console.log("VARIANTS TO PAY: ", props.variantsToPay);
 
-    const { actualView, actualButton, hasBgImg } = useMemo(() => {
+    // const { actualView, actualButton, hasBgImg } = useMemo(() => {
+    //     switch (cardView) {
+    //         case CardView.FIRST_CONTENT:
+    //             return {
+    //                 actualView: (
+    //                     <FirstContent
+    //                         name={props.additionalPlan.name}
+    //                         description={props.additionalPlan.description}
+    //                         // minPrice no lo recibo todavía del endpoint
+    //                         minPrice=""
+    //                     />
+    //                 ),
+    //                 actualButton: (
+    //                     <RoundedButton
+    //                         label="VER OPCIONES"
+    //                         style={{ width: "100%", backgroundColor: "white", padding: theme.spacing(1) }}
+    //                         textStyle={{ color: theme.palette.primary.main }}
+    //                         onClick={() => setcardView(CardView.SELECT_ATTRIBUTE)}
+    //                     />
+    //                 ),
+    //                 hasBgImg: true,
+    //             };
+    //         case CardView.SELECT_ATTRIBUTE:
+    //             return {
+    //                 actualView: (
+    //                     <SelectVariantContent
+    //                         variants={props.additionalPlan.variants}
+    //                         selectedVariants={props.selectedVariants}
+    //                         setselectedVariants={props.setselectedVariants}
+    //                         frequencies={props.additionalPlan.availableFrequencies!}
+    //                         selectedFrequency={selectedFrequency}
+    //                         setselectedFrequency={setselectedFrequency}
+    //                         planId={props.additionalPlan.id}
+    //                     />
+    //                 ),
+    //                 actualButton: (
+    //                     <RoundedButton
+    //                         label="SELECCIONAR"
+    //                         disabled={props.selectedVariants.length === 0}
+    //                         style={{ width: "100%", padding: theme.spacing(1) }}
+    //                         onClick={() => {
+    //                             addPlanToCart();
+    //                             setcardView(CardView.ATTRIBUTE_SELECTED);
+    //                         }}
+    //                     />
+    //                 ),
+    //                 hasBgImg: false,
+    //             };
+    //         case CardView.ATTRIBUTE_SELECTED:
+    //             return {
+    //                 actualView: (
+    //                     <VariantSelectedContent
+    //                         selectedFrequency={selectedFrequency}
+    //                         variant={props.selectedVariants.find((variant) => variant.planId === props.additionalPlan.id)}
+    //                     />
+    //                 ),
+    //                 actualButton: (
+    //                     <RoundedButton
+    //                         label="REMOVER"
+    //                         style={{
+    //                             width: "100%",
+    //                             backgroundColor: "white",
+    //                             border: `1px solid ${theme.palette.secondary.main}`,
+    //                             padding: theme.spacing(1),
+    //                         }}
+    //                         textStyle={{ color: theme.palette.secondary.main }}
+    //                         onClick={() => handleRemoveVariant(props.additionalPlan.id)}
+    //                     />
+    //                 ),
+    //                 hasBgImg: false,
+    //             };
+    //         default:
+    //             return {
+    //                 actualView: (
+    //                     <FirstContent
+    //                         name={props.additionalPlan.name}
+    //                         description={props.additionalPlan.description}
+    //                         minPrice={props.additionalPlan.description}
+    //                     />
+    //                 ),
+    //                 actualButton: (
+    //                     <RoundedButton
+    //                         label="VER OPCIONES"
+    //                         style={{ width: "100%", padding: theme.spacing(1) }}
+    //                         onClick={() => setcardView(CardView.SELECT_ATTRIBUTE)}
+    //                     />
+    //                 ),
+    //                 hasBgImg: true,
+    //             };
+    //     }
+    // }, [cardView, selectedVariant, selectedFrequency]);
+    const getRenders = () => {
         switch (cardView) {
             case CardView.FIRST_CONTENT:
                 return {
@@ -84,7 +177,12 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                     actualButton: (
                         <RoundedButton
                             label="SELECCIONAR"
-                            disabled={props.selectedVariants.length === 0}
+                            disabled={
+                                props.selectedVariants.length === 0 ||
+                                props.selectedVariants.every((variant) =>
+                                    variant.planId === props.additionalPlan.id ? !!!variant.frequency : true
+                                )
+                            }
                             style={{ width: "100%", padding: theme.spacing(1) }}
                             onClick={() => {
                                 addPlanToCart();
@@ -136,7 +234,8 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                     hasBgImg: true,
                 };
         }
-    }, [cardView, selectedVariant, selectedFrequency]);
+    };
+    const { actualView, actualButton, hasBgImg } = getRenders();
 
     const addPlanToCart = () => {
         setselectedPlans({
@@ -145,6 +244,10 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                 frequency: selectedFrequency,
             },
         });
+        props.setvariantsToPay([
+            ...props.variantsToPay,
+            props.selectedVariants.find((variant) => variant.planId === props.additionalPlan.id),
+        ]);
     };
 
     return (
