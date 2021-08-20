@@ -1,7 +1,7 @@
 // Utils & config
 import React, { FormEvent } from "react";
 import { useRouter } from "next/router";
-import * as ga from '../../../helpers/ga';
+import * as ga from "../../../helpers/ga";
 
 // External components
 import { IconButton, Toolbar, AppBar, Hidden, makeStyles } from "@material-ui/core";
@@ -36,44 +36,43 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
-        backgroundColor: theme.palette.background.paper
+        backgroundColor: theme.palette.background.paper,
     },
-    cursorPointer: { cursor: "pointer" }
+    cursorPointer: { cursor: "pointer" },
 }));
 
 interface NavbarContentProps {
-    toggleOpeningDrawer: (e: FormEvent) => void,
-    page: string
+    toggleOpeningDrawer: (e: FormEvent) => void;
+    page: string;
 }
 
 export const NavbarContent = (props: NavbarContentProps) => {
-    const _handleOnChangeLang = (lang) => { };
+    const _handleOnChangeLang = (lang) => {};
     const classes = useStyles();
     const router = useRouter();
-    const [lang] = useLang('navbarContent')
+    const [lang] = useLang("navbarContent");
 
     const goToPlans = () => {
         ga.event({
             action: "clic en nuestros planes",
             params: {
-                event_category: props.page ? props.page : 'undefined page',
-                event_label: 'cabecera',
-            }
-        })
-        router.push("/planes")
-    }
+                event_category: props.page ? props.page : "undefined page",
+                event_label: "cabecera",
+            },
+        });
+        router.push("/planes");
+    };
 
     const goToLogin = () => {
         ga.event({
             action: "clic en iniciar sesion",
             params: {
-                event_category: props.page ? props.page : 'undefined page',
-                event_label: 'cabecera',
-            }
-        })
-        router.push("/iniciar-sesion")
-    }
-
+                event_category: props.page ? props.page : "undefined page",
+                event_label: "cabecera",
+            },
+        });
+        router.push("/iniciar-sesion");
+    };
 
     return (
         <AppBar position="fixed" color="default" className={classes.navbarClass}>
@@ -96,7 +95,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
                     <LoginButton goToLogin={goToLogin} />
                     <RoundedButton label={lang.seePlans} variant="content" onClick={goToPlans}></RoundedButton>
                 </Hidden>
-                <LangSelector onChangeLang={_handleOnChangeLang} />
+                {/* <LangSelector onChangeLang={_handleOnChangeLang} /> */}
             </Toolbar>
         </AppBar>
     );

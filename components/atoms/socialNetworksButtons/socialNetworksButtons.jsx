@@ -3,7 +3,7 @@ import React from "react";
 import useStyles from "./styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-import * as ga from '../../../helpers/ga'
+import * as ga from "../../../helpers/ga";
 import { loginWithFacebookAndGetIdToken, loginWithGoogleAndGetIdToken } from "../../../helpers/firebase";
 import { useSnackbar } from "notistack";
 
@@ -19,12 +19,12 @@ export const SocialNetworksButtons = (props) => {
 
     const handleFacebookLogin = async () => {
         ga.event({
-            action: 'clic en continuar con rrss',
+            action: "clic en continuar con rrss",
             params: {
                 event_category: `registrarse - ${props.source}`,
-                event_label: 'facebook',
-            }
-        })
+                event_label: "facebook",
+            },
+        });
 
         const { token, error, email } = await loginWithFacebookAndGetIdToken();
 
@@ -42,12 +42,12 @@ export const SocialNetworksButtons = (props) => {
 
     const handleGoogleLogin = async () => {
         ga.event({
-            action: 'clic en continuar con rrss',
+            action: "clic en continuar con rrss",
             params: {
                 event_category: `registrarse - ${props.source}`,
-                event_label: 'google',
-            }
-        })
+                event_label: "google",
+            },
+        });
 
         const { token, error } = await loginWithGoogleAndGetIdToken();
 
@@ -66,14 +66,14 @@ export const SocialNetworksButtons = (props) => {
 
     return (
         <>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <Button className={clsx(button, facebook)} onClick={handleFacebookLogin}>
                     <Image src="/assets/facebook.png" width={20} height={20} />
                     <Typography variant="h6" className={txt}>
                         {lang.facebook}
                     </Typography>
                 </Button>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
                 <Button className={clsx(button, google)} onClick={handleGoogleLogin}>
                     <Image src="/assets/google.png" width={20} height={20} />

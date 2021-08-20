@@ -28,10 +28,10 @@ const _links: ILink[] = [
         name: "Recetas",
         url: "/recetas",
     },
-    {
-        name: "Bono regalo",
-        url: "/bono-regalo",
-    },
+    // {
+    //     name: "Bono regalo",
+    //     url: "/bono-regalo",
+    // },
     {
         name: "¿Cómo funciona?",
         url: "/como-funciona",
@@ -40,10 +40,10 @@ const _links: ILink[] = [
         name: "Preguntas frecuentes",
         url: "/preguntas-frecuentes",
     },
-    {
-        name: "Blog",
-        url: "/blogs/recetas",
-    },
+    // {
+    //     name: "Blog",
+    //     url: "/blogs/recetas",
+    // },
     {
         name: "Aviso legal",
         url: "/aviso-legal",

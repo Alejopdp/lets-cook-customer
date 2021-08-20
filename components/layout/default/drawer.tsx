@@ -4,7 +4,7 @@ import { Divider, Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles
 import Image from "next/image";
 import { LoginButton } from "@atoms";
 import { useLang } from "@hooks";
-import * as ga from '../../../helpers/ga';
+import * as ga from "../../../helpers/ga";
 import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     menuLogginButton: {
         padding: theme.spacing(2),
         margin: "0 auto",
-        width: '100%'
+        width: "100%",
     },
 }));
 
@@ -30,15 +30,15 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
 
     const menuOptions = {
         top: [
-            { label: lang.itemHome, path: "/", img: '/icons/checkout/home.svg' },
-            { label: lang.itemPlans, path: "/planes", img: '/icons/checkout/gestion-del-plan.svg' },
-            { label: lang.itemRecipes, path: "/recetas", img: '/icons/checkout/recetas-nuevas.svg' },
+            { label: lang.itemHome, path: "/", img: "/icons/checkout/home.svg" },
+            { label: lang.itemPlans, path: "/planes", img: "/icons/checkout/gestion-del-plan.svg" },
+            { label: lang.itemRecipes, path: "/recetas", img: "/icons/checkout/recetas-nuevas.svg" },
         ],
         bottom: [
             { label: lang.itemHowItWork, path: "/como-funciona" },
             { label: lang.itemFAQ, path: "/preguntas-frecuentes" },
-            { label: lang.itemBlog, path: "/blogs/recetas" },
-            { label: lang.itemGif, path: "/bono-regalo" },
+            // { label: lang.itemBlog, path: "/blogs/recetas" },
+            // { label: lang.itemGif, path: "/bono-regalo" },
             { label: lang.itemLegal, path: "/aviso-legal" },
         ],
     };
@@ -47,12 +47,12 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
         ga.event({
             action: "clic en iniciar sesion",
             params: {
-                event_category: props.page ? props.page : 'undefined page',
-                event_label: 'sidebar',
-            }
-        })
-        router.push("/iniciar-sesion")
-    }
+                event_category: props.page ? props.page : "undefined page",
+                event_label: "sidebar",
+            },
+        });
+        router.push("/iniciar-sesion");
+    };
 
     return (
         <Drawer
@@ -68,7 +68,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
             }}
         >
             <div className={classes.menuLogginButton}>
-                <LoginButton border style={{ width: '100%' }} goToLogin={goToLogin} />
+                <LoginButton border style={{ width: "100%" }} goToLogin={goToLogin} />
             </div>
             <List>
                 {menuOptions.top.map((option, index) => (
