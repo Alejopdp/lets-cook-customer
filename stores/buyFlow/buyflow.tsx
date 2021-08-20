@@ -53,6 +53,8 @@ export interface BuyFlowStore {
         planName: string;
         planSlug: string;
         planDescription: string;
+        planImageUrl: string;
+        planIconWithColorUrl: string;
         weekLabel: string;
         variant?: PlanVariant;
         deliveryForm?: DeliveryForm;
@@ -99,7 +101,15 @@ export interface Store extends BuyFlowStore {
     setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => void;
     setPaymentMethod: (paymentMethod: Partial<PaymentMethodForm>) => void;
     selectRecipes: (recipes: Recipes[]) => void;
-    setPlanCode: (code: string, slug: string, name: string, description: string, canChooseRecipes: boolean) => void;
+    setPlanCode: (
+        code: string,
+        slug: string,
+        name: string,
+        description: string,
+        canChooseRecipes: boolean,
+        planImageUrl: string,
+        planIconWithColorUrl: string
+    ) => void;
     setPlanVariant: (variant: Partial<PlanVariant>) => void;
     setCoupon: (coupon: Partial<Coupon>) => void;
     setFirstOrderId: (firstOrderId: Partial<string>) => void;
@@ -214,13 +224,23 @@ const store = devtools<Store>((set, get) => ({
         set({ form });
     },
 
-    setPlanCode: (code: string, slug: string = "", name: string = "", description: string = "", canChooseRecipes: boolean) => {
+    setPlanCode: (
+        code: string,
+        slug: string = "",
+        name: string = "",
+        description: string = "",
+        canChooseRecipes: boolean,
+        planImageUrl: string = "",
+        planIconWithColorUrl: string = ""
+    ) => {
         const form = get().form;
         form.planCode = code;
         form.planSlug = slug;
         form.planName = name;
         form.planDescription = description;
         form.canChooseRecipes = canChooseRecipes;
+        form.planImageUrl = planImageUrl;
+        form.planIconWithColorUrl = planIconWithColorUrl;
         set({ form });
     },
     setDeliveryInfo: (deliveryForm: DeliveryForm) => {
