@@ -117,8 +117,6 @@ const PlanDetails = (props: PlanDetailsProps) => {
             recipe = props.subscription.nextWeekOrder.recipes.find((recipe) => recipe.id === recipeId);
         }
 
-        console.log("RECIPE A MOSTRAR: ", recipe);
-
         setselectedRecipe(recipe);
         // setRecipeSelectedIndex({
         //     ...recipeSelectedIndex,

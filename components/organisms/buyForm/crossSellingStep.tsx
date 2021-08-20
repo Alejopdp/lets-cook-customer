@@ -36,6 +36,7 @@ const CrossSellingStep = (props) => {
     const { enqueueSnackbar } = useSnackbar();
     const [additionalPlans, setadditionalPlans] = useState<Plan[]>([]);
     const [selectedVariants, setselectedVariants] = useState<PlanVariant[]>([]);
+    const [variantsToPay, setvariantsToPay] = useState<PlanVariant[]>([]);
     // const selectedPlans = useCrossSellingStore((state) => state.selectedPlans);
     const stripe = useStripe();
 
@@ -54,25 +55,16 @@ const CrossSellingStep = (props) => {
     }, []);
 
     const totalValue = useMemo(() => {
-        // if (selectedPlans) {
-        //     const entries = Object.entries(selectedPlans);
-
-        //     return entries.reduce((acc, entry) => entry[1].variant.price + acc, 0);
-        // } else {
-        //     return undefined;
-        // }
-
-        return selectedVariants.reduce((acc, variant) => acc + variant.priceWithOffer || variant.price, 0);
-    }, [selectedVariants]);
+        return variantsToPay.reduce((acc, variant) => (variant.priceWithOffer ? acc + variant.priceWithOffer : acc + variant.price), 0);
+    }, [variantsToPay]);
 
     const handleSubmitPayment = async () => {
-        const variants = selectedVariants.map((variant) => ({
+        const variants = variantsToPay.map((variant) => ({
             planId: variant.planId,
             variant: { id: variant.id },
             frequency: variant.frequency,
         }));
 
-        console.log("SELECTED VARIANTS: ", selectedVariants);
         const res = await createManySubscriptions(userInfo.id, variants);
 
         if (res.status === 200) {
@@ -125,6 +117,8 @@ const CrossSellingStep = (props) => {
                         selectedVariants={selectedVariants}
                         setselectedVariants={setselectedVariants}
                         additionalPlans={additionalPlans}
+                        variantsToPay={variantsToPay}
+                        setvariantsToPay={setvariantsToPay}
                     />
                 </Grid>
                 <Grid item xs={12}>
