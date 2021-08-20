@@ -266,7 +266,7 @@ const UserInfoDetail = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             {props.isLoading ? (
-                                <DataPaperSkeleton boxTitle="Datos de FacturaciÓn" buttonLabel="MODIFICAR DATOS DE FACTURACIÓN" />
+                                <DataPaperSkeleton boxTitle="Datos de Facturación" buttonLabel="MODIFICAR DATOS DE FACTURACIÓN" />
                             ) : (
                                 <BoxWithTitleAndTextButton
                                     title="Datos de FacturaciÓn"
@@ -334,7 +334,7 @@ const UserInfoDetail = (props) => {
                                     <BoxWithTitle title="Datos de la Cuenta">
                                         <DataDisplayEditable
                                             title="Correo electrónico"
-                                            text="alejo@novolabs.xyz"
+                                            text={customerInfo.email}
                                             handleClick={() => handleClickOpenEmailModal()}
                                             style={{ marginBottom: theme.spacing(2) }}
                                         />
