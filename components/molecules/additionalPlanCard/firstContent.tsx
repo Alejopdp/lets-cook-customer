@@ -12,11 +12,11 @@ const FirstContent = (props: FirstContentProps) => {
             <Typography variant="subtitle1" color="initial" style={{ marginBottom: 8 }}>
                 {props.additionalPlanName}
             </Typography>
-            <Typography variant="body2" color="initial" style={{ marginBottom: '16px' }}>
+            <Typography variant="body2" color="initial" style={{ marginBottom: "16px" }}>
                 {props.description || "Description"}
             </Typography>
             <Typography variant="subtitle2" color="initial">
-                {props.minPrice || "Desde X €"}
+                Desde {props.minPrice}€
             </Typography>
         </div>
     );

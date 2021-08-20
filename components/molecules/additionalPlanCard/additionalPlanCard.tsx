@@ -45,8 +45,6 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
         props.setvariantsToPay(props.variantsToPay.filter((variant) => variant.planId !== additionalPlanId));
         setcardView(CardView.FIRST_CONTENT);
     };
-    console.log("SELECTED VARIANTS: ", props.selectedVariants);
-    console.log("VARIANTS TO PAY: ", props.variantsToPay);
 
     // const { actualView, actualButton, hasBgImg } = useMemo(() => {
     //     switch (cardView) {
@@ -151,8 +149,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                         <FirstContent
                             name={props.additionalPlan.name}
                             description={props.additionalPlan.description}
-                            // minPrice no lo recibo todavía del endpoint
-                            minPrice=""
+                            minPrice={props.additionalPlan.minimumVariantPrice}
                             additionalPlanName={props.additionalPlan.name}
                         />
                     ),
@@ -229,7 +226,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                         <FirstContent
                             name={props.additionalPlan.name}
                             description={props.additionalPlan.description}
-                            minPrice={props.additionalPlan.description}
+                            minPrice={props.additionalPlan.minimumVariantPrice}
                         />
                     ),
                     actualButton: (
