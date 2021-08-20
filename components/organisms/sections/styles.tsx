@@ -59,7 +59,11 @@ export const useBenefitsStyle = makeStyles(theme => ({
         flex: 1,
         borderRadius: 8,
         width: "100%",
-        maxWidth: 480,
+        maxWidth: 450,
+        [theme.breakpoints.down("sm")]: {
+            maxWidth: 375,
+            margin: '0px auto 24px auto '
+        },
     },
     smallText: {
         paddingTop: theme.spacing(1),

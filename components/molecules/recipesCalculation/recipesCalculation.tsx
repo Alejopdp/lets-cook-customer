@@ -40,7 +40,7 @@ const RecipesCalculation = (props: RecipesCalculationProps) => {
                 <Grid item>
                     {props.priceWithOffer ? (
                         <Typography variant="body1" color="primary">
-                            <span style={{ textDecoration: 'line-through', fontSize: '14px', color: '#707070' }}>{props.price} €</span><b> {props.priceWithOffer} €/semana</b>
+                            <span style={{ textDecoration: 'line-through', fontSize: '14px', color: '#515151' }}>{props.price} €</span><b> {props.priceWithOffer} €/semana</b>
                         </Typography>
                     ) : (
                             <Typography variant="body1" color="primary">

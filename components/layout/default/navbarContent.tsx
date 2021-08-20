@@ -54,7 +54,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
 
     const goToPlans = () => {
         ga.event({
-            action: "clic en ver planes",
+            action: "clic en nuestros planes",
             params: {
                 event_category: props.page ? props.page : 'undefined page',
                 event_label: 'cabecera',
@@ -65,13 +65,13 @@ export const NavbarContent = (props: NavbarContentProps) => {
 
     const goToLogin = () => {
         ga.event({
-            action: "clic en ingresar",
+            action: "clic en iniciar sesion",
             params: {
                 event_category: props.page ? props.page : 'undefined page',
                 event_label: 'cabecera',
             }
         })
-        router.push("/ingresar")
+        router.push("/iniciar-sesion")
     }
 
 

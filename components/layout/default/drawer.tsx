@@ -45,13 +45,13 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
 
     const goToLogin = () => {
         ga.event({
-            action: "clic en ingresar",
+            action: "clic en iniciar sesion",
             params: {
                 event_category: props.page ? props.page : 'undefined page',
                 event_label: 'sidebar',
             }
         })
-        router.push("/ingresar")
+        router.push("/iniciar-sesion")
     }
 
     return (

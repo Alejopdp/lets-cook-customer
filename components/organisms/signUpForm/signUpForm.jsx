@@ -91,13 +91,13 @@ const SignUpForm = (props) => {
 
     const handleRedirect = () => {
         ga.event({
-            action: 'clic en ingresa aqui',
+            action: 'clic en iniciar sesion',
             params: {
                 event_category: `registrarse - ${props.source}`,
                 event_label: 'ya tienes cuenta',
             }
         })
-        router.push("/ingresar");
+        router.push("/iniciar-sesion");
     };
 
     const router = useRouter();

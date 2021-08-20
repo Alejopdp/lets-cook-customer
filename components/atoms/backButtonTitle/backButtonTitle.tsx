@@ -19,7 +19,7 @@ const BackButtonTitle = (props) => {
             <Grid item xs={12}>
                 <Link href={props.url}>
                     <Grid container alignItems="center" style={{ cursor: "pointer" }}>
-                        <ArrowBackIcon style={{ marginRight: theme.spacing(1), color: "#707070" }} />
+                        <ArrowBackIcon style={{ marginRight: theme.spacing(1), color: "#515151" }} />
                         <Typography variant="h6" style={{ fontSize: matches ? "20px" : "24px" }}>
                             {props.title}
                         </Typography>

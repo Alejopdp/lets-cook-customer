@@ -13,13 +13,14 @@ export const LoginButton = (props: LoginButtonProps) => {
             focusRipple
             className={classes.loginButton}
             style={{
+                color: '#515151',
                 border: props.border ? "solid 1px gray" : "none",
                 ...props.style
             }}
             onClick={props.goToLogin}
         >
             <PersonOutlineRounded style={{ marginRight: 4 }} />
-            <Typography variant="button">{lang.singin}</Typography>
+            <Typography variant="button" color='textPrimary'>{lang.singin}</Typography>
         </ButtonBase>
     );
 };

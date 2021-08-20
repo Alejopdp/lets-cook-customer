@@ -31,7 +31,7 @@ export const ValuePropositionSection = () => {
                             <Typography variant="h1">Cocina bueno y rico cada semana</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="body1">¿Qué hay para cenar? Enviamos ingredientes frescos en cantidades exactas con la receta para cocinar en casa.</Typography>
+                            <Typography variant="body1">¿Qué hay para cenar? Te enviamos ingredientes frescos en cantidades exactas con la receta para cocinar en tu casa.</Typography>
                         </Grid>
                         <Grid item xs={12} className={classes.buttonWithCaptionGrid}>
                             <RoundedButton label="Ver planes" onClick={goToPlans} />

@@ -31,10 +31,10 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                     <TitleOtherPages title="Beneficios de Let's Cook" subtitle='Lorem ipsum dolor sit amet, consectetur adipiscing elit.' />
                 )}
                 <Grid container spacing={2}>
-                    <Grid item xs={12} md={6} style={{ alignSelf: "center" }}>
-                        <img className={classes.img} src="/assets/home/home-atributos.webp" alt='atributos' />
+                    <Grid item xs={12} md={5} style={{ alignSelf: "center" }}>
+                        <img className={classes.img} src="/assets/home/home-atributos.jpg" alt='atributos' />
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={7} style={{alignSelf: 'center'}}>
                         {(Array.isArray(props.cards) ? props.cards : []).map((card, index) => (
                             <div key={index} className={classes.card}>
                                 <div className={classes.cardIcon}>

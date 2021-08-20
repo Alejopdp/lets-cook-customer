@@ -36,7 +36,7 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
                             variant="h3"
                             align='center'
                         >
-                            Comienza la experiencia Let’s Cook ahora
+                            Descubre tu chef interior
                     </Typography>
                     </Grid>
                     <Grid item xs={12}>
@@ -45,7 +45,7 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
                             variant="body1"
                             align='center'
                         >
-                            Cociná nuevas recetas todas las semanas con ingredientes frescos y naturales
+                            Empieza a cocinar ingredientes frescos y de proximidad con Let's cook.
                     </Typography>
                     </Grid>
                 </Grid>

@@ -19,12 +19,12 @@ const ComoFunciona = () => {
     const benefits = [
         {
             title: "Economiza tu tiempo",
-            content: "Sabemos que no está en nuestras manos parar el ritmo la sociedad en el que vivimos, pero si aportar una solución con la que podamos sacar momentos para cuidarnos día a día.",
+            content: "Sabemos que no está en nuestras manos parar el ritmo de la sociedad en la que vivimos, pero si aportar una solución con la que podamos sacar momentos para cuidarnos día a día.",
             image: "/assets/home/save-time.svg",
         },
         {
             title: "Come saludable y variado",
-            content: "Queremos cuidarte en todo sentido, por eso seleccionamos cuidadosamente los ingredientes de tus recetas frescos y de proximidad y te sorprendemos cada semana con recetas variadas.",
+            content: "Queremos cuidarte en todo sentido, por eso seleccionamos para tus cenas, ingredientes frescos y de proximidad y te sorprendemos cada semana con recetas variadas.",
             image: "/assets/home/healthy-food.svg",
         },
         {

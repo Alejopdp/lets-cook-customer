@@ -35,22 +35,22 @@ export async function getServerSideProps({ locale }) {
 
 const howItWorks: HowItWorks[] = [
     {
-        title: "1) Apúntate",
-        content: "Elige el plan que más se ajuste a lo que quieres, cantidad de días y raciones por día que quieres que te llevemos cada semana. ¡No te aburrirás, tenemos muchas recetas!",
+        title: "Apúntate",
+        content: "Elige el plan que más se adapte a ti. Escoge la cantidad de días y raciones por día que quieres que te llevemos cada semana. ¡No te aburrirás, tenemos muchas recetas!",
         image: "/assets/home/home-cf1-apuntate.webp",
     },
     {
-        title: "2) Recibe",
+        title: "Recibe",
         content: "Cada martes recibirás con ilusión tus kits personalizados con los ingredientes frescos necesarios y exactos para preparar las recetas que has elegido.",
         image: "/assets/home/home-cf2-recibe.webp",
     },
     {
-        title: "3) Cocina",
+        title: "Cocina",
         content: "Saca el chef que llevas dentro y tómate la calma para cocinar. Cuentas con la ayuda de nuestras recetas y videorecetas. ¡Son muy fáciles de preparar!",
         image: "/assets/home/home-cf3-cocina.webp",
     },
     {
-        title: "4) Disfruta",
+        title: "Disfruta",
         content: "¡A cenaaaaar! Disfruta de una cena deliciosa y diferente. El mejor premio para un día ajetreado, un manjar rico y saludable hecho para ti… ¡y por ti!",
         image: "/assets/home/home-cf4-disfruta.webp",
     },
@@ -59,12 +59,12 @@ const howItWorks: HowItWorks[] = [
 const benefits: Benefit[] = [
     {
         title: "Economiza tu tiempo",
-        content: "Sabemos que no está en nuestras manos parar el ritmo la sociedad en el que vivimos, pero si aportar una solución con la que podamos sacar momentos para cuidarnos día a día.",
+        content: "Sabemos que no está en nuestras manos parar el ritmo de la sociedad en la que vivimos, pero si aportar una solución con la que podamos sacar momentos para cuidarnos día a día.",
         image: "/assets/home/save-time.svg",
     },
     {
         title: "Come saludable y variado",
-        content: "Queremos cuidarte en todo sentido, por eso seleccionamos cuidadosamente los ingredientes de tus recetas frescos y de proximidad y te sorprendemos cada semana con recetas variadas.",
+        content: "Queremos cuidarte en todo sentido, por eso seleccionamos para tus cenas, ingredientes frescos y de proximidad y te sorprendemos cada semana con recetas variadas.",
         image: "/assets/home/healthy-food.svg",
     },
     {
