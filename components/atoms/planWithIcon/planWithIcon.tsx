@@ -13,15 +13,18 @@ import useStyles from "./styles";
 import { useRouter } from 'next/router';
 
 export const PlanWithIcon = (props: PlanWithIconProp) => {
-    const { box, checkedBox, icon } = useStyles();
-    const image = props.isSelected ? props.plan.iconWithColor : props.plan.icon
+    const { box, checkedBox, icon, hoverBox } = useStyles();
     const { locale } = useRouter();
+    const [isHover, setIsHover] = useState(false)
+    const image = (props.isSelected || isHover) ? props.plan.iconWithColor : props.plan.icon
 
     return (
         <ButtonBase
             focusRipple
-            className={clsx(box, { [checkedBox]: props.isSelected })}
+            className={clsx(box, { [checkedBox]: props.isSelected }, { [hoverBox]: isHover })}
             onClick={() => props.onClick(props.plan)}
+            onMouseOver={() => setIsHover(true)}
+            onMouseOut={() => setIsHover(false)}
         // focusVisibleClassName={classes.focusVisible}
         >
             <img src={image} className={icon} />

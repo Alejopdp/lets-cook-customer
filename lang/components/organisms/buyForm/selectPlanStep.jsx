@@ -10,10 +10,6 @@ export const selectPlanStep = {
                 answer: "No, tienes total libertad de saltar semanas o cancelar tu plan en cualquier momento. Tienes hasta el viernes a las 23:59 cada semana para cancelar o saltar la semana siguiente. Lo gestionas desde tu área de clientes.",
             },
             {
-                question: "¿Hay planes para 1 persona?",
-                answer: "Nuestros planes son a partir de dos raciones por receta. Tenemos muchos clientes solteros que aprovechan la comida que sobra para un ‘tupper’ espectacular el día siguiente en el trabajo. O bien, cocinan un día la mitad de todos los ingredientes y otro día la otra mitad.",
-            },
-            {
                 question: "¿Tengo que recibir kits cada semana?",
                 answer: "No, tienes hasta el viernes a las 23:59 cada semana para saltar la semana siguiente, o incluso varias semanas. Lo gestionas desde tu área de clientes.",
             },
@@ -30,24 +26,8 @@ export const selectPlanStep = {
                 answer: "Entregamos los martes por la tarde/noche. Nos ponemos en contacto contigo para coordinar una franja horaria para asegurar que hay alguien en casa.\nSi no puedes recibir tus kits en este horario, coordinamos otra franja horaria el miércoles.",
             },
             {
-                question: "¿Cómo recibo mi pedido?",
-                answer: "Los ingredientes de cada kit vienen en una bolsa de papel para uso alimentario. Dentro de la bolsa tendrás todos los ingredientes necesarios, en las cantidades exactas, para preparar la receta. Salsas y líquidos vienen en vidrio o en envases biodegradables. Alimentos secos como arroz, granos o especies vienen en bolsas de papel. Carne y pescado viene sellado al vacío.\nTransportamos los pedidos en bolsas térmicas que conservan el frío durante el viaje de nuestras instalaciones a tu casa.\nCuando recibas tus kits rogamos las guardes en la nevera.",
-            },
-            {
-                question: "¿Dónde está la receta?",
-                answer: "Antes de recibir tus kits recibirás un correo electrónico con las recetas. Las recetas son de máximo 6 pasos, cada uno con una imagen. También hay un enlace a un video explicativo.\nEn la bolsa de los kits encontrarás 2 QR: el primero es para vizualizar la receta, tanto en castellano como en inglés, el segundo es para acceder directamente al vídeo. Abre la cámara de tu móvil, o bien la app para leer QR, y apunta al QR. Un enlace aparece en la pantalla, haz clic en ella.",
-            },
-            {
-                question: "¿Debo tener ingredientes en casa?",
-                answer: "Te enviamos todo lo que necesitas para cocinar excepto la sal, pimienta negra y aceite.",
-            },
-            {
                 question: "No quiero comer gluten o lactosa. ¿Qué hago?",
                 answer: "Tu plan es el plan gourmet, familiar, vegetariano o vegano. Cuando haces tu elección de platos, puedes visualizar un listado de ingredientes de cada plato y así puedes descartar los platos que no te convienen. La mayoría de nuestros platos no contienen ni gluten ni lactosa.",
-            },
-            {
-                question: "¿De dónde provienen los ingredientes?",
-                answer: "Siempre priorizamos los productos de proximidad para reducir la huella de carbono. Frutas y verduras son de productores locales y tanto la carne como el pollo son de granajas ubicadas en pueblos cercanos a Barcelona.",
             },
         ],
     },
@@ -62,10 +42,6 @@ export const selectPlanStep = {
                 answer: "No, tienes total libertad de saltar semanas o cancelar tu plan en cualquier momento. Tienes hasta el viernes a las 23:59 cada semana para cancelar o saltar la semana siguiente. Lo gestionas desde tu área de clientes.",
             },
             {
-                question: "¿Hay planes para 1 persona?",
-                answer: "Nuestros planes son a partir de dos raciones por receta. Tenemos muchos clientes solteros que aprovechan la comida que sobra para un ‘tupper’ espectacular el día siguiente en el trabajo. O bien, cocinan un día la mitad de todos los ingredientes y otro día la otra mitad.",
-            },
-            {
                 question: "¿Tengo que recibir kits cada semana?",
                 answer: "No, tienes hasta el viernes a las 23:59 cada semana para saltar la semana siguiente, o incluso varias semanas. Lo gestionas desde tu área de clientes.",
             },
@@ -82,24 +58,8 @@ export const selectPlanStep = {
                 answer: "Entregamos los martes por la tarde/noche. Nos ponemos en contacto contigo para coordinar una franja horaria para asegurar que hay alguien en casa.\nSi no puedes recibir tus kits en este horario, coordinamos otra franja horaria el miércoles.",
             },
             {
-                question: "¿Cómo recibo mi pedido?",
-                answer: "Los ingredientes de cada kit vienen en una bolsa de papel para uso alimentario. Dentro de la bolsa tendrás todos los ingredientes necesarios, en las cantidades exactas, para preparar la receta. Salsas y líquidos vienen en vidrio o en envases biodegradables. Alimentos secos como arroz, granos o especies vienen en bolsas de papel. Carne y pescado viene sellado al vacío.\nTransportamos los pedidos en bolsas térmicas que conservan el frío durante el viaje de nuestras instalaciones a tu casa.\nCuando recibas tus kits rogamos las guardes en la nevera.",
-            },
-            {
-                question: "¿Dónde está la receta?",
-                answer: "Antes de recibir tus kits recibirás un correo electrónico con las recetas. Las recetas son de máximo 6 pasos, cada uno con una imagen. También hay un enlace a un video explicativo.\nEn la bolsa de los kits encontrarás 2 QR: el primero es para vizualizar la receta, tanto en castellano como en inglés, el segundo es para acceder directamente al vídeo. Abre la cámara de tu móvil, o bien la app para leer QR, y apunta al QR. Un enlace aparece en la pantalla, haz clic en ella.",
-            },
-            {
-                question: "¿Debo tener ingredientes en casa?",
-                answer: "Te enviamos todo lo que necesitas para cocinar excepto la sal, pimienta negra y aceite.",
-            },
-            {
                 question: "No quiero comer gluten o lactosa. ¿Qué hago?",
                 answer: "Tu plan es el plan gourmet, familiar, vegetariano o vegano. Cuando haces tu elección de platos, puedes visualizar un listado de ingredientes de cada plato y así puedes descartar los platos que no te convienen. La mayoría de nuestros platos no contienen ni gluten ni lactosa.",
-            },
-            {
-                question: "¿De dónde provienen los ingredientes?",
-                answer: "Siempre priorizamos los productos de proximidad para reducir la huella de carbono. Frutas y verduras son de productores locales y tanto la carne como el pollo son de granajas ubicadas en pueblos cercanos a Barcelona.",
             },
         ],
     },
@@ -114,10 +74,6 @@ export const selectPlanStep = {
                 answer: "No, tienes total libertad de saltar semanas o cancelar tu plan en cualquier momento. Tienes hasta el viernes a las 23:59 cada semana para cancelar o saltar la semana siguiente. Lo gestionas desde tu área de clientes.",
             },
             {
-                question: "¿Hay planes para 1 persona?",
-                answer: "Nuestros planes son a partir de dos raciones por receta. Tenemos muchos clientes solteros que aprovechan la comida que sobra para un ‘tupper’ espectacular el día siguiente en el trabajo. O bien, cocinan un día la mitad de todos los ingredientes y otro día la otra mitad.",
-            },
-            {
                 question: "¿Tengo que recibir kits cada semana?",
                 answer: "No, tienes hasta el viernes a las 23:59 cada semana para saltar la semana siguiente, o incluso varias semanas. Lo gestionas desde tu área de clientes.",
             },
@@ -134,24 +90,8 @@ export const selectPlanStep = {
                 answer: "Entregamos los martes por la tarde/noche. Nos ponemos en contacto contigo para coordinar una franja horaria para asegurar que hay alguien en casa.\nSi no puedes recibir tus kits en este horario, coordinamos otra franja horaria el miércoles.",
             },
             {
-                question: "¿Cómo recibo mi pedido?",
-                answer: "Los ingredientes de cada kit vienen en una bolsa de papel para uso alimentario. Dentro de la bolsa tendrás todos los ingredientes necesarios, en las cantidades exactas, para preparar la receta. Salsas y líquidos vienen en vidrio o en envases biodegradables. Alimentos secos como arroz, granos o especies vienen en bolsas de papel. Carne y pescado viene sellado al vacío.\nTransportamos los pedidos en bolsas térmicas que conservan el frío durante el viaje de nuestras instalaciones a tu casa.\nCuando recibas tus kits rogamos las guardes en la nevera.",
-            },
-            {
-                question: "¿Dónde está la receta?",
-                answer: "Antes de recibir tus kits recibirás un correo electrónico con las recetas. Las recetas son de máximo 6 pasos, cada uno con una imagen. También hay un enlace a un video explicativo.\nEn la bolsa de los kits encontrarás 2 QR: el primero es para vizualizar la receta, tanto en castellano como en inglés, el segundo es para acceder directamente al vídeo. Abre la cámara de tu móvil, o bien la app para leer QR, y apunta al QR. Un enlace aparece en la pantalla, haz clic en ella.",
-            },
-            {
-                question: "¿Debo tener ingredientes en casa?",
-                answer: "Te enviamos todo lo que necesitas para cocinar excepto la sal, pimienta negra y aceite.",
-            },
-            {
                 question: "No quiero comer gluten o lactosa. ¿Qué hago?",
                 answer: "Tu plan es el plan gourmet, familiar, vegetariano o vegano. Cuando haces tu elección de platos, puedes visualizar un listado de ingredientes de cada plato y así puedes descartar los platos que no te convienen. La mayoría de nuestros platos no contienen ni gluten ni lactosa.",
-            },
-            {
-                question: "¿De dónde provienen los ingredientes?",
-                answer: "Siempre priorizamos los productos de proximidad para reducir la huella de carbono. Frutas y verduras son de productores locales y tanto la carne como el pollo son de granajas ubicadas en pueblos cercanos a Barcelona.",
             },
         ],
     },

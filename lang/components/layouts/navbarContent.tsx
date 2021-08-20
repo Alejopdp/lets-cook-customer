@@ -1,11 +1,11 @@
 export const navbarContent = {
     es: {
-        seePlans: "Ver planes",
+        seePlans: "Nuestros planes",
     },
     en: {
-        seePlans: "Ver planes",
+        seePlans: "Our plans",
     },
     ca: {
-        seePlans: "Ver planes",
+        seePlans: "Nuestros planes",
     },
 }

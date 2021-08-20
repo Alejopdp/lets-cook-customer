@@ -5,6 +5,7 @@ import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-
 import { createSubscription, handle3dSecureFailure } from "../../../helpers/serverRequests/subscription";
 import { useSnackbar } from "notistack";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import * as ga from "../../../helpers/ga";
 
 // External components
 import HttpsOutlinedIcon from "@material-ui/icons/HttpsOutlined";
@@ -94,10 +95,6 @@ export const PaymentForm = (props) => {
     );
     const [areTermsAccepted, setareTermsAccepted] = useState(false);
 
-    const handleOnChange = () => {
-        router.push("/aviso-legal");
-    };
-
     const handlePaymentMethodTypeChange = (e) => {
         const value = e.target.value;
         setPaymentMethod({
@@ -132,6 +129,14 @@ export const PaymentForm = (props) => {
     };
 
     const handleSubmitPayment = async () => {
+        ga.event({
+            action: "clic en realizar pago",
+            params: {
+                event_category: "checkout",
+                event_label: "metodos de pago",
+            },
+        });
+
         setisLoadingPayment(true);
         if (form.paymentMethod.type === "newPaymentMethod" || !!!userInfo.paymentMethods || userInfo.paymentMethods?.length === 0) {
             const stripeRes = await handleStripePaymentMethod();
@@ -177,6 +182,23 @@ export const PaymentForm = (props) => {
                     });
                     updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
                     form.canChooseRecipes ? goToNextView() : moveNSteps(2);
+                    // ga.purchase({
+                    //     transaction_id: res.data.subscriptionId,
+                    //     affiliation: "Let's cook website",
+                    //     value: 0,
+                    //     currency: "EUR",
+                    //     tax: 0,
+                    //     shipping: 0,
+                    //     items: [
+                    //         {
+                    //             id: "",
+                    //             name: "",
+                    //             category: "",
+                    //             quantity: 0,
+                    //             price: 0
+                    //         }
+                    //     ]
+                    // })
                 } else {
                     // TO DO: Reject payment in DB
                     await handle3dSecureFailure(res.data.subscriptionId);
@@ -196,6 +218,23 @@ export const PaymentForm = (props) => {
                 });
                 updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
                 form.canChooseRecipes ? goToNextView() : moveNSteps(2);
+                // ga.purchase({
+                //     transaction_id: res.data.subscriptionId,
+                //     affiliation: "Let's cook website",
+                //     value: 0,
+                //     currency: "EUR",
+                //     tax: 0,
+                //     shipping: 0,
+                //     items: [
+                //         {
+                //             id: "",
+                //             name: "",
+                //             category: "",
+                //             quantity: 0,
+                //             price: 0
+                //         }
+                //     ]
+                // })
             } else {
                 enqueueSnackbar("Error al completar el pago", { variant: "error" });
             }

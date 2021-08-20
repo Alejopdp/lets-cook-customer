@@ -29,7 +29,6 @@ export const TitleBuyFlow = ({ title, subtitle }: TitleBuyFlow) => {
         <>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Typography variant="h5" color="primary" style={{ textAlign: 'center', display: 'flex', alignItems: 'center' }}>
-                    <img src="/icons/checkout/gracias.svg" height={40} width={40} className={ico} />
                     {title}
                 </Typography>
             </div>

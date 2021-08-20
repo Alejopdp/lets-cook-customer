@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     gradient: {
         borderRadius: "8px",
-        height: 250,
+        height: 300,
         backgroundSize: "cover",
     },
     imgTag: {

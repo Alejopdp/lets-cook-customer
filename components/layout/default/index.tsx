@@ -70,17 +70,17 @@ export const Layout = props => {
                 {isAuthenticated ? (
                     <LoggedInNavbar toggleOpeningDrawer={_toggleOpeningDrawer} />
                 ) : (
-                        <NavbarContent toggleOpeningDrawer={_toggleOpeningDrawer} />
+                        <NavbarContent page={props.page} toggleOpeningDrawer={_toggleOpeningDrawer} />
                     )}
                 <nav className={classes.drawer} aria-label="mailbox folders">
                     <Hidden smUp implementation="css">
-                        <NavbarDrawer open={openDrawerMenu} toggleOpeningDrawer={_toggleOpeningDrawer} />
+                        <NavbarDrawer page={props.page} open={openDrawerMenu} toggleOpeningDrawer={_toggleOpeningDrawer} />
                     </Hidden>
                 </nav>
                 <main className={classes.content}>
                     {props.children}
                     {!props.disableCallToActionSection && (
-                        <CallToActionSection />
+                        <CallToActionSection page={props.page} />
                     )}
                 </main>
                 {!props.disableFooterSection && (

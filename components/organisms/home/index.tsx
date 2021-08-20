@@ -17,7 +17,7 @@ import { HomePageProps } from "./interfaces";
 const HomePage = (props: HomePageProps) => {
     const classes = useStyles();
     return (
-        <Layout>
+        <Layout page='homepage'>
             <ValuePropositionSection />
             <div style={{ paddingTop: "32px" }}>
                 <GoogleRatingSection />

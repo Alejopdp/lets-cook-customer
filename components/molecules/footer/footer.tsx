@@ -78,9 +78,9 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                 </Grid>
 
                 <Grid item xs={6} md={3}>
-                    <Typography variant="subtitle1" className={marg1}>
+                    {/* <Typography variant="subtitle1" className={marg1}>
                         Menú
-                    </Typography>
+                    </Typography> */}
 
                     {links.map((link, index) => (
                         <Link href={link.url} key={index} underline="none">
@@ -92,9 +92,9 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                 </Grid>
 
                 <Grid item xs={6} md={3}>
-                    <Typography variant="subtitle1" className={marg1}>
+                    {/* <Typography variant="subtitle1" className={marg1}>
                         Soporte
-                    </Typography>
+                    </Typography> */}
                     <Link href="mailto:info@letscooknow.es" underline="none" target="_blank" rel="noreferrer noopener">
                         <Typography variant="body1" color="textSecondary">
                             info@letscooknow.es
@@ -108,18 +108,17 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                 </Grid>
 
                 <Grid item xs={6} md={3} className={paymentMethodsSection}>
-                    <Typography variant="subtitle1" className={marg1}>
+                    {/* <Typography variant="subtitle1" className={marg1}>
                         Medios de pago
-                    </Typography>
-                    <Image src="/payment.png" width={300} height={160} alt="Pagos con tarjeta online" />
+                    </Typography> */}
+                    <Image src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
                 </Grid>
             </Grid>
 
-            <Grid container direction="row" justify="space-between" alignItems="flex-end" className={footer}>
+            <Grid item xs={12} className={footer}>
                 <Typography variant="body2" style={{ fontSize: "13px" }}>
-                    Lets Cook 2021 © - Todos los derechos reservados
+                    Let's Cook 2021 © - Todos los derechos reservados
                 </Typography>
-                <Image src="/enisa.png" width={50} height={100} alt="Lets cook now" />
             </Grid>
         </div>
     );

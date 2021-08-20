@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import RoundedButton from "../../atoms/roundedButton/roundedButton";
 import RecipeCard from "../../molecules/recipeCard/recipeCard";
 import TitleOtherPages from "../../molecules/titleOtherPages/titleOtherPages";
-
 import { Recipe } from "@helpers";
 import { useRecipesStyles as useStyles } from "./styles";
 import { RecipesSectionProps } from "./interfaces";
@@ -12,6 +11,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Recipes } from "@stores";
 import RecipeModal from "components/molecules/recipeModal/recipeModal";
+import * as ga from '../../../helpers/ga'
 
 export const RecipesSection = memo((props: RecipesSectionProps) => {
     const classes = useStyles();
@@ -23,6 +23,14 @@ export const RecipesSection = memo((props: RecipesSectionProps) => {
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
 
     const handleClickOpenModal = (recipe: Recipes) => {
+        ga.event({
+            action: "clic en recetas",
+            params: {
+                event_category: 'homepage',
+                event_label: recipe.name.toLowerCase(),
+            }
+        })
+        console.log('recipe', recipe)
         setSelectedRecipe(recipe);
         setisModalOpen(true);
     };

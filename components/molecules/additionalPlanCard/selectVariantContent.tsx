@@ -8,11 +8,12 @@ import { useTheme } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import { SelectVariantContentProps } from "./interface";
 import AttributePicker from "./attributePicker";
-import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@material-ui/core";
+import { FormControl, FormControlLabel, Radio, RadioGroup, Typography, Grid } from "@material-ui/core";
 import { getPlanVariantWithAttributes } from "@helpers";
 import { PlanVariant } from "types/planVariant";
 import { translateFrequency } from "helpers/utils/i18n";
 import { useRouter } from "next/router";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 // Internal components
 
@@ -93,6 +94,12 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
 
     return (
         <Box>
+            <Box style={{ cursor: "pointer", display: 'flex', alignItems: 'center', marginBottom: theme.spacing(1) }} onClick={props.handleClickBackToFirstContent}>
+                <ArrowBackIcon style={{ marginRight: theme.spacing(1), color: "#515151" }} />
+                <Typography variant="subtitle1" color="initial">
+                    {props.additionalPlanName}
+                </Typography>
+            </Box>
             <Box>
                 {attributesKeyAndValues.map((entry: any, index: number) => (
                     <AttributePicker

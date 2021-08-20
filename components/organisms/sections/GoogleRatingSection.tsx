@@ -18,11 +18,11 @@ export const GoogleRatingSection = memo((props: GoogleRatingSectionProps) => {
                         <Typography className={classes.item} variant="subtitle1">Rating</Typography>
                     </div>
                 </Grid>
-                <Grid item xs={12} md={6} style={{alignSelf: 'center'}}>
+                <Grid item xs={12} md={6} style={{ alignSelf: 'center' }}>
                     <div className={classes.textRatingRow}>
                         <Typography className={classes.item} variant="h6"><b>5.0</b></Typography>
                         <Rating className={classes.item} name="read-only" value={5} readOnly />
-                        <Typography className={classes.item} variant="caption">108 opiniones</Typography>
+                        <Typography className={classes.item} variant="caption">149 opiniones</Typography>
                     </div>
                 </Grid>
             </Grid>
