@@ -74,6 +74,7 @@ const PlanDetailsDesktop = ({
                                         nextWeekOrder={subscription.nextWeekOrder}
                                         hasChosenRecipesForNextWeek={subscription.hasChosenRecipesForNextWeek}
                                         handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                                        canChooseRecipes={subscription.canChooseRecipesForNextWeekOrder}
                                     />
                                 </Grid>
                             )}

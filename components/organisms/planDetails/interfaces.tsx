@@ -58,6 +58,7 @@ export interface PlanDetailasSubscription {
     canChooseRecipes: true;
     nextTwelveOrders: SkippableOrder[];
     hasRecipes: boolean;
+    canChooseRecipesForNextWeekOrder: boolean;
 }
 
 export interface PlanDetailsProps {

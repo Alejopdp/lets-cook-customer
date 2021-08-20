@@ -148,6 +148,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                     variant="outlined"
                     fullWidth
                     disabled={props.disabled}
+                    autoComplete="off"
                 />
             )}
             renderOption={(option) => {
