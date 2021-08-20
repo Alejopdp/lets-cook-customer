@@ -126,7 +126,7 @@ export default function CheckoutDetails() {
             >
                 <Typography variant="h5">Resumen de compra</Typography>
                 <PlanSelector
-                    planIcon="http://localhost:3000/development/plans/Plan_test/Plan_test.png"
+                    planIcon={form.planImageUrl ? form.planImageUrl : "/icons/appbar/img-header-select-plan.svg"}
                     planName={form.planName}
                     planVariantLabel={form.variant.label}
                     onClick={handleClickEditPlan}
@@ -196,7 +196,7 @@ export default function CheckoutDetails() {
                     )}
                     {/* Agregar foto del plan seleccionado */}
                     {/* <img
-                        src="/assets/empty-image-checkout.png"
+                        src={form.planImageUrl}
                         alt="checkout-image"
                         style={{ width: "100%", borderRadius: "8px", marginTop: theme.spacing(4) }}
                     /> */}
