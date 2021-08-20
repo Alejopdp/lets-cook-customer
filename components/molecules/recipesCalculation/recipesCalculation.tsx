@@ -17,17 +17,19 @@ const RecipesCalculation = (props: RecipesCalculationProps) => {
 
     return (
         <>
-            {!!rations && (<>
-                <Typography variant="body1" paragraph>
-                    {props.recipesQty} recetas para {props.peopleQty} personas por semana
-                </Typography>
+            {!!rations && (
+                <>
+                    <Typography variant="body1" paragraph>
+                        {props.planVariantLabel || `${props.recipesQty} recetas para ${props.peopleQty} personas por semana`}
+                    </Typography>
 
-                <Typography variant="body1" paragraph>
-                    {rations} raciones a {fixedRationPrice} € por ración
-                </Typography>
+                    <Typography variant="body1" paragraph>
+                        {rations} raciones a {fixedRationPrice} € por ración
+                    </Typography>
 
-                <Divider />
-            </>)}
+                    <Divider />
+                </>
+            )}
 
             <Grid container style={{ paddingTop: 16 }}>
                 <Grid item xs>
