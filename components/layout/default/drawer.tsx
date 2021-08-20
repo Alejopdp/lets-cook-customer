@@ -4,6 +4,8 @@ import { Divider, Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles
 import Image from "next/image";
 import { LoginButton } from "@atoms";
 import { useLang } from "@hooks";
+import * as ga from '../../../helpers/ga';
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -24,6 +26,7 @@ interface NavbarDrawerProps {
 const NavbarDrawer = (props: NavbarDrawerProps) => {
     const classes = useStyles();
     const [lang] = useLang("navbarDrawer");
+    const router = useRouter();
 
     const menuOptions = {
         top: [
@@ -40,6 +43,17 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
         ],
     };
 
+    const goToLogin = () => {
+        ga.event({
+            action: "clic en iniciar sesion",
+            params: {
+                event_category: props.page ? props.page : 'undefined page',
+                event_label: 'sidebar',
+            }
+        })
+        router.push("/iniciar-sesion")
+    }
+
     return (
         <Drawer
             variant="temporary"
@@ -54,7 +68,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
             }}
         >
             <div className={classes.menuLogginButton}>
-                <LoginButton border style={{ width: '100%' }} />
+                <LoginButton border style={{ width: '100%' }} goToLogin={goToLogin} />
             </div>
             <List>
                 {menuOptions.top.map((option, index) => (

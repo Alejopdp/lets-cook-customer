@@ -11,7 +11,7 @@ import { Layout } from "../../../components/layout/index";
 const BlogRecetas = (props) => {
     const [lang] = useLang('recipesBlog');
     return (
-        <Layout>
+        <Layout page='blog page'>
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <BlogsGrid posts={props.posts} />

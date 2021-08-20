@@ -6,6 +6,7 @@ import { AppBarStepper } from "@organisms";
 import { useStyles } from "./styles";
 import { useLang } from "@hooks";
 import Head from "next/head";
+import * as ga from "../../../helpers/ga";
 
 export interface IFilter {
     label: string;
@@ -34,6 +35,13 @@ export const BuyFlowLayout = memo(({ children: Component, filterOptions }: BuyFl
     };
 
     const _handleClickApplyFilters = (_filters) => {
+        ga.event({
+            action: "clic en aplicar filtros",
+            params: {
+                event_category: "elegir recetas",
+                event_label: "aplicar filtros",
+            },
+        });
         setFilters(_filters);
         _toggleOpeningDrawer();
     };

@@ -40,7 +40,7 @@ import { Layout } from "../../../components/layout/index";
 
 const BlogPostPage = ({ post, error }) => {
     return (
-        <Layout seoTitle="Blog - Let's cook: Productos frescos y recetas">
+        <Layout seoTitle="Blog - Let's cook: Productos frescos y recetas" page='blog post page'>
             <InnerSectionLayout containerMaxWidth="md">
                 <BackButtonTitle url="/blogs/recetas" title="Volver al Blog" />
                 <BlogPostCardDetail post={post} />

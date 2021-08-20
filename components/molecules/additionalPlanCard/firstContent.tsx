@@ -9,6 +9,9 @@ const FirstContent = (props: FirstContentProps) => {
 
     return (
         <div className={classes.cardContent}>
+            <Typography variant="subtitle1" color="initial" style={{ marginBottom: 8 }}>
+                {props.additionalPlanName}
+            </Typography>
             <Typography variant="body2" color="initial" style={{ marginBottom: '16px' }}>
                 {props.description || "Description"}
             </Typography>

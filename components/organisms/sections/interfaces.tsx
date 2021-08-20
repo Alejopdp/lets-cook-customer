@@ -13,7 +13,9 @@ export interface BenefitsSectionProps {
     enableTitleSection?: boolean,
 }
 
-export interface CallToActionSectionProps { }
+export interface CallToActionSectionProps {
+    page?: string
+}
 export interface GoogleRatingSectionProps { }
 
 export interface HowItWorks {

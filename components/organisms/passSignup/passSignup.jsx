@@ -55,7 +55,7 @@ const PassSignup = () => {
             />
 
             <CustomButton
-                disabled={values.authorize === true ? false : true }
+                disabled={values.authorize === true ? false : true}
                 text={"Ingresar"}
                 onClick={handleSubmit}
             />
@@ -64,7 +64,7 @@ const PassSignup = () => {
 
             <SocialNetworksButtons />
 
-            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/ingresar" />
+            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/iniciar-sesion" />
         </FormPaper>
     )
 }

@@ -5,6 +5,8 @@ import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-
 import { createSubscription, handle3dSecureFailure } from "../../../helpers/serverRequests/subscription";
 import { useSnackbar } from "notistack";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import * as ga from '../../../helpers/ga'
+
 
 // External components
 import HttpsOutlinedIcon from "@material-ui/icons/HttpsOutlined";
@@ -94,9 +96,6 @@ export const PaymentForm = (props) => {
     );
     const [areTermsAccepted, setareTermsAccepted] = useState(false);
 
-    const handleOnChange = () => {
-        router.push("/aviso-legal");
-    };
 
     const handlePaymentMethodTypeChange = (e) => {
         const value = e.target.value;
@@ -132,7 +131,16 @@ export const PaymentForm = (props) => {
     };
 
     const handleSubmitPayment = async () => {
+        ga.event({
+            action: 'clic en realizar pago',
+            params: {
+                event_category: 'checkout',
+                event_label: 'metodos de pago',
+            }
+        })
+
         setisLoadingPayment(true);
+
         if (form.paymentMethod.type === "newPaymentMethod") {
             const stripeRes = await handleStripePaymentMethod();
             if (stripeRes.error) return;
@@ -141,12 +149,12 @@ export const PaymentForm = (props) => {
         const data = {
             customerId: userInfo.id || "f031ca8c-647e-4d0b-8afc-28e982068fd5", // Get customer id from zustand
             planId: form.planCode,
-            planVariantId: form.variant?.id,
+            planVariantId: form.variant ?.id,
             planFrequency: "weekly",
             restrictionComment: props.deliveryData.restrictions || "No puedo comer alimentos con lactosa", // Add restriction comment
-            couponId: form.coupon?.id,
-            stripePaymentMethodId: form.paymentMethod?.stripeId, // Add if it is a new payment method
-            paymentMethodId: form.paymentMethod?.id, // Add if customer uses an already saved payment method
+            couponId: form.coupon ?.id,
+            stripePaymentMethodId: form.paymentMethod ?.stripeId, // Add if it is a new payment method
+            paymentMethodId: form.paymentMethod ?.id, // Add if customer uses an already saved payment method
             addressName: props.deliveryData.addressName,
             addressDetails: props.deliveryData.addressDetails,
             latitude: props.deliveryData.latitude,
@@ -161,7 +169,7 @@ export const PaymentForm = (props) => {
         if (res.status === 200) {
             if (res.data.payment_status === "requires_action") {
                 const confirmationResponse = await stripe.confirmCardPayment(res.data.client_secret, {
-                    payment_method: form.paymentMethod?.stripeId,
+                    payment_method: form.paymentMethod ?.stripeId,
                 });
 
                 if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
@@ -177,6 +185,23 @@ export const PaymentForm = (props) => {
                     });
                     updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
                     form.canChooseRecipes ? goToNextView() : moveNSteps(2);
+                    // ga.purchase({
+                    //     transaction_id: res.data.subscriptionId,
+                    //     affiliation: "Let's cook website",
+                    //     value: 0,
+                    //     currency: "EUR",
+                    //     tax: 0,
+                    //     shipping: 0,
+                    //     items: [
+                    //         {
+                    //             id: "",
+                    //             name: "",
+                    //             category: "",
+                    //             quantity: 0,
+                    //             price: 0
+                    //         }
+                    //     ]
+                    // })
                 } else {
                     // TO DO: Reject payment in DB
                     await handle3dSecureFailure(res.data.subscriptionId);
@@ -196,6 +221,23 @@ export const PaymentForm = (props) => {
                 });
                 updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
                 form.canChooseRecipes ? goToNextView() : moveNSteps(2);
+                // ga.purchase({
+                //     transaction_id: res.data.subscriptionId,
+                //     affiliation: "Let's cook website",
+                //     value: 0,
+                //     currency: "EUR",
+                //     tax: 0,
+                //     shipping: 0,
+                //     items: [
+                //         {
+                //             id: "",
+                //             name: "",
+                //             category: "",
+                //             quantity: 0,
+                //             price: 0
+                //         }
+                //     ]
+                // })
             } else {
                 enqueueSnackbar("Error al completar el pago", { variant: "error" });
             }
@@ -291,22 +333,10 @@ export const PaymentForm = (props) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <div style={{ display: "flex", alignItems: "center" }}>
-                                <Checkbox
-                                    checked={areTermsAccepted}
-                                    onChange={() => setareTermsAccepted(!areTermsAccepted)}
-                                    color="primary"
-                                    name="acceptTerms"
-                                />
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    style={{ fontSize: "13px", marginLeft: theme.spacing(0.5) }}
-                                >
-                                    He leído y acepto las{" "}
-                                    <b onClick={props.handleOpenPurchaseConditionsModal} style={{ cursor: "pointer" }}>
-                                        condiciones generales de venta
-                                    </b>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <Checkbox checked={areTermsAccepted} onChange={() => setareTermsAccepted(!areTermsAccepted)} color="primary" name='acceptTerms' />
+                                <Typography variant='body2' color='textSecondary' style={{ fontSize: '13px', marginLeft: theme.spacing(0.5) }}>
+                                    He leído y acepto las <b onClick={props.handleOpenPurchaseConditionsModal} style={{ cursor: 'pointer' }}>condiciones generales de venta</b>
                                 </Typography>
                             </div>
                         </Grid>

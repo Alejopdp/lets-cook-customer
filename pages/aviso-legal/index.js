@@ -15,7 +15,7 @@ const AvisoLegal = () => {
     const lang = langs[router.locale];
 
     return (
-        <Layout seoTitle="Aviso legal - Let's cook: Productos frescos y recetas">
+        <Layout seoTitle="Aviso legal - Let's cook: Productos frescos y recetas" page='aviso legal'>
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <LegalTextSection />

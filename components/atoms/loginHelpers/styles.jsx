@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(4)
     },
     link: {
-        color: "#707070"
+        color: "#515151"
     }
 }));
 

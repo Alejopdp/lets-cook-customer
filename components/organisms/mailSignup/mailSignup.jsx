@@ -44,7 +44,7 @@ const MailSignup = () => {
 
             <AcceptLegalTerms />
 
-            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/ingresar" />
+            <Register text="¿Ya tienes cuenta?" boldText="Ingresa aquí" redirectTo="/iniciar-sesion" />
         </FormPaper>
     )
 }

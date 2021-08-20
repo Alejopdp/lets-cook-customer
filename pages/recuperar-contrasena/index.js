@@ -11,9 +11,9 @@ const Signup = () => {
     const router = useRouter();
 
     return (
-        <Layout disableCallToActionSection disableFooterSection>
+        <Layout disableCallToActionSection disableFooterSection page='recuperar contrasena'>
             <InnerSectionLayout containerMaxWidth="lg">
-                <RecoverPasswordForm />
+                <RecoverPasswordForm source='outside buyflow' />
             </InnerSectionLayout>
         </Layout>
     );

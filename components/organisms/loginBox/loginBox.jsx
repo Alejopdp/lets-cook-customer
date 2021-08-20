@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 const langs = require("../../../lang").loginBox;
 import { loginWithEmail, loginWithSocialMedia } from "../../../helpers/serverRequests/customer";
 import cookies from "js-cookie";
+import * as ga from '../../../helpers/ga'
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -37,6 +38,14 @@ const LoginBox = (props) => {
     };
 
     const handleSubmit = async () => {
+        ga.event({
+            action: 'clic en ingresar',
+            params: {
+                event_category: `ingresar - ${props.source}`,
+                event_label: 'ingresar',
+            }
+        })
+
         const res = await loginWithEmail(values.email, values.password);
 
         if (res.status === 200) {
@@ -72,12 +81,30 @@ const LoginBox = (props) => {
     const lang = langs[router.locale];
 
     const handleRedirectToSignUp = () => {
+        ga.event({
+            action: 'clic en registrate aqui',
+            params: {
+                event_category: `ingresar - ${props.source}`,
+                event_label: 'aun no tienes cuenta',
+            }
+        })
         router.push("/registrarme");
     };
 
+    const handleRedirectToForgotPassword = () => {
+        ga.event({
+            action: 'clic en olvide mi contrasena',
+            params: {
+                event_category: `ingresar - ${props.source}`,
+                event_label: 'olvide mi contrasena',
+            }
+        })
+        router.push("/recuperar-contrasena");
+    }
+
     return (
         <FormPaper title={lang.title}>
-            <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} />
+            <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} source={props.source} />
             <Divider />
             <Grid item xs={12}>
                 <TextInput label={lang.emailInput} name="email" value={values.email} onChange={handleChange("email")} />
@@ -93,18 +120,26 @@ const LoginBox = (props) => {
                 />
             </Grid>
             <Grid item xs={12}>
-                {props.dontRedirectForgotPassword ? (
-                    <Typography
-                        variant="subtitle2"
-                        color="primary"
-                        style={{ fontSize: "14px", fontWeight: "600", cursor: "pointer" }}
-                        onClick={props.handleForgotPasswordClick}
-                    >
-                        Olvidé mi contraseña
+                {/* {props.dontRedirectForgotPassword ? (
+                <Typography
+                    variant="subtitle2"
+                    color="primary"
+                    style={{ fontSize: "14px", fontWeight: "600", cursor: "pointer" }}
+                    onClick={props.handleForgotPasswordClick ? props.handleForgotPasswordClick : handleRedirectToForgotPassword}
+                >
+                    Olvidé mi contraseña
                     </Typography>
                 ) : (
-                    <ForgotPassword text={lang.forgotPassword} handleRedirect={props.handleRedirect} />
-                )}
+                        <ForgotPassword text={lang.forgotPassword} />
+                    )} */}
+                <Typography
+                    variant="subtitle2"
+                    color="primary"
+                    style={{ fontSize: "14px", fontWeight: "600", cursor: "pointer" }}
+                    onClick={props.handleForgotPasswordClick ? props.handleForgotPasswordClick : handleRedirectToForgotPassword}
+                >
+                    Olvidé mi contraseña
+                    </Typography>
             </Grid>
             <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>
                 <RoundedButton

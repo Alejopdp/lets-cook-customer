@@ -13,6 +13,9 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
     const router = useRouter();
     return (
         <Box>
+            <Typography variant="subtitle1" color="initial" style={{ marginBottom: 8 }}>
+                {props.additionalPlanName}
+            </Typography>
             {props.variant && (
                 <>
                     <Box marginBottom={3}>

@@ -149,6 +149,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                             description={props.additionalPlan.description}
                             // minPrice no lo recibo todavía del endpoint
                             minPrice=""
+                            additionalPlanName={props.additionalPlan.name}
                         />
                     ),
                     actualButton: (
@@ -172,6 +173,8 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                             selectedFrequency={selectedFrequency}
                             setselectedFrequency={setselectedFrequency}
                             planId={props.additionalPlan.id}
+                            additionalPlanName={props.additionalPlan.name}
+                            handleClickBackToFirstContent={handleClickBackToFirstContent}
                         />
                     ),
                     actualButton: (
@@ -198,6 +201,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                         <VariantSelectedContent
                             selectedFrequency={selectedFrequency}
                             variant={props.selectedVariants.find((variant) => variant.planId === props.additionalPlan.id)}
+                            additionalPlanName={props.additionalPlan.name}
                         />
                     ),
                     actualButton: (
@@ -254,9 +258,6 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
         <Box style={{ marginRight: "24px" }}>
             <div className={classes.card} style={{ backgroundImage: `url(${props.additionalPlan.imageUrl})` }}>
                 <div className={hasBgImg ? classes.overlay : classes.overlayWhite}>
-                    <Typography variant="subtitle1" color="initial" style={{ marginBottom: 8 }}>
-                        {props.additionalPlan.name}
-                    </Typography>
                     {actualView}
                     <div className={classes.cardAction}>{actualButton}</div>
                 </div>

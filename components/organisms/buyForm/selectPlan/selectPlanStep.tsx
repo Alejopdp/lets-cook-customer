@@ -17,6 +17,8 @@ import SectionTitleBuyFlow from "components/molecules/sectionTitleBuyFlow/sectio
 import WeekPlanRecipesSection from "./sections/weekPlanRecipesSection/weekPlanRecipesSection";
 import TermsAndConditionsModal from "../../../molecules/legalModals/termsAndConditionsModal";
 import PrivacyPolicyModal from "../../../molecules/legalModals/privacyPolicyModal";
+import * as ga from '../../../../helpers/ga';
+
 
 const langs = require("../../../../lang").selectPlanStep;
 
@@ -27,9 +29,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const classes = useStyles();
     const theme = useTheme();
     const buyFlow = useBuyFlow();
-    console.log("buyFlow", buyFlow);
     const [planSize, setPlanSize] = useState({});
-    console.log("planSize", planSize);
     const [recipesOfWeek, setRecipesOfWeek] = useState<Recipe[]>([]);
     const [openTycModal, setOpenTycModal] = useState(false);
     const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = useState(false);
@@ -76,6 +76,14 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         if (errors.length) {
             console.log("***->Oops!", errors);
         }
+
+        ga.event({
+            action: `clic en ${plan.slug}`,
+            params: {
+                event_category: 'planes',
+                event_label: plan.slug,
+            }
+        })
 
         const { peopleLabels, planName } = getPlanData(plan.slug, props.plans);
         setPlanSize(peopleLabels);
@@ -174,6 +182,19 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         setOpenPrivacyPolicyModal(false);
     };
 
+    const handleClickSelectPlan = () => {
+        ga.event({
+            action: 'clic en seleccionar plan',
+            params: {
+                event_category: 'planes',
+                event_label: `${buyFlow.form.planSlug}_${buyFlow.form.variant.numberOfPersons}-personas_${buyFlow.form.variant.numberOfRecipes}-recetas`,
+            }
+        })
+        buyFlow.forward()
+    }
+
+    console.log('buyFlow.form', buyFlow.form)
+
     return (
         <>
             <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6) }}>
@@ -236,13 +257,16 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                                 peopleQty={buyFlow.form.variant?.numberOfPersons}
                                 totalPrice={buyFlow.form.variant?.priceWithOffer || buyFlow.form.variant?.price}
                                 planVariantLabel={buyFlow.form.variant?.label}
+                                // totalPrice={buyFlow.form.variant ?.priceWithOffer || buyFlow.form.variant ?.price}
+                                price={buyFlow.form.variant ?.price}
+                                priceWithOffer={buyFlow.form.variant ?.priceWithOffer}
                             />
                         </Grid>
                     </Grid>
                     <Grid item xs={12} style={{ textAlign: "center", marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
                         <RoundedButton
                             label="Seleccionar plan"
-                            onClick={() => buyFlow.forward()}
+                            onClick={handleClickSelectPlan}
                             style={{ padding: `${theme.spacing(2.5)}px ${theme.spacing(8)}px` }}
                         />
                         <Typography variant="body2" color="textSecondary" style={{ marginTop: theme.spacing(2) }}>
@@ -258,9 +282,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             {!!recipesOfWeek.length && (
                 <div className={classes.recipeSection}>
                     <WeekPlanRecipesSection
-                        title="Hecha un vistazo a las recetas de esta semana"
-                        subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam"
-                        titleAlign="center"
                         recipes={recipesOfWeek}
                     />
                 </div>

@@ -3,4 +3,5 @@ export interface LocationSearchInputProps {
     handleChange: (newValue: string) => void;
     name: string;
     disabled: boolean;
+    label: string;
 }

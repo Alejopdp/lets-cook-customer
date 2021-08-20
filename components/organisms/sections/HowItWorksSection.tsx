@@ -7,18 +7,30 @@ import { useRouter } from "next/router";
 import { useHowItWorksStyles as useStyles } from "./styles";
 import { HowItWorksSectionProps, HowItWorks } from "./interfaces";
 import { memo } from "react";
+import * as ga from '../../../helpers/ga'
 
 const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
     const theme = useTheme();
     const classes = useStyles();
     const router = useRouter();
 
+    const goToPlans = () => {
+        ga.event({
+            action: "clic en descubre mas",
+            params: {
+                event_category: 'homepage',
+                event_label: 'como funciona',
+            }
+        })
+        router.push("/planes")
+    }
+
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Title title="¿Cómo funciona?" />
                 {(props.cards || []).map((card, index) => (
-                    <Grid key={index} item xs={12} sm={6} md={3} style={{ textAlign: "center" }}>
+                    <Grid key={index} item xs={12} sm={6} md={3} style={{ textAlign: "center" }} className={classes.gridCard}>
                         <img className={classes.img} src={card.image} />
                         <Typography className={classes.paddingCardTitle} variant="subtitle1" color="initial">
                             {card.title}
@@ -31,7 +43,7 @@ const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
             </Grid>
             <Grid container style={{ marginTop: theme.spacing(4) }}>
                 <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
-                    <RoundedButton label="Descubre más" onClick={() => router.push("/planes")} />
+                    <RoundedButton label="Descubre más" onClick={goToPlans} />
                     <Typography className={classes.smallText} variant="caption">
                         Podrás pausar, cambiar o cancelar el plan cuando quieras
                     </Typography>
