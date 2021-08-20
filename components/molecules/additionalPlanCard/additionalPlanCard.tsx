@@ -139,6 +139,10 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
     //             };
     //     }
     // }, [cardView, selectedVariant, selectedFrequency]);
+
+    const handleClickBackToFirstContent = () => {
+        setcardView(CardView.FIRST_CONTENT);
+    };
     const getRenders = () => {
         switch (cardView) {
             case CardView.FIRST_CONTENT:
