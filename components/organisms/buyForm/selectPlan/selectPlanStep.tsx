@@ -87,7 +87,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             plan.description,
             plan.abilityToChooseRecipes,
             plan.imageUrl || "",
-            plan.iconWithColor  || ""
+            plan.iconWithColor || ""
         );
         navigate(variant, id, slug);
     };
@@ -235,6 +235,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                                 recipesQty={buyFlow.form.variant?.numberOfRecipes}
                                 peopleQty={buyFlow.form.variant?.numberOfPersons}
                                 totalPrice={buyFlow.form.variant?.priceWithOffer || buyFlow.form.variant?.price}
+                                planVariantLabel={buyFlow.form.variant?.label}
                             />
                         </Grid>
                     </Grid>
