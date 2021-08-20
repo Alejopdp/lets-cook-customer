@@ -1,6 +1,7 @@
 // Utils & config
 import React from "react";
 import PropTypes from "prop-types";
+import * as ga from '../../../helpers/ga'
 
 // External components
 import Grid from "@material-ui/core/Grid";
@@ -19,6 +20,13 @@ export const RecipesGrid = (props: RecipesGridProps) => {
     const { recipes, selectRecipes } = useBuyFlow(({ form: { recipes }, selectRecipes }) => ({ recipes, selectRecipes }));
 
     const handleClickOpenModal = (recipe) => {
+        ga.event({
+            action: "clic en recetas",
+            params: {
+                event_category: props.recipesSelection ? 'elegir recetas' : 'recetas page',
+                event_label: recipe.name.toLowerCase(),
+            }
+        })
         setRecipeToView(recipe);
         setOpen(true);
     };
@@ -44,6 +52,7 @@ export const RecipesGrid = (props: RecipesGridProps) => {
     }, [props.selectedRecipes]);
 
     const descriptionElementRef = React.useRef(null);
+
     React.useEffect(() => {
         if (open) {
             const { current: descriptionElement } = descriptionElementRef;

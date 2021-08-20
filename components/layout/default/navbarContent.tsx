@@ -1,6 +1,7 @@
 // Utils & config
 import React, { FormEvent } from "react";
 import { useRouter } from "next/router";
+import * as ga from '../../../helpers/ga';
 
 // External components
 import { IconButton, Toolbar, AppBar, Hidden, makeStyles } from "@material-ui/core";
@@ -22,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
             display: "none",
         },
     },
-
     logo: {
         display: "flex",
         flex: 1,
@@ -36,12 +36,14 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
+        backgroundColor: theme.palette.background.paper
     },
     cursorPointer: { cursor: "pointer" }
 }));
 
 interface NavbarContentProps {
-    toggleOpeningDrawer: (e: FormEvent) => void
+    toggleOpeningDrawer: (e: FormEvent) => void,
+    page: string
 }
 
 export const NavbarContent = (props: NavbarContentProps) => {
@@ -49,6 +51,29 @@ export const NavbarContent = (props: NavbarContentProps) => {
     const classes = useStyles();
     const router = useRouter();
     const [lang] = useLang('navbarContent')
+
+    const goToPlans = () => {
+        ga.event({
+            action: "clic en nuestros planes",
+            params: {
+                event_category: props.page ? props.page : 'undefined page',
+                event_label: 'cabecera',
+            }
+        })
+        router.push("/planes")
+    }
+
+    const goToLogin = () => {
+        ga.event({
+            action: "clic en iniciar sesion",
+            params: {
+                event_category: props.page ? props.page : 'undefined page',
+                event_label: 'cabecera',
+            }
+        })
+        router.push("/iniciar-sesion")
+    }
+
 
     return (
         <AppBar position="fixed" color="default" className={classes.navbarClass}>
@@ -68,8 +93,8 @@ export const NavbarContent = (props: NavbarContentProps) => {
                     </Link>
                 </div>
                 <Hidden xsDown implementation="css">
-                    <LoginButton />
-                    <RoundedButton label={lang.seePlans} variant="content" onClick={() => router.push("/planes")}></RoundedButton>
+                    <LoginButton goToLogin={goToLogin} />
+                    <RoundedButton label={lang.seePlans} variant="content" onClick={goToPlans}></RoundedButton>
                 </Hidden>
                 <LangSelector onChangeLang={_handleOnChangeLang} />
             </Toolbar>

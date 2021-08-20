@@ -3,7 +3,7 @@ import React from "react";
 import useStyles from "./styles";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-
+import * as ga from '../../../helpers/ga'
 import { loginWithFacebookAndGetIdToken, loginWithGoogleAndGetIdToken } from "../../../helpers/firebase";
 import { useSnackbar } from "notistack";
 
@@ -18,6 +18,14 @@ export const SocialNetworksButtons = (props) => {
     const [lang] = useLang("socialNetworksButtons");
 
     const handleFacebookLogin = async () => {
+        ga.event({
+            action: 'clic en continuar con rrss',
+            params: {
+                event_category: `registrarse - ${props.source}`,
+                event_label: 'facebook',
+            }
+        })
+
         const { token, error, email } = await loginWithFacebookAndGetIdToken();
 
         if (!!token) {
@@ -33,6 +41,14 @@ export const SocialNetworksButtons = (props) => {
     };
 
     const handleGoogleLogin = async () => {
+        ga.event({
+            action: 'clic en continuar con rrss',
+            params: {
+                event_category: `registrarse - ${props.source}`,
+                event_label: 'google',
+            }
+        })
+
         const { token, error } = await loginWithGoogleAndGetIdToken();
 
         if (!!token) {
@@ -53,7 +69,7 @@ export const SocialNetworksButtons = (props) => {
             <Grid item xs={12}>
                 <Button className={clsx(button, facebook)} onClick={handleFacebookLogin}>
                     <Image src="/assets/facebook.png" width={20} height={20} />
-                    <Typography variant="subtitle1" className={txt}>
+                    <Typography variant="h6" className={txt}>
                         {lang.facebook}
                     </Typography>
                 </Button>
@@ -61,7 +77,7 @@ export const SocialNetworksButtons = (props) => {
             <Grid item xs={12}>
                 <Button className={clsx(button, google)} onClick={handleGoogleLogin}>
                     <Image src="/assets/google.png" width={20} height={20} />
-                    <Typography variant="subtitle1" className={txt}>
+                    <Typography variant="h6" className={txt}>
                         {lang.google}
                     </Typography>
                 </Button>

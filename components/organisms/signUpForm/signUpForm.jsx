@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 const langs = require("../../../lang").signupForm;
 import { useUserInfoStore, useAuthStore } from "../../../stores/auth";
 import cookies from "js-cookie";
+import * as ga from '../../../helpers/ga'
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -40,6 +41,13 @@ const SignUpForm = (props) => {
     var currentInputs = <></>;
 
     const handleSubmit = (number) => {
+        ga.event({
+            action: 'clic en continuar',
+            params: {
+                event_category: `registrarse - ${props.source}`,
+                event_label: 'correo electronico',
+            }
+        })
         if (currentStep + number < 0 || currentStep + number > 1) alert("error");
         setcurrentStep(currentStep + number);
     };
@@ -59,6 +67,14 @@ const SignUpForm = (props) => {
     };
 
     const handleCreateAccount = async () => {
+        ga.event({
+            action: 'clic en registrarme',
+            params: {
+                event_category: `registrarse - ${props.source}`,
+                event_label: 'ingrese su contrasena',
+            }
+        })
+
         const res = await signUp(formData.email, formData.password);
 
         if (res.status === 200) {
@@ -74,7 +90,14 @@ const SignUpForm = (props) => {
     };
 
     const handleRedirect = () => {
-        router.push("/ingresar");
+        ga.event({
+            action: 'clic en iniciar sesion',
+            params: {
+                event_category: `registrarse - ${props.source}`,
+                event_label: 'ya tienes cuenta',
+            }
+        })
+        router.push("/iniciar-sesion");
     };
 
     const router = useRouter();
@@ -112,6 +135,7 @@ const SignUpForm = (props) => {
                     handleSignUp={props.handleSignUp}
                     handleOpenTycModal={handleOpenTycModal}
                     handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
+                    source={props.source}
                 />
             );
             break;
@@ -127,6 +151,7 @@ const SignUpForm = (props) => {
                     handleSubmit={props.handleCreateAccount || handleCreateAccount}
                     handleOpenTycModal={handleOpenTycModal}
                     handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
+                    source={props.source}
                 />
             );
             break;
@@ -141,6 +166,7 @@ const SignUpForm = (props) => {
                     email={formData.email}
                     handleOpenTycModal={handleOpenTycModal}
                     handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
+                    source={props.source}
                 />
             );
     }

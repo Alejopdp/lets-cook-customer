@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     footer: {
         maxWidth: "90vw",
         margin: "0 auto",
+        marginTop:theme.spacing(4)
     },
     marg1: {
         marginBottom: theme.spacing(1),

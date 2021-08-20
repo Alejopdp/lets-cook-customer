@@ -5,6 +5,7 @@ import { useRecipesStyles as useStyles } from "./styles";
 import { RecipesSectionProps } from "./interfaces";
 import "react-multi-carousel/lib/styles.css";
 import { useBuyFlow } from "@stores";
+import * as ga from '../../../../../../helpers/ga'
 
 // External components
 import { GridList, makeStyles, Typography, Container, Grid, useMediaQuery, useTheme } from "@material-ui/core";
@@ -61,6 +62,13 @@ export const WeekPlanRecipesSection = memo((props: RecipesSectionProps) => {
     const { form } = useBuyFlow((state) => ({ form: state.form }));
 
     const handleClickOpenModal = (recipe) => {
+        ga.event({
+            action: "clic en recetas",
+            params: {
+                event_category: 'planes',
+                event_label: recipe.name.toLowerCase(),
+            }
+        })
         setRecipeToView(recipe);
         setOpen(true);
     };
@@ -74,8 +82,8 @@ export const WeekPlanRecipesSection = memo((props: RecipesSectionProps) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <SectionTitleBuyFlow
-                            title={`Recetas del ${form.planName} del ${form.weekLabel}`}
-                            subtitle="Déjate sorprender por nuestras deliciosas recetas preparadas por chefs y aprende cocinando"
+                            title={`Recetas del ${form.planName} de esta semana`}
+                            subtitle="Nuestros chefs preparan recetas variadas cada semana para mantener la llama viva."
                         />
                     </Grid>
                     {props.recipes.length <= 4 && isLgUp && (

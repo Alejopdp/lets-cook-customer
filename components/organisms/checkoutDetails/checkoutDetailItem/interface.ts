@@ -3,3 +3,10 @@ export interface CheckoutDetailItemProps {
     value: string;
     isDiscountItem?: boolean;
 }
+
+export interface checkoutDetailPlanPriceProps {
+    title: string;
+    price?: number;
+    priceWithOffer?: number;
+}
+

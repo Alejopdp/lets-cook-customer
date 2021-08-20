@@ -31,7 +31,6 @@ const MailStep = (props) => {
 
     const handleSocialMediaSubmit = async (token) => {
         const res = await loginWithSocialMedia(token);
-
         if (res.status === 200) {
             saveInLocalStorage("token", res.data.token);
             saveInLocalStorage("userInfo", res.data.userInfo);
@@ -47,7 +46,7 @@ const MailStep = (props) => {
 
     return (
         <>
-            <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} />
+            <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} source={props.source} />
             <AcceptLegalTerms handleOpenTycModal={props.handleOpenTycModal} handleOpenPrivacyPolicyModal={props.handleOpenPrivacyPolicyModal} />
             <Divider />
             <Grid item xs={12}>

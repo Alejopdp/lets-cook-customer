@@ -5,6 +5,7 @@ import { ShipmentForm, PaymentForm, IconsWithText } from "@molecules";
 import CheckoutDetails from "../checkoutDetails";
 import { getGeometry } from "helpers/utils/geocode";
 import PurchaseConditionsModal from '../../molecules/legalModals/purchaseConditionsModal';
+import * as ga from '../../../helpers/ga'
 
 interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
@@ -16,13 +17,13 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     const form = useBuyFlow((state) => state.form);
     const [expanded, setExpanded] = React.useState<string | false>("panel1");
     const [deliveryData, setdeliveryData] = useState({
-        addressName: form.deliveryForm?.addressName || "",
-        addressDetails: form.deliveryForm?.addressDetails || "",
-        firstName: form.deliveryForm?.firstName || "",
-        lastName: form.deliveryForm?.lastName || "",
-        phone1: form.deliveryForm?.phone1 || "",
-        latitude: form.deliveryForm?.latitude || "",
-        longitude: form.deliveryForm?.longitude || "",
+        addressName: form.deliveryForm ?.addressName || "",
+        addressDetails: form.deliveryForm ?.addressDetails || "",
+        firstName: form.deliveryForm ?.firstName || "",
+        lastName: form.deliveryForm ?.lastName || "",
+        phone1: form.deliveryForm ?.phone1 || "",
+        latitude: form.deliveryForm ?.latitude || "",
+        longitude: form.deliveryForm ?.longitude || "",
     });
     const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false)
 
@@ -32,6 +33,13 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     };
 
     const changeToSecondStep = () => {
+        ga.event({
+            action: 'clic en continuar',
+            params: {
+                event_category: 'checkout',
+                event_label: 'datos de entrega',
+            }
+        })
         setExpanded("panel2");
     };
 
@@ -68,66 +76,66 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
 
 
 
-        // Purchase Conditions Modal Functions
+    // Purchase Conditions Modal Functions
 
-        const handleOpenPurchaseConditionsModal = () => {
-            setOpenPurchaseConditionsModal(true);
-        };
-    
-        const handleClosePurchaseConditionsModal = () => {
-            setOpenPurchaseConditionsModal(false);
-        };
+    const handleOpenPurchaseConditionsModal = () => {
+        setOpenPurchaseConditionsModal(true);
+    };
 
-        
+    const handleClosePurchaseConditionsModal = () => {
+        setOpenPurchaseConditionsModal(false);
+    };
+
+
     return (
         <>
-        <Container>
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={8} style={{ paddingTop: theme.spacing(8), paddingBottom: theme.spacing(6) }}>
-                    <Container style={{ maxWidth: "650px" }}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                                <div style={{ display: "flex", alignItems: "center" }}>
-                                    <img src="/icons/checkout/verified.svg" width={24} height={24} />
-                                    <Typography variant="h5" style={{ marginLeft: theme.spacing(1) }}>
-                                        Pago 100% seguro
+            <Container>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={8} style={{ paddingTop: theme.spacing(8), paddingBottom: theme.spacing(6) }}>
+                        <Container style={{ maxWidth: "650px" }}>
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                        <img src="/icons/checkout/verified.svg" width={24} height={24} />
+                                        <Typography variant="h5" style={{ marginLeft: theme.spacing(1) }}>
+                                            Pago 100% seguro
                                     </Typography>
-                                </div>
+                                    </div>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <ShipmentForm
+                                        deliveryData={deliveryData}
+                                        isFormCompleted={isDeliveryFormCompleted}
+                                        handleChange={handleDeliveryDataChange}
+                                        handleAddressChange={handleAddressChange}
+                                        expanded={expanded}
+                                        handleChangeAccordion={handleChangeAccordion}
+                                        handleChangeStep={changeToSecondStep}
+                                        setDeliveryData={setdeliveryData}
+                                        panelNumber='panel1'
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <PaymentForm
+                                        expanded={expanded}
+                                        handleChangeAccordion={handleChangeAccordion}
+                                        deliveryData={deliveryData}
+                                        panelNumber='panel2'
+                                        handleOpenPurchaseConditionsModal={handleOpenPurchaseConditionsModal}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: theme.spacing(4) }}>
+                                    <IconsWithText />
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <ShipmentForm
-                                    deliveryData={deliveryData}
-                                    isFormCompleted={isDeliveryFormCompleted}
-                                    handleChange={handleDeliveryDataChange}
-                                    handleAddressChange={handleAddressChange}
-                                    expanded={expanded}
-                                    handleChangeAccordion={handleChangeAccordion}
-                                    handleChangeStep={changeToSecondStep}
-                                    setDeliveryData={setdeliveryData}
-                                    panelNumber='panel1'
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <PaymentForm
-                                    expanded={expanded}
-                                    handleChangeAccordion={handleChangeAccordion}
-                                    deliveryData={deliveryData}
-                                    panelNumber='panel2'
-                                    handleOpenPurchaseConditionsModal={handleOpenPurchaseConditionsModal}
-                                />
-                            </Grid>
-                            <Grid item xs={12} style={{ marginTop: theme.spacing(4) }}>
-                                <IconsWithText />
-                            </Grid>
-                        </Grid>
-                    </Container>
+                        </Container>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <CheckoutDetails />
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} md={4}>
-                    <CheckoutDetails />
-                </Grid>
-            </Grid>
-        </Container>
-        <PurchaseConditionsModal
+            </Container>
+            <PurchaseConditionsModal
                 open={openPurchaseConditionsModal}
                 handleClose={handleClosePurchaseConditionsModal}
             />

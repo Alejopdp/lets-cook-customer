@@ -54,7 +54,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                 <div className={classes.recipesQtySelected}>
                                     <CheckCircleOutline color="primary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
-                                        ¡Ha seleccionado todas las recetas!
+                                        Has seleccionado todas las recetas
                                     </Typography>
                                 </div>
                             )}

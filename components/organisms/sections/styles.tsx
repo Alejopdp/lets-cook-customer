@@ -4,9 +4,9 @@ export const useValuePropositionStyle = makeStyles((theme) => ({
     root: {
         minHeight: "75vh",
         [theme.breakpoints.down('sm')]: {
-            backgroundImage: "url(/assets/home/home-principal-mobile.webp)",
+            backgroundImage: "url(/assets/home/home-principal-mobile.jpg)",
         },
-        backgroundImage: "url(/assets/home/home-principal-desktop.webp)",
+        backgroundImage: "url(/assets/home/home-principal-desktop.jpg)",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",
@@ -59,7 +59,11 @@ export const useBenefitsStyle = makeStyles(theme => ({
         flex: 1,
         borderRadius: 8,
         width: "100%",
-        maxWidth: 480,
+        maxWidth: 450,
+        [theme.breakpoints.down("sm")]: {
+            maxWidth: 375,
+            margin: '0px auto 24px auto '
+        },
     },
     smallText: {
         paddingTop: theme.spacing(1),
@@ -165,7 +169,6 @@ export const useHowItWorksStyles = makeStyles(theme => ({
     },
     img: {
         borderRadius: 8,
-        height: 170,
         width: "100%",
     },
     paddingCardTitle: {
@@ -175,6 +178,11 @@ export const useHowItWorksStyles = makeStyles(theme => ({
     smallText: {
         paddingTop: theme.spacing(1),
         textAlign: "center"
+    },
+    gridCard: {
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: theme.spacing(4)
+        },
     }
 }));
 

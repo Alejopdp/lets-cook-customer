@@ -1,6 +1,6 @@
 export const passwordStep = {
     es: {
-        passwordInput: "Ingrese su contraseña",
+        passwordInput: "Crea tu contraseña",
         authorizeCheckbox: {
             label: "Autorizo a Let's Cook a tratar mis datos para poder gestionar el alta como usuario en su web. Puedes obtener más información",
             boldText: "pulsando aquí",
@@ -24,7 +24,7 @@ export const passwordStep = {
         buttonText: "Register"
     },
     ca: {
-        passwordInput: "[CA] Enter your password",
+        passwordInput: "Crea tu contraseña",
         authorizeCheckbox: {
             label: "I authorize Let's Cook to treat my data in order to register me in it's web. You can get more information",
             boldText: "clicking here",

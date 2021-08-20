@@ -1,9 +1,9 @@
 export const loginButton = {
     es: {
-        singin: "Ingresar"
+        singin: "Iniciar sesión"
     },
     en: {
-        singin: "Sign in"
+        singin: "Log in"
     },
     ca: {
         singin: "Ingresar"

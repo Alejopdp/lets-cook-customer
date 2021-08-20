@@ -28,11 +28,10 @@ export const SimpleAccordion = (props: SimpleAccordionProps) => {
                 <AccordionDetails style={{ flexDirection: 'column' }}>
                     {props.answer.split('\n').map((item, key) => {
                         return (
-                            <>
-                                <Typography variant="body2" color="textSecondary" style={{ marginBottom: '8px' }}>
-                                    {item}
-                                </Typography>
-                            </>)
+                            <Typography variant="body2" color="textSecondary" style={{ marginBottom: '8px' }}>
+                                {item}
+                            </Typography>
+                        )
                     })}
                 </AccordionDetails>
             </Accordion>
