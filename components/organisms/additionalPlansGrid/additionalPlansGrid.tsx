@@ -65,6 +65,8 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                                 <AdditionalPlanCard
                                     selectedVariants={props.selectedVariants}
                                     setselectedVariants={props.setselectedVariants}
+                                    variantsToPay={props.variantsToPay}
+                                    setvariantsToPay={props.setvariantsToPay}
                                     additionalPlan={plan}
                                 />
                             </Grid>
@@ -99,6 +101,8 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                         <AdditionalPlanCard
                             selectedVariants={props.selectedVariants}
                             setselectedVariants={props.setselectedVariants}
+                            variantsToPay={props.variantsToPay}
+                            setvariantsToPay={props.setvariantsToPay}
                             key={index}
                             additionalPlan={plan}
                         />

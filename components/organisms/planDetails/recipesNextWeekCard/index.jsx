@@ -34,9 +34,16 @@ const RecipesNextWeekCard = (props) => {
                             color="textSecondary"
                             style={{ fontSize: "16px", marginTop: theme.spacing(1), marginBottom: theme.spacing(2) }}
                         >
-                            Ya puedes elegir tus recetas para la entrega del {props.nextWeekOrder.shippingDate}
+                            {props.canChooseRecipes
+                                ? `Ya puedes elegir tus recetas para la entrega del ${props.nextWeekOrder.shippingDate}`
+                                : "Estamos eligiendo por tí las recetas de la semana actual"}
                         </Typography>
-                        <RoundedButton label="Elegir recetas" onClick={() => router.push(`/elegir-recetas/${props.nextWeekOrder.id}`)} />
+                        {props.canChooseRecipes && (
+                            <RoundedButton
+                                label="Elegir recetas"
+                                onClick={() => router.push(`/elegir-recetas/${props.nextWeekOrder.id}`)}
+                            />
+                        )}
                     </Box>
                 </BoxWithTitle>
             ) : (

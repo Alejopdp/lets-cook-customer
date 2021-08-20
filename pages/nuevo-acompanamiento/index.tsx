@@ -23,6 +23,7 @@ const NuevoAcompañamientoPage = (props) => {
     const [isLoading, setisLoading] = useState(true);
     const { enqueueSnackbar } = useSnackbar();
     const [selectedVariants, setselectedVariants] = useState<PlanVariant[]>([]);
+    const [variantsToPay, setvariantsToPay] = useState<PlanVariant[]>([]);
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const stripe = useStripe();
 
@@ -41,11 +42,11 @@ const NuevoAcompañamientoPage = (props) => {
     }, []);
 
     const totalValue = useMemo(() => {
-        return selectedVariants.reduce((acc, variant) => acc + variant.priceWithOffer || variant.price, 0);
-    }, [selectedVariants]);
+        return variantsToPay.reduce((acc, variant) => (variant.priceWithOffer ? acc + variant.priceWithOffer : acc + variant.price), 0);
+    }, [variantsToPay]);
 
     const handleSubmitPayment = async () => {
-        const variants = selectedVariants.map((variant) => ({
+        const variants = variantsToPay.map((variant) => ({
             planId: variant.planId,
             variant: { id: variant.id },
             frequency: variant.frequency,
@@ -87,6 +88,8 @@ const NuevoAcompañamientoPage = (props) => {
                     <AdditionalPlansGrid
                         selectedVariants={selectedVariants}
                         setselectedVariants={setselectedVariants}
+                        variantsToPay={variantsToPay}
+                        setvariantsToPay={setvariantsToPay}
                         additionalPlans={additionalPlans}
                     />
                 </Grid>
