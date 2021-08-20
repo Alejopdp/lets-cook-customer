@@ -5,6 +5,7 @@ import { getAdditionalPlans } from "@helpers";
 import { useSnackbar } from "notistack";
 import { useStripe } from "@stripe/react-stripe-js";
 import * as ga from "../../../helpers/ga";
+const langs = require("../../../lang").crossSellingStep;
 
 // External components
 import { Box, Button, Container, Grid, Icon } from "@material-ui/core";
@@ -14,17 +15,15 @@ import { useBuyFlow, useCrossSellingStore, useUserInfoStore } from "@stores";
 import { Plan } from "types/plan";
 import { useRouter } from "next/router";
 import { useTheme } from "@material-ui/core";
+
 // Internal components
+import SectionTitleBuyFlow from "../../molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
 
 // Images & icons
 import Payment from "@material-ui/icons/Payment";
-import { CustomButton, RoundedButton } from "@atoms";
+import { CustomButton, RoundedButton, SimpleAccordion } from "@atoms";
 import { PlanVariant } from "types/planVariant";
-import {
-    createManySubscriptions,
-    handle3dSecureFailure,
-    handle3dSecureFailureForManySubscriptions,
-} from "helpers/serverRequests/subscription";
+import { createManySubscriptions, handle3dSecureFailure, handle3dSecureFailureForManySubscriptions } from "helpers/serverRequests/subscription";
 import AdditionalPlansBuyButtons from "components/molecules/additionalPlansBuyButtons/additionalPlansBuyButtons";
 import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
@@ -33,6 +32,7 @@ const CrossSellingStep = (props) => {
     const theme = useTheme();
     const { form, resetBuyFlowState } = useBuyFlow((state) => ({ form: state.form, resetBuyFlowState: state.resetBuyFlowState }));
     const router = useRouter();
+    const lang = langs[router.locale];
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
     const [additionalPlans, setadditionalPlans] = useState<Plan[]>([]);
@@ -97,7 +97,7 @@ const CrossSellingStep = (props) => {
         if (res.status === 200) {
             if (res.data.payment_status === "requires_action") {
                 const confirmationResponse = await stripe.confirmCardPayment(res.data.client_secret, {
-                    payment_method: form.paymentMethod?.stripeId,
+                    payment_method: form.paymentMethod ?.stripeId,
                 });
 
                 if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
@@ -127,10 +127,10 @@ const CrossSellingStep = (props) => {
 
     const handleNotAddingAdditionalPlans = async () => {
         ga.event({
-            action: "clic en no quiero agregar productos adicionales",
+            action: "clic en no quiero añadir ningun adicional",
             params: {
                 event_category: "cross-selling",
-                event_label: "no agregar productos adicionales",
+                event_label: "no quiero añadir ningun adicional",
             },
         });
         await router.push("/perfil");
@@ -138,12 +138,12 @@ const CrossSellingStep = (props) => {
     };
 
     return (
-        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6) }}>
+        <Container maxWidth="lg" style={{ paddingTop: theme.spacing(8) }}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TitleBuyFlow
-                        title={form.recipes.length > 0 ? "Ya has seleccionado las recetas correctamente" : "¡Gracias por suscribirte!"}
-                        subtitle="¿Quieres agregar algún producto adicional?"
+                        title={form.recipes.length > 0 ? "¡Enhorabuena! Guardamos tu elección." : "¡Enhorabuena! Muchas gracias por tu compra"}
+                        subtitle="Ya puedes ir encendiendo los fogones. ¿Te gustaría disfrutar un adicional con tu plan?"
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
@@ -159,9 +159,26 @@ const CrossSellingStep = (props) => {
                     <AdditionalPlansBuyButtons
                         handleSecondaryButtonClick={handleNotAddingAdditionalPlans}
                         handleSubmitPayment={handleSubmitPayment}
-                        secondaryButtonLabel="No quiero agregar ningún producto adicional"
+                        secondaryButtonLabel="No quiero añadir ningún adicional"
                         totalValue={totalValue}
                     />
+                </Grid>
+            </Grid>
+            <Grid container spacing={2} style={{ paddingBottom: theme.spacing(8), paddingTop: theme.spacing(8) }}>
+                <Grid item xs={12}>
+                    <SectionTitleBuyFlow
+                        title="Preguntas frecuentes"
+                        subtitle="¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat"
+                    />
+                    <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
+                        <Grid container spacing={2}>
+                            {lang.faqs.map((faq, index) => (
+                                <Grid item xs={12}>
+                                    <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Container>

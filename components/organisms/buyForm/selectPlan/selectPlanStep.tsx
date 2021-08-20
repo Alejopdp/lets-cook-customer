@@ -197,7 +197,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
     return (
         <>
-            <Container maxWidth="lg" style={{ paddingTop: theme.spacing(6) }}>
+            <Container maxWidth="lg" style={{ paddingTop: theme.spacing(8) }}>
                 <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
                     {/* PLAN CARRUSEL */}
                     <Grid item xs={12}>

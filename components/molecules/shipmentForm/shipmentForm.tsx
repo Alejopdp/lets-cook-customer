@@ -52,7 +52,7 @@ const useStylesAccordion = makeStyles((theme: Theme) =>
             backgroundColor: 'rgba(0,165,85,0.1)',
             padding: '16px',
             color: theme.palette.text.primary,
-            border: '1px dashed black',
+            border: '1px dashed #707070',
             borderRadius: '4px'
         },
         shipmentFormContainer: {

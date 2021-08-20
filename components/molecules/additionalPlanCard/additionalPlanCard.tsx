@@ -207,7 +207,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                     ),
                     actualButton: (
                         <RoundedButton
-                            label="REMOVER"
+                            label="QUITAR"
                             style={{
                                 width: "100%",
                                 backgroundColor: "white",
