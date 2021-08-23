@@ -161,13 +161,15 @@ const PlanDetails = (props: PlanDetailsProps) => {
                     handleClickOpenRecipeModal={handleClickOpenRecipeModal}
                 />
             </Hidden>
-            <RecipeModal
-                open={openRecipeModal}
-                handleClose={handleCloseRecipeModal}
-                descriptionElementRef={descriptionElementRefRecipeModal}
-                recipe={selectedRecipe}
-                // data={recipeSelectedIndex.period === 'actualWeek' ? data.actualWeekOrder[recipeSelectedIndex.index] : data.nextWeekOrder[recipeSelectedIndex.index]}
-            />
+            {openRecipeModal && (
+                <RecipeModal
+                    open={openRecipeModal}
+                    handleClose={handleCloseRecipeModal}
+                    descriptionElementRef={descriptionElementRefRecipeModal}
+                    recipe={selectedRecipe}
+                    // data={recipeSelectedIndex.period === 'actualWeek' ? data.actualWeekOrder[recipeSelectedIndex.index] : data.nextWeekOrder[recipeSelectedIndex.index]}
+                />
+            )}
             <SwapPlanModal
                 open={openChangePlanModal}
                 handleClose={handleCloseChangePlanModal}

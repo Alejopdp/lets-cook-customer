@@ -4,6 +4,7 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/c
 import StripeForm from "components/molecules/stripeForm/stripeForm";
 import { IPaymentMethod } from "@stores";
 import { PaymentMethodFormProps } from "./interfaces";
+import { capitalizeFirstLetter } from "helpers/utils/utils";
 
 const PaymentMethodForm = (props: PaymentMethodFormProps) => {
     return (
@@ -22,7 +23,7 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                             <FormControlLabel
                                 value={paymentMethod.id}
                                 control={<Radio />}
-                                label={paymentMethod.label || paymentMethod.card}
+                                label={capitalizeFirstLetter(paymentMethod.label) || capitalizeFirstLetter(paymentMethod.card)}
                             />
                         ))}
                     </RadioGroup>

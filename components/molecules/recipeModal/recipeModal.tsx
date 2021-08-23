@@ -79,7 +79,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
     }, []);
 
     const ingredients = useMemo(() => {
-        return props.recipe.recipeVariants[0]?.ingredients.join(", ") || "";
+        return props.recipe?.recipeVariants[0]?.ingredients.join(", ") || "";
     }, []);
 
     return (
@@ -140,20 +140,6 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                     </Grid>
                                 </Grid>
 
-                                {/* <Grid container>
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        style={{ display: "flex", alignItems: "center", margin: `${theme.spacing(3)}px 0px` }}
-                                    >
-                                        {(props.recipe.recipeVariants || []).map((option, index) => (
-                                            <Typography key={index} style={{ marginRight: theme.spacing(2), fontSize: 14 }}>
-                                                Hay opción {option.restriction.label}
-                                            </Typography>
-                                        ))}
-                                    </Grid>
-                                </Grid>
- */}
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
