@@ -78,6 +78,10 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
         return (props.recipe.tools || []).join(", ");
     }, []);
 
+    const ingredients = useMemo(() => {
+        return props.recipe.recipeVariants[0]?.ingredients.join(", ") || "";
+    }, []);
+
     return (
         <>
             {!!props.recipe && (
@@ -136,7 +140,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                     </Grid>
                                 </Grid>
 
-                                <Grid container>
+                                {/* <Grid container>
                                     <Grid
                                         item
                                         xs={12}
@@ -149,7 +153,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                         ))}
                                     </Grid>
                                 </Grid>
-
+ */}
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
@@ -161,10 +165,11 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
                                             Ingredientes
                                         </Typography>
-                                        <RecipeVariantsTab
+                                        {/* <RecipeVariantsTab
                                             variants={props.recipe.recipeVariants} // TO DO SON RESTRICTIONS ?
                                             // ingredientsLists={[props.recipe.]}
-                                        />
+                                        /> */}
+                                        <Typography variant="body2">{ingredients}</Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
