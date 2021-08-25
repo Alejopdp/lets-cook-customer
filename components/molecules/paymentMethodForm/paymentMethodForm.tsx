@@ -23,7 +23,8 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                             <FormControlLabel
                                 value={paymentMethod.id}
                                 control={<Radio />}
-                                label={capitalizeFirstLetter(paymentMethod.label) || capitalizeFirstLetter(paymentMethod.card)}
+                                // label={capitalizeFirstLetter(paymentMethod.label) || capitalizeFirstLetter(paymentMethod.card)}
+                                label={paymentMethod.label || paymentMethod.card}
                             />
                         ))}
                     </RadioGroup>
