@@ -64,8 +64,12 @@ const useStylesAccordion = makeStyles((theme: Theme) =>
                 color: theme.palette.text.secondary,
                 opacity: '0.3',
                 cursor: 'default'
+            },
+            "& div.react-tel-input input.form-control:focus": {
+                borderColor: theme.palette.primary.main,
+                borderWidth: '2px',
+                boxShadow: 'none'
             }
-
         }
     })
 );

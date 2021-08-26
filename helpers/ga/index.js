@@ -2,16 +2,20 @@
 export const pageview = (url) => {
     window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
         page_path: url,
+        custom_map: { dimension1: 'app_language' },
+        custom_map: { metrix1: 'isLoggedIn' }
     })
 }
 
 // log specific events happening.
 export const event = ({ action, params }) => {
-    window.gtag('event', action, params)
+
+    const paramsModified = { ...params, isLoggedIn: 1, app_language: 'es' }
+    window.gtag('event', action, paramsModified)
 }
 
 // log purchase event (ecommerce settings)
-export const purchase = () => {
+export const purchase = puchaseDetails => {
     window.gtag('event', 'purchase', puchaseDetails);
 
     // how i have to implement it

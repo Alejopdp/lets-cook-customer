@@ -21,7 +21,23 @@ import AppliedCouponBox from "./appliedCouponBox/appliedCouponBox";
 import CheckoutValueItem from "./checkoutValueItem/checkoutValueItem";
 import { useRouter } from "next/router";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+    generalBoxContainer: {
+        [theme.breakpoints.up("md")]: {
+            padding: `${theme.spacing(5)}px ${theme.spacing(6)}px`,
+            position: "fixed",
+            maxWidth: 500,
+            right: 0,
+            minHeight: "100vh",
+        },
+        backgroundColor: theme.palette.background.paper,
+        padding: `${theme.spacing(5)}px ${theme.spacing(3)}px`,
+        [theme.breakpoints.down("sm")]: {
+            borderRadius: '8px',
+            border: '1px dashed rgba(0,0,0,0.1)'
+        },
+    }
+}));
 
 export default function CheckoutDetails() {
     const classes = useStyles();
@@ -104,15 +120,16 @@ export default function CheckoutDetails() {
     console.log("form", form);
     return (
         <Box
+            className={classes.generalBoxContainer}
             style={{
-                // display: "flex",
-                position: "fixed",
-                maxWidth: 500,
-                right: 0,
-                // flexDirection: "column",
-                backgroundColor: theme.palette.background.paper,
-                minHeight: "100vh",
-                padding: isSmDown ? `${theme.spacing(5)}px ${theme.spacing(2)}px` : `${theme.spacing(5)}px ${theme.spacing(6)}px`,
+                // // display: "flex",
+                // position: "fixed",
+                // maxWidth: 500,
+                // right: 0,
+                // // flexDirection: "column",
+                // backgroundColor: theme.palette.background.paper,
+                // minHeight: "100vh",
+                // padding: isSmDown ? `${theme.spacing(5)}px ${theme.spacing(2)}px` : `${theme.spacing(5)}px ${theme.spacing(6)}px`,
             }}
         >
             <Box

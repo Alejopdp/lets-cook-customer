@@ -54,6 +54,17 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
         router.push("/iniciar-sesion");
     };
 
+    const goToPage = (sectionName, path) => {
+        ga.event({
+            action: `clic en ${sectionName.toLowerCase()}`,
+            params: {
+                event_category: 'menu hamburguesa',
+                event_label: sectionName.toLowerCase(),
+            },
+        });
+        router.push(path);
+    };
+
     return (
         <Drawer
             variant="temporary"
@@ -72,7 +83,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
             </div>
             <List>
                 {menuOptions.top.map((option, index) => (
-                    <ListItem button component="a" href={option.path} key={index}>
+                    <ListItem button component="a" onClick={() => goToPage(option.label, option.path)} key={index}>
                         <ListItemIcon>
                             <Image src={option.img} alt={option.label} width={24} height={24} />
                         </ListItemIcon>
@@ -83,7 +94,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
             <Divider />
             <List>
                 {menuOptions.bottom.map((option, index) => (
-                    <ListItem button component="a" href={option.path} key={index}>
+                    <ListItem button component="a" onClick={() => goToPage(option.label, option.path)} key={index}>
                         <ListItemText primary={option.label} />
                     </ListItem>
                 ))}
