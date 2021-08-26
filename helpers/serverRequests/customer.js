@@ -108,10 +108,8 @@ export const forgotPassword = async (email) => {
             method: "PUT",
             url: `${apiUrl}/forgot-password/${email}`,
         });
-
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -125,10 +123,8 @@ export const validateRecoverPasswordCode = async (code, email) => {
                 email,
             },
         });
-
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -147,7 +143,6 @@ export const resetPassword = async (newPassword, email, code) => {
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };

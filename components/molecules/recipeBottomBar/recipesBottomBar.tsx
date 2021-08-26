@@ -62,8 +62,11 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                 <div className={classes.recipesQtySelected}>
                                     <ErrorOutlineOutlined color="secondary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
-                                        {" "}
-                                        Aún te quedan {props.maxRecipesQty - props.selectedRecipes.length} recetas por seleccionar
+                                        {(props.maxRecipesQty - props.selectedRecipes.length) === 1 ?
+                                            `Aún te queda ${props.maxRecipesQty - props.selectedRecipes.length} receta por seleccionar` :
+                                            `Aún te quedan ${props.maxRecipesQty - props.selectedRecipes.length} recetas por seleccionar`
+                                        }
+
                                     </Typography>
                                 </div>
                             )}

@@ -15,7 +15,6 @@ export const getCustomerPaymentOrders = async (customerId: string, locale: strin
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -32,7 +31,6 @@ export const getPaymentOrderById = async (paymentOrderId: string, locale: string
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -49,7 +47,6 @@ export const updatePaymentOrderState = async (paymentOrderId: string, state: Pay
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };

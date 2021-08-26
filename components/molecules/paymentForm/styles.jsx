@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column"
     },
     chckbox: {
-    }
+    },
 }));
 
 export default useStyles;

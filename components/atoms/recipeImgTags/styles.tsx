@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
     imgTag: {
         width: "max-content",
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.secondary.main,
         textTransform: "uppercase",
         textAlign: "center",
         fontWeight: "bolder",

@@ -44,9 +44,6 @@ export const DrawerMenu = ({
         toggleDrawer(false);
     };
 
-    console.log("SELECTED ITEMS DRAWER: ", selectedItems);
-    console.log("STORE ITEMS DRAWER: ", storeFilters);
-
     return (
         <nav className={classes.drawer} aria-label="apply filters">
             <Drawer

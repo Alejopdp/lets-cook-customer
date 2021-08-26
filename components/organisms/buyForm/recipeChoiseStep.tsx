@@ -100,8 +100,6 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
             : props.recipes;
     }, [filters]);
 
-    console.log(filteredRecipes);
-
     const handleClickAddRecipe = (recipe) => {
         ga.event({
             action: "clic en agregar receta",

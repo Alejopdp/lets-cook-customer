@@ -35,9 +35,6 @@ const useStyles = makeStyles((theme) => ({
 const SkipPlanModal = (props: SkipPlanModalProps) => {
     const classes = useStyles();
     const theme = useTheme();
-
-    console.log("QUIE ME LLEGA EN SKIPPLANMODAL: ", props.data);
-
     const [weeksStore, setWeeksStore] = useState<SkippableOrder[]>([]);
 
     useEffect(() => {

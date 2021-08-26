@@ -51,7 +51,7 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                 min: 0,
             },
             items: 1,
-            partialVisibilityGutter: 120,
+            partialVisibilityGutter: 40,
         },
     };
 

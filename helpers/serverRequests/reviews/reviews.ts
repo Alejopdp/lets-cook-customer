@@ -16,7 +16,6 @@ export async function getReviews(locale: string): Promise<ReviewResponse> {
             data: res.data,
         };
     } catch (error) {
-        console.log("***-> Review Oops!: ", error);
         return {
             status: 500,
             error: error.response as string,

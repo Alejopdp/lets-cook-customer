@@ -45,7 +45,6 @@ export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
     }, []);
 
     // useEffect(() => {
-    //     console.log("STEPPER: ", isAuthenticated);
     //     if (isAuthenticated) {
     //         toggleRegister(false);
     //     }
@@ -56,7 +55,10 @@ export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
         <AppBar position="fixed" color="default" className={classes.navbarClass}>
             <Toolbar>
                 <div className={classes.logo}>
-                    <Image src="/logo.png" width={115} height={40} />
+                    <Link href="/">
+                        <Image src="/logo.png" width={115} height={40} alt="lets-cook-logo" className={classes.cursorPointer} />
+                    </Link>
+                    {/* <Image src="/logo.png" width={115} height={40} /> */}
                 </div>
                 <StepperBuy smDowmHide steps={showLoggedInSteps ? loggedInSteps : steps} />
                 <LangSelector />

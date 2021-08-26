@@ -23,7 +23,6 @@ export const loginWithGoogleAndGetIdToken = async () => {
         const token = await firebase.auth().currentUser.getIdToken(true);
         return { token };
     } catch (error) {
-        console.log(error);
         return { error };
     }
 };
@@ -38,11 +37,8 @@ export const loginWithFacebookAndGetIdToken = async () => {
         });
         const result = await firebase.auth().signInWithPopup(facebookAuthProvider);
         const token = await firebase.auth().currentUser.getIdToken(true);
-        console.log(result);
-
         return { token, email: result.user.email };
     } catch (error) {
-        console.log(error);
         return { error };
     }
 };

@@ -57,8 +57,6 @@ const PostCard = (props) => {
     const classes = useStyles();
     const { root, image, marg1, marg2, marg4, publisher, date } = classes;
     const router = useRouter();
-    console.log(props.post)
-
     const harcodedTags = ['harcodedTag1', 'harcodedTag2', 'harcodedTag3'];
 
     const handlePostClick = () => {

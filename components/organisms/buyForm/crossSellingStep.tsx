@@ -159,7 +159,7 @@ const CrossSellingStep = (props) => {
                     <AdditionalPlansBuyButtons
                         handleSecondaryButtonClick={handleNotAddingAdditionalPlans}
                         handleSubmitPayment={handleSubmitPayment}
-                        secondaryButtonLabel="No quiero añadir ningún adicional"
+                        secondaryButtonLabel="Ir a mi perfil"
                         totalValue={totalValue}
                     />
                 </Grid>

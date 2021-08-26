@@ -35,7 +35,6 @@ const ChooseRecipes = (props) => {
 
     // useEffect(() => {
     //     const getData = async () => {
-    //         console.log("ROUTER QUERY: ", router);
     //         const res = await getRecipesForOrder(router.query.orderId as string, router.locale);
 
     //         if (res.status === 200) {

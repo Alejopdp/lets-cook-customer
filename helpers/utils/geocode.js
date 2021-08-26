@@ -23,7 +23,6 @@ export const getGeometry = async (address) => {
 
         return location;
     } catch (error) {
-        console.log(error);
         return undefined;
     }
 };

@@ -13,9 +13,6 @@ const useStyles = makeStyles((theme) => ({
 const LoginButton = ({ border = false, ...props }) => {
     const classes = useStyles();
     const [lang] = useLang("loginButton");
-    useEffect(() => {
-        console.log('***->',lang)
-    }, [])
 
     return (
         <ButtonBase

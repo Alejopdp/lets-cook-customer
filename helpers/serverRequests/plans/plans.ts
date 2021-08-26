@@ -14,7 +14,6 @@ export const getDataForSwappingAPlan = async (subscriptionId: string, locale?: s
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -33,7 +32,6 @@ export async function getPlans(locale: string): Promise<PlanResponse> {
             data: res.data,
         };
     } catch (error) {
-        console.log("***-> Plans Oops!: ", error);
         return {
             status: 500,
             error: error.response as string,
