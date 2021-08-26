@@ -15,7 +15,7 @@ const ProfileTitleWithButton = (props) => {
     return (
         <>
             <Grid item>
-                <Typography variant="h6" style={{ color: theme.palette.text.secondary }}>
+                <Typography variant="h5" style={{ color: theme.palette.text.secondary }}>
                     {props.title}
                 </Typography>
             </Grid>

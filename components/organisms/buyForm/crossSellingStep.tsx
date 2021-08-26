@@ -114,7 +114,6 @@ const CrossSellingStep = (props) => {
                     );
                 }
             } else if (res.data.payment_status === "succeeded") {
-                enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
                 await router.push("/perfil");
                 resetBuyFlowState();
             } else {

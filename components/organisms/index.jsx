@@ -14,8 +14,6 @@ export * from "./blogPostCardDetail/blogPostCardDetail";
 export * from "./faqsSection/faqsSection";
 export * from "./howItWorksExtendedSection/howItWorksExtendedSection";
 export * from "./loginBox/loginBox";
-export * from "./mailSignup/mailSignup";
-export * from "./passSignup/passSignup";
 export * from "./recipesGrid";
 export * from "./recoverPassword/recoverPassword";
 export * from "./recoverPassword/recoverPasswordCode";
