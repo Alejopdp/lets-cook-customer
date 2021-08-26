@@ -35,7 +35,7 @@ const PlanCard = props => {
                 <div className={classes.cardContent}>
                     <Typography
                         style={{ textAlign: 'left', marginBottom: theme.spacing(1) }}
-                        variant="subtitle1"
+                        variant="h5"
                         color="initial">{props.card.name}</Typography>
                     <Typography
                         style={{ textAlign: 'left' }}

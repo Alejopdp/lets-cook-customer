@@ -47,7 +47,7 @@ export const RecipeCard = (props: RecipeCardProps) => {
                         </Grid>
                     </Grid>
 
-                    <Typography variant="subtitle1" className={clsx(titleText, textWhite)}>
+                    <Typography variant="h6" className={clsx(titleText, textWhite)}>
                         {props.recipeName}
                     </Typography>
                 </CardContent>

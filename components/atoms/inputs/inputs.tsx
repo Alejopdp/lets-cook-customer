@@ -16,9 +16,12 @@ import Typography from "@material-ui/core/Typography";
 export const TextInput = (props: TextInputProps) => {
     const { textField, border } = useStyles();
 
+    const labelRef = React.useRef()
+    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 0
+
     return (
         <FormControl variant="outlined" className={textField}>
-            <InputLabel style={{ fontSize: "16px" }}>{props.label}</InputLabel>
+            <InputLabel ref={labelRef} style={{ fontSize: "16px" }}>{props.label}</InputLabel>
             <OutlinedInput
                 style={{ fontSize: "16px" }}
                 className={border}
@@ -26,7 +29,7 @@ export const TextInput = (props: TextInputProps) => {
                 value={props.value}
                 placeholder={props.placeholder}
                 onChange={props.onChange}
-                labelWidth={props.labelWidth || 210}
+                labelWidth={labelWidth}
                 inputProps={{ ...props.inputsProps }}
                 disabled={props.disabled}
             />
@@ -45,9 +48,12 @@ export const PasswordInput = (props: PasswordInputProps) => {
         setValues({ ...values, showPassword: !values.showPassword });
     };
 
+    const labelRef = React.useRef()
+    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 0
+
     return (
         <FormControl variant="outlined" className={textField}>
-            <InputLabel style={{ fontSize: "16px" }}>{props.label}</InputLabel>
+            <InputLabel ref={labelRef} style={{ fontSize: "16px" }}>{props.label}</InputLabel>
             <OutlinedInput
                 style={{ fontSize: "16px" }}
                 className={border}
@@ -63,7 +69,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
                         </IconButton>
                     </InputAdornment>
                 }
-                labelWidth={props.labelWidth || 160}
+                labelWidth={labelWidth}
             />
             {props.helperText && (
                 <Typography variant="caption" color={props.hasError ? "error" : "textPrimary"}>
