@@ -342,6 +342,7 @@ export const PaymentForm = (props) => {
                             <RoundedButton
                                 label="Realizar pago"
                                 disabled={isPayButtonDisabled() || isLoadingPayment}
+                                isLoading={isLoadingPayment}
                                 onClick={handleSubmitPayment}
                                 style={{ width: "100%" }}
                             />

@@ -33,6 +33,7 @@ const SignUpForm = (props) => {
     });
     const [openTycModal, setOpenTycModal] = React.useState(false)
     const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const { enqueueSnackbar } = useSnackbar();
@@ -48,8 +49,10 @@ const SignUpForm = (props) => {
                 event_label: 'correo electronico',
             }
         })
+        setIsLoading(true);
         if (currentStep + number < 0 || currentStep + number > 1) alert("error");
         setcurrentStep(currentStep + number);
+        setIsLoading(false);
     };
 
     const handleChange = (e) => {
@@ -152,6 +155,7 @@ const SignUpForm = (props) => {
                     handleOpenTycModal={handleOpenTycModal}
                     handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                     source={props.source}
+                    isLoading={isLoading}
                 />
             );
             break;

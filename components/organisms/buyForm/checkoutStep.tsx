@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { useBuyFlow } from "@stores";
 import { Container, Grid, Typography, useTheme } from "@material-ui/core";
 import { ShipmentForm, PaymentForm, IconsWithText } from "@molecules";
@@ -13,7 +13,6 @@ interface CheckoutStepProps {
 
 export const CheckoutStep = memo((props: CheckoutStepProps) => {
     const theme = useTheme();
-
     const form = useBuyFlow((state) => state.form);
     const [expanded, setExpanded] = React.useState<string | false>("panel1");
     const [deliveryData, setdeliveryData] = useState({
@@ -27,6 +26,9 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     });
     const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false)
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleChangeAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
         setExpanded(isExpanded ? panel : expanded === "panel2" ? "panel2" : "panel1");

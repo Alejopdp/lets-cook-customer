@@ -200,34 +200,34 @@ const UserInfoDetail = (props) => {
                             {props.isLoading ? (
                                 <DataPaperSkeleton boxTitle="Datos Personales" buttonLabel="MODIFICAR DATOS PERSONALES" />
                             ) : (
-                                <BoxWithTitleAndTextButton
-                                    title="Datos Personales"
-                                    btnText="MODIFICAR DATOS PERSONALES"
-                                    handleClick={() => handleClickOpenPersonalDataModal()}
-                                >
-                                    <DataDisplay
-                                        title="Nombre completo"
-                                        text={customerInfo.personalData.fullName}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title="Telefono (1)"
-                                        text={customerInfo.personalData.phone1}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title="Telefono (2)"
-                                        text={customerInfo.personalData.phone1}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title={"Fecha de Nacimiento"}
-                                        text={customerInfo.personalData.birthDateValue}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay title="Idioma de preferencia" text={customerInfo.personalData.preferredLanguage} />
-                                </BoxWithTitleAndTextButton>
-                            )}
+                                    <BoxWithTitleAndTextButton
+                                        title="Datos personales"
+                                        btnText="MODIFICAR DATOS PERSONALES"
+                                        handleClick={() => handleClickOpenPersonalDataModal()}
+                                    >
+                                        <DataDisplay
+                                            title="Nombre completo"
+                                            text={customerInfo.personalData.fullName}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay
+                                            title="Telefono (1)"
+                                            text={customerInfo.personalData.phone1}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay
+                                            title="Telefono (2)"
+                                            text={customerInfo.personalData.phone1}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay
+                                            title={"Fecha de Nacimiento"}
+                                            text={customerInfo.personalData.birthDateValue}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay title="Idioma de preferencia" text={customerInfo.personalData.preferredLanguage} />
+                                    </BoxWithTitleAndTextButton>
+                                )}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -235,30 +235,30 @@ const UserInfoDetail = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             {props.isLoading ? (
-                                <DataPaperSkeleton boxTitle="Direccion de Entrega" buttonLabel="MODIFICAR DIRECCION DE ENTREGA" />
+                                <DataPaperSkeleton boxTitle="Direccion de entrega" buttonLabel="MODIFICAR DIRECCION DE ENTREGA" />
                             ) : (
-                                <BoxWithTitleAndTextButton
-                                    title="Direccion de Entrega"
-                                    btnText="MODIFICAR DIRECCION DE ENTREGA"
-                                    handleClick={() => handleClickOpenDeliveryAddressModal()}
-                                >
-                                    <DataDisplay
-                                        title="Direccion de Entrega"
-                                        text={customerInfo.shippingAddress.name}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title="Piso / Puerta / Aclaraciones"
-                                        text={customerInfo.shippingAddress.details}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title="Horario de preferencia de entrega"
-                                        text={customerInfo.shippingAddress.preferredShippingHour}
-                                        style={{ marginBottom: "8.3rem" }}
-                                    />
-                                </BoxWithTitleAndTextButton>
-                            )}
+                                    <BoxWithTitleAndTextButton
+                                        title="Direccion de entrega"
+                                        btnText="MODIFICAR DIRECCION DE ENTREGA"
+                                        handleClick={() => handleClickOpenDeliveryAddressModal()}
+                                    >
+                                        <DataDisplay
+                                            title="Direccion de entrega"
+                                            text={customerInfo.shippingAddress.name}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay
+                                            title="Piso / puerta / aclaraciones"
+                                            text={customerInfo.shippingAddress.details}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay
+                                            title="Horario de preferencia de entrega"
+                                            text={customerInfo.shippingAddress.preferredShippingHour}
+                                            style={{ marginBottom: "8.3rem" }}
+                                        />
+                                    </BoxWithTitleAndTextButton>
+                                )}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -266,35 +266,35 @@ const UserInfoDetail = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             {props.isLoading ? (
-                                <DataPaperSkeleton boxTitle="Datos de Facturación" buttonLabel="MODIFICAR DATOS DE FACTURACIÓN" />
+                                <DataPaperSkeleton boxTitle="Datos de facturación" buttonLabel="MODIFICAR DATOS DE FACTURACIÓN" />
                             ) : (
-                                <BoxWithTitleAndTextButton
-                                    title="Datos de FacturaciÓn"
-                                    btnText="MODIFICAR DATOS DE FACTURACIÓN"
-                                    handleClick={() => handleClickOpenBillingAddressModal()}
-                                >
-                                    <DataDisplay
-                                        title="Direccion de Entrega"
-                                        text={customerInfo.billingData.addressName}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title="Piso / Puerta / Aclaraciones"
-                                        text={customerInfo.billingData.details}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title="Nombre Completo"
-                                        text={customerInfo.billingData.customerName}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title="DNI/NIE/CIF"
-                                        text={customerInfo.billingData.identification}
-                                        style={{ marginBottom: "4.1rem" }}
-                                    />
-                                </BoxWithTitleAndTextButton>
-                            )}
+                                    <BoxWithTitleAndTextButton
+                                        title="Datos de facturación"
+                                        btnText="MODIFICAR DATOS DE FACTURACIÓN"
+                                        handleClick={() => handleClickOpenBillingAddressModal()}
+                                    >
+                                        <DataDisplay
+                                            title="Direccion de entrega"
+                                            text={customerInfo.billingData.addressName}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay
+                                            title="Piso / puerta / aclaraciones"
+                                            text={customerInfo.billingData.details}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay
+                                            title="Nombre completo"
+                                            text={customerInfo.billingData.customerName}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay
+                                            title="DNI/NIE/CIF"
+                                            text={customerInfo.billingData.identification}
+                                            style={{ marginBottom: "4.1rem" }}
+                                        />
+                                    </BoxWithTitleAndTextButton>
+                                )}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -304,23 +304,23 @@ const UserInfoDetail = (props) => {
                             {props.isLoading ? (
                                 <DataPaperSkeleton boxTitle="Metodo de Pago" buttonLabel="MODIFICAR METODO DE PAGO" />
                             ) : (
-                                <BoxWithTitleAndTextButton
-                                    title="Metodo de Pago"
-                                    btnText="MODIFICAR METODO DE PAGO"
-                                    handleClick={() => handleClickOpenPaymentMethodModal()}
-                                >
-                                    <DataDisplay
-                                        title="Tarjeta"
-                                        text={defaultPaymentMethod.card}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title="Vencimiento"
-                                        text={defaultPaymentMethod.expirationDate}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                </BoxWithTitleAndTextButton>
-                            )}
+                                    <BoxWithTitleAndTextButton
+                                        title="Metodo de pago"
+                                        btnText="MODIFICAR METODO DE PAGO"
+                                        handleClick={() => handleClickOpenPaymentMethodModal()}
+                                    >
+                                        <DataDisplay
+                                            title="Tarjeta"
+                                            text={defaultPaymentMethod.card}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                        <DataDisplay
+                                            title="Vencimiento"
+                                            text={defaultPaymentMethod.expirationDate}
+                                            style={{ marginBottom: theme.spacing(2) }}
+                                        />
+                                    </BoxWithTitleAndTextButton>
+                                )}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -329,23 +329,23 @@ const UserInfoDetail = (props) => {
                         <Grid item xs={12}>
                             <Grid item xs={12}>
                                 {props.isLoading ? (
-                                    <DataPaperSkeleton boxTitle="Datos de la Cuenta" buttonLabel="MODIFICAR DATOS DE CUENTA" />
+                                    <DataPaperSkeleton boxTitle="Datos de la cuenta" buttonLabel="MODIFICAR DATOS DE CUENTA" />
                                 ) : (
-                                    <BoxWithTitle title="Datos de la Cuenta">
-                                        <DataDisplayEditable
-                                            title="Correo electrónico"
-                                            text={customerInfo.email}
-                                            handleClick={() => handleClickOpenEmailModal()}
-                                            style={{ marginBottom: theme.spacing(2) }}
-                                        />
-                                        <DataDisplayEditable
-                                            title="Contraseña"
-                                            text="********"
-                                            handleClick={() => handleClickOpenPasswordModal()}
-                                            style={{ marginBottom: "2.2rem" }}
-                                        />
-                                    </BoxWithTitle>
-                                )}
+                                        <BoxWithTitle title="Datos de la cuenta">
+                                            <DataDisplayEditable
+                                                title="Correo electrónico"
+                                                text={customerInfo.email}
+                                                handleClick={() => handleClickOpenEmailModal()}
+                                                style={{ marginBottom: theme.spacing(2) }}
+                                            />
+                                            <DataDisplayEditable
+                                                title="Contraseña"
+                                                text="********"
+                                                handleClick={() => handleClickOpenPasswordModal()}
+                                                style={{ marginBottom: "2.2rem" }}
+                                            />
+                                        </BoxWithTitle>
+                                    )}
                             </Grid>
                         </Grid>
                     </Grid>
@@ -401,7 +401,7 @@ const UserInfoDetail = (props) => {
                 // handlePrimaryButtonClick={handleClickChangePaymentMethod}
                 primaryButtonText="MODIFICAR METODO DE PAGO"
                 secondaryButtonText="CANCELAR"
-                // initialData={data.paymentMethod}
+            // initialData={data.paymentMethod}
             />
         </>
     );

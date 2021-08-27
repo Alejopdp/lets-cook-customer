@@ -36,6 +36,7 @@ const RecoverPassword = (props) => {
                 <RoundedButton
                     label={lang.buttonText}
                     disabled={!isPassword(props.value)}
+                    isLoading={props.isLoading}
                     onClick={props.handleSubmit}
                     style={{ width: '100%' }}
                 />

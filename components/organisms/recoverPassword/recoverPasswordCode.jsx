@@ -36,6 +36,7 @@ const RecoverPasswordCode = (props) => {
                 <RoundedButton
                     label={lang.buttonText}
                     disabled={props.value.length !== 6}
+                    isLoading={props.isLoading}
                     onClick={() => props.handleSubmit(1)}
                     style={{ width: '100%' }}
                 />

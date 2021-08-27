@@ -39,9 +39,11 @@ const CrossSellingStep = (props) => {
     const [selectedVariants, setselectedVariants] = useState<PlanVariant[]>([]);
     const [variantsToPay, setvariantsToPay] = useState<PlanVariant[]>([]);
     // const selectedPlans = useCrossSellingStore((state) => state.selectedPlans);
+    const [isLoadingPayment, setisLoadingPayment] = useState(false);
     const stripe = useStripe();
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const getAdditionalPlansByPlanId = async () => {
             const res = await getAdditionalPlans(router.locale, form.planCode);
 
@@ -51,7 +53,6 @@ const CrossSellingStep = (props) => {
                 enqueueSnackbar(res.data.message, { variant: "error" });
             }
         };
-
         getAdditionalPlansByPlanId();
     }, []);
 
@@ -60,12 +61,6 @@ const CrossSellingStep = (props) => {
     }, [variantsToPay]);
 
     const handleSubmitPayment = async () => {
-        const variants = variantsToPay.map((variant) => ({
-            planId: variant.planId,
-            variant: { id: variant.id },
-            frequency: variant.frequency,
-        }));
-
         ga.event({
             action: "clic en pagar productos adicionales",
             params: {
@@ -73,6 +68,14 @@ const CrossSellingStep = (props) => {
                 event_label: "agregar productos adicionales",
             },
         });
+
+        setisLoadingPayment(true);
+
+        const variants = variantsToPay.map((variant) => ({
+            planId: variant.planId,
+            variant: { id: variant.id },
+            frequency: variant.frequency,
+        }));
 
         // ga.purchase({
         //     transaction_id: res.data.subscriptionId,
@@ -122,6 +125,7 @@ const CrossSellingStep = (props) => {
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
+        setisLoadingPayment(false);
     };
 
     const handleNotAddingAdditionalPlans = async () => {
@@ -160,6 +164,7 @@ const CrossSellingStep = (props) => {
                         handleSubmitPayment={handleSubmitPayment}
                         secondaryButtonLabel="Ir a mi perfil"
                         totalValue={totalValue}
+                        isLoadingPayment={isLoadingPayment}
                     />
                 </Grid>
             </Grid>

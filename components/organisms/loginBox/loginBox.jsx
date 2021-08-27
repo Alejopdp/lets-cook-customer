@@ -32,6 +32,8 @@ const LoginBox = (props) => {
     const [serverError, setserverError] = useState("");
     const { enqueueSnackbar } = useSnackbar();
     const theme = useTheme();
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -46,6 +48,8 @@ const LoginBox = (props) => {
             }
         })
 
+        setIsLoading(true);
+
         const res = await loginWithEmail(values.email, values.password);
 
         if (res.status === 200) {
@@ -54,6 +58,7 @@ const LoginBox = (props) => {
             setserverError(res.data.message);
             // alert("Error al querer ingresar");
         }
+        setIsLoading(false);
     };
 
     const handleSocialMediaSubmit = async (token, email = "") => {
@@ -120,18 +125,6 @@ const LoginBox = (props) => {
                 />
             </Grid>
             <Grid item xs={12}>
-                {/* {props.dontRedirectForgotPassword ? (
-                <Typography
-                    variant="subtitle2"
-                    color="primary"
-                    style={{ fontSize: "14px", fontWeight: "600", cursor: "pointer" }}
-                    onClick={props.handleForgotPasswordClick ? props.handleForgotPasswordClick : handleRedirectToForgotPassword}
-                >
-                    Olvidé mi contraseña
-                    </Typography>
-                ) : (
-                        <ForgotPassword text={lang.forgotPassword} />
-                    )} */}
                 <Typography
                     variant="subtitle2"
                     color="primary"
@@ -144,6 +137,7 @@ const LoginBox = (props) => {
             <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>
                 <RoundedButton
                     disabled={!isEmail(values.email) || isEmpty(values.password)}
+                    isLoading={isLoading}
                     label={lang.buttonText}
                     onClick={handleSubmit}
                     style={{ width: "100%" }}

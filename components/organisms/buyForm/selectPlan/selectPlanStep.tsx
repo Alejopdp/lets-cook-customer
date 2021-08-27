@@ -216,7 +216,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         })}
                     </Grid>
                     <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(6) }}>
-                        <Typography variant="body1">{buyFlow.form.planDescription}</Typography>
+                        <Typography variant="body1" align='center'>{buyFlow.form.planDescription}</Typography>
                     </Grid>
                     <Grid container spacing={2} justifyContent="center">
                         <Grid item xs={12} md={4}>
@@ -265,7 +265,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         <RoundedButton
                             label="Seleccionar plan"
                             onClick={handleClickSelectPlan}
-                            style={{ padding: `${theme.spacing(2.5)}px ${theme.spacing(8)}px` }}
                         />
                         <Typography variant="body2" color="textSecondary" style={{ marginTop: theme.spacing(2) }}>
                             {buyFlow.form.canChooseRecipes

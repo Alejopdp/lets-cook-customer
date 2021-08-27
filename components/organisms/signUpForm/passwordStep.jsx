@@ -59,6 +59,7 @@ const PasswordStep = (props) => {
             <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>
                 <RoundedButton
                     disabled={!props.authorize || !isPassword(props.password)}
+                    isLoading={props.isLoading}
                     label={lang.buttonText}
                     onClick={props.handleSubmit}
                     style={{ width: "100%" }}

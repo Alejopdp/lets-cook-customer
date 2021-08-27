@@ -12,6 +12,7 @@ type RecipesBottomBarProps = {
     selectedRecipes: any[];
     maxRecipesQty: number;
     handleSecondaryButtonClick: () => void;
+    isLoading: boolean;
 };
 
 export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
@@ -75,6 +76,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                             <RoundedButton
                                 label="Finalizar"
                                 onClick={props.handleSubmit}
+                                isLoading={props.isLoading}
                                 disabled={props.maxRecipesQty > props.selectedRecipes.length}
                                 style={isXsDown && { width: "100%" }}
                             />

@@ -31,6 +31,7 @@ const RecoverPasswordMail = (props) => {
                     label={lang.buttonText}
                     onClick={() => props.handleSubmit(1)}
                     disabled={!isEmail(props.value)}
+                    isLoading={props.isLoading}
                     style={{ width: '100%' }}
                 />
             </Grid>
