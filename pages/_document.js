@@ -23,12 +23,9 @@ export default class MyDocument extends Document {
                     </noscript>
                     <script async src="/script/hotjar.js"></script>
                     <script async src="/script/ml.js"></script>
-                    <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/20136870.js"></script>
+                    <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/5350114.js"></script>
                     <meta name="p:domain_verify" content="cf716535d91b916766dee3945c922d08" />
-                    <script
-                        async
-                        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-                    />
+                    <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
                     <script
                         dangerouslySetInnerHTML={{
                             __html: `
