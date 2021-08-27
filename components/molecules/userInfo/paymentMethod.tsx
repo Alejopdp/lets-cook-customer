@@ -1,31 +1,61 @@
 import React, { useState, useEffect } from "react";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import StripeForm from "../../molecules/stripeForm/stripeForm";
-
+import StripeForm from "../stripeForm/stripeForm";
+import { useSnackbar } from "notistack";
 import { Typography, Radio, RadioGroup, FormControlLabel, FormControl, Grid, makeStyles, TextField, useTheme } from "@material-ui/core";
-
+import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
 import Modal from "../../atoms/modal/modal";
 
 const PaymentMethodModal = (props) => {
     const theme = useTheme();
+    const { enqueueSnackbar } = useSnackbar();
+    const stripe = useStripe();
+    const elements = useElements();
     const [value, setValue] = useState("card");
-    // const [card, setCard] = useState("");
+    const [selectedSavedCard, setselectedSavedCard] = useState("");
 
-    // const [value, setValue] = useState("");
-    // const [card, setCard] = useState(false);
-    const [newPaymentMethod, setNewPaymentMethod] = useState(false);
-    const [selectedSavedCard, setselectedSavedCard] = useState("visa");
+    useEffect(() => {
+        const defaultPaymentMethod = props.initialData.find((paymentMethod) => paymentMethod.isDefault);
+
+        if (!!defaultPaymentMethod) {
+            setselectedSavedCard(defaultPaymentMethod.id);
+        }
+    }, []);
 
     const handleChangePaymentMethod = (event) => {
         setValue(event.target.value);
     };
 
-    // const handleChangeCards = (event) => {
-    //     setCard(event.target.value);
-    // };
+    const handleSubmit = async () => {
+        if (value === "newPaymentMethod") {
+            await handleAddPaymentMethod();
+        } else {
+            handleChangeDefaultPayment();
+        }
+    };
 
-    const handleClickChangePaymentMethod = () => {
-        props.handlePrimaryButtonClick(card);
+    const handleChangeDefaultPayment = async () => {
+        await props.handleUpdateDefaultPaymentMethod(selectedSavedCard);
+    };
+
+    const handleNewStripePaymentMethod = async () => {
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card: elements.getElement(CardNumberElement),
+        });
+
+        return { error, paymentMethod };
+    };
+
+    const handleAddPaymentMethod = async () => {
+        const { error, paymentMethod } = await handleNewStripePaymentMethod();
+
+        if (!!error) {
+            enqueueSnackbar(error.message, { variant: "error" });
+            return;
+        }
+
+        props.handleAddPaymentMethod(paymentMethod.id);
     };
 
     return (
@@ -34,17 +64,10 @@ const PaymentMethodModal = (props) => {
             handleClose={props.handleClose}
             title="Modificar metodo de pago"
             fullScreen
-            handlePrimaryButtonClick={handleClickChangePaymentMethod}
+            handlePrimaryButtonClick={handleSubmit}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
         >
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Typography variant="h6" style={{ fontSize: 22 }}>
-                        Modificar metodo de pago
-                    </Typography>
-                </Grid>
-            </Grid>
             <FormControl component="fieldset" style={{ width: "100%" }}>
                 <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChangePaymentMethod}>
                     <FormControlLabel value="card" control={<Radio />} label="Mis tarjetas guardadas" />
@@ -56,12 +79,14 @@ const PaymentMethodModal = (props) => {
                             onChange={(e) => setselectedSavedCard(e.target.value)}
                             style={{ marginLeft: "2rem" }}
                         >
-                            <FormControlLabel value="visa" control={<Radio />} label="Visa terminada en 1234 - Expira el 12/25" />
-                            <FormControlLabel
-                                value="mastercard"
-                                control={<Radio />}
-                                label="MasterCard terminada en 1234 - Expira el 12/25"
-                            />
+                            {props.initialData.map((paymentMethod) => (
+                                <FormControlLabel
+                                    value={paymentMethod.id}
+                                    control={<Radio />}
+                                    label={`${paymentMethod.card} - ${paymentMethod.expirationDate}`}
+                                    checked={paymentMethod.id === selectedSavedCard}
+                                />
+                            ))}
                         </RadioGroup>
                     ) : null}
                     <FormControlLabel

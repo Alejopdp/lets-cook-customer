@@ -151,3 +151,36 @@ export const resetPassword = async (newPassword, email, code) => {
         return error.response;
     }
 };
+
+export const addNewPaymentMethod = async (customerId: string, stripePaymentMethodId: string) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/add-payment-method/${customerId}`,
+            data: {
+                stripePaymentMethodId,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};
+
+export const changeDefaultPaymentMethod = async (paymentMethodId: string, customerId: string) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/update-payment/${customerId}`,
+            data: {
+                id: paymentMethodId,
+                isDefault: true,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};

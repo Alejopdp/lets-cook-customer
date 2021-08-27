@@ -1,5 +1,14 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useSnackbar } from "notistack";
+import {
+    addNewPaymentMethod,
+    changeDefaultPaymentMethod,
+    updateBillingData,
+    updatePersonalData,
+    updateShippingAddress,
+} from "../../../helpers/serverRequests/customer";
+import { useUserInfoStore } from "../../../stores/auth";
+import { LOCAL_STORAGE_KEYS, useLocalStorage } from "../../../hooks";
 
 // External Components
 import Grid from "@material-ui/core/Grid";
@@ -18,9 +27,6 @@ import DeliveryAddressModal from "../../molecules/userInfo/deliveryAddressModal"
 import PaymentMethodModal from "../../molecules/userInfo/paymentMethod";
 import DataPaperSkeleton from "./dataPaperSkeleton";
 import WithSkeleton from "../../molecules/withSkeleton/withSkeleton";
-import { updateBillingData, updatePersonalData, updateShippingAddress } from "../../../helpers/serverRequests/customer";
-import { useUserInfoStore } from "../../../stores/auth";
-import { LOCAL_STORAGE_KEYS, useLocalStorage } from "../../../hooks";
 
 const UserInfoDetail = (props) => {
     const theme = useTheme();
@@ -125,6 +131,48 @@ const UserInfoDetail = (props) => {
 
     const handleClickClosePaymentMethodModal = () => {
         setPaymentMethod(false);
+    };
+
+    const handleAddPaymentMethod = async (stripePaymentMethodId) => {
+        const res = await addNewPaymentMethod(customerInfo.id, stripePaymentMethodId);
+
+        if (res && res.status === 200) {
+            const newPaymentMethods = [
+                ...customerInfo.paymentMethods.map((paymentMethod) => ({
+                    ...paymentMethod,
+                    isDefault: false,
+                })),
+                res.data,
+            ];
+            const newUserInfo = { ...userInfo, paymentMethods: newPaymentMethods };
+            setuserInfo(newUserInfo);
+            saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, newUserInfo);
+            setcustomerInfo({ ...customerInfo, paymentMethods: newPaymentMethods });
+
+            enqueueSnackbar("El método de pago se ha agregado correctamente", { variant: "success" });
+            handleClickClosePaymentMethodModal();
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+    };
+
+    const handleUpdateDefaultPaymentMethod = async (paymentMethodId) => {
+        const res = await changeDefaultPaymentMethod(paymentMethodId, customerInfo.id);
+
+        if (res && res.status === 200) {
+            const newPaymentMethods = customerInfo.paymentMethods.map((paymentMethod) => ({
+                ...paymentMethod,
+                isDefault: paymentMethod.id === paymentMethodId ? true : false,
+            }));
+            const newUserInfo = { ...userInfo, paymentMethods: newPaymentMethods };
+            setuserInfo(newUserInfo);
+            saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, newUserInfo);
+            setcustomerInfo({ ...customerInfo, paymentMethods: newPaymentMethods });
+            handleClickClosePaymentMethodModal();
+            enqueueSnackbar("El método de pago se modificado correctamente", { variant: "success" });
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
     };
 
     const handleUpdatePersonalDataSubmit = async (newData) => {
@@ -269,7 +317,7 @@ const UserInfoDetail = (props) => {
                                 <DataPaperSkeleton boxTitle="Datos de Facturación" buttonLabel="MODIFICAR DATOS DE FACTURACIÓN" />
                             ) : (
                                 <BoxWithTitleAndTextButton
-                                    title="Datos de FacturaciÓn"
+                                    title="Datos de Facturación"
                                     btnText="MODIFICAR DATOS DE FACTURACIÓN"
                                     handleClick={() => handleClickOpenBillingAddressModal()}
                                 >
@@ -395,14 +443,19 @@ const UserInfoDetail = (props) => {
                     handleSubmit={handleShippingAddressSubmit}
                 />
             )}
-            <PaymentMethodModal
-                open={openPaymentMethod}
-                handleClose={handleClickClosePaymentMethodModal}
-                // handlePrimaryButtonClick={handleClickChangePaymentMethod}
-                primaryButtonText="MODIFICAR METODO DE PAGO"
-                secondaryButtonText="CANCELAR"
-                // initialData={data.paymentMethod}
-            />
+
+            {openPaymentMethod && (
+                <PaymentMethodModal
+                    open={openPaymentMethod}
+                    handleClose={handleClickClosePaymentMethodModal}
+                    // handlePrimaryButtonClick={handleClickChangePaymentMethod}
+                    handleAddPaymentMethod={handleAddPaymentMethod}
+                    handleUpdateDefaultPaymentMethod={handleUpdateDefaultPaymentMethod}
+                    primaryButtonText="MODIFICAR METODO DE PAGO"
+                    secondaryButtonText="CANCELAR"
+                    initialData={customerInfo.paymentMethods}
+                />
+            )}
         </>
     );
 };
