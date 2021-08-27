@@ -30,12 +30,18 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
                             </>
                         ))}
                     </Box>
-                    <div style={{ marginBottom: theme.spacing(3) }}>
-                        <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
-                            Precio: {props.variant.priceWithOffer || props.variant.price} €
-                        </Typography>
-                        <Typography variant="caption" color='textSecondary'>Impuestos incluidos</Typography>
-                    </div>
+                    {props.variant.numberOfPersons && (
+                        <Box marginBottom={3}>
+                            <>
+                                <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}>
+                                    Tamaño del plan
+                                </Typography>
+                                <Typography variant="body2">
+                                    {props.variant.numberOfPersons} personas / {props.variant.numberOfRecipes} recetas
+                                </Typography>
+                            </>
+                        </Box>
+                    )}
                 </>
             )}
             <Box display="flex" alignItems="center">
@@ -44,6 +50,12 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
                     Frequencia {translateFrequency(props.selectedFrequency, router.locale).toLowerCase()}
                 </Typography>
             </Box>
+            <div style={{ marginTop: theme.spacing(3) }}>
+                <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
+                    Precio: {props.variant.priceWithOffer || props.variant.price} €
+                </Typography>
+                <Typography variant="caption" color='textSecondary'>Impuestos incluidos</Typography>
+            </div>
         </Box>
     );
 };

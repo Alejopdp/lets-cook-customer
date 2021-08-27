@@ -12,6 +12,7 @@ type RecipesBottomBarProps = {
     selectedRecipes: any[];
     maxRecipesQty: number;
     handleSecondaryButtonClick: () => void;
+    isLoading: boolean;
 };
 
 export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
@@ -62,8 +63,11 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                 <div className={classes.recipesQtySelected}>
                                     <ErrorOutlineOutlined color="secondary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
-                                        {" "}
-                                        Aún te quedan {props.maxRecipesQty - props.selectedRecipes.length} recetas por seleccionar
+                                        {(props.maxRecipesQty - props.selectedRecipes.length) === 1 ?
+                                            `Aún te queda ${props.maxRecipesQty - props.selectedRecipes.length} receta por seleccionar` :
+                                            `Aún te quedan ${props.maxRecipesQty - props.selectedRecipes.length} recetas por seleccionar`
+                                        }
+
                                     </Typography>
                                 </div>
                             )}
@@ -72,6 +76,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                             <RoundedButton
                                 label="Finalizar"
                                 onClick={props.handleSubmit}
+                                isLoading={props.isLoading}
                                 disabled={props.maxRecipesQty > props.selectedRecipes.length}
                                 style={isXsDown && { width: "100%" }}
                             />

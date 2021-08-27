@@ -20,7 +20,6 @@ export async function getFAQS(locale: string): Promise<FAQSResponse> {
     // return res.data;
 
     // } catch (error) {
-    //     console.log('***-> Plans Oops!: ', error);
     //     return  {
     //         status: 500,
     //         error: error.response as string

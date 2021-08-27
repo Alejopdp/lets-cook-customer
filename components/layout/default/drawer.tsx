@@ -6,6 +6,7 @@ import { LoginButton } from "@atoms";
 import { useLang } from "@hooks";
 import * as ga from "../../../helpers/ga";
 import { useRouter } from "next/router";
+import { MyProfileButton } from "components/atoms/myProfileButton";
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 interface NavbarDrawerProps {
     toggleOpeningDrawer: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
     open: boolean;
+    isAuthenticated: boolean;
 }
 
 const NavbarDrawer = (props: NavbarDrawerProps) => {
@@ -54,6 +56,20 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
         router.push("/iniciar-sesion");
     };
 
+    const goToMyProfile = () => {
+        ga.event({
+            action: "clic en mi perfil",
+            params: {
+                event_category: props.page ? props.page : "undefined page",
+                event_label: "sidebar",
+            },
+        });
+        router.push("/perfil");
+    };
+
+
+    
+
     const goToPage = (sectionName, path) => {
         ga.event({
             action: `clic en ${sectionName.toLowerCase()}`,
@@ -79,7 +95,8 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
             }}
         >
             <div className={classes.menuLogginButton}>
-                <LoginButton border style={{ width: "100%" }} goToLogin={goToLogin} />
+                {props.isAuthenticated ? <MyProfileButton border style={{ width: "100%" }} goToLogin={goToMyProfile} /> :
+                    <LoginButton border style={{ width: "100%" }} goToLogin={goToLogin} />}
             </div>
             <List>
                 {menuOptions.top.map((option, index) => (

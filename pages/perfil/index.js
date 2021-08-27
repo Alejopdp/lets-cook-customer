@@ -171,11 +171,9 @@ const Perfil = (props) => {
                                     style={{ marginBottom: theme.spacing(5) }}
                                 >
                                     <Grid item xs={9}>
-                                        {/* <Grid item> */}
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
                                             Hola {userInfo.firstName || ""}
                                         </Typography>
-                                        {/* </Grid> */}
                                     </Grid>
                                     <Grid item xs={3} style={{ textAlign: "right" }}>
                                         <TextButton

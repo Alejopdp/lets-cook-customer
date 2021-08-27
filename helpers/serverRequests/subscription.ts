@@ -31,7 +31,6 @@ export const cancelSubscription = async (subscriptionId: string, reason: string,
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -45,7 +44,6 @@ export const reorderPlan = async (subscriptionId: string) => {
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -63,7 +61,6 @@ export const swapPlan = async (subscriptionId: string, newPlanId: string, newPla
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -80,7 +77,6 @@ export const updateRestriction = async (subscriptionId: string, restrictionId: s
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -89,7 +85,6 @@ export const createManySubscriptions = async (
     customerId: string,
     variants: { planId: string; frequency: string; variant: { id: string } }[]
 ) => {
-    console.log("A VER LAS VARIANTS: ", variants);
     try {
         const res = await axios({
             method: "POST",
@@ -102,7 +97,6 @@ export const createManySubscriptions = async (
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -116,7 +110,6 @@ export const handle3dSecureFailure = async (subscriptionId: string) => {
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -133,7 +126,6 @@ export const handle3dSecureFailureForManySubscriptions = async (subscriptionsIds
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };
@@ -147,7 +139,6 @@ export const sendNewSubscriptionWelcomeEmail = async (subscriptionId) => {
 
         return res;
     } catch (error) {
-        console.log(error);
         return error.response;
     }
 };

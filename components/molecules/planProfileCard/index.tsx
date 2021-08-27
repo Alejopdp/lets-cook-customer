@@ -5,6 +5,7 @@ import { useTheme } from "@material-ui/core/styles";
 import Link from "next/link";
 // const langs = require("../../lang").comoFunciona;
 import { translateFrequency } from "helpers/utils/i18n";
+import RotateRight from "@material-ui/icons/RotateRight";
 
 // External Components
 import Typography from "@material-ui/core/Typography";
@@ -13,7 +14,6 @@ import Typography from "@material-ui/core/Typography";
 
 import BoxWithTextButton from "../specificBox/boxWithTextButton";
 import PlanInfoWithStatus from "../planInfo/planInfoWithStatus";
-import Network from "../../atoms/icons/Network";
 import Options from "../../atoms/options/Options";
 
 const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpenPlanRecoverModal }) => {
@@ -44,16 +44,16 @@ const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpe
             </div>
             {plan.stateTitle === "SUBSCRIPTION_ACTIVE" && (
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: theme.spacing(2) }}>
-                    <Network width={15} heigth={15} />
+                    <img width={15} height={15} src="/icons/checkout/informacion-de-envio.svg" />
                     <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
                         Próxima entrega: {plan.nextShippment}
                     </Typography>
                 </div>
             )}
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                <Network width={15} heigth={15} />
+                <RotateRight style={{ fontSize: '14px' }} />
                 <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                    Frecuencia {translateFrequency(plan.frequency, router.locale)}
+                    Frecuencia {translateFrequency(plan.frequency, router.locale).toLocaleLowerCase()}
                 </Typography>
             </div>
         </BoxWithTextButton>

@@ -12,7 +12,7 @@ export const useValuePropositionStyle = makeStyles((theme) => ({
         backgroundSize: "cover",
     },
     overlay: {
-        backgroundColor: "rgba(0,0,0,0.5)",
+        backgroundColor: "rgba(0,0,0,0.6)",
         display: "flex",
         minHeight: "75vh",
         paddingTop: 64,

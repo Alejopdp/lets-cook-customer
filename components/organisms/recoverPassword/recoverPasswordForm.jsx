@@ -30,7 +30,9 @@ const RecoverPasswordForm = (props) => {
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const { saveInLocalStorage } = useLocalStorage();
-    const [isResetingPassword, setisResetingPassword] = useState(false);
+    const [isLoadingRecoverPasswordMail, setIsLoadingRecoverPasswordMail] = useState(false);
+    const [isLoadingRecoverPasswordCode, setIsLoadingRecoverPasswordCode] = useState(false);
+    const [isLoadingRecoverPassword, setIsLoadingRecoverPassword] = useState(false);
 
     const router = useRouter();
     const lang = langs[router.locale];
@@ -46,6 +48,8 @@ const RecoverPasswordForm = (props) => {
             }
         })
 
+        setIsLoadingRecoverPasswordMail(true);
+
         const res = await forgotPassword(formData.email);
 
         if (res.status === 200) {
@@ -53,6 +57,7 @@ const RecoverPasswordForm = (props) => {
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
+        setIsLoadingRecoverPasswordMail(false);
     };
 
     const handleSubmitCode = async () => {
@@ -64,6 +69,8 @@ const RecoverPasswordForm = (props) => {
             }
         })
 
+        setIsLoadingRecoverPasswordCode(true);
+
         const res = await validateRecoverPasswordCode(formData.code, formData.email);
 
         if (res.status === 200) {
@@ -71,6 +78,7 @@ const RecoverPasswordForm = (props) => {
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
+        setIsLoadingRecoverPasswordCode(false);
     };
 
     const handleSubmitNewPassword = async () => {
@@ -82,7 +90,8 @@ const RecoverPasswordForm = (props) => {
             }
         })
 
-        setisResetingPassword(true);
+        setIsLoadingRecoverPassword(true);
+
         const res = await resetPassword(formData.password, formData.email, formData.code);
 
         if (res.status === 200) {
@@ -101,7 +110,7 @@ const RecoverPasswordForm = (props) => {
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
-        setisResetingPassword(false);
+        setIsLoadingRecoverPassword(true);
     };
 
     const saveLoginData = (token, userInfo) => {
@@ -126,21 +135,21 @@ const RecoverPasswordForm = (props) => {
 
     switch (true) {
         case currentStep === 0:
-            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} />;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} isLoading={isLoadingRecoverPasswordMail}/>;
             break;
 
         case currentStep === 1:
-            currentInputs = <RecoverPasswordCode handleChange={handleChange} handleSubmit={handleSubmitCode} value={formData.code} />;
+            currentInputs = <RecoverPasswordCode handleChange={handleChange} handleSubmit={handleSubmitCode} value={formData.code} isLoading={isLoadingRecoverPasswordCode}/>;
             break;
 
         case currentStep === 2:
             currentInputs = (
-                <RecoverPassword handleChange={handleChange} handleSubmit={handleSubmitNewPassword} value={formData.password} />
+                <RecoverPassword handleChange={handleChange} handleSubmit={handleSubmitNewPassword} value={formData.password} isLoading={isLoadingRecoverPassword}/>
             );
             break;
 
         default:
-            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} />;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} isLoading={isLoadingRecoverPasswordMail}/>;
     }
 
     return (
@@ -150,7 +159,7 @@ const RecoverPasswordForm = (props) => {
                 text={lang.register.text}
                 boldText={lang.register.boldText}
                 handleRedirect={props.handleRedirect || handleRedirect}
-                isSubmitting={isResetingPassword}
+                isSubmitting={isLoadingRecoverPassword}
             />
         </FormPaper>
     );

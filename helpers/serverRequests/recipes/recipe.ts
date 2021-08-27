@@ -16,7 +16,6 @@ export async function getRecipes(locale: string): Promise<RecipeResponse> {
             data: res.data,
         };
     } catch (error) {
-        console.log("***-> Recipe Oops!: ", error);
         return {
             status: 500,
             error: error.response as string,
@@ -35,7 +34,6 @@ export const getRecipesForOrder = async (orderId: string, locale: string = "es")
         });
         return res;
     } catch (error) {
-        console.log("***-> Recipe Oops!: ", error);
         return error.response;
     }
 };

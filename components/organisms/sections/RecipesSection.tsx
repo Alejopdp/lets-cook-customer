@@ -30,7 +30,6 @@ export const RecipesSection = memo((props: RecipesSectionProps) => {
                 event_label: recipe.name.toLowerCase(),
             }
         })
-        console.log('recipe', recipe)
         setSelectedRecipe(recipe);
         setisModalOpen(true);
     };

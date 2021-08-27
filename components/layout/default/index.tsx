@@ -74,7 +74,7 @@ export const Layout = props => {
                     )}
                 <nav className={classes.drawer} aria-label="mailbox folders">
                     <Hidden smUp implementation="css">
-                        <NavbarDrawer page={props.page} open={openDrawerMenu} toggleOpeningDrawer={_toggleOpeningDrawer} />
+                        <NavbarDrawer page={props.page} open={openDrawerMenu} toggleOpeningDrawer={_toggleOpeningDrawer} isAuthenticated={isAuthenticated}/>
                     </Hidden>
                 </nav>
                 <main className={classes.content}>

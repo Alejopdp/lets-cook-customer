@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import React, { memo, useMemo, useEffect, useState} from "react";
 // Utils & Config
 import { useBuyFlow, useFilterDrawer } from "@stores";
 import _ from "lodash";
@@ -37,6 +37,12 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     );
     const gotToNextView = useBuyFlow(({ forward }) => forward);
     const { enqueueSnackbar } = useSnackbar();
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleRemoveFilter = (filter: IFilter) => {
         ga.event({
@@ -58,6 +64,9 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                 event_label: "finalizar",
             },
         });
+
+        setIsLoading(true);
+
         var recipeSelection: { recipeId: string; quantity: number }[] = [];
         const ordererSelectedRecipes = _.orderBy(recipes, ["id"], ["asc"]);
 
@@ -76,6 +85,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
+        setIsLoading(false);
     };
 
     const handleChooseRecipesLater = () => {
@@ -93,14 +103,12 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const filteredRecipes = useMemo(() => {
         return filters.length > 0
             ? props.recipes.filter((recipe) =>
-                  filters.some(
-                      (filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqualToFilterValue(recipe.difficultyLevel)
-                  )
-              )
+                filters.some(
+                    (filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqualToFilterValue(recipe.difficultyLevel)
+                )
+            )
             : props.recipes;
     }, [filters]);
-
-    console.log(filteredRecipes);
 
     const handleClickAddRecipe = (recipe) => {
         ga.event({
@@ -198,6 +206,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                 maxRecipesQty={variant.numberOfRecipes}
                 selectedRecipes={recipes}
                 handleSubmit={handleSubmit}
+                isLoading={isLoading}
             />
         </Container>
     );

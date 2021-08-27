@@ -249,7 +249,7 @@ const UserInfoDetail = (props) => {
                                 <DataPaperSkeleton boxTitle="Datos Personales" buttonLabel="MODIFICAR DATOS PERSONALES" />
                             ) : (
                                 <BoxWithTitleAndTextButton
-                                    title="Datos Personales"
+                                    title="Datos personales"
                                     btnText="MODIFICAR DATOS PERSONALES"
                                     handleClick={() => handleClickOpenPersonalDataModal()}
                                 >
@@ -283,20 +283,20 @@ const UserInfoDetail = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             {props.isLoading ? (
-                                <DataPaperSkeleton boxTitle="Direccion de Entrega" buttonLabel="MODIFICAR DIRECCION DE ENTREGA" />
+                                <DataPaperSkeleton boxTitle="Direccion de entrega" buttonLabel="MODIFICAR DIRECCION DE ENTREGA" />
                             ) : (
                                 <BoxWithTitleAndTextButton
-                                    title="Direccion de Entrega"
+                                    title="Direccion de entrega"
                                     btnText="MODIFICAR DIRECCION DE ENTREGA"
                                     handleClick={() => handleClickOpenDeliveryAddressModal()}
                                 >
                                     <DataDisplay
-                                        title="Direccion de Entrega"
+                                        title="Direccion de entrega"
                                         text={customerInfo.shippingAddress.name}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay
-                                        title="Piso / Puerta / Aclaraciones"
+                                        title="Piso / puerta / aclaraciones"
                                         text={customerInfo.shippingAddress.details}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
@@ -314,7 +314,7 @@ const UserInfoDetail = (props) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             {props.isLoading ? (
-                                <DataPaperSkeleton boxTitle="Datos de Facturación" buttonLabel="MODIFICAR DATOS DE FACTURACIÓN" />
+                                <DataPaperSkeleton boxTitle="Datos de facturación" buttonLabel="MODIFICAR DATOS DE FACTURACIÓN" />
                             ) : (
                                 <BoxWithTitleAndTextButton
                                     title="Datos de Facturación"
@@ -353,7 +353,7 @@ const UserInfoDetail = (props) => {
                                 <DataPaperSkeleton boxTitle="Metodo de Pago" buttonLabel="MODIFICAR METODO DE PAGO" />
                             ) : (
                                 <BoxWithTitleAndTextButton
-                                    title="Metodo de Pago"
+                                    title="Metodo de pago"
                                     btnText="MODIFICAR METODO DE PAGO"
                                     handleClick={() => handleClickOpenPaymentMethodModal()}
                                 >
@@ -377,9 +377,9 @@ const UserInfoDetail = (props) => {
                         <Grid item xs={12}>
                             <Grid item xs={12}>
                                 {props.isLoading ? (
-                                    <DataPaperSkeleton boxTitle="Datos de la Cuenta" buttonLabel="MODIFICAR DATOS DE CUENTA" />
+                                    <DataPaperSkeleton boxTitle="Datos de la cuenta" buttonLabel="MODIFICAR DATOS DE CUENTA" />
                                 ) : (
-                                    <BoxWithTitle title="Datos de la Cuenta">
+                                    <BoxWithTitle title="Datos de la cuenta">
                                         <DataDisplayEditable
                                             title="Correo electrónico"
                                             text={customerInfo.email}

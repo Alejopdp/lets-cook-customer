@@ -14,6 +14,7 @@ import CustomCheckbox from "../../atoms/customCheckbox/customCheckbox";
 import { Grid, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { AcceptLegalTerms } from "../../atoms/loginHelpers/loginHelpers";
+import CustomCheckboxWithPopup from "components/atoms/customCheckbox/customCheckboxWithPopup";
 
 const PasswordStep = (props) => {
     const router = useRouter();
@@ -36,13 +37,13 @@ const PasswordStep = (props) => {
                 />
             </Grid>
             <Grid item xs={12}>
-                <CustomCheckbox
+                <CustomCheckboxWithPopup
                     name="authorize"
                     checked={props.authorize}
                     onChange={props.handleCheckboxesChange}
                     label={lang.authorizeCheckbox.label}
                     boldText={lang.authorizeCheckbox.boldText}
-                    redirectTo={lang.authorizeCheckbox.redirectTo}
+                    handleOpenModal={props.handleOpenPrivacyPolicyModal}
                 />
             </Grid>
             <Grid item xs={12}>
@@ -58,6 +59,7 @@ const PasswordStep = (props) => {
             <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>
                 <RoundedButton
                     disabled={!props.authorize || !isPassword(props.password)}
+                    isLoading={props.isLoading}
                     label={lang.buttonText}
                     onClick={props.handleSubmit}
                     style={{ width: "100%" }}

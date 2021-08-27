@@ -17,7 +17,7 @@ export const TextInput = (props: TextInputProps) => {
     const { textField, border } = useStyles();
 
     const labelRef = React.useRef()
-    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 0
+    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 220
 
     return (
         <FormControl variant="outlined" className={textField}>
@@ -49,7 +49,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
     };
 
     const labelRef = React.useRef()
-    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 0
+    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 175
 
     return (
         <FormControl variant="outlined" className={textField}>
@@ -63,7 +63,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
                 onChange={props.onChange}
                 disabled={props.disabled}
                 endAdornment={
-                    <InputAdornment position="end">
+                    <InputAdornment position="end" style={{ padding: '8px' }}>
                         <IconButton onClick={handleClickShowPassword} edge="end">
                             {values.showPassword ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
@@ -72,7 +72,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
                 labelWidth={labelWidth}
             />
             {props.helperText && (
-                <Typography variant="caption" color={props.hasError ? "error" : "textPrimary"}>
+                <Typography variant="caption" color={props.hasError ? "error" : "textPrimary"} style={{ marginTop: '4px' }}>
                     {props.helperText}
                 </Typography>
             )}

@@ -19,7 +19,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 // Internal components
 import { FormPaperWithIcons } from "@molecules";
 import StripeForm from "../../molecules/stripeForm/stripeForm";
-import { CustomCheckbox, CustomButton, RoundedButton } from "@atoms";
+import { CustomButton, RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
 import PaymentMethodForm from "../paymentMethodForm/paymentMethodForm";
 import { useBuyFlow, useUserInfoStore } from "@stores";
@@ -27,6 +27,7 @@ import { Grid, Typography, useTheme } from "@material-ui/core";
 import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
 import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
+import CustomCheckboxWithPopup from "../../atoms/customCheckbox/customCheckboxWithPopup";
 
 const useStylesAccordion = makeStyles((theme: Theme) =>
     createStyles({
@@ -172,7 +173,6 @@ export const PaymentForm = (props) => {
                 if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
                     // TO DO: Confirm payments in DB
                     await updatePaymentOrderState(res.data.paymentOrderId, PaymentOrderState.PAYMENT_ORDER_BILLED);
-                    enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
                     setSubscriptionId(res.data.subscriptionId);
                     setFirstOrderId(res.data.firstOrderId);
                     setFirstOrderShippingDate(res.data.firstOrderShippingDate);
@@ -208,7 +208,6 @@ export const PaymentForm = (props) => {
                     );
                 }
             } else if (res.data.payment_status === "succeeded") {
-                enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
                 setSubscriptionId(res.data.subscriptionId);
                 setFirstOrderId(res.data.firstOrderId);
                 setFirstOrderShippingDate(res.data.firstOrderShippingDate);
@@ -331,32 +330,26 @@ export const PaymentForm = (props) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <div style={{ display: "flex", alignItems: "center" }}>
-                                <Checkbox
-                                    checked={areTermsAccepted}
-                                    onChange={() => setareTermsAccepted(!areTermsAccepted)}
-                                    color="primary"
-                                    name="acceptTerms"
-                                />
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    style={{ fontSize: "13px", marginLeft: theme.spacing(0.5) }}
-                                >
-                                    He leído y acepto las{" "}
-                                    <b onClick={props.handleOpenPurchaseConditionsModal} style={{ cursor: "pointer" }}>
-                                        condiciones generales de venta
-                                    </b>
-                                </Typography>
-                            </div>
+                            <CustomCheckboxWithPopup
+                                name="acceptTerms"
+                                checked={areTermsAccepted}
+                                onChange={() => setareTermsAccepted(!areTermsAccepted)}
+                                label="He leído y acepto las "
+                                boldText="condiciones generales de venta"
+                                handleOpenModal={props.handleOpenPurchaseConditionsModal}
+                            />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
                             <RoundedButton
                                 label="Realizar pago"
                                 disabled={isPayButtonDisabled() || isLoadingPayment}
+                                isLoading={isLoadingPayment}
                                 onClick={handleSubmitPayment}
                                 style={{ width: "100%" }}
                             />
+                            <Typography style={{ paddingTop: theme.spacing(1), textAlign: "center" }} variant="caption">
+                                Totalmente flexible y sin permanencia. Puedes cancelar, cambiar o saltar semana cuando quieras.
+                            </Typography>
                         </Grid>
                     </Grid>
                 </AccordionDetails>

@@ -8,7 +8,10 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     drawerPaper: {
-        width: 400,
+        width: '80%',
+        [theme.breakpoints.up("sm")]: {
+            width: 400,
+        },
         padding: `${theme.spacing(5)}px ${theme.spacing(3)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`,
 
     },

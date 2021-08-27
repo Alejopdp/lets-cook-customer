@@ -15,4 +15,5 @@ export const useStyles = makeStyles((theme) => ({
         mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         backgroundColor: theme.palette.background.paper
     },
+    cursorPointer: { cursor: "pointer" },
 }));

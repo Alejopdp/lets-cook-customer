@@ -96,7 +96,6 @@ function MyApp(props) {
 export default MyApp;
 
 // export const getInitialProps = async (context) => {
-//     console.log("ENTRA A LA PP");
 //     const token = context.req.cookies.token;
 //     if (!!!token) {
 //         return { props: { isLogged: false } };

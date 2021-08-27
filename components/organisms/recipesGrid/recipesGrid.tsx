@@ -67,7 +67,7 @@ export const RecipesGrid = (props: RecipesGridProps) => {
             {props.recipesPage && (
                 <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={2}>
                     {props.recipes.map((recipe, index) => (
-                        <Grid item xs={6} sm={6} md={4} key={index}>
+                        <Grid item xs={12} sm={6} md={4} key={index}>
                             <RecipeCard
                                 img={recipe.imageUrl}
                                 imgTags={recipe.imageTags}

@@ -11,4 +11,5 @@ export interface RoundedButtonProps {
     onClick?: () => void;
     disabled?: boolean;
     textStyle?: object
+    isLoading?:boolean;
 }

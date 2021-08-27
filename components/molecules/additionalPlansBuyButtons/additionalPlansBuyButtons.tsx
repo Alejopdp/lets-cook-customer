@@ -4,11 +4,13 @@ import { Box, Button, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
 
+
 type AdditionalPlansBuyButtonsProps = {
     totalValue: number;
     handleSubmitPayment: () => void;
     handleSecondaryButtonClick: () => void;
     secondaryButtonLabel: string;
+    isLoadingPayment: boolean;
 };
 
 const AdditionalPlansBuyButtons = (props: AdditionalPlansBuyButtonsProps) => {
@@ -21,6 +23,8 @@ const AdditionalPlansBuyButtons = (props: AdditionalPlansBuyButtonsProps) => {
                 <RoundedButton
                     label={`PAGAR PRODUCTOS ADICIONALES (${props.totalValue} €)`}
                     onClick={props.handleSubmitPayment}
+                    disabled={props.isLoadingPayment}
+                    isLoading={props.isLoadingPayment}
                     style={{ marginBottom: theme.spacing(2) }}
                 />
             )}
