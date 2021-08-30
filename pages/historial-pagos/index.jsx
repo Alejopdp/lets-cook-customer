@@ -17,7 +17,8 @@ import { Layout } from "../../components/layout/index";
 import PaymentsTable from "../../components/molecules/paymentsTable/PaymentsTable";
 import PaymentDetailsModal from "../../components/molecules/paymentDetailsModal/paymentDetailsModal";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
-import { useLang } from '@hooks';
+import { useLang } from "@hooks";
+
 const HistorialPagos = (props) => {
     const theme = useTheme();
     const router = useRouter();
@@ -26,15 +27,18 @@ const HistorialPagos = (props) => {
     const [selectedPaymentOrder, setSelectedPaymentOrder] = useState({});
     const [orders, setorders] = useState([]);
     const userInfo = useUserInfoStore((state) => state.userInfo);
-    const [lang] = useLang('historialPagos');
-
+    const [lang] = useLang("historialPagos");
 
     useEffect(() => {
         const getCustomerOrders = async () => {
             const res = await getCustomerPaymentOrders(userInfo.id, router.locale);
 
             if (res.status === 200) {
-                setorders(res.data.paymentOrders);
+                setorders(
+                    res.data.paymentOrders.filter(
+                        (paymentOrder) => paymentOrder.billingDate < new Date() || paymentOrder.state === "PAYMENT_ORDER_BILLED"
+                    )
+                );
             } else {
                 enqueueSnackbar(res.data.message, { variant: "error" });
             }
