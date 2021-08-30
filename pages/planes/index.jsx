@@ -1,10 +1,10 @@
-import {memo} from 'react';
+import { memo } from "react";
 const PlansIndexPage = () => {
     return <></>;
 };
 
 export async function getServerSideProps({ locale, previewData }) {
-    const defaultPlan = "default-plan";
+    const defaultPlan = "plan-familiar";
     const defaultPeopleQty = 0;
     const defaultRecipesQty = 0;
 
@@ -15,4 +15,4 @@ export async function getServerSideProps({ locale, previewData }) {
         },
     };
 }
-export default  memo(PlansIndexPage);
+export default memo(PlansIndexPage);
