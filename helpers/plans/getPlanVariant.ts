@@ -12,6 +12,8 @@ export interface PlanVarianResult {
         permanent: boolean;
     };
     errors: string[];
+    planImageUrl?: string;
+    iconLinealWithColorUrl?: string;
 }
 
 export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQty: 0 }, plans?: Plan[], locale = "es"): PlanVarianResult {
@@ -95,6 +97,8 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
         recipes,
         redirect,
         errors,
+        planImageUrl: plansBySlug.imageUrl,
+        iconLinealWithColorUrl: plansBySlug.iconWithColor,
     };
 }
 

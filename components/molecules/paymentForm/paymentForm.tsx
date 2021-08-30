@@ -181,7 +181,9 @@ export const PaymentForm = (props) => {
                         ...props.deliveryData,
                     });
                     updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
-                    form.canChooseRecipes && Array.isArray(form.recipes) && form.recipes.length > 0 ? goToNextView() : moveNSteps(2);
+                    form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
+                        ? goToNextView()
+                        : moveNSteps(2);
                     // ga.purchase({
                     //     transaction_id: res.data.subscriptionId,
                     //     affiliation: "Let's cook website",
@@ -216,7 +218,7 @@ export const PaymentForm = (props) => {
                     ...props.deliveryData,
                 });
                 updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
-                form.canChooseRecipes && Array.isArray(form.recipes) && form.recipes.length ? goToNextView() : moveNSteps(2);
+                form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0 ? goToNextView() : moveNSteps(2);
                 console.log("res.data", res.data);
                 // ga.purchase({
                 //     transaction_id: res.data.subscriptionId,

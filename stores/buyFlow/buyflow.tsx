@@ -61,6 +61,7 @@ export interface BuyFlowStore {
         paymentMethod?: PaymentMethodForm;
         coupon?: Coupon;
         recipes: Recipes[];
+        planRecipes: Recipes[];
         firstOrderId: string;
         subscriptionId: string;
         firstOrderShippingDate: string;
@@ -100,7 +101,8 @@ export interface Store extends BuyFlowStore {
     toFirstStep: () => void;
     setDeliveryInfo: (deliveryForm: Partial<DeliveryForm>) => void;
     setPaymentMethod: (paymentMethod: Partial<PaymentMethodForm>) => void;
-    selectRecipes: (recipes: Recipes[]) => void;
+    selectRecipes: (recipes: Recipes[]) => void; // Used for recipe selection
+    selectPlanRecipes: (recipes: Recipes[]) => void;
     setPlanCode: (
         code: string,
         slug: string,
@@ -182,6 +184,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             },
         },
         recipes: [],
+        planRecipes: [], // Populate at every plan selection change. Used for skipping or not recipe choice step.
         subscriptionId: "",
         firstOrderId: "",
         firstOrderShippingDate: "",
@@ -256,6 +259,11 @@ const store = devtools<Store>((set, get) => ({
     selectRecipes: (recipes: Recipes[]) => {
         const form = get().form;
         form.recipes = recipes;
+        set({ form });
+    },
+    selectPlanRecipes: (recipes: Recipes[]) => {
+        const form = get().form;
+        form.planRecipes = recipes;
         set({ form });
     },
     setPlanVariant: (variant: PlanVariant) => {
