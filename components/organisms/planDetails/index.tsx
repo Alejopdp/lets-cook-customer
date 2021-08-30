@@ -18,6 +18,7 @@ import PlanDetailsMobile from "./planDetailsMobile/index";
 import { useSnackbar } from "notistack";
 import { PlanDetailsProps, SkippableOrder } from "./interfaces";
 import { skipOrders } from "helpers/serverRequests/order";
+import { useRouter } from "next/router";
 
 const PlanDetails = (props: PlanDetailsProps) => {
     const cancelPlanData = {
@@ -34,7 +35,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
     };
 
     const theme = useTheme();
-    // const router = useRouter();
+    const router = useRouter();
     // const lang = langs[router.locale];
     const { enqueueSnackbar } = useSnackbar();
     const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: -1, period: "" });
@@ -61,7 +62,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
             enqueueSnackbar("Plan cambiado con éxito", { variant: "success" });
             setOpenChangePlanModal(false);
         } else {
-            enqueueSnackbar(res.data, { variant: "error" });
+            enqueueSnackbar(res.data.message, { variant: "error" });
         }
     };
 
@@ -80,6 +81,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
 
         if (res.status === 200) {
             enqueueSnackbar("El plan se canceló correctamente", { variant: "success" });
+            router.replace("/perfil");
         } else {
             enqueueSnackbar("Error al cancelar el plan", { variant: "error" });
         }
