@@ -83,7 +83,7 @@ const NuevoAcompañamientoPage = (props) => {
     return (
         <Layout disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
-                <BackButtonTitle url="/perfil" title={"Acompañamientos"} />
+                <BackButtonTitle url="/perfil" title={"Adicionales"} />
                 <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
                     <AdditionalPlansGrid
                         selectedVariants={selectedVariants}
@@ -97,8 +97,8 @@ const NuevoAcompañamientoPage = (props) => {
                     <AdditionalPlansBuyButtons
                         totalValue={totalValue}
                         handleSubmitPayment={handleSubmitPayment}
-                        handleSecondaryButtonClick={() => router.replace("/perfil")}
-                        secondaryButtonLabel="POR EL MOMENTO NO QUIERO UN NUEVO ACOMPAÑAMIENTO"
+                        // handleSecondaryButtonClick={() => router.replace("/perfil")}
+                        // secondaryButtonLabel="POR EL MOMENTO NO QUIERO UN NUEVO ACOMPAÑAMIENTO"
                     />
                 </Grid>
             </InnerSectionLayout>

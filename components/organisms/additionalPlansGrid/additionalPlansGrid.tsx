@@ -34,7 +34,7 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                 max: 1280,
                 min: 960,
             },
-            items: 3,
+            items: 4,
             partialVisibilityGutter: 40,
         },
         tablet: {
@@ -57,11 +57,11 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
 
     return (
         <>
-            {props.additionalPlans.length <= 3 && isLgUp && (
+            {props.additionalPlans.length <= 4 && isLgUp && (
                 <Grid item xs={12}>
                     <Grid container spacing={2} style={{ justifyContent: "center" }}>
                         {props.additionalPlans.map((plan, index) => (
-                            <Grid item xs={12} lg={4} key={index}>
+                            <Grid item xs={12} lg={3} key={index}>
                                 <AdditionalPlanCard
                                     selectedVariants={props.selectedVariants}
                                     setselectedVariants={props.setselectedVariants}
@@ -74,7 +74,7 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                     </Grid>
                 </Grid>
             )}
-            {(props.additionalPlans.length > 3 || isLgDown) && (
+            {(props.additionalPlans.length > 4 || isLgDown) && (
                 <Carousel
                     additionalTransfrom={0}
                     arrows={isSmDown ? false : true}

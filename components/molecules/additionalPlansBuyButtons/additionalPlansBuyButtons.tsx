@@ -8,8 +8,8 @@ import { useRouter } from "next/router";
 type AdditionalPlansBuyButtonsProps = {
     totalValue: number;
     handleSubmitPayment: () => void;
-    handleSecondaryButtonClick: () => void;
-    secondaryButtonLabel: string;
+    handleSecondaryButtonClick?: () => void;
+    secondaryButtonLabel?: string;
     isLoadingPayment: boolean;
 };
 
@@ -21,16 +21,18 @@ const AdditionalPlansBuyButtons = (props: AdditionalPlansBuyButtonsProps) => {
         <Box display="flex" flexDirection="column" alignItems="center">
             {props.totalValue > 0 && (
                 <RoundedButton
-                    label={`PAGAR PRODUCTOS ADICIONALES (${props.totalValue} €)`}
+                    label={`PAGAR ADICIONALES (${props.totalValue} €)`}
                     onClick={props.handleSubmitPayment}
                     disabled={props.isLoadingPayment}
                     isLoading={props.isLoadingPayment}
                     style={{ marginBottom: theme.spacing(2) }}
                 />
             )}
-            <Button variant="text" onClick={props.handleSecondaryButtonClick}>
-                {props.secondaryButtonLabel}
-            </Button>
+            {props.secondaryButtonLabel && (
+                <Button variant="text" onClick={props.handleSecondaryButtonClick}>
+                    {props.secondaryButtonLabel}
+                </Button>
+            )}
         </Box>
     );
 };
