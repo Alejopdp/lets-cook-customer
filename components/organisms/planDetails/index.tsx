@@ -19,18 +19,19 @@ import { useSnackbar } from "notistack";
 import { PlanDetailsProps, SkippableOrder } from "./interfaces";
 import { skipOrders } from "helpers/serverRequests/order";
 import { useRouter } from "next/router";
+import { CancellationReason } from "types/cancellation";
 
 const PlanDetails = (props: PlanDetailsProps) => {
     const cancelPlanData = {
         reasons: [
-            { id: 1, value: "created_by_error", text: "Se ha creado por error" },
-            { id: 2, value: "cant_get_kits_next_week", text: "No puedo recibir los kits la próxima semana" },
-            { id: 3, value: "special_diet", text: "Tengo una dieta especial" },
-            { id: 4, value: "move_abroad", text: "Me voy a vivir fuera por tiempo indeterminado" },
-            { id: 5, value: "dont_like_meal_kits", text: "No me gustan los kits para cocinar (meal kits)" },
-            { id: 6, value: "had_problems_with_letscook", text: "He tenido problemas con Let’s Cook" },
-            { id: 7, value: "price_too_high", text: "El precio es muy alto" },
-            { id: 8, value: "other_reason", text: "Otra razón" },
+            { id: 1, value: CancellationReason.CREATED_BY_ERROR, text: "Se ha creado por error" },
+            { id: 2, value: CancellationReason.CANT_GET_KITS_NEXT_WEEK, text: "No puedo recibir los kits la próxima semana" },
+            { id: 3, value: CancellationReason.SPECIAL_DIET, text: "Tengo una dieta especial" },
+            { id: 4, value: CancellationReason.MOVE_ABROAD, text: "Me voy a vivir fuera por tiempo indeterminado" },
+            { id: 5, value: CancellationReason.DONT_LIKE_MEAL_KITS, text: "No me gustan los kits para cocinar (meal kits)" },
+            { id: 6, value: CancellationReason.HAD_PROBLEMS_WITH_LETSCOOK, text: "He tenido problemas con Let’s Cook" },
+            { id: 7, value: CancellationReason.PRICE_TOO_HIGH, text: "El precio es muy alto" },
+            { id: 8, value: CancellationReason.OTHER_REASONS, text: "Otra razón" },
         ],
     };
 

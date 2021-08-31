@@ -23,6 +23,7 @@ import { useSnackbar } from "notistack";
 import { CancelPlanModalProps } from "./interface";
 import { useRouter } from "next/router";
 import { updateRestriction } from "helpers/serverRequests/subscription";
+import { CancellationReason } from "types/cancellation";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -87,6 +88,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
 
         if (res.status === 200) {
             enqueueSnackbar("Semanas salteadas correctamente", { variant: "success" });
+            router.reload();
         } else {
             enqueueSnackbar("Error al saltear las semanas", { variant: "error" });
         }
@@ -131,6 +133,14 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         props.handleClose();
     };
 
+    const isSkipWeekButtonDisabled = () => {
+        return reasonSelected?.value === CancellationReason.CANT_GET_KITS_NEXT_WEEK && weeksToSkip.length === 0;
+    };
+
+    const isModalPrimaryButtonDisabled = () => {
+        return isSkipWeekButtonDisabled();
+    };
+
     let cancellationReasonComponent;
     let secondaryBtnColor;
     let secondaryBtnText;
@@ -141,7 +151,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
 
     if (reasonSelected) {
         switch (reasonSelected.value) {
-            case "created_by_error":
+            case CancellationReason.CREATED_BY_ERROR:
                 cancellationReasonComponent = (
                     <CreatedByError handleChange={handleChangeCancellationComments} value={cancellationComments} />
                 );
@@ -152,7 +162,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                 primaryBtnColor = "#FC1919";
                 primaryBtnText = "cancelar plan";
                 break;
-            case "cant_get_kits_next_week":
+            case CancellationReason.CANT_GET_KITS_NEXT_WEEK:
                 cancellationReasonComponent = (
                     <CantGetKitsNextWeek handleChange={handleChangeSkipWeeks} weeks={props.orders} value={weeksToSkip} />
                 );
@@ -163,7 +173,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                 primaryBtnColor = theme.palette.primary.main;
                 primaryBtnText = "saltar semana";
                 break;
-            case "special_diet":
+            case CancellationReason.SPECIAL_DIET:
                 cancellationReasonComponent = (
                     <SpecialDiet
                         handleChangeSelect={handleChangeSelectSpecialDiet}
@@ -180,7 +190,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                 primaryBtnColor = theme.palette.primary.main;
                 primaryBtnText = "ajustar dieta";
                 break;
-            case "move_abroad":
+            case CancellationReason.MOVE_ABROAD:
                 cancellationReasonComponent = <MoveAbroad />;
                 handleSecondaryBtnClick = props.handleClose;
                 secondaryBtnColor = theme.palette.text.secondary;
@@ -189,7 +199,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                 primaryBtnColor = "#FC1919";
                 primaryBtnText = "cancelar plan";
                 break;
-            case "dont_like_meal_kits":
+            case CancellationReason.DONT_LIKE_MEAL_KITS:
                 cancellationReasonComponent = (
                     <DontLikeMealKits handleChange={handleChangeCancellationComments} value={cancellationComments} />
                 );
@@ -200,7 +210,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                 primaryBtnColor = "#FC1919";
                 primaryBtnText = "cancelar plan";
                 break;
-            case "had_problems_with_letscook":
+            case CancellationReason.HAD_PROBLEMS_WITH_LETSCOOK:
                 cancellationReasonComponent = (
                     <HadProblemsWithLetsCook handleChange={handleChangeCancellationComments} value={cancellationComments} />
                 );
@@ -211,7 +221,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                 primaryBtnColor = "#FC1919";
                 primaryBtnText = "cancelar plan";
                 break;
-            case "price_too_high":
+            case CancellationReason.PRICE_TOO_HIGH:
                 cancellationReasonComponent = (
                     <PriceTooHigh
                         plan={plan}
@@ -227,7 +237,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                 primaryBtnColor = theme.palette.primary.main;
                 primaryBtnText = "cambiar plan";
                 break;
-            case "other_reason":
+            case CancellationReason.OTHER_REASONS:
                 cancellationReasonComponent = <OtherReason handleChange={handleChangeCancellationComments} value={cancellationComments} />;
                 handleSecondaryBtnClick = props.handleClose;
                 secondaryBtnColor = theme.palette.text.secondary;
@@ -260,6 +270,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
             secondaryButtonColor={secondaryBtnColor}
             secondaryButtonText={secondaryBtnText}
             fullScreen={true}
+            disabled={isModalPrimaryButtonDisabled()}
         >
             <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
                 ¿Por qué quieres cancelar el plan?
