@@ -150,7 +150,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
     let handlePrimaryBtnClick;
 
     if (reasonSelected) {
-        switch (reasonSelected.value) {
+        switch (reasonSelected?.value) {
             case CancellationReason.CREATED_BY_ERROR:
                 cancellationReasonComponent = (
                     <CreatedByError handleChange={handleChangeCancellationComments} value={cancellationComments} />
