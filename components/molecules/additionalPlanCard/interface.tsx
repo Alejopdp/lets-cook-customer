@@ -6,6 +6,7 @@ export interface AdditionalPlanCardProps {
     selectedAttributes: { [key: string]: string };
     selectedVariants: PlanVariant[];
     setselectedVariants: (variants: PlanVariant[]) => void;
+    style: any;
 }
 
 export interface SelectVariantContentProps {

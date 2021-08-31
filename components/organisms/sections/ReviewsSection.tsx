@@ -132,7 +132,7 @@ export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
                         <div className={classes.textRatingRow}>
                             <Typography className={classes.item} variant="h6"><b>5.0</b></Typography>
                             <Rating className={classes.item} name="read-only" value={5} readOnly />
-                            <Typography className={classes.item} variant="caption">149 opiniones</Typography>
+                            <Typography className={classes.item} variant="caption">150 opiniones</Typography>
                         </div>
                     </Grid>
                 </Grid>

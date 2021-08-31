@@ -105,6 +105,7 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                             setvariantsToPay={props.setvariantsToPay}
                             key={index}
                             additionalPlan={plan}
+                            style={{ marginRight: "16px" }}
                         />
                     ))}
                 </Carousel>

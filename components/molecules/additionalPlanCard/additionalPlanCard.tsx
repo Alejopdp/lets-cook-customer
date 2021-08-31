@@ -163,7 +163,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
     };
 
     return (
-        <Box style={{ marginRight: "16px" }}>
+        <Box style={{ ...props.style }}>
             <div className={classes.card} style={{ backgroundImage: `url(${props.additionalPlan.imageUrl})` }}>
                 <div className={hasBgImg ? classes.overlay : classes.overlayWhite}>
                     {actualView}
