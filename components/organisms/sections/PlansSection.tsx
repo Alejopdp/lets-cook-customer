@@ -11,6 +11,7 @@ import { memo } from "react";
 import PlanCard from "../../molecules/planCard";
 
 export const PlansSection = memo((props: PlansSectionProps) => {
+    const lang = props.lang
     const classes = useStyles();
     const theme = useTheme();
     const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
@@ -58,8 +59,8 @@ export const PlansSection = memo((props: PlansSectionProps) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Title
-                            title="Encuentra el plan indicado para tí"
-                            subtitle="..."
+                            title={lang.title}
+                            subtitle={lang.subtitle}
                         />
                     </Grid>
                     {props.cards.length <= 6 && isLgUp && (

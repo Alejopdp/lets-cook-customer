@@ -1,3 +1,1 @@
-export const molecules = {
-    todo: "TODO"
-}
+export * from "./footer";;

@@ -5,3 +5,4 @@ export * from "./signupForm";
 export * from "./recoverPasswordForm";
 export * from "./buyForm/selectPlanStep";
 export * from "./buyForm/crossSellingStep";
+export * from "./sections/callToActionSection";

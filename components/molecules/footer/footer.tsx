@@ -13,46 +13,50 @@ import PinterestIcon from "@material-ui/icons/Pinterest";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import { Link } from "@material-ui/core";
 import { useStyles } from "./styles";
+import { useLang } from '@hooks';
 
-interface ILink {
-    name: string;
-    url: string;
-}
 
-interface FooterProps {
-    links?: ILink[];
-}
-
-const _links: ILink[] = [
-    {
-        name: "Recetas",
-        url: "/recetas",
-    },
-    // {
-    //     name: "Bono regalo",
-    //     url: "/bono-regalo",
-    // },
-    {
-        name: "¿Cómo funciona?",
-        url: "/como-funciona",
-    },
-    {
-        name: "Preguntas frecuentes",
-        url: "/preguntas-frecuentes",
-    },
-    // {
-    //     name: "Blog",
-    //     url: "/blogs/recetas",
-    // },
-    {
-        name: "Aviso legal",
-        url: "/aviso-legal",
-    },
-];
-
-export const Footer = memo(({ links = _links }: FooterProps) => {
+export const Footer = () => {
     const classes = useStyles();
     const { logoSection, paymentMethodsSection, root, footer, marg1 } = classes;
+    const [lang] = useLang('footer');
+
+    interface ILink {
+        name: string;
+        url: string;
+    }
+
+    interface FooterProps {
+        links?: ILink[];
+    }
+
+    const _links: ILink[] = [
+        {
+            name: lang.links.recipes,
+            url: "/recetas",
+        },
+        // {
+        //     name: lang.links.bonoRegalo,
+        //     url: "/bono-regalo",
+        // },
+        {
+            name: lang.links.howItWorks,
+            url: "/como-funciona",
+        },
+        {
+            name: lang.links.faqs,
+            url: "/preguntas-frecuentes",
+        },
+        // {
+        //     name: lang.links.blog,
+        //     url: "/blogs/recetas",
+        // },
+        {
+            name: lang.links.legal,
+            url: "/aviso-legal",
+        },
+    ];
+
 
     return (
         <div className={root}>
@@ -82,7 +86,7 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
                         Menú
                     </Typography> */}
 
-                    {links.map((link, index) => (
+                    {_links.map((link, index) => (
                         <Link href={link.url} key={index} underline="none">
                             <Typography variant="body1" color="textSecondary">
                                 {link.name}
@@ -117,9 +121,9 @@ export const Footer = memo(({ links = _links }: FooterProps) => {
 
             <Grid item xs={12} className={footer}>
                 <Typography variant="body2" style={{ fontSize: "13px" }}>
-                    Let's Cook 2021 © - Todos los derechos reservados
+                    {lang.copyright}
                 </Typography>
             </Grid>
         </div>
     );
-});
+};

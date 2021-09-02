@@ -6,7 +6,8 @@ import { useValuePropositionStyle as useStyles } from './styles';
 import { useRouter } from "next/router";
 import * as ga from '../../../helpers/ga'
 
-export const ValuePropositionSection = () => {
+export const ValuePropositionSection = props => {
+    const lang = props.lang
     const classes = useStyles();
     const router = useRouter();
 
@@ -28,14 +29,14 @@ export const ValuePropositionSection = () => {
                 <Container maxWidth='md' className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <Typography variant="h1">Cocina bueno y rico cada semana</Typography>
+                            <Typography variant="h1">{lang.title}</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="body1">¿Qué hay para cenar? Te enviamos ingredientes frescos en cantidades exactas con la receta para cocinar en tu casa.</Typography>
+                            <Typography variant="body1">{lang.subtitle}</Typography>
                         </Grid>
                         <Grid item xs={12} className={classes.buttonWithCaptionGrid}>
-                            <RoundedButton label="Ver planes" onClick={goToPlans} />
-                            <Typography variant="caption" className={classes.marginTop2}>Podrás pausar, cambiar o cancelar el plan cuando quieras</Typography>
+                            <RoundedButton label={lang.btnText} onClick={goToPlans} />
+                            <Typography variant="caption" className={classes.marginTop2}>{lang.btnCaption}</Typography>
                         </Grid>
                     </Grid>
                 </Container>

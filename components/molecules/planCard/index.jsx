@@ -4,12 +4,15 @@ import { RoundedButton } from '@atoms';
 import { useRouter } from 'next/router';
 import { usePlansStyles as useStyles } from "./styles";
 import * as ga from '../../../helpers/ga'
-
+const langs = require("../../../lang").home
 
 const PlanCard = props => {
     const { push: navigateTo, locale } = useRouter();
     const theme = useTheme();
     const classes = useStyles();
+    const lang = langs[locale].plansSection;
+
+
 
     const goToPlans = () => {
         ga.event({
@@ -43,7 +46,7 @@ const PlanCard = props => {
                         color="initial">{props.card.description}</Typography>
                 </div>
                 <div className={classes.cardAction}>
-                    <RoundedButton label="¡LO QUIERO!" style={{ width: '100%', minWidth: '1px', padding: '8px' }} onClick={goToPlans} />
+                    <RoundedButton label={lang.btnText} style={{ width: '100%', minWidth: '1px', padding: '8px' }} onClick={goToPlans} />
                 </div>
             </div>
         </div>

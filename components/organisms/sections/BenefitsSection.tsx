@@ -9,6 +9,7 @@ import TitleOtherPages from "components/molecules/titleOtherPages/titleOtherPage
 import * as ga from '../../../helpers/ga'
 
 export const BenefitsSection = (props: BenefitsSectionProps) => {
+    const lang = props.lang
     const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();
@@ -28,14 +29,14 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
         <Box style={{ backgroundColor: props.backgroundColor ? props.backgroundColor : "white", padding: `${theme.spacing(8)}px 0px` }}>
             <Container maxWidth="lg">
                 {props.enableTitleSection && (
-                    <TitleOtherPages title="Beneficios de Let's Cook" subtitle='...' />
+                    <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 )}
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={5} style={{ alignSelf: "center" }}>
                         <img className={classes.img} src="/assets/home/home-atributos.jpg" alt='atributos' />
                     </Grid>
                     <Grid item xs={12} md={7} style={{ alignSelf: 'center' }}>
-                        {(Array.isArray(props.cards) ? props.cards : []).map((card, index) => (
+                        {lang.cards.map((card, index) => (
                             <div key={index} className={classes.card}>
                                 <div className={classes.cardIcon}>
                                     <img src={card.image} alt={card.title} className={classes.icon} />
@@ -57,9 +58,9 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                 {!props.removeCallToAction && (
                     <Grid container style={{ marginTop: theme.spacing(4) }}>
                         <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
-                            <RoundedButton label="Descubre más" onClick={goToPlans} />
+                            <RoundedButton label={lang.btnText} onClick={goToPlans} />
                             <Typography className={classes.smallText} variant="caption">
-                                Envío gratis en Barcelona
+                                {lang.btnCaption}
                             </Typography>
                         </Grid>
                     </Grid>
