@@ -53,6 +53,7 @@ const useStylesAccordion = makeStyles((theme: Theme) =>
 );
 
 export const PaymentForm = (props) => {
+    const lang = props.lang
     const { chckbox } = useStyles();
     const classes = useStylesAccordion();
     const { getFromLocalStorage, saveInLocalStorage } = useLocalStorage();
@@ -139,7 +140,7 @@ export const PaymentForm = (props) => {
         });
 
         setisLoadingPayment(true);
-        if (form.paymentMethod.type === "newPaymentMethod" || !!!userInfo.paymentMethods || userInfo.paymentMethods?.length === 0) {
+        if (form.paymentMethod.type === "newPaymentMethod" || !!!userInfo.paymentMethods || userInfo.paymentMethods ?.length === 0) {
             const stripeRes = await handleStripePaymentMethod();
             if (stripeRes.error) return;
         }
@@ -147,12 +148,12 @@ export const PaymentForm = (props) => {
         const data = {
             customerId: userInfo.id || "f031ca8c-647e-4d0b-8afc-28e982068fd5", // Get customer id from zustand
             planId: form.planCode,
-            planVariantId: form.variant?.id,
+            planVariantId: form.variant ?.id,
             planFrequency: "weekly",
             restrictionComment: props.deliveryData.restrictions || "No puedo comer alimentos con lactosa", // Add restriction comment
-            couponId: form.coupon?.id,
-            stripePaymentMethodId: form.paymentMethod?.stripeId, // Add if it is a new payment method
-            paymentMethodId: form.paymentMethod?.id, // Add if customer uses an already saved payment method
+            couponId: form.coupon ?.id,
+            stripePaymentMethodId: form.paymentMethod ?.stripeId, // Add if it is a new payment method
+            paymentMethodId: form.paymentMethod ?.id, // Add if customer uses an already saved payment method
             addressName: props.deliveryData.addressName,
             addressDetails: props.deliveryData.addressDetails,
             latitude: props.deliveryData.latitude,
@@ -167,7 +168,7 @@ export const PaymentForm = (props) => {
         if (res.status === 200) {
             if (res.data.payment_status === "requires_action") {
                 const confirmationResponse = await stripe.confirmCardPayment(res.data.client_secret, {
-                    payment_method: form.paymentMethod?.stripeId,
+                    payment_method: form.paymentMethod ?.stripeId,
                 });
 
                 if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
@@ -256,11 +257,11 @@ export const PaymentForm = (props) => {
                 shippingAddress: !!userInfo.shippingAddress
                     ? { ...userInfo.shippingAddress }
                     : {
-                          addressDetails: props.deliveryData.addressDetails,
-                          addressName: props.deliveryData.addressName,
-                          latitude: props.deliveryData.latitude,
-                          longitude: props.deliveryData.longitude,
-                      },
+                        addressDetails: props.deliveryData.addressDetails,
+                        addressName: props.deliveryData.addressName,
+                        latitude: props.deliveryData.latitude,
+                        longitude: props.deliveryData.longitude,
+                    },
                 paymentMethods,
             });
 
@@ -303,7 +304,7 @@ export const PaymentForm = (props) => {
                         <Grid item className={classes.title}>
                             <Image src="/icons/checkout/metodos-de-pago.svg" height={32} width={32} />
                             <Typography variant="h6" color="textSecondary" className={classes.titleMargin}>
-                                Métodos de pago
+                                {lang.title}
                             </Typography>
                         </Grid>
                     </Grid>
@@ -317,17 +318,18 @@ export const PaymentForm = (props) => {
                                     variant="body2"
                                     style={{ fontSize: "14px", marginLeft: theme.spacing(1), marginRight: theme.spacing(2) }}
                                 >
-                                    Pago seguro y garantizado
+                                    {lang.securePaymentLabel}
                                 </Typography>
                                 <img src="/icons/checkout/powered-by-stripe.png" alt="stripe" style={{ height: "24px" }} />
                             </div>
                         </Grid>
                         <Grid item xs={12}>
                             <PaymentMethodForm
+                                lang={lang.paymentMethodForm}
                                 paymentMethods={userInfo.paymentMethods || []}
-                                selectedOption={form.paymentMethod?.type}
+                                selectedOption={form.paymentMethod ?.type}
                                 setselectedOption={(e) => handlePaymentMethodTypeChange(e)}
-                                selectedSavedCard={form.paymentMethod?.id}
+                                selectedSavedCard={form.paymentMethod ?.id}
                                 setselectedSavedCard={(e) => handleSelectedCardChange(e)}
                             />
                         </Grid>
@@ -336,21 +338,21 @@ export const PaymentForm = (props) => {
                                 name="acceptTerms"
                                 checked={areTermsAccepted}
                                 onChange={() => setareTermsAccepted(!areTermsAccepted)}
-                                label="He leído y acepto las "
-                                boldText="condiciones generales de venta"
+                                label={lang.acceptTermsInputLabel.text}
+                                boldText={lang.acceptTermsInputLabel.boldText}
                                 handleOpenModal={props.handleOpenPurchaseConditionsModal}
                             />
                         </Grid>
                         <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
                             <RoundedButton
-                                label="Realizar pago"
+                                label={lang.btnText}
                                 disabled={isPayButtonDisabled() || isLoadingPayment}
                                 isLoading={isLoadingPayment}
                                 onClick={handleSubmitPayment}
                                 style={{ width: "100%" }}
                             />
                             <Typography style={{ paddingTop: theme.spacing(1), textAlign: "center" }} variant="caption">
-                                Totalmente flexible y sin permanencia. Puedes cancelar, cambiar o saltar semana cuando quieras.
+                                {lang.btnCaption}
                             </Typography>
                         </Grid>
                     </Grid>

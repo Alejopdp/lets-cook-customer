@@ -9,4 +9,5 @@ export interface PaymentMethodFormProps {
     paymentMethods: IPaymentMethod[];
     selectedSavedCard: string;
     setselectedSavedCard: (event: any) => void;
+    lang: any;
 }

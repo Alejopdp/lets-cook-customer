@@ -7,7 +7,7 @@ import { AppliedCouponBoxProps } from "./interface";
 const AppliedCouponBox = (props: AppliedCouponBoxProps) => {
     return (
         <Box marginTop={4}>
-            <Typography style={{ fontWeight: 600, fontSize: 16 }}>Cupón de descuento aplicado</Typography>
+            <Typography style={{ fontWeight: 600, fontSize: 16 }}>{props.text}</Typography>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Typography style={{ fontSize: 16 }}>{props.couponCode}</Typography>
                 <IconButton onClick={props.handleRemoveCoupon}>

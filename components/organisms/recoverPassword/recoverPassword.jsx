@@ -30,6 +30,7 @@ const RecoverPassword = (props) => {
                     name="password"
                     value={props.value}
                     onChange={props.handleChange}
+                    helperText={lang.passwordHelperText}
                 />
             </Grid>
             <Grid item xs={12}>

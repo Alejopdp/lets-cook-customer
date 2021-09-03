@@ -7,7 +7,7 @@ import Image from "next/image";
 export default class MyDocument extends Document {
     render() {
         return (
-            <Html lang="en">
+            <Html lang="es">
                 <Head>
                     {/* PWA primary color */}
                     <meta name="theme-color" content={theme.palette.primary.main} />

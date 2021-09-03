@@ -6,12 +6,14 @@ import CheckoutDetails from "../checkoutDetails";
 import { getGeometry } from "helpers/utils/geocode";
 import PurchaseConditionsModal from '../../molecules/legalModals/purchaseConditionsModal';
 import * as ga from '../../../helpers/ga'
+import { useLang } from "@hooks";
 
 interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
 }
 
 export const CheckoutStep = memo((props: CheckoutStepProps) => {
+    const [lang] = useLang("checkoutStep");
     const theme = useTheme();
     const form = useBuyFlow((state) => state.form);
     const [expanded, setExpanded] = React.useState<string | false>("panel1");
@@ -100,12 +102,13 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                     <div style={{ display: "flex", alignItems: "center" }}>
                                         <img src="/icons/checkout/verified.svg" width={24} height={24} />
                                         <Typography variant="h5" style={{ marginLeft: theme.spacing(1) }}>
-                                            Pago 100% seguro
-                                    </Typography>
+                                            {lang.title}
+                                        </Typography>
                                     </div>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <ShipmentForm
+                                        lang={lang.shipmentForm}
                                         deliveryData={deliveryData}
                                         isFormCompleted={isDeliveryFormCompleted}
                                         handleChange={handleDeliveryDataChange}
@@ -119,6 +122,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <PaymentForm
+                                        lang={lang.paymentForm}
                                         expanded={expanded}
                                         handleChangeAccordion={handleChangeAccordion}
                                         deliveryData={deliveryData}
@@ -127,13 +131,13 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                     />
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: theme.spacing(4) }}>
-                                    <IconsWithText />
+                                    <IconsWithText lang={lang.iconsWithText} />
                                 </Grid>
                             </Grid>
                         </Container>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <CheckoutDetails />
+                        <CheckoutDetails lang={lang.checkoutDetails}/>
                     </Grid>
                 </Grid>
             </Container>

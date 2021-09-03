@@ -131,8 +131,8 @@ const LoginBox = (props) => {
                     style={{ fontSize: "14px", fontWeight: "600", cursor: "pointer" }}
                     onClick={props.handleForgotPasswordClick ? props.handleForgotPasswordClick : handleRedirectToForgotPassword}
                 >
-                    Olvidé mi contraseña
-                    </Typography>
+                    {lang.forgotPassword}
+                </Typography>
             </Grid>
             <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>
                 <RoundedButton

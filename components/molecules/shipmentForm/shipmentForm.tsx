@@ -75,6 +75,7 @@ const useStylesAccordion = makeStyles((theme: Theme) =>
 );
 
 export const ShipmentForm = memo((props: ShipmentFormProps) => {
+    const lang = props.lang
     const theme = useTheme();
     const classes = useStylesAccordion();
     const { setDeliveryInfo, form } = useBuyFlow(({ setDeliveryInfo, form }) => ({ setDeliveryInfo, form }));
@@ -121,7 +122,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <Grid item className={classes.title}>
                             <Image src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} />
                             <Typography variant="h6" color="textSecondary" className={classes.titleMargin}>
-                                Datos de entrega
+                                {lang.title}
                             </Typography>
                         </Grid>
                         {props.expanded !== props.panelNumber && (
@@ -139,7 +140,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <Grid item xs={12}>
                             <LocationSearchInput
                                 name="addressName"
-                                label='Dirección'
+                                label={lang.addressNameInputLabel}
                                 disabled={!!form.deliveryForm ?.addressName}
                                 value={props.deliveryData.addressName}
                                 handleChange={props.handleAddressChange}
@@ -148,7 +149,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <Grid item xs={12}>
                             <TextInput
                                 name="addressDetails"
-                                label="Piso / puerta / aclaraciones"
+                                label={lang.addressDetailsInputLabel}
                                 disabled={!!form.deliveryForm ?.addressName}
                                 value={props.deliveryData.addressDetails}
                                 onChange={props.handleChange}
@@ -157,7 +158,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <Grid item xs={12} md={6}>
                             <TextInput
                                 name="firstName"
-                                label="Nombre"
+                                label={lang.firstNameInputLabel}
                                 value={props.deliveryData.firstName}
                                 onChange={props.handleChange}
                                 disabled={!!form.deliveryForm ?.firstName}
@@ -166,7 +167,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <Grid item xs={12} md={6}>
                             <TextInput
                                 name="lastName"
-                                label="Apellido/s"
+                                label={lang.lastNameInputLabel}
                                 value={props.deliveryData ?.lastName}
                                 onChange={props.handleChange}
                                 disabled={!!form.deliveryForm ?.lastName}
@@ -175,7 +176,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <Grid item xs={12}>
                             <PhoneNumberInput
                                 name="phone1"
-                                label='WhatsApp o móvil'
+                                label={lang.phone1InputLabel}
                                 value={props.deliveryData ?.phone1}
                                 handleChange={props.handleChange}
                                 disabled={!!form.deliveryForm ?.phone1}
@@ -186,25 +187,25 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 <Box display="flex" alignItems="center" className={classes.boxChangeProfileDataLater} >
                                     <ErrorIcon fontSize="small" style={{ marginRight: "8px" }} />
                                     <Typography variant="body1" style={{ fontSize: "14px" }}>
-                                        Podrás actualizar los datos en tu perfil
+                                        {lang.editDataFromProfile}
                                     </Typography>
                                 </Box>
                             </Grid>
                         )}
                         <Grid item xs={12}>
                             <Typography variant="body2" style={{ marginBottom: theme.spacing(1) }}>
-                                ¿Tienes alguna restricción con algún tipo de ingrediente?
+                                {lang.restrictionsTitle}
                             </Typography>
                             <TextInput
                                 name="restrictions"
-                                label="Indica aquí tus restricciones (solo si aplica)"
+                                label={lang.restrictionsInputLabel}
                                 value={props.deliveryData ?.restrictions}
                                 onChange={props.handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <RoundedButton
-                                label="Continuar"
+                                label={lang.btnText}
                                 onClick={props.handleChangeStep}
                                 style={{ width: "100%" }}
                                 disabled={!props.isFormCompleted()}
