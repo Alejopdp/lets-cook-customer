@@ -1,5 +1,5 @@
 // Utils & Config
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 // External Components
@@ -22,8 +22,14 @@ import { skippOrdersFromCancellationModal } from "helpers/serverRequests/order";
 import { useSnackbar } from "notistack";
 import { CancelPlanModalProps } from "./interface";
 import { useRouter } from "next/router";
-import { updateRestriction } from "helpers/serverRequests/subscription";
+import { swapPlan, updateRestriction } from "helpers/serverRequests/subscription";
 import { CancellationReason } from "types/cancellation";
+import { getPlanAhorro } from "@helpers";
+
+export enum RecoverPriceTooHighActions {
+    SWAP_WITH_PLAN_AHORRO = "SWAP_WITH_PLAN_AHORRO",
+    CHANGE_ACTUAL_PlAN_VARiANT = "CHANGE_ACTUAL_PlAN_VARiANT",
+}
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -44,12 +50,6 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         priceText: "36 €/semana",
     };
 
-    const variants = [
-        { planId: "1", planVariantId: "6", variantDescription: "4 recetas para 3 personas - 36 €/semana", active: true },
-        { planId: "1", planVariantId: "7", variantDescription: "3 recetas para 3 personas - 30 €/semana", active: false },
-        { planId: "1", planVariantId: "8", variantDescription: "2 recetas para 3 personas - 24 €/semana", active: false },
-    ];
-
     const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();
@@ -60,6 +60,22 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
     const [specialDiet, setSpecialDiet] = useState({ id: "", value: "", comments: "" });
     // PriceTooHigh States
     const [planVariantIdSelected, setPlanVariantIdSelected] = useState(plan.planVariantId);
+    const [planAhorro, setplanAhorro] = useState({ variants: [] });
+    const [priceTooHighModalView, setpriceTooHighModalView] = useState<RecoverPriceTooHighActions>(
+        RecoverPriceTooHighActions.SWAP_WITH_PLAN_AHORRO
+    );
+
+    useEffect(() => {
+        const getPlanAhorroForCancellation = async () => {
+            const res = await getPlanAhorro();
+
+            if (res && res.status === 200) {
+                setplanAhorro(res.data);
+            }
+        };
+
+        getPlanAhorroForCancellation();
+    }, []);
 
     const handleChangeReason = (event) => {
         let newReason = props.data.reasons.filter((reason) => reason.value === event.target.value)[0];
@@ -128,9 +144,41 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
 
     // Price Too High Functions
 
+    const getActualPlanAhorroVariant = () => {
+        return (
+            planAhorro.variants.find(
+                (variant) => variant.numberOfPersons === props.actualPlan.Personas && variant.numberOfRecipes === props.actualPlan.Recetas
+            ) || planAhorro.variants.find((variant) => variant.isDefault)
+        );
+    };
+
+    const defaultPlanAhorroVariant = useMemo(() => {
+        return getActualPlanAhorroVariant();
+    }, [planAhorro]);
+
     const handleClickRecoverPriceTooHigh = () => {
-        alert(`PlanVariantId: ${JSON.stringify(planVariantIdSelected)}`);
-        props.handleClose();
+        switch (priceTooHighModalView) {
+            case RecoverPriceTooHighActions.CHANGE_ACTUAL_PlAN_VARiANT:
+                () => "";
+                break;
+            case RecoverPriceTooHighActions.SWAP_WITH_PLAN_AHORRO:
+                handleSwapPlanAhorro();
+                break;
+            default:
+                () => "";
+                break;
+        }
+    };
+
+    const handleSwapPlanAhorro = async () => {
+        const res = await swapPlan(props.subscriptionId, planAhorro.id, defaultPlanAhorroVariant.id);
+
+        if (res && res.status === 200) {
+            enqueueSnackbar("Plan cambiado correctament", { variant: "success" });
+            props.handleClose();
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
     };
 
     const isSkipWeekButtonDisabled = () => {
@@ -224,10 +272,15 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
             case CancellationReason.PRICE_TOO_HIGH:
                 cancellationReasonComponent = (
                     <PriceTooHigh
-                        plan={plan}
-                        variants={variants}
+                        plan={planAhorro}
+                        variants={planAhorro.variants}
+                        actualPlan={props.actualPlan}
+                        actualPlanVariantId={props.actualPlanVariantId}
                         planVariantIdSelected={planVariantIdSelected}
                         setPlanVariantIdSelected={setPlanVariantIdSelected}
+                        priceTooHighModalView={priceTooHighModalView}
+                        setpriceTooHighModalView={setpriceTooHighModalView}
+                        defaultPlanAhorroVariant={defaultPlanAhorroVariant}
                     />
                 );
                 handleSecondaryBtnClick = handleClickCancel;

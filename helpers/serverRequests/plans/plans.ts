@@ -56,6 +56,22 @@ export const getAdditionalPlans = async (locale: string, planId?: string) => {
     }
 };
 
+export const getPlanAhorro = async () => {
+    try {
+        const res = await Axios.request<Plan>({
+            method: "GET",
+            url: `${API_URL}/plan/ahorro`,
+            params: {
+                locale: "es",
+            },
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};
+
 export const getDemoPlans = async (locale: string): Promise<PlanResponse> => ({
     status: 200,
     data,
