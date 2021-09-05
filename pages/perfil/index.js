@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "@material-ui/core";
+const langs = require("../../lang").perfil;
+
 
 import Link from "next/link";
 // const langs = require("../../lang").comoFunciona;
@@ -57,7 +59,7 @@ const Perfil = (props) => {
         pendingActions: [],
     });
     const userInfo = useUserInfoStore((state) => state.userInfo);
-    // const lang = langs[router.locale];
+    const lang = langs[router.locale];
 
     useEffect(() => {
         const getProfile = async () => {
@@ -91,11 +93,11 @@ const Perfil = (props) => {
     const getPendingActionComponent = (data) => {
         switch (data.type) {
             case "choose_recipes":
-                return <ChooseRecipesActionBox data={data} />;
+                return <ChooseRecipesActionBox data={data} lang={lang.chooseRecipesActionBox} />;
             case "rate_recipes":
-                return <RateRecipesActionBox />;
+                return <RateRecipesActionBox lang={lang.rateRecipesActionBox} />;
             case "invite_code":
-                return <ReferalActionBox data={data} />;
+                return <ReferalActionBox data={data} lang={lang.referalActionBox} />;
             default:
                 return <p>unknown action</p>;
         }
@@ -172,7 +174,7 @@ const Perfil = (props) => {
                                 >
                                     <Grid item xs={9}>
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                            Hola {userInfo.firstName || ""}
+                                            {lang.greeting} {userInfo.firstName || ""}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={3} style={{ textAlign: "right" }}>
@@ -180,13 +182,13 @@ const Perfil = (props) => {
                                             style={{ marginRight: theme.spacing(2) }}
                                             noColor
                                             icon="time"
-                                            btnText="Historial de pagos"
+                                            btnText={lang.paymentHistoryBtnText}
                                             handleClick={() => router.push("/historial-pagos")}
                                         />
                                         <TextButton
                                             noColor
                                             icon="settings"
-                                            btnText="Configuración"
+                                            btnText={lang.settingsBtnText}
                                             handleClick={() => router.push("/configuracion")}
                                         />
                                         {/* </Grid> */}
@@ -227,7 +229,7 @@ const Perfil = (props) => {
                                 <Grid container direction="column" alignItems="left" spacing={2}>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(3) }}>
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                            Hola {userInfo.firstName || ""}
+                                            {lang.greeting} {userInfo.firstName || ""}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
@@ -235,7 +237,7 @@ const Perfil = (props) => {
                                             style={{ marginRight: "14px" }}
                                             noColor
                                             icon="time"
-                                            btnText="Historial de pagos"
+                                            btnText={lang.paymentHistoryBtnText}
                                             handleClick={() => router.push("/historial-pagos")}
                                         />
                                     </Grid>
@@ -243,7 +245,7 @@ const Perfil = (props) => {
                                         <TextButton
                                             noColor
                                             icon="settings"
-                                            btnText="Configuración"
+                                            btnText={lang.settingsBtnText}
                                             handleClick={() => router.push("/configuracion")}
                                         />
                                     </Grid>
@@ -266,8 +268,8 @@ const Perfil = (props) => {
                                 style={{ marginBottom: theme.spacing(3) }}
                             >
                                 <ProfileTitleWithButton
-                                    title="Mis planes"
-                                    btnText="Nuevo plan"
+                                    title={lang.myPlansTitle}
+                                    btnText={lang.newPlanBtnText}
                                     handleClick={() => router.push("/planes")}
                                 />
                             </Grid>
@@ -283,6 +285,7 @@ const Perfil = (props) => {
                                                             handleClickOpenPlanRecoverModal(plan.id, "principalPlanSubscriptions")
                                                         }
                                                         handleClickRedirectToPlanDetail={handleClickRedirectToPlanDetail}
+                                                        lang={lang.planProfileCard}
                                                     />
                                                 </Grid>
                                             );
@@ -291,8 +294,8 @@ const Perfil = (props) => {
                                 ) : (
                                         <EmptyState
                                             image="/emptyStatePlans.png"
-                                            title="Aún no tienes planes"
-                                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                            title={lang.plansEmptyStateTitle}
+                                            text={lang.plansEmptyStateSubtitle}
                                         />
                                     )}
                             </Grid>
@@ -307,8 +310,8 @@ const Perfil = (props) => {
                                         style={{ marginBottom: theme.spacing(3) }}
                                     >
                                         <ProfileTitleWithButton
-                                            title="Mis adicionales"
-                                            btnText="Nuevo adicional"
+                                            title={lang.myAdditionalsTitle}
+                                            btnText={lang.additionalsBtnText}
                                             handleClick={() => router.push("/adicionales")}
                                         />
                                     </Grid>
@@ -323,6 +326,7 @@ const Perfil = (props) => {
                                                                 handleClickOpenPlanRecoverModal(plan.id, "additionalPlanSubscriptions")
                                                             }
                                                             handleClickRedirectToPlanDetail={handleClickRedirectToPlanDetail}
+                                                            lang={lang.planProfileCard}
                                                         />
                                                     </Grid>
                                                 ))}
@@ -330,8 +334,8 @@ const Perfil = (props) => {
                                         ) : (
                                                 <EmptyState
                                                     image="/emptyStatePlans.png"
-                                                    title="Aún no tienes acompañamientos"
-                                                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                                    title={lang.additionalsEmptyStateTitle}
+                                                    text={lang.additionalsEmptyStateSubtitle}
                                                 />
                                             )}
                                     </Grid>

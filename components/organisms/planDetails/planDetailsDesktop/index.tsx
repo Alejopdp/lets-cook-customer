@@ -23,6 +23,7 @@ const PlanDetailsDesktop = ({
     handleClickOpenCancelPlanModal,
     handleClickOpenSkipPlanModal,
     handleClickOpenRecipeModal,
+    lang
 }: PlanDetailsProps) => {
     const theme = useTheme();
     return (
@@ -33,15 +34,15 @@ const PlanDetailsDesktop = ({
                         <PlanCard plan={subscription.plan} handleClick={handleClickOpenChangePlanModal} />
                     </Grid>
                     <Grid item xs={12}>
-                        <ShippingAddressCard shippingAddress={subscription.shippingAddress} />
+                        <ShippingAddressCard shippingAddress={subscription.shippingAddress} lang={lang.shippingAddressCard} />
                     </Grid>
                     <Grid item xs={12}>
-                        <PaymentMethodCard paymentMethod={subscription.paymentMethod} />
+                        <PaymentMethodCard paymentMethod={subscription.paymentMethod} lang={lang.paymentMethodCard} />
                     </Grid>
                     <Grid item xs={12}>
                         <TextButton
                             handleClick={handleClickOpenCancelPlanModal}
-                            btnText="cancelar plan"
+                            btnText={lang.cancelPlanBtnText}
                             style={{ color: "#FC1919", marginTop: theme.spacing(2) }}
                         />
                     </Grid>
@@ -54,6 +55,7 @@ const PlanDetailsDesktop = ({
                             schedule={subscription.schedule}
                             skippedOrders={subscription.skippedOrders}
                             handleClick={handleClickOpenSkipPlanModal}
+                            lang={lang.calendarCard}
                         />
                     </Grid>
                     {subscription.hasRecipes && (
@@ -65,6 +67,7 @@ const PlanDetailsDesktop = ({
                                         hasChosenRecipesForActualWeek={subscription.hasChosenRecipesForActualWeek}
                                         canChooseRecipes={subscription.canChooseRecipes}
                                         handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                                        lang={lang.recipesActualWeekCard}
                                     />
                                 </Grid>
                             )}
@@ -75,6 +78,7 @@ const PlanDetailsDesktop = ({
                                         hasChosenRecipesForNextWeek={subscription.hasChosenRecipesForNextWeek}
                                         handleClickOpenRecipeModal={handleClickOpenRecipeModal}
                                         canChooseRecipes={subscription.canChooseRecipesForNextWeekOrder}
+                                        lang={lang.recipesNextWeekCard}
                                     />
                                 </Grid>
                             )}

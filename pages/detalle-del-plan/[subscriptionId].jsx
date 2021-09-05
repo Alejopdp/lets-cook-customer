@@ -45,6 +45,7 @@ const PlanDetailsPage = ({ subscription, error, subscriptionId, swapPlanData, re
                     subscriptionId={subscriptionId}
                     swapPlanData={swapPlanData}
                     restrictions={restrictions}
+                    lang={lang}
                 />
             </InnerSectionLayout>
         </Layout>

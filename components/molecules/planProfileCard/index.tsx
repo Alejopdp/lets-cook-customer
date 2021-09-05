@@ -16,14 +16,14 @@ import BoxWithTextButton from "../specificBox/boxWithTextButton";
 import PlanInfoWithStatus from "../planInfo/planInfoWithStatus";
 import Options from "../../atoms/options/Options";
 
-const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpenPlanRecoverModal }) => {
+const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpenPlanRecoverModal, lang }) => {
     const theme = useTheme();
     const router = useRouter();
 
     return (
         <BoxWithTextButton
             status={plan.stateTitle}
-            btnText={plan.stateTitle === "SUBSCRIPTION_ACTIVE" ? "Ver detalle" : "Volver a pedir"}
+            btnText={plan.stateTitle === "SUBSCRIPTION_ACTIVE" ? lang.seeDetailsBtnText : lang.repeatPurchaseBtnText}
             handleClick={
                 plan.stateTitle === "SUBSCRIPTION_ACTIVE" ? () => handleClickRedirectToPlanDetail(plan.id) : handleClickOpenPlanRecoverModal
             }
@@ -44,16 +44,16 @@ const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpe
             </div>
             {plan.stateTitle === "SUBSCRIPTION_ACTIVE" && (
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: theme.spacing(2) }}>
-                    <img width={15} height={15} src="/icons/checkout/informacion-de-envio.svg" />
+                    <img width={24} height={24} src="/icons/checkout/informacion-de-envio.svg" />
                     <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                        Próxima entrega: {plan.nextShippment}
+                        {lang.nextShippingDateText}: {plan.nextShippment}
                     </Typography>
                 </div>
             )}
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                <RotateRight style={{ fontSize: '14px' }} />
+                <RotateRight style={{ fontSize: '24px' }} />
                 <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
-                    Frecuencia {translateFrequency(plan.frequency, router.locale).toLocaleLowerCase()}
+                    {lang.frequencyText} {translateFrequency(plan.frequency, router.locale).toLocaleLowerCase()}
                 </Typography>
             </div>
         </BoxWithTextButton>

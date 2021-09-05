@@ -13,20 +13,17 @@ import DataDisplay from "../../../molecules/dataDisplay/dataDisplay";
 const useStyles = makeStyles((theme) => ({}));
 
 const ShippingAddressCard = (props) => {
+    const lang = props.lang
     const theme = useTheme();
     const classes = useStyles();
     // const router = useRouter();
     // const lang = langs[router.locale];
 
     return (
-        <BoxWithTitle title="Dirección de entrega">
-            <DataDisplay title="Dirección" text={props.shippingAddress.addressName} style={{ marginBottom: theme.spacing(2) }} />
-            <DataDisplay
-                title="Piso / Puerta / Aclaraciones"
-                text={props.shippingAddress.addressDetails}
-                style={{ marginBottom: theme.spacing(2) }}
-            />
-            <DataDisplay title="Horario de preferencia" text={props.shippingAddress.preferredSchedule} />
+        <BoxWithTitle title={lang.title}>
+            <DataDisplay title={lang.addressNameTitle} text={props.shippingAddress.addressName} style={{ marginBottom: theme.spacing(2) }} />
+            <DataDisplay title={lang.addressDetailsTitle} text={props.shippingAddress.addressDetails} style={{ marginBottom: theme.spacing(2) }} />
+            <DataDisplay title={lang.preferredScheduleTitle} text={props.shippingAddress.preferredSchedule} />
         </BoxWithTitle>
     );
 };

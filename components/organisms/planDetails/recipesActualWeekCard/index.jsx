@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RecipesActualWeekCard = props => {
+    const lang = props.lang
     const theme = useTheme();
     const classes = useStyles();
     // const router = useRouter();
@@ -26,23 +27,23 @@ const RecipesActualWeekCard = props => {
     return (
         <>
             {!props.hasChosenRecipesForActualWeek ? (
-                <BoxWithTitle title='Recetas de la semana actual'>
+                <BoxWithTitle title={lang.title}>
                     <Box style={{ textAlign: 'center', marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
                         <Image src='/assets/userProfile/recipesEmptyState.svg' width='80' height='80' />
                         <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginTop: theme.spacing(1), marginBottom: theme.spacing(0.5) }}>
-                            {props.canChooseRecipes ? `No has seleccionado recetas para la entrega del ${props.actualWeekOrder.shippingDate}` : 'Estamos eligiendo por tí las recetas de la semana actual'}
+                            {props.canChooseRecipes ? `${lang.hasNotChosenRecipesForActualWeek.withoutRecipesAndCanChooseText} ${props.actualWeekOrder.shippingDate}` : lang.hasNotChosenRecipesForActualWeek.withoutRecipesAndCantChooseText}
                         </Typography>
                         {props.canChooseRecipes && (
                             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
-                                Elegiremos por tí las recetas de esta semana
+                                {lang.hasNotChosenRecipesForActualWeek.withoutRecipesAndCantChooseSubtext}
                             </Typography>
                         )}
                     </Box>
                 </BoxWithTitle>
             ) : (
-                    <BoxWithTitle title='Recetas de la semana actual'>
+                    <BoxWithTitle title={lang.title}>
                         <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px' }}>
-                            Estas son las recetas que recibirás el {props.actualWeekOrder.shippingDate}
+                            {lang.hasChosenRecipesForActualWeek.text} {props.actualWeekOrder.shippingDate}
                         </Typography>
                         <ChosenRecipes recipes={props.actualWeekOrder.recipes} handleClickOpenRecipeModal={props.handleClickOpenRecipeModal} period='actualWeek' />
                     </BoxWithTitle>

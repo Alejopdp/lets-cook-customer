@@ -7,4 +7,8 @@ export const recetas = {
         title: "Weekly menu",
         subtitle: "Each week we change the menu to add new recipes",
     },
+    ca: {
+        title: "Weekly menu",
+        subtitle: "Each week we change the menu to add new recipes",
+    }
 };
