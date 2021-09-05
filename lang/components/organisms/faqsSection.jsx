@@ -129,7 +129,7 @@ export const productosAdicionales = {
         title: "Productos adicionales",
         accordions: [
             {
-                question: "¿Cómo funciona?",
+                question: "¿Cómo funcionan los adicionales?",
                 answer: "Para complementar tu plan semanal, puedes añadir un plan de productos adicionales como frutas, brunch, vinos y/o kit barbacoa.",
             },
             {

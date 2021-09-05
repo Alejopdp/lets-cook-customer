@@ -1,8 +1,9 @@
-import React, { memo, useMemo, useEffect, useState} from "react";
+import React, { memo, useMemo, useEffect, useState } from "react";
 // Utils & Config
 import { useBuyFlow, useFilterDrawer } from "@stores";
 import _ from "lodash";
 import * as ga from "../../../helpers/ga";
+import { useLang } from "@hooks";
 
 // External components
 import { Container, Grid, Chip, Icon, useTheme } from "@material-ui/core";
@@ -38,6 +39,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const gotToNextView = useBuyFlow(({ forward }) => forward);
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setIsLoading] = useState(false);
+    const [lang] = useLang("recipeChoiseStep");
 
 
     useEffect(() => {
@@ -160,8 +162,8 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TitleBuyFlow
-                        title="¡Muchas gracias por tu compra!"
-                        subtitle={`Elige las ${variant.numberOfRecipes} recetas que recibirás el ${firstOrderShippingDate}`}
+                        title={lang.title}
+                        subtitle={`${lang.subtitle.firstText} ${variant.numberOfRecipes} ${lang.subtitle.secondText} ${firstOrderShippingDate}`}
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
@@ -169,7 +171,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                         <Grid item>
                             <RoundedButton
                                 variant="outline"
-                                label="Filtrar recetas"
+                                label={lang.filterBtnText}
                                 style={{ backgroundColor: "white", padding: "8px" }}
                                 onClick={handleClickOpenFilters}
                             >
@@ -202,6 +204,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                 </Grid>
             </Grid>
             <RecipesBottomBar
+                lang={lang.recipesBottomBar}
                 handleSecondaryButtonClick={handleChooseRecipesLater}
                 maxRecipesQty={variant.numberOfRecipes}
                 selectedRecipes={recipes}

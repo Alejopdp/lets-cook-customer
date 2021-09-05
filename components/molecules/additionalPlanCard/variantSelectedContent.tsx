@@ -9,6 +9,7 @@ import RotateRight from "@material-ui/icons/RotateRight";
 import { useRouter } from "next/router";
 
 const VariantSelectedContent = (props: VariantSelectedContentProps) => {
+    const lang = props.lang;
     const theme = useTheme();
     const router = useRouter();
     return (
@@ -34,7 +35,7 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
                         <Box marginBottom={3}>
                             <>
                                 <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}>
-                                    Tamaño del plan
+                                    {lang.planSizeText}
                                 </Typography>
                                 <Typography variant="body2">
                                     {props.variant.numberOfPersons} personas / {props.variant.numberOfRecipes} recetas
@@ -47,14 +48,14 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
             <Box display="flex" alignItems="center">
                 <RotateRight style={{ marginRight: 8 }} />
                 <Typography variant="body2" style={{ fontSize: "16px" }}>
-                    Frequencia {translateFrequency(props.selectedFrequency, router.locale).toLowerCase()}
+                    {lang.frequencyText} {translateFrequency(props.selectedFrequency, router.locale).toLowerCase()}
                 </Typography>
             </Box>
             <div style={{ marginTop: theme.spacing(3) }}>
                 <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
-                    Precio: {props.variant.priceWithOffer || props.variant.price} €
+                    {lang.priceText}: {props.variant.priceWithOffer || props.variant.price}€
                 </Typography>
-                <Typography variant="caption" color='textSecondary'>Impuestos incluidos</Typography>
+                <Typography variant="caption" color='textSecondary'>{lang.taxIncluded}</Typography>
             </div>
         </Box>
     );

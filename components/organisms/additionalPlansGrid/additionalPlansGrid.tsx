@@ -7,7 +7,6 @@ import "react-multi-carousel/lib/styles.css";
 import AdditionalPlanCard from "components/molecules/additionalPlanCard/additionalPlanCard";
 import { AdditionalPlansGridProps } from "./interface";
 import { useStyles } from "./styles";
-import { GoogleReviewBox } from "@molecules";
 
 // External components
 

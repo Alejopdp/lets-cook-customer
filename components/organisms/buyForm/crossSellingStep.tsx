@@ -145,8 +145,8 @@ const CrossSellingStep = (props) => {
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TitleBuyFlow
-                        title={form.recipes.length > 0 ? "¡Enhorabuena! Guardamos tu elección." : "¡Enhorabuena! Muchas gracias por tu compra"}
-                        subtitle="Ya puedes ir encendiendo los fogones. ¿Te gustaría disfrutar un adicional con tu plan?"
+                        title={form.recipes.length > 0 ? lang.title.recipesChosen : lang.title.withoutRecipes}
+                        subtitle={lang.subtitle}
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
@@ -162,7 +162,8 @@ const CrossSellingStep = (props) => {
                     <AdditionalPlansBuyButtons
                         handleSecondaryButtonClick={handleNotAddingAdditionalPlans}
                         handleSubmitPayment={handleSubmitPayment}
-                        secondaryButtonLabel="Ir a mi perfil"
+                        primaryButtonLabel={lang.purchaseBtnText}
+                        secondaryButtonLabel={lang.goToProfileBtnText}
                         totalValue={totalValue}
                         isLoadingPayment={isLoadingPayment}
                     />
@@ -171,12 +172,12 @@ const CrossSellingStep = (props) => {
             <Grid container spacing={2} style={{ paddingBottom: theme.spacing(8), paddingTop: theme.spacing(8) }}>
                 <Grid item xs={12}>
                     <SectionTitleBuyFlow
-                        title="Preguntas frecuentes"
-                        subtitle="¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat"
+                        title={lang.faqs.title}
+                        subtitle={lang.faqs.subtitle}
                     />
                     <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                         <Grid container spacing={2}>
-                            {lang.faqs.map((faq, index) => (
+                            {lang.faqs.accordions.map((faq, index) => (
                                 <Grid item xs={12}>
                                     <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                                 </Grid>

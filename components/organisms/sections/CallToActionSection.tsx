@@ -34,7 +34,7 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
                     <Grid item xs={12}>
                         <Typography
                             className={classes.title}
-                            color="secondary"
+                            color="primary"
                             variant="h3"
                             align='center'
                         >
