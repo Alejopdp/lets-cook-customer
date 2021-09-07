@@ -58,7 +58,6 @@ const SwapPlanModal = (props) => {
     };
 
     const handleChangePlan = (event) => {
-        alert(event.target.value);
         setPlanSelected({
             ...planSelected,
             planId: event.target.value,

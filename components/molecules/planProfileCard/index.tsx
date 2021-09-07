@@ -16,7 +16,7 @@ import BoxWithTextButton from "../specificBox/boxWithTextButton";
 import PlanInfoWithStatus from "../planInfo/planInfoWithStatus";
 import Options from "../../atoms/options/Options";
 
-const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpenPlanRecoverModal, lang }) => {
+const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpenPlanRecoverModal, lang, handleSetSubscriptionId, handleClickOpenSkipPlanModal, handleClickOpenChangePlanModal }) => {
     const theme = useTheme();
     const router = useRouter();
 
@@ -35,7 +35,12 @@ const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpe
                     planIcon={plan.iconUrl}
                     status={{ value: plan.stateTitle, text: plan.stateHumanTitle }}
                 />
-                <Options />
+                <Options
+                    handleSetSubscriptionId={handleSetSubscriptionId}
+                    subscriptionId={plan.id}
+                    handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
+                    handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
+                />
             </div>
             <div style={{ marginBottom: theme.spacing(3), marginTop: theme.spacing(2) }}>
                 <Typography variant="body2" style={{ fontSize: "16px" }}>
