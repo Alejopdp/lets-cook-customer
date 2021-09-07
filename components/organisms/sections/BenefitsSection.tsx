@@ -1,4 +1,4 @@
-import { makeStyles, Box, useTheme, Typography, Container, Grid } from "@material-ui/core";
+import { makeStyles, Box, useTheme, Typography, Container, Grid, Hidden } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
@@ -15,7 +15,7 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
 
     const goToPlans = () => {
         ga.event({
-            action: "clic en me interesa",
+            action: "clic en descubre mas",
             params: {
                 event_category: 'homepage',
                 event_label: 'beneficios lets cook',
@@ -44,9 +44,11 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                                     <Typography variant="h5" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
                                         {card.title}
                                     </Typography>
-                                    <Typography variant="body1" color="textSecondary">
-                                        {card.content}
-                                    </Typography>
+                                    <Hidden smDown>
+                                        <Typography variant="body1" color="textSecondary">
+                                            {card.content}
+                                        </Typography>
+                                    </Hidden>
                                 </div>
                             </div>
                         ))}
@@ -55,9 +57,9 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                 {!props.removeCallToAction && (
                     <Grid container style={{ marginTop: theme.spacing(4) }}>
                         <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
-                            <RoundedButton label="Me interesa" onClick={goToPlans} />
+                            <RoundedButton label="Descubre más" onClick={goToPlans} />
                             <Typography className={classes.smallText} variant="caption">
-                                Podrás pausar, cambiar o cancelar el plan cuando quieras
+                                Envío gratis en Barcelona
                             </Typography>
                         </Grid>
                     </Grid>

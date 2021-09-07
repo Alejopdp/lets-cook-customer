@@ -307,9 +307,9 @@ const Perfil = (props) => {
                                         style={{ marginBottom: theme.spacing(3) }}
                                     >
                                         <ProfileTitleWithButton
-                                            title="Mis acompañamientos"
-                                            btnText="Nuevo acompañamiento"
-                                            handleClick={() => router.push("/nuevo-acompanamiento")}
+                                            title="Mis adicionales"
+                                            btnText="Nuevo adicional"
+                                            handleClick={() => router.push("/adicionales")}
                                         />
                                     </Grid>
                                     <Grid container spacing={2} style={{ marginBottom: theme.spacing(5) }}>

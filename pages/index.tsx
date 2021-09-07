@@ -36,7 +36,7 @@ export async function getServerSideProps({ locale }) {
 const howItWorks: HowItWorks[] = [
     {
         title: "Apúntate",
-        content: "Elige el plan que más se adapte a ti. Escoge la cantidad de días y raciones por día que quieres que te llevemos cada semana. ¡No te aburrirás, tenemos muchas recetas!",
+        content: "Elige el plan que más se adapte a ti. Escoge la cantidad de días y raciones por día que quieres que te llevemos cada semana. ¡No te aburrirás, tenemos más de 15 recetas diferentes cada semana!",
         image: "/assets/home/home-cf1-apuntate.jpg",
     },
     {

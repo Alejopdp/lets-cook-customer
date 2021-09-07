@@ -223,7 +223,7 @@ export default function CheckoutDetails() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Typography variant="body2" style={{ fontSize: "13px" }}>
-                                Tenemos una calificación excelente en <strong>149 opiniones</strong>
+                                Tenemos una calificación excelente en <strong>150 opiniones</strong>
                             </Typography>
                         </Grid>
                     </Grid>

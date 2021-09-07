@@ -16,7 +16,7 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
 
     const goToPlans = () => {
         ga.event({
-            action: "clic en nuestros planes",
+            action: "clic en me interesa",
             params: {
                 event_category: props.page ? props.page : 'undefined page',
                 event_label: 'call to action',
@@ -51,9 +51,9 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
                 </Grid>
                 <Grid container style={{ marginTop: theme.spacing(4) }}>
                     <Grid item xs={12} style={{ display: 'flex', flexDirection: 'column' }}>
-                        <RoundedButton label="Nuestros planes" onClick={goToPlans} />
+                        <RoundedButton label="Me interesa" onClick={goToPlans} />
                         <Typography className={classes.smallText} align='center' variant="caption">
-                            Podrás pausar, cambiar o cancelar el plan cuando quieras
+                            Sin compromiso de permanencia
                     </Typography>
                     </Grid>
                 </Grid>

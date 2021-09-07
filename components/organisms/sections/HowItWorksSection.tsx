@@ -16,7 +16,7 @@ const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
 
     const goToPlans = () => {
         ga.event({
-            action: "clic en descubre mas",
+            action: "clic en empieza a cocinar",
             params: {
                 event_category: 'homepage',
                 event_label: 'como funciona',
@@ -43,9 +43,9 @@ const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
             </Grid>
             <Grid container style={{ marginTop: theme.spacing(4) }}>
                 <Grid item xs={12} style={{ display: "flex", flexDirection: "column" }}>
-                    <RoundedButton label="Descubre más" onClick={goToPlans} />
+                    <RoundedButton label="Empieza a cocinar" onClick={goToPlans} />
                     <Typography className={classes.smallText} variant="caption">
-                        Podrás pausar, cambiar o cancelar el plan cuando quieras
+                        Nuevas recetas cada semana
                     </Typography>
                 </Grid>
             </Grid>

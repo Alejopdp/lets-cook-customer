@@ -35,7 +35,7 @@ export const ValuePropositionSection = () => {
                         </Grid>
                         <Grid item xs={12} className={classes.buttonWithCaptionGrid}>
                             <RoundedButton label="Ver planes" onClick={goToPlans} />
-                            <Typography variant="caption" className={classes.marginTop2}>Sin compromiso de permanencia</Typography>
+                            <Typography variant="caption" className={classes.marginTop2}>Podrás pausar, cambiar o cancelar el plan cuando quieras</Typography>
                         </Grid>
                     </Grid>
                 </Container>

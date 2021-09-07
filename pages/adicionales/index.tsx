@@ -6,7 +6,7 @@ import InnerSectionLayout from "components/layout/innerSectionLayout";
 import BackButtonTitle from "components/atoms/backButtonTitle/backButtonTitle";
 import { Box, Grid, useTheme } from "@material-ui/core";
 import AdditionalPlansGrid from "components/organisms/additionalPlansGrid/additionalPlansGrid";
-import { RoundedButton } from "@atoms";
+import { SimpleAccordion } from "@atoms";
 import AdditionalPlansBuyButtons from "components/molecules/additionalPlansBuyButtons/additionalPlansBuyButtons";
 import { getAdditionalPlans, PlanVariant } from "@helpers";
 import { useSnackbar } from "notistack";
@@ -15,10 +15,13 @@ import { createManySubscriptions, handle3dSecureFailureForManySubscriptions } fr
 import { useUserInfoStore } from "@stores";
 import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
+import SectionTitleBuyFlow from "components/molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
+const langs = require("../../lang").crossSellingStep;
 
 const NuevoAcompañamientoPage = (props) => {
     const theme = useTheme();
     const router = useRouter();
+    const lang = langs[router.locale];
     const [additionalPlans, setadditionalPlans] = useState([]);
     const [isLoading, setisLoading] = useState(true);
     const { enqueueSnackbar } = useSnackbar();
@@ -83,7 +86,7 @@ const NuevoAcompañamientoPage = (props) => {
     return (
         <Layout disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
-                <BackButtonTitle url="/perfil" title={"Acompañamientos"} />
+                <BackButtonTitle url="/perfil" title={"Adicionales"} />
                 <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
                     <AdditionalPlansGrid
                         selectedVariants={selectedVariants}
@@ -97,9 +100,26 @@ const NuevoAcompañamientoPage = (props) => {
                     <AdditionalPlansBuyButtons
                         totalValue={totalValue}
                         handleSubmitPayment={handleSubmitPayment}
-                        handleSecondaryButtonClick={() => router.replace("/perfil")}
-                        secondaryButtonLabel="POR EL MOMENTO NO QUIERO UN NUEVO ACOMPAÑAMIENTO"
+                    // handleSecondaryButtonClick={() => router.replace("/perfil")}
+                    // secondaryButtonLabel="POR EL MOMENTO NO QUIERO UN NUEVO ACOMPAÑAMIENTO"
                     />
+                </Grid>
+                <Grid container spacing={2} style={{ paddingBottom: theme.spacing(8), paddingTop: theme.spacing(8) }}>
+                    <Grid item xs={12}>
+                        <SectionTitleBuyFlow
+                            title="Preguntas frecuentes"
+                            subtitle="¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat"
+                        />
+                        <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
+                            <Grid container spacing={2}>
+                                {lang.faqs.map((faq, index) => (
+                                    <Grid item xs={12}>
+                                        <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </InnerSectionLayout>
         </Layout>
