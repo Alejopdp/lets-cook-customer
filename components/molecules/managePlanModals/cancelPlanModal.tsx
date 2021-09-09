@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CancelPlanModal = (props: CancelPlanModalProps) => {
     // Data for PriceTooHigh
+    const lang = props.lang;
 
     const plan = {
         planId: "1",
@@ -143,25 +144,25 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         switch (reasonSelected.value) {
             case "created_by_error":
                 cancellationReasonComponent = (
-                    <CreatedByError handleChange={handleChangeCancellationComments} value={cancellationComments} />
+                    <CreatedByError handleChange={handleChangeCancellationComments} value={cancellationComments} lang={lang.createdByError} />
                 );
                 handleSecondaryBtnClick = props.handleClose;
                 secondaryBtnColor = theme.palette.text.secondary;
-                secondaryBtnText = "cerrar";
+                secondaryBtnText = lang.createdByError.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
-                primaryBtnText = "cancelar plan";
+                primaryBtnText = lang.createdByError.primaryButtonText;
                 break;
             case "cant_get_kits_next_week":
                 cancellationReasonComponent = (
-                    <CantGetKitsNextWeek handleChange={handleChangeSkipWeeks} weeks={props.orders} value={weeksToSkip} />
+                    <CantGetKitsNextWeek handleChange={handleChangeSkipWeeks} weeks={props.orders} value={weeksToSkip} lang={lang.cantGetKitsNextWeek} />
                 );
                 handleSecondaryBtnClick = handleClickCancel;
                 secondaryBtnColor = "#FC1919";
-                secondaryBtnText = "no gracias, deseo cancelar";
+                secondaryBtnText = lang.cantGetKitsNextWeek.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickRecoverSkipWeeks;
                 primaryBtnColor = theme.palette.primary.main;
-                primaryBtnText = "saltar semana";
+                primaryBtnText = lang.cantGetKitsNextWeek.primaryButtonText;
                 break;
             case "special_diet":
                 cancellationReasonComponent = (
@@ -171,45 +172,46 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                         handleChangeComments={handleChangeCommentsSpecialDiet}
                         valueComments={specialDiet.comments}
                         restrictions={props.restrictions}
+                        lang={lang.specialDiet}
                     />
                 );
                 handleSecondaryBtnClick = handleClickCancel;
                 secondaryBtnColor = "#FC1919";
-                secondaryBtnText = "no gracias, deseo cancelar";
+                secondaryBtnText = lang.specialDiet.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickRecoverSpecialDiet;
                 primaryBtnColor = theme.palette.primary.main;
-                primaryBtnText = "ajustar dieta";
+                primaryBtnText = lang.specialDiet.primaryButtonText;
                 break;
             case "move_abroad":
-                cancellationReasonComponent = <MoveAbroad />;
+                cancellationReasonComponent = <MoveAbroad lang={lang.moveAbroad} />;
                 handleSecondaryBtnClick = props.handleClose;
                 secondaryBtnColor = theme.palette.text.secondary;
-                secondaryBtnText = "cerrar";
+                secondaryBtnText = lang.moveAbroad.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
-                primaryBtnText = "cancelar plan";
+                primaryBtnText = lang.moveAbroad.primaryButtonText;
                 break;
             case "dont_like_meal_kits":
                 cancellationReasonComponent = (
-                    <DontLikeMealKits handleChange={handleChangeCancellationComments} value={cancellationComments} />
+                    <DontLikeMealKits handleChange={handleChangeCancellationComments} value={cancellationComments} lang={lang.dontLikeMealKits} />
                 );
                 handleSecondaryBtnClick = props.handleClose;
                 secondaryBtnColor = theme.palette.text.secondary;
-                secondaryBtnText = "cerrar";
+                secondaryBtnText = lang.dontLikeMealKits.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
-                primaryBtnText = "cancelar plan";
+                primaryBtnText = lang.dontLikeMealKits.primaryButtonText;
                 break;
             case "had_problems_with_letscook":
                 cancellationReasonComponent = (
-                    <HadProblemsWithLetsCook handleChange={handleChangeCancellationComments} value={cancellationComments} />
+                    <HadProblemsWithLetsCook handleChange={handleChangeCancellationComments} value={cancellationComments} lang={lang.hadProblemsWithLetsCook} />
                 );
                 handleSecondaryBtnClick = props.handleClose;
                 secondaryBtnColor = theme.palette.text.secondary;
-                secondaryBtnText = "cerrar";
+                secondaryBtnText = lang.hadProblemsWithLetsCook.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
-                primaryBtnText = "cancelar plan";
+                primaryBtnText = lang.hadProblemsWithLetsCook.primaryButtonText;
                 break;
             case "price_too_high":
                 cancellationReasonComponent = (
@@ -218,32 +220,33 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                         variants={variants}
                         planVariantIdSelected={planVariantIdSelected}
                         setPlanVariantIdSelected={setPlanVariantIdSelected}
+                        lang={lang.priceTooHigh}
                     />
                 );
                 handleSecondaryBtnClick = handleClickCancel;
                 secondaryBtnColor = "#FC1919";
-                secondaryBtnText = "no gracias, deseo cancelar";
+                secondaryBtnText = lang.priceTooHigh.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickRecoverPriceTooHigh;
                 primaryBtnColor = theme.palette.primary.main;
-                primaryBtnText = "cambiar plan";
+                primaryBtnText = lang.priceTooHigh.primaryButtonText;
                 break;
             case "other_reason":
-                cancellationReasonComponent = <OtherReason handleChange={handleChangeCancellationComments} value={cancellationComments} />;
+                cancellationReasonComponent = <OtherReason handleChange={handleChangeCancellationComments} value={cancellationComments} lang={lang.otherReason} />;
                 handleSecondaryBtnClick = props.handleClose;
                 secondaryBtnColor = theme.palette.text.secondary;
-                secondaryBtnText = "cerrar";
+                secondaryBtnText = lang.otherReason.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
-                primaryBtnText = "cancelar plan";
+                primaryBtnText = lang.otherReason.primaryButtonText;
                 break;
             default:
-                cancellationReasonComponent = <OtherReason handleChange={handleChangeCancellationComments} value={cancellationComments} />;
+                cancellationReasonComponent = <OtherReason handleChange={handleChangeCancellationComments} value={cancellationComments} lang={lang.otherReason} />;
                 handleSecondaryBtnClick = props.handleClose;
                 secondaryBtnColor = theme.palette.text.secondary;
-                secondaryBtnText = "cerrar";
+                secondaryBtnText = lang.otherReason.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
-                primaryBtnText = "cancelar plan";
+                primaryBtnText = lang.otherReason.primaryButtonText;
                 break;
         }
     }
@@ -252,7 +255,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            title="Cancelar plan"
+            title={lang.title}
             handlePrimaryButtonClick={handlePrimaryBtnClick}
             primaryButtonColor={primaryBtnColor}
             primaryButtonText={primaryBtnText}
@@ -262,15 +265,15 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
             fullScreen={true}
         >
             <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
-                ¿Por qué quieres cancelar el plan?
+                {lang.subtitle}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl} style={{ marginBottom: theme.spacing(3) }}>
-                <InputLabel htmlFor="outlined-age-native-simple">Razones de cancelación</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">{lang.cancellationText}</InputLabel>
                 <Select
                     native
                     value={reasonSelected && reasonSelected.value}
                     onChange={handleChangeReason}
-                    label="Razones de cancelación"
+                    label={lang.cancellationInputLabel}
                     inputProps={{ name: "reason", id: "outlined-age-native-simple" }}
                 >
                     <option key="0" value=""></option>

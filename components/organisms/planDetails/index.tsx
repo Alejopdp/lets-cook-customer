@@ -178,6 +178,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 handleClose={handleCloseChangePlanModal}
                 handlePrimaryButtonClick={handlePrimaryButtonClickChangePlanModal}
                 data={props.swapPlanData}
+                lang={lang.swapPlanModal}
             />
             <CancelPlanModal
                 open={openCancelPlanModal}
@@ -187,12 +188,14 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 orders={props.subscription.nextTwelveOrders}
                 restrictions={props.restrictions}
                 subscriptionId={props.subscription.subscriptionId}
+                lang={lang.cancelPlanModal}
             />
             <SkipPlanModal
                 open={openSkipPlanModal}
                 handleClose={handleCloseSkipPlanModal}
                 handlePrimaryButtonClick={handlePrimaryButtonClickSkipPlanModal}
                 data={props.subscription.nextTwelveOrders}
+                lang={lang.skipPlanModal}
             />
         </>
     );

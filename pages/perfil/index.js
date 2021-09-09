@@ -422,6 +422,7 @@ const Perfil = (props) => {
                 open={openPlanRecoverModal}
                 handleClose={handleClosePlanRecoverModal}
                 handleSubmit={handleRecoverPlanSubmit}
+                lang={lang.planRecoverModal}
             />
 
 
@@ -433,6 +434,7 @@ const Perfil = (props) => {
                     handleClose={handleCloseChangePlanModal}
                     handlePrimaryButtonClick={handlePrimaryButtonClickChangePlanModal}
                     data={swapPlanData}
+                    lang={lang.swapPlanModal}
                 />
             )}
             {subscription && (
@@ -441,6 +443,7 @@ const Perfil = (props) => {
                     handleClose={handleCloseSkipPlanModal}
                     handlePrimaryButtonClick={handlePrimaryButtonClickSkipPlanModal}
                     data={subscription.nextTwelveOrders}
+                    lang={lang.skipPlanModal}
                 />
             )}
         </>

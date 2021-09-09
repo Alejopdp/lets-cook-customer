@@ -19,18 +19,19 @@ const useStyles = makeStyles((theme) => ({
 
 
 const CreatedByError = (props) => {
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
 
     return (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
-                Gracias por corregirlo. Cualquier consulta, no dudes en enviarnos un correo a <strong>info@letscooknow.es</strong>
+                {lang.modalText} <strong>{lang.emailText}</strong>
             </Typography>
             <div className={classes.root}>
                 <TextField
                     id="created_by_error_comments"
-                    label="Comentarios adicionales "
+                    label={lang.additionalComments}
                     multiline
                     rows={5}
                     variant="outlined"

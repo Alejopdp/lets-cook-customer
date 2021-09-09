@@ -72,6 +72,7 @@ const DialogTitle = withStyles(styles)((props) => {
 });
 
 const PlanRecoverModal = withStyles(styles)((props) => {
+    const lang = props.lang;
     const theme = useTheme();
     const isMdUp = useMediaQuery("(min-width:960px)");
     const router = useRouter();
@@ -95,7 +96,7 @@ const PlanRecoverModal = withStyles(styles)((props) => {
                 style={{ zIndex: "3147483647" }}
             >
                 <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
-                    Volver a pedir plan
+                    {lang.title}
                 </DialogTitle>
 
                 <DialogContent dividers={false}>
@@ -107,22 +108,22 @@ const PlanRecoverModal = withStyles(styles)((props) => {
                                     {label}
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
-                                    Frecuencia: {translateFrequency(freq, router.locale)}
+                                    {lang.frequencyText}: {translateFrequency(freq, router.locale)}
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1), fontWeight: 900 }}>
-                                    Valor total: 36 €
+                                    {lang.totalPrice}: 36 €
                                 </Typography>
                             </Grid>
                         </Grid>
                         <Grid container spacing={2} justify="flex-end">
                             <Grid item>
-                                <TextButton handleClick={props.handleClose} btnText="Cancelar" />
+                                <TextButton handleClick={props.handleClose} btnText={lang.secondaryButtonText} />
                             </Grid>
                             <Grid item>
                                 <TextButton
                                     handleClick={props.handleSubmit}
                                     style={{ color: theme.palette.primary.main }}
-                                    btnText="Volver a pedir"
+                                    btnText={lang.primaryButtonText}
                                 />
                             </Grid>
                         </Grid>

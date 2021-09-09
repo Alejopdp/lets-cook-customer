@@ -19,18 +19,19 @@ const useStyles = makeStyles((theme) => ({
 
 
 const OtherReason = (props) => {
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
 
     return (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
-                Por favor, indica cual es la razón principal para cancelar tu plan
+                {lang.modalText}
             </Typography>
             <div className={classes.root}>
                 <TextField
                     id="other_reason_comments"
-                    label="Indica la razón de su cancelación"
+                    label={lang.inputLabel}
                     multiline
                     rows={5}
                     variant="outlined"

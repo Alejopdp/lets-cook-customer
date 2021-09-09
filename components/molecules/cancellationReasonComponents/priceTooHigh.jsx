@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdSelected }) => {
+const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdSelected, lang }) => {
     const classes = useStyles();
     const theme = useTheme();
     const [operationView, setOperationView] = useState('economyPlan')
@@ -55,7 +55,7 @@ const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdS
     const economyPlanComponent = (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
-                El precio del plan ahorro es el más bajo que podemos ofrecer. Let’s Cook recibe descuentos por comprar en cantidad y lo traducimos directamente al precio en los planes ahorro.
+                {lang.economyPlan.modalText}
             </Typography>
             <Box className={classes.planBox}>
                 <PlanInfo style={{ marginBottom: theme.spacing(2) }} planName={plan.name} planIcon={plan.icon} />
@@ -67,7 +67,7 @@ const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdS
                 </Typography>
                 <Box className={classes.totalPrice}>
                     <Typography variant='body1' color='primary' style={{ fontSize: '16px', fontWeight: '600' }}>
-                        Valor total:
+                    {lang.economyPlan.totalPrice}:
                 </Typography>
                     <Typography variant='body1' color='primary' style={{ fontSize: '16px', fontWeight: '600' }}>
                         {plan.priceText}
@@ -75,12 +75,12 @@ const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdS
                 </Box>
             </Box>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(0.5) }}>
-                También podemos ofrecerte reducir raciones del plan actual.
+                {lang.economyPlan.alsoWeCanOfferLowerVariants}
             </Typography>
             <Link onClick={() => changeOperationView('lowerVariants')} color='textPrimary' style={{ cursor: 'pointer', textDecoration: 'none' }}>
                 <Typography variant="subtitle1" color="textPrimary" style={{ fontSize: '14px' }}>
-                    Ver opciones
-            </Typography>
+                    {lang.economyPlan.seeOptions}
+                </Typography>
             </Link>
         </>
     )
@@ -88,15 +88,15 @@ const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdS
     const lowerVariantsComponent = (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
-                A continuación encontrarás una lista de opciones de tu plan actual
+                {lang.lowerVariants.modalText}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-native-simple">Variante</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">{lang.lowerVariants.inputLabel}</InputLabel>
                 <Select
                     native
                     value={planVariantIdSelected}
                     onChange={handleChangeVariant}
-                    label="Variante"
+                    label={lang.lowerVariants.inputLabel}
                     inputProps={{ name: 'planVariantId', id: 'variantDropdown' }}
                 >
                     {variants.map(variant => (
@@ -105,11 +105,11 @@ const PriceTooHigh = ({ setPlanVariantIdSelected, plan, variants, planVariantIdS
                 </Select>
             </FormControl>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(0.5) }}>
-                También podemos ofrecerte cambiar a un plan más económico.
+                {lang.lowerVariants.alsoWeCanOfferEconomyPlan}
             </Typography>
             <Link onClick={() => changeOperationView('economyPlan')} color='textPrimary' style={{ cursor: 'pointer', textDecoration: 'none' }}>
                 <Typography variant="subtitle1" color="textPrimary" style={{ fontSize: '14px' }}>
-                    Ver opciones
+                    {lang.lowerVariants.seeOptions}
                 </Typography>
             </Link>
         </>

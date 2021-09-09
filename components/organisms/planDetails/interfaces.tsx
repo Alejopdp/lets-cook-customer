@@ -77,6 +77,7 @@ export interface SkipPlanModalProps {
     handleClose: () => void;
     handlePrimaryButtonClick: (orders: SkippableOrder[]) => void;
     data: SkippableOrder[];
+    lang: any;
 }
 
 export interface CalendarCardProps {

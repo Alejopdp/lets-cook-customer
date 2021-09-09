@@ -1,3 +1,5 @@
+import { skipPlanModal, swapPlanModal, planRecoverModal } from '../../lang'
+
 export const perfil = {
     es: {
         greeting: "Hola",
@@ -27,6 +29,9 @@ export const perfil = {
             nextShippingDateText: "Próxima entrega",
             frequencyText: "Próxima entrega"
         },
+        skipPlanModal: skipPlanModal.es,
+        swapPlanModal: swapPlanModal.es,
+        planRecoverModal: planRecoverModal.es
     },
     en: {
         greeting: "Hola",
@@ -56,6 +61,9 @@ export const perfil = {
             nextShippingDateText: "Próxima entrega",
             frequencyText: "Próxima entrega"
         },
+        skipPlanModal: skipPlanModal.en,
+        swapPlanModal: swapPlanModal.en,
+        planRecoverModal: planRecoverModal.en
     },
     ca: {
         greeting: "Hola",
@@ -85,5 +93,8 @@ export const perfil = {
             nextShippingDateText: "Próxima entrega",
             frequencyText: "Próxima entrega"
         },
+        skipPlanModal: skipPlanModal.ca,
+        swapPlanModal: swapPlanModal.ca,
+        planRecoverModal: planRecoverModal.ca
     }
 };

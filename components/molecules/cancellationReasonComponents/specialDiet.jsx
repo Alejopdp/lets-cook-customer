@@ -21,22 +21,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SpecialDiet = (props) => {
+    const lang = props.lang
     const classes = useStyles();
     const theme = useTheme();
 
     return (
         <>
             <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
-                Si tienes alguna intolerancia (como gluten o lactosa) o dieta especial (como vegano), lo puedes comunicar y nosotros
-                enviaremos ingredientes que se adapten a tus requerimientos
+                {lang.modalText}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl} style={{ marginBottom: theme.spacing(3) }}>
-                <InputLabel htmlFor="outlined-age-native-simple">Indique su dieta</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">{lang.inputLabel}</InputLabel>
                 <Select
                     native
                     value={props.valueSelect}
                     onChange={props.handleChangeSelect}
-                    label="Indique su dieta"
+                    label={lang.inputLabel}
                     inputProps={{ name: "id", id: "specialDiet" }}
                 >
                     <option key="0" value=""></option>
@@ -51,7 +51,7 @@ const SpecialDiet = (props) => {
                 <div className={classes.formControl}>
                     <TextField
                         id="special_diet_comments"
-                        label="Indique su dieta"
+                        label={lang.inputLabel}
                         multiline
                         rows={4}
                         variant="outlined"

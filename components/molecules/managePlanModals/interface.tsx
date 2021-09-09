@@ -8,4 +8,5 @@ export interface CancelPlanModalProps {
     orders: SkippableOrder[];
     restrictions: Restriction[];
     subscriptionId: string;
+    lang: any;
 }
