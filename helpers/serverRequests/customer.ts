@@ -79,7 +79,7 @@ export const updateShippingAddress = async (id, data) => {
         const res = await axios({
             method: "PUT",
             url: `${apiUrl}/update-shipping/${id}`,
-            data,
+            data: { ...data, lat: data.latitude, long: data.longitude, delivery_time: data.preferredShippingHour },
         });
 
         return res;

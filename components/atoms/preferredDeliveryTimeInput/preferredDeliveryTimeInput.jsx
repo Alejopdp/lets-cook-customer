@@ -6,6 +6,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import { useLang } from "../../../hooks";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -15,12 +16,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PreferredDeliveryTimeInput(props) {
     const classes = useStyles();
+    const router = useRouter();
     const [lang] = useLang("preferredDeliveryTimeInput");
 
     const scheduleOptions = [
-        { value: "8 - 12", label: "De 8 a 12 hs" },
-        { value: "12 - 16", label: "De 12 a 16 hs" },
-        { value: "16 - 20", label: "De 16 a 20 hs" },
+        { value: "15 - 18", label: { es: "de 15 a 18 hs", ca: "de 15 a 18 hs", en: "3 to 6 pm" } },
+        { value: "17 - 20", label: { es: "de 17 a 20 hs", ca: "de 17 a 20 hs", en: "5 to 8 pm" } },
+        { value: "19 - 22", label: { es: "de 19 a 22 hs", ca: "de 19 a 22 hs", en: "7 to 10 pm" } },
     ];
 
     return (
@@ -37,26 +39,19 @@ export default function PreferredDeliveryTimeInput(props) {
             >
                 <option key="0" value="" disabled></option>
                 <option key="1" value={scheduleOptions[0].value}>
-                    {scheduleOptions[0].label}
+                    {scheduleOptions[0].label[router.locale]}
                 </option>
                 <option key="2" value={scheduleOptions[1].value}>
-                    {scheduleOptions[1].label}
+                    {scheduleOptions[1].label[router.locale]}
                 </option>
                 <option key="3" value={scheduleOptions[2].value}>
-                    {scheduleOptions[2].label}
+                    {scheduleOptions[2].label[router.locale]}
                 </option>
             </Select>
         </FormControl>
     );
 }
 
-// <Select
-//     name={props.name}
-//     label="Horario de preferencia de entrega"
-//     value={props.value}
-//     handleChange={props.handleChange}
-//     options={scheduleOptions}
-// />
 PreferredDeliveryTimeInput.propTypes = {
     value: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

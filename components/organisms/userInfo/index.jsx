@@ -9,7 +9,7 @@ import {
 } from "../../../helpers/serverRequests/customer";
 import { useUserInfoStore } from "../../../stores/auth";
 import { LOCAL_STORAGE_KEYS, useLocalStorage } from "../../../hooks";
-
+import { translateShippíngHour } from "../../../helpers/utils/i18n";
 // External Components
 import Grid from "@material-ui/core/Grid";
 import { useTheme, useMediaQuery } from "@material-ui/core";
@@ -302,7 +302,11 @@ const UserInfoDetail = (props) => {
                                     />
                                     <DataDisplay
                                         title="Horario de preferencia de entrega"
-                                        text={customerInfo.shippingAddress.preferredShippingHour}
+                                        text={
+                                            !!customerInfo.shippingAddress.preferredShippingHour
+                                                ? translateShippíngHour(customerInfo.shippingAddress.preferredShippingHour)
+                                                : ""
+                                        }
                                         style={{ marginBottom: "8.3rem" }}
                                     />
                                 </BoxWithTitleAndTextButton>
