@@ -6,6 +6,7 @@ export const chooseRecipes = async (orderId: string, recipeSelection: { recipeId
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/update-recipes/${orderId}`,
             headers: {
                 authorization: JSON.parse(window.localStorage.getItem("token")),

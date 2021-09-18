@@ -25,6 +25,7 @@ import { useRouter } from "next/router";
 import { swapPlan, updateRestriction } from "helpers/serverRequests/subscription";
 import { CancellationReason } from "types/cancellation";
 import { getPlanAhorro } from "@helpers";
+import { PlanVariant } from "types/planVariant";
 
 export enum RecoverPriceTooHighActions {
     SWAP_WITH_PLAN_AHORRO = "SWAP_WITH_PLAN_AHORRO",
@@ -149,13 +150,12 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
 
     // Price Too High Functions
 
-    const getActualPlanAhorroVariant = () => {
-        return (
-            planAhorro.variants.find(
-                (variant) => variant.numberOfPersons === props.actualPlan.Personas && variant.numberOfRecipes === props.actualPlan.Recetas
-            ) || planAhorro.variants.find((variant) => variant.isDefault)
-        );
-    };
+    const getActualPlanAhorroVariant = (): PlanVariant =>
+        planAhorro.variants.find(
+            (variant) =>
+                variant.numberOfPersons === props.actualPlanVariant.numberOfPersons &&
+                variant.numberOfRecipes === props.actualPlanVariant.numberOfRecipes
+        ) || planAhorro.variants.find((variant) => variant.isDefault);
 
     const defaultPlanAhorroVariant = useMemo(() => {
         return getActualPlanAhorroVariant();
@@ -165,9 +165,11 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         switch (priceTooHighModalView) {
             case RecoverPriceTooHighActions.CHANGE_ACTUAL_PlAN_VARiANT:
                 handleChangePlanVariant();
+                router.push("/perfil");
                 break;
             case RecoverPriceTooHighActions.SWAP_WITH_PLAN_AHORRO:
                 handleSwapPlanAhorro();
+                router.push("/perfil");
                 break;
             default:
                 () => "";

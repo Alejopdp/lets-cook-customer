@@ -74,7 +74,7 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                                 {order.planVariant}
                             </Typography>
                             <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
-                                Subtotal: {order.subtotal}
+                                Subtotal: {order.amount} €
                             </Typography>
                             {order.hasRecipes && (
                                 <>
