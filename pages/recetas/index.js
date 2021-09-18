@@ -1,7 +1,7 @@
 // Utils & Config
 import React from "react";
 import { useRouter } from "next/router";
-import { getRecipes } from "../../helpers/serverRequests/recipes";
+import { getNextWeekRecipes } from "../../helpers/serverRequests/recipes";
 const langs = require("../../lang").recetas;
 
 // Internal Components
@@ -15,7 +15,7 @@ const Recetas = (props) => {
     const lang = langs[router.locale];
 
     return (
-        <Layout seoTitle="Recetas - Let's cook: Productos frescos y recetas" seoOgUrlSlug='recetas' page='recetas'>
+        <Layout seoTitle="Recetas - Let's cook: Productos frescos y recetas" seoOgUrlSlug="recetas" page="recetas">
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <RecipesGrid recipesPage recipes={props.recipes} />
@@ -26,7 +26,7 @@ const Recetas = (props) => {
 export default Recetas;
 
 export async function getServerSideProps(context) {
-    const res = await getRecipes(context.locale);
+    const res = await getNextWeekRecipes(context.locale);
 
     return {
         props: {
