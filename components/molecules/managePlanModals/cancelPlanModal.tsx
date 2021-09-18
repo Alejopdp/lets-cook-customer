@@ -40,15 +40,15 @@ const useStyles = makeStyles((theme) => ({
 const CancelPlanModal = (props: CancelPlanModalProps) => {
     // Data for PriceTooHigh
 
-    const plan = {
-        planId: "1",
-        name: "Plan Ahorro",
-        icon: "/assets/plan-test-color.svg",
-        variantInfo: "4 recetas para 3 personas por semana",
-        variantExtraInfo: "12 raciones a 3 € por ración",
-        planVariantId: "1",
-        priceText: "36 €/semana",
-    };
+    // const plan = {
+    //     planId: "1",
+    //     name: "Plan Ahorro",
+    //     icon: "/assets/plan-test-color.svg",
+    //     variantInfo: "4 recetas para 3 personas por semana",
+    //     variantExtraInfo: "12 raciones a 3 € por ración",
+    //     planVariantId: "1",
+    //     priceText: "36 €/semana",
+    // };
 
     const classes = useStyles();
     const theme = useTheme();
@@ -59,8 +59,8 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
     const [weeksToSkip, setWeeksToSkip] = useState([]);
     const [specialDiet, setSpecialDiet] = useState({ id: "", value: "", comments: "" });
     // PriceTooHigh States
-    const [planVariantIdSelected, setPlanVariantIdSelected] = useState(plan.planVariantId);
     const [planAhorro, setplanAhorro] = useState({ variants: [] });
+    const [planVariantIdSelected, setPlanVariantIdSelected] = useState("");
     const [priceTooHighModalView, setpriceTooHighModalView] = useState<RecoverPriceTooHighActions>(
         RecoverPriceTooHighActions.SWAP_WITH_PLAN_AHORRO
     );
@@ -71,6 +71,9 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
 
             if (res && res.status === 200) {
                 setplanAhorro(res.data);
+                setPlanVariantIdSelected(
+                    res.data.variants.reduce((acc, variant) => (variant.price < acc.price ? variant : acc), { price: 9999 }).id
+                );
             }
         };
 
@@ -82,7 +85,9 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         setCancellationComments("");
         setWeeksToSkip([]);
         setSpecialDiet({ value: "", comments: "", id: "" });
-        setPlanVariantIdSelected(plan.planVariantId);
+        setPlanVariantIdSelected(
+            planAhorro.variants.reduce((acc, variant) => (variant.price < acc.price ? variant : acc), { price: 9999 }).id
+        );
         setReason(newReason);
     };
 
@@ -159,7 +164,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
     const handleClickRecoverPriceTooHigh = () => {
         switch (priceTooHighModalView) {
             case RecoverPriceTooHighActions.CHANGE_ACTUAL_PlAN_VARiANT:
-                () => "";
+                handleChangePlanVariant();
                 break;
             case RecoverPriceTooHighActions.SWAP_WITH_PLAN_AHORRO:
                 handleSwapPlanAhorro();
@@ -170,11 +175,22 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         }
     };
 
+    const handleChangePlanVariant = async () => {
+        const res = await swapPlan(props.subscriptionId, props.actualPlan.id, planVariantIdSelected);
+
+        if (res && res.status === 200) {
+            enqueueSnackbar("Plan cambiado correctamente", { variant: "success" });
+            props.handleClose();
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+    };
+
     const handleSwapPlanAhorro = async () => {
         const res = await swapPlan(props.subscriptionId, planAhorro.id, defaultPlanAhorroVariant.id);
 
         if (res && res.status === 200) {
-            enqueueSnackbar("Plan cambiado correctament", { variant: "success" });
+            enqueueSnackbar("Plan cambiado correctamente", { variant: "success" });
             props.handleClose();
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
@@ -275,7 +291,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                         plan={planAhorro}
                         variants={planAhorro.variants}
                         actualPlan={props.actualPlan}
-                        actualPlanVariantId={props.actualPlanVariantId}
+                        actualPlanVariant={props.actualPlanVariant}
                         planVariantIdSelected={planVariantIdSelected}
                         setPlanVariantIdSelected={setPlanVariantIdSelected}
                         priceTooHighModalView={priceTooHighModalView}

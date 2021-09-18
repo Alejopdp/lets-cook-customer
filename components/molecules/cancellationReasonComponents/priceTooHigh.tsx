@@ -37,7 +37,9 @@ const useStyles = makeStyles((theme) => ({
 const PriceTooHigh = ({
     setPlanVariantIdSelected,
     plan,
+    actualPlan,
     variants,
+    actualPlanVariant,
     planVariantIdSelected,
     priceTooHighModalView,
     setpriceTooHighModalView,
@@ -45,6 +47,10 @@ const PriceTooHigh = ({
 }) => {
     const classes = useStyles();
     const theme = useTheme();
+
+    const hasVariantWithLowerPrice = useMemo(() => {
+        return plan.variants.some((variant) => variant < actualPlanVariant.price);
+    }, []);
 
     const changeOperationView = (newView: RecoverPriceTooHighActions) => {
         if (newView === RecoverPriceTooHighActions.SWAP_WITH_PLAN_AHORRO) {
@@ -82,21 +88,28 @@ const PriceTooHigh = ({
                     </Typography>
                 </Box>
             </Box>
-            <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>
-                También podemos ofrecerte reducir raciones del plan actual.
-            </Typography>
-            <Link
-                onClick={() => changeOperationView(RecoverPriceTooHighActions.CHANGE_ACTUAL_PlAN_VARiANT)}
-                color="textPrimary"
-                style={{ cursor: "pointer", textDecoration: "none" }}
-            >
-                <Typography variant="subtitle1" color="textPrimary" style={{ fontSize: "14px" }}>
-                    Ver opciones
+            {hasVariantWithLowerPrice ? (
+                <>
+                    <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>
+                        También podemos ofrecerte reducir raciones del plan actual.
+                    </Typography>
+                    <Link
+                        onClick={() => changeOperationView(RecoverPriceTooHighActions.CHANGE_ACTUAL_PlAN_VARiANT)}
+                        color="textPrimary"
+                        style={{ cursor: "pointer", textDecoration: "none" }}
+                    >
+                        <Typography variant="subtitle1" color="textPrimary" style={{ fontSize: "14px" }}>
+                            Ver opciones
+                        </Typography>
+                    </Link>
+                </>
+            ) : (
+                <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>
+                    No tenemos una variante del mismo plan mas barata para ofrecerte
                 </Typography>
-            </Link>
+            )}
         </>
     );
-
     const lowerVariantsComponent = (
         <>
             <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
@@ -111,11 +124,13 @@ const PriceTooHigh = ({
                     label="Variante"
                     inputProps={{ name: "planVariantId", id: "variantDropdown" }}
                 >
-                    {plan.variants.map((variant) => (
-                        <option key={variant.id} value={variant.id}>
-                            {variant.description}
-                        </option>
-                    ))}
+                    {actualPlan.variants
+                        .filter((variant) => variant.id !== actualPlanVariant.id && variant.price < actualPlanVariant.price)
+                        .map((variant) => (
+                            <option key={variant.id} value={variant.id}>
+                                {variant.description}
+                            </option>
+                        ))}
                 </Select>
             </FormControl>
             <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>

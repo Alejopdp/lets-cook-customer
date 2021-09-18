@@ -188,7 +188,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 restrictions={props.restrictions}
                 subscriptionId={props.subscription.subscriptionId}
                 actualPlan={props.subscription.plan}
-                actualPlanVariantId={props.subscription.planVariantId}
+                actualPlanVariant={props.subscription.actualPlanVariant}
             />
             <SkipPlanModal
                 open={openSkipPlanModal}
