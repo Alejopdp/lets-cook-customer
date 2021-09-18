@@ -49,7 +49,7 @@ const PriceTooHigh = ({
     const theme = useTheme();
 
     const hasVariantWithLowerPrice = useMemo(() => {
-        return plan.variants.some((variant) => variant < actualPlanVariant.price);
+        return plan.variants.some((variant) => variant.price < actualPlanVariant.price);
     }, []);
 
     const changeOperationView = (newView: RecoverPriceTooHighActions) => {
