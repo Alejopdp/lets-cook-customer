@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { RecipeChoiceScreenProps } from "./interfaces";
 import { useLang } from "@hooks";
@@ -20,6 +20,7 @@ import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
 import { useRouter } from "next/router";
 import { IFilter } from "@layouts";
+import { Recipe } from "@helpers";
 
 interface IFilterOptions {
     title: string;
@@ -32,7 +33,24 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
     const [lang] = useLang("buyFlowLayout");
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
     const { enqueueSnackbar } = useSnackbar();
-    const [selectedRecipes, setselectedRecipes] = useState([]);
+    const [selectedRecipes, setselectedRecipes] = useState<Recipe[]>([]);
+
+    useEffect(() => {
+        if (props.actualChosenRecipes.length > 0) {
+            const recipesToAdd = [];
+            for (let selection of props.actualChosenRecipes) {
+                const recipe: Recipe | undefined = props.recipes.find((recipe) => recipe.id === selection.recipeId);
+
+                for (let i = 0; i < selection.quantity; i++) {
+                    if (!!!recipe) break;
+
+                    recipesToAdd.push(recipe);
+                }
+            }
+
+            setselectedRecipes([...recipesToAdd]);
+        }
+    }, []);
 
     const _filterOptions: IFilterOptions[] = [
         {
@@ -120,13 +138,15 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
         }
     };
 
-    const handleClickAddRecipe = (recipe) => {
+    const handleClickAddRecipe = (recipe: Recipe) => {
         setselectedRecipes([...selectedRecipes, recipe]);
     };
 
-    const handleClickRemoveRecipe = ({ id: _id }) => {
-        const index = selectedRecipes.find(({ id }) => id !== _id);
+    const handleClickRemoveRecipe = (recipe: Recipe) => {
+        const index = selectedRecipes.findIndex((selectedRecipe) => selectedRecipe.id === recipe.id);
+
         if (index === -1) return;
+
         const newState = [...selectedRecipes];
         newState.splice(index, 1);
         setselectedRecipes(newState);
