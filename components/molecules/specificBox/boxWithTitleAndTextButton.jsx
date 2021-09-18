@@ -29,7 +29,7 @@ const BoxWithTitleAndTextButton = (props) => {
                 </Typography>
                 {props.children}
             </div>
-            {props.showButton && (
+            {!props.hideButton && (
                 <TextButton btnText={props.btnText} style={{ marginTop: theme.spacing(3) }} handleClick={props.handleClick} />
             )}
         </GeneralBox>
@@ -40,7 +40,7 @@ BoxWithTitleAndTextButton.propTypes = {
     title: PropTypes.string.isRequired,
     btnText: PropTypes.string.isRequired,
     handleClick: PropTypes.func.isRequired,
-    showButton: PropTypes.bool,
+    hideButton: PropTypes.bool,
 };
 
 export default BoxWithTitleAndTextButton;

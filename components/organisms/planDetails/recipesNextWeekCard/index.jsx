@@ -51,7 +51,7 @@ const RecipesNextWeekCard = (props) => {
                     title="Recetas de la próxima semana"
                     btnText="modificar recetas"
                     handleClick={() => router.push(`/elegir-recetas/${props.nextWeekOrder.id}`)}
-                    showButton={props.canChooseRecipes}
+                    hideButton={!props.canChooseRecipes}
                 >
                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px" }}>
                         Estas son las recetas que recibirás el {props.nextWeekOrder.shippingDate}
