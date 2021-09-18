@@ -35,6 +35,7 @@ export interface PlanDetailasSubscription {
         priceLabel: string;
         icon: string;
     };
+    planVariantId: string;
     shippingAddress: {
         addressName: string;
         addressDetails: string;

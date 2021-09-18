@@ -1,4 +1,6 @@
 import { Restriction, SkippableOrder } from "components/organisms/planDetails/interfaces";
+import { Plan } from "types/plan";
+import { PlanVariant } from "types/planVariant";
 
 export interface CancelPlanModalProps {
     handleClose: () => void;
@@ -8,4 +10,6 @@ export interface CancelPlanModalProps {
     orders: SkippableOrder[];
     restrictions: Restriction[];
     subscriptionId: string;
+    actualPlan: Plan;
+    actualPlanVariant: PlanVariant;
 }
