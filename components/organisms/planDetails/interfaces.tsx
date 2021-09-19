@@ -66,6 +66,7 @@ export interface PlanDetailsProps {
     subscription: PlanDetailasSubscription;
     swapPlanData: { plans: any; variants: any };
     restrictions: Restriction[];
+    reload: () => void;
     handleClickOpenChangePlanModal: () => void;
     handleClickOpenCancelPlanModal: () => void;
     handleClickOpenSkipPlanModal: () => void;

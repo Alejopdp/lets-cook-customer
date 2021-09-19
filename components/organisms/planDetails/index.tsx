@@ -62,6 +62,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
         if (res.status === 200) {
             enqueueSnackbar("Plan cambiado con éxito", { variant: "success" });
             setOpenChangePlanModal(false);
+            props.reload();
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
@@ -103,9 +104,10 @@ const PlanDetails = (props: PlanDetailsProps) => {
         const res = await skipOrders(orders);
 
         if (res.status === 200) {
-            enqueueSnackbar("Semanas salteadas correctamente", { variant: "success" });
+            enqueueSnackbar("Semanas saltadas correctamente", { variant: "success" });
+            props.reload();
         } else {
-            enqueueSnackbar("Error al saltear las semanas", { variant: "error" });
+            enqueueSnackbar("Error al saltar las semanas", { variant: "error" });
         }
         setOpenSkipPlanModal(false);
     };
