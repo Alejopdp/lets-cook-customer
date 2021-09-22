@@ -80,6 +80,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
     const { setDeliveryInfo, form } = useBuyFlow(({ setDeliveryInfo, form }) => ({ setDeliveryInfo, form }));
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
+    const [isShippingAddressInvalid, setisShippingAddressInvalid] = useState(false)
 
     useEffect(() => {
         const getShippingCostIfAddressExists = async () => {
@@ -98,6 +99,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                     nextShippingDate: res.data.nextShippingDate,
                 });
             } else {
+                setisShippingAddressInvalid(true)
                 enqueueSnackbar(res.data.message, { variant: "error" });
             }
         };
@@ -207,7 +209,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 label="Continuar"
                                 onClick={props.handleChangeStep}
                                 style={{ width: "100%" }}
-                                disabled={!props.isFormCompleted()}
+                                disabled={!props.isFormCompleted() || isShippingAddressInvalid}
                             />
                         </Grid>
                     </Grid>
