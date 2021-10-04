@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         flex: 1,
         justifyContent: "center",
         [theme.breakpoints.up("sm")]: {
-            justifyContent: "right",
+            justifyContent: "flex-start",
         },
     },
     navbarClass: {
@@ -34,11 +34,11 @@ const useStyles = makeStyles((theme) => ({
         webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
     },
-    cursorPointer: { cursor: "pointer" }
+    cursorPointer: { cursor: "pointer" },
 }));
 
 interface ToggleOpeningDrawerProps {
-    toggleOpeningDrawer: (e: FormEvent) => void
+    toggleOpeningDrawer: (e: FormEvent) => void;
 }
 
 export const NavbarContent = (props: ToggleOpeningDrawerProps) => {
