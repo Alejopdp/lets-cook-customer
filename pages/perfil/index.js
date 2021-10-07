@@ -48,6 +48,7 @@ import PlanProfileCard from "../../components/molecules/planProfileCard/";
 const Perfil = (props) => {
     const theme = useTheme();
     const router = useRouter();
+    const [isReorderingPlan, setIsReorderingPlan] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const [openPlanRecoverModal, setOpenPlanRecoverModal] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
@@ -102,15 +103,20 @@ const Perfil = (props) => {
     };
 
     const handleRecoverPlanSubmit = async () => {
+        setIsReorderingPlan(true);
         const res = await reorderPlan(selectedPlan.id);
 
         if (res.status === 200) {
             enqueueSnackbar("Pedido correctamente realizado", { variant: "success" });
             router.push(`/detalle-del-plan/${res.data.subscriptionId}`);
         } else {
-            enqueueSnackbar("Error al volver a pedir el plan", { variant: "error" });
+            enqueueSnackbar(
+                res && res.data && res.data.message ? res.data.message : "Ocurrió un error inesperado, por favor intente de nuevo",
+                { variant: "error" }
+            );
         }
 
+        setIsReorderingPlan(false);
         handleClosePlanRecoverModal();
     };
 
@@ -289,12 +295,12 @@ const Perfil = (props) => {
                                         })}
                                     </>
                                 ) : (
-                                        <EmptyState
-                                            image="/emptyStatePlans.png"
-                                            title="Aún no tienes planes"
-                                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                                        />
-                                    )}
+                                    <EmptyState
+                                        image="/emptyStatePlans.png"
+                                        title="Aún no tienes planes"
+                                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                    />
+                                )}
                             </Grid>
                             {data.principalPlanSubscriptions.length > 0 && (
                                 <>
@@ -328,12 +334,12 @@ const Perfil = (props) => {
                                                 ))}
                                             </>
                                         ) : (
-                                                <EmptyState
-                                                    image="/emptyStatePlans.png"
-                                                    title="Aún no tienes acompañamientos"
-                                                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                                                />
-                                            )}
+                                            <EmptyState
+                                                image="/emptyStatePlans.png"
+                                                title="Aún no tienes acompañamientos"
+                                                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                            />
+                                        )}
                                     </Grid>
                                 </>
                             )}
@@ -346,6 +352,7 @@ const Perfil = (props) => {
                 open={openPlanRecoverModal}
                 handleClose={handleClosePlanRecoverModal}
                 handleSubmit={handleRecoverPlanSubmit}
+                isSubmitting={isReorderingPlan}
             />
         </>
     );
