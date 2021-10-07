@@ -45,7 +45,14 @@ const TextButton = (props) => {
             ) : null}
         </IconButton>
     ) : (
-        <Button size="small" className={classes.textButton} variant="text" style={props.style} onClick={() => props.handleClick()}>
+        <Button
+            size="small"
+            className={classes.textButton}
+            variant="text"
+            style={props.style}
+            onClick={() => props.handleClick()}
+            disabled={props.disabled}
+        >
             {props.icon === "plus-circle-outline" ? (
                 <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : null} />
             ) : props.icon === "settings" ? (

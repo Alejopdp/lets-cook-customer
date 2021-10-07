@@ -123,6 +123,7 @@ const PlanRecoverModal = withStyles(styles)((props) => {
                                     handleClick={props.handleSubmit}
                                     style={{ color: theme.palette.primary.main }}
                                     btnText="Volver a pedir"
+                                    disabled={props.isSubmitting}
                                 />
                             </Grid>
                         </Grid>
