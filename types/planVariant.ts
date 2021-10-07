@@ -5,6 +5,8 @@ export type PlanVariant = {
     price: number;
     priceWithOffer: number;
     attributes: [string, string][];
+    isDefault: boolean;
+    isDeleted: boolean;
     numberOfRecipes?: number;
     numberOfPersons?: number;
     planId?: string;
