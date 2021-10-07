@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { SkippableOrder, SkipPlanModalProps } from "components/organisms/planDetails/interfaces";
+import { OrderState } from "types/order";
 
 const useStyles = makeStyles((theme) => ({
     generalBoxStyle: {
@@ -20,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         flexDirection: "column",
         cursor: "pointer",
+    },
+
+    disabled: {
+        cursor: "default",
+        backgroundColor: "#f3f3f3",
     },
     activeWeek: {
         backgroundColor: "white",
@@ -44,6 +50,7 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
     const skipWeek = (id: string) => {
         let weekIndexSelected = weeksStore.findIndex((week) => week.id === id);
         let weekToModify = weeksStore[weekIndexSelected];
+        if (weekToModify.state === OrderState.ORDER_BILLED) return;
         weekToModify["isSkipped"] = !weekToModify["isSkipped"];
         setWeeksStore([...weeksStore.slice(0, weekIndexSelected), weekToModify, ...weeksStore.slice(weekIndexSelected + 1)]);
     };
@@ -65,9 +72,16 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
         >
             <Grid container spacing={2}>
                 {weeksStore.map((week, index) => (
-                    <Grid key={week.id} item xs={6} sm={3}>
+                    <Grid key={week.id} item xs={6} sm={3} key={index}>
                         <Box
-                            className={clsx(classes.generalBoxStyle, week.isSkipped ? classes.skippedWeek : classes.activeWeek)}
+                            className={clsx(
+                                classes.generalBoxStyle,
+                                week.state === OrderState.ORDER_BILLED
+                                    ? classes.disabled
+                                    : week.isSkipped
+                                    ? classes.skippedWeek
+                                    : classes.activeWeek
+                            )}
                             onClick={() => skipWeek(week.id)}
                         >
                             <Typography
@@ -77,8 +91,12 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
                             >
                                 {week.weekLabel}
                             </Typography>
-                            <Typography variant="subtitle2" style={{ fontWeight: 700, fontSize: "14px", textTransform: "uppercase" }}>
-                                {week.isSkipped ? "reanudar" : "saltar"}
+                            <Typography
+                                variant="subtitle2"
+                                style={{ fontWeight: 700, fontSize: "14px", textTransform: "uppercase" }}
+                                align="center"
+                            >
+                                {week.state === OrderState.ORDER_BILLED ? "Pedido cobrado" : week.isSkipped ? "reanudar" : "saltar"}
                             </Typography>
                         </Box>
                     </Grid>

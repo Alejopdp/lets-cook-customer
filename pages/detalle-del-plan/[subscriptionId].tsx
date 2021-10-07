@@ -16,25 +16,6 @@ import { Layout } from "../../components/layout/index";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 import PlanDetails from "../../components/organisms/planDetails";
 
-// export async function getServerSideProps(context) {
-//     const subscriptionId = context.params.subscriptionId;
-//     const locale = context.locale;
-//     const res = await getSubscriptionById(subscriptionId, locale);
-//     const swapPlanDataRes = await getDataForSwappingAPlan(subscriptionId, locale);
-//     const restrictionsRes = await getRestrictions(locale);
-
-//     return {
-//         props: {
-//             subscription: res.data || null,
-//             error: res.status !== 200 || swapPlanDataRes.status !== 200 ? "ERROR" : "",
-//             subscriptionId: subscriptionId,
-//             swapPlanData: swapPlanDataRes.data || null,
-//             restrictions: restrictionsRes.data || null,
-//         },
-//     };
-// }
-
-// const PlanDetailsPage = ({ subscription, error, subscriptionId, swapPlanData, restrictions }) => {
 const PlanDetailsPage = () => {
     const theme = useTheme();
     const router = useRouter();

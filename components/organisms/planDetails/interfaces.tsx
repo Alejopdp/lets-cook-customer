@@ -1,4 +1,5 @@
 import { Recipes } from "@stores";
+import { OrderState } from "types/order";
 
 export interface Restriction {
     id: string;
@@ -11,6 +12,7 @@ export interface SkippableOrder {
     weekLabel: string;
     shippingDate: string;
     isSkipped: boolean;
+    state: OrderState;
 }
 
 export interface WeekOrder {
