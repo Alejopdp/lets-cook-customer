@@ -36,7 +36,10 @@ const HistorialPagos = (props) => {
             if (res.status === 200) {
                 setorders(
                     res.data.paymentOrders.filter(
-                        (paymentOrder) => paymentOrder.billingDate < new Date() || paymentOrder.state === "PAYMENT_ORDER_BILLED"
+                        (paymentOrder) =>
+                            paymentOrder.state === "PAYMENT_ORDER_BILLED" ||
+                            paymentOrder.state === "PAYMENT_ORDER_REFUNDED" ||
+                            paymentOrder.state === "PAYMENT_ORDER_PARTIALLY_REFUNDED"
                     )
                 );
             } else {
