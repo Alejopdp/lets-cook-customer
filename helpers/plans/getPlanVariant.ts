@@ -32,36 +32,37 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
      * Verification of the params for variant selection.
      * */
 
-    const plansBySlug = plans?.find(({ slug: _slug }) => _slug === slug);
+    const slugPlan = plans?.find(({ slug: _slug }) => _slug === slug);
 
-    if (plansBySlug) {
+    if (!!slugPlan && !!params.peopleQty && !!params.recipeQty) {
         // Find the variant coincident, if the variant in not found so
         // is  selected the first variant into plan.
-        variant = plansBySlug.variants?.find(
+        variant = slugPlan.variants?.find(
             ({ numberOfPersons = "", numberOfRecipes = "" }) => numberOfPersons == params.peopleQty && numberOfRecipes == params.recipeQty
         );
 
         if (!variant) {
+            variant = slugPlan.variants.find((v) => v.isDefault);
             redirect = {
-                destination: `/planes/${slug}?personas=${plansBySlug.variants[0]?.numberOfPersons || ""}&recetas=${
-                    plansBySlug.variants[0]?.numberOfRecipes || ""
+                destination: `/planes/${slug}?personas=${variant?.numberOfPersons || slugPlan.variants[0]?.numberOfPersons || ""}&recetas=${
+                    variant?.numberOfRecipes || slugPlan.variants[0]?.numberOfRecipes || ""
                 }`,
                 permanent: true,
             };
-            variant = plansBySlug.variants[0];
+            variant = slugPlan.variants[0];
         }
 
-        id = plansBySlug?.id || "";
-        recipes = plansBySlug?.recipes || [];
-        planImageUrl = plansBySlug?.imageUrl || "";
-        iconLinealWithColorUrl = plansBySlug?.iconWithColor || "";
+        id = slugPlan?.id || "";
+        recipes = slugPlan?.recipes || [];
+        planImageUrl = slugPlan?.imageUrl || "";
+        iconLinealWithColorUrl = slugPlan?.iconWithColor || "";
     }
 
-    if (!plansBySlug) {
+    if (!slugPlan) {
         // If slug-plan is not found so is selected the first plan for default.
         id = plans[0]?.id || "";
         slug = plans[0]?.slug || "no-plan";
-        variant = plans[0]?.variants[0];
+        variant = plans[0]?.variants.find((variant) => variant.isDefault) || plans[0]?.variants[0];
         recipes = plans[0]?.recipes || [];
         planImageUrl = plans[0]?.imageUrl || "";
         iconLinealWithColorUrl = plans[0]?.iconWithColor || "";
@@ -80,10 +81,19 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
 
     if (!variant) {
         // TODO: Move to lang messages
-        errors.push("The current plan hasn't variants.");
+
+        variant = slugPlan.variants.find((variant) => variant.isDefault) || slugPlan.variants[0];
+
+        redirect = {
+            destination: `/planes/${slug}?personas=${variant?.numberOfPersons || 0}&recetas=${variant?.numberOfRecipes || 0}`,
+            permanent: true,
+        };
+
+        if (!variant) errors.push("The current plan hasn't variants.");
     }
 
-    if (!variant?.numberOfPersons || !variant?.numberOfRecipes) {
+    if (!!!variant?.numberOfPersons || !!!variant?.numberOfRecipes) {
+        console.log("No hay persons o recetas");
         // TODO: Move to lang messages
         errors.push(
             "The information for the current variants has #numberPeople# people and #numberRecipes# recipes."

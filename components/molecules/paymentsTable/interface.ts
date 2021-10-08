@@ -5,6 +5,7 @@ interface PaymentOrder {
     state: string;
     humanState: string;
     ordersQty: number;
+    discountAmount: number;
 }
 
 export interface PaymentsTableProps {

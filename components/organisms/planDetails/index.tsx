@@ -107,7 +107,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
             enqueueSnackbar("Semanas saltadas correctamente", { variant: "success" });
             props.reload();
         } else {
-            enqueueSnackbar("Error al saltar las semanas", { variant: "error" });
+            enqueueSnackbar(res && res.data ? res.data.message : "Error al saltar las semanas", { variant: "error" });
         }
         setOpenSkipPlanModal(false);
     };
