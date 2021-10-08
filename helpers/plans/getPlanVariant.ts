@@ -62,7 +62,7 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
         // If slug-plan is not found so is selected the first plan for default.
         id = plans[0]?.id || "";
         slug = plans[0]?.slug || "no-plan";
-        variant = plans[0]?.variants[0];
+        variant = plans[0]?.variants.find((variant) => variant.isDefault) || plans[0]?.variants[0];
         recipes = plans[0]?.recipes || [];
         planImageUrl = plans[0]?.imageUrl || "";
         iconLinealWithColorUrl = plans[0]?.iconWithColor || "";
