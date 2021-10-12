@@ -64,8 +64,8 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     );
 
     const handleOnSelectPlan = (plan: Plan) => {
-        const recipeQty = buyFlow.form.variant?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty);
-        const peopleQty = buyFlow.form.variant?.numberOfPersons || parseInt(props.initialPlanSettings.personQty);
+        const recipeQty = plan.variants?.find(variant => variant.isDefault).numberOfRecipes || buyFlow.form.variant?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty);
+        const peopleQty = plan.variants?.find(variant => variant.isDefault).numberOfPersons || buyFlow.form.variant?.numberOfPersons || parseInt(props.initialPlanSettings.personQty);
 
         const { variant, errors, slug, id, recipes } = getPlanVariant(
             {
