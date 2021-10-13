@@ -39,6 +39,7 @@ const PlanDetailsMobile = ({
                             <RecipesActualWeekCard
                                 actualWeekOrder={data.actualWeekOrder}
                                 canChooseRecipes={data.canChooseRecipes}
+                                hasChosenRecipesForActualWeek={data.hasChosenRecipesForActualWeek}
                                 handleClickOpenRecipeModal={handleClickOpenRecipeModal}
                             />
                         </Grid>
@@ -48,6 +49,7 @@ const PlanDetailsMobile = ({
                             <RecipesNextWeekCard
                                 nextWeekOrder={data.nextWeekOrder}
                                 handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                                hasChosenRecipesForNextWeek={data.hasChosenRecipesForNextWeek}
                                 canChooseRecipes={data.canChooseRecipesForNextWeekOrder}
                             />
                         </Grid>
