@@ -58,7 +58,6 @@ const SwapPlanModal = (props) => {
     };
 
     const handleChangePlan = (event) => {
-        alert(event.target.value);
         setPlanSelected({
             ...planSelected,
             planId: event.target.value,
@@ -76,6 +75,7 @@ const SwapPlanModal = (props) => {
         props.handlePrimaryButtonClick(planSelected);
     };
 
+    console.log("Planes para swapear: ", props.data?.plans);
     return (
         <Modal
             open={props.open}
