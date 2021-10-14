@@ -81,6 +81,7 @@ const PlanRecoverModal = withStyles(styles)((props) => {
     let name = props.data ? props.data.planName : "";
     let label = props.data ? props.data.planVariantLabel : "";
 
+    console.log("Props data plan recoveer plan: ", props.data);
     return (
         <div>
             <Dialog
@@ -110,7 +111,7 @@ const PlanRecoverModal = withStyles(styles)((props) => {
                                     Frecuencia: {translateFrequency(freq, router.locale)}
                                 </Typography>
                                 <Typography variant="body2" style={{ fontSize: "16px", marginBottom: theme.spacing(1), fontWeight: 900 }}>
-                                    Valor total: 36 €
+                                    Valor total: {props.data?.planVariantPrice || 0}€
                                 </Typography>
                             </Grid>
                         </Grid>
