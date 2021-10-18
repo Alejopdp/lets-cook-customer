@@ -24,7 +24,10 @@ const PasswordStep = (props) => {
     return (
         <>
             <SocialNetworksButtons />
-            <AcceptLegalTerms handleOpenTycModal={props.handleOpenTycModal} handleOpenPrivacyPolicyModal={props.handleOpenPrivacyPolicyModal} />
+            <AcceptLegalTerms
+                handleOpenTycModal={props.handleOpenTycModal}
+                handleOpenPrivacyPolicyModal={props.handleOpenPrivacyPolicyModal}
+            />
             <Divider />
             <Grid item xs={12}>
                 <PasswordInput
@@ -33,7 +36,7 @@ const PasswordStep = (props) => {
                     value={props.password}
                     onChange={props.handleChange}
                     labelWidth={200}
-                    helperText="La contraseña debe tener al menos 8 caracteres, 1 mayúscula y 1 número"
+                    helperText="La contraseña debe tener al menos 8 caracteres, 1 minúscula, 1 mayúscula y 1 número"
                 />
             </Grid>
             <Grid item xs={12}>
