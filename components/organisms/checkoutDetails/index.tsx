@@ -162,7 +162,7 @@ export default function CheckoutDetails() {
                         <CheckoutValueItem title="Precio final primer entrega" value={totalValue} />
                         <CheckoutValueItem
                             title="Precio a partir de la segunda entrega"
-                            value={roundTwoDecimals((planVariantPrice || 0) + form.deliveryForm?.shippingCost || 0)}
+                            value={roundTwoDecimals((planVariantPrice || 0) + (form.deliveryForm?.shippingCost || 0))}
                         />
                     </>
                 ) : form.coupon?.id && form.coupon.coupons_by_subscription.type === "more_one_fee" ? (
@@ -173,7 +173,7 @@ export default function CheckoutDetails() {
                         />
                         <CheckoutValueItem
                             title={`Precio luego de las ${form.coupon?.coupons_by_subscription.value} entregas`}
-                            value={(roundTwoDecimals(planVariantPrice) || 0) + form.deliveryForm?.shippingCost || 0}
+                            value={roundTwoDecimals(planVariantPrice) + (form.deliveryForm?.shippingCost || 0)}
                         />
                     </>
                 ) : (
