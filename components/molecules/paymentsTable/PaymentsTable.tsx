@@ -42,7 +42,7 @@ const PaymentsTable = (props: PaymentsTableProps) => {
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(100);
     const theme = useTheme();
 
     const handleChangePage = (event, newPage) => {
@@ -98,7 +98,7 @@ const PaymentsTable = (props: PaymentsTableProps) => {
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
+                rowsPerPageOptions={[50, 100, 250, 500, { label: "Todos", value: -1 }]}
                 component="div"
                 labelRowsPerPage="Filas por página"
                 labelDisplayedRows={getLabelDisplayedRows}
