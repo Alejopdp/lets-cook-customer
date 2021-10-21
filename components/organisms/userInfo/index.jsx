@@ -74,7 +74,6 @@ const UserInfoDetail = (props) => {
     };
 
     const handleClickChangeEmail = (newEmail) => {
-        alert(`newEmail ${newEmail}`);
         setEmailModal(false);
     };
 
@@ -88,7 +87,6 @@ const UserInfoDetail = (props) => {
     };
 
     const handleClickChangePassword = (newPassword) => {
-        alert(`newPassword ${newPassword}`);
         setPasswordModal(false);
     };
 
@@ -102,7 +100,6 @@ const UserInfoDetail = (props) => {
     };
 
     const handleClickChangePersonalData = (data) => {
-        alert(`newPassword ${JSON.stringify(data)}`);
         setPersonalDataModal(false);
     };
 
@@ -209,7 +206,7 @@ const UserInfoDetail = (props) => {
                     addressDetails: newData.details,
                     latitude: newData.latitude,
                     longitude: newData.longitude,
-                    name: newData.name,
+                    addressName: newData.name,
                     preferredShippingHour: newData.preferredShippingHour,
                 },
             };

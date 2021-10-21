@@ -64,8 +64,14 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     );
 
     const handleOnSelectPlan = (plan: Plan) => {
-        const recipeQty = plan.variants?.find(variant => variant.isDefault).numberOfRecipes || buyFlow.form.variant?.numberOfRecipes || parseInt(props.initialPlanSettings.recipeQty);
-        const peopleQty = plan.variants?.find(variant => variant.isDefault).numberOfPersons || buyFlow.form.variant?.numberOfPersons || parseInt(props.initialPlanSettings.personQty);
+        const recipeQty =
+            plan.variants?.find((variant) => variant.isDefault).numberOfRecipes ||
+            buyFlow.form.variant?.numberOfRecipes ||
+            parseInt(props.initialPlanSettings.recipeQty);
+        const peopleQty =
+            plan.variants?.find((variant) => variant.isDefault).numberOfPersons ||
+            buyFlow.form.variant?.numberOfPersons ||
+            parseInt(props.initialPlanSettings.personQty);
 
         const { variant, errors, slug, id, recipes } = getPlanVariant(
             {
@@ -88,10 +94,11 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             },
         });
 
-        const { peopleLabels, planName } = getPlanData(plan.slug, props.plans);
+        const { peopleLabels, planName, planRecipes } = getPlanData(plan.slug, props.plans);
         setPlanSize(peopleLabels);
         setRecipesOfWeek(recipes);
-        buyFlow.selectPlanRecipes(plan.recipes); // TO DO: Unifiy recipe type
+        console.log("Recieps: ", planRecipes);
+        buyFlow.selectPlanRecipes(planRecipes); // TO DO: Unifiy recipe type
         buyFlow.setPlanCode(
             plan.id,
             plan.slug,
@@ -159,23 +166,25 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     };
 
     useEffect(() => {
-        const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes } = getPlanData(
-            props.initialPlanSettings.slug,
-            props.plans
-        );
-        buyFlow.selectPlanRecipes(planRecipes);
-        buyFlow.setPlanCode(
-            props.initialPlanSettings.id,
-            props.initialPlanSettings.slug,
-            planName,
-            planDescription,
-            canChooseRecipes,
-            props.initialPlanSettings.planImageUrl,
-            props.initialPlanSettings.iconLinealWithColorUrl
-        );
-        buyFlow.setPlanVariant(props.variant);
-        setPlanSize(peopleLabels);
-        setRecipesOfWeek(props.recipes);
+        if (!!!buyFlow.form.planCode) {
+            const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes } = getPlanData(
+                props.initialPlanSettings.slug,
+                props.plans
+            );
+            buyFlow.selectPlanRecipes(planRecipes);
+            buyFlow.setPlanCode(
+                props.initialPlanSettings.id,
+                props.initialPlanSettings.slug,
+                planName,
+                planDescription,
+                canChooseRecipes,
+                props.initialPlanSettings.planImageUrl,
+                props.initialPlanSettings.iconLinealWithColorUrl
+            );
+            buyFlow.setPlanVariant(props.variant);
+            setPlanSize(peopleLabels);
+            setRecipesOfWeek(props.recipes);
+        }
     }, []);
 
     // TyC Modal Functions

@@ -79,21 +79,29 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         }
     }, [isAuthenticated]);
 
-    const steps = useMemo(
-        () => [
-            <SelectPlanStep
-                initialPlanSettings={props.planUrlParams}
-                plans={props.plans}
-                variant={props.variant}
-                recipes={props.recipes}
-            />,
-            <RegisterUserStep />,
-            <CheckoutStep />,
-            <RecipeChoiseStep recipes={props.recipes} />,
-            <CrossSellingStep />,
-        ],
-        []
-    );
+    // const steps = useMemo(
+    //     () => [
+    //         <SelectPlanStep
+    //             initialPlanSettings={props.planUrlParams}
+    //             plans={props.plans}
+    //             variant={props.variant}
+    //             recipes={props.recipes}
+    //         />,
+    //         <RegisterUserStep />,
+    //         <CheckoutStep />,
+    //         <RecipeChoiseStep recipes={props.recipes} />,
+    //         <CrossSellingStep />,
+    //     ],
+    //     []
+    // );
+
+    const steps = [
+        <SelectPlanStep initialPlanSettings={props.planUrlParams} plans={props.plans} variant={props.variant} recipes={props.recipes} />,
+        <RegisterUserStep />,
+        <CheckoutStep />,
+        <RecipeChoiseStep recipes={props.recipes} />,
+        <CrossSellingStep />,
+    ];
 
     return step === steps.length - 1 ? (
         <Box paddingY={4}>

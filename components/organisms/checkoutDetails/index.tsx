@@ -119,6 +119,8 @@ export default function CheckoutDetails() {
                 event_label: form.planSlug,
             },
         });
+        // TO DO: Change plan
+        // router.push("/planes");
         toFirstStep();
     };
 

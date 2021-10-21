@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useEffect, useState} from "react";
+import React, { memo, useMemo, useEffect, useState } from "react";
 // Utils & Config
 import { useBuyFlow, useFilterDrawer } from "@stores";
 import _ from "lodash";
@@ -25,9 +25,10 @@ interface RecipeChoiseStepProps {
 export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const theme = useTheme();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
-    const { recipes, firstOrderId, subscriptionId, firstOrderShippingDate, variant, selectRecipes } = useBuyFlow(
+    const { planRecipes, recipes, firstOrderId, subscriptionId, firstOrderShippingDate, variant, selectRecipes } = useBuyFlow(
         ({ form, selectRecipes }) => ({
-            recipes: form.recipes,
+            planRecipes: form.planRecipes,
+            recipes: form.recipes, // TO DO: Returns [] despite of being ok in previous steps
             selectRecipes: selectRecipes,
             firstOrderId: form.firstOrderId,
             subscriptionId: form.subscriptionId,
@@ -38,7 +39,6 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     const gotToNextView = useBuyFlow(({ forward }) => forward);
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setIsLoading] = useState(false);
-
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -100,15 +100,27 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
         gotToNextView();
     };
 
-    const filteredRecipes = useMemo(() => {
-        return filters.length > 0
-            ? props.recipes.filter((recipe) =>
-                filters.some(
-                    (filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqualToFilterValue(recipe.difficultyLevel)
-                )
-            )
-            : props.recipes;
-    }, [filters]);
+    const filteredRecipes =
+        filters.length > 0
+            ? planRecipes.filter((recipe) =>
+                  filters.some(
+                      (filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqualToFilterValue(recipe.difficultyLevel)
+                  )
+              )
+            : planRecipes;
+
+    console.log("Before filtered: ", planRecipes);
+    console.log("FIltered recipes: ", filteredRecipes);
+
+    // const filteredRecipes = useMemo(() => {
+    //     return filters.length > 0
+    //         ? recipes.filter((recipe) =>
+    //               filters.some(
+    //                   (filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqualToFilterValue(recipe.difficultyLevel)
+    //               )
+    //           )
+    //         : recipes;
+    // }, [filters]);
 
     const handleClickAddRecipe = (recipe) => {
         ga.event({
@@ -129,7 +141,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                 event_label: "remover receta",
             },
         });
-        const index = recipes.find(({ id }) => id !== _id);
+        const index = recipes.findIndex(({ id }) => id === _id);
         if (index === -1) return;
         const newState = [...recipes];
         newState.splice(index, 1);
