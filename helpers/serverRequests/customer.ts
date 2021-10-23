@@ -179,3 +179,16 @@ export const changeDefaultPaymentMethod = async (paymentMethodId: string, custom
         return error.response;
     }
 };
+
+export const setupFuturePaymentMethod = async (customerId: string) => {
+    try {
+        const res = await axios({
+            method: "POST",
+            url: `${apiUrl}/setup-future-payment-method/${customerId}`,
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};

@@ -5,21 +5,35 @@ import { useSnackbar } from "notistack";
 import { Typography, Radio, RadioGroup, FormControlLabel, FormControl, Grid, makeStyles, TextField, useTheme } from "@material-ui/core";
 import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
 import Modal from "../../atoms/modal/modal";
+import { setupFuturePaymentMethod } from "helpers/serverRequests/customer";
+import { SetupIntent, StripeError } from "@stripe/stripe-js";
 
 const PaymentMethodModal = (props) => {
     const theme = useTheme();
     const { enqueueSnackbar } = useSnackbar();
     const stripe = useStripe();
     const elements = useElements();
+    const [isLoading, setIsLoading] = useState(true);
+    const [clientSecret, setClientSecret] = useState("");
     const [value, setValue] = useState("card");
     const [selectedSavedCard, setselectedSavedCard] = useState("");
 
     useEffect(() => {
+        const setupFuturePaymentMethodCall = async () => {
+            const res = await setupFuturePaymentMethod(props.customerId);
+
+            if (res && res.status === 200) {
+                setClientSecret(res.data.client_secret);
+            }
+            setIsLoading(false);
+        };
         const defaultPaymentMethod = props.initialData.find((paymentMethod) => paymentMethod.isDefault);
 
         if (!!defaultPaymentMethod) {
             setselectedSavedCard(defaultPaymentMethod.id);
         }
+
+        setupFuturePaymentMethodCall();
     }, []);
 
     const handleChangePaymentMethod = (event) => {
@@ -47,11 +61,34 @@ const PaymentMethodModal = (props) => {
         return { error, paymentMethod };
     };
 
+    const handleSetupIntentConfirmation = async (paymentMethod: string): Promise<{ error: StripeError; setupIntent: SetupIntent }> => {
+        props.handleClose();
+        const { error, setupIntent } = await stripe.confirmCardSetup(clientSecret, { payment_method: paymentMethod });
+
+        console.log("Error: ", error);
+        console.log("Setup intent: ", setupIntent);
+        if (!!error || !!!setupIntent) {
+            props.handleOpen();
+        } else {
+            if (setupIntent.status === "requires_action") {
+                enqueueSnackbar("3d secure", { variant: "success" });
+            }
+        }
+
+        return { error, setupIntent };
+    };
     const handleAddPaymentMethod = async () => {
         const { error, paymentMethod } = await handleNewStripePaymentMethod();
 
         if (!!error) {
             enqueueSnackbar(error.message, { variant: "error" });
+            return;
+        }
+
+        const { error: setupIntentError, setupIntent } = await handleSetupIntentConfirmation(paymentMethod.id);
+
+        if (!!setupIntentError) {
+            enqueueSnackbar(setupIntentError.message, { variant: "error" });
             return;
         }
 

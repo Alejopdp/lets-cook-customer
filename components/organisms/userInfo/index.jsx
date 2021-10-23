@@ -449,12 +449,14 @@ const UserInfoDetail = (props) => {
                 <PaymentMethodModal
                     open={openPaymentMethod}
                     handleClose={handleClickClosePaymentMethodModal}
+                    handleOpen={handleClickOpenPaymentMethodModal}
                     // handlePrimaryButtonClick={handleClickChangePaymentMethod}
                     handleAddPaymentMethod={handleAddPaymentMethod}
                     handleUpdateDefaultPaymentMethod={handleUpdateDefaultPaymentMethod}
                     primaryButtonText="MODIFICAR METODO DE PAGO"
                     secondaryButtonText="CANCELAR"
                     initialData={customerInfo.paymentMethods}
+                    customerId={customerInfo.id}
                 />
             )}
         </>
