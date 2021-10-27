@@ -98,7 +98,7 @@ const PaymentsTable = (props: PaymentsTableProps) => {
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={[50, 100, 250, 500, { label: "Todos", value: -1 }]}
+                rowsPerPageOptions={[50, 100, 250, { label: "Todos", value: -1 }]}
                 component="div"
                 labelRowsPerPage="Filas por página"
                 labelDisplayedRows={getLabelDisplayedRows}
