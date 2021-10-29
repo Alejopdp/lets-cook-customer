@@ -76,10 +76,7 @@ const PaymentsTable = (props: PaymentsTableProps) => {
                             return (
                                 <TableRow role="checkbox" tabIndex={-1} key={row.id}>
                                     {columnsNewTable.map((column) => {
-                                        let value =
-                                            column.id === "amount"
-                                                ? (Math.round(row.amount * 100) - Math.round(row.discountAmount * 100)) / 100
-                                                : row[column.id];
+                                        let value = column.id === "amount" ? row.amount : row[column.id];
                                         if (column.id === "seeMore") {
                                             value = (
                                                 <IconButton size="small" aria-label="close" onClick={() => props.onClick(row.id)}>
