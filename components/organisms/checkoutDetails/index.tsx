@@ -150,7 +150,7 @@ export default function CheckoutDetails() {
                             } ${form.coupon?.discount_type.type === "percent" ? "%" : "€"}`}
                             value={
                                 form.coupon?.discount_type.type === "percent"
-                                    ? `- ${roundTwoDecimals(planVariantPrice * form.coupon?.discount_type.value) / 100}€`
+                                    ? `- ${roundTwoDecimals((planVariantPrice * form.coupon?.discount_type.value) / 100)}€`
                                     : form.coupon?.discount_type.type === "fix" || form.coupon?.discount_type.type === "fixed"
                                     ? `- ${form.coupon?.discount_type.value}€`
                                     : `${form.deliveryForm?.shippingCost || 0}€`
