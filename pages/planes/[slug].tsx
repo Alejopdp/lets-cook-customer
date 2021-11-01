@@ -74,8 +74,8 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         }
 
         return () => {
-            alert("Returning from slug use effect");
-            setCoupon({ ...BuyFlowInitialStore.form.coupon });
+            // setCoupon({ ...BuyFlowInitialStore.form.coupon });
+            setCoupon(undefined);
         };
     }, []);
 

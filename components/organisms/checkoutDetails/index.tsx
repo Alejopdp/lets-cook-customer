@@ -64,7 +64,7 @@ export default function CheckoutDetails() {
             : form.coupon?.discount_type.type === "fix" || form.coupon?.discount_type.type === "fixed"
             ? `${roundTwoDecimals(planVariantPrice - form.coupon?.discount_type.value + shippingCost)}`
             : planVariantPrice;
-    }, [form.coupon, form.deliveryForm?.shippingCost, form.variant?.priceWithOffer, form.variant?.price]);
+    }, [form.coupon, form.deliveryForm?.shippingCost, planVariantPrice]);
 
     const handleCouponSubmit = async (couponCode: string) => {
         ga.event({
