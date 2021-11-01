@@ -79,7 +79,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
     };
 
     const handlePrimaryButtonClickCancelPlanModal = async (reason, comment) => {
-        const res = await cancelSubscription(props.subscription.subscriptionId, reason, comment);
+        const res = await cancelSubscription(props.subscription.subscriptionId, reason.value, comment);
 
         if (res.status === 200) {
             enqueueSnackbar("El plan se canceló correctamente", { variant: "success" });
