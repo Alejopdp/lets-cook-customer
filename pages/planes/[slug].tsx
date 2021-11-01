@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { getPlans, Plan, Recipe, PlanVariant, getPlanVariant } from "@helpers";
-import { IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
+import { BuyFlowInitialStore, IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 
 // External components
 
@@ -41,12 +41,13 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     const step = useBuyFlow(({ step }) => step);
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-    const { setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel } = useBuyFlow(
-        ({ setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel }) => ({
+    const { setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon } = useBuyFlow(
+        ({ setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon }) => ({
             setDeliveryInfo,
             setPaymentMethod,
             setShowRegister,
             setWeekLabel,
+            setCoupon,
         })
     );
 
@@ -71,6 +72,11 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 type: defaultPaymentMethod ? "card" : "newPaymentMethod",
             });
         }
+
+        return () => {
+            alert("Returning from slug use effect");
+            setCoupon({ ...BuyFlowInitialStore.form.coupon });
+        };
     }, []);
 
     useEffect(() => {
