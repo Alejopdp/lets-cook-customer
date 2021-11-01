@@ -144,7 +144,7 @@ const BonoRegaloConfirmationForm = (props) => {
             planId: form.planCode,
             planVariantId: form.variant ?.id,
             planFrequency: "Semanal",
-            restrictionComment: props.deliveryData.restrictions || "No puedo comer alimentos con lactosa", // Add restriction comment
+            restrictionComment: props.deliveryData.restrictions || "", // Add restriction comment
             couponId: "",
             stripePaymentMethodId: form.paymentMethod ?.stripeId, // Add if it is a new payment method
             paymentMethodId: form.paymentMethod ?.id, // Add if customer uses an already saved payment method

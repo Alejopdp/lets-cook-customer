@@ -57,7 +57,7 @@ export default function CheckoutDetails() {
 
     const totalValue = useMemo(() => {
         const shippingCost = form.deliveryForm?.shippingCost || 0;
-        if (!form.coupon?.id) return planVariantPrice + shippingCost;
+        if (!form.coupon?.id) return (Math.round(planVariantPrice * 100) + Math.round(shippingCost * 100)) / 100;
 
         return form.coupon?.discount_type.type === "percent"
             ? `${roundTwoDecimals(planVariantPrice - (planVariantPrice * form.coupon?.discount_type.value) / 100 + shippingCost)}€`
