@@ -13,9 +13,11 @@ type RecipesBottomBarProps = {
     maxRecipesQty: number;
     handleSecondaryButtonClick: () => void;
     isLoading: boolean;
+    lang: any;
 };
 
 export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
     const { recipes, variant, forward } = useBuyFlow((store) => ({
@@ -55,7 +57,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                 <div className={classes.recipesQtySelected}>
                                     <CheckCircleOutline color="primary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
-                                        Has seleccionado todas las recetas
+                                        {lang.allRecipesChosen}
                                     </Typography>
                                 </div>
                             )}
@@ -64,8 +66,8 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                     <ErrorOutlineOutlined color="secondary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
                                         {(props.maxRecipesQty - props.selectedRecipes.length) === 1 ?
-                                            `Aún te queda ${props.maxRecipesQty - props.selectedRecipes.length} receta por seleccionar` :
-                                            `Aún te quedan ${props.maxRecipesQty - props.selectedRecipes.length} recetas por seleccionar`
+                                            `${lang.recipesPendingToSelect.singular.firstText} ${props.maxRecipesQty - props.selectedRecipes.length} ${lang.recipesPendingToSelect.singular.secondText}` :
+                                            `${lang.recipesPendingToSelect.plural.firstText} ${props.maxRecipesQty - props.selectedRecipes.length} ${lang.recipesPendingToSelect.plural.secondText}`
                                         }
 
                                     </Typography>
@@ -74,7 +76,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                         </Box>
                         <Box style={{ display: "flex", flexDirection: "column" }}>
                             <RoundedButton
-                                label="Finalizar"
+                                label={lang.btnText}
                                 onClick={props.handleSubmit}
                                 isLoading={props.isLoading}
                                 disabled={props.maxRecipesQty > props.selectedRecipes.length}
@@ -86,7 +88,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                 style={{ fontSize: "13px", marginTop: theme.spacing(0.5) }}
                                 onClick={props.handleSecondaryButtonClick}
                             >
-                                Elegir recetas luego
+                                {lang.chooseLaterBtnText}
                             </Button>
                         </Box>
                     </Grid>

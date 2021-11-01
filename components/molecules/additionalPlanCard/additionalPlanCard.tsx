@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useStyles } from "./styles";
+import { useLang } from "@hooks";
 
 // External components
 import { Typography, Box, useTheme } from "@material-ui/core";
@@ -22,6 +23,7 @@ enum CardView {
 }
 
 const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
+    const [lang] = useLang("additionalPlanCard");
     const classes = useStyles();
     const theme = useTheme();
     const [cardView, setcardView] = useState(CardView.FIRST_CONTENT);
@@ -58,11 +60,12 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                             description={props.additionalPlan.description}
                             minPrice={props.additionalPlan.minimumVariantPrice}
                             additionalPlanName={props.additionalPlan.name}
+                            lang={lang.cardView.firstContent.content}
                         />
                     ),
                     actualButton: (
                         <RoundedButton
-                            label="VER OPCIONES"
+                            label={lang.cardView.firstContent.btnText}
                             style={{ width: "100%", backgroundColor: "white", padding: theme.spacing(1) }}
                             textStyle={{ color: theme.palette.primary.main }}
                             onClick={() => setcardView(CardView.SELECT_ATTRIBUTE)}
@@ -83,11 +86,12 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                             planId={props.additionalPlan.id}
                             additionalPlanName={props.additionalPlan.name}
                             handleClickBackToFirstContent={handleClickBackToFirstContent}
+                            lang={lang.cardView.selectAttribute.content}
                         />
                     ),
                     actualButton: (
                         <RoundedButton
-                            label="SELECCIONAR"
+                            label={lang.cardView.selectAttribute.btnText}
                             disabled={
                                 props.selectedVariants.length === 0 ||
                                 props.selectedVariants.every((variant) =>
@@ -110,11 +114,12 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                             selectedFrequency={selectedFrequency}
                             variant={props.selectedVariants.find((variant) => variant.planId === props.additionalPlan.id)}
                             additionalPlanName={props.additionalPlan.name}
+                            lang={lang.cardView.attributeSelected.content}
                         />
                     ),
                     actualButton: (
                         <RoundedButton
-                            label="QUITAR"
+                            label={lang.cardView.attributeSelected.btnText}
                             style={{
                                 width: "100%",
                                 backgroundColor: "white",
@@ -134,11 +139,12 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                             name={props.additionalPlan.name}
                             description={props.additionalPlan.description}
                             minPrice={props.additionalPlan.minimumVariantPrice}
+                            lang={lang.cardView.firstContent.content}
                         />
                     ),
                     actualButton: (
                         <RoundedButton
-                            label="VER OPCIONES"
+                            label={lang.cardView.firstContent.btnText}
                             style={{ width: "100%", padding: theme.spacing(1) }}
                             onClick={() => setcardView(CardView.SELECT_ATTRIBUTE)}
                         />

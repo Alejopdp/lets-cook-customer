@@ -47,7 +47,7 @@ interface NavbarContentProps {
 }
 
 export const NavbarContent = (props: NavbarContentProps) => {
-    const _handleOnChangeLang = (lang) => {};
+    const _handleOnChangeLang = (lang) => { };
     const classes = useStyles();
     const router = useRouter();
     const [lang] = useLang("navbarContent");
@@ -95,7 +95,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
                     <LoginButton goToLogin={goToLogin} />
                     <RoundedButton label={lang.seePlans} variant="content" onClick={goToPlans}></RoundedButton>
                 </Hidden>
-                {/* <LangSelector onChangeLang={_handleOnChangeLang} /> */}
+                <LangSelector onChangeLang={_handleOnChangeLang} />
             </Toolbar>
         </AppBar>
     );

@@ -182,7 +182,6 @@ const SignUpForm = (props) => {
                 <Register
                     text={lang.register.text}
                     boldText={lang.register.boldText}
-                    // redirectTo={lang.register.redirectTo}
                     handleRedirect={props.handleRedirect || handleRedirect}
                 />
             </FormPaper>

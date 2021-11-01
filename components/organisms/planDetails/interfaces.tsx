@@ -73,6 +73,7 @@ export interface PlanDetailsProps {
     handleClickOpenCancelPlanModal: () => void;
     handleClickOpenSkipPlanModal: () => void;
     handleClickOpenRecipeModal: () => void;
+    lang: any;
 }
 
 export interface SkipPlanModalProps {
@@ -80,6 +81,7 @@ export interface SkipPlanModalProps {
     handleClose: () => void;
     handlePrimaryButtonClick: (orders: SkippableOrder[]) => void;
     data: SkippableOrder[];
+    lang: any;
 }
 
 export interface CalendarCardProps {
@@ -89,4 +91,5 @@ export interface CalendarCardProps {
     };
     skippedOrders: SkippableOrder[];
     handleClick: () => void;
+    lang: any;
 }

@@ -19,18 +19,19 @@ const useStyles = makeStyles((theme) => ({
 
 
 const DontLikeMealKits = (props) => {
+    const lang = props.lang
     const classes = useStyles();
     const theme = useTheme();
 
     return (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
-                ¡Muchas gracias por probarlos! ¿Qué es lo que no te gusta de los kits para cocinar (meal kits)?
+                {lang.modalText}
             </Typography>
             <div className={classes.root}>
                 <TextField
                     id="dont_like_meal_kits_comments"
-                    label="Ingrese aquí sus comentarios"
+                    label={lang.inputLabel}
                     multiline
                     rows={5}
                     variant="outlined"

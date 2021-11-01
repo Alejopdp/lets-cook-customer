@@ -27,19 +27,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CalendarCard = (props: CalendarCardProps) => {
+    const lang = props.lang
     const theme = useTheme();
     const classes = useStyles();
     // const router = useRouter();
     // const lang = langs[router.locale];
 
     return (
-        <BoxWithTitleAndTextButton title="Calendario" btnText="saltar semana" handleClick={props.handleClick}>
+        <BoxWithTitleAndTextButton title={lang.title} btnText={lang.skipWeekBtnText} handleClick={props.handleClick}>
             <Grid container>
                 <Grid item xs={12} sm={6}>
-                    <DataDisplay title="Próxima entrega" text={props.schedule.nextDelivery} />
+                    <DataDisplay title={lang.nextDeliveryTitle} text={props.schedule.nextDelivery} />
                 </Grid>
                 <Grid item xs={12} sm={6} className={classes.nextChargeGrid}>
-                    <DataDisplay title="Próximo cargo" text={props.schedule.nextPayment} />
+                    <DataDisplay title={lang.nextPaymentTitle} text={props.schedule.nextPayment} />
                 </Grid>
                 {props.skippedOrders.length > 0 && (
                     <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
@@ -50,7 +51,7 @@ const CalendarCard = (props: CalendarCardProps) => {
                                 color="textSecondary"
                                 style={{ fontSize: "14px", opacity: 0.7, marginLeft: theme.spacing(0.5) }}
                             >
-                                Has saltado las siguientes semanas: {props.skippedOrders.map((order) => `${order.weekLabel}, `)}
+                                {lang.skippedWeeksInfo}: {props.skippedOrders.map((order) => `${order.weekLabel}, `)}
                             </Typography>
                         </div>
                     </Grid>

@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
         flex: 1,
         justifyContent: "center",
         [theme.breakpoints.up('sm')]: {
-            justifyContent: "right",
+            justifyContent: "left",
         }
     },
     navbarClass: {

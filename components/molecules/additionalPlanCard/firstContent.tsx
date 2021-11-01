@@ -5,6 +5,7 @@ import { Typography } from "@material-ui/core";
 import { FirstContentProps } from "./interface";
 
 const FirstContent = (props: FirstContentProps) => {
+    const lang = props.lang
     const classes = useStyles();
 
     return (
@@ -13,10 +14,10 @@ const FirstContent = (props: FirstContentProps) => {
                 {props.additionalPlanName}
             </Typography>
             <Typography variant="body2" color="initial" style={{ marginBottom: 8 }}>
-                {props.description || "Description"}
+                {props.description}
             </Typography>
             <Typography variant="subtitle2" color="initial">
-                Desde {props.minPrice}€
+                {lang.fromText} {props.minPrice}€
             </Typography>
         </div>
     );

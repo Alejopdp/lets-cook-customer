@@ -7,10 +7,12 @@ import { PaymentMethodFormProps } from "./interfaces";
 import { capitalizeFirstLetter } from "helpers/utils/utils";
 
 const PaymentMethodForm = (props: PaymentMethodFormProps) => {
+    const lang = props.lang;
+
     return (
         <FormControl component="fieldset" style={{ width: "100%" }}>
-            <RadioGroup aria-label="gender" name="gender1" value={props.selectedOption} onChange={props.setselectedOption}>
-                {props.paymentMethods.length > 0 && <FormControlLabel value="card" control={<Radio />} label="Mis tarjetas guardadas" />}
+            <RadioGroup aria-label="paymentForm" name="paymentForm" value={props.selectedOption} onChange={props.setselectedOption}>
+                {props.paymentMethods.length > 0 && <FormControlLabel value="card" control={<Radio />} label={lang.savedCardLabel} />}
                 {props.selectedOption === "card" ? (
                     <RadioGroup
                         aria-label="paymentMethods"
@@ -33,10 +35,10 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                     <FormControlLabel
                         value="newPaymentMethod"
                         control={<Radio />}
-                        label="Ingresar nuevo metodo de pago"
-                        // onClick={props.setselectedOption}
+                        label={lang.addNewPaymentMethodLabel}
+                    // onClick={props.setselectedOption}
                     />
-                )}{" "}
+                )}
                 {props.selectedOption === "newPaymentMethod" || props.paymentMethods.length === 0 ? <StripeForm /> : null}
             </RadioGroup>
         </FormControl>

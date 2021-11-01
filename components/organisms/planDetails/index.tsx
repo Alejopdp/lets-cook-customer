@@ -2,8 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { cancelSubscription, swapPlan } from "../../../helpers/serverRequests/subscription";
-// import { useRouter } from "next/router";
-// const langs = require("../../lang").comoFunciona;
 
 // External Components
 import Hidden from "@material-ui/core/Hidden";
@@ -22,16 +20,17 @@ import { useRouter } from "next/router";
 import { CancellationReason } from "types/cancellation";
 
 const PlanDetails = (props: PlanDetailsProps) => {
+    const lang = props.lang;
     const cancelPlanData = {
         reasons: [
-            { id: 1, value: CancellationReason.CREATED_BY_ERROR, text: "Se ha creado por error" },
-            { id: 2, value: CancellationReason.CANT_GET_KITS_NEXT_WEEK, text: "No puedo recibir los kits la próxima semana" },
-            { id: 3, value: CancellationReason.SPECIAL_DIET, text: "Tengo una dieta especial" },
-            { id: 4, value: CancellationReason.MOVE_ABROAD, text: "Me voy a vivir fuera por tiempo indeterminado" },
-            { id: 5, value: CancellationReason.DONT_LIKE_MEAL_KITS, text: "No me gustan los kits para cocinar (meal kits)" },
-            { id: 6, value: CancellationReason.HAD_PROBLEMS_WITH_LETSCOOK, text: "He tenido problemas con Let’s Cook" },
-            { id: 7, value: CancellationReason.PRICE_TOO_HIGH, text: "El precio es muy alto" },
-            { id: 8, value: CancellationReason.OTHER_REASONS, text: "Otra razón" },
+            { id: 1, value: CancellationReason.CREATED_BY_ERROR, text: lang.cancelPlanReasonsText.created_by_error },
+            { id: 2, value: CancellationReason.CANT_GET_KITS_NEXT_WEEK, text: lang.cancelPlanReasonsText.cant_get_kits_next_week },
+            { id: 3, value: CancellationReason.SPECIAL_DIET, text: lang.cancelPlanReasonsText.special_diet },
+            { id: 4, value: CancellationReason.MOVE_ABROAD, text: lang.cancelPlanReasonsText.move_abroad },
+            { id: 5, value: CancellationReason.DONT_LIKE_MEAL_KITS, text: lang.cancelPlanReasonsText.dont_like_meal_kits },
+            { id: 6, value: CancellationReason.HAD_PROBLEMS_WITH_LETSCOOK, text: lang.cancelPlanReasonsText.had_problems_with_letscook },
+            { id: 7, value: CancellationReason.PRICE_TOO_HIGH, text: lang.cancelPlanReasonsText.price_too_high },
+            { id: 8, value: CancellationReason.OTHER_REASONS, text: lang.cancelPlanReasonsText.other_reason },
         ],
     };
 
@@ -82,10 +81,10 @@ const PlanDetails = (props: PlanDetailsProps) => {
         const res = await cancelSubscription(props.subscription.subscriptionId, reason, comment);
 
         if (res.status === 200) {
-            enqueueSnackbar("El plan se canceló correctamente", { variant: "success" });
+            enqueueSnackbar(lang.cancelPlanSnackbarSuccessText, { variant: "success" });
             router.replace("/perfil");
         } else {
-            enqueueSnackbar("Error al cancelar el plan", { variant: "error" });
+            enqueueSnackbar(lang.cancelPlanSnackbarFailureText, { variant: "error" });
         }
         setOpenCancelPlanModal(false);
     };
@@ -104,10 +103,9 @@ const PlanDetails = (props: PlanDetailsProps) => {
         const res = await skipOrders(orders);
 
         if (res.status === 200) {
-            enqueueSnackbar("Semanas saltadas correctamente", { variant: "success" });
-            props.reload();
+            enqueueSnackbar(lang.skipPlanSnackbarSuccessText, { variant: "success" });
         } else {
-            enqueueSnackbar(res && res.data ? res.data.message : "Error al saltar las semanas", { variant: "error" });
+            enqueueSnackbar(res && res.data ? res.data.message : lang.skipPlanSnackbarFailureText, { variant: "error" });
         }
         setOpenSkipPlanModal(false);
     };
@@ -155,6 +153,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                     handleClickOpenCancelPlanModal={handleClickOpenCancelPlanModal}
                     handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
                     handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                    lang={lang}
                 />
             </Hidden>
             <Hidden mdUp>
@@ -164,6 +163,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                     handleClickOpenCancelPlanModal={handleClickOpenCancelPlanModal}
                     handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
                     handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                    lang={lang}
                 />
             </Hidden>
             {openRecipeModal && (
@@ -180,6 +180,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 handleClose={handleCloseChangePlanModal}
                 handlePrimaryButtonClick={handlePrimaryButtonClickChangePlanModal}
                 data={props.swapPlanData}
+                lang={lang.swapPlanModal}
             />
             <CancelPlanModal
                 open={openCancelPlanModal}
@@ -191,12 +192,14 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 subscriptionId={props.subscription.subscriptionId}
                 actualPlan={props.subscription.plan}
                 actualPlanVariant={props.subscription.actualPlanVariant}
+                lang={lang.cancelPlanModal}
             />
             <SkipPlanModal
                 open={openSkipPlanModal}
                 handleClose={handleCloseSkipPlanModal}
                 handlePrimaryButtonClick={handlePrimaryButtonClickSkipPlanModal}
                 data={props.subscription.nextTwelveOrders}
+                lang={lang.skipPlanModal}
             />
         </>
     );

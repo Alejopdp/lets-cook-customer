@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SwapPlanModal = (props) => {
+    const lang = props.lang
     const classes = useStyles();
     const theme = useTheme();
 
@@ -81,21 +82,21 @@ const SwapPlanModal = (props) => {
             open={props.open}
             handleClose={props.handleClose}
             handlePrimaryButtonClick={submitNewPlan}
-            title="Cambiar plan"
-            primaryButtonText="cambiar plan"
-            secondaryButtonText="cancelar"
+            title={lang.title}
+            primaryButtonText={lang.primaryButtonText}
+            secondaryButtonText={lang.secondaryButtonText}
             disabled={handleDisableButton()}
         >
             <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
-                1. Elige tu plan
+                {lang.choosePlanSubtitle}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl} style={{ marginBottom: theme.spacing(3) }}>
-                <InputLabel htmlFor="outlined-age-native-simple">Plan</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">{lang.choosePlanInputLabel}</InputLabel>
                 <Select
                     native
                     value={planSelected.planId}
                     onChange={handleChangePlan}
-                    label="Plan"
+                    label={lang.choosePlanInputLabel}
                     inputProps={{ name: "planId", id: "planDropdown" }}
                 >
                     {props.data?.plans?.map((plan) => (
@@ -106,7 +107,7 @@ const SwapPlanModal = (props) => {
                 </Select>
             </FormControl>
             <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
-                2. Elige el tamaño de tu plan
+                {lang.sizePlanSubtitle}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel htmlFor="outlined-age-native-simple">Variante</InputLabel>
@@ -114,7 +115,7 @@ const SwapPlanModal = (props) => {
                     native
                     value={planSelected.planVariantId}
                     onChange={handleChangeVariant}
-                    label="Variante"
+                    label={lang.sizePlanSubtitle}
                     inputProps={{ name: "planVariantId", id: "variantDropdown" }}
                 >
                     {props.data?.variants ? (

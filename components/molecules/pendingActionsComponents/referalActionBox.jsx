@@ -9,13 +9,13 @@ import Typography from "@material-ui/core/Typography";
 import BoxWithIconAndTextButton from "../../../components/molecules/specificBox/boxWithIconAndTextButton";
 
 
-const ReferalActionBox = ({ data }) => {
+const ReferalActionBox = ({ data, lang }) => {
     const theme = useTheme();
 
     return (
         <BoxWithIconAndTextButton noColor icon="network" btnText={data.couponCode}>
             <Typography variant="body2" style={{ fontSize: "16px" }}>
-                Invitá a tus amigos a Let’s Cook con el código de descuento de {data.discountValue}
+                {lang.text} {data.discountValue}
             </Typography>
         </BoxWithIconAndTextButton>
     );

@@ -11,28 +11,32 @@ import ReviewsSection from "../sections/ReviewsSection";
 
 import { useStyles } from "./styles";
 import { HomePageProps } from "./interfaces";
-/**
- * TODO: IMPORTANT!!! is needly add all values to container, the idea is go to controlling the spaces o margins for the differents sections.
- */
+import { useRouter } from "next/router";
+// const langs = require("../../../lang").home;
+import { useLang } from '@hooks';
+
+
 const HomePage = (props: HomePageProps) => {
     const classes = useStyles();
+    const [lang] = useLang('home');
+
     return (
         <Layout page='homepage'>
-            <ValuePropositionSection />
+            <ValuePropositionSection lang={lang.valuePropositionSection} />
             <div style={{ paddingTop: "32px" }}>
                 <GoogleRatingSection />
             </div>
             <div className={classes.paddingY8}>
-                <HowItWorksSection cards={props.howItWorks} />
+                <HowItWorksSection lang={lang.howItWorksSection} />
             </div>
             <div className={classes.paddingY8}>
-                <PlansSection cards={props.plans} />
+                <PlansSection cards={props.plans} lang={lang.plansSection} />
             </div>
             <div>
-                <BenefitsSection cards={props.benefits} />
+                <BenefitsSection lang={lang.benefitsSection} />
             </div>
             <div className={classes.paddingY8}>
-                <RecipesSection recipes={props.recipes} />
+                <RecipesSection recipes={props.recipes} lang={lang.recipesSection} />
             </div>
             <div className={classes.paddingY8}>
                 <ReviewsSection />

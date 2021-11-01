@@ -40,7 +40,7 @@ const ComoFunciona = () => {
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <HowItWorksExtendedSection />
             </InnerSectionLayout>
-            <BenefitsSection backgroundColor={theme.palette.background.default} cards={benefits} removeCallToAction enableTitleSection />
+            <BenefitsSection backgroundColor={theme.palette.background.default} cards={benefits} removeCallToAction enableTitleSection lang={lang.benefitsSection} />
         </Layout>
     );
 };

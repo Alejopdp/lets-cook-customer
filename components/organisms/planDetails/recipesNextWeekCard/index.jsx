@@ -18,15 +18,15 @@ import RoundedButton from "../../../atoms/roundedButton/roundedButton";
 const useStyles = makeStyles((theme) => ({}));
 
 const RecipesNextWeekCard = (props) => {
+    const lang = props.lang;
     const theme = useTheme();
     const classes = useStyles();
     const router = useRouter();
-    // const lang = langs[router.locale];
 
     return (
         <>
             {!props.hasChosenRecipesForNextWeek ? (
-                <BoxWithTitle title="Recetas de la próxima semana">
+                <BoxWithTitle title={lang.title}>
                     <Box style={{ textAlign: "center", marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
                         <Image src="/assets/userProfile/recipesEmptyState.svg" width="80" height="80" />
                         <Typography
@@ -35,12 +35,12 @@ const RecipesNextWeekCard = (props) => {
                             style={{ fontSize: "16px", marginTop: theme.spacing(1), marginBottom: theme.spacing(2) }}
                         >
                             {props.canChooseRecipes
-                                ? `Ya puedes elegir tus recetas para la entrega del ${props.nextWeekOrder.shippingDate}`
-                                : "Estamos eligiendo por tí las recetas de la semana actual"}
+                                ? `${lang.hasNotChosenRecipesForNextWeek.withoutRecipesAndCanChooseText} ${props.nextWeekOrder.shippingDate}`
+                                : lang.hasNotChosenRecipesForNextWeek.withoutRecipesAndCantChooseText}
                         </Typography>
                         {props.canChooseRecipes && (
                             <RoundedButton
-                                label="Elegir recetas"
+                                label={lang.chooseRecipesBtnText}
                                 onClick={() => router.push(`/elegir-recetas/${props.nextWeekOrder.id}`)}
                             />
                         )}
@@ -48,13 +48,13 @@ const RecipesNextWeekCard = (props) => {
                 </BoxWithTitle>
             ) : (
                 <BoxWithTitleAndTextButton
-                    title="Recetas de la próxima semana"
-                    btnText="modificar recetas"
+                    title={lang.title}
+                    btnText={lang.editRecipesBtnText}
                     handleClick={() => router.push(`/elegir-recetas/${props.nextWeekOrder.id}`)}
                     hideButton={!props.canChooseRecipes}
                 >
                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px" }}>
-                        Estas son las recetas que recibirás el {props.nextWeekOrder.shippingDate}
+                        {lang.hasChosenRecipesForNextWeek.text} {props.nextWeekOrder.shippingDate}
                     </Typography>
                     <ChosenRecipes
                         recipes={props.nextWeekOrder.recipes}

@@ -97,7 +97,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         const { peopleLabels, planName, planRecipes } = getPlanData(plan.slug, props.plans);
         setPlanSize(peopleLabels);
         setRecipesOfWeek(recipes);
-        console.log("Recieps: ", planRecipes);
         buyFlow.selectPlanRecipes(planRecipes); // TO DO: Unifiy recipe type
         buyFlow.setPlanCode(
             plan.id,
@@ -224,7 +223,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                 <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
                     {/* PLAN CARRUSEL */}
                     <Grid item xs={12}>
-                        <Typography variant="h5">1. Elige tu plan</Typography>
+                        <Typography variant="h5">{lang.choosePlanTitle}</Typography>
                     </Grid>
                     <Grid container spacing={2} style={{ marginTop: theme.spacing(2), justifyContent: "center" }}>
                         {props.plans.map((plan, index) => {
@@ -250,12 +249,12 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                             {!!Object.keys(planSize).length && (
                                 <Grid container spacing={2}>
                                     <Grid item xs={12}>
-                                        <Typography variant="h5">2. Elige el tamaño de tu plan</Typography>
+                                        <Typography variant="h5">{lang.chooseVariantTitle}</Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <PlanSize
                                             name="peopleQty"
-                                            subtitle={"Cantidad de personas"}
+                                            subtitle={lang.peopleSubtitle}
                                             fromArray={Object.keys(planSize)}
                                             valueSelected={`${buyFlow.form.variant?.numberOfPersons}`}
                                             handleOnChange={handleOnSelectPeopleQty}
@@ -264,7 +263,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                                     <Grid item xs={12}>
                                         <PlanSize
                                             name="recipeQty"
-                                            subtitle="Cantidad de recetas por semana"
+                                            subtitle={lang.recipesSubtitle}
                                             fromArray={planSize[buyFlow.form.variant?.numberOfPersons]}
                                             valueSelected={`${buyFlow.form.variant?.numberOfRecipes}`}
                                             handleOnChange={handleOnSelectRecipeQty}
@@ -289,11 +288,9 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} style={{ textAlign: "center", marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
-                        <RoundedButton label="Seleccionar plan" onClick={handleClickSelectPlan} />
+                        <RoundedButton label={lang.btnText} onClick={handleClickSelectPlan} />
                         <Typography variant="body2" color="textSecondary" style={{ marginTop: theme.spacing(2) }}>
-                            {buyFlow.form.canChooseRecipes
-                                ? "Podrás elegir las recetas en el último paso. Cada semana cambiamos las recetas."
-                                : "Cada semana te sorprenderemos con nuevas recetas."}
+                            {buyFlow.form.canChooseRecipes ? lang.btnCaption.canChooseRecipes : lang.btnCaption.cantChooseRecipes}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -302,7 +299,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             {/* RECIPES SECTION */}
             {!!recipesOfWeek.length && (
                 <div className={classes.recipeSection}>
-                    <WeekPlanRecipesSection recipes={recipesOfWeek} />
+                    <WeekPlanRecipesSection recipes={recipesOfWeek} lang={lang.weekPlanRecipesSection} />
                 </div>
             )}
 
@@ -310,13 +307,10 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             <Container maxWidth="lg">
                 <Grid container spacing={2} className={classes.faqsSection}>
                     <Grid item xs={12}>
-                        <SectionTitleBuyFlow
-                            title="Preguntas frecuentes"
-                            subtitle="¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat"
-                        />
+                        <SectionTitleBuyFlow title={lang.faqsSection.title} subtitle={lang.faqsSection.subtitle} />
                         <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>
-                                {lang.faqs.map((faq, index) => (
+                                {lang.faqsSection.faqs.map((faq, index) => (
                                     <Grid item xs={12}>
                                         <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                                     </Grid>
@@ -336,7 +330,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             <Grid item container direction="row" component="nav" xs={12} className={classes.footer}>
                 <Grid item className={classes.footerItem} xs>
                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
-                        Let's Cook 2021 © - Todos los derechos reservados
+                        {lang.footerSection.copyright}
                     </Typography>
                 </Grid>
                 <Grid item className={classes.footerItem}>
@@ -346,7 +340,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         style={{ fontSize: "14px", cursor: "pointer" }}
                         onClick={handleOpenTycModal}
                     >
-                        Términos y condiciones
+                        {lang.footerSection.termsAndConditions}
                     </Typography>
                 </Grid>
                 <Grid item className={classes.footerItem}>
@@ -356,7 +350,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         style={{ fontSize: "14px", cursor: "pointer" }}
                         onClick={handleOpenPrivacyPolicyModal}
                     >
-                        Política de privacidad
+                        {lang.footerSection.privacyPolicy}
                     </Typography>
                 </Grid>
             </Grid>

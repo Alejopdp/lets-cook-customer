@@ -1,8 +1,6 @@
 // Utils & Config
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-// import { useRouter } from "next/router";
-// const langs = require("../../lang").comoFunciona;
 
 // External Components
 import Typography from "@material-ui/core/Typography";
@@ -18,8 +16,6 @@ const useStyles = makeStyles((theme) => ({
 const PlanCard = props => {
     const theme = useTheme();
     const classes = useStyles();
-    // const router = useRouter();
-    // const lang = langs[router.locale];
 
     return (
         <BoxWithTextButton btnText='cambiar plan' handleClick={props.handleClick}>

@@ -18,6 +18,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 // Internal components
 
 const SelectVariantContent = (props: SelectVariantContentProps) => {
+    const lang = props.lang
     const theme = useTheme();
     const router = useRouter();
     const classes = useStylesVariantContent();
@@ -112,7 +113,7 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                 ))}
             </Box>
             <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}>
-                Frecuencia:
+                {lang.frequencyText}
             </Typography>
             <FormControl component="fieldset" style={{ width: "100%" }}>
                 <RadioGroup
@@ -136,9 +137,9 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
             {actualValue !== -1 && (
                 <div style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(3) }}>
                     <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
-                        {`Precio: ${actualValue} €`}
+                        {`${lang.priceText}: ${actualValue}€`}
                     </Typography>
-                    <Typography variant="caption" color='textSecondary'>Impuestos incluidos</Typography>
+                    <Typography variant="caption" color='textSecondary'>{lang.taxIncluded}</Typography>
                 </div>
             )}
         </Box>

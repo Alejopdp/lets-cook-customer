@@ -16,21 +16,22 @@ const useStyles = makeStyles((theme) => ({
 
 
 const MoveAbroad = (props) => {
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
 
-    const googleReviewLink = 'https://support.google.com/business/answer/7035772?hl=en'
+    const googleReviewLink = 'https://g.page/r/CWbmYA4fuxLDEAg/review'
 
     return (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
-                Muchas gracias por acompañarnos durante este tiempo. Que tengas suerte en tu nueva etapa. Te agradecemos si podrías dejar una reseña.
+                {lang.modalText}
             </Typography>
-            <Link href={googleReviewLink} color='textPrimary' style={{ cursor: 'pointer', textDecoration: 'none' }}>
+            <Link href={googleReviewLink} target="_blank" rel="noopener noreferrer" color='textPrimary' style={{ cursor: 'pointer', textDecoration: 'none' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <RateReviewIcon />
                     <Typography variant="subtitle1" color="textPrimary" style={{ fontSize: '16px', marginLeft: theme.spacing(1) }}>
-                        Dejar una reseña en Google
+                        {lang.reviewText}
                     </Typography>
                 </div>
             </Link>

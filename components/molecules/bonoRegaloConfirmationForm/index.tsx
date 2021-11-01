@@ -235,6 +235,14 @@ const BonoRegaloConfirmationForm = (props) => {
         }
     }
 
+    const lang = {
+        paymentMethodForm: {
+            savedCardLabel: "Mis tarjetas guardadas",
+            addNewPaymentMethodLabel: "Ingresar nuevo metodo de pago"
+        },
+    }
+    
+
     return (
         <>
             <Accordion
@@ -311,6 +319,7 @@ const BonoRegaloConfirmationForm = (props) => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <PaymentMethodForm
+                                        lang={lang.paymentMethodForm}
                                         paymentMethods={userInfo.paymentMethods || []}
                                         selectedOption={form.paymentMethod ?.type}
                                         setselectedOption={(e) => handlePaymentMethodTypeChange(e)}

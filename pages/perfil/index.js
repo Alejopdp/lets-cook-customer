@@ -2,6 +2,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "@material-ui/core";
+const langs = require("../../lang").perfil;
+import { swapPlan } from "../../helpers/serverRequests/subscription";
+import { skipOrders } from "../../helpers/serverRequests/order";
+import { getSubscriptionById } from "../../helpers/serverRequests/userProfile";
+import { getDataForSwappingAPlan } from "../../helpers/serverRequests/plans";
+import { useUserInfoStore } from "../../stores/auth";
+import { useSnackbar } from "notistack";
+import { reorderPlan } from "../../helpers/serverRequests/subscription";
 
 import Link from "next/link";
 // const langs = require("../../lang").comoFunciona;
@@ -24,31 +32,15 @@ import ChooseRecipesActionBox from "../../components/molecules/pendingActionsCom
 import RateRecipesActionBox from "../../components/molecules/pendingActionsComponents/rateRecipesActionBox";
 import ReferalActionBox from "../../components/molecules/pendingActionsComponents/referalActionBox";
 import EmptyState from "../../components/molecules/emptyState/emptyState";
-import { useUserInfoStore } from "../../stores/auth";
-import { useSnackbar } from "notistack";
-import { reorderPlan } from "../../helpers/serverRequests/subscription";
 import PlanProfileCard from "../../components/molecules/planProfileCard/";
-
-// export async function getServerSideProps(context) {
-//     const customerWithPlans = "f031ca8c-647e-4d0b-8afc-28e982068fd5";
-//     const customerWithoutPlans = "";
-//     const customerId = customerWithPlans;
-
-//     const locale = context.locale;
-//     const res = await getProfileInfo(customerId, locale);
-
-//     return {
-//         props: {
-//             data: res.data || null,
-//             error: res.status !== 200 ? "ERROR" : "",
-//         },
-//     };
-// }
+import SwapPlanModal from "../../components/molecules/managePlanModals/swapPlanModal";
+import SkipPlanModal from "../../components/molecules/managePlanModals/skipPlanModal";
 
 const Perfil = (props) => {
     const theme = useTheme();
     const router = useRouter();
     const [isReorderingPlan, setIsReorderingPlan] = useState(false);
+    const lang = langs[router.locale];
     const { enqueueSnackbar } = useSnackbar();
     const [openPlanRecoverModal, setOpenPlanRecoverModal] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
@@ -57,8 +49,12 @@ const Perfil = (props) => {
         additionalPlanSubscriptions: [],
         pendingActions: [],
     });
+    const [openChangePlanModal, setOpenChangePlanModal] = useState(false);
+    const [openSkipPlanModal, setOpenSkipPlanModal] = useState(false);
+    const [subscription, setSubscription] = useState();
+    const [swapPlanData, setSwapPlanData] = useState();
+    const [subscriptionIdSelected, setSubscriptionIdSelected] = useState();
     const userInfo = useUserInfoStore((state) => state.userInfo);
-    // const lang = langs[router.locale];
 
     useEffect(() => {
         const getProfile = async () => {
@@ -73,6 +69,69 @@ const Perfil = (props) => {
 
         getProfile();
     }, [userInfo]);
+
+    const handleSetSubscriptionId = async (subscriptionId) => {
+        const locale = router.locale;
+        setSubscriptionIdSelected(subscriptionId);
+        const res = await getSubscriptionById(subscriptionId, locale);
+        const swapPlanDataRes = await getDataForSwappingAPlan(subscriptionId, locale);
+        if (res.status === 200) {
+            setSubscription(res.data);
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+        if (swapPlanDataRes.status === 200) {
+            setSwapPlanData(swapPlanDataRes.data);
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+    };
+
+    // FUNCTIONS MANAGE PLAN
+
+    // Change Plan Modal Functions
+
+    const handleClickOpenChangePlanModal = () => {
+        setOpenChangePlanModal(true);
+    };
+
+    const handleCloseChangePlanModal = () => {
+        setOpenChangePlanModal(false);
+    };
+
+    const handlePrimaryButtonClickChangePlanModal = async (newPlan) => {
+        const res = await swapPlan(subscriptionIdSelected, newPlan.planId, newPlan.planVariantId);
+
+        if (res.status === 200) {
+            enqueueSnackbar("Plan cambiado con éxito", { variant: "success" });
+            setOpenChangePlanModal(false);
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+        }
+    };
+
+    // Skip Plan Modal Functions
+
+    const handleClickOpenSkipPlanModal = () => {
+        setOpenSkipPlanModal(true);
+    };
+
+    const handleCloseSkipPlanModal = () => {
+        setOpenSkipPlanModal(false);
+    };
+
+    const handlePrimaryButtonClickSkipPlanModal = async (orders) => {
+        const res = await skipOrders(orders);
+
+        if (res.status === 200) {
+            enqueueSnackbar("La/s semana/s han sido saltadas correctamente", { variant: "success" });
+        } else {
+            enqueueSnackbar("Error al saltar la/s semana/s", { variant: "error" });
+        }
+        setOpenSkipPlanModal(false);
+    };
+
+    // END FUNCTIONS MANAGE PLAN
 
     const handleClickOpenPlanRecoverModal = async (id, type) => {
         const plan = data[type].find((el) => el.id === id);
@@ -92,11 +151,11 @@ const Perfil = (props) => {
     const getPendingActionComponent = (data) => {
         switch (data.type) {
             case "choose_recipes":
-                return <ChooseRecipesActionBox data={data} />;
+                return <ChooseRecipesActionBox data={data} lang={lang.chooseRecipesActionBox} />;
             case "rate_recipes":
-                return <RateRecipesActionBox />;
+                return <RateRecipesActionBox lang={lang.rateRecipesActionBox} />;
             case "invite_code":
-                return <ReferalActionBox data={data} />;
+                return <ReferalActionBox data={data} lang={lang.referalActionBox} />;
             default:
                 return <p>unknown action</p>;
         }
@@ -178,7 +237,7 @@ const Perfil = (props) => {
                                 >
                                     <Grid item xs={9}>
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                            Hola {userInfo.firstName || ""}
+                                            {lang.greeting} {userInfo.firstName || ""}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={3} style={{ textAlign: "right" }}>
@@ -186,13 +245,13 @@ const Perfil = (props) => {
                                             style={{ marginRight: theme.spacing(2) }}
                                             noColor
                                             icon="time"
-                                            btnText="Historial de pagos"
+                                            btnText={lang.paymentHistoryBtnText}
                                             handleClick={() => router.push("/historial-pagos")}
                                         />
                                         <TextButton
                                             noColor
                                             icon="settings"
-                                            btnText="Configuración"
+                                            btnText={lang.settingsBtnText}
                                             handleClick={() => router.push("/configuracion")}
                                         />
                                         {/* </Grid> */}
@@ -233,7 +292,7 @@ const Perfil = (props) => {
                                 <Grid container direction="column" alignItems="left" spacing={2}>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(3) }}>
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
-                                            Hola {userInfo.firstName || ""}
+                                            {lang.greeting} {userInfo.firstName || ""}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
@@ -241,7 +300,7 @@ const Perfil = (props) => {
                                             style={{ marginRight: "14px" }}
                                             noColor
                                             icon="time"
-                                            btnText="Historial de pagos"
+                                            btnText={lang.paymentHistoryBtnText}
                                             handleClick={() => router.push("/historial-pagos")}
                                         />
                                     </Grid>
@@ -249,7 +308,7 @@ const Perfil = (props) => {
                                         <TextButton
                                             noColor
                                             icon="settings"
-                                            btnText="Configuración"
+                                            btnText={lang.settingsBtnText}
                                             handleClick={() => router.push("/configuracion")}
                                         />
                                     </Grid>
@@ -272,8 +331,8 @@ const Perfil = (props) => {
                                 style={{ marginBottom: theme.spacing(3) }}
                             >
                                 <ProfileTitleWithButton
-                                    title="Mis planes"
-                                    btnText="Nuevo plan"
+                                    title={lang.myPlansTitle}
+                                    btnText={lang.newPlanBtnText}
                                     handleClick={() => router.push("/planes")}
                                 />
                             </Grid>
@@ -289,6 +348,10 @@ const Perfil = (props) => {
                                                             handleClickOpenPlanRecoverModal(plan.id, "principalPlanSubscriptions")
                                                         }
                                                         handleClickRedirectToPlanDetail={handleClickRedirectToPlanDetail}
+                                                        lang={lang.planProfileCard}
+                                                        handleSetSubscriptionId={handleSetSubscriptionId}
+                                                        handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
+                                                        handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
                                                     />
                                                 </Grid>
                                             );
@@ -297,8 +360,8 @@ const Perfil = (props) => {
                                 ) : (
                                     <EmptyState
                                         image="/emptyStatePlans.png"
-                                        title="Aún no tienes planes"
-                                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                        title={lang.plansEmptyStateTitle}
+                                        text={lang.plansEmptyStateSubtitle}
                                     />
                                 )}
                             </Grid>
@@ -313,8 +376,8 @@ const Perfil = (props) => {
                                         style={{ marginBottom: theme.spacing(3) }}
                                     >
                                         <ProfileTitleWithButton
-                                            title="Mis adicionales"
-                                            btnText="Nuevo adicional"
+                                            title={lang.myAdditionalsTitle}
+                                            btnText={lang.additionalsBtnText}
                                             handleClick={() => router.push("/adicionales")}
                                         />
                                     </Grid>
@@ -329,6 +392,10 @@ const Perfil = (props) => {
                                                                 handleClickOpenPlanRecoverModal(plan.id, "additionalPlanSubscriptions")
                                                             }
                                                             handleClickRedirectToPlanDetail={handleClickRedirectToPlanDetail}
+                                                            lang={lang.planProfileCard}
+                                                            handleSetSubscriptionId={handleSetSubscriptionId}
+                                                            handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
+                                                            handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
                                                         />
                                                     </Grid>
                                                 ))}
@@ -336,8 +403,8 @@ const Perfil = (props) => {
                                         ) : (
                                             <EmptyState
                                                 image="/emptyStatePlans.png"
-                                                title="Aún no tienes acompañamientos"
-                                                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                                                title={lang.additionalsEmptyStateTitle}
+                                                text={lang.additionalsEmptyStateSubtitle}
                                             />
                                         )}
                                     </Grid>
@@ -352,8 +419,28 @@ const Perfil = (props) => {
                 open={openPlanRecoverModal}
                 handleClose={handleClosePlanRecoverModal}
                 handleSubmit={handleRecoverPlanSubmit}
-                isSubmitting={isReorderingPlan}
+                lang={lang.planRecoverModal}
             />
+
+            {/* MODALS MANAGE PLAN */}
+            {swapPlanData && (
+                <SwapPlanModal
+                    open={openChangePlanModal}
+                    handleClose={handleCloseChangePlanModal}
+                    handlePrimaryButtonClick={handlePrimaryButtonClickChangePlanModal}
+                    data={swapPlanData}
+                    lang={lang.swapPlanModal}
+                />
+            )}
+            {subscription && (
+                <SkipPlanModal
+                    open={openSkipPlanModal}
+                    handleClose={handleCloseSkipPlanModal}
+                    handlePrimaryButtonClick={handlePrimaryButtonClickSkipPlanModal}
+                    data={subscription.nextTwelveOrders}
+                    lang={lang.skipPlanModal}
+                />
+            )}
         </>
     );
 };

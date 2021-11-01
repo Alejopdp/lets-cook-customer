@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SkipPlanModal = (props: SkipPlanModalProps) => {
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
     const [weeksStore, setWeeksStore] = useState<SkippableOrder[]>([]);
@@ -64,9 +65,9 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
             open={props.open}
             handleClose={props.handleClose}
             handlePrimaryButtonClick={submitSkippedWeeks}
-            title="Saltar semana"
-            primaryButtonText="guardar cambios"
-            secondaryButtonText="cancelar"
+            title={lang.title}
+            primaryButtonText={lang.primaryButtonText}
+            secondaryButtonText={lang.secondaryButtonText}
             fullScreen={true}
             maxWidth="lg"
         >
@@ -96,7 +97,11 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
                                 style={{ fontWeight: 700, fontSize: "14px", textTransform: "uppercase" }}
                                 align="center"
                             >
-                                {week.state === OrderState.ORDER_BILLED ? "Pedido cobrado" : week.isSkipped ? "reanudar" : "saltar"}
+                                {week.state === OrderState.ORDER_BILLED
+                                    ? "Pedido cobrado"
+                                    : week.isSkipped
+                                    ? lang.reanudarBtnText
+                                    : lang.saltarBtnText}
                             </Typography>
                         </Box>
                     </Grid>

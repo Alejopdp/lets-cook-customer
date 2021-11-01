@@ -7,12 +7,14 @@ import { useRouter } from "next/router";
 import { useCallToActionStyle as useStyles } from "./styles";
 import { CallToActionSectionProps } from "./interfaces";
 import * as ga from '../../../helpers/ga'
+const langs = require("../../../lang").callToActionSection;
 
 
 export const CallToActionSection = memo((props: CallToActionSectionProps) => {
     const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();
+    const lang = langs[router.locale];
 
     const goToPlans = () => {
         ga.event({
@@ -32,12 +34,12 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
                     <Grid item xs={12}>
                         <Typography
                             className={classes.title}
-                            color="secondary"
+                            color="primary"
                             variant="h3"
                             align='center'
                         >
-                            Descubre tu chef interior
-                    </Typography>
+                            {lang.title}
+                        </Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography
@@ -45,16 +47,16 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
                             variant="body1"
                             align='center'
                         >
-                            Empieza a cocinar ingredientes frescos y de proximidad con Let's cook.
-                    </Typography>
+                            {lang.subtitle}
+                        </Typography>
                     </Grid>
                 </Grid>
                 <Grid container style={{ marginTop: theme.spacing(4) }}>
                     <Grid item xs={12} style={{ display: 'flex', flexDirection: 'column' }}>
-                        <RoundedButton label="Me interesa" onClick={goToPlans} />
+                        <RoundedButton label={lang.btnText} onClick={goToPlans} />
                         <Typography className={classes.smallText} align='center' variant="caption">
-                            Sin compromiso de permanencia
-                    </Typography>
+                            {lang.btnCaption}
+                        </Typography>
                     </Grid>
                 </Grid>
             </Container>
