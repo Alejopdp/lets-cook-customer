@@ -184,23 +184,23 @@ export const PaymentForm = (props) => {
                     form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                         ? goToNextView()
                         : moveNSteps(2);
-                    // ga.purchase({
-                    //     transaction_id: res.data.subscriptionId,
-                    //     affiliation: "Let's cook website",
-                    //     value: 0,
-                    //     currency: "EUR",
-                    //     tax: 0,
-                    //     shipping: 0,
-                    //     items: [
-                    //         {
-                    //             id: "",
-                    //             name: "",
-                    //             category: "",
-                    //             quantity: 0,
-                    //             price: 0
-                    //         }
-                    //     ]
-                    // })
+                    ga.purchase({
+                        transaction_id: res.data.subscriptionId,
+                        affiliation: "Let's cook website",
+                        value: res.data.amountBilled,
+                        currency: "EUR",
+                        tax: res.data.tax,
+                        shipping: res.data.shippingCost,
+                        items: [
+                            {
+                                id: form.planCode,
+                                name: form.planName,
+                                category: "",
+                                quantity: 1,
+                                // price: form.plan,
+                            },
+                        ],
+                    });
                 } else {
                     // TO DO: Reject payment in DB
                     await handle3dSecureFailure(res.data.subscriptionId);
@@ -219,24 +219,23 @@ export const PaymentForm = (props) => {
                 });
                 updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
                 form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0 ? goToNextView() : moveNSteps(2);
-                console.log("res.data", res.data);
-                // ga.purchase({
-                //     transaction_id: res.data.subscriptionId,
-                //     affiliation: "Let's cook website",
-                //     value: 0,
-                //     currency: "EUR",
-                //     tax: 0,
-                //     shipping: 0,
-                //     items: [
-                //         {
-                //             id: "",
-                //             name: "",
-                //             category: "",
-                //             quantity: 0,
-                //             price: 0
-                //         }
-                //     ]
-                // })
+                ga.purchase({
+                    transaction_id: res.data.subscriptionId,
+                    affiliation: "Let's cook website",
+                    value: res.data.amountBilled,
+                    currency: "EUR",
+                    tax: res.data.tax,
+                    shipping: res.data.shippingCost,
+                    items: [
+                        {
+                            id: form.planCode,
+                            name: form.planName,
+                            category: "",
+                            quantity: 1,
+                            // price: form.plan,
+                        },
+                    ],
+                });
             } else {
                 enqueueSnackbar("Error al completar el pago", { variant: "error" });
             }
