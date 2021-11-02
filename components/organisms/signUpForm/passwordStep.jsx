@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { isPassword } from "../../../helpers/regex/regex";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").passwordStep;
+import cookies from "js-cookie";
 
 // Internal components
 import { PasswordInput } from "../../atoms/inputs/inputs";
@@ -15,15 +16,40 @@ import { Grid, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { AcceptLegalTerms } from "../../atoms/loginHelpers/loginHelpers";
 import CustomCheckboxWithPopup from "components/atoms/customCheckbox/customCheckboxWithPopup";
+import { useLocalStorage } from "@hooks";
+import { useAuthStore, useUserInfoStore } from "@stores";
+import { loginWithSocialMedia } from "helpers/serverRequests/customer";
+import { useSnackbar } from "notistack";
 
 const PasswordStep = (props) => {
     const router = useRouter();
     const theme = useTheme();
     const lang = langs[router.locale];
+    const [serverError, setserverError] = useState("");
+    const { saveInLocalStorage } = useLocalStorage();
+    const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
+    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+    const { enqueueSnackbar } = useSnackbar();
+
+    const handleSocialMediaSubmit = async (token) => {
+        const res = await loginWithSocialMedia(token);
+        if (res.status === 200) {
+            saveInLocalStorage("token", res.data.token);
+            saveInLocalStorage("userInfo", res.data.userInfo);
+            setUserInfo(res.data.userInfo);
+            cookies.set("token", res.data.token);
+            props.signUpRedirect ? router.push("/") : "";
+            props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
+        } else {
+            setserverError(res.data.message);
+            // alert("Error al querer ingresar");
+            enqueueSnackbar(res && res.data ? res.data.message : "Ocurrió un error inesperado", { variant: "error" });
+        }
+    };
 
     return (
         <>
-            <SocialNetworksButtons />
+            <SocialNetworksButtons handleSubmit={props.handleSocialMediaSubmit} />
             <AcceptLegalTerms
                 handleOpenTycModal={props.handleOpenTycModal}
                 handleOpenPrivacyPolicyModal={props.handleOpenPrivacyPolicyModal}
