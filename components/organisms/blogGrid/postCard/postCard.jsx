@@ -12,7 +12,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
 // Internal components
-import BlogTagsWithFilter from '../../../atoms/blogTags/blogTagsFWithFilter';
+import BlogTagsWithFilter from "../../../atoms/blogTags/blogTagsFWithFilter";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "8px",
         marginBottom: theme.spacing(3),
         cursor: "pointer",
-        boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
+        boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
     },
     image: {
         borderRadius: "8px 0 0 8px",
@@ -57,10 +58,10 @@ const PostCard = (props) => {
     const classes = useStyles();
     const { root, image, marg1, marg2, marg4, publisher, date } = classes;
     const router = useRouter();
-    const harcodedTags = ['harcodedTag1', 'harcodedTag2', 'harcodedTag3'];
+    const harcodedTags = ["harcodedTag1", "harcodedTag2", "harcodedTag3"];
 
     const handlePostClick = () => {
-        router.push({ pathname: `/blogs/recetas/${props.post.slug}` });
+        router.push({ pathname: `${localeRoutes[router.locale][Routes.blogs]}/recetas/${props.post.slug}` });
     };
 
     return (
@@ -94,7 +95,6 @@ const PostCard = (props) => {
                         {dateFromISO8601(props.post.publishedAt, router.locale)}
                     </Typography>
                 </Grid>
-
             </Grid>
         </Grid>
     );

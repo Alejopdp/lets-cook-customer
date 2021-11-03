@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { cancelSubscription, swapPlan } from "../../../helpers/serverRequests/subscription";
+import { planDetails } from "lang/components/pages/planDetails";
 
 // External Components
 import Hidden from "@material-ui/core/Hidden";
@@ -20,7 +21,8 @@ import { useRouter } from "next/router";
 import { CancellationReason } from "types/cancellation";
 
 const PlanDetails = (props: PlanDetailsProps) => {
-    const lang = props.lang;
+    const router = useRouter();
+    const lang = planDetails[router.locale];
     const cancelPlanData = {
         reasons: [
             { id: 1, value: CancellationReason.CREATED_BY_ERROR, text: lang.cancelPlanReasonsText.created_by_error },
@@ -35,7 +37,6 @@ const PlanDetails = (props: PlanDetailsProps) => {
     };
 
     const theme = useTheme();
-    const router = useRouter();
     // const lang = langs[router.locale];
     const { enqueueSnackbar } = useSnackbar();
     const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: -1, period: "" });

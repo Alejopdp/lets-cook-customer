@@ -7,6 +7,7 @@ import { useLang } from "@hooks";
 import * as ga from "../../../helpers/ga";
 import { useRouter } from "next/router";
 import { MyProfileButton } from "components/atoms/myProfileButton";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -33,15 +34,15 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
     const menuOptions = {
         top: [
             { label: lang.itemHome, path: "/", img: "/icons/checkout/home.svg" },
-            { label: lang.itemPlans, path: "/planes", img: "/icons/checkout/gestion-del-plan.svg" },
-            { label: lang.itemRecipes, path: "/recetas", img: "/icons/checkout/recetas-nuevas.svg" },
+            { label: lang.itemPlans, path: localeRoutes[router.locale][Routes.planes], img: "/icons/checkout/gestion-del-plan.svg" },
+            { label: lang.itemRecipes, path: localeRoutes[router.locale][Routes.recetas], img: "/icons/checkout/recetas-nuevas.svg" },
         ],
         bottom: [
-            { label: lang.itemHowItWork, path: "/como-funciona" },
-            { label: lang.itemFAQ, path: "/preguntas-frecuentes" },
+            { label: lang.itemHowItWork, path: localeRoutes[router.locale][Routes["como-funciona"]] },
+            { label: lang.itemFAQ, path: localeRoutes[router.locale][Routes["preguntas-frecuentes"]] },
             // { label: lang.itemBlog, path: "/blogs/recetas" },
             // { label: lang.itemGif, path: "/bono-regalo" },
-            { label: lang.itemLegal, path: "/aviso-legal" },
+            { label: lang.itemLegal, path: localeRoutes[router.locale][Routes["aviso-legal"]] },
         ],
     };
 
@@ -53,7 +54,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
                 event_label: "sidebar",
             },
         });
-        router.push("/iniciar-sesion");
+        router.push(localeRoutes[router.locale][Routes["iniciar-sesion"]]);
     };
 
     const goToMyProfile = () => {
@@ -64,17 +65,14 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
                 event_label: "sidebar",
             },
         });
-        router.push("/perfil");
+        router.push(localeRoutes[router.locale][Routes["perfil"]]);
     };
-
-
-    
 
     const goToPage = (sectionName, path) => {
         ga.event({
             action: `clic en ${sectionName.toLowerCase()}`,
             params: {
-                event_category: 'menu hamburguesa',
+                event_category: "menu hamburguesa",
                 event_label: sectionName.toLowerCase(),
             },
         });
@@ -95,8 +93,11 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
             }}
         >
             <div className={classes.menuLogginButton}>
-                {props.isAuthenticated ? <MyProfileButton border style={{ width: "100%" }} goToLogin={goToMyProfile} /> :
-                    <LoginButton border style={{ width: "100%" }} goToLogin={goToLogin} />}
+                {props.isAuthenticated ? (
+                    <MyProfileButton border style={{ width: "100%" }} goToLogin={goToMyProfile} />
+                ) : (
+                    <LoginButton border style={{ width: "100%" }} goToLogin={goToLogin} />
+                )}
             </div>
             <List>
                 {menuOptions.top.map((option, index) => (

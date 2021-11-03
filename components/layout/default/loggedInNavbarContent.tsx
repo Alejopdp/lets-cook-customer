@@ -12,6 +12,7 @@ import UserBox from "./userBox";
 
 // Images and icons
 import MenuIcon from "@material-ui/icons/Menu";
+import { LangSelector } from "@molecules";
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -61,7 +62,7 @@ export const NavbarContent = (props: ToggleOpeningDrawerProps) => {
                     </Link>
                 </div>
                 <UserBox />
-                {/* <LangSelector onChangeLang={_handleOnChangeLang} /> */}
+                <LangSelector />
             </Toolbar>
         </AppBar>
     );

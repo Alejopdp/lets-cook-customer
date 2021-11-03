@@ -41,7 +41,11 @@ const RecipesNextWeekCard = (props) => {
                         {props.canChooseRecipes && (
                             <RoundedButton
                                 label={lang.chooseRecipesBtnText}
-                                onClick={() => router.push(`/elegir-recetas/${props.nextWeekOrder.id}`)}
+                                onClick={() =>
+                                    router.push(
+                                        `${localeRoutes[router.locale][Routes["elegir-recetas"]]}?orderId=${props.nextWeekOrder.id}`
+                                    )
+                                }
                             />
                         )}
                     </Box>
@@ -50,7 +54,9 @@ const RecipesNextWeekCard = (props) => {
                 <BoxWithTitleAndTextButton
                     title={lang.title}
                     btnText={lang.editRecipesBtnText}
-                    handleClick={() => router.push(`/elegir-recetas/${props.nextWeekOrder.id}`)}
+                    handleClick={() =>
+                        router.push(`/${localeRoutes[router.locale][Routes["elegir-recetas"]]}orderId=${props.nextWeekOrder.id}`)
+                    }
                     hideButton={!props.canChooseRecipes}
                 >
                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px" }}>

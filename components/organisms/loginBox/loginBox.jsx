@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 const langs = require("../../../lang").loginBox;
 import { loginWithEmail, loginWithSocialMedia } from "../../../helpers/serverRequests/customer";
 import cookies from "js-cookie";
-import * as ga from '../../../helpers/ga'
+import * as ga from "../../../helpers/ga";
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -20,6 +20,7 @@ import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
 import { useSnackbar } from "notistack";
 import { Grid, Typography, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const LoginBox = (props) => {
     const [values, setValues] = useState({
@@ -34,19 +35,18 @@ const LoginBox = (props) => {
     const theme = useTheme();
     const [isLoading, setIsLoading] = useState(false);
 
-
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
 
     const handleSubmit = async () => {
         ga.event({
-            action: 'clic en ingresar',
+            action: "clic en ingresar",
             params: {
                 event_category: `ingresar - ${props.source}`,
-                event_label: 'ingresar',
-            }
-        })
+                event_label: "ingresar",
+            },
+        });
 
         setIsLoading(true);
 
@@ -87,25 +87,25 @@ const LoginBox = (props) => {
 
     const handleRedirectToSignUp = () => {
         ga.event({
-            action: 'clic en registrate aqui',
+            action: "clic en registrate aqui",
             params: {
                 event_category: `ingresar - ${props.source}`,
-                event_label: 'aun no tienes cuenta',
-            }
-        })
-        router.push("/registrarme");
+                event_label: "aun no tienes cuenta",
+            },
+        });
+        router.push(localeRoutes[router.locale][Routes.registrarme]);
     };
 
     const handleRedirectToForgotPassword = () => {
         ga.event({
-            action: 'clic en olvide mi contrasena',
+            action: "clic en olvide mi contrasena",
             params: {
                 event_category: `ingresar - ${props.source}`,
-                event_label: 'olvide mi contrasena',
-            }
-        })
-        router.push("/recuperar-contrasena");
-    }
+                event_label: "olvide mi contrasena",
+            },
+        });
+        router.push(localeRoutes[router.locale][Routes["recuperar-contrasena"]]);
+    };
 
     return (
         <FormPaper title={lang.title}>

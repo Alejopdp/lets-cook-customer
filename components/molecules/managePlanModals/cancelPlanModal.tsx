@@ -26,6 +26,7 @@ import { swapPlan, updateRestriction } from "helpers/serverRequests/subscription
 import { CancellationReason } from "types/cancellation";
 import { getPlanAhorro } from "@helpers";
 import { PlanVariant } from "types/planVariant";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 export enum RecoverPriceTooHighActions {
     SWAP_WITH_PLAN_AHORRO = "SWAP_WITH_PLAN_AHORRO",
@@ -155,11 +156,11 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         switch (priceTooHighModalView) {
             case RecoverPriceTooHighActions.CHANGE_ACTUAL_PlAN_VARiANT:
                 handleChangePlanVariant();
-                router.push("/perfil");
+                router.push(localeRoutes[router.locale][Routes.perfil]);
                 break;
             case RecoverPriceTooHighActions.SWAP_WITH_PLAN_AHORRO:
                 handleSwapPlanAhorro();
-                router.push("/perfil");
+                router.push(localeRoutes[router.locale][Routes.perfil]);
                 break;
             default:
                 () => "";

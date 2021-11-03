@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import cookies from "js-cookie";
 import { useLang, useLocalStorage } from "@hooks";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const UserBox = (props) => {
     const router = useRouter();
@@ -37,19 +38,35 @@ const UserBox = (props) => {
 
     const options = {
         es: [
-            { title: lang.titlePlans, path: "/perfil", handler: () => _handleOptionSelected("/perfil") },
+            {
+                title: lang.titlePlans,
+                path: localeRoutes[router.locale][Routes.perfil],
+                handler: () => _handleOptionSelected(localeRoutes[router.locale][Routes.perfil]),
+            },
             {
                 title: lang.titleAccountSettings,
-                path: `/configuracion/${userInfo.id}`,
-                handler: () => _handleOptionSelected(`/configuracion`),
+                path: `/${localeRoutes[router.locale][Routes.perfil]}/${userInfo.id}`,
+                handler: () => _handleOptionSelected(localeRoutes[router.locale][Routes.configuracion]),
             },
-            { title: lang.titleHistoryPayments, path: "/historial-pagos", handler: () => _handleOptionSelected("/historial-pagos") },
+            {
+                title: lang.titleHistoryPayments,
+                path: localeRoutes[router.locale][Routes["historial-pagos"]],
+                handler: () => _handleOptionSelected(localeRoutes[router.locale][Routes["historial-pagos"]]),
+            },
             { title: lang.titleCloseSession, path: "/", handler: handleSignOut },
         ],
         en: [
-            { title: lang.titlePlans, path: "/perfil", handler: () => _handleOptionSelected("/") },
-            { title: lang.titleAccountSettings, path: `/configuracion`, handler: () => _handleOptionSelected("/") },
-            { title: lang.titleHistoryPayments, path: "/historial-pagos", handler: () => _handleOptionSelected("/historial-pagos") },
+            { title: lang.titlePlans, path: localeRoutes[router.locale][Routes.perfil], handler: () => _handleOptionSelected("/") },
+            {
+                title: lang.titleAccountSettings,
+                path: localeRoutes[router.locale][Routes.configuracion],
+                handler: () => _handleOptionSelected("/"),
+            },
+            {
+                title: lang.titleHistoryPayments,
+                path: localeRoutes[router.locale][Routes["historial-pagos"]],
+                handler: () => _handleOptionSelected(localeRoutes[router.locale][Routes["historial-pagos"]]),
+            },
             { title: lang.titleCloseSession, path: "/", handler: handleSignOut },
         ],
     };

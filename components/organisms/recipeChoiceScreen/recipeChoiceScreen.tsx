@@ -21,6 +21,7 @@ import { chooseRecipes } from "helpers/serverRequests/order";
 import { useRouter } from "next/router";
 import { IFilter } from "@layouts";
 import { Recipe } from "@helpers";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 interface IFilterOptions {
     title: string;
@@ -132,7 +133,9 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
 
         if (res.status === 200) {
             enqueueSnackbar("Recetas elegidas correctamente", { variant: "success" });
-            router.replace({ pathname: `/detalle-del-plan/${props.subscriptionId}` });
+            router.replace({
+                pathname: `${localeRoutes[router.locale][Routes["detalle-del-plan"]]}?subscriptionId=${props.subscriptionId}`,
+            });
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
@@ -213,6 +216,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                 maxRecipesQty={props.maxRecipesQty}
                 handleSubmit={handleSubmit}
                 handleSecondaryButtonClick={() => router.back()}
+                lang={lang}
             />
             {drawerIsOpen && (
                 <DrawerMenu

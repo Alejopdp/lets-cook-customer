@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 import { useHowItWorksStyles as useStyles } from "./styles";
 import { HowItWorksSectionProps, HowItWorks } from "./interfaces";
 import { memo } from "react";
-import * as ga from '../../../helpers/ga'
+import * as ga from "../../../helpers/ga";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
     const lang = props.lang;
@@ -19,12 +20,12 @@ const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
         ga.event({
             action: "clic en empieza a cocinar",
             params: {
-                event_category: 'homepage',
-                event_label: 'como funciona',
-            }
-        })
-        router.push("/planes")
-    }
+                event_category: "homepage",
+                event_label: "como funciona",
+            },
+        });
+        router.push(localeRoutes[router.locale][Routes.planes]);
+    };
 
     return (
         <Container maxWidth="lg">

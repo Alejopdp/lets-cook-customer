@@ -18,6 +18,7 @@ import WeekPlanRecipesSection from "./sections/weekPlanRecipesSection/weekPlanRe
 import TermsAndConditionsModal from "../../../molecules/legalModals/termsAndConditionsModal";
 import PrivacyPolicyModal from "../../../molecules/legalModals/privacyPolicyModal";
 import * as ga from "../../../../helpers/ga";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const langs = require("../../../../lang").selectPlanStep;
 
@@ -150,7 +151,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
         router.push(
             {
-                pathname: "/planes/[slug]",
+                pathname: `${localeRoutes[router.locale][Routes.planes]}/[slug]`,
                 query: {
                     slug: slug,
                     recetas: variant.numberOfRecipes,

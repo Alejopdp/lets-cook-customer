@@ -15,6 +15,7 @@ import { LangSelector } from "@molecules";
 // Images and icons
 import MenuIcon from "@material-ui/icons/Menu";
 import { useLang } from "@hooks";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -47,7 +48,7 @@ interface NavbarContentProps {
 }
 
 export const NavbarContent = (props: NavbarContentProps) => {
-    const _handleOnChangeLang = (lang) => { };
+    const _handleOnChangeLang = (lang) => {};
     const classes = useStyles();
     const router = useRouter();
     const [lang] = useLang("navbarContent");
@@ -60,7 +61,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
                 event_label: "cabecera",
             },
         });
-        router.push("/planes");
+        router.push(localeRoutes[router.locale][Routes.planes]);
     };
 
     const goToLogin = () => {
@@ -71,7 +72,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
                 event_label: "cabecera",
             },
         });
-        router.push("/iniciar-sesion");
+        router.push(localeRoutes[router.locale][Routes["iniciar-sesion"]]);
     };
 
     return (

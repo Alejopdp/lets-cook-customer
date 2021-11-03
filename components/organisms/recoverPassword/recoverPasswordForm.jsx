@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import cookies from "js-cookie";
 const langs = require("../../../lang").recoverPassword;
-import * as ga from '../../../helpers/ga'
+import { Routes, localeRoutes } from "lang/routes/routes";
+import * as ga from "../../../helpers/ga";
 
 // Internal components
 import RecoverPasswordMail from "./recoverPasswordMail";
@@ -41,12 +42,12 @@ const RecoverPasswordForm = (props) => {
 
     const handleSubmitEmail = async () => {
         ga.event({
-            action: 'clic en recuperar contrasena',
+            action: "clic en recuperar contrasena",
             params: {
                 event_category: `recupero de contrasena - ${props.source}`,
-                event_label: 'ingreso de email',
-            }
-        })
+                event_label: "ingreso de email",
+            },
+        });
 
         setIsLoadingRecoverPasswordMail(true);
 
@@ -62,12 +63,12 @@ const RecoverPasswordForm = (props) => {
 
     const handleSubmitCode = async () => {
         ga.event({
-            action: 'clic en continuar',
+            action: "clic en continuar",
             params: {
                 event_category: `recupero de contrasena - ${props.source}`,
-                event_label: 'ingreso del codigo',
-            }
-        })
+                event_label: "ingreso del codigo",
+            },
+        });
 
         setIsLoadingRecoverPasswordCode(true);
 
@@ -83,12 +84,12 @@ const RecoverPasswordForm = (props) => {
 
     const handleSubmitNewPassword = async () => {
         ga.event({
-            action: 'clic en continuar',
+            action: "clic en continuar",
             params: {
                 event_category: `recupero de contrasena - ${props.source}`,
-                event_label: 'ingreso de nueva contrasena',
-            }
-        })
+                event_label: "ingreso de nueva contrasena",
+            },
+        });
 
         setIsLoadingRecoverPassword(true);
 
@@ -119,7 +120,7 @@ const RecoverPasswordForm = (props) => {
         setUserInfo(userInfo);
         cookies.set("token", token);
         setIsAuthenticated(true);
-        router.push("/perfil");
+        router.push(localeRoutes[router.locale][Routes.perfil]);
     };
 
     const handleChange = (e) => {
@@ -130,26 +131,52 @@ const RecoverPasswordForm = (props) => {
     };
 
     const handleRedirect = () => {
-        router.push("/registrarme");
+        router.push(localeRoutes[router.locale][Routes.registrarme]);
     };
 
     switch (true) {
         case currentStep === 0:
-            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} isLoading={isLoadingRecoverPasswordMail}/>;
+            currentInputs = (
+                <RecoverPasswordMail
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmitEmail}
+                    value={formData.email}
+                    isLoading={isLoadingRecoverPasswordMail}
+                />
+            );
             break;
 
         case currentStep === 1:
-            currentInputs = <RecoverPasswordCode handleChange={handleChange} handleSubmit={handleSubmitCode} value={formData.code} isLoading={isLoadingRecoverPasswordCode}/>;
+            currentInputs = (
+                <RecoverPasswordCode
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmitCode}
+                    value={formData.code}
+                    isLoading={isLoadingRecoverPasswordCode}
+                />
+            );
             break;
 
         case currentStep === 2:
             currentInputs = (
-                <RecoverPassword handleChange={handleChange} handleSubmit={handleSubmitNewPassword} value={formData.password} isLoading={isLoadingRecoverPassword}/>
+                <RecoverPassword
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmitNewPassword}
+                    value={formData.password}
+                    isLoading={isLoadingRecoverPassword}
+                />
             );
             break;
 
         default:
-            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} isLoading={isLoadingRecoverPasswordMail}/>;
+            currentInputs = (
+                <RecoverPasswordMail
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmitEmail}
+                    value={formData.email}
+                    isLoading={isLoadingRecoverPasswordMail}
+                />
+            );
     }
 
     return (
