@@ -11,6 +11,8 @@ import Modal from "../../atoms/modal/modal";
 import LocationSearchInput from "../../atoms/locationSearchInput/locationSearchiInput";
 
 const BillingAddressModal = (props) => {
+    const lang = props.lang;
+
     const [formData, setformData] = useState({
         addressName: props.billingData.addressName,
         details: props.billingData.details,
@@ -46,7 +48,7 @@ const BillingAddressModal = (props) => {
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            title="Modificar direccion de facturacion"
+            title={lang.title}
             fullScreen
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
@@ -59,7 +61,7 @@ const BillingAddressModal = (props) => {
                 <Grid item xs={12}>
                     <TextField
                         id="outlined-basic"
-                        label="Piso / Puerta / Aclaraciones"
+                        label={lang.details}
                         variant="outlined"
                         name="details"
                         fullWidth
@@ -70,7 +72,7 @@ const BillingAddressModal = (props) => {
                 <Grid item xs={12}>
                     <TextField
                         id="outlined-basic"
-                        label="Nombre Completo"
+                        label={lang.customerName}
                         variant="outlined"
                         fullWidth
                         name="customerName"
@@ -81,7 +83,7 @@ const BillingAddressModal = (props) => {
                 <Grid item xs={12}>
                     <TextField
                         id="outlined-basic"
-                        label="DNI/NIE/CIF"
+                        label={lang.identification}
                         fullWidth
                         variant="outlined"
                         name="identification"

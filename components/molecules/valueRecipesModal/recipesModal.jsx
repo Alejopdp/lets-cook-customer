@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RecipesModal = (props) => {
+    const lang = props.lang
     const theme = useTheme();
     const classes = useStyles();
     const {
@@ -85,9 +86,9 @@ const RecipesModal = (props) => {
             open={props.open}
             handleClose={handleSecondaryButtonClick}
             handlePrimaryButtonClick={() => handleQualificationClick(chosenRecipe.id, starValue, comment)}
-            title={chosenRecipe.rating ? "Modificar calificacion" : "Calificar receta"}
-            primaryButtonText={chosenRecipe.rating ? "Modificar calificacion" : "Calificar receta"}
-            secondaryButtonText="cancelar"
+            title={chosenRecipe.rating ? lang.title.hasRating : lang.title.hasNotRating}
+            primaryButtonText={chosenRecipe.rating ? lang.primaryButtonText.hasRating : lang.primaryButtonText.hasNotRating}
+            secondaryButtonText={lang.secondaryButtonText}
             fullScreen={true}
         >
             <Grid container spacing={2}>
@@ -112,7 +113,7 @@ const RecipesModal = (props) => {
                     <form className={classes.root} noValidate autoComplete="off" style={{ marginTop: "1rem" }}>
                         <TextField
                             id={chosenRecipe.id}
-                            placeholder="Ingrese aqui sus comentarios sobre la receta (opcional)"
+                            placeholder={lang.comments}
                             variant="outlined"
                             fullWidth
                             multiline
@@ -123,17 +124,6 @@ const RecipesModal = (props) => {
                     </form>
                 </Grid>
             </Grid>
-            {/* <DialogActions>
-                <Button onClick={() => handleSecondaryButtonClick()} style={{ color: theme.palette.text.secondary }}>
-                    CANCELAR
-                </Button>
-                <Button
-                    onClick={() => handleQualificationClick(chosenRecipe.id, starValue, comment)}
-                    style={{ color: theme.palette.primary.main }}
-                >
-                    {chosenRecipe.rating ? "Modificar calificacion" : "Calificar receta"}
-                </Button>
-            </DialogActions> */}
         </Modal>
     );
 };

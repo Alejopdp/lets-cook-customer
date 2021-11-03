@@ -12,7 +12,7 @@ import RecoverPasswordCode from "./recoverPasswordCode";
 import RecoverPassword from "./recoverPassword";
 import FormPaper from "../../molecules/formPaper/formPaper";
 import { ForgotPassword, Register } from "../../atoms/loginHelpers/loginHelpers";
-import { forgotPassword, loginWithEmail, resetPassword, validateRecoverPasswordCode } from "helpers/serverRequests/customer";
+import { forgotPassword, loginWithEmail, resetPassword, validateRecoverPasswordCode } from "../../../helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
 import { useAuthStore, useUserInfoStore } from "@stores";
 import { useLocalStorage } from "@hooks";
@@ -135,21 +135,21 @@ const RecoverPasswordForm = (props) => {
 
     switch (true) {
         case currentStep === 0:
-            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} isLoading={isLoadingRecoverPasswordMail}/>;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} isLoading={isLoadingRecoverPasswordMail} />;
             break;
 
         case currentStep === 1:
-            currentInputs = <RecoverPasswordCode handleChange={handleChange} handleSubmit={handleSubmitCode} value={formData.code} isLoading={isLoadingRecoverPasswordCode}/>;
+            currentInputs = <RecoverPasswordCode handleChange={handleChange} handleSubmit={handleSubmitCode} value={formData.code} isLoading={isLoadingRecoverPasswordCode} />;
             break;
 
         case currentStep === 2:
             currentInputs = (
-                <RecoverPassword handleChange={handleChange} handleSubmit={handleSubmitNewPassword} value={formData.password} isLoading={isLoadingRecoverPassword}/>
+                <RecoverPassword handleChange={handleChange} handleSubmit={handleSubmitNewPassword} value={formData.password} isLoading={isLoadingRecoverPassword} />
             );
             break;
 
         default:
-            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} isLoading={isLoadingRecoverPasswordMail}/>;
+            currentInputs = <RecoverPasswordMail handleChange={handleChange} handleSubmit={handleSubmitEmail} value={formData.email} isLoading={isLoadingRecoverPasswordMail} />;
     }
 
     return (

@@ -11,6 +11,7 @@ import Modal from "../../atoms/modal/modal";
 import { PasswordInput } from "../../atoms/inputs/inputs";
 
 const PasswordModal = (props) => {
+    const lang = props.lang;
     const theme = useTheme();
 
     const [newPassword, setNewPassword] = useState("");
@@ -34,7 +35,7 @@ const PasswordModal = (props) => {
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            title="Modificar correo electronico"
+            title={lang.title}
             handlePrimaryButtonClick={handleChangePassword}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
@@ -43,15 +44,15 @@ const PasswordModal = (props) => {
         >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <PasswordInput label="Nueva contraseña" name="newPassword" value={newPassword} onChange={handleChangeNewPassword} />
+                    <PasswordInput label={lang.newPassword} name="newPassword" value={newPassword} onChange={handleChangeNewPassword} />
                 </Grid>
                 <Grid item xs={12}>
                     <PasswordInput
-                        label="Repita su nueva contraseña"
+                        label={lang.repeatNewPassword}
                         name="repeatNewPassword"
                         value={repeatNewPassword}
                         onChange={handleChangeRepeatNewPassword}
-                        helperText="La contraseña debe tener al menos 8 caracteres, 1 minúscula, 1 mayúscula y 1 número"
+                        helperText={lang.helperText}
                     />
                 </Grid>
             </Grid>

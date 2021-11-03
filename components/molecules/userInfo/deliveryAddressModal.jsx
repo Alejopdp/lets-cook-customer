@@ -14,6 +14,7 @@ import LocationSearchInput from "../../atoms/locationSearchInput/locationSearchi
 import { getGeometry } from "../../../helpers/utils/geocode";
 
 const DeliveryAddressModal = (props) => {
+    const lang = props.lang;
     const theme = useTheme();
     const [formData, setformData] = useState({
         name: props.shippingAddress.name,
@@ -53,7 +54,7 @@ const DeliveryAddressModal = (props) => {
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            title="Modificar direccion de entrega"
+            title={lang.title}
             fullScreen
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
@@ -69,7 +70,7 @@ const DeliveryAddressModal = (props) => {
                         name="details"
                         fullWidth
                         id="outlined-basic"
-                        label="Piso / Puerta / Aclaraciones"
+                        label={lang.details}
                         variant="outlined"
                         value={formData.details}
                         onChange={handleChange}
@@ -88,7 +89,7 @@ const DeliveryAddressModal = (props) => {
             <div style={{ display: "flex", marginTop: ".7rem", alignItems: "center" }}>
                 <ErrorOutlineIcon style={{ color: "red" }} />
                 <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>
-                    La direccion de entrega se modificara en todos los planes activos
+                    {lang.helperText}
                 </i>
             </div>
         </Modal>

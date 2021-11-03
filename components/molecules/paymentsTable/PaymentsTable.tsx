@@ -27,12 +27,13 @@ const useStyles = makeStyles({
 });
 
 const PaymentsTable = (props: PaymentsTableProps) => {
+    const lang = props.lang;
     const columnsNewTable = [
-        { id: "billingDate", label: "Fecha de pago", minWidth: 100 },
-        { id: "id", label: "Número de orden", minWidth: 100 },
-        { id: "ordersQty", label: "Descripción", minWidth: 100 },
-        { id: "amount", label: "Monto total", minWidth: 100 },
-        { id: "state", label: "Estado", minWidth: 100 },
+        { id: "billingDate", label: lang.billingDate, minWidth: 100 },
+        { id: "id", label: lang.id, minWidth: 100 },
+        { id: "ordersQty", label: lang.ordersQty, minWidth: 100 },
+        { id: "amount", label: lang.amount, minWidth: 100 },
+        { id: "state", label: lang.state, minWidth: 100 },
         { id: "seeMore", label: "", minWidth: 50 },
     ];
 
@@ -55,7 +56,7 @@ const PaymentsTable = (props: PaymentsTableProps) => {
     };
 
     const getLabelDisplayedRows = ({ from, to, count }) => {
-        return `${from}-${to} de ${count !== -1 ? count : `más que ${to}`}`;
+        return `${from}-${to} ${lang.labelDisplayedRows.firstText} ${count !== -1 ? count : `${lang.labelDisplayedRows.secondText} ${to}`}`;
     };
 
     return (
@@ -72,7 +73,7 @@ const PaymentsTable = (props: PaymentsTableProps) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.paymentOrders?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        {props.paymentOrders ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                             return (
                                 <TableRow role="checkbox" tabIndex={-1} key={row.id}>
                                     {columnsNewTable.map((column) => {
@@ -95,9 +96,9 @@ const PaymentsTable = (props: PaymentsTableProps) => {
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={[50, 100, 250, { label: "Todos", value: -1 }]}
+                rowsPerPageOptions={[50, 100, 250, { label: lang.rowsPerPageAllOption, value: -1 }]}
                 component="div"
-                labelRowsPerPage="Filas por página"
+                labelRowsPerPage={lang.labelRowsPerPage}
                 labelDisplayedRows={getLabelDisplayedRows}
                 count={props.paymentOrders.length}
                 rowsPerPage={rowsPerPage}

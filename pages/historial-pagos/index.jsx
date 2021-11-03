@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "@material-ui/core/styles";
 import Link from "next/link";
+import { useLang } from "@hooks";
 
 // External components
 import Grid from "@material-ui/core/Grid";
@@ -17,7 +18,6 @@ import { Layout } from "../../components/layout/index";
 import PaymentsTable from "../../components/molecules/paymentsTable/PaymentsTable";
 import PaymentDetailsModal from "../../components/molecules/paymentDetailsModal/paymentDetailsModal";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
-import { useLang } from "@hooks";
 
 const HistorialPagos = (props) => {
     const theme = useTheme();
@@ -71,10 +71,10 @@ const HistorialPagos = (props) => {
             <Layout disableCallToActionSection>
                 <InnerSectionLayout containerMaxWidth="lg">
                     <BackButtonTitle url="/perfil" title={lang.title} />
-                    <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} paymentOrders={orders} />
+                    <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} paymentOrders={orders} lang={lang.paymentsTable} />
                 </InnerSectionLayout>
             </Layout>
-            <PaymentDetailsModal data={selectedPaymentOrder} open={openPaymentDetailsModal} handleClose={handleClosePaymentDetailsModal} />
+            <PaymentDetailsModal data={selectedPaymentOrder} open={openPaymentDetailsModal} handleClose={handleClosePaymentDetailsModal} lang={lang.paymentDetailsModal} />
         </>
     );
 };

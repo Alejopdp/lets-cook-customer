@@ -14,6 +14,7 @@ import Modal from "../../atoms/modal/modal";
 
 const EmailModal = (props) => {
     const theme = useTheme();
+    const lang = props.lang;
 
     const [newEmail, setNewEmail] = useState('')
 
@@ -29,7 +30,7 @@ const EmailModal = (props) => {
     return (
         <Modal
             open={props.open}
-            title='Modificar correo electronico'
+            title={lang.title}
             handlePrimaryButtonClick={handleChangeEmail}
             handleClose={props.handleClose}
             primaryButtonText={props.primaryButtonText}
@@ -39,7 +40,7 @@ const EmailModal = (props) => {
         >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <TextField id="outlined-basic" label="Nuevo correo electronico" variant="outlined" value={newEmail} onChange={handleChange} type='email' style={{ width: '100%' }} />
+                    <TextField id="outlined-basic" label={lang.newEmail} variant="outlined" value={newEmail} onChange={handleChange} type='email' style={{ width: '100%' }} />
                 </Grid>
             </Grid>
         </Modal>
