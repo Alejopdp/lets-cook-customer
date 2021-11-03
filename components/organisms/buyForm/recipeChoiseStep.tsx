@@ -108,10 +108,6 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                   )
               )
             : planRecipes;
-
-    console.log("Before filtered: ", planRecipes);
-    console.log("FIltered recipes: ", filteredRecipes);
-
     // const filteredRecipes = useMemo(() => {
     //     return filters.length > 0
     //         ? recipes.filter((recipe) =>
