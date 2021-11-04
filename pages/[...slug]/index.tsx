@@ -51,8 +51,8 @@ const Pages = (props) => {
             case localeRoutes[router.locale][Routes.perfil]:
                 return <ProfilePage />;
 
-            // case localeRoutes[router.locale][Routes.planes]:
-            //     return <PlanesPage />;
+            case localeRoutes[router.locale][Routes.planes]:
+                return <PlanesPage />;
 
             case localeRoutes[router.locale][Routes["preguntas-frecuentes"]]:
                 return <PreguntasFrecuentesPage />;

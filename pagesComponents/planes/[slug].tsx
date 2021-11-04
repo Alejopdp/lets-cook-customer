@@ -2,6 +2,7 @@
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { getPlans, Plan, Recipe, PlanVariant, getPlanVariant } from "@helpers";
 import { BuyFlowInitialStore, IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
+import { useRouter } from "next/router";
 
 // External components
 
@@ -38,21 +39,90 @@ export interface PlanesPageProps {
 }
 
 const PlanesPage = memo((props: PlanesPageProps) => {
+    const router = useRouter();
     const step = useBuyFlow(({ step }) => step);
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-    const { setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon } = useBuyFlow(
-        ({ setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon }) => ({
+    const { setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon, resetBuyFlowState } = useBuyFlow(
+        ({ setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon, resetBuyFlowState }) => ({
             setDeliveryInfo,
             setPaymentMethod,
             setShowRegister,
             setWeekLabel,
             setCoupon,
+            resetBuyFlowState,
         })
     );
+    const [isInitializing, setisInitializing] = useState(true);
+    const [data, setData] = useState({
+        isLogged: true,
+        plans: [],
+        aditionalsPlans: [],
+        weekLabel: "",
+        variant: {},
+        recipes: [],
+        planUrlParams: {},
+        errors: [],
+        redirect: {},
+    });
 
     useEffect(() => {
-        setWeekLabel(props.weekLabel);
+        const initialize = async () => {
+            const _slug = router.query.planSlug || "plan-familiar";
+            console.log("Router query plan slug: ", _slug);
+            const mainPlans: Plan[] = [];
+            const aditionalsPlans: Plan[] = [];
+
+            const [_plans] = await Promise.all([getPlans(router.locale)]);
+
+            const errors = [_plans.error].filter((e) => !!e);
+
+            if (errors.length) {
+                console.warn("***-> Errors: ", errors);
+            }
+
+            _plans.data?.plans.forEach((plan, index) => {
+                if (plan.type === "Main" || plan.type === "Principal") {
+                    mainPlans.push(plan);
+                } else {
+                    aditionalsPlans.push(plan);
+                }
+            });
+
+            const {
+                id,
+                slug,
+                variant,
+                redirect,
+                errors: _errors,
+                recipes,
+                planImageUrl,
+                iconLinealWithColorUrl,
+            } = getPlanVariant({ slug: _slug, recipeQty: router.query.recetas || 0, peopleQty: router.query.personas || 0 }, mainPlans);
+
+            setWeekLabel(_plans.data.weekLabel);
+            const planUrlParams: PlanUrlParams = {
+                personQty: `${variant?.numberOfPersons || 0}`,
+                recipeQty: `${variant?.numberOfRecipes || 0}`,
+                slug,
+                id,
+                planImageUrl,
+                iconLinealWithColorUrl,
+            };
+
+            setData({
+                aditionalsPlans,
+                errors: [...errors, _errors],
+                isLogged: true,
+                planUrlParams,
+                plans: mainPlans,
+                recipes,
+                redirect,
+                variant,
+                weekLabel: _plans.data.weekLabel,
+            });
+            setisInitializing(false);
+        };
         setDeliveryInfo({
             addressDetails: userInfo.shippingAddress?.addressDetails,
             addressName: userInfo.shippingAddress?.addressName,
@@ -73,7 +143,9 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             });
         }
 
+        initialize();
         return () => {
+            resetBuyFlowState();
             setCoupon({ ...BuyFlowInitialStore.form.coupon });
         };
     }, []);
@@ -101,14 +173,16 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     // );
 
     const steps = [
-        <SelectPlanStep initialPlanSettings={props.planUrlParams} plans={props.plans} variant={props.variant} recipes={props.recipes} />,
+        <SelectPlanStep initialPlanSettings={data.planUrlParams} plans={data.plans} variant={data.variant} recipes={data.recipes} />,
         <RegisterUserStep />,
         <CheckoutStep />,
-        <RecipeChoiseStep recipes={props.recipes} />,
+        <RecipeChoiseStep recipes={data.recipes} />,
         <CrossSellingStep />,
     ];
 
-    return step === steps.length - 1 ? (
+    return isInitializing ? (
+        <></>
+    ) : step === steps.length - 1 ? (
         <Box paddingY={4}>
             <LoggedInNavbar toggleOpeningDrawer={() => ""} />
             <CrossSellingStep />
@@ -118,60 +192,60 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     );
 });
 
-export async function getServerSideProps({ locale, query }) {
-    const _slug = query.slug || "";
-    const mainPlans: Plan[] = [];
-    const aditionalsPlans: Plan[] = [];
+// export async function getServerSideProps({ locale, query }) {
+//     const _slug = query.slug || "";
+//     const mainPlans: Plan[] = [];
+//     const aditionalsPlans: Plan[] = [];
 
-    const [_plans] = await Promise.all([getPlans(locale)]);
+//     const [_plans] = await Promise.all([getPlans(locale)]);
 
-    const errors = [_plans.error].filter((e) => !!e);
+//     const errors = [_plans.error].filter((e) => !!e);
 
-    if (errors.length) {
-        console.warn("***-> Errors: ", errors);
-    }
+//     if (errors.length) {
+//         console.warn("***-> Errors: ", errors);
+//     }
 
-    _plans.data?.plans.forEach((plan, index) => {
-        if (plan.type === "Main" || plan.type === "Principal") {
-            mainPlans.push(plan);
-        } else {
-            aditionalsPlans.push(plan);
-        }
-    });
+//     _plans.data?.plans.forEach((plan, index) => {
+//         if (plan.type === "Main" || plan.type === "Principal") {
+//             mainPlans.push(plan);
+//         } else {
+//             aditionalsPlans.push(plan);
+//         }
+//     });
 
-    const {
-        id,
-        slug,
-        variant,
-        redirect,
-        errors: _errors,
-        recipes,
-        planImageUrl,
-        iconLinealWithColorUrl,
-    } = getPlanVariant({ slug: _slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
+//     const {
+//         id,
+//         slug,
+//         variant,
+//         redirect,
+//         errors: _errors,
+//         recipes,
+//         planImageUrl,
+//         iconLinealWithColorUrl,
+//     } = getPlanVariant({ slug: _slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
 
-    const planUrlParams: PlanUrlParams = {
-        personQty: `${variant?.numberOfPersons || 0}`,
-        recipeQty: `${variant?.numberOfRecipes || 0}`,
-        slug,
-        id,
-        planImageUrl,
-        iconLinealWithColorUrl,
-    };
+//     const planUrlParams: PlanUrlParams = {
+//         personQty: `${variant?.numberOfPersons || 0}`,
+//         recipeQty: `${variant?.numberOfRecipes || 0}`,
+//         slug,
+//         id,
+//         planImageUrl,
+//         iconLinealWithColorUrl,
+//     };
 
-    return {
-        props: {
-            isLogged: true,
-            plans: mainPlans,
-            aditionalsPlans,
-            weekLabel: _plans.data.weekLabel,
-            variant,
-            recipes,
-            planUrlParams,
-            errors: [...errors, ..._errors],
-        },
-        redirect,
-    };
-}
+//     return {
+//         props: {
+//             isLogged: true,
+//             plans: mainPlans,
+//             aditionalsPlans,
+//             weekLabel: _plans.data.weekLabel,
+//             variant,
+//             recipes,
+//             planUrlParams,
+//             errors: [...errors, ..._errors],
+//         },
+//         redirect,
+//     };
+// }
 
 export default PlanesPage;

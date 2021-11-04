@@ -292,7 +292,7 @@ const store = devtools<Store>((set, get) => ({
         set({ form });
     },
     resetBuyFlowState: () => {
-        set({ form: BuyFlowInitialStore.form, step: 0, showRegister: BuyFlowInitialStore.showRegister });
+        set({ form: { ...BuyFlowInitialStore.form }, step: 0, showRegister: BuyFlowInitialStore.showRegister });
     },
 }));
 

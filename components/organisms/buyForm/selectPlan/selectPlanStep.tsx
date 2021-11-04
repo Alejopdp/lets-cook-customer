@@ -35,34 +35,31 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
 
-    const getPlanData = useCallback(
-        (
-            slug: string,
-            plans: Plan[]
-        ): { peopleLabels: string; planName: string; planDescription: string; canChooseRecipes: boolean; planRecipes: Recipes[] } => {
-            const planSelect = plans.find((plan) => plan.slug === slug);
+    const getPlanData = (
+        slug: string,
+        plans: Plan[]
+    ): { peopleLabels: string; planName: string; planDescription: string; canChooseRecipes: boolean; planRecipes: Recipes[] } => {
+        const planSelect = plans.find((plan) => plan.slug === slug);
 
-            const peopleLabels = planSelect.variants?.reduce((_planSize, _variant) => {
-                const valueIsIncluded = (_planSize[_variant.numberOfPersons] || []).includes(_variant.numberOfRecipes);
+        const peopleLabels = planSelect.variants?.reduce((_planSize, _variant) => {
+            const valueIsIncluded = (_planSize[_variant.numberOfPersons] || []).includes(_variant.numberOfRecipes);
 
-                if (valueIsIncluded || !_variant?.numberOfPersons) {
-                    return _planSize;
-                }
-
-                _planSize[_variant.numberOfPersons] = [...(_planSize[_variant.numberOfPersons] || []), _variant.numberOfRecipes];
+            if (valueIsIncluded || !_variant?.numberOfPersons) {
                 return _planSize;
-            }, {});
+            }
 
-            return {
-                peopleLabels,
-                planName: planSelect.name,
-                planDescription: planSelect.description,
-                canChooseRecipes: planSelect.abilityToChooseRecipes,
-                planRecipes: planSelect.recipes,
-            };
-        },
-        []
-    );
+            _planSize[_variant.numberOfPersons] = [...(_planSize[_variant.numberOfPersons] || []), _variant.numberOfRecipes];
+            return _planSize;
+        }, {});
+
+        return {
+            peopleLabels,
+            planName: planSelect.name,
+            planDescription: planSelect.description,
+            canChooseRecipes: planSelect.abilityToChooseRecipes,
+            planRecipes: planSelect.recipes,
+        };
+    };
 
     const handleOnSelectPlan = (plan: Plan) => {
         const recipeQty =
@@ -149,11 +146,11 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         buyFlow.setPlanVariant(variant);
         buyFlow.setPlanCode(planId, slug, buyFlow.form.planName, buyFlow.form.planDescription, buyFlow.form.canChooseRecipes);
 
-        router.push(
+        router.replace(
             {
-                pathname: `${localeRoutes[router.locale][Routes.planes]}/[slug]`,
+                pathname: `${localeRoutes[router.locale][Routes.planes]}`,
                 query: {
-                    slug: slug,
+                    planSlug: slug,
                     recetas: variant.numberOfRecipes,
                     personas: variant.numberOfPersons,
                 },
@@ -166,25 +163,28 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     };
 
     useEffect(() => {
-        if (!!!buyFlow.form.planCode) {
-            const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes } = getPlanData(
-                props.initialPlanSettings.slug,
-                props.plans
-            );
-            buyFlow.selectPlanRecipes(planRecipes);
-            buyFlow.setPlanCode(
-                props.initialPlanSettings.id,
-                props.initialPlanSettings.slug,
-                planName,
-                planDescription,
-                canChooseRecipes,
-                props.initialPlanSettings.planImageUrl,
-                props.initialPlanSettings.iconLinealWithColorUrl
-            );
-            buyFlow.setPlanVariant(props.variant);
-            setPlanSize(peopleLabels);
-            setRecipesOfWeek(props.recipes);
-        }
+        console.log("Buy flow form plan code: ", buyFlow.form.planCode);
+        console.log("INITIAL PLAN SETTINGS ID: ", props.initialPlanSettings.id);
+        console.log("INITIAL PLAN SETTINGS SLUG: ", props.initialPlanSettings.slug);
+        // if (!!!props.initialPlanSettings.id) {
+        const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes } = getPlanData(
+            props.initialPlanSettings.slug,
+            props.plans
+        );
+        buyFlow.selectPlanRecipes(planRecipes);
+        buyFlow.setPlanCode(
+            props.initialPlanSettings.id,
+            props.initialPlanSettings.slug,
+            planName,
+            planDescription,
+            canChooseRecipes,
+            props.initialPlanSettings.planImageUrl,
+            props.initialPlanSettings.iconLinealWithColorUrl
+        );
+        buyFlow.setPlanVariant(props.variant);
+        setPlanSize(peopleLabels);
+        setRecipesOfWeek(props.recipes);
+        // }
     }, []);
 
     // TyC Modal Functions
