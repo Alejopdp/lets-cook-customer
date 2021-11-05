@@ -4,8 +4,8 @@ import { Container, Grid, Typography, useTheme } from "@material-ui/core";
 import { ShipmentForm, PaymentForm, IconsWithText } from "@molecules";
 import CheckoutDetails from "../checkoutDetails";
 import { getGeometry } from "helpers/utils/geocode";
-import PurchaseConditionsModal from '../../molecules/legalModals/purchaseConditionsModal';
-import * as ga from '../../../helpers/ga'
+import PurchaseConditionsModal from "../../molecules/legalModals/purchaseConditionsModal";
+import * as ga from "../../../helpers/ga";
 
 interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
@@ -16,15 +16,15 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     const form = useBuyFlow((state) => state.form);
     const [expanded, setExpanded] = React.useState<string | false>("panel1");
     const [deliveryData, setdeliveryData] = useState({
-        addressName: form.deliveryForm ?.addressName || "",
-        addressDetails: form.deliveryForm ?.addressDetails || "",
-        firstName: form.deliveryForm ?.firstName || "",
-        lastName: form.deliveryForm ?.lastName || "",
-        phone1: form.deliveryForm ?.phone1 || "",
-        latitude: form.deliveryForm ?.latitude || "",
-        longitude: form.deliveryForm ?.longitude || "",
+        addressName: form.deliveryForm?.addressName || "",
+        addressDetails: form.deliveryForm?.addressDetails || "",
+        firstName: form.deliveryForm?.firstName || "",
+        lastName: form.deliveryForm?.lastName || "",
+        phone1: form.deliveryForm?.phone1 || "",
+        latitude: form.deliveryForm?.latitude || "",
+        longitude: form.deliveryForm?.longitude || "",
     });
-    const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false)
+    const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -36,12 +36,12 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
 
     const changeToSecondStep = () => {
         ga.event({
-            action: 'clic en continuar',
+            action: "clic en continuar",
             params: {
-                event_category: 'checkout',
-                event_label: 'datos de entrega',
-            }
-        })
+                event_category: "checkout",
+                event_label: "datos de entrega",
+            },
+        });
         setExpanded("panel2");
     };
 
@@ -66,17 +66,17 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     };
 
     const isDeliveryFormCompleted = (): boolean => {
+        console.log("Phone: ", deliveryData.phone1);
         return (
             !!deliveryData.addressName &&
             !!deliveryData.latitude &&
             !!deliveryData.longitude &&
             !!deliveryData.firstName &&
             !!deliveryData.lastName &&
-            !!deliveryData.phone1
+            !!deliveryData.phone1 &&
+            deliveryData.phone1.length > 7
         );
     };
-
-
 
     // Purchase Conditions Modal Functions
 
@@ -87,7 +87,6 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     const handleClosePurchaseConditionsModal = () => {
         setOpenPurchaseConditionsModal(false);
     };
-
 
     return (
         <>
@@ -101,7 +100,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                         <img src="/icons/checkout/verified.svg" width={24} height={24} />
                                         <Typography variant="h5" style={{ marginLeft: theme.spacing(1) }}>
                                             Pago 100% seguro
-                                    </Typography>
+                                        </Typography>
                                     </div>
                                 </Grid>
                                 <Grid item xs={12}>
@@ -114,7 +113,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                         handleChangeAccordion={handleChangeAccordion}
                                         handleChangeStep={changeToSecondStep}
                                         setDeliveryData={setdeliveryData}
-                                        panelNumber='panel1'
+                                        panelNumber="panel1"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -122,7 +121,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                                         expanded={expanded}
                                         handleChangeAccordion={handleChangeAccordion}
                                         deliveryData={deliveryData}
-                                        panelNumber='panel2'
+                                        panelNumber="panel2"
                                         handleOpenPurchaseConditionsModal={handleOpenPurchaseConditionsModal}
                                     />
                                 </Grid>
@@ -137,10 +136,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                     </Grid>
                 </Grid>
             </Container>
-            <PurchaseConditionsModal
-                open={openPurchaseConditionsModal}
-                handleClose={handleClosePurchaseConditionsModal}
-            />
+            <PurchaseConditionsModal open={openPurchaseConditionsModal} handleClose={handleClosePurchaseConditionsModal} />
         </>
     );
 });
