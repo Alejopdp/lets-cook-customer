@@ -124,7 +124,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             getOptionLabel={(option) => (typeof option === "string" ? option : option.description)}
             filterOptions={(x) => x}
             options={options}
-            autoComplete
+            // autoComplete
             includeInputInList
             filterSelectedOptions
             value={props.value}
@@ -139,18 +139,25 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                 setInputValue(newInputValue);
                 // setValue(newInputValue);
             }}
-            renderInput={(params) => (
-                <TextField
-                    {...params}
-                    name={props.name}
-                    classes={{ root: classes.root }}
-                    label={props.label}
-                    variant="outlined"
-                    fullWidth
-                    disabled={props.disabled}
-                    autoComplete="off"
-                />
-            )}
+            renderInput={(params) => {
+                const inputProps = params.inputProps;
+                inputProps.autoComplete = "no";
+
+                return (
+                    <TextField
+                        {...params}
+                        type="text"
+                        name={props.name}
+                        classes={{ root: classes.root }}
+                        label={props.label}
+                        variant="outlined"
+                        fullWidth
+                        disabled={props.disabled}
+                        autoComplete="no"
+                        inputProps={inputProps}
+                    />
+                );
+            }}
             renderOption={(option) => {
                 var matches;
                 var parts;
@@ -168,14 +175,14 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                             <LocationOnIcon className={classes.icon} />
                         </Grid>
                         <Grid item xs>
-                            {parts ?.map((part, index) => (
+                            {parts?.map((part, index) => (
                                 <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
                                     {part.text}
                                 </span>
                             ))}
 
                             <Typography variant="body2" color="textSecondary">
-                                {option ?.structured_formatting.secondary_text || ""}
+                                {option?.structured_formatting.secondary_text || ""}
                             </Typography>
                         </Grid>
                     </Grid>

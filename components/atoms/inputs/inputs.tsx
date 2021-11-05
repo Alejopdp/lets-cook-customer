@@ -16,12 +16,14 @@ import Typography from "@material-ui/core/Typography";
 export const TextInput = (props: TextInputProps) => {
     const { textField, border } = useStyles();
 
-    const labelRef = React.useRef()
-    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 220
+    const labelRef = React.useRef();
+    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 220;
 
     return (
         <FormControl variant="outlined" className={textField}>
-            <InputLabel ref={labelRef} style={{ fontSize: "16px" }}>{props.label}</InputLabel>
+            <InputLabel ref={labelRef} style={{ fontSize: "16px" }}>
+                {props.label}
+            </InputLabel>
             <OutlinedInput
                 style={{ fontSize: "16px" }}
                 className={border}
@@ -48,12 +50,14 @@ export const PasswordInput = (props: PasswordInputProps) => {
         setValues({ ...values, showPassword: !values.showPassword });
     };
 
-    const labelRef = React.useRef()
-    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 175
+    const labelRef = React.useRef();
+    const labelWidth = labelRef.current ? labelRef.current.clientWidth : 175;
 
     return (
         <FormControl variant="outlined" className={textField}>
-            <InputLabel ref={labelRef} style={{ fontSize: "16px" }}>{props.label}</InputLabel>
+            <InputLabel ref={labelRef} style={{ fontSize: "16px" }}>
+                {props.label}
+            </InputLabel>
             <OutlinedInput
                 style={{ fontSize: "16px" }}
                 className={border}
@@ -63,7 +67,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
                 onChange={props.onChange}
                 disabled={props.disabled}
                 endAdornment={
-                    <InputAdornment position="end" style={{ padding: '8px' }}>
+                    <InputAdornment position="end" style={{ padding: "8px" }}>
                         <IconButton onClick={handleClickShowPassword} edge="end">
                             {values.showPassword ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
@@ -72,7 +76,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
                 labelWidth={labelWidth}
             />
             {props.helperText && (
-                <Typography variant="caption" color={props.hasError ? "error" : "textPrimary"} style={{ marginTop: '4px' }}>
+                <Typography variant="caption" color={props.hasError ? "error" : "textPrimary"} style={{ marginTop: "4px" }}>
                     {props.helperText}
                 </Typography>
             )}

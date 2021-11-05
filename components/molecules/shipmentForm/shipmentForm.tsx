@@ -49,28 +49,28 @@ const useStylesAccordion = makeStyles((theme: Theme) =>
             alignItems: "center",
         },
         boxChangeProfileDataLater: {
-            backgroundColor: 'rgba(0,165,85,0.1)',
-            padding: '16px',
+            backgroundColor: "rgba(0,165,85,0.1)",
+            padding: "16px",
             color: theme.palette.text.primary,
-            border: '1px dashed #707070',
-            borderRadius: '4px'
+            border: "1px dashed #707070",
+            borderRadius: "4px",
         },
         shipmentFormContainer: {
             "& div.MuiInputBase-root.Mui-disabled": {
                 color: theme.palette.text.secondary,
-                opacity: '0.3'
+                opacity: "0.3",
             },
             "& div.react-tel-input input.form-control[disabled]": {
                 color: theme.palette.text.secondary,
-                opacity: '0.3',
-                cursor: 'default'
+                opacity: "0.3",
+                cursor: "default",
             },
             "& div.react-tel-input input.form-control:focus": {
                 borderColor: theme.palette.primary.main,
-                borderWidth: '2px',
-                boxShadow: 'none'
-            }
-        }
+                borderWidth: "2px",
+                boxShadow: "none",
+            },
+        },
     })
 );
 
@@ -80,12 +80,12 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
     const { setDeliveryInfo, form } = useBuyFlow(({ setDeliveryInfo, form }) => ({ setDeliveryInfo, form }));
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
-    const [isShippingAddressInvalid, setisShippingAddressInvalid] = useState(false)
+    const [isShippingAddressInvalid, setisShippingAddressInvalid] = useState(false);
 
     useEffect(() => {
         const getShippingCostIfAddressExists = async () => {
-            const newLatitude = props.deliveryData ?.latitude || userInfo.shippingAddress ?.latitude;
-            const newLongitude = props.deliveryData ?.longitude || userInfo.shippingAddress ?.longitude;
+            const newLatitude = props.deliveryData?.latitude || userInfo.shippingAddress?.latitude;
+            const newLongitude = props.deliveryData?.longitude || userInfo.shippingAddress?.longitude;
 
             if (!!!newLatitude && !!!newLongitude) return;
 
@@ -98,14 +98,15 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                     shippingDayLabel: res.data.dayLabel,
                     nextShippingDate: res.data.nextShippingDate,
                 });
+                setisShippingAddressInvalid(false);
             } else {
-                setisShippingAddressInvalid(true)
+                setisShippingAddressInvalid(true);
                 enqueueSnackbar(res.data.message, { variant: "error" });
             }
         };
 
         getShippingCostIfAddressExists();
-    }, [props.deliveryData ?.latitude, props.deliveryData ?.longitude]);
+    }, [props.deliveryData?.latitude, props.deliveryData?.longitude]);
 
     return (
         <>
@@ -114,11 +115,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                 expanded={props.expanded === props.panelNumber}
                 onChange={props.handleChangeAccordion(props.panelNumber)}
             >
-                <AccordionSummary
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
-                    style={{ cursor: "default" }}
-                >
+                <AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header" style={{ cursor: "default" }}>
                     <Grid item container justify="space-between" alignItems="center">
                         <Grid item className={classes.title}>
                             <Image src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} />
@@ -141,8 +138,8 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                         <Grid item xs={12}>
                             <LocationSearchInput
                                 name="addressName"
-                                label='Dirección'
-                                disabled={!!form.deliveryForm ?.addressName}
+                                label="Dirección"
+                                disabled={!!form.deliveryForm?.addressName}
                                 value={props.deliveryData.addressName}
                                 handleChange={props.handleAddressChange}
                             />
@@ -151,7 +148,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                             <TextInput
                                 name="addressDetails"
                                 label="Piso / puerta / aclaraciones"
-                                disabled={!!form.deliveryForm ?.addressName}
+                                disabled={!!form.deliveryForm?.addressName}
                                 value={props.deliveryData.addressDetails}
                                 onChange={props.handleChange}
                             />
@@ -162,30 +159,30 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 label="Nombre"
                                 value={props.deliveryData.firstName}
                                 onChange={props.handleChange}
-                                disabled={!!form.deliveryForm ?.firstName}
+                                disabled={!!form.deliveryForm?.firstName}
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextInput
                                 name="lastName"
                                 label="Apellido/s"
-                                value={props.deliveryData ?.lastName}
+                                value={props.deliveryData?.lastName}
                                 onChange={props.handleChange}
-                                disabled={!!form.deliveryForm ?.lastName}
+                                disabled={!!form.deliveryForm?.lastName}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <PhoneNumberInput
                                 name="phone1"
-                                label='WhatsApp o móvil'
-                                value={props.deliveryData ?.phone1}
+                                label="WhatsApp o móvil"
+                                value={props.deliveryData?.phone1}
                                 handleChange={props.handleChange}
-                                disabled={!!form.deliveryForm ?.phone1}
+                                disabled={!!form.deliveryForm?.phone1}
                             />
                         </Grid>
-                        {form.deliveryForm ?.addressName && (
+                        {form.deliveryForm?.addressName && (
                             <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                                <Box display="flex" alignItems="center" className={classes.boxChangeProfileDataLater} >
+                                <Box display="flex" alignItems="center" className={classes.boxChangeProfileDataLater}>
                                     <ErrorIcon fontSize="small" style={{ marginRight: "8px" }} />
                                     <Typography variant="body1" style={{ fontSize: "14px" }}>
                                         Podrás actualizar los datos en tu perfil
@@ -200,7 +197,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                             <TextInput
                                 name="restrictions"
                                 label="Indica aquí tus restricciones (solo si aplica)"
-                                value={props.deliveryData ?.restrictions}
+                                value={props.deliveryData?.restrictions}
                                 onChange={props.handleChange}
                             />
                         </Grid>
