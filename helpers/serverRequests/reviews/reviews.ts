@@ -6,6 +6,7 @@ export async function getReviews(locale: string): Promise<ReviewResponse> {
     try {
         const res = await Axios.request<Review[]>({
             method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${API_URL}/reviews`,
             params: {
                 locale,

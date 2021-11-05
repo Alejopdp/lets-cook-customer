@@ -19,6 +19,7 @@ export const cancelSubscription = async (subscriptionId: string, reason: string,
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/cancel/${subscriptionId}`,
             params: {
                 locale,
@@ -39,6 +40,7 @@ export const reorderPlan = async (subscriptionId: string) => {
     try {
         const res = await axios({
             method: "POST",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/reorder/${subscriptionId}`,
         });
 
@@ -52,6 +54,7 @@ export const swapPlan = async (subscriptionId: string, newPlanId: string, newPla
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/swap-plan/${subscriptionId}`,
             data: {
                 newPlanId,
@@ -69,6 +72,7 @@ export const updateRestriction = async (subscriptionId: string, restrictionId: s
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/update-restriction/${subscriptionId}`,
             data: {
                 restrictionId,
@@ -105,6 +109,7 @@ export const handle3dSecureFailure = async (subscriptionId: string) => {
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/handle-3dsecure-failure/${subscriptionId}`,
         });
 
@@ -118,6 +123,7 @@ export const handle3dSecureFailureForManySubscriptions = async (subscriptionsIds
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/handle-3dsecure-failure-for-many-subscriptions`,
             data: {
                 subscriptionsIds,
@@ -134,6 +140,7 @@ export const sendNewSubscriptionWelcomeEmail = async (subscriptionId) => {
     try {
         const res = await axios({
             method: "POST",
+            // headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/notify-new-subscription/${subscriptionId}`,
         });
 

@@ -41,13 +41,14 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     const step = useBuyFlow(({ step }) => step);
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-    const { setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon } = useBuyFlow(
-        ({ setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon }) => ({
+    const { setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon, resetBuyFlowState } = useBuyFlow(
+        ({ setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon, resetBuyFlowState }) => ({
             setDeliveryInfo,
             setPaymentMethod,
             setShowRegister,
             setWeekLabel,
             setCoupon,
+            resetBuyFlowState,
         })
     );
 
@@ -75,6 +76,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
 
         return () => {
             // setCoupon({ ...BuyFlowInitialStore.form.coupon });
+            resetBuyFlowState();
             setCoupon(undefined);
         };
     }, []);

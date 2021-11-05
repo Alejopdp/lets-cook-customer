@@ -11,6 +11,7 @@ export const getCouponValidation = async (
     try {
         const res = await axios({
             method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/validation/${couponCode}`,
             params: { customerId, shippingCost, planId, planVariantId },
         });

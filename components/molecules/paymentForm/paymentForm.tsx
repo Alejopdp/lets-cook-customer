@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import useStyles from "./styles";
 import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
-import { createSubscription, handle3dSecureFailure } from "../../../helpers/serverRequests/subscription";
+import { createSubscription, handle3dSecureFailure, sendNewSubscriptionWelcomeEmail } from "../../../helpers/serverRequests/subscription";
 import { useSnackbar } from "notistack";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import * as ga from "../../../helpers/ga";
@@ -183,7 +183,7 @@ export const PaymentForm = (props) => {
                     updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
                     form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                         ? goToNextView()
-                        : moveNSteps(2);
+                        : skipRecipeChoiceStep(res.data.subscriptionId);
                     ga.purchase({
                         transaction_id: res.data.subscriptionId,
                         affiliation: "Let's cook website",
@@ -218,7 +218,9 @@ export const PaymentForm = (props) => {
                     ...props.deliveryData,
                 });
                 updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
-                form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0 ? goToNextView() : moveNSteps(2);
+                form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
+                    ? goToNextView()
+                    : skipRecipeChoiceStep(res.data.subscriptionId);
                 ga.purchase({
                     transaction_id: res.data.subscriptionId,
                     affiliation: "Let's cook website",
@@ -243,6 +245,19 @@ export const PaymentForm = (props) => {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
         setisLoadingPayment(false);
+    };
+
+    const sendWelcomeEmail = async (subscriptionId) => {
+        const res = await sendNewSubscriptionWelcomeEmail(subscriptionId);
+
+        if (!!!res || res.status !== 200) {
+            enqueueSnackbar("Error al enviar email de bienvenida", { variant: "error" });
+        }
+    };
+
+    const skipRecipeChoiceStep = (subscriptionId) => {
+        moveNSteps(2);
+        sendWelcomeEmail(subscriptionId);
     };
 
     const updateUserInfoStoreIfNecessary = (paymentMethods) => {

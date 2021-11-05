@@ -6,6 +6,7 @@ export const getDataForSwappingAPlan = async (subscriptionId: string, locale?: s
     try {
         const res = await Axios({
             method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${API_URL}/plan/data-for-swapping/${subscriptionId}`,
             params: {
                 locale,
@@ -22,6 +23,7 @@ export async function getPlans(locale: string): Promise<PlanResponse> {
     try {
         const res = await Axios.request<Plan[]>({
             method: "GET",
+            // headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${API_URL}/plan/plans/week`,
             params: {
                 locale,
@@ -43,6 +45,7 @@ export const getAdditionalPlans = async (locale: string, planId?: string) => {
     try {
         const res = await Axios.request<Plan[]>({
             method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${API_URL}/plan/additionals`,
             params: {
                 locale,
@@ -60,6 +63,7 @@ export const getPlanAhorro = async () => {
     try {
         const res = await Axios.request<Plan>({
             method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${API_URL}/plan/ahorro`,
             params: {
                 locale: "es",

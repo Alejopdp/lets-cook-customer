@@ -6,6 +6,7 @@ export const getProfileInfo = async (customerId, locale) => {
     try {
         const res = await Axios({
             method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${process.env.NEXT_PUBLIC_API_URL}/subscription/by-customer/${customerId}`,
             params: {
                 locale,
@@ -23,6 +24,7 @@ export const getSubscriptionById = async (subscriptionId, locale) => {
     try {
         const res = await Axios({
             method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${process.env.NEXT_PUBLIC_API_URL}/subscription/${subscriptionId}`,
             params: {
                 locale,
@@ -38,6 +40,7 @@ export const swapPlan = async (subscriptionId, newPlanId, newPlanVariantId) => {
     try {
         const res = await Axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${process.env.NEXT_PUBLIC_API_URL}/subscription/swap-plan/${subscriptionId}`,
             data: {
                 newPlanId: newPlanId,

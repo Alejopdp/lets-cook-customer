@@ -7,6 +7,7 @@ export const getCustomerPaymentOrders = async (customerId: string, locale: strin
     try {
         const res = await axios({
             method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/by-customer/${customerId}`,
             params: {
                 locale,
@@ -23,6 +24,7 @@ export const getPaymentOrderById = async (paymentOrderId: string, locale: string
     try {
         const res = await axios({
             method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/${paymentOrderId}`,
             params: {
                 locale,
@@ -39,6 +41,7 @@ export const updatePaymentOrderState = async (paymentOrderId: string, state: Pay
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/update-state/${paymentOrderId}`,
             data: {
                 state,

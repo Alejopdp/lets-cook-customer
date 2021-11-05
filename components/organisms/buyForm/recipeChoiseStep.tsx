@@ -89,6 +89,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     };
 
     const handleChooseRecipesLater = () => {
+        sendWelcomeEmail();
         ga.event({
             action: "clic en elegir recetas luego",
             params: {
@@ -96,7 +97,6 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
                 event_label: "elegir recetas luego",
             },
         });
-        sendWelcomeEmail();
         gotToNextView();
     };
 

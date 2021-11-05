@@ -64,6 +64,7 @@ export const updatePersonalData = async (id, data) => {
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/update-info/${id}`,
             data,
         });
@@ -78,6 +79,7 @@ export const updateShippingAddress = async (id, data) => {
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/update-shipping/${id}`,
             data: { ...data, lat: data.latitude, long: data.longitude, delivery_time: data.preferredShippingHour },
         });
@@ -92,6 +94,7 @@ export const updateBillingData = async (id, data) => {
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/update-billing/${id}`,
             data,
         });

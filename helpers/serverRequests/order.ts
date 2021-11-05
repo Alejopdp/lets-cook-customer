@@ -8,9 +8,6 @@ export const chooseRecipes = async (orderId: string, recipeSelection: { recipeId
             method: "PUT",
             headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/update-recipes/${orderId}`,
-            headers: {
-                authorization: JSON.parse(window.localStorage.getItem("token")),
-            },
             data: {
                 recipeSelection,
             },
@@ -34,6 +31,7 @@ export const skipOrders = async (orders: SkippableOrder[]) => {
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/skip`,
             data: {
                 ordersToSkip,
@@ -51,6 +49,7 @@ export const skippOrdersFromCancellationModal = async (orders: SkippableOrder[])
     try {
         const res = await axios({
             method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/skip`,
             data: {
                 ordersToSkip: orders.map((order) => order.id),
