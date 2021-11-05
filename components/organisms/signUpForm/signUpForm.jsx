@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const langs = require("../../../lang").signupForm;
 import { useUserInfoStore, useAuthStore } from "../../../stores/auth";
 import cookies from "js-cookie";
-import * as ga from '../../../helpers/ga'
+import * as ga from "../../../helpers/ga";
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -31,10 +31,9 @@ const SignUpForm = (props) => {
         authorize: false,
         sendInfo: false,
     });
-    const [openTycModal, setOpenTycModal] = React.useState(false)
-    const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false)
+    const [openTycModal, setOpenTycModal] = React.useState(false);
+    const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
 
     const { enqueueSnackbar } = useSnackbar();
     const { saveInLocalStorage } = useLocalStorage();
@@ -43,12 +42,12 @@ const SignUpForm = (props) => {
 
     const handleSubmit = (number) => {
         ga.event({
-            action: 'clic en continuar',
+            action: "clic en continuar",
             params: {
                 event_category: `registrarse - ${props.source}`,
-                event_label: 'correo electronico',
-            }
-        })
+                event_label: "correo electronico",
+            },
+        });
         setIsLoading(true);
         if (currentStep + number < 0 || currentStep + number > 1) alert("error");
         setcurrentStep(currentStep + number);
@@ -71,12 +70,12 @@ const SignUpForm = (props) => {
 
     const handleCreateAccount = async () => {
         ga.event({
-            action: 'clic en registrarme',
+            action: "clic en registrarme",
             params: {
                 event_category: `registrarse - ${props.source}`,
-                event_label: 'ingrese su contrasena',
-            }
-        })
+                event_label: "ingrese su contrasena",
+            },
+        });
 
         const res = await signUp(formData.email, formData.password);
 
@@ -94,12 +93,12 @@ const SignUpForm = (props) => {
 
     const handleRedirect = () => {
         ga.event({
-            action: 'clic en iniciar sesion',
+            action: "clic en iniciar sesion",
             params: {
                 event_category: `registrarse - ${props.source}`,
-                event_label: 'ya tienes cuenta',
-            }
-        })
+                event_label: "ya tienes cuenta",
+            },
+        });
         router.push("/iniciar-sesion");
     };
 
@@ -115,7 +114,6 @@ const SignUpForm = (props) => {
     const handleCloseTycModal = () => {
         setOpenTycModal(false);
     };
-
 
     // Privacy Policy Modal Functions
 
@@ -156,6 +154,7 @@ const SignUpForm = (props) => {
                     handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                     source={props.source}
                     isLoading={isLoading}
+                    handleSignUp={props.handleSignUp}
                 />
             );
             break;
@@ -186,14 +185,8 @@ const SignUpForm = (props) => {
                     handleRedirect={props.handleRedirect || handleRedirect}
                 />
             </FormPaper>
-            <TermsAndConditionsModal
-                open={openTycModal}
-                handleClose={handleCloseTycModal}
-            />
-            <PrivacyPolicyModal
-                open={openPrivacyPolicyModal}
-                handleClose={handleClosePrivacyPolicyModal}
-            />
+            <TermsAndConditionsModal open={openTycModal} handleClose={handleCloseTycModal} />
+            <PrivacyPolicyModal open={openPrivacyPolicyModal} handleClose={handleClosePrivacyPolicyModal} />
         </>
     );
 };

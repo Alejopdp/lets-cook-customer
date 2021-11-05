@@ -1,5 +1,5 @@
 // Utils & Config
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { isPassword } from "../../../helpers/regex/regex";
 import { useRouter } from "next/router";
@@ -49,7 +49,7 @@ const PasswordStep = (props) => {
 
     return (
         <>
-            <SocialNetworksButtons handleSubmit={props.handleSocialMediaSubmit} />
+            <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} />
             <AcceptLegalTerms
                 handleOpenTycModal={props.handleOpenTycModal}
                 handleOpenPrivacyPolicyModal={props.handleOpenPrivacyPolicyModal}
