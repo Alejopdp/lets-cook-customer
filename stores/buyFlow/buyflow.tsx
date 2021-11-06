@@ -43,6 +43,7 @@ export interface DeliveryForm {
     shippingCost: number;
     shippingDayLabel: string;
     nextShippingDate: string;
+    hasNextShipping: boolean;
 }
 
 export interface BuyFlowStore {
@@ -150,6 +151,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
             longitude: null,
             shippingCost: 0,
             shippingDayLabel: "",
+            hasNextShipping: false,
             nextShippingDate: "",
         },
         paymentMethod: {

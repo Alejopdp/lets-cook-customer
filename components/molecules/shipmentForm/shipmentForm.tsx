@@ -97,6 +97,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                     shippingCost: res.data.cost,
                     shippingDayLabel: res.data.dayLabel,
                     nextShippingDate: res.data.nextShippingDate,
+                    hasNextShipping: res.data.hasNextShipping
                 });
                 setisShippingAddressInvalid(false);
             } else {

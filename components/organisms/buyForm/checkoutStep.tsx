@@ -66,7 +66,6 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     };
 
     const isDeliveryFormCompleted = (): boolean => {
-        console.log("Phone: ", deliveryData.phone1);
         return (
             !!deliveryData.addressName &&
             !!deliveryData.latitude &&

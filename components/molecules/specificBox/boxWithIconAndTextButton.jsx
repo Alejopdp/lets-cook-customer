@@ -71,6 +71,7 @@ const BoxWithIconAndTextButton = (props) => {
                         btnText={props.btnText}
                         handleClick={props.handleClick}
                         style={{ marginTop: theme.spacing(3), color: props.noColor ? null : theme.palette.secondary.main }}
+                        startIcon={props.startIcon}
                     />
                 </div>
             </div>

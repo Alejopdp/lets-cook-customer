@@ -52,6 +52,7 @@ const TextButton = (props) => {
             style={props.style}
             onClick={() => props.handleClick()}
             disabled={props.disabled}
+            startIcon={props.startIcon}
         >
             {props.icon === "plus-circle-outline" ? (
                 <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : null} />

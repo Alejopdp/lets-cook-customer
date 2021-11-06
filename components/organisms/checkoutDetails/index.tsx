@@ -56,7 +56,7 @@ export default function CheckoutDetails() {
     const planVariantPrice = form.variant?.priceWithOffer || form.variant?.price;
 
     const totalValue = useMemo(() => {
-        const shippingCost = form.deliveryForm?.shippingCost || 0;
+        const shippingCost = form.deliveryForm?.hasNextShipping ? 0 : form.deliveryForm?.shippingCost || 0;
         if (!form.coupon?.id) return (Math.round(planVariantPrice * 100) + Math.round(shippingCost * 100)) / 100;
 
         return form.coupon?.discount_type.type === "percent"
@@ -140,7 +140,7 @@ export default function CheckoutDetails() {
                         price={form.variant?.price}
                         priceWithOffer={form.variant?.priceWithOffer}
                     />
-                    {!!form.deliveryForm.shippingCost && (
+                    {!!form.deliveryForm.shippingCost && !form.deliveryForm.hasNextShipping && (
                         <CheckoutDetailItem title="Costes de envío" value={`${form.deliveryForm?.shippingCost}€` || "Envío gratis"} />
                     )}
                     {form.coupon?.id && (
