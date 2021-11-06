@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import clsx from "clsx";
 import { Divider, Grid, Typography, useTheme, Container } from "@material-ui/core";
 import { Plan, getPlanVariant, Recipe, PlanVariant } from "@helpers";
-import { Recipes, useBuyFlow } from "@stores";
+import { Recipes, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 import { PlanWithIcon, CustomButton, SimpleAccordion, RoundedButton } from "@atoms";
 import { PlanSize } from "@molecules";
 import RecipesCalculation from "../../../molecules/recipesCalculation/recipesCalculation";
@@ -18,6 +18,7 @@ import WeekPlanRecipesSection from "./sections/weekPlanRecipesSection/weekPlanRe
 import TermsAndConditionsModal from "../../../molecules/legalModals/termsAndConditionsModal";
 import PrivacyPolicyModal from "../../../molecules/legalModals/privacyPolicyModal";
 import * as ga from "../../../../helpers/ga";
+import { subscribeToMailingListGroup } from "helpers/serverRequests/mailingList";
 
 const langs = require("../../../../lang").selectPlanStep;
 
@@ -33,6 +34,8 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const [openTycModal, setOpenTycModal] = useState(false);
     const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
+    const authStore = useAuthStore();
+    const userInfoStore = useUserInfoStore();
 
     const getPlanData = useCallback(
         (
@@ -215,6 +218,14 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                 event_label: `${buyFlow.form.planSlug}_${buyFlow.form.variant.numberOfPersons}-personas_${buyFlow.form.variant.numberOfRecipes}-recetas`,
             },
         });
+
+        if (authStore.isAuthenticated) {
+            subscribeToMailingListGroup("109309532", userInfoStore.userInfo.email, {
+                planName: buyFlow.form.planName,
+                planVariantLabel: buyFlow.form.planDescription,
+            });
+        }
+
         buyFlow.forward();
     };
 

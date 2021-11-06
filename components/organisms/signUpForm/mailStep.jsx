@@ -18,7 +18,6 @@ import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
 import { RoundedButton, TextInput } from "@atoms";
 import { Grid } from "@material-ui/core";
 
-
 const MailStep = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
@@ -29,7 +28,7 @@ const MailStep = (props) => {
     const theme = useTheme();
 
     const handleSocialMediaSubmit = async (token) => {
-        const res = await loginWithSocialMedia(token);
+        const res = await loginWithSocialMedia(token, props.source === "buyFlow");
         if (res.status === 200) {
             saveInLocalStorage("token", res.data.token);
             saveInLocalStorage("userInfo", res.data.userInfo);
@@ -46,18 +45,21 @@ const MailStep = (props) => {
     return (
         <>
             <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} source={props.source} />
-            <AcceptLegalTerms handleOpenTycModal={props.handleOpenTycModal} handleOpenPrivacyPolicyModal={props.handleOpenPrivacyPolicyModal} />
+            <AcceptLegalTerms
+                handleOpenTycModal={props.handleOpenTycModal}
+                handleOpenPrivacyPolicyModal={props.handleOpenPrivacyPolicyModal}
+            />
             <Divider />
             <Grid item xs={12}>
-                <TextInput
-                    label={lang.emailInput}
-                    name="email"
-                    value={props.email}
-                    onChange={props.handleChange}
-                />
+                <TextInput label={lang.emailInput} name="email" value={props.email} onChange={props.handleChange} />
             </Grid>
             <Grid item xs={12}>
-                <RoundedButton disabled={!isEmail(props.email)} label={lang.buttonText} onClick={() => props.handleSubmit(1)} style={{ width: '100%' }} />
+                <RoundedButton
+                    disabled={!isEmail(props.email)}
+                    label={lang.buttonText}
+                    onClick={() => props.handleSubmit(1)}
+                    style={{ width: "100%" }}
+                />
             </Grid>
         </>
     );

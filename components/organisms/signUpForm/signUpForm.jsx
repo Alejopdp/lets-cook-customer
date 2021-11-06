@@ -77,7 +77,7 @@ const SignUpForm = (props) => {
             },
         });
 
-        const res = await signUp(formData.email, formData.password);
+        const res = await signUp(formData.email, formData.password, props.source === "buyFlow");
 
         if (res.status === 200) {
             saveInLocalStorage("userInfo", res.data.userInfo);
@@ -196,6 +196,7 @@ SignUpForm.propTypes = {
     handleRedirect: PropTypes.func,
     handleSignUp: PropTypes.func,
     redirect: PropTypes.bool,
+    source: PropTypes.string,
 };
 
 export default SignUpForm;

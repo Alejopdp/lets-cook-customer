@@ -2,12 +2,12 @@ import axios from "axios";
 const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/customer`;
 const userApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/user`;
 
-export const loginWithSocialMedia = async (token, email = "") => {
+export const loginWithSocialMedia = async (token: string, email: string, isInCheckout: boolean) => {
     try {
         const res = await axios({
             method: "POST",
             url: `${apiUrl}/social-auth/${token}`,
-            data: { token, email },
+            data: { token, email, isInCheckout },
         });
 
         return res;
@@ -46,12 +46,12 @@ export const verifyToken = async (token) => {
     }
 };
 
-export const signUp = async (email, password) => {
+export const signUp = async (email: string, password: string, isInCheckout: boolean) => {
     try {
         const res = await axios({
             method: "POST",
             url: `${apiUrl}/sign-up`,
-            data: { email, password },
+            data: { email, password, isInCheckout },
         });
 
         return res;

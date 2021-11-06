@@ -28,6 +28,7 @@ import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
 import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
 import CustomCheckboxWithPopup from "../../atoms/customCheckbox/customCheckboxWithPopup";
+import { subscribeToMailingListGroup, updateSubscriber } from "helpers/serverRequests/mailingList";
 
 const useStylesAccordion = makeStyles((theme: Theme) =>
     createStyles({
@@ -184,6 +185,17 @@ export const PaymentForm = (props) => {
                     form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                         ? goToNextView()
                         : skipRecipeChoiceStep(res.data.subscriptionId);
+
+                    subscribeToMailingListGroup("109309613", userInfo.email, {
+                        planName: form.planName,
+                        planVariantLabel: form.planDescription,
+                    });
+
+                    updateSubscriber(userInfo.email, {
+                        address: userInfo.shippingAddress?.addressName,
+                        addressDetails: userInfo.shippingAddress?.addressDetails,
+                        phone: userInfo.phone1,
+                    });
                     ga.purchase({
                         transaction_id: res.data.subscriptionId,
                         affiliation: "Let's cook website",
@@ -221,6 +233,16 @@ export const PaymentForm = (props) => {
                 form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                     ? goToNextView()
                     : skipRecipeChoiceStep(res.data.subscriptionId);
+
+                subscribeToMailingListGroup("109309613", userInfo.email, {
+                    planName: form.planName,
+                    planVariantLabel: form.planDescription,
+                });
+                updateSubscriber(userInfo.email, {
+                    address: userInfo.shippingAddress?.addressName,
+                    addressDetails: userInfo.shippingAddress?.addressDetails,
+                    phone: userInfo.phone1,
+                });
                 ga.purchase({
                     transaction_id: res.data.subscriptionId,
                     affiliation: "Let's cook website",

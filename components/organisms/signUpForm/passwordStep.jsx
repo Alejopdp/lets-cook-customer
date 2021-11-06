@@ -32,7 +32,7 @@ const PasswordStep = (props) => {
     const { enqueueSnackbar } = useSnackbar();
 
     const handleSocialMediaSubmit = async (token) => {
-        const res = await loginWithSocialMedia(token);
+        const res = await loginWithSocialMedia(token, "", props.source === "buyFlow");
         if (res.status === 200) {
             saveInLocalStorage("token", res.data.token);
             saveInLocalStorage("userInfo", res.data.userInfo);
