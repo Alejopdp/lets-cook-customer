@@ -100,7 +100,7 @@ const CrossSellingStep = (props) => {
         if (res.status === 200) {
             if (res.data.payment_status === "requires_action") {
                 const confirmationResponse = await stripe.confirmCardPayment(res.data.client_secret, {
-                    payment_method: form.paymentMethod ?.stripeId,
+                    payment_method: form.paymentMethod?.stripeId,
                 });
 
                 if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {

@@ -85,7 +85,7 @@ const SignUpForm = (props) => {
             saveInLocalStorage("token", res.data.token);
             cookies.set("token", res.data.token);
             setIsAuthenticated(true);
-            props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
+            props.handleSignUp ? props.handleSignUp(res.data.userInfo, formData.sendInfo) : "";
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }

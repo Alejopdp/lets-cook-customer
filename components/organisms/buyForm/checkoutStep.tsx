@@ -1,11 +1,12 @@
 import React, { memo, useState, useEffect } from "react";
-import { useBuyFlow } from "@stores";
+import { useBuyFlow, useUserInfoStore } from "@stores";
 import { Container, Grid, Typography, useTheme } from "@material-ui/core";
 import { ShipmentForm, PaymentForm, IconsWithText } from "@molecules";
 import CheckoutDetails from "../checkoutDetails";
 import { getGeometry } from "helpers/utils/geocode";
 import PurchaseConditionsModal from "../../molecules/legalModals/purchaseConditionsModal";
 import * as ga from "../../../helpers/ga";
+import { updateSubscriber } from "helpers/serverRequests/mailingList";
 
 interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
@@ -15,6 +16,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
     const theme = useTheme();
     const form = useBuyFlow((state) => state.form);
     const [expanded, setExpanded] = React.useState<string | false>("panel1");
+    const { userInfo, setuserInfo } = useUserInfoStore(({ userInfo, setuserInfo }) => ({ userInfo, setuserInfo }));
     const [deliveryData, setdeliveryData] = useState({
         addressName: form.deliveryForm?.addressName || "",
         addressDetails: form.deliveryForm?.addressDetails || "",
@@ -23,6 +25,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
         phone1: form.deliveryForm?.phone1 || "",
         latitude: form.deliveryForm?.latitude || "",
         longitude: form.deliveryForm?.longitude || "",
+        restrictions: "",
     });
     const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false);
 
@@ -42,6 +45,18 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
                 event_label: "datos de entrega",
             },
         });
+
+        updateSubscriber(userInfo.email, {
+            phone: deliveryData.phone1,
+            name: deliveryData.firstName,
+            last_name: deliveryData.lastName,
+            country: "Spain",
+            city: "",
+            state: "enabled",
+            zip: "",
+            shopify_note: deliveryData.restrictions,
+        });
+
         setExpanded("panel2");
     };
 

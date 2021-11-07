@@ -172,8 +172,10 @@ export const PaymentForm = (props) => {
                 });
 
                 if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
-                    // TO DO: Confirm payments in DB
-                    await updatePaymentOrderState(res.data.paymentOrderId, PaymentOrderState.PAYMENT_ORDER_BILLED);
+                    const updatePaymentOrderRes = await updatePaymentOrderState(
+                        res.data.paymentOrderId,
+                        PaymentOrderState.PAYMENT_ORDER_BILLED
+                    );
                     setSubscriptionId(res.data.subscriptionId);
                     setFirstOrderId(res.data.firstOrderId);
                     setFirstOrderShippingDate(res.data.firstOrderShippingDate);
@@ -192,9 +194,9 @@ export const PaymentForm = (props) => {
                     });
 
                     updateSubscriber(userInfo.email, {
-                        address: userInfo.shippingAddress?.addressName,
-                        addressDetails: userInfo.shippingAddress?.addressDetails,
-                        phone: userInfo.phone1,
+                        shopify_last_order_id: updatePaymentOrderRes.data.billedPaymentOrderHumanId,
+                        shopify_tags: "Active subscriber",
+                        shopify_last_order_name: `${form.planName} / ${form.variant.label}`,
                     });
                     ga.purchase({
                         transaction_id: res.data.subscriptionId,
@@ -239,9 +241,9 @@ export const PaymentForm = (props) => {
                     planVariantLabel: form.planDescription,
                 });
                 updateSubscriber(userInfo.email, {
-                    address: userInfo.shippingAddress?.addressName,
-                    addressDetails: userInfo.shippingAddress?.addressDetails,
-                    phone: userInfo.phone1,
+                    shopify_last_order_id: res.data.billedPaymentOrderHumanId,
+                    shopify_tags: "Active subscriber",
+                    shopify_last_order_name: `${form.planName} / ${form.variant.label}`,
                 });
                 ga.purchase({
                     transaction_id: res.data.subscriptionId,
@@ -283,7 +285,12 @@ export const PaymentForm = (props) => {
     };
 
     const updateUserInfoStoreIfNecessary = (paymentMethods) => {
-        if (!!!userInfo.shippingAddress || !!!userInfo.paymentMethods || userInfo.paymentMethods.length === 0) {
+        if (
+            !!!userInfo.shippingAddress ||
+            !!!userInfo.paymentMethods ||
+            userInfo.paymentMethods.length === 0 ||
+            userInfo.paymentMethods.length !== paymentMethods.length
+        ) {
             setuserInfo({
                 ...userInfo,
                 firstName: props.deliveryData.firstName,

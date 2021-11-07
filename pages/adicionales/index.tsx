@@ -100,8 +100,8 @@ const NuevoAcompañamientoPage = (props) => {
                     <AdditionalPlansBuyButtons
                         totalValue={totalValue}
                         handleSubmitPayment={handleSubmitPayment}
-                    // handleSecondaryButtonClick={() => router.replace("/perfil")}
-                    // secondaryButtonLabel="POR EL MOMENTO NO QUIERO UN NUEVO ACOMPAÑAMIENTO"
+                        // handleSecondaryButtonClick={() => router.replace("/perfil")}
+                        // secondaryButtonLabel="POR EL MOMENTO NO QUIERO UN NUEVO ACOMPAÑAMIENTO"
                     />
                 </Grid>
                 <Grid container spacing={2} style={{ paddingBottom: theme.spacing(8), paddingTop: theme.spacing(8) }}>

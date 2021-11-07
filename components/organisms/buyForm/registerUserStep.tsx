@@ -11,7 +11,8 @@ import SignUpForm from "../signUpForm/signUpForm";
 import LoginBox from "../loginBox/loginBox";
 import RecoverPassword from "../recoverPassword/recoverPassword";
 import RecoverPasswordForm from "../recoverPassword/recoverPasswordForm";
-import { subscribeToMailingListGroup } from "helpers/serverRequests/mailingList";
+import { subscribeToMailingListGroup, updateSubscriber } from "helpers/serverRequests/mailingList";
+import { useRouter } from "next/router";
 
 enum View {
     SIGN_IN = "SIGN_IN",
@@ -21,6 +22,7 @@ enum View {
 
 export const RegisterUserStep = () => {
     const theme = useTheme();
+    const router = useRouter();
     const [actualView, setactualView] = useState<View>(View.SIGN_UP);
     const { setDeliveryInfo, setPaymentMethod, setShowRegister, form } = useBuyFlow(
         ({ setDeliveryInfo, setPaymentMethod, setShowRegister, form }) => ({
@@ -58,7 +60,7 @@ export const RegisterUserStep = () => {
         gotToNextView();
     };
 
-    const handleSignUp = (userInfo: IUserInfoFields) => {
+    const handleSignUp = (userInfo: IUserInfoFields, accpetsMarketing: boolean) => {
         setDeliveryInfo({
             addressName: userInfo.shippingAddress?.addressName,
             addressDetails: userInfo.shippingAddress?.addressDetails,
@@ -79,6 +81,12 @@ export const RegisterUserStep = () => {
             });
         }
         subscribeToMailingListGroup("109309532", userInfo.email, { planName: form.planName, planVariantLabel: form.planDescription });
+        updateSubscriber(userInfo.email, {
+            shopify_accepts_marketing: accpetsMarketing ? 1 : 0,
+            shopify_id: userInfo.id,
+            language: router.locale === "es" ? "esp" : router.locale === "en" ? "ing" : "cat",
+            shopify_last_order_name: `${form.planName} / ${form.variant.label}`,
+        });
         setShowRegister(false);
         gotToNextView();
     };
