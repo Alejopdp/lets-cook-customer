@@ -27,6 +27,7 @@ import SpeedIcon from "@material-ui/icons/Speed";
 import CloseIcon from "@material-ui/icons/Close";
 import { RecipeModalProps } from "./interfaces";
 import NutritionalInfoTable from "./nutritionalInfoTable";
+import CarouselComponent from "../carousel/carousel";
 
 const styles = (theme) => ({
     root: {
@@ -82,6 +83,19 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
         return props.recipe?.recipeVariants[0]?.ingredients.join(", ") || "";
     }, []);
 
+    const componentsForCarousel = useMemo(() => {
+        return props.recipe.imagesUrls.map((url: string, index: number) => ({
+            item: url,
+            component: <img className={props.classes.image} src={url} alt={index} width="100%" height={250} />,
+        }));
+        // return props.recipe.imagesUrls.map((url: string, index: number) => ({
+        //     item: url,
+        //     component: (
+        //         <Image className={props.classes.image} src={props.recipe.imageUrl} alt={props.recipe.name} width={400} height={250} />
+        //     ),
+        // }));
+    }, []);
+
     return (
         <>
             {!!props.recipe && (
@@ -105,12 +119,18 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                             <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={6}>
-                                        <Image
+                                        {/* <Image
                                             className={props.classes.image}
                                             src={props.recipe.imageUrl}
                                             alt={props.recipe.name}
                                             width={400}
                                             height={250}
+                                        /> */}
+                                        <CarouselComponent
+                                            maxItemsMobile={1}
+                                            maxItemsTablet={1}
+                                            maxItemsDesktop={1}
+                                            components={componentsForCarousel}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>

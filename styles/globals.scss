@@ -16,7 +16,7 @@ a {
 }
 
 div.MuiAutocomplete-popper {
-    z-index: 4147483647
+    z-index: 4147483647;
 }
 
 // #hubspot-messages-iframe-container {
@@ -51,4 +51,9 @@ div.MuiAutocomplete-popper {
     font-style: normal;
     font-weight: 700;
     font-display: swap;
+}
+
+li.react-multi-carousel-item {
+    padding-left: 0px;
+    padding-right: 0px;
 }
