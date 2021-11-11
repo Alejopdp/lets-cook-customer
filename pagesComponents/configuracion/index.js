@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
+import { useLang } from "@hooks";
 
 // Internal Components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
@@ -19,6 +20,7 @@ const UserInfo = (props) => {
     const [initialCustomerInfo, setinitialCustomerInfo] = useState({});
     const userInfo = useUserInfoStore((state) => state.userInfo);
     // const { enqueueSnackbar } = useSnackbar();
+    const [lang] = useLang("configuracion");
 
     useEffect(() => {
         const getData = async () => {
@@ -41,8 +43,8 @@ const UserInfo = (props) => {
     return (
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
-                <BackButtonTitle url={localeRoutes[router.locale][Routes.perfil]} title="Configuracion de la cuenta" />
-                <UserInfoDetail customer={initialCustomerInfo} isLoading={isLoading} />
+                <BackButtonTitle url={localeRoutes[router.locale][Routes.perfil]} title={lang.title} />
+                <UserInfoDetail customer={initialCustomerInfo} isLoading={isLoading} lang={lang.userInfoDetail} />
             </InnerSectionLayout>
         </Layout>
     );

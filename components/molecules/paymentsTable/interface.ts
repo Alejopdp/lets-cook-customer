@@ -10,5 +10,6 @@ interface PaymentOrder {
 
 export interface PaymentsTableProps {
     paymentOrders: PaymentOrder[];
+    lang: any;
     onClick: (paymentOrderId: string) => void;
 }

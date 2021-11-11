@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const Recipes = ({ recipes }) => {
+const Recipes = ({ recipes, lang }) => {
     const classes = useStyles();
 
     const theme = useTheme();
@@ -62,7 +62,7 @@ const Recipes = ({ recipes }) => {
             <Grid container spacing={2}>
                 <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                     <Typography variant="h5">
-                        Recetas pendientes de valorar
+                        {lang.recipesRatingPendingSubtitle}
                     </Typography>
                 </Grid>
                 {recipesToRate.map((recipeToRate) => {
@@ -82,6 +82,7 @@ const Recipes = ({ recipes }) => {
                                         setRecipesToRate={setRecipesToRate}
                                         handleDeleteRecipe={handleDeleteRecipe}
                                         recipeToRate={recipeToRate}
+                                        lang={lang.foodCard}
                                     />
                                 </Grid>
                             </Grid>
@@ -90,7 +91,7 @@ const Recipes = ({ recipes }) => {
                 })}
                 <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
                     <Typography variant="h5">
-                        Recetas valoradas
+                        {lang.recipesRatedSubtitle}
                     </Typography>
                 </Grid>
                 {recipesWithRating.map((recipeWithRating) => {
@@ -109,6 +110,7 @@ const Recipes = ({ recipes }) => {
                                         recipesToRate={recipesToRate}
                                         setRecipesToRate={setRecipesToRate}
                                         handleDeleteRecipe={handleDeleteRecipe}
+                                        lang={lang.foodCard}
                                     />
                                 </Grid>
                             </Grid>
@@ -129,6 +131,7 @@ const Recipes = ({ recipes }) => {
                 setRecipesWithRating={setRecipesWithRating}
                 setStarValue={setStarValue}
                 setChosenRecipe={setChosenRecipe}
+                lang={lang.recipesModal}
             />
         </>
     );

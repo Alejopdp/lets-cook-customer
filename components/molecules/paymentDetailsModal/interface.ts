@@ -23,12 +23,13 @@ export interface PaymentDetailsModalProps {
             discounts: "-5 €";
             total: "105 €";
         };
-        amount: string;
-        shippingCost: string;
-        discountAmount: string;
-        totalAmount: string;
+        amount: number;
+        shippingCost: number;
+        discountAmount: number;
+        totalAmount: number;
         orders: Order[];
     };
+    lang: any;
     open: boolean;
     handleClose: () => void;
 }

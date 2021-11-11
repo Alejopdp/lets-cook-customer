@@ -52,15 +52,17 @@ const styles = (theme) => ({
 
 const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps) => {
     const theme = useTheme();
+    const lang = props.lang
+    console.log(props.data, 'props.data')
 
     return (
-        <Modal open={props.open} handleClose={props.handleClose} maxWidth="md" fullScreen title="Detalle del pago">
+        <Modal open={props.open} handleClose={props.handleClose} maxWidth="md" fullScreen title={lang.title}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <Typography variant="subtitle1" color="textSecondary" style={{ marginBottom: theme.spacing(2) }}>
-                        Suscripciones pagadas
+                        {lang.subscriptionPaid}
                     </Typography>
-                    {props.data.orders?.map((order, index) => (
+                    {props.data.orders ?.map((order, index) => (
                         <div
                             key={index}
                             style={{
@@ -74,12 +76,12 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                                 {order.planVariant}
                             </Typography>
                             <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
-                                Subtotal: {order.amount} €
+                                {lang.subtotal}: {order.amount} €
                             </Typography>
                             {order.hasRecipes && (
                                 <>
                                     <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(2) }}>
-                                        Recetas elegidas:
+                                        {lang.recipesChoosen}
                                     </Typography>
                                     {order.recipes.length > 0 ? (
                                         order.recipes.map((recipe, index) => (
@@ -100,10 +102,10 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                                             </div>
                                         ))
                                     ) : (
-                                        <Typography variant="body2" color="textSecondary">
-                                            No se encontraron recetas
-                                        </Typography>
-                                    )}
+                                            <Typography variant="body2" color="textSecondary">
+                                                {lang.recipesNotFound}
+                                            </Typography>
+                                        )}
                                 </>
                             )}
                         </div>
@@ -111,17 +113,17 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Typography variant="subtitle1" color="textSecondary" style={{ marginBottom: theme.spacing(2) }}>
-                        Detalle del monto pagado
+                        {lang.amountPaidDetails}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
-                        Subtotal: {props.data.amount} €
+                        {lang.subtotal}: {props.data.amount} €
                     </Typography>
                     <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
-                        Costo de envío: {props.data.shippingCost} €
+                        {lang.shippingCost}: {props.data.shippingCost} €
                     </Typography>
                     {props.data.discountAmount !== 0 && (
                         <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
-                            Descuento: -{props.data.discountAmount} €
+                            {lang.discount}: -{props.data.discountAmount} €
                         </Typography>
                     )}
                     <Typography
@@ -129,7 +131,7 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                         color="textSecondary"
                         style={{ fontWeight: 600, borderTop: `1px dashed rgba(0,0,0,0.1)`, paddingTop: theme.spacing(1) }}
                     >
-                        Total: {props.data.totalAmount} €
+                        {lang.total}: {props.data.totalAmount} €
                     </Typography>
                 </Grid>
             </Grid>
