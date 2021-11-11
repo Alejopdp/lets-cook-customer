@@ -11,7 +11,6 @@ import { useLang } from "@hooks";
 export const getServerSideProps = async (context) => {
     const test = context.params.id;
     const res = await getRecipesByCustomer(test, context.locale);
-    const [lang] = useLang("valorarRecetas");
 
     return {
         props: {
@@ -22,16 +21,12 @@ export const getServerSideProps = async (context) => {
 };
 
 const RecetasLayout = ({ recipes }) => {
+    const [lang] = useLang("valorarRecetas");
     return (
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
-<<<<<<< HEAD:pagesComponents/recetas-grid/[id].js
-                <BackButtonTitle url={localeRoutes[router.locale][Routes.perfil]} title="Valorar recetas" />
-                <Recipes recipes={recipes} />
-=======
-                <BackButtonTitle url="/perfil" title={lang.title} />
+                <BackButtonTitle url={localeRoutes[router.locale][Routes.perfil]} title={lang.title} />
                 <Recipes recipes={recipes} lang={lang} />
->>>>>>> 1c0ba09f712a2a5a9c585aa3a1581a30f474995b:pages/valorar-recetas/[id].js
             </InnerSectionLayout>
         </Layout>
     );

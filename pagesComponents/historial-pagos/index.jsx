@@ -18,11 +18,7 @@ import { Layout } from "../../components/layout/index";
 import PaymentsTable from "../../components/molecules/paymentsTable/PaymentsTable";
 import PaymentDetailsModal from "../../components/molecules/paymentDetailsModal/paymentDetailsModal";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
-<<<<<<< HEAD:pagesComponents/historial-pagos/index.jsx
-import { useLang } from "@hooks";
 import { localeRoutes, Routes } from "lang/routes/routes";
-=======
->>>>>>> 1c0ba09f712a2a5a9c585aa3a1581a30f474995b:pages/historial-pagos/index.jsx
 
 const HistorialPagos = (props) => {
     const theme = useTheme();
@@ -79,7 +75,12 @@ const HistorialPagos = (props) => {
                     <PaymentsTable onClick={handleClickOpenPaymentDetailsModal} paymentOrders={orders} lang={lang.paymentsTable} />
                 </InnerSectionLayout>
             </Layout>
-            <PaymentDetailsModal data={selectedPaymentOrder} open={openPaymentDetailsModal} handleClose={handleClosePaymentDetailsModal} lang={lang.paymentDetailsModal} />
+            <PaymentDetailsModal
+                data={selectedPaymentOrder}
+                open={openPaymentDetailsModal}
+                handleClose={handleClosePaymentDetailsModal}
+                lang={lang.paymentDetailsModal}
+            />
         </>
     );
 };

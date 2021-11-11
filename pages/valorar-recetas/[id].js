@@ -25,13 +25,8 @@ const RecetasLayout = ({ recipes }) => {
     return (
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
-<<<<<<< HEAD:pagesComponents/recetas-grid/[id].js
-                <BackButtonTitle url={localeRoutes[router.locale][Routes.perfil]} title="Valorar recetas" />
-                <Recipes recipes={recipes} />
-=======
-                <BackButtonTitle url="/perfil" title={lang.title} />
+                <BackButtonTitle url={localeRoutes[router.locale][Routes.perfil]} title={lang.title} />
                 <Recipes recipes={recipes} lang={lang} />
->>>>>>> 1c0ba09f712a2a5a9c585aa3a1581a30f474995b:pages/valorar-recetas/[id].js
             </InnerSectionLayout>
         </Layout>
     );
