@@ -20,9 +20,11 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { Box, Button, IconButton } from "@material-ui/core";
 import { useBuyFlow } from "@stores";
 import { RecipeCardBuyFlowProps } from "./interfaces";
+import { useLang } from "@hooks";
 
 export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
     const theme = useTheme();
+    const [lang] = useLang("buyFlowLayout");
     const { root, cardCnt, tag, marg } = useStyles();
     // const { recipes, variant } = useBuyFlow((store) => ({ recipes: store.form.recipes, variant: store.form.variant }));
 
@@ -48,7 +50,11 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
                         <Box className={tag}>
                             <SpeedIcon fontSize="small" color="primary" className={marg} />
                             <Typography variant="subtitle2" style={{ fontSize: "13px" }}>
-                                {props.difficultyLevel}
+                                {props.difficultyLevel === "Facil"
+                                    ? lang.itemEasy
+                                    : props.difficultyLevel === "Dificil"
+                                    ? lang.itemHard
+                                    : lang.itemMedium}
                             </Typography>
                         </Box>
                     </Grid>

@@ -15,8 +15,8 @@ import { RoundedButton } from "@atoms";
 import { TitleBuyFlow, RecipesBottomBar } from "@molecules";
 import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
-import { IFilter } from "@layouts";
 import { sendNewSubscriptionWelcomeEmail } from "helpers/serverRequests/subscription";
+import { IFilter } from "@hooks";
 
 interface RecipeChoiseStepProps {
     recipes: any[];
@@ -100,23 +100,13 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
         gotToNextView();
     };
 
-    const filteredRecipes =
-        filters.length > 0
+    const filteredRecipes = useMemo(() => {
+        return filters.length > 0
             ? planRecipes.filter((recipe) =>
-                  filters.some(
-                      (filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqualToFilterValue(recipe.difficultyLevel)
-                  )
+                  filters.some((filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqual(recipe.difficultyLevel))
               )
             : planRecipes;
-    // const filteredRecipes = useMemo(() => {
-    //     return filters.length > 0
-    //         ? recipes.filter((recipe) =>
-    //               filters.some(
-    //                   (filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqualToFilterValue(recipe.difficultyLevel)
-    //               )
-    //           )
-    //         : recipes;
-    // }, [filters]);
+    }, [filters]);
 
     const handleClickAddRecipe = (recipe) => {
         ga.event({

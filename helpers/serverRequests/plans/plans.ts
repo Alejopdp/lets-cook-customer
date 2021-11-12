@@ -163,7 +163,7 @@ const data: Plan[] = Array<Plan>(20)
                 longDescription: "Las mejores arepas hechas por el mejor dev de Colombia",
                 cookDuration: "50 min",
                 cookDurationNumberValue: 50,
-                difficultyLevel: "Alta",
+                difficultyLevel: "Dificil",
                 imageUrl: "development/plans/Plan_test/Plan_test.png",
                 weight: "150 gr",
                 weightNumberValue: 150,

@@ -1,10 +1,10 @@
-import { IFilter } from "@layouts";
 import { Checkbox, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography, useTheme } from "@material-ui/core";
 import { useFilterDrawer } from "@stores";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import CustomButton from "../../atoms/customButton/customButton";
 import useStyles from "./styles";
+import { IFilter } from "@hooks";
 
 export const DrawerMenu = ({
     open = false,
@@ -23,10 +23,10 @@ export const DrawerMenu = ({
     const [filtersSelected, setFilters] = useState<IFilter[]>(storeFilters);
 
     const handleOnClick = (filter: IFilter) => {
-        const isApplied = filtersSelected.some((f) => filter.isEqualToFilterValue(f.value));
+        const isApplied = filtersSelected.some((f) => filter.isEqualToFilterValue(f.value) || filter.isEqual(f.value));
         if (isApplied) {
             let newFilterState = [];
-            newFilterState = filtersSelected.filter((f) => !filter.isEqualToFilterValue(f.value));
+            newFilterState = filtersSelected.filter((f) => !filter.isEqualToFilterValue(f.value) || !filter.isEqual(f.value));
             setFilters(newFilterState);
         } else {
             setFilters([...filtersSelected, filter]);
@@ -80,7 +80,10 @@ export const DrawerMenu = ({
                                         <ListItemIcon>
                                             <Checkbox
                                                 edge="start"
-                                                checked={filtersSelected.some((filter) => filter.isEqualToFilterValue(filterItem.value))}
+                                                checked={filtersSelected.some(
+                                                    (filter) =>
+                                                        filter.isEqualToFilterValue(filterItem.value) || filter.isEqual(filterItem.value)
+                                                )}
                                                 tabIndex={-1}
                                                 disableRipple
                                                 inputProps={{ "aria-labelledby": filterItem.value }}

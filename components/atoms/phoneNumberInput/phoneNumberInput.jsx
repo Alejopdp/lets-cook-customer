@@ -14,6 +14,7 @@ const PhoneNumberInput = (props) => {
     return (
         <>
             <PhoneInput
+                localization="es"
                 value={props.value}
                 inputStyle={{
                     backgroundColor: theme.palette.background.secondary,
@@ -35,9 +36,14 @@ const PhoneNumberInput = (props) => {
                 containerStyle={{ width: "100%", fontFamily: paragraphFont, fontSize: "16px" }}
                 specialLabel={props.label}
                 inputProps={{ name: props.name, autoComplete: "no" }}
-                onChange={(value, country, event, formattedValue) => props.handleChange(event)}
+                onChange={(value, country, event, formattedValue) => {
+                    props.handleChange(event);
+                }}
+                countryCodeEditable={false}
                 placeholder={props.placeholder}
                 country="es"
+                enableSearch
+                disableCountryGuess
                 disabled={props.disabled}
             />
         </>

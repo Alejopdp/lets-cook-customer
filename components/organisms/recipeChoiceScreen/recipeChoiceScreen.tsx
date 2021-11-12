@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { RecipeChoiceScreenProps } from "./interfaces";
-import { useLang } from "@hooks";
+import { useLang, useRecipesFilters } from "@hooks";
 import _ from "lodash";
 
 // External components
@@ -19,18 +19,13 @@ import { useFilterDrawer } from "@stores";
 import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
 import { useRouter } from "next/router";
-import { IFilter } from "@layouts";
 import { Recipe } from "@helpers";
-
-interface IFilterOptions {
-    title: string;
-    items: IFilter[];
-}
 
 const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
     const router = useRouter();
     const theme = useTheme();
     const [lang] = useLang("buyFlowLayout");
+    const [_filterOptions] = useRecipesFilters();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
     const { enqueueSnackbar } = useSnackbar();
     const [selectedRecipes, setselectedRecipes] = useState<Recipe[]>([]);
@@ -51,61 +46,6 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
             setselectedRecipes([...recipesToAdd]);
         }
     }, []);
-
-    const _filterOptions: IFilterOptions[] = [
-        {
-            title: lang.difficultLevel,
-            items: [
-                {
-                    label: lang.itemEasy,
-                    value: lang.itemEasy,
-                    isEqual: (recipeDifficultLevel) => recipeDifficultLevel === lang.itemEasy,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemEasy,
-                },
-                {
-                    label: lang.itemMedium,
-                    value: lang.itemMedium,
-                    isEqual: (recipeDifficultLevel) => recipeDifficultLevel === lang.itemMedium,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemMedium,
-                },
-                {
-                    label: lang.itemHard,
-                    value: lang.itemHard,
-                    isEqual: (recipeDifficultLevel) => recipeDifficultLevel === lang.itemHard,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemHard,
-                },
-            ],
-        },
-        {
-            title: lang.timeOfCook,
-            items: [
-                {
-                    label: lang.item15Min,
-                    value: lang.item15Min,
-                    isEqual: (recipeCookTime: number) => recipeCookTime < 15,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.item15Min,
-                },
-                {
-                    label: lang.item15To30,
-                    value: lang.item15To30,
-                    isEqual: (recipeCookTime: number) => 15 <= recipeCookTime && recipeCookTime < 30,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.item15To30,
-                },
-                {
-                    label: lang.item30To60,
-                    value: lang.item30To60,
-                    isEqual: (recipeCookTime: number) => 30 <= recipeCookTime && recipeCookTime < 60,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.item30To60,
-                },
-                {
-                    label: lang.itemUpperTo60,
-                    value: lang.itemUpperTo60,
-                    isEqual: (recipeCookTime: number) => recipeCookTime >= 60,
-                    isEqualToFilterValue: (anotherFilterValue: string) => anotherFilterValue === lang.itemUpperTo60,
-                },
-            ],
-        },
-    ];
 
     const handleRemoveFilter = (filter) => {
         const newFilterState = filters.filter((f) => filter !== f);
@@ -154,9 +94,9 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
 
     const filteredRecipes = useMemo(() => {
         return filters.length > 0
-            ? props.recipes.filter((recipe) =>
-                  filters.some((filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqual(recipe.difficultyLevel))
-              )
+            ? props.recipes.filter((recipe) => {
+                  return filters.some((filter) => filter.isEqual(recipe.cookDurationNumberValue) || filter.isEqual(recipe.difficultyLevel));
+              })
             : props.recipes;
     }, [filters]);
 
@@ -169,20 +109,21 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                         subtitle=""
                     />
                 </Grid>
-                <Grid item container direction="column" spacing={2}>
-                    <Grid item xs={3}>
-                        <RoundedButton
-                            variant="outline"
-                            label="Filtrar recetas"
-                            style={{ backgroundColor: "white" }}
-                            onClick={() => {
-                                setDrawerOpen(!drawerIsOpen);
-                            }}
-                        >
-                            <Icon component={FilterIcon} />
-                        </RoundedButton>
-                    </Grid>
-                    <Grid item container spacing={2}>
+                <Grid item xs={12} style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
+                    <Grid container spacing={2} alignItems="center">
+                        <Grid item>
+                            <RoundedButton
+                                variant="outline"
+                                label="Filtrar recetas"
+                                style={{ backgroundColor: "white", padding: "8px" }}
+                                onClick={() => {
+                                    setDrawerOpen(!drawerIsOpen);
+                                }}
+                            >
+                                <Icon component={FilterIcon} />
+                            </RoundedButton>
+                        </Grid>
+                        {/* <Grid item xs={9} container spacing={2}> */}
                         {filters.map((filter, index) => (
                             <Grid key={index} item>
                                 <Chip

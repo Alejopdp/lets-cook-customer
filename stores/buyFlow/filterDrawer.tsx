@@ -1,4 +1,4 @@
-import { IFilter } from "@layouts";
+import { IFilter } from "@hooks";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 
