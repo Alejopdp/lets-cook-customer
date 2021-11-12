@@ -33,7 +33,7 @@ const PlanDetailsDesktop = ({
                         <PlanCard plan={subscription.plan} handleClick={handleClickOpenChangePlanModal} />
                     </Grid>
                     <Grid item xs={12}>
-                        <ShippingAddressCard shippingAddress={subscription.shippingAddress} />
+                        <ShippingAddressCard shippingAddress={subscription.shippingAddress} shippingCost={subscription.shippingCost} />
                     </Grid>
                     <Grid item xs={12}>
                         <PaymentMethodCard paymentMethod={subscription.paymentMethod} />

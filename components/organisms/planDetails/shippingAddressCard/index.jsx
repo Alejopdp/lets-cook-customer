@@ -26,7 +26,19 @@ const ShippingAddressCard = (props) => {
                 text={props.shippingAddress.addressDetails}
                 style={{ marginBottom: theme.spacing(2) }}
             />
-            <DataDisplay title="Horario de preferencia" text={props.shippingAddress.preferredSchedule} />
+            <DataDisplay
+                title="Horario de preferencia"
+                text={props.shippingAddress.preferredSchedule}
+                style={{ marginBottom: theme.spacing(2) }}
+            />
+            <DataDisplay
+                title="Costo de envío"
+                text={
+                    !!props.shippingCost
+                        ? [`Tu próximo pedido tiene un costo de envío de `, <b>{props.shippingCost} €</b>]
+                        : "Tu próximo pedido no tiene costo de envío"
+                }
+            />
         </BoxWithTitle>
     );
 };

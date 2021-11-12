@@ -57,7 +57,7 @@ const PlanDetailsMobile = ({
                 </>
             )}
             <Grid item xs={12}>
-                <ShippingAddressCard shippingAddress={data.shippingAddress} />
+                <ShippingAddressCard shippingAddress={data.shippingAddress} shippingCost={data.shippingCost} />
             </Grid>
             <Grid item xs={12}>
                 <PaymentMethodCard paymentMethod={data.paymentMethod} />
