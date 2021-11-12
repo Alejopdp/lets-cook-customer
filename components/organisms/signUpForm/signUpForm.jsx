@@ -29,7 +29,7 @@ const SignUpForm = (props) => {
         email: "",
         password: "",
         authorize: false,
-        sendInfo: false,
+        sendInfo: true,
     });
     const [openTycModal, setOpenTycModal] = React.useState(false);
     const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false);

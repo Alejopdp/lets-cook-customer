@@ -191,13 +191,14 @@ export const PaymentForm = (props) => {
                     subscribeToMailingListGroup("109309613", userInfo.email, {
                         planName: form.planName,
                         planVariantLabel: form.planDescription,
-                    });
+                    }).then((res) =>
+                        updateSubscriber(userInfo.email, {
+                            shopify_last_order_id: updatePaymentOrderRes.data.billedPaymentOrderHumanId,
+                            shopify_tags: "Active subscriber",
+                            shopify_last_order_name: `${form.planName} / ${form.variant.label}`,
+                        })
+                    );
 
-                    updateSubscriber(userInfo.email, {
-                        shopify_last_order_id: updatePaymentOrderRes.data.billedPaymentOrderHumanId,
-                        shopify_tags: "Active subscriber",
-                        shopify_last_order_name: `${form.planName} / ${form.variant.label}`,
-                    });
                     ga.purchase({
                         transaction_id: res.data.subscriptionId,
                         affiliation: "Let's cook website",

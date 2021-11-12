@@ -80,13 +80,18 @@ export const RegisterUserStep = () => {
                 type: defaultPaymentMethod ? "card" : "",
             });
         }
-        subscribeToMailingListGroup("109309532", userInfo.email, { planName: form.planName, planVariantLabel: form.planDescription });
-        updateSubscriber(userInfo.email, {
-            shopify_accepts_marketing: accpetsMarketing ? 1 : 0,
-            shopify_id: userInfo.id,
-            language: router.locale === "es" ? "esp" : router.locale === "en" ? "ing" : "cat",
-            shopify_last_order_name: `${form.planName} / ${form.variant.label}`,
-        });
+        subscribeToMailingListGroup("109309532", userInfo.email, {
+            planName: form.planName,
+            planVariantLabel: form.planDescription,
+        }).then((res) =>
+            updateSubscriber(userInfo.email, {
+                shopify_accepts_marketing: accpetsMarketing ? 1 : 0,
+                shopify_id: userInfo.id,
+                language: router.locale === "es" ? "esp" : router.locale === "en" ? "ing" : "cat",
+                shopify_last_order_name: `${form.planName} / ${form.variant.label}`,
+            })
+        );
+
         setShowRegister(false);
         gotToNextView();
     };
