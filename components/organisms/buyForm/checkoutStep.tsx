@@ -51,9 +51,9 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
             name: deliveryData.firstName,
             last_name: deliveryData.lastName,
             country: "Spain",
-            city: "",
-            state: "enabled",
-            zip: "",
+            city: deliveryData.addressName,
+            state: deliveryData.addressName,
+            zip: deliveryData.addressName,
             shopify_note: deliveryData.restrictions,
         });
 

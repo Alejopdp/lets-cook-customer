@@ -40,7 +40,7 @@ import { Layout } from "../../../components/layout/index";
 
 const BlogPostPage = ({ post, error }) => {
     return (
-        <Layout seoTitle="Blog - Let's cook: Productos frescos y recetas" page='blog post page'>
+        <Layout seoTitle="Blog - Let's cook: Productos frescos y recetas" page="blog post page">
             <InnerSectionLayout containerMaxWidth="md">
                 <BackButtonTitle url="/blogs/recetas" title="Volver al Blog" />
                 <BlogPostCardDetail post={post} />
@@ -57,7 +57,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
-            pors: res.data || null,
+            post: res.data || null,
             error: res.status !== 200 ? "ERROR" : "",
         },
     };
