@@ -60,7 +60,7 @@ const BlogPostCardDetail = ({ post }) => {
 
                 <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
                     <Image
-                        src={`${process.env.NEXT_PUBLIC_BLOG_API_URL}${post.image.url}`}
+                        src={`${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${post.image.url}`}
                         alt={post.image.name}
                         width={700}
                         height={350}

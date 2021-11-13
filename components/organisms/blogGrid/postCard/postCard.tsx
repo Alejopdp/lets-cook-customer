@@ -71,7 +71,7 @@ const PostCard = (props: PostCardProps) => {
         <Grid container classes={{ root }} onClick={handlePostClick}>
             <Grid item xs={12} md={4}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_BLOG_API_URL}${props.post.image.url}`}
+                    src={`${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${props.post.image.url}`}
                     alt={props.post.image.name}
                     width={300}
                     height={270}
