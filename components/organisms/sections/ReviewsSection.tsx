@@ -104,15 +104,15 @@ export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
                 min: 0
             },
             items: 1,
-            partialVisibilityGutter: 30
+            partialVisibilityGutter: 40
         },
         tablet: {
             breakpoint: {
                 max: 1024,
-                min: 464
+                min: 700
             },
             items: 2,
-            partialVisibilityGutter: 30
+            partialVisibilityGutter: 40
         }
     };
 

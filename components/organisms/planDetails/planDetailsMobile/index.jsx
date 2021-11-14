@@ -22,6 +22,7 @@ const PlanDetailsMobile = ({
     handleClickOpenCancelPlanModal,
     handleClickOpenSkipPlanModal,
     handleClickOpenRecipeModal,
+    lang,
 }) => {
     const theme = useTheme();
     return (
@@ -30,7 +31,12 @@ const PlanDetailsMobile = ({
                 <PlanCard plan={data.plan} handleClick={handleClickOpenChangePlanModal} />
             </Grid>
             <Grid item xs={12}>
-                <CalendarCard schedule={data.schedule} skippedOrders={data.skippedOrders} handleClick={handleClickOpenSkipPlanModal} />
+                <CalendarCard
+                    schedule={data.schedule}
+                    skippedOrders={data.skippedOrders}
+                    handleClick={handleClickOpenSkipPlanModal}
+                    lang={lang.calendarCard}
+                />
             </Grid>
             {data.hasRecipes && (
                 <>
@@ -41,6 +47,7 @@ const PlanDetailsMobile = ({
                                 canChooseRecipes={data.canChooseRecipes}
                                 hasChosenRecipesForActualWeek={data.hasChosenRecipesForActualWeek}
                                 handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                                lang={lang.recipesActualWeekCard}
                             />
                         </Grid>
                     )}
@@ -51,21 +58,26 @@ const PlanDetailsMobile = ({
                                 handleClickOpenRecipeModal={handleClickOpenRecipeModal}
                                 hasChosenRecipesForNextWeek={data.hasChosenRecipesForNextWeek}
                                 canChooseRecipes={data.canChooseRecipesForNextWeekOrder}
+                                lang={lang.recipesNextWeekCard}
                             />
                         </Grid>
                     )}
                 </>
             )}
             <Grid item xs={12}>
-                <ShippingAddressCard shippingAddress={data.shippingAddress} shippingCost={data.shippingCost} />
+                <ShippingAddressCard
+                    shippingAddress={data.shippingAddress}
+                    lang={lang.shippingAddressCard}
+                    shippingCost={data.shippingCost}
+                />
             </Grid>
             <Grid item xs={12}>
-                <PaymentMethodCard paymentMethod={data.paymentMethod} />
+                <PaymentMethodCard paymentMethod={data.paymentMethod} lang={lang.paymentMethodCard} />
             </Grid>
             <Grid item xs={12}>
                 <TextButton
                     handleClick={handleClickOpenCancelPlanModal}
-                    btnText="cancelar plan"
+                    btnText={lang.cancelPlanBtnText}
                     style={{ color: "#FC1919", marginTop: theme.spacing(2) }}
                 />
             </Grid>

@@ -7,10 +7,10 @@ export interface Benefit {
     image: string;
 }
 export interface BenefitsSectionProps {
-    cards: Benefit[],
     backgroundColor?: string,
     removeCallToAction?: boolean,
     enableTitleSection?: boolean,
+    lang: any;
 }
 
 export interface CallToActionSectionProps {
@@ -24,14 +24,16 @@ export interface HowItWorks {
     image: string;
 }
 export interface HowItWorksSectionProps {
-    cards: HowItWorks[]
+    lang: any;
 }
 export interface PlansSectionProps {
     cards: Plan[]
+    lang: any;
 }
 
 export interface RecipesSectionProps {
     recipes?: Recipe[];
+    lang: any;
 }
 
 export interface ReviewsSectionProps {

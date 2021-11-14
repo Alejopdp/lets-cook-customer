@@ -62,7 +62,7 @@ const PasswordStep = (props) => {
                     value={props.password}
                     onChange={props.handleChange}
                     labelWidth={200}
-                    helperText="La contraseña debe tener al menos 8 caracteres, 1 minúscula, 1 mayúscula y 1 número"
+                    helperText={lang.passwordHelperText}
                 />
             </Grid>
             <Grid item xs={12}>

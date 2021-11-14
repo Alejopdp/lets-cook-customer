@@ -13,6 +13,8 @@ import PreferedLanguageInput from "../../atoms/preferedLanguageInput/preferedLan
 import DatePicker from "../../atoms/datePickerInput/datePickerInput";
 
 const PersonalDataModal = (props) => {
+    const lang = props.lang;
+
     const [formData, setformData] = useState({
         name: props.personalData.name,
         lastName: props.personalData.lastName,
@@ -36,7 +38,7 @@ const PersonalDataModal = (props) => {
     return (
         <Modal
             open={props.open}
-            title="Modificar datos personales"
+            title={lang.title}
             handleClose={props.handleClose}
             fullScreen
             primaryButtonText={props.primaryButtonText}
@@ -47,7 +49,7 @@ const PersonalDataModal = (props) => {
                 <Grid item xs={12}>
                     <TextField
                         id="outlined-basic"
-                        label="Nombre"
+                        label={lang.name}
                         variant="outlined"
                         name="name"
                         value={formData.name}
@@ -59,7 +61,7 @@ const PersonalDataModal = (props) => {
                     <TextField
                         id="outlined-basic"
                         name="lastName"
-                        label="Apellido"
+                        label={lang.lastName}
                         variant="outlined"
                         value={formData.lastName}
                         onChange={handleChange}
@@ -67,14 +69,14 @@ const PersonalDataModal = (props) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <PhoneNumberInput handleChange={handleChange} placeholder="Telefono (1)" value={formData.phone1} name="phone1" />
+                    <PhoneNumberInput handleChange={handleChange} placeholder={lang.phone1} value={formData.phone1} name="phone1" />
                 </Grid>
                 <Grid item xs={12}>
-                    <PhoneNumberInput value={formData.phone2} handleChange={handleChange} placeholder="Telefono (2)" name="phone2" />
+                    <PhoneNumberInput value={formData.phone2} handleChange={handleChange} placeholder={lang.phone2} name="phone2" />
                 </Grid>
                 <Grid item xs={12}>
                     <DatePicker
-                        label="Fecha de Nacimiento"
+                        label={lang.birthDate}
                         value={formData.birthDateValue}
                         handleChange={handleChange}
                         name="birthDateValue"

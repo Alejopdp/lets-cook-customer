@@ -1,6 +1,7 @@
 export const passwordStep = {
     es: {
         passwordInput: "Crea tu contraseña",
+        passwordHelperText: "La contraseña debe tener al menos 8 caracteres, 1 mayúscula y 1 número",
         authorizeCheckbox: {
             label: "Autorizo a Let's Cook a tratar mis datos para poder gestionar el alta como usuario en su web. ",
             boldText: "Puedes obtener más información aquí.",
@@ -12,6 +13,7 @@ export const passwordStep = {
     },
     en: {
         passwordInput: "Enter your password",
+        passwordHelperText: "La contraseña debe tener al menos 8 caracteres, 1 mayúscula y 1 número",
         authorizeCheckbox: {
             label: "I authorize Let's Cook to treat my data in order to register me on it's website. ",
             boldText: "Click here to get more information.",
@@ -23,6 +25,7 @@ export const passwordStep = {
     },
     ca: {
         passwordInput: "Crea tu contraseña",
+        passwordHelperText: "La contraseña debe tener al menos 8 caracteres, 1 mayúscula y 1 número",
         authorizeCheckbox: {
             label: "Autorizo a Let's Cook a tratar mis datos para poder gestionar el alta como usuario en su web. ",
             boldText: "Puedes obtener más información aquí.",

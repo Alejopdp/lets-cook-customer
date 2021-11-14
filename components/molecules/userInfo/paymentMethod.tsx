@@ -5,10 +5,11 @@ import { useSnackbar } from "notistack";
 import { Typography, Radio, RadioGroup, FormControlLabel, FormControl, Grid, makeStyles, TextField, useTheme } from "@material-ui/core";
 import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
 import Modal from "../../atoms/modal/modal";
-import { setupFuturePaymentMethod } from "helpers/serverRequests/customer";
+import { setupFuturePaymentMethod } from "../../../helpers/serverRequests/customer";
 import { SetupIntent, StripeError } from "@stripe/stripe-js";
 
 const PaymentMethodModal = (props) => {
+    const lang = props.lang;
     const theme = useTheme();
     const { enqueueSnackbar } = useSnackbar();
     const stripe = useStripe();
@@ -99,7 +100,7 @@ const PaymentMethodModal = (props) => {
         <Modal
             open={props.open}
             handleClose={props.handleClose}
-            title="Modificar metodo de pago"
+            title={lang.title}
             fullScreen
             handlePrimaryButtonClick={handleSubmit}
             primaryButtonText={props.primaryButtonText}
@@ -107,7 +108,7 @@ const PaymentMethodModal = (props) => {
         >
             <FormControl component="fieldset" style={{ width: "100%" }}>
                 <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChangePaymentMethod}>
-                    <FormControlLabel value="card" control={<Radio />} label="Mis tarjetas guardadas" />
+                    <FormControlLabel value="card" control={<Radio />} label={lang.mySavedCards} />
                     {value === "card" ? (
                         <RadioGroup
                             aria-label="gender"
@@ -129,15 +130,15 @@ const PaymentMethodModal = (props) => {
                     <FormControlLabel
                         value="newPaymentMethod"
                         control={<Radio />}
-                        label="Ingresar nuevo metodo de pago"
-                        // onClick={() => handleClickPaymentMethod()}
+                        label={lang.addNewPaymentMethod}
+                    // onClick={() => handleClickPaymentMethod()}
                     />
                     {value === "newPaymentMethod" ? <StripeForm /> : null}
                 </RadioGroup>
             </FormControl>
             <div style={{ display: "flex", marginTop: ".7rem", alignItems: "center" }}>
                 <ErrorOutlineIcon style={{ color: "red" }} />
-                <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>El metodo de pago se modificara en todos los planes activos</i>
+                <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>{lang.helperText}</i>
             </div>
         </Modal>
     );

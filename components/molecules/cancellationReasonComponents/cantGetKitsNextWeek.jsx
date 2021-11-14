@@ -15,13 +15,14 @@ import CheckBoxIcon from "@material-ui/icons/CheckBox";
 const useStyles = makeStyles((theme) => ({}));
 
 const CantGetKitsNextWeek = (props) => {
+    const lang = props.lang
     const classes = useStyles();
     const theme = useTheme();
 
     return (
         <>
             <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
-                Si lo que quieres es hacer una pausa por una o varias semana, recomendamos saltar semanas en lugar de cancelar el plan
+                {lang.modalText}
             </Typography>
             <Autocomplete
                 multiple
@@ -40,10 +41,10 @@ const CantGetKitsNextWeek = (props) => {
                             style={{ marginRight: 8 }}
                             checked={selected}
                         />
-                        {option.weekLabel} {option.isSkipped && "- Semana ya saltada"}
+                        {option.weekLabel} {option.isSkipped && `- ${lang.weekAlreadySkipped}`}
                     </>
                 )}
-                renderInput={(params) => <TextField {...params} variant="outlined" label="Semanas a saltar" />}
+                renderInput={(params) => <TextField {...params} variant="outlined" label={lang.inputLabel} />}
             />
         </>
     );

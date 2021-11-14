@@ -23,10 +23,15 @@ import SectionTitleBuyFlow from "../../molecules/sectionTitleBuyFlow/sectionTitl
 import Payment from "@material-ui/icons/Payment";
 import { CustomButton, RoundedButton, SimpleAccordion } from "@atoms";
 import { PlanVariant } from "types/planVariant";
-import { createManySubscriptions, handle3dSecureFailure, handle3dSecureFailureForManySubscriptions } from "helpers/serverRequests/subscription";
+import {
+    createManySubscriptions,
+    handle3dSecureFailure,
+    handle3dSecureFailureForManySubscriptions,
+} from "helpers/serverRequests/subscription";
 import AdditionalPlansBuyButtons from "components/molecules/additionalPlansBuyButtons/additionalPlansBuyButtons";
 import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const CrossSellingStep = (props) => {
     const theme = useTheme();
@@ -107,7 +112,7 @@ const CrossSellingStep = (props) => {
                     // TO DO: Confirm payments in DB
 
                     await updatePaymentOrderState(res.data.paymentOrderId, PaymentOrderState.PAYMENT_ORDER_BILLED);
-                    await router.push("/perfil");
+                    await router.push(localeRoutes[router.locale][Routes.perfil]);
                     resetBuyFlowState();
                 } else {
                     await handle3dSecureFailureForManySubscriptions(res.data.subscriptionsIds);
@@ -117,7 +122,7 @@ const CrossSellingStep = (props) => {
                     );
                 }
             } else if (res.data.payment_status === "succeeded") {
-                await router.push("/perfil");
+                await router.push(localeRoutes[router.locale][Routes.perfil]);
                 resetBuyFlowState();
             } else {
                 enqueueSnackbar("Error al completar el pago", { variant: "error" });
@@ -136,7 +141,7 @@ const CrossSellingStep = (props) => {
                 event_label: "no quiero añadir ningun adicional",
             },
         });
-        await router.push("/perfil");
+        await router.push(localeRoutes[router.locale][Routes.perfil]);
         resetBuyFlowState();
     };
 
@@ -145,8 +150,8 @@ const CrossSellingStep = (props) => {
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TitleBuyFlow
-                        title={form.recipes.length > 0 ? "¡Enhorabuena! Guardamos tu elección." : "¡Enhorabuena! Muchas gracias por tu compra"}
-                        subtitle="Ya puedes ir encendiendo los fogones. ¿Te gustaría disfrutar un adicional con tu plan?"
+                        title={form.recipes.length > 0 ? lang.title.recipesChosen : lang.title.withoutRecipes}
+                        subtitle={lang.subtitle}
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
@@ -162,7 +167,8 @@ const CrossSellingStep = (props) => {
                     <AdditionalPlansBuyButtons
                         handleSecondaryButtonClick={handleNotAddingAdditionalPlans}
                         handleSubmitPayment={handleSubmitPayment}
-                        secondaryButtonLabel="Ir a mi perfil"
+                        primaryButtonLabel={lang.purchaseBtnText}
+                        secondaryButtonLabel={lang.goToProfileBtnText}
                         totalValue={totalValue}
                         isLoadingPayment={isLoadingPayment}
                     />
@@ -170,13 +176,10 @@ const CrossSellingStep = (props) => {
             </Grid>
             <Grid container spacing={2} style={{ paddingBottom: theme.spacing(8), paddingTop: theme.spacing(8) }}>
                 <Grid item xs={12}>
-                    <SectionTitleBuyFlow
-                        title="Preguntas frecuentes"
-                        subtitle="¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat"
-                    />
+                    <SectionTitleBuyFlow title={lang.faqs.title} subtitle={lang.faqs.subtitle} />
                     <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                         <Grid container spacing={2}>
-                            {lang.faqs.map((faq, index) => (
+                            {lang.faqs.accordions.map((faq, index) => (
                                 <Grid item xs={12}>
                                     <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                                 </Grid>

@@ -44,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function CheckoutDetails() {
+export default function CheckoutDetails(props) {
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
     const { form, setCoupon, toFirstStep } = useBuyFlow(({ form, setCoupon, toFirstStep }) => ({ form, setCoupon, toFirstStep }));
@@ -127,7 +128,7 @@ export default function CheckoutDetails() {
     return (
         <Box className={classes.generalBoxContainer}>
             <Box display="flex" flexDirection="column" style={{ backgroundColor: theme.palette.background.paper }}>
-                <Typography variant="h5">Resumen de compra</Typography>
+                <Typography variant="h5">{lang.title}</Typography>
                 <PlanSelector
                     planIcon={form.planImageUrl ? form.planImageUrl : "/icons/appbar/img-header-select-plan.svg"}
                     planName={form.planName}
@@ -136,18 +137,23 @@ export default function CheckoutDetails() {
                 />
                 <Box paddingTop={4} borderTop="2px dashed #E5E5E5" borderBottom="2px solid #E5E5E5">
                     <CheckoutDetailPlanPrice
-                        title="Valor del plan"
+                        title={lang.planPriceTitle}
                         price={form.variant?.price}
                         priceWithOffer={form.variant?.priceWithOffer}
                     />
                     {!!form.deliveryForm.shippingCost && !form.deliveryForm.hasNextShipping && (
-                        <CheckoutDetailItem title="Costes de envío" value={`${form.deliveryForm?.shippingCost}€` || "Envío gratis"} />
+                        <CheckoutDetailItem
+                            title={lang.shippingCostTitle}
+                            value={`${form.deliveryForm?.shippingCost}€` || lang.freeShippingLabel}
+                        />
                     )}
                     {form.coupon?.id && (
                         <CheckoutDetailItem
-                            title={`Descuento ${form.coupon?.discount_type.type === "percent" ? "del" : "de"} ${
-                                form.coupon?.discount_type.value || form.deliveryForm?.shippingCost || 0
-                            } ${form.coupon?.discount_type.type === "percent" ? "%" : "€"}`}
+                            title={`${
+                                form.coupon?.discount_type.type === "percent" ? lang.percentageDiscountLabel : lang.fixedDiscountLabel
+                            } ${form.coupon?.discount_type.value || form.deliveryForm?.shippingCost || 0} ${
+                                form.coupon?.discount_type.type === "percent" ? "%" : "€"
+                            }`}
                             value={
                                 form.coupon?.discount_type.type === "percent"
                                     ? `- ${roundTwoDecimals((planVariantPrice * form.coupon?.discount_type.value) / 100)}€`
@@ -161,36 +167,36 @@ export default function CheckoutDetails() {
                 </Box>
                 {form.coupon?.id && form.coupon.coupons_by_subscription.type === "only_fee" ? (
                     <>
-                        <CheckoutValueItem title="Precio final primer entrega" value={totalValue} />
+                        <CheckoutValueItem title={lang.priceFromFirstDelivery} value={totalValue} />
                         <CheckoutValueItem
-                            title="Precio a partir de la segunda entrega"
                             value={roundTwoDecimals((planVariantPrice || 0) + (form.deliveryForm?.shippingCost || 0))}
+                            title={lang.priceFromSecondDelivery}
                         />
                     </>
                 ) : form.coupon?.id && form.coupon.coupons_by_subscription.type === "more_one_fee" ? (
                     <>
                         <CheckoutValueItem
-                            title={`Precio final de las primeras ${form.coupon?.coupons_by_subscription.value} entregas`}
+                            title={`${lang.priceFromFirstNDeliveries.firstText} ${form.coupon?.coupons_by_subscription.value} ${lang.priceFromFirstNDeliveries.secondText}`}
                             value={totalValue}
                         />
                         <CheckoutValueItem
-                            title={`Precio luego de las ${form.coupon?.coupons_by_subscription.value} entregas`}
+                            title={`${lang.priceForTheNextDeliveries.firstText} ${form.coupon?.coupons_by_subscription.value} ${lang.priceForTheNextDeliveries.secondText}`}
                             value={roundTwoDecimals(planVariantPrice) + (form.deliveryForm?.shippingCost || 0)}
                         />
                     </>
                 ) : (
-                    <CheckoutValueItem title="Precio final" value={totalValue} />
+                    <CheckoutValueItem title={lang.finalPrice} value={totalValue} />
                 )}
                 <div style={{ display: "flex", justifyContent: "flex-end", marginTop: theme.spacing(0.5) }}>
                     <Typography variant="caption" color="textSecondary">
-                        Impuestos incluidos
+                        {lang.taxIncluded}
                     </Typography>
                 </div>
                 <div style={{ marginTop: theme.spacing(3) }}>
                     {form.coupon?.id ? (
-                        <AppliedCouponBox couponCode={form.coupon.code} handleRemoveCoupon={handleRemoveCoupon} />
+                        <AppliedCouponBox text={lang.appliedCoupon} couponCode={form.coupon.code} handleRemoveCoupon={handleRemoveCoupon} />
                     ) : (
-                        <CouponInputAccordion handleSubmit={handleCouponSubmit} />
+                        <CouponInputAccordion text={lang.doYouHaveCoupon} handleSubmit={handleCouponSubmit} />
                     )}
                 </div>
                 <Box marginTop={4} paddingTop={4} borderTop="2px dashed #E5E5E5">
@@ -198,8 +204,8 @@ export default function CheckoutDetails() {
                         <div style={{ display: "flex" }}>
                             <img width={24} height={24} src="/icons/checkout/informacion-de-envio.svg" />
                             <Typography variant="body2" style={{ fontSize: "14px", paddingLeft: theme.spacing(2) }}>
-                                Tu primer pedido llegará este <strong>{form.deliveryForm.nextShippingDate}</strong>. Recibirás un correo con
-                                el horario de entrega. Luego, todas las entregas se realizarán los {form.deliveryForm.shippingDayLabel}
+                                {lang.shippingDayLabel.firstText} <strong>{form.deliveryForm.nextShippingDate}</strong>.{" "}
+                                {lang.shippingDayLabel.secondText} {form.deliveryForm.shippingDayLabel}
                             </Typography>
                         </div>
                     )}
@@ -226,7 +232,7 @@ export default function CheckoutDetails() {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Typography variant="body2" style={{ fontSize: "13px" }}>
-                                Tenemos una calificación excelente en <strong>150 opiniones</strong>
+                                {lang.reviewsText.firstText} <strong>150 {lang.reviewsText.secondText}</strong>
                             </Typography>
                         </Grid>
                     </Grid>

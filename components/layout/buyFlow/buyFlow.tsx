@@ -71,6 +71,8 @@ export const BuyFlowLayout = memo(({ children: Component }: BuyFlowLayoutProps) 
                         selectedItems={filters}
                         handleOnClose={() => setDrawerOpen(false)}
                         handleOnClickApplyButton={_handleClickApplyFilters}
+                        filterTitle={lang.filterTitle}
+                        applyFiltersBtnText={lang.applyFiltersBtnText}
                     />
                 )}
                 <main className={classes.content}>{Component}</main>

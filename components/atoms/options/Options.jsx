@@ -4,25 +4,40 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-const options = ["ELEGIR RECETAS", "SALTAR SEMANA", "CAMBIAR PLAN"];
 
-const ITEM_HEIGHT = 32;
-
-export default function Options() {
+const Options = ({ handleSetSubscriptionId, subscriptionId, handleClickOpenSkipPlanModal, handleClickOpenChangePlanModal }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+    const ITEM_HEIGHT = 32;
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
+    const handleCloseOptions = () => {
         setAnchorEl(null);
     };
 
+    const handleClickOptions = (event) => {
+        setAnchorEl(event.currentTarget);
+        handleSetSubscriptionId(subscriptionId)
+
+    };
+
+    const handleClickSkipPlanModal = () => {
+        handleClickOpenSkipPlanModal();
+        handleCloseOptions();
+    }
+
+    const handleClickChangePlan = () => {
+        handleClickOpenChangePlanModal();
+        handleCloseOptions();
+    }
+
+    const options = [
+        { id: 1, title: "SALTAR SEMANA", handleClick: handleClickSkipPlanModal },
+        { id: 2, title: "CAMBIAR PLAN", handleClick: handleClickChangePlan },
+    ];
+
     return (
         <div>
-            <IconButton aria-label="more" aria-controls="long-menu" aria-haspopup="true" onClick={handleClick}>
+            <IconButton aria-label="more" aria-controls="long-menu" aria-haspopup="true" onClick={handleClickOptions}>
                 <MoreVertIcon />
             </IconButton>
             <Menu
@@ -30,7 +45,7 @@ export default function Options() {
                 anchorEl={anchorEl}
                 keepMounted
                 open={open}
-                onClose={handleClose}
+                onClose={handleCloseOptions}
                 PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 4.5,
@@ -39,11 +54,13 @@ export default function Options() {
                 }}
             >
                 {options.map((option) => (
-                    <MenuItem key={option} selected={option === "Pyxis"} onClick={handleClose}>
-                        {option}
+                    <MenuItem key={option.id} onClick={option.handleClick}>
+                        {option.title}
                     </MenuItem>
                 ))}
             </Menu>
         </div>
     );
 }
+
+export default Options;

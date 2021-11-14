@@ -2,6 +2,7 @@ import { memo, useRef, useState } from "react";
 import { Button, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { Routes, localeRoutes } from "lang/routes/routes";
 
 export interface ILan {
     label: string;
@@ -18,7 +19,7 @@ interface LangSelectorProps {
     onChangeLang?: (args?: ILan) => void;
 }
 
-export const LangSelector = memo( ({ onChangeLang }: LangSelectorProps) => {
+export const LangSelector = memo(({ onChangeLang }: LangSelectorProps) => {
     const languages: ILangs = {
         es: {
             label: "es",
@@ -36,18 +37,29 @@ export const LangSelector = memo( ({ onChangeLang }: LangSelectorProps) => {
 
     const [open, setOpen] = useState(false);
     const anchorRef = useRef();
-    const [lang, setLang] = useState(languages.es);
     const router = useRouter();
+    const [lang, setLang] = useState(languages[router.locale]);
 
     const _toggleOpen = () => {
         setOpen(!open);
     };
 
     const _handleOptionSelected = (locale: ILan) => {
+        const actualPageName = Object.keys(localeRoutes[router.locale]).find(
+            (key) => localeRoutes[router.locale][key] === `/${router.query.slug?.join("/")}` || ""
+        )!;
+        const actualQueryParams = Object.entries(router.query).reduce(
+            (acc, entry, index) =>
+                entry[0] === "slug" ? acc : index === 0 ? `?${entry[0]}=${entry[1]}` : `${acc}&${entry[0]}=${entry[1]}`,
+            ""
+        );
+
         onChangeLang && onChangeLang(locale);
         setOpen(false);
         setLang(locale);
-        router.replace(router, undefined, { locale: locale.label });
+        router.replace(`${localeRoutes[locale.label][Routes[actualPageName]] || "/"}${actualQueryParams}`, undefined, {
+            locale: locale.label,
+        });
     };
 
     return (

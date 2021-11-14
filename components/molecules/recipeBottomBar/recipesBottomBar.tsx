@@ -6,6 +6,8 @@ import { CustomButton, RoundedButton } from "@atoms";
 import { useBuyFlow, useRecipesBottomBar } from "@stores";
 import useStyles from "./styles";
 import Hidden from "@material-ui/core/Hidden";
+import { recipeChoiseStep } from "lang/components/organisms/buyForm/recipeChoiseStep";
+import { useRouter } from "next/router";
 
 type RecipesBottomBarProps = {
     handleSubmit: () => void;
@@ -13,9 +15,12 @@ type RecipesBottomBarProps = {
     maxRecipesQty: number;
     handleSecondaryButtonClick: () => void;
     isLoading: boolean;
+    lang: any;
 };
 
 export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
+    const router = useRouter();
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
     const { recipes, variant, forward } = useBuyFlow((store) => ({
@@ -55,7 +60,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                 <div className={classes.recipesQtySelected}>
                                     <CheckCircleOutline color="primary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
-                                        Has seleccionado todas las recetas
+                                        {lang.allRecipesChosen}
                                     </Typography>
                                 </div>
                             )}
@@ -63,18 +68,25 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                 <div className={classes.recipesQtySelected}>
                                     <ErrorOutlineOutlined color="secondary" className={classes.marginRight} />
                                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
-                                        {(props.maxRecipesQty - props.selectedRecipes.length) === 1 ?
-                                            `Aún te queda ${props.maxRecipesQty - props.selectedRecipes.length} receta por seleccionar` :
-                                            `Aún te quedan ${props.maxRecipesQty - props.selectedRecipes.length} recetas por seleccionar`
-                                        }
-
+                                        {props.maxRecipesQty - props.selectedRecipes.length === 1
+                                            ? `${
+                                                  recipeChoiseStep[router.locale].recipesBottomBar.recipesPendingToSelect.singular.firstText
+                                              } ${props.maxRecipesQty - props.selectedRecipes.length} ${
+                                                  recipeChoiseStep[router.locale].recipesBottomBar.recipesPendingToSelect.singular
+                                                      .secondText
+                                              }`
+                                            : `${
+                                                  recipeChoiseStep[router.locale].recipesBottomBar.recipesPendingToSelect.plural.firstText
+                                              } ${props.maxRecipesQty - props.selectedRecipes.length} ${
+                                                  recipeChoiseStep[router.locale].recipesBottomBar.recipesPendingToSelect.plural.secondText
+                                              }`}
                                     </Typography>
                                 </div>
                             )}
                         </Box>
                         <Box style={{ display: "flex", flexDirection: "column" }}>
                             <RoundedButton
-                                label="Finalizar"
+                                label={recipeChoiseStep[router.locale].recipesBottomBar.btnText}
                                 onClick={props.handleSubmit}
                                 isLoading={props.isLoading}
                                 disabled={props.maxRecipesQty > props.selectedRecipes.length}
@@ -86,7 +98,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                                 style={{ fontSize: "13px", marginTop: theme.spacing(0.5) }}
                                 onClick={props.handleSecondaryButtonClick}
                             >
-                                Elegir recetas luego
+                                {recipeChoiseStep[router.locale].recipesBottomBar.chooseLaterBtnText}
                             </Button>
                         </Box>
                     </Grid>

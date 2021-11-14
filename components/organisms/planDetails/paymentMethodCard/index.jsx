@@ -13,15 +13,16 @@ import DataDisplay from "../../../molecules/dataDisplay/dataDisplay";
 const useStyles = makeStyles((theme) => ({}));
 
 const PaymentMethodCard = (props) => {
+    const lang = props.lang;
     const theme = useTheme();
     const classes = useStyles();
     // const router = useRouter();
     // const lang = langs[router.locale];
 
     return (
-        <BoxWithTitle title="Método de pago">
-            <DataDisplay title="Tarjeta" text={props.paymentMethod.cardLabel} style={{ marginBottom: theme.spacing(2) }} />
-            <DataDisplay title="Vencimiento" text={props.paymentMethod.expirationDateLabel} />
+        <BoxWithTitle title={lang.title}>
+            <DataDisplay title={lang.cardLabelTitle} text={props.paymentMethod.cardLabel} style={{ marginBottom: theme.spacing(2) }} />
+            <DataDisplay title={lang.expirationDateLabelTitle} text={props.paymentMethod.expirationDateLabel} />
         </BoxWithTitle>
     );
 };

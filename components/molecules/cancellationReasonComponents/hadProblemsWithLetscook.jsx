@@ -19,17 +19,18 @@ const useStyles = makeStyles((theme) => ({
 
 
 const HadProblemsWithLetscook = (props) => {
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
     return (
         <>
             <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
-                ¡Lo sentimos mucho! Por favor, informa a continuación cuales fueron los problemas que has tenido e intentaremos que no vuelva a suceder
+                {lang.modalText}
             </Typography>
             <div className={classes.root}>
                 <TextField
                     id="had_problems_with_letscook_comments"
-                    label="Indica qué problemas has tenido"
+                    label={lang.inputLabel}
                     multiline
                     rows={5}
                     variant="outlined"

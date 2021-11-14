@@ -19,6 +19,7 @@ export interface SelectVariantContentProps {
     setselectedVariants: (variants: PlanVariant[]) => void;
     additionalPlanName: string;
     handleClickBackToFirstContent: any;
+    lang: any;
 }
 
 export interface AttributePickerProps {
@@ -33,10 +34,12 @@ export interface FirstContentProps {
     description: string;
     minPrice: string;
     additionalPlanName: string;
+    lang: any;
 }
 
 export interface VariantSelectedContentProps {
     variant: PlanVariant;
     selectedFrequency: string;
     additionalPlanName: string;
+    lang: any;
 }

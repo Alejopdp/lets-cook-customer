@@ -96,12 +96,12 @@ export const useCallToActionStyle = makeStyles(theme => ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundImage: "url(/assets/img-call-to-action-background.png)",
+        backgroundImage: "url(/assets/img-call-to-action-background.jpg)",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8),
         backgroundColor: theme.palette.background.paper
     },
     smallText: {

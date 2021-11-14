@@ -1,5 +1,5 @@
 import { Plan, PlanVariant, Recipe } from "@helpers";
-import { PlanUrlParams } from "../../../../pages/planes/[slug]";
+import { PlanUrlParams } from "../../../../pages/planes(old)/[slug]";
 
 export interface SelectPlanProps {
     recipes: Recipe[];

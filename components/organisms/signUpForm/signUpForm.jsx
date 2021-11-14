@@ -99,7 +99,7 @@ const SignUpForm = (props) => {
                 event_label: "ya tienes cuenta",
             },
         });
-        router.push("/iniciar-sesion");
+        router.push(localeRoutes[router.locale][Routes["iniciar-sesion"]]);
     };
 
     const router = useRouter();
@@ -181,7 +181,6 @@ const SignUpForm = (props) => {
                 <Register
                     text={lang.register.text}
                     boldText={lang.register.boldText}
-                    // redirectTo={lang.register.redirectTo}
                     handleRedirect={props.handleRedirect || handleRedirect}
                 />
             </FormPaper>

@@ -14,6 +14,7 @@ import RecipeModal from "components/molecules/recipeModal/recipeModal";
 import * as ga from '../../../helpers/ga'
 
 export const RecipesSection = memo((props: RecipesSectionProps) => {
+    const lang = props.lang
     const classes = useStyles();
     const [isModalOpen, setisModalOpen] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState({});
@@ -75,8 +76,8 @@ export const RecipesSection = memo((props: RecipesSectionProps) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <TitleOtherPages
-                            title="Hecha un vistazo a las recetas de esta semana"
-                            subtitle="Nuestros chefs preparan recetas variadas cada semana para mantener la llama viva"
+                            title={lang.title}
+                            subtitle={lang.subtitle}
                             titleAlign="center"
                         />
                     </Grid>

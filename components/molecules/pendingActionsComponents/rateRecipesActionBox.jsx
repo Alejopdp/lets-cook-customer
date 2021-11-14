@@ -9,13 +9,13 @@ import Typography from "@material-ui/core/Typography";
 import BoxWithIconAndTextButton from "../../../components/molecules/specificBox/boxWithIconAndTextButton";
 
 
-const RateRecipesActionBox = props => {
+const RateRecipesActionBox = ({lang}) => {
     const theme = useTheme();
 
     return (
-        <BoxWithIconAndTextButton icon="rating" btnText="Valorar recetas">
+        <BoxWithIconAndTextButton icon="rating" btnText={lang.btnText}>
             <Typography variant="body2" style={{ fontSize: "16px" }}>
-                Tienes recetas pendientes de valorar. ¡Tu opinión nos ayuda a mejorar!
+                {lang.text}
             </Typography>
         </BoxWithIconAndTextButton>
     );

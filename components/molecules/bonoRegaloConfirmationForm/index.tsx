@@ -25,6 +25,7 @@ import { useBuyFlow, useUserInfoStore } from "@stores";
 import { Grid, Typography, useTheme } from "@material-ui/core";
 import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
 import PlanInfoWithVariantLabel from "../planInfo/planInfoWithVariantLabel";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const useStylesAccordion = makeStyles((theme: Theme) =>
     createStyles({
@@ -59,7 +60,7 @@ const BonoRegaloConfirmationForm = (props) => {
     // const gotToNextView = useBuyFlow(({ forward }) => forward);
     const stripe = useStripe();
     const [isLoadingPayment, setisLoadingPayment] = useState(false);
-    const [showPaymentForm, setShowPaymentForm] = useState(false)
+    const [showPaymentForm, setShowPaymentForm] = useState(false);
 
     const elements = useElements();
     const { enqueueSnackbar } = useSnackbar();
@@ -96,7 +97,7 @@ const BonoRegaloConfirmationForm = (props) => {
     const [areTermsAccepted, setareTermsAccepted] = useState(false);
 
     const handleOnChange = () => {
-        router.push("/aviso-legal");
+        router.push(localeRoutes[router.locale][Routes["aviso-legal"]]);
     };
 
     const handlePaymentMethodTypeChange = (e) => {
@@ -142,12 +143,12 @@ const BonoRegaloConfirmationForm = (props) => {
         const data = {
             customerId: userInfo.id || "f031ca8c-647e-4d0b-8afc-28e982068fd5", // Get customer id from zustand
             planId: form.planCode,
-            planVariantId: form.variant ?.id,
+            planVariantId: form.variant?.id,
             planFrequency: "Semanal",
             restrictionComment: props.deliveryData.restrictions || "", // Add restriction comment
             couponId: "",
-            stripePaymentMethodId: form.paymentMethod ?.stripeId, // Add if it is a new payment method
-            paymentMethodId: form.paymentMethod ?.id, // Add if customer uses an already saved payment method
+            stripePaymentMethodId: form.paymentMethod?.stripeId, // Add if it is a new payment method
+            paymentMethodId: form.paymentMethod?.id, // Add if customer uses an already saved payment method
             addressName: props.deliveryData.addressName,
             addressDetails: props.deliveryData.addressDetails,
             latitude: props.deliveryData.latitude,
@@ -162,7 +163,7 @@ const BonoRegaloConfirmationForm = (props) => {
         if (res.status === 200) {
             if (res.data.payment_status === "requires_action") {
                 await stripe.confirmCardPayment(res.data.client_secret, {
-                    payment_method: form.paymentMethod ?.stripeId,
+                    payment_method: form.paymentMethod?.stripeId,
                 });
             }
             enqueueSnackbar("Suscripción creada con éxito", { variant: "success" });
@@ -191,11 +192,11 @@ const BonoRegaloConfirmationForm = (props) => {
                 shippingAddress: !!userInfo.shippingAddress
                     ? { ...userInfo.shippingAddress }
                     : {
-                        addressDetails: props.deliveryData.addressDetails,
-                        addressName: props.deliveryData.addressName,
-                        latitude: props.deliveryData.latitude,
-                        longitude: props.deliveryData.longitude,
-                    },
+                          addressDetails: props.deliveryData.addressDetails,
+                          addressName: props.deliveryData.addressName,
+                          latitude: props.deliveryData.latitude,
+                          longitude: props.deliveryData.longitude,
+                      },
                 paymentMethods,
             });
 
@@ -221,19 +222,25 @@ const BonoRegaloConfirmationForm = (props) => {
         return !!!form.paymentMethod;
     };
 
-
     const freeShipping = false;
-    const shippingCost = '10 €'
+    const shippingCost = "10 €";
     // const freeShipping = true;
     // const shippingCost = 'Gratis'
 
     const handleClickNextButton = () => {
         if (freeShipping) {
-            alert('continue to next step - recipes selection')
+            alert("continue to next step - recipes selection");
         } else {
-            setShowPaymentForm(true)
+            setShowPaymentForm(true);
         }
-    }
+    };
+
+    const lang = {
+        paymentMethodForm: {
+            savedCardLabel: "Mis tarjetas guardadas",
+            addNewPaymentMethodLabel: "Ingresar nuevo metodo de pago",
+        },
+    };
 
     return (
         <>
@@ -260,26 +267,38 @@ const BonoRegaloConfirmationForm = (props) => {
                 <AccordionDetails>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <PlanInfoWithVariantLabel planIcon='/icons/plans/plan-bono-regalo-color.svg' planName='Bono Regalo' planVariantLabel='4 recetas para 3 personas' />
+                            <PlanInfoWithVariantLabel
+                                planIcon="/icons/plans/plan-bono-regalo-color.svg"
+                                planName="Bono Regalo"
+                                planVariantLabel="4 recetas para 3 personas"
+                            />
                         </Grid>
                         <Grid item xs={12} style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
                             <Grid container spacing={2}>
                                 <Grid item xs={6}>
                                     <div>
-                                        <Typography variant='subtitle2' color='textSecondary' style={{ fontSize: '14px' }}>
+                                        <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px" }}>
                                             Fecha de entrega
                                         </Typography>
-                                        <Typography variant='body1' color='primary' style={{ marginTop: theme.spacing(0.5), fontWeight: '700' }}>
+                                        <Typography
+                                            variant="body1"
+                                            color="primary"
+                                            style={{ marginTop: theme.spacing(0.5), fontWeight: "700" }}
+                                        >
                                             Martes 25 de mayo
                                         </Typography>
                                     </div>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <div style={{ borderLeft: '1px dashed rgba(0,0,0,0.2)', paddingLeft: theme.spacing(3) }}>
-                                        <Typography variant='subtitle2' color='textSecondary' style={{ fontSize: '14px' }}>
+                                    <div style={{ borderLeft: "1px dashed rgba(0,0,0,0.2)", paddingLeft: theme.spacing(3) }}>
+                                        <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px" }}>
                                             Costo de envío
                                         </Typography>
-                                        <Typography variant='body1' color='primary' style={{ marginTop: theme.spacing(0.5), fontWeight: '700' }}>
+                                        <Typography
+                                            variant="body1"
+                                            color="primary"
+                                            style={{ marginTop: theme.spacing(0.5), fontWeight: "700" }}
+                                        >
                                             {shippingCost}
                                         </Typography>
                                     </div>
@@ -289,7 +308,7 @@ const BonoRegaloConfirmationForm = (props) => {
                         {!showPaymentForm && (
                             <Grid item xs={12}>
                                 <RoundedButton
-                                    label={freeShipping ? 'Continuar y seleccionar recetas' : `Pagar costos de envío (${shippingCost})`}
+                                    label={freeShipping ? "Continuar y seleccionar recetas" : `Pagar costos de envío (${shippingCost})`}
                                     onClick={handleClickNextButton}
                                     style={{ width: "100%" }}
                                 />
@@ -311,18 +330,31 @@ const BonoRegaloConfirmationForm = (props) => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <PaymentMethodForm
+                                        lang={lang.paymentMethodForm}
                                         paymentMethods={userInfo.paymentMethods || []}
-                                        selectedOption={form.paymentMethod ?.type}
+                                        selectedOption={form.paymentMethod?.type}
                                         setselectedOption={(e) => handlePaymentMethodTypeChange(e)}
-                                        selectedSavedCard={form.paymentMethod ?.id}
+                                        selectedSavedCard={form.paymentMethod?.id}
                                         setselectedSavedCard={(e) => handleSelectedCardChange(e)}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <div style={{display:'flex', alignItems:'center'}}>
-                                        <Checkbox checked={areTermsAccepted} onChange={() => setareTermsAccepted(!areTermsAccepted)} color="primary" name='acceptTerms' />
-                                        <Typography variant='body2' color='textSecondary' style={{ fontSize: '13px', marginLeft: theme.spacing(0.5) }}>
-                                            He leído y acepto las <b onClick={props.handleOpenPurchaseConditionsModal} style={{ cursor: 'pointer' }}>condiciones generales de venta</b>
+                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                        <Checkbox
+                                            checked={areTermsAccepted}
+                                            onChange={() => setareTermsAccepted(!areTermsAccepted)}
+                                            color="primary"
+                                            name="acceptTerms"
+                                        />
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                            style={{ fontSize: "13px", marginLeft: theme.spacing(0.5) }}
+                                        >
+                                            He leído y acepto las{" "}
+                                            <b onClick={props.handleOpenPurchaseConditionsModal} style={{ cursor: "pointer" }}>
+                                                condiciones generales de venta
+                                            </b>
                                         </Typography>
                                     </div>
                                 </Grid>

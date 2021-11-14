@@ -12,4 +12,5 @@ export interface CancelPlanModalProps {
     subscriptionId: string;
     actualPlan: Plan;
     actualPlanVariant: PlanVariant;
+    lang: any;
 }

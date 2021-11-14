@@ -12,6 +12,7 @@ export const DrawerMenu = ({
     selectedItems = [],
     handleOnClose = () => {},
     handleOnClickApplyButton = (e: any) => {},
+    ...props
 }) => {
     const classes = useStyles();
     const theme = useTheme();
@@ -58,7 +59,7 @@ export const DrawerMenu = ({
             >
                 <div className={classes.drawerContentRoot}>
                     <Typography variant="h5" style={{ textAlign: "left" }}>
-                        Filtrar recetas
+                        {props.filterTitle}
                     </Typography>
                     <List>
                         {items.map((filterPart, keyPartTitle) => (
@@ -96,7 +97,7 @@ export const DrawerMenu = ({
                         ))}
                     </List>
                 </div>
-                <CustomButton text="Aplicar filtros" onClick={() => _handleOnClickApplyButton()} style={{ width: "100%" }} />
+                <CustomButton text={props.applyFiltersBtnText} onClick={() => _handleOnClickApplyButton()} style={{ width: "100%" }} />
             </Drawer>
         </nav>
     );

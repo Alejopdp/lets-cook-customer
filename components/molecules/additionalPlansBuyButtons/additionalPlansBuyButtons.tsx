@@ -9,6 +9,7 @@ type AdditionalPlansBuyButtonsProps = {
     totalValue: number;
     handleSubmitPayment: () => void;
     handleSecondaryButtonClick?: () => void;
+    primaryButtonLabel?: string;
     secondaryButtonLabel?: string;
     isLoadingPayment: boolean;
 };
@@ -21,7 +22,7 @@ const AdditionalPlansBuyButtons = (props: AdditionalPlansBuyButtonsProps) => {
         <Box display="flex" flexDirection="column" alignItems="center">
             {props.totalValue > 0 && (
                 <RoundedButton
-                    label={`PAGAR ADICIONALES (${props.totalValue} €)`}
+                    label={`${props.primaryButtonLabel} (${props.totalValue} €)`}
                     onClick={props.handleSubmitPayment}
                     disabled={props.isLoadingPayment}
                     isLoading={props.isLoadingPayment}

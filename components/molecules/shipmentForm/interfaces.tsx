@@ -9,4 +9,5 @@ export interface ShipmentFormProps {
     deliveryData: any;
     handleAddressChange: any;
     isFormComplete: () => boolean;
+    lang: any;
 }

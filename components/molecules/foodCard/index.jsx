@@ -37,6 +37,7 @@ export default function FoodCard({
     setStarValue,
     handleDeleteRecipe,
     recipeToRate,
+    lang
 }) {
     const classes = useStyles();
     const theme = useTheme();
@@ -72,7 +73,7 @@ export default function FoodCard({
                 <CardActions>
                     {isRated ? null : (
                         <Button size="small" className={classes.button} onClick={() => handleDeleteRecipe(recipeToRate)}>
-                            NO VALORAR ESTA RECETA
+                            {lang.dontRateBtnLabel}
                         </Button>
                     )}
                 </CardActions>
