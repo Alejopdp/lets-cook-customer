@@ -4,6 +4,7 @@ import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
 import { usePlansStyles as useStyles } from "./styles";
 import * as ga from "../../../helpers/ga";
+import { localeRoutes, Routes } from "lang/routes/routes";
 const langs = require("../../../lang").home;
 
 const PlanCard = (props) => {
@@ -21,12 +22,12 @@ const PlanCard = (props) => {
             },
         });
         navigateTo({
-            pathname: `/planes/${props.card.slug}`,
-            // query: {
-            //     slug: props.card.slug,
-            //     personas: props.card.variants.find(v => v.isDefault)?.numberOfPersons || "",
-            //     recetas: props.card.variants ?.numberOfRecipes || "",
-            // }
+            pathname: `${localeRoutes[locale][Routes["planes"]]}`,
+            query: {
+                planSlug: props.card.slug,
+                personas: props.card.variants.find((v) => v.isDefault)?.numberOfPersons || "",
+                recetas: props.card.variants.find((v) => v.isDefault)?.numberOfRecipes || "",
+            },
         });
     };
 

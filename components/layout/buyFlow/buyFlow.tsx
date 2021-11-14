@@ -11,9 +11,10 @@ import { useRecipesFilters } from "@hooks";
 
 interface BuyFlowLayoutProps {
     children: React.ReactNode;
+    isInitializing: boolean;
 }
 
-export const BuyFlowLayout = memo(({ children: Component }: BuyFlowLayoutProps) => {
+export const BuyFlowLayout = memo(({ children: Component, isInitializing }: BuyFlowLayoutProps) => {
     const classes = useStyles();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
     const [lang] = useLang("buyFlowLayout");
@@ -24,7 +25,6 @@ export const BuyFlowLayout = memo(({ children: Component }: BuyFlowLayoutProps) 
     };
 
     const _handleClickApplyFilters = (_filters) => {
-        console.log("Buy flow filters: ", filters);
         ga.event({
             action: "clic en aplicar filtros",
             params: {
@@ -75,7 +75,7 @@ export const BuyFlowLayout = memo(({ children: Component }: BuyFlowLayoutProps) 
                         applyFiltersBtnText={lang.applyFiltersBtnText}
                     />
                 )}
-                <main className={classes.content}>{Component}</main>
+                {!isInitializing && <main className={classes.content}>{Component}</main>}
             </div>
         </>
     );

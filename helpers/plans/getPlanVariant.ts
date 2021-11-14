@@ -35,8 +35,6 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
     const slugPlan = plans?.find(({ slug: _slug }) => _slug === slug);
 
     if (!!slugPlan && !!params.peopleQty && !!params.recipeQty) {
-        // Find the variant coincident, if the variant in not found so
-        // is  selected the first variant into plan.
         variant = slugPlan.variants?.find(
             ({ numberOfPersons = "", numberOfRecipes = "" }) => numberOfPersons == params.peopleQty && numberOfRecipes == params.recipeQty
         );
@@ -59,6 +57,7 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
     }
 
     if (!slugPlan) {
+        console.log("slugPlan");
         // If slug-plan is not found so is selected the first plan for default.
         id = plans[0]?.id || "";
         slug = plans[0]?.slug || "no-plan";
@@ -81,9 +80,9 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
 
     if (!variant) {
         // TODO: Move to lang messages
-
+        console.log("!variant");
         variant = slugPlan.variants.find((variant) => variant.isDefault) || slugPlan.variants[0];
-
+        recipes = slugPlan.recipes || [];
         redirect = {
             destination: `/planes/${slug}?personas=${variant?.numberOfPersons || 0}&recetas=${variant?.numberOfRecipes || 0}`,
             permanent: true,
@@ -93,7 +92,6 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
     }
 
     if (!!!variant?.numberOfPersons || !!!variant?.numberOfRecipes) {
-        console.log("No hay persons o recetas");
         // TODO: Move to lang messages
         errors.push(
             "The information for the current variants has #numberPeople# people and #numberRecipes# recipes."

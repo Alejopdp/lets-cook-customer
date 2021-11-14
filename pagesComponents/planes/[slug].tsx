@@ -69,7 +69,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     useEffect(() => {
         const initialize = async () => {
             const _slug = router.query.planSlug || "plan-familiar";
-            console.log("Router query plan slug: ", _slug);
             const mainPlans: Plan[] = [];
             const aditionalsPlans: Plan[] = [];
 
@@ -180,72 +179,14 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         <CrossSellingStep />,
     ];
 
-    return isInitializing ? (
-        <></>
-    ) : step === steps.length - 1 ? (
+    return step === steps.length - 1 ? (
         <Box paddingY={4}>
             <LoggedInNavbar toggleOpeningDrawer={() => ""} />
             <CrossSellingStep />
         </Box>
     ) : (
-        <BuyFlowLayout>{steps[step]}</BuyFlowLayout>
+        <BuyFlowLayout isInitializing={isInitializing}>{steps[step]}</BuyFlowLayout>
     );
 });
-
-// export async function getServerSideProps({ locale, query }) {
-//     const _slug = query.slug || "";
-//     const mainPlans: Plan[] = [];
-//     const aditionalsPlans: Plan[] = [];
-
-//     const [_plans] = await Promise.all([getPlans(locale)]);
-
-//     const errors = [_plans.error].filter((e) => !!e);
-
-//     if (errors.length) {
-//         console.warn("***-> Errors: ", errors);
-//     }
-
-//     _plans.data?.plans.forEach((plan, index) => {
-//         if (plan.type === "Main" || plan.type === "Principal") {
-//             mainPlans.push(plan);
-//         } else {
-//             aditionalsPlans.push(plan);
-//         }
-//     });
-
-//     const {
-//         id,
-//         slug,
-//         variant,
-//         redirect,
-//         errors: _errors,
-//         recipes,
-//         planImageUrl,
-//         iconLinealWithColorUrl,
-//     } = getPlanVariant({ slug: _slug, recipeQty: query.recetas, peopleQty: query.personas }, mainPlans);
-
-//     const planUrlParams: PlanUrlParams = {
-//         personQty: `${variant?.numberOfPersons || 0}`,
-//         recipeQty: `${variant?.numberOfRecipes || 0}`,
-//         slug,
-//         id,
-//         planImageUrl,
-//         iconLinealWithColorUrl,
-//     };
-
-//     return {
-//         props: {
-//             isLogged: true,
-//             plans: mainPlans,
-//             aditionalsPlans,
-//             weekLabel: _plans.data.weekLabel,
-//             variant,
-//             recipes,
-//             planUrlParams,
-//             errors: [...errors, ..._errors],
-//         },
-//         redirect,
-//     };
-// }
 
 export default PlanesPage;
