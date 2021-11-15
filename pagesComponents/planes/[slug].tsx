@@ -12,6 +12,7 @@ import LoggedInNavbar from "../../components/layout/default/loggedInNavbarConten
 import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "@organisms";
 import CrossSellingStep from "components/organisms/buyForm/crossSellingStep";
 import { Box } from "@material-ui/core";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 export interface PlansErrors {
     plans?: string;
@@ -68,11 +69,9 @@ const PlanesPage = memo((props: PlanesPageProps) => {
 
     useEffect(() => {
         const initialize = async () => {
-            const _slug = router.query.planSlug || "plan-familiar";
+            const [_plans] = await Promise.all([getPlans(router.locale)]);
             const mainPlans: Plan[] = [];
             const aditionalsPlans: Plan[] = [];
-
-            const [_plans] = await Promise.all([getPlans(router.locale)]);
 
             const errors = [_plans.error].filter((e) => !!e);
 
@@ -87,6 +86,8 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                     aditionalsPlans.push(plan);
                 }
             });
+            const _slug = router.query.planSlug || mainPlans.find((plan) => plan.isDefaultAtCheckout)?.slug || "";
+            console.log("SLUG: ", _slug);
 
             const {
                 id,
@@ -99,6 +100,9 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 iconLinealWithColorUrl,
             } = getPlanVariant({ slug: _slug, recipeQty: router.query.recetas || 0, peopleQty: router.query.personas || 0 }, mainPlans);
 
+            if (redirect && !!redirect.destination)
+                router.replace(`${localeRoutes[router.locale][Routes["planes"]]}/${redirect.destination}`);
+
             setWeekLabel(_plans.data.weekLabel);
             const planUrlParams: PlanUrlParams = {
                 personQty: `${variant?.numberOfPersons || 0}`,
@@ -108,6 +112,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 planImageUrl,
                 iconLinealWithColorUrl,
             };
+            console.log("URL PARAMS: ", planUrlParams);
 
             setData({
                 aditionalsPlans,

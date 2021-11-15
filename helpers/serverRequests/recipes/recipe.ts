@@ -2,7 +2,7 @@ import Axios from "axios";
 import { API_URL } from "../serverRequestInterfaces/response";
 import { Recipe, RecipeResponse } from "./recipesInterfaces";
 
-export async function getRecipes(locale: string): Promise<RecipeResponse> {
+export async function getRecipes(locale: string = "es"): Promise<RecipeResponse> {
     try {
         const res = await Axios.request<Recipe[]>({
             method: "GET",
@@ -24,7 +24,7 @@ export async function getRecipes(locale: string): Promise<RecipeResponse> {
     }
 }
 
-export async function getNextWeekRecipes(locale: string): Promise<RecipeResponse> {
+export async function getNextWeekRecipes(locale: string = "es"): Promise<RecipeResponse> {
     try {
         const res = await Axios.request<Recipe[]>({
             method: "GET",

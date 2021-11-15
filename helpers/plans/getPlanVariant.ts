@@ -1,5 +1,6 @@
 import { getLang } from "@hooks";
 import { Plan, Recipe } from "helpers/serverRequests";
+import { localeRoutes, Routes } from "lang/routes/routes";
 import { PlanVariant } from "types/planVariant";
 
 export interface PlanVarianResult {
@@ -42,10 +43,8 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
         if (!variant) {
             variant = slugPlan.variants.find((v) => v.isDefault);
             redirect = {
-                destination: `/planes/${slug}?personas=${variant?.numberOfPersons || slugPlan.variants[0]?.numberOfPersons || ""}&recetas=${
-                    variant?.numberOfRecipes || slugPlan.variants[0]?.numberOfRecipes || ""
-                }`,
-                permanent: true,
+                destination: `?planSlug=${slug}&personas=${variant?.numberOfPersons || 0}&recetas=${variant?.numberOfRecipes || 0}`,
+                permanent: false,
             };
             variant = slugPlan.variants[0];
         }
@@ -67,8 +66,8 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
         iconLinealWithColorUrl = plans[0]?.iconWithColor || "";
 
         redirect = {
-            destination: `/planes/${slug}?personas=${variant?.numberOfPersons || 0}&recetas=${variant?.numberOfRecipes || 0}`,
-            permanent: true,
+            destination: `?planSlug=${slug}&personas=${variant?.numberOfPersons || 0}&recetas=${variant?.numberOfRecipes || 0}`,
+            permanent: false,
         };
 
         // If hasn't plans
@@ -81,11 +80,14 @@ export function getPlanVariant(params = { slug: undefined, peopleQty: 0, recipeQ
     if (!variant) {
         // TODO: Move to lang messages
         console.log("!variant");
+        id = slugPlan?.id || "";
+        planImageUrl = slugPlan?.imageUrl || "";
+        iconLinealWithColorUrl = slugPlan?.iconWithColor || "";
         variant = slugPlan.variants.find((variant) => variant.isDefault) || slugPlan.variants[0];
         recipes = slugPlan.recipes || [];
         redirect = {
-            destination: `/planes/${slug}?personas=${variant?.numberOfPersons || 0}&recetas=${variant?.numberOfRecipes || 0}`,
-            permanent: true,
+            destination: `?planSlug=${slug}&personas=${variant?.numberOfPersons || 0}&recetas=${variant?.numberOfRecipes || 0}`,
+            permanent: false,
         };
 
         if (!variant) errors.push("The current plan hasn't variants.");
