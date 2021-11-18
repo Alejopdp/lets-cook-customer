@@ -87,7 +87,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 }
             });
             const _slug = router.query.planSlug || mainPlans.find((plan) => plan.isDefaultAtCheckout)?.slug || "";
-            console.log("SLUG: ", _slug);
 
             const {
                 id,
@@ -112,7 +111,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 planImageUrl,
                 iconLinealWithColorUrl,
             };
-            console.log("URL PARAMS: ", planUrlParams);
 
             setData({
                 aditionalsPlans,
@@ -149,6 +147,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
 
         initialize();
         return () => {
+            console.log("Exedcuting reset flow");
             resetBuyFlowState();
             setCoupon({ ...BuyFlowInitialStore.form.coupon });
         };
