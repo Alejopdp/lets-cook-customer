@@ -40,8 +40,8 @@ const ShippingAddressCard = (props) => {
                 title="Coste de envío"
                 text={
                     !!props.shippingCost
-                        ? [`Tu próximo pedido tiene un costo de envío de `, <b>{props.shippingCost} €</b>]
-                        : "Tu próximo pedido no tiene costo de envío"
+                        ? [`Tu próximo pedido tiene un coste de envío de `, <b>{props.shippingCost} €</b>]
+                        : "Tu próximo pedido no tiene coste de envío"
                 }
             />
         </BoxWithTitle>

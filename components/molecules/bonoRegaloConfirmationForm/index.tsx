@@ -292,7 +292,7 @@ const BonoRegaloConfirmationForm = (props) => {
                                 <Grid item xs={6}>
                                     <div style={{ borderLeft: "1px dashed rgba(0,0,0,0.2)", paddingLeft: theme.spacing(3) }}>
                                         <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px" }}>
-                                            Costo de envío
+                                            Coste de envío
                                         </Typography>
                                         <Typography
                                             variant="body1"
@@ -308,7 +308,7 @@ const BonoRegaloConfirmationForm = (props) => {
                         {!showPaymentForm && (
                             <Grid item xs={12}>
                                 <RoundedButton
-                                    label={freeShipping ? "Continuar y seleccionar recetas" : `Pagar costos de envío (${shippingCost})`}
+                                    label={freeShipping ? "Continuar y seleccionar recetas" : `Pagar costes de envío (${shippingCost})`}
                                     onClick={handleClickNextButton}
                                     style={{ width: "100%" }}
                                 />
