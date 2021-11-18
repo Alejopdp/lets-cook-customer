@@ -86,7 +86,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
     const componentsForCarousel = useMemo(() => {
         return props.recipe.imagesUrls.map((url: string, index: number) => ({
             item: url,
-            component: <img className={props.classes.image} src={url} alt={index} width="100%" height={250} />,
+            component: <img className={props.classes.image} src={url} alt={index} width="100%" />,
         }));
         // return props.recipe.imagesUrls.map((url: string, index: number) => ({
         //     item: url,
