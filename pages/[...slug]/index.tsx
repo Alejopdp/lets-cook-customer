@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Routes, localeRoutes } from "lang/routes/routes";
 import { useRouter } from "next/router";
+import Adicionales from "../../pagesComponents/adicionales/index";
 import ConfigurationPage from "../../pagesComponents/configuracion/index";
 import BlogPage from "../../pagesComponents/blogs/recetas/[slug]";
 import BonoRegaloPage from "../../pagesComponents/bono-regalo/index";
@@ -60,7 +61,7 @@ const Pages = (props) => {
             case localeRoutes[router.locale][Routes.recetas]:
                 return <RecetasPage />;
 
-            case localeRoutes[router.locale][Routes["recetas-grid"]]:
+            case localeRoutes[router.locale][Routes["valorar-recetas"]]:
                 return <RecetasGridPage />;
 
             case localeRoutes[router.locale][Routes["recuperar-contrasena"]]:
@@ -71,6 +72,9 @@ const Pages = (props) => {
 
             case localeRoutes[router.locale][Routes.configuracion]:
                 return <ConfigurationPage />;
+
+            case localeRoutes[router.locale][Routes.adicionales]:
+                return <Adicionales />;
 
             default:
                 return (
