@@ -13,7 +13,6 @@ export interface Recipe {
     id?: string;
     name?: string;
     sku?: string;
-    shortDescription?: string;
     longDescription?: string;
     cookDuration?: string;
     cookDurationNumberValue?: number;

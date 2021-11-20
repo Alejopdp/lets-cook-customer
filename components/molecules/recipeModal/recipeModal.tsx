@@ -142,9 +142,6 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                                 <Typography variant="h6">{props.recipe.name}</Typography>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Typography variant="body2">{props.recipe.shortDescription}</Typography>
-                                            </Grid>
-                                            <Grid item xs={12}>
                                                 <Grid container>
                                                     <Grid item className={props.classes.tag}>
                                                         <TimerIcon color="primary" style={{ marginRight: theme.spacing(1) }} />
