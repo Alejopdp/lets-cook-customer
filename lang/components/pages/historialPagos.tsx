@@ -3,7 +3,7 @@ export const historialPagos = {
         title: "Historial de pagos",
         paymentsTable: {
             billingDate: "Fecha de pago",
-            id: "Número de orden",
+            id: "Número de pedido",
             ordersQty: "Descripción",
             amount: "Monto total",
             state: "Estado",
@@ -30,7 +30,7 @@ export const historialPagos = {
         title: "[EN] Historial de pagos",
         paymentsTable: {
             billingDate: "Fecha de pago",
-            id: "Número de orden",
+            id: "Número de pedido",
             ordersQty: "Descripción",
             amount: "Monto total",
             state: "Estado",
@@ -57,7 +57,7 @@ export const historialPagos = {
         title: "[CA] Historial de pagos",
         paymentsTable: {
             billingDate: "Fecha de pago",
-            id: "Número de orden",
+            id: "Número de pedido",
             ordersQty: "Descripción",
             amount: "Monto total",
             state: "Estado",

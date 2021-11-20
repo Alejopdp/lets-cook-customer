@@ -73,11 +73,11 @@ const PaymentsTable = (props: PaymentsTableProps) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.paymentOrders ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        {props.paymentOrders?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                             return (
                                 <TableRow role="checkbox" tabIndex={-1} key={row.id}>
                                     {columnsNewTable.map((column) => {
-                                        let value = column.id === "amount" ? row.amount : row[column.id];
+                                        let value = column.id === "amount" ? row.amount : column.id === "id" ? row.humanId : row[column.id];
                                         if (column.id === "seeMore") {
                                             value = (
                                                 <IconButton size="small" aria-label="close" onClick={() => props.onClick(row.id)}>
