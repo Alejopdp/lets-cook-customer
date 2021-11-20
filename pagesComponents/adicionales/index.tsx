@@ -113,7 +113,7 @@ const NuevoAcompañamientoPage = (props) => {
                         />
                         <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>
-                                {lang.faqs.map((faq, index) => (
+                                {lang.faqs.accordions.map((faq, index) => (
                                     <Grid item xs={12}>
                                         <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                                     </Grid>
