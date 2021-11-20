@@ -7,6 +7,7 @@ import { Layout } from "../../components/layout/index";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 import { getRecipesByCustomer } from "../../helpers/serverRequests/user-recipes";
 import { useLang } from "@hooks";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 export const getServerSideProps = async (context) => {
     const test = context.params.id;
@@ -21,7 +22,9 @@ export const getServerSideProps = async (context) => {
 };
 
 const RecetasLayout = ({ recipes }) => {
+    const router = useRouter();
     const [lang] = useLang("valorarRecetas");
+
     return (
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
