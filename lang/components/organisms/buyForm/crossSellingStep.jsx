@@ -1,10 +1,10 @@
-import { productosAdicionales } from '../faqsSection'
+import { productosAdicionales } from "../faqsSection";
 
 export const crossSellingStep = {
     es: {
         title: {
             recipesChosen: "¡Enhorabuena! Guardamos tu elección.",
-            withoutRecipes: "¡Enhorabuena! Muchas gracias por tu compra"
+            withoutRecipes: "¡Enhorabuena! Muchas gracias por tu compra",
         },
         subtitle: "Ya puedes ir encendiendo los fogones. ¿Te gustaría disfrutar un adicional con tu plan?",
         purchaseBtnText: "Pagar adicionales",
@@ -17,29 +17,29 @@ export const crossSellingStep = {
     },
     en: {
         title: {
-            recipesChosen: "¡Enhorabuena! Guardamos tu elección.",
-            withoutRecipes: "¡Enhorabuena! Muchas gracias por tu compra"
+            recipesChosen: "Thank you! We have saved your selection.",
+            withoutRecipes: "Thank you for your order!",
         },
-        subtitle: "Ya puedes ir encendiendo los fogones. ¿Te gustaría disfrutar un adicional con tu plan?",
-        purchaseBtnText: "Pagar adicionales",
-        goToProfileBtnText: "Ir a mi perfil",
+        subtitle: "Now you can start heating up your stoves. Would you like to enjoy an additional product with your plan?",
+        purchaseBtnText: "Pay additional products",
+        goToProfileBtnText: "Go to my profile",
         faqs: {
-            title: "Preguntas frecuentes",
-            subtitle: "¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat",
+            title: "Frequently asked questions",
+            subtitle: "Do you need help? Check our frequently asked questions or ask us in our live chat",
             accordions: productosAdicionales.es.accordions,
         },
     },
     ca: {
         title: {
-            recipesChosen: "¡Enhorabuena! Guardamos tu elección.",
-            withoutRecipes: "¡Enhorabuena! Muchas gracias por tu compra"
+            recipesChosen: "Enhorabona! Registrem la teva elecció.",
+            withoutRecipes: "Enhorabona! Moltes gràcies per la teva compra",
         },
-        subtitle: "Ya puedes ir encendiendo los fogones. ¿Te gustaría disfrutar un adicional con tu plan?",
-        purchaseBtnText: "Pagar adicionales",
-        goToProfileBtnText: "Ir a mi perfil",
+        subtitle: "Ja pots anar encenent els fogons. T’agradaria gaudir d’un addicional amb el teu pla?",
+        purchaseBtnText: "Pagar addicionals",
+        goToProfileBtnText: "Anar al meu perfil",
         faqs: {
-            title: "Preguntas frecuentes",
-            subtitle: "¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat",
+            title: "Preguntes freqüents",
+            subtitle: "Necessites ajuda? Revisa les nostres preguntes freqüents o consulta en el nostre xat",
             accordions: productosAdicionales.es.accordions,
         },
     },

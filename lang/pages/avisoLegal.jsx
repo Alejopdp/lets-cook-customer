@@ -4,11 +4,11 @@ export const avisoLegal = {
         subtitle: "Condiciones generales del uso del sitio web.",
     },
     en: {
-        title: "Legal advice",
-        subtitle: "General conditions of the website's usage.",
+        title: "Legal disclaimer",
+        subtitle: "General terms and conditions for use of the website.",
     },
     ca: {
-        title: "Legal advice",
-        subtitle: "General conditions of the website's usage.",
+        title: "Avís legal",
+        subtitle: "Condicions generals d’ús del lloc web.",
     },
 };

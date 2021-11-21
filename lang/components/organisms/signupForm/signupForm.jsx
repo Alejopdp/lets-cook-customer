@@ -3,7 +3,7 @@ export const signupForm = {
         title: "Crear tu cuenta",
         register: {
             text: "¿Ya tienes cuenta?",
-            boldText: "Ingresa aquí",
+            boldText: "Entra aquí",
         },
     },
     en: {
@@ -11,13 +11,13 @@ export const signupForm = {
         register: {
             text: "Have an account already?",
             boldText: "Login here",
-        }
+        },
     },
     ca: {
         title: "Crear tu cuenta",
         register: {
             text: "¿Ya tienes cuenta?",
-            boldText: "Ingresa aquí",
-        }
-    }
-}
+            boldText: "Entra aquí",
+        },
+    },
+};

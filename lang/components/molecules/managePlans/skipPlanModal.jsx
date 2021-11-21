@@ -4,20 +4,20 @@ export const skipPlanModal = {
         primaryButtonText: "Guardar cambios",
         secondaryButtonText: "Cancelar",
         reanudarBtnText: "Reanudar",
-        saltarBtnText: "Saltar"
+        saltarBtnText: "Saltar",
     },
     en: {
-        title: "Saltar semana",
-        primaryButtonText: "Guardar cambios",
-        secondaryButtonText: "Cancelar",
-        reanudarBtnText: "Reanudar",
-        saltarBtnText: "Saltar"
+        title: "Skip week",
+        primaryButtonText: "Save changes",
+        secondaryButtonText: "Cancel",
+        reanudarBtnText: "Resume",
+        saltarBtnText: "Skip",
     },
     ca: {
-        title: "Saltar semana",
-        primaryButtonText: "Guardar cambios",
-        secondaryButtonText: "Cancelar",
-        reanudarBtnText: "Reanudar",
-        saltarBtnText: "Saltar"
+        title: "Saltar setmana",
+        primaryButtonText: "Guardar canvis",
+        secondaryButtonText: "Cancel·lar",
+        reanudarBtnText: "Rependre",
+        saltarBtnText: "Saltar",
     },
-}
+};

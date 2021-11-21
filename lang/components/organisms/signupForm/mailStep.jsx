@@ -1,14 +1,14 @@
 export const mailStep = {
     es: {
         emailInput: "Tu correo electrónico",
-        buttonText: "Continuar"
+        buttonText: "Continuar",
     },
     en: {
         emailInput: "Your email",
-        buttonText: "Next"
+        buttonText: "Next",
     },
     ca: {
-        emailInput: "Tu correo electrónico",
-        buttonText: "Continuar"
-    }
-}
+        emailInput: "El teu correu electrònic",
+        buttonText: "Continuar",
+    },
+};

@@ -1,14 +1,14 @@
 export const loginBox = {
     es: {
-        title: "Ingresa con tu cuenta",
-        emailInput: "Ingrese su correo electrónico",
-        passwordInput: "Ingrese su contraseña",
+        title: "Iniciar sesión",
+        emailInput: "Entra tu correo electrónico",
+        passwordInput: "Entra tu contraseña",
         forgotPassword: "Olvidé mi contraseña",
-        buttonText: "Ingresar",
+        buttonText: "Entrar",
         register: {
             text: "¿Aún no tienes cuenta?",
             boldText: "Registrate aquí",
-        }
+        },
     },
     en: {
         title: "Login with your account",
@@ -17,19 +17,19 @@ export const loginBox = {
         forgotPassword: "Forgot your password?",
         buttonText: "Login",
         register: {
-            text: "¿No account yet?",
+            text: "You don’t have an account yet?",
             boldText: "Register here",
-        }
+        },
     },
     ca: {
-        title: "[CA] Login with your account",
-        emailInput: "[CA] Enter your email",
-        passwordInput: "[CA] Enter your password",
-        forgotPassword: "[CA] Forgot your password?",
-        buttonText: "[CA] Login",
+        title: "Entra amb el teu compte",
+        emailInput: "Introdueix el teu correu electrònic",
+        passwordInput: "Introdueix la teva contrasenya",
+        forgotPassword: "Has oblidat la teva contrasenya?",
+        buttonText: "Entra",
         register: {
-            text: "[CA] ¿No account yet?",
-            boldText: "[CA] Register here",
-        }
+            text: "Encara no tens compte?",
+            boldText: "Enregistrar-se aquí",
+        },
     },
-}
+};

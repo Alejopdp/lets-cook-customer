@@ -45,7 +45,7 @@ const SignUpForm = (props) => {
             action: "clic en continuar",
             params: {
                 event_category: `registrarse - ${props.source}`,
-                event_label: "correo electronico",
+                event_label: "correo electrónico",
             },
         });
         setIsLoading(true);

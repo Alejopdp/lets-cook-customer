@@ -221,7 +221,6 @@ const Perfil = (props) => {
         },
     };
 
-    console.log("HISTORILA: ", localeRoutes[router.locale][Routes["historial-pagos"]]);
     return (
         <>
             <Layout disableCallToActionSection>
@@ -361,9 +360,13 @@ const Perfil = (props) => {
                                     </>
                                 ) : (
                                     <EmptyState
-                                        image="/emptyStatePlans.png"
+                                        image="/empty-cart.png"
                                         title={lang.plansEmptyStateTitle}
-                                        text={lang.plansEmptyStateSubtitle}
+                                        text={
+                                            !!props.friendCode
+                                                ? `${lang.plansEmptyStateSubtitleFirstPart} ${lang.withCodeEmptyState} ${props.friendCode} ${lang.plansEmptyStateSubtitleSecondPart}`
+                                                : `${lang.plansEmptyStateSubtitleFirstPart}`
+                                        }
                                     />
                                 )}
                             </Grid>
@@ -404,7 +407,7 @@ const Perfil = (props) => {
                                             </>
                                         ) : (
                                             <EmptyState
-                                                image="/emptyStatePlans.png"
+                                                image="/empty-cart.png"
                                                 title={lang.additionalsEmptyStateTitle}
                                                 text={lang.additionalsEmptyStateSubtitle}
                                             />

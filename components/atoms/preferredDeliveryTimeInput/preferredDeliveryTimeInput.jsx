@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
 export default function PreferredDeliveryTimeInput(props) {
     const classes = useStyles();
     const router = useRouter();
-    const [lang] = useLang("preferredDeliveryTimeInput");
+    const [lang] = useLang("configuracion");
 
     const scheduleOptions = [
-        { value: "", label: { es: "Sin indicar", ca: "Sin indicar", en: "No option" } },
+        { value: " ", label: { es: "Sin indicar", ca: "Sin indicar", en: "No option" } },
         { value: "15 - 18", label: { es: "de 15 a 18 hs", ca: "de 15 a 18 hs", en: "3 to 6 pm" } },
         { value: "17 - 20", label: { es: "de 17 a 20 hs", ca: "de 17 a 20 hs", en: "5 to 8 pm" } },
         { value: "19 - 22", label: { es: "de 19 a 22 hs", ca: "de 19 a 22 hs", en: "7 to 10 pm" } },
@@ -28,14 +28,15 @@ export default function PreferredDeliveryTimeInput(props) {
 
     return (
         <FormControl variant="outlined" className={classes.container} fullWidth>
-            <InputLabel htmlFor="outlined-age-native-simple">Horario de preferencia de entrega</InputLabel>
+            <InputLabel htmlFor="preferred-hour-input">{lang.userInfoDetail.deliveryAddressModal.preferredHour}</InputLabel>
             <Select
+                labelId="preferred-hour-input"
                 fullWidth
                 native
                 name={props.name}
                 value={props.value}
                 onChange={props.handleChange}
-                label="Horario de preferencia de entrega"
+                label={lang.userInfoDetail.deliveryAddressModal.preferredHour}
                 inputProps={{ name: props.name }}
             >
                 <option key="0" value={scheduleOptions[0].value}>

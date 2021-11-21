@@ -9,6 +9,7 @@ import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOth
 import SearchBar from "../../components/atoms/searchBar/searchBar";
 import FaqsSection from "../../components/organisms/faqsSection/faqsSection";
 import { Layout } from "../../components/layout/index";
+import { useLang } from "@hooks";
 
 const PreguntasFrecuentes = () => {
     const router = useRouter();
@@ -16,7 +17,11 @@ const PreguntasFrecuentes = () => {
     const [searchValue, setsearchValue] = useState("");
 
     return (
-        <Layout seoTitle="Preguntas frecuentes - Let's cook: Productos frescos y recetas" seoOgUrlSlug='preguntas-frecuentes' page='preguntas frecuentes'>
+        <Layout
+            seoTitle="Preguntas frecuentes - Let's cook: Productos frescos y recetas"
+            seoOgUrlSlug="preguntas-frecuentes"
+            page="preguntas frecuentes"
+        >
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <SearchBar searchValue={searchValue} setsearchValue={setsearchValue} />

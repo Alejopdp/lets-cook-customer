@@ -1,6 +1,6 @@
 export const recoverPasswordMail = {
     es: {
-        emailInput: "Ingrese su correo electrónico",
+        emailInput: "Entra tu correo electrónico",
         buttonText: "Recuperar contraseña",
     },
     en: {
@@ -8,7 +8,7 @@ export const recoverPasswordMail = {
         buttonText: "Recover password",
     },
     ca: {
-        emailInput: "Enter your email",
-        buttonText: "Recover password",
+        emailInput: "Introdueix el teu correu electrònic",
+        buttonText: "Recuperar contrasenya",
     },
-}
+};

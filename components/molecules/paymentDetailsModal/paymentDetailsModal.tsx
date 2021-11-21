@@ -52,8 +52,8 @@ const styles = (theme) => ({
 
 const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps) => {
     const theme = useTheme();
-    const lang = props.lang
-    console.log(props.data, 'props.data')
+    const lang = props.lang;
+    console.log(props.data, "props.data");
 
     return (
         <Modal open={props.open} handleClose={props.handleClose} maxWidth="md" fullScreen title={lang.title}>
@@ -62,7 +62,7 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                     <Typography variant="subtitle1" color="textSecondary" style={{ marginBottom: theme.spacing(2) }}>
                         {lang.subscriptionPaid}
                     </Typography>
-                    {props.data.orders ?.map((order, index) => (
+                    {props.data.orders?.map((order, index) => (
                         <div
                             key={index}
                             style={{
@@ -102,19 +102,16 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                                             </div>
                                         ))
                                     ) : (
-                                            <Typography variant="body2" color="textSecondary">
-                                                {lang.recipesNotFound}
-                                            </Typography>
-                                        )}
+                                        <Typography variant="body2" color="textSecondary">
+                                            {lang.recipesNotFound}
+                                        </Typography>
+                                    )}
                                 </>
                             )}
                         </div>
                     ))}
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="subtitle1" color="textSecondary" style={{ marginBottom: theme.spacing(2) }}>
-                        {lang.amountPaidDetails}
-                    </Typography>
                     <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
                         {lang.subtotal}: {props.data.amount} €
                     </Typography>

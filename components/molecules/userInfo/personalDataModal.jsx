@@ -69,18 +69,25 @@ const PersonalDataModal = (props) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <PhoneNumberInput handleChange={handleChange} placeholder={lang.phone1} value={formData.phone1} name="phone1" />
-                </Grid>
-                <Grid item xs={12}>
-                    <PhoneNumberInput value={formData.phone2} handleChange={handleChange} placeholder={lang.phone2} name="phone2" />
-                </Grid>
-                <Grid item xs={12}>
-                    <DatePicker
-                        label={lang.birthDate}
-                        value={formData.birthDateValue}
+                    <PhoneNumberInput
                         handleChange={handleChange}
-                        name="birthDateValue"
+                        placeholder={lang.phone1}
+                        label={lang.phone1}
+                        value={formData.phone1}
+                        name="phone1"
                     />
+                </Grid>
+                <Grid item xs={12}>
+                    <PhoneNumberInput
+                        value={formData.phone2}
+                        handleChange={handleChange}
+                        placeholder={lang.phone2}
+                        label={lang.phone2}
+                        name="phone2"
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <DatePicker label={lang.birthDate} value={formData.birthDateValue} handleChange={handleChange} name="birthDateValue" />
                 </Grid>
                 <Grid item xs={12}>
                     <PreferedLanguageInput name="preferredLanguage" value={formData.preferedLanguage} handleChange={handleChange} />

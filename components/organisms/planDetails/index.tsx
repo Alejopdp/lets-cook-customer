@@ -19,6 +19,7 @@ import { PlanDetailsProps, SkippableOrder } from "./interfaces";
 import { skipOrders } from "helpers/serverRequests/order";
 import { useRouter } from "next/router";
 import { CancellationReason } from "types/cancellation";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const PlanDetails = (props: PlanDetailsProps) => {
     const router = useRouter();
@@ -83,7 +84,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
 
         if (res.status === 200) {
             enqueueSnackbar(lang.cancelPlanSnackbarSuccessText, { variant: "success" });
-            router.replace("/perfil");
+            router.replace(localeRoutes[router.locale][Routes.perfil]);
         } else {
             enqueueSnackbar(lang.cancelPlanSnackbarFailureText, { variant: "error" });
         }
