@@ -17,12 +17,14 @@ import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
 import SectionTitleBuyFlow from "components/molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import { useLang } from "@hooks";
 const langs = require("../../lang").crossSellingStep;
 
 const NuevoAcompañamientoPage = (props) => {
     const theme = useTheme();
     const router = useRouter();
     const lang = langs[router.locale];
+    const [faqsLang] = useLang("faqsSection");
     const [additionalPlans, setadditionalPlans] = useState([]);
     const [isLoading, setisLoading] = useState(true);
     const { enqueueSnackbar } = useSnackbar();
@@ -113,7 +115,7 @@ const NuevoAcompañamientoPage = (props) => {
                         />
                         <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>
-                                {lang.faqs.accordions.map((faq, index) => (
+                                {faqsLang.sections[1].accordions.map((faq, index) => (
                                     <Grid item xs={12}>
                                         <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                                     </Grid>
