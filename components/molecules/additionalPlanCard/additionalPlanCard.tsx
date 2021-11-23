@@ -34,6 +34,8 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
         price: 0,
         priceWithOffer: 0,
         sku: "",
+        isDefault: false,
+        isDeleted: false,
     });
     const [selectedFrequency, setselectedFrequency] = useState("");
     const { selectedPlans, setselectedPlans } = useCrossSellingStore(({ selectedPlans, setselectedPlans }) => ({
@@ -47,6 +49,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
         props.setvariantsToPay(props.variantsToPay.filter((variant) => variant.planId !== additionalPlanId));
         setcardView(CardView.FIRST_CONTENT);
     };
+
     const handleClickBackToFirstContent = () => {
         setcardView(CardView.FIRST_CONTENT);
     };
@@ -77,6 +80,7 @@ const AdditionalPlanCard = (props: AdditionalPlanCardProps) => {
                 return {
                     actualView: (
                         <SelectVariantContent
+                            attributesKeysAndValues={props.additionalPlan.attributes}
                             variants={props.additionalPlan.variants}
                             selectedVariants={props.selectedVariants}
                             setselectedVariants={props.setselectedVariants}

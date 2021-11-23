@@ -4,7 +4,6 @@ import { QuantityBox } from "@atoms";
 import { PlanSizeProps, ARGS } from "./interfaces";
 
 export const PlanSize = (props: PlanSizeProps) => {
-
     const _handleOnChange = (args: ARGS) => {
         props.handleOnChange(args);
     };
@@ -14,34 +13,39 @@ export const PlanSize = (props: PlanSizeProps) => {
             <Grid item>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">
-                        <Typography variant='body2' style={{fontSize:'14px', fontWeight: 600}}>{props.subtitle}</Typography>
+                        <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600 }}>
+                            {props.subtitle}
+                        </Typography>
                     </FormLabel>
                     <div style={{ display: "flex" }}>
                         <>
-                            {props.numberItems && props.fromNumber && Array(props.numberItems)
-                                .fill(props.fromNumber)
-                                .map((from, index) => {
-                                    return (
-                                        <QuantityBox
-                                            name={props.name}
-                                            onChange={(_value) => {
-                                                _handleOnChange({
-                                                    name: props.name,
-                                                    value: _value,
-                                                });
-                                            }}
-                                            key={index}
-                                            label={`${index + from}`}
-                                            value={`${index + from}`}
-                                            state={`${index + from}` === props.valueSelected}
-                                        />
-                                    );
-                                })}
+                            {props.numberItems &&
+                                props.fromNumber &&
+                                Array(props.numberItems)
+                                    .fill(props.fromNumber)
+                                    .map((from, index) => {
+                                        return (
+                                            <QuantityBox
+                                                name={props.name}
+                                                onChange={(_value) => {
+                                                    _handleOnChange({
+                                                        name: props.name,
+                                                        value: _value,
+                                                    });
+                                                }}
+                                                key={index}
+                                                label={`${index + from}`}
+                                                value={`${index + from}`}
+                                                state={`${index + from}` === props.valueSelected}
+                                            />
+                                        );
+                                    })}
                         </>
                         <>
                             {props.fromArray?.map((item, index) => {
                                 return (
                                     <QuantityBox
+                                        idForHtml={`${Math.random() * Date.now()}${item}${index}${props.name}`}
                                         name={props.name}
                                         onChange={(_value) => {
                                             _handleOnChange({

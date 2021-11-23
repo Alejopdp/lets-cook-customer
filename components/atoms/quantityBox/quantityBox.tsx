@@ -13,7 +13,7 @@ export const QuantityBox = (props: QuantityBoxProps) => {
     return (
         <div className={classes.root}>
             <input
-                id={props.label + props.name + "-id-1000"}
+                id={props.idForHtml}
                 type="radio"
                 name={props.name || props.value || props.label || ID}
                 value={props.value}
@@ -22,7 +22,7 @@ export const QuantityBox = (props: QuantityBoxProps) => {
                 className={classes.hidden}
             />
             <label
-                htmlFor={props.label + props.name + "-id-1000"}
+                htmlFor={props.idForHtml}
                 className={clsx(props.size === "sm" ? classes.boxSmall : classes.box, {
                     [classes.checkedBox]: props.state,
                 })}

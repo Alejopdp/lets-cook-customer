@@ -26,6 +26,7 @@ const PlanDetailsDesktop = ({
     lang,
 }: PlanDetailsProps) => {
     const theme = useTheme();
+
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
@@ -75,7 +76,7 @@ const PlanDetailsDesktop = ({
                                     />
                                 </Grid>
                             )}
-                            {subscription.nextWeekOrder !== null && subscription.canChooseRecipes && (
+                            {subscription.nextWeekOrder !== null && (
                                 <Grid item xs={12}>
                                     <RecipesNextWeekCard
                                         nextWeekOrder={subscription.nextWeekOrder}
