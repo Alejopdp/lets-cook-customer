@@ -161,7 +161,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
             </Hidden>
             <Hidden mdUp>
                 <PlanDetailsMobile
-                    data={props.subscription}
+                    subscription={props.subscription}
                     handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
                     handleClickOpenCancelPlanModal={handleClickOpenCancelPlanModal}
                     handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
