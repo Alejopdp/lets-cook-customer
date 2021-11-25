@@ -167,6 +167,8 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                     selectedItems={filters}
                     handleOnClose={() => setDrawerOpen(false)}
                     handleOnClickApplyButton={_handleClickApplyFilters}
+                    filterTitle={lang.filterTitle}
+                    applyFiltersBtnText={lang.applyFiltersBtnText}
                 />
             )}
         </Container>
