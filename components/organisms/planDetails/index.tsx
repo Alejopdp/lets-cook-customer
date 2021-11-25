@@ -106,6 +106,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
 
         if (res.status === 200) {
             enqueueSnackbar(lang.skipPlanSnackbarSuccessText, { variant: "success" });
+            router.replace(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}?subscriptionId=${router.query.subscriptionId}`);
         } else {
             enqueueSnackbar(res && res.data ? res.data.message : lang.skipPlanSnackbarFailureText, { variant: "error" });
         }
