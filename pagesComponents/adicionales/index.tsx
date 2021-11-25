@@ -38,7 +38,7 @@ const NuevoAcompañamientoPage = (props) => {
             const res = await getAdditionalPlans(router.locale);
 
             if (res.status === 200) {
-                setadditionalPlans(res.data);
+                setadditionalPlans(res.data.filter((plan) => plan.isActive));
             } else {
                 enqueueSnackbar(res.data.message, { variant: "error" });
             }

@@ -55,7 +55,7 @@ const CrossSellingStep = (props) => {
             const res = await getAdditionalPlans(router.locale, form.planCode);
 
             if (res.status === 200) {
-                setadditionalPlans(res.data);
+                setadditionalPlans(res.data.filter((plan) => plan.isActive));
             } else {
                 enqueueSnackbar(res.data.message, { variant: "error" });
             }
