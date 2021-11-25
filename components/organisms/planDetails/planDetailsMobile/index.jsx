@@ -28,7 +28,12 @@ const PlanDetailsMobile = ({
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <PlanCard plan={data.plan} handleClick={handleClickOpenChangePlanModal} />
+                <PlanCard
+                    plan={data.plan}
+                    handleClick={handleClickOpenChangePlanModal}
+                    portionPrice={subscription.portionPrice}
+                    portionsQuantity={subscription.portionsQuantity}
+                />
             </Grid>
             <Grid item xs={12}>
                 <CalendarCard
