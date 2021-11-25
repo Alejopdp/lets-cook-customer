@@ -103,16 +103,14 @@ const NuevoAcompañamientoPage = (props) => {
                     <AdditionalPlansBuyButtons
                         totalValue={totalValue}
                         handleSubmitPayment={handleSubmitPayment}
+                        primaryButtonLabel={lang.purchaseBtnText}
                         // handleSecondaryButtonClick={() => router.replace("/perfil")}
                         // secondaryButtonLabel="POR EL MOMENTO NO QUIERO UN NUEVO ACOMPAÑAMIENTO"
                     />
                 </Grid>
                 <Grid container spacing={2} style={{ paddingBottom: theme.spacing(8), paddingTop: theme.spacing(8) }}>
                     <Grid item xs={12}>
-                        <SectionTitleBuyFlow
-                            title="Preguntas frecuentes"
-                            subtitle="¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat"
-                        />
+                        <SectionTitleBuyFlow title={lang.faqs.title} subtitle={lang.faqs.subtitle} />
                         <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>
                                 {faqsLang.sections[1].accordions.map((faq, index) => (

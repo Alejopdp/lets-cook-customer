@@ -14,14 +14,17 @@ const texts = {
     es: {
         portions: "raciones a",
         perPortion: "por ración",
+        swapPlanButtonText: "Cambiar plan",
     },
     en: {
-        portions: "potrions for",
+        portions: "portions for",
         perPortion: "per portion",
+        swapPlanButtonText: "Swap plan",
     },
     ca: {
         portions: "raciones a",
         perPortion: "por porción",
+        swapPlanButtonText: "Canviar pla",
     },
 };
 
@@ -30,7 +33,7 @@ const PlanCard = (props) => {
     const router = useRouter();
 
     return (
-        <BoxWithTextButton btnText="cambiar plan" handleClick={props.handleClick}>
+        <BoxWithTextButton btnText={texts[router.locale].swapPlanButtonText} handleClick={props.handleClick}>
             <PlanInfoWithStatus
                 style={{ marginBottom: theme.spacing(2) }}
                 planName={props.plan.planName}

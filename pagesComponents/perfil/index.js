@@ -69,7 +69,7 @@ const Perfil = (props) => {
         };
 
         getProfile();
-    }, [userInfo]);
+    }, [userInfo, router.locale]);
 
     const handleSetSubscriptionId = async (subscriptionId) => {
         const locale = router.locale;

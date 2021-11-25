@@ -25,6 +25,10 @@ export const planDetails = {
             addressNameTitle: "Dirección",
             addressDetailsTitle: "Piso / Puerta / Aclaraciones",
             preferredScheduleTitle: "Horario de preferencia",
+            preferredScheduleTitleEmptyState: "Sin seleccionar",
+            shippingCostTitle: "Coste de envío",
+            noShippingCostLabel: "Tu próximo pedido no tiene coste de envío",
+            shippingCostLabel: "Tu próximo pedido tiene un coste de envío de ",
         },
         paymentMethodCard: {
             title: "Forma de pago",
@@ -87,6 +91,10 @@ export const planDetails = {
             addressNameTitle: "Address",
             addressDetailsTitle: "Apartment / Door / Comments",
             preferredScheduleTitle: "Preferred time frame",
+            preferredScheduleTitleEmptyState: "None",
+            shippingCostTitle: "Shipping cost",
+            noShippingCostLabel: "Tu próximo pedido no tiene coste de envío",
+            shippingCostLabel: "Tu próximo pedido tiene un coste de envío de ",
         },
         paymentMethodCard: {
             title: "Payment method",
@@ -149,6 +157,10 @@ export const planDetails = {
             addressNameTitle: "Direcció",
             addressDetailsTitle: "Pis / Porta / Aclaracions",
             preferredScheduleTitle: "Horari de preferència",
+            preferredScheduleTitleEmptyState: "Sense seleccionar",
+            shippingCostTitle: "Cost d'enviament",
+            noShippingCostLabel: "La teva propera comanda no té cost d'enviament",
+            shippingCostLabel: "La teva propera comanda té un cost d'enviament de ",
         },
         paymentMethodCard: {
             title: "Mètode de pagament",
