@@ -56,7 +56,7 @@ const RecipesNextWeekCard = (props) => {
                     title={lang.title}
                     btnText={lang.editRecipesBtnText}
                     handleClick={() =>
-                        router.push(`${localeRoutes[router.locale][Routes["elegir-recetas"]]}orderId=${props.nextWeekOrder.id}`)
+                        router.push(`${localeRoutes[router.locale][Routes["elegir-recetas"]]}?orderId=${props.nextWeekOrder.id}`)
                     }
                     hideButton={!props.canChooseRecipes}
                 >
