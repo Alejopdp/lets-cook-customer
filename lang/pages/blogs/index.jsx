@@ -1,11 +1,14 @@
 export const slug = {
     es: {
-        backButtonTitle: "Volver al Blog"
+        backButtonTitle: "Volver al Blog",
+        allOption: "Todos",
     },
     en: {
-        backButtonTitle: "Volver al Blog"
+        backButtonTitle: "Back to the Blog",
+        allOption: "Every",
     },
     ca: {
-        backButtonTitle: "Volver al Blog" 
-    }
-}
+        backButtonTitle: "Volver al Blog",
+        allOption: "Tots",
+    },
+};
