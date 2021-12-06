@@ -8,7 +8,6 @@ import InnerSectionLayout from "../../../components/layout/innerSectionLayout";
 import TitleOtherPages from "../../../components/molecules/titleOtherPages/titleOtherPages";
 import BlogsGrid from "../../../components/organisms/blogGrid/blogGrid";
 import { Layout } from "../../../components/layout";
-import { type } from "os";
 
 const BlogRecetas = (props) => {
     const [lang] = useLang("recipesBlog");
@@ -17,7 +16,7 @@ const BlogRecetas = (props) => {
         <Layout>
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-                <BlogsGrid posts={props.posts} />
+                <BlogsGrid posts={props.posts} categories={props.categories} />
             </InnerSectionLayout>
         </Layout>
     );
@@ -57,6 +56,10 @@ export async function getServerSideProps(context) {
     return {
         props: {
             posts: res?.status === 200 ? res?.data : [],
+            categories:
+                categoriesRes.status && categoriesRes.status === 200 && Array.isArray(categoriesRes.data)
+                    ? categoriesRes.data.map((category) => category.name)
+                    : [],
         },
     };
 }
