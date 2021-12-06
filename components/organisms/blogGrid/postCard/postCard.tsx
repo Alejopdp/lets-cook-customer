@@ -67,6 +67,8 @@ const PostCard = (props: PostCardProps) => {
         router.push({ pathname: `/blogs/recetas/${props.post.slug}` });
     };
 
+    console.log(`Image url: ${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${props.post.image.url}`);
+
     return (
         <Grid container classes={{ root }} onClick={handlePostClick}>
             <Grid item xs={12} md={4}>
