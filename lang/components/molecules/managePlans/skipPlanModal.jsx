@@ -5,6 +5,8 @@ export const skipPlanModal = {
         secondaryButtonText: "Cancelar",
         reanudarBtnText: "Reanudar",
         saltarBtnText: "Saltar",
+        skippedAndNonReanudableOrderText: "Semana saltada",
+        billedWeek: "Pedido cobrado",
     },
     en: {
         title: "Skip week",
@@ -12,6 +14,8 @@ export const skipPlanModal = {
         secondaryButtonText: "Cancel",
         reanudarBtnText: "Resume",
         saltarBtnText: "Skip",
+        skippedAndNonReanudableOrderText: "Skipped week",
+        billedWeek: "Order billed",
     },
     ca: {
         title: "Saltar setmana",
@@ -19,5 +23,7 @@ export const skipPlanModal = {
         secondaryButtonText: "Cancel·lar",
         reanudarBtnText: "Rependre",
         saltarBtnText: "Saltar",
+        skippedAndNonReanudableOrderText: "Setmana saltada",
+        billedWeek: "Comanda facturada",
     },
 };

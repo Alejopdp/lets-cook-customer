@@ -12,6 +12,7 @@ export interface SkippableOrder {
     weekLabel: string;
     shippingDate: string;
     isSkipped: boolean;
+    isReanudable: boolean;
     state: OrderState;
 }
 
