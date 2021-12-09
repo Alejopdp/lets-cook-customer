@@ -407,7 +407,7 @@ const Perfil = (props) => {
                                             </>
                                         ) : (
                                             <EmptyState
-                                                image="/empty-cart.png"
+                                                image="/lc-square-logo.png"
                                                 title={lang.additionalsEmptyStateTitle}
                                                 text={lang.additionalsEmptyStateSubtitle}
                                             />
