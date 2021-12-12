@@ -35,6 +35,11 @@ export const TextInput = (props: TextInputProps) => {
                 inputProps={{ ...props.inputsProps }}
                 disabled={props.disabled}
             />
+            {props.helperText && (
+                <Typography variant="caption" color={props.hasError ? "error" : "textPrimary"} style={{ marginTop: "4px" }}>
+                    {props.helperText}
+                </Typography>
+            )}
         </FormControl>
     );
 };
