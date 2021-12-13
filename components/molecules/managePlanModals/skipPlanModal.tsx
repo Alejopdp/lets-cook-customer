@@ -51,7 +51,7 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
     const skipWeek = (id: string) => {
         let weekIndexSelected = weeksStore.findIndex((week) => week.id === id);
         let weekToModify = weeksStore[weekIndexSelected];
-        if (weekToModify.state === OrderState.ORDER_BILLED) return;
+        if (weekToModify.state === OrderState.ORDER_BILLED || (weekToModify.isSkipped && !weekToModify.isReanudable)) return;
 
         weekToModify["isSkipped"] = !weekToModify["isSkipped"];
         weekToModify["isReanudable"] = !weekToModify["isReanudable"];
