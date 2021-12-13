@@ -18,6 +18,8 @@ import RecetasPage from "../../pagesComponents/recetas/index";
 import RecetasGridPage from "../../pagesComponents/recetas-grid/[id]";
 import RecoverPasswordPage from "../../pagesComponents/recuperar-contrasena/index";
 import SignUpPage from "../../pagesComponents/registrarme/index";
+import BlogNoticias from "../noticias";
+import BlogRecetas from "../recetas";
 
 import { Box, Typography } from "@material-ui/core";
 import { preguntasFrecuentes } from "@lang";
@@ -77,11 +79,8 @@ const Pages = (props) => {
                 return <Adicionales />;
 
             default:
-                return (
-                    <Box width="100%" height="100vh">
-                        <Typography variant="h1">No yet / show here 404 page</Typography>
-                    </Box>
-                );
+                router.push("/404");
+                return <></>;
         }
     };
 

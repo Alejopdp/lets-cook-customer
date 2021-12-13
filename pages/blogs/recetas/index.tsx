@@ -23,35 +23,7 @@ const BlogRecetas = (props) => {
 };
 
 export async function getServerSideProps(context) {
-    const categoriesRes = await getCategories(context.locale);
-    const categoryNameIdMap: { [categoryName: string]: string } = {};
-    const categoryOrCategories: string | string[] | undefined = !!!context.query.category ? undefined : context.query.category;
-
-    if (categoriesRes && categoriesRes.status === 200) {
-        for (let category of categoriesRes.data) {
-            categoryNameIdMap[category.name] = category.id;
-        }
-    }
-
-    var categoriesQueryParam;
-
-    if (Array.isArray(categoryOrCategories)) {
-        categoriesQueryParam = categoryOrCategories.reduce(
-            (acc, categoryName) =>
-                !!!categoryNameIdMap[categoryName]
-                    ? acc
-                    : acc === ""
-                    ? `${acc}categories_in=${categoryNameIdMap[categoryName]}`
-                    : `${acc}&categories_in=${categoryNameIdMap[categoryName]}`,
-            ""
-        );
-    }
-
-    if (typeof categoryOrCategories === "string") {
-        categoriesQueryParam = `categories_in=${categoryNameIdMap[categoryOrCategories]}`;
-    }
-
-    const res = await getPosts(context.locale, categoriesQueryParam);
+    const [res, categoriesRes] = await Promise.all([getPosts(context.locale, {}), getCategories(context.locale)]);
 
     return {
         props: {

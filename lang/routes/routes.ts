@@ -11,16 +11,20 @@ export enum Routes {
     perfil = "perfil",
     planes = "planes",
     "preguntas-frecuentes" = "preguntas-frecuentes",
-    recetas = "recetas",
+    recetas = "menu-semanal",
     "recetas-grid" = "recetas-grid",
     "recuperar-contrasena" = "recuperar-contrasena",
     registrarme = "registrarme",
     adicionales = "adicionales",
+    blogRecetas = "blog-recetas",
+    blogNoticias = "blog-noticias",
 }
 
 export const localeRoutes = {
     es: {
         blogs: "/blogs",
+        "blog-recetas": "/recetas",
+        "blog-noticias": "/noticias",
         "bono-regalo": "/bono-regalo",
         "canjear-bono-regalo": "/canjear-bono-regalo",
         "como-funciona": "/como-funciona",
@@ -32,7 +36,7 @@ export const localeRoutes = {
         perfil: "/perfil",
         planes: "/planes",
         "preguntas-frecuentes": "/preguntas-frecuentes",
-        recetas: "/recetas",
+        recetas: "/menu-semanal",
         "recetas-grid": "/recetas-grid",
         "recuperar-contrasena": "/recuperar-contrasena",
         registrarme: "/registrarme",
@@ -41,6 +45,8 @@ export const localeRoutes = {
 
     en: {
         blogs: "/blogs-en",
+        "blog-recetas": "/recetas",
+        "blog-noticias": "/noticias",
         "bono-regalo": "/bono-regalo-en",
         "canjear-bono-regalo": "/canjear-bono-regalo-en",
         "como-funciona": "/como-funciona-en",
@@ -52,7 +58,7 @@ export const localeRoutes = {
         perfil: "/perfil-en",
         planes: "/planes",
         "preguntas-frecuentes": "/preguntas-frecuentes-en",
-        recetas: "/recetas-en",
+        recetas: "/weekly-menu",
         "recetas-grid": "/recetas-grid-en",
         "recuperar-contrasena": "/recuperar-contrasena-en",
         registrarme: "/registrarme-en",
@@ -61,6 +67,8 @@ export const localeRoutes = {
 
     ca: {
         blogs: "/blogs-ca",
+        "blog-recetas": "/recetas",
+        "blog-noticias": "/noticias",
         "bono-regalo": "/bono-regalo-ca",
         "canjear-bono-regalo": "/canjear-bono-regalo-ca",
         "como-funciona": "/como-funciona-ca",
@@ -72,7 +80,7 @@ export const localeRoutes = {
         perfil: "/perfil-ca",
         planes: "/planes",
         "preguntas-frecuentes": "/preguntas-frecuentes-ca",
-        recetas: "/recetas-ca",
+        recetas: "/menu-sematnal",
         "recetas-grid": "/recetas-grid-ca",
         "recuperar-contrasena": "/recuperar-contrasena-ca",
         registrarme: "/registrarme-ca",

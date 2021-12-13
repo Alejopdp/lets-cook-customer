@@ -20,6 +20,7 @@ const BlogGrid = (props) => {
     const [lang] = useLang("recipesBlog");
 
     const postsToShow = useMemo(() => {
+        console.log("Posts: ", props.posts);
         if (!!!router.query || !!!router.query.tag) return props.posts;
 
         return props.posts.filter((post) => post.categories.some((category) => category.name === router.query.tag));
@@ -28,28 +29,29 @@ const BlogGrid = (props) => {
     const handleTagForFilter = (value) => {
         if (value === lang.allOption) {
             router.push({ pathname: router.pathname });
+            return;
         }
+
         router.push({
-            pathname: router.pathname,
-            query: {
-                tag: value,
-            },
+            pathname: `/blogs/recetas/tagged/${value}`,
         });
     };
 
     return (
         <>
-            <Grid item xs={12}>
-                <Box width={200} margin="auto" marginBottom={4}>
-                    <SimpleDropdown
-                        fullWidth
-                        selectedValue={router.query.tag}
-                        options={[lang.allOption, ...props.categories] || []}
-                        label={"Etiqueta de blog"}
-                        handleChange={(e) => handleTagForFilter(e.target.value)}
-                    />
-                </Box>
-            </Grid>
+            {!!!props.hideFilter && (
+                <Grid item xs={12}>
+                    <Box width={200} margin="auto" marginBottom={4}>
+                        <SimpleDropdown
+                            fullWidth
+                            selectedValue={router.query.tag}
+                            options={[lang.allOption, ...props.categories] || []}
+                            label={"Etiqueta de blog"}
+                            handleChange={(e) => handleTagForFilter(e.target.value)}
+                        />
+                    </Box>
+                </Grid>
+            )}{" "}
             {postsToShow.map((post, index) => (
                 <PostCard key={post.id} post={post} />
             ))}

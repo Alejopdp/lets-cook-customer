@@ -1,12 +1,11 @@
 import Axios from "axios";
 
-export const getPosts = async (locale, categories) => {
+export const getPosts = async (locale, queryParams) => {
     try {
         const res = await Axios({
             method: "GET",
-            url: !!categories
-                ? `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles?${categories}`
-                : `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles`,
+            url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles`,
+            params: queryParams,
         });
         return res;
     } catch (error) {
