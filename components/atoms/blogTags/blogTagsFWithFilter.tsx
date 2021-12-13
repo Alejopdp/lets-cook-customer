@@ -4,27 +4,27 @@ import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import { useStyles } from "./styles";
 import { BlogTagsProps } from "./interfaces";
+import { useRouter } from "next/router";
 
 export const BlogTagsWithFilter = (props: BlogTagsProps) => {
+    const router = useRouter();
     const classes = useStyles();
     const { tagClass } = classes;
-    const [tags, setTags] = useState(props.tags)
-
-    // const filteredTags = tags.splice(4);
-
-    // const handleSeeMoreTags = () => {
-    //     setTags(...tags, filteredTags)
-    // }
+    const [tags, setTags] = useState(props.tags);
 
     return (
         <>
             {tags.map((tag, index) => (
-                <Typography variant="body1" className={tagClass}>
+                <Typography
+                    key={index}
+                    variant="body1"
+                    className={tagClass}
+                    onClick={() => router.push({ pathname: `/blogs/recetas/tagged/${tag}` })}
+                >
                     {tag}
                 </Typography>
             ))}
         </>
-
     );
 };
 

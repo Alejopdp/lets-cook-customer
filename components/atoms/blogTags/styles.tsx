@@ -6,5 +6,6 @@ export const useStyles = makeStyles((theme) => ({
         padding: "0px 16px 0px 16px",
         marginTop: theme.spacing(1),
         marginRight: theme.spacing(1),
+        cursor: "pointer",
     },
 }));
