@@ -55,6 +55,7 @@ const Perfil = (props) => {
     const [subscription, setSubscription] = useState();
     const [swapPlanData, setSwapPlanData] = useState();
     const [subscriptionIdSelected, setSubscriptionIdSelected] = useState();
+    const [reloadCounter, setreloadCounter] = useState(0);
     const userInfo = useUserInfoStore((state) => state.userInfo);
 
     useEffect(() => {
@@ -69,7 +70,7 @@ const Perfil = (props) => {
         };
 
         getProfile();
-    }, [userInfo, router.locale]);
+    }, [userInfo, router.locale, reloadCounter]);
 
     const handleSetSubscriptionId = async (subscriptionId) => {
         const locale = router.locale;
@@ -106,6 +107,7 @@ const Perfil = (props) => {
         if (res.status === 200) {
             enqueueSnackbar("Plan cambiado con éxito", { variant: "success" });
             setOpenChangePlanModal(false);
+            setreloadCounter(reloadCounter + 1);
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }

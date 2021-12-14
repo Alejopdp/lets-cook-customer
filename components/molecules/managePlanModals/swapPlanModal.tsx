@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SwapPlanModal = (props) => {
-    const lang = props.lang
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
 
@@ -76,7 +76,6 @@ const SwapPlanModal = (props) => {
         props.handlePrimaryButtonClick(planSelected);
     };
 
-    console.log("Planes para swapear: ", props.data?.plans);
     return (
         <Modal
             open={props.open}
