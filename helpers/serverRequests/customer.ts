@@ -155,6 +155,7 @@ export const addNewPaymentMethod = async (customerId: string, stripePaymentMetho
         const res = await axios({
             method: "PUT",
             url: `${apiUrl}/add-payment-method/${customerId}`,
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             data: {
                 stripePaymentMethodId,
             },
@@ -171,6 +172,7 @@ export const changeDefaultPaymentMethod = async (paymentMethodId: string, custom
         const res = await axios({
             method: "PUT",
             url: `${apiUrl}/update-payment/${customerId}`,
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             data: {
                 id: paymentMethodId,
                 isDefault: true,
