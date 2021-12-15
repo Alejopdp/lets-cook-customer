@@ -22,7 +22,7 @@ import StripeForm from "../../molecules/stripeForm/stripeForm";
 import { CustomButton, RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
 import PaymentMethodForm from "../paymentMethodForm/paymentMethodForm";
-import { useBuyFlow, useUserInfoStore } from "@stores";
+import { useBuyFlow, useUserInfoStore, BuyFlowInitialStore } from "@stores";
 import { Grid, Typography, useTheme } from "@material-ui/core";
 import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
 import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
@@ -75,6 +75,7 @@ export const PaymentForm = (props) => {
         setDeliveryInfo,
         forward: goToNextView,
         moveNSteps,
+        setCoupon,
     } = useBuyFlow(
         ({
             setPaymentMethod,
@@ -85,6 +86,7 @@ export const PaymentForm = (props) => {
             setDeliveryInfo,
             forward,
             moveNSteps,
+            setCoupon,
         }) => ({
             setPaymentMethod,
             form,
@@ -94,6 +96,7 @@ export const PaymentForm = (props) => {
             setDeliveryInfo,
             forward,
             moveNSteps,
+            setCoupon,
         })
     );
     const [areTermsAccepted, setareTermsAccepted] = useState(false);
@@ -185,6 +188,7 @@ export const PaymentForm = (props) => {
                         ...props.deliveryData,
                     });
                     updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
+                    setCoupon(BuyFlowInitialStore.form.coupon);
                     form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                         ? goToNextView()
                         : skipRecipeChoiceStep(res.data.subscriptionId);
@@ -234,6 +238,7 @@ export const PaymentForm = (props) => {
                     ...props.deliveryData,
                 });
                 updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
+                setCoupon(BuyFlowInitialStore.form.coupon);
                 form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                     ? goToNextView()
                     : skipRecipeChoiceStep(res.data.subscriptionId);
