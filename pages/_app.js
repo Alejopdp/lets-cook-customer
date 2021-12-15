@@ -25,7 +25,10 @@ function MyApp(props) {
     const [isLoading, setisLoading] = useState(true);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
-    const hasAcceptedCookies = useCookiesStore((state) => state.hasAcceptedCookies);
+    const { hasAcceptedCookies, setHasAccepteCookies } = useCookiesStore((state) => ({
+        hasAcceptedCookies: state.hasAcceptedCookies,
+        setHasAccepteCookies: state.setHasAcceptedCookies,
+    }));
     const router = useRouter();
 
     useEffect(() => {
@@ -43,6 +46,9 @@ function MyApp(props) {
             } else {
                 resetLocalStorage();
             }
+
+            const hasAcceptedCookies = await getFromLocalStorage("HAS_ACCEPTED_COOKIES");
+            setHasAccepteCookies(hasAcceptedCookies);
             setisLoading(false);
         };
         verifyAuthentication();

@@ -3,7 +3,7 @@ import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
 import { Grid, Typography, Paper, Hidden, Button } from "@material-ui/core";
 import { useCookiesStore } from "stores/cookies";
-
+import { useLang, useLocalStorage } from "@hooks";
 const useStyles = makeStyles((theme: Theme) => ({
     grid: {
         position: "fixed",
@@ -36,15 +36,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function CookiesDialog() {
     const classes = useStyles();
-    const theme = useTheme();
+    const [lang] = useLang("cookiesDialog");
     const router = useRouter();
+    const { saveInLocalStorage } = useLocalStorage();
     const { hasAcceptedCookies, setHasAcceptedCookies } = useCookiesStore((state) => ({
         hasAcceptedCookies: state.hasAcceptedCookies,
         setHasAcceptedCookies: state.setHasAcceptedCookies,
     }));
 
     const handleCookies = (hasAccepted: boolean) => {
-        setHasAcceptedCookies(hasAccepted);
+        if (hasAccepted) saveInLocalStorage("HAS_ACCEPTED_COOKIES", true);
+        setHasAcceptedCookies(true);
         // TO DO: Handle 3rd party cookies depending on the accepted value
     };
 
@@ -56,9 +58,7 @@ export default function CookiesDialog() {
                         <Grid container alignItems="center" justifyContent="center">
                             <Grid item xs={12} md={9}>
                                 <Typography variant="body1" align="center" style={{ color: "black" }}>
-                                    En <span style={{ fontWeight: "bold" }}>Let's cook now.</span> usamos{" "}
-                                    <span style={{ textDecoration: "underline" }}>cookies</span> de terceros para poder personalizar tu
-                                    experiencia en nuestro sitio.
+                                    {lang.text}
                                 </Typography>
                             </Grid>
                             <Hidden smDown>

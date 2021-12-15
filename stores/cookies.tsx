@@ -15,5 +15,5 @@ const initialState: ICookiesStore = {
 
 export const useCookiesStore = create<ICookiesStore>((set, get) => ({
     ...initialState,
-    setuserInfo: (hasAcceptedCookies: boolean) => set({ hasAcceptedCookies }),
+    setHasAcceptedCookies: (hasAcceptedCookies: boolean) => set({ hasAcceptedCookies }),
 }));
