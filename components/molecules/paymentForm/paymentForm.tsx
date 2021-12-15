@@ -193,6 +193,7 @@ export const PaymentForm = (props) => {
                         ? goToNextView()
                         : skipRecipeChoiceStep(res.data.subscriptionId);
 
+                    router.push({ pathname: router.pathname, query: { checkout: true, ...router.query } }, undefined, { shallow: true });
                     subscribeToMailingListGroup("109309613", userInfo.email, {
                         planName: form.planName,
                         planVariantLabel: form.planDescription,
@@ -250,6 +251,8 @@ export const PaymentForm = (props) => {
                 form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                     ? goToNextView()
                     : skipRecipeChoiceStep(res.data.subscriptionId);
+
+                router.push({ pathname: router.pathname, query: { checkout: true, ...router.query } }, undefined, { shallow: true });
 
                 subscribeToMailingListGroup("109309613", userInfo.email, {
                     planName: form.planName,

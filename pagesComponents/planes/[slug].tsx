@@ -147,7 +147,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
 
         initialize();
         return () => {
-            console.log("Exedcuting reset flow");
             resetBuyFlowState();
             setCoupon({ ...BuyFlowInitialStore.form.coupon });
         };
