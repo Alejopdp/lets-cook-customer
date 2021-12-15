@@ -7,17 +7,17 @@ export const planRecoverModal = {
         secondaryButtonText: "Cancelar",
     },
     en: {
-        title: "Volver a pedir plan",
-        frequencyText: "Frecuencia",
-        totalPrice: "Precio total",
-        primaryButtonText: "Volver a pedir",
-        secondaryButtonText: "Cancelar",
+        title: "Order plan again",
+        frequencyText: "Frequency",
+        totalPrice: "Total price",
+        primaryButtonText: "Order again",
+        secondaryButtonText: "Cancel",
     },
     ca: {
-        title: "Volver a pedir plan",
-        frequencyText: "Frecuencia",
-        totalPrice: "Precio total",
-        primaryButtonText: "Volver a pedir",
-        secondaryButtonText: "Cancelar",
+        title: "Tornar a demana un pla",
+        frequencyText: "Freqüència",
+        totalPrice: "Preu final",
+        primaryButtonText: "Tornar a demanar",
+        secondaryButtonText: "Cancel·lar",
     },
-}
+};

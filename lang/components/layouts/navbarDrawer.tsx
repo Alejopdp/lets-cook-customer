@@ -7,7 +7,7 @@ export const navbarDrawer = {
         itemBlog: "Blog",
         itemFAQ: "Preguntas frecuentes",
         itemGif: "Bono regalo",
-        itemLegal: "Aviso legal"
+        itemLegal: "Aviso legal",
     },
     en: {
         itemHome: "Home",
@@ -16,17 +16,17 @@ export const navbarDrawer = {
         itemHowItWork: "How it works",
         itemBlog: "Blog",
         itemFAQ: "FAQs",
-        itemGif: "Gift bonus",
-        itemLegal: "Legal notice"
+        itemGif: "Gift card",
+        itemLegal: "Legal disclaimer",
     },
     ca: {
-        itemHome: "Inicio",
-        itemPlans: "Planes",
-        itemRecipes: "Recetas",
-        itemHowItWork: "Cómo funciona",
+        itemHome: "Inici",
+        itemPlans: "Plans",
+        itemRecipes: "Receptes",
+        itemHowItWork: "Com funciona",
         itemBlog: "Blog",
-        itemFAQ: "Preguntas frecuentes",
-        itemGif: "Bono regalo",
-        itemLegal: "Aviso legal"
+        itemFAQ: "Preguntes freqüents",
+        itemGif: "Targeta regal",
+        itemLegal: "Avís legal",
     },
-}
+};

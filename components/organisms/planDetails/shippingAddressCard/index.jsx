@@ -33,16 +33,12 @@ const ShippingAddressCard = (props) => {
             />
             <DataDisplay
                 title={lang.preferredScheduleTitle}
-                text={props.shippingAddress.preferredSchedule}
+                text={props.shippingAddress.preferredSchedule || lang.preferredScheduleTitleEmptyState}
                 style={{ marginBottom: theme.spacing(2) }}
             />
             <DataDisplay
-                title="Coste de envío"
-                text={
-                    !!props.shippingCost
-                        ? [`Tu próximo pedido tiene un coste de envío de `, <b>{props.shippingCost} €</b>]
-                        : "Tu próximo pedido no tiene coste de envío"
-                }
+                title={lang.shippingCostTitle}
+                text={!!props.shippingCost ? [lang.shippingCostLabel, <b>{props.shippingCost} €</b>] : lang.shippingCostLabel}
             />
         </BoxWithTitle>
     );

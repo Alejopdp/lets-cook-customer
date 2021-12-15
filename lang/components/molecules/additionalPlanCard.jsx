@@ -3,7 +3,7 @@ export const additionalPlanCard = {
         cardView: {
             firstContent: {
                 content: {
-                    fromText: 'Desde',
+                    fromText: "Desde",
                 },
                 btnText: "Ver opciones",
             },
@@ -24,60 +24,60 @@ export const additionalPlanCard = {
                 },
                 btnText: "Quitar",
             },
-        }
+        },
     },
     en: {
         cardView: {
             firstContent: {
                 content: {
-                    fromText: 'Desde',
+                    fromText: "From",
                 },
-                btnText: "Ver opciones",
+                btnText: "See options",
             },
             selectAttribute: {
                 content: {
-                    frequencyText: "Frecuencia",
-                    priceText: "Precio",
-                    taxIncluded: "Impuestos incluidos",
+                    frequencyText: "Frequency",
+                    priceText: "Price",
+                    taxIncluded: "Tax included",
                 },
-                btnText: "Seleccionar",
+                btnText: "Select",
             },
             attributeSelected: {
                 content: {
-                    planSizeText: "Tamaño del plan",
-                    frequencyText: "Frecuencia",
-                    priceText: "Precio",
-                    taxIncluded: "Impuestos incluidos",
+                    planSizeText: "Plan size",
+                    frequencyText: "Frequency",
+                    priceText: "Price",
+                    taxIncluded: "Tax included",
                 },
-                btnText: "Quitar",
+                btnText: "Remove",
             },
-        }
+        },
     },
     ca: {
         cardView: {
             firstContent: {
                 content: {
-                    fromText: 'Desde',
+                    fromText: "Des de",
                 },
-                btnText: "Ver opciones",
+                btnText: "Veure opcions",
             },
             selectAttribute: {
                 content: {
-                    frequencyText: "Frecuencia",
-                    priceText: "Precio",
-                    taxIncluded: "Impuestos incluidos",
+                    frequencyText: "Freqüència",
+                    priceText: "Preu",
+                    taxIncluded: "Impostos inclosos",
                 },
                 btnText: "Seleccionar",
             },
             attributeSelected: {
                 content: {
-                    planSizeText: "Tamaño del plan",
-                    frequencyText: "Frecuencia",
-                    priceText: "Precio",
-                    taxIncluded: "Impuestos incluidos",
+                    planSizeText: "Tamany del pla",
+                    frequencyText: "Freqüència",
+                    priceText: "Preu",
+                    taxIncluded: "Impostos inclosos",
                 },
-                btnText: "Quitar",
+                btnText: "Treure",
             },
-        }
+        },
     },
-}
+};

@@ -20,6 +20,7 @@ import PrivacyPolicyModal from "../../../molecules/legalModals/privacyPolicyModa
 import * as ga from "../../../../helpers/ga";
 import { subscribeToMailingListGroup } from "helpers/serverRequests/mailingList";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import { useLang } from "@hooks";
 
 const langs = require("../../../../lang").selectPlanStep;
 
@@ -27,6 +28,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     // const { push: navigateTo, locale: lang } = useRouter();
     const router = useRouter();
     const lang = langs[router.locale];
+    const [faqLang] = useLang("faqsSection");
     const classes = useStyles();
     const theme = useTheme();
     const buyFlow = useBuyFlow();
@@ -166,9 +168,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     };
 
     useEffect(() => {
-        console.log("Buy flow form plan code: ", buyFlow.form.planCode);
-        console.log("INITIAL PLAN SETTINGS ID: ", props.initialPlanSettings.id);
-        console.log("INITIAL PLAN SETTINGS SLUG: ", props.initialPlanSettings.slug);
         // if (!!!props.initialPlanSettings.id) {
         const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes } = getPlanData(
             props.initialPlanSettings.slug,
@@ -322,7 +321,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                         <SectionTitleBuyFlow title={lang.faqsSection.title} subtitle={lang.faqsSection.subtitle} />
                         <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>
-                                {lang.faqsSection.faqs.map((faq, index) => (
+                                {faqLang.sections[0].accordions.map((faq, index) => (
                                     <Grid item xs={12}>
                                         <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                                     </Grid>

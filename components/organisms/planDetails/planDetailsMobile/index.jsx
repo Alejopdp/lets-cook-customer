@@ -17,47 +17,52 @@ import RecipesNextWeekCard from "../recipesNextWeekCard/index";
 import TextButton from "../../../atoms/textButton/textButton";
 
 const PlanDetailsMobile = ({
-    data,
     handleClickOpenChangePlanModal,
     handleClickOpenCancelPlanModal,
     handleClickOpenSkipPlanModal,
     handleClickOpenRecipeModal,
     lang,
+    subscription,
 }) => {
     const theme = useTheme();
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <PlanCard plan={data.plan} handleClick={handleClickOpenChangePlanModal} />
+                <PlanCard
+                    plan={subscription.plan}
+                    handleClick={handleClickOpenChangePlanModal}
+                    portionPrice={subscription.portionPrice}
+                    portionsQuantity={subscription.portionsQuantity}
+                />
             </Grid>
             <Grid item xs={12}>
                 <CalendarCard
-                    schedule={data.schedule}
-                    skippedOrders={data.skippedOrders}
+                    schedule={subscription.schedule}
+                    skippedOrders={subscription.skippedOrders}
                     handleClick={handleClickOpenSkipPlanModal}
                     lang={lang.calendarCard}
                 />
             </Grid>
-            {data.hasRecipes && (
+            {subscription.hasRecipes && (
                 <>
-                    {data.actualWeekOrder !== null && (
+                    {subscription.actualWeekOrder !== null && (
                         <Grid item xs={12}>
                             <RecipesActualWeekCard
-                                actualWeekOrder={data.actualWeekOrder}
-                                canChooseRecipes={data.canChooseRecipes}
-                                hasChosenRecipesForActualWeek={data.hasChosenRecipesForActualWeek}
+                                actualWeekOrder={subscription.actualWeekOrder}
+                                canChooseRecipes={subscription.canChooseRecipes}
+                                hasChosenRecipesForActualWeek={subscription.hasChosenRecipesForActualWeek}
                                 handleClickOpenRecipeModal={handleClickOpenRecipeModal}
                                 lang={lang.recipesActualWeekCard}
                             />
                         </Grid>
                     )}
-                    {data.nextWeekOrder !== null && data.canChooseRecipes && (
+                    {subscription.nextWeekOrder !== null && subscription.canChooseRecipes && (
                         <Grid item xs={12}>
                             <RecipesNextWeekCard
-                                nextWeekOrder={data.nextWeekOrder}
+                                nextWeekOrder={subscription.nextWeekOrder}
                                 handleClickOpenRecipeModal={handleClickOpenRecipeModal}
-                                hasChosenRecipesForNextWeek={data.hasChosenRecipesForNextWeek}
-                                canChooseRecipes={data.canChooseRecipesForNextWeekOrder}
+                                hasChosenRecipesForNextWeek={subscription.hasChosenRecipesForNextWeek}
+                                canChooseRecipes={subscription.canChooseRecipesForNextWeekOrder}
                                 lang={lang.recipesNextWeekCard}
                             />
                         </Grid>
@@ -66,13 +71,13 @@ const PlanDetailsMobile = ({
             )}
             <Grid item xs={12}>
                 <ShippingAddressCard
-                    shippingAddress={data.shippingAddress}
+                    shippingAddress={subscription.shippingAddress}
                     lang={lang.shippingAddressCard}
-                    shippingCost={data.shippingCost}
+                    shippingCost={subscription.shippingCost}
                 />
             </Grid>
             <Grid item xs={12}>
-                <PaymentMethodCard paymentMethod={data.paymentMethod} lang={lang.paymentMethodCard} />
+                <PaymentMethodCard paymentMethod={subscription.paymentMethod} lang={lang.paymentMethodCard} />
             </Grid>
             <Grid item xs={12}>
                 <TextButton

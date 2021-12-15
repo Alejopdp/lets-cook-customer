@@ -1,62 +1,62 @@
 export const recipeChoiseStep = {
     es: {
         title: "¡Muchas gracias por tu compra!",
-        subtitle: { firstText: 'Elige las', secondText: 'recetas que recibirás el' },
-        filterBtnText: 'Filtrar recetas',
+        subtitle: { firstText: "Elige las", secondText: "recetas que recibirás el" },
+        filterBtnText: "Filtrar recetas",
         recipesBottomBar: {
-            allRecipesChosen: 'Has seleccionado todas las recetas',
+            allRecipesChosen: "Has seleccionado todas las recetas",
             recipesPendingToSelect: {
                 singular: {
-                    firstText: 'Aún te queda',
-                    secondText: 'receta por seleccionar'
+                    firstText: "Aún te queda",
+                    secondText: "receta por seleccionar",
                 },
                 plural: {
-                    firstText: 'Aún te quedan',
-                    secondText: 'recetas por seleccionar'
-                }
+                    firstText: "Aún te quedan",
+                    secondText: "recetas por seleccionar",
+                },
             },
-            btnText: 'Finalizar',
-            chooseLaterBtnText: 'Elegir recetas luego'
-        }
+            btnText: "Finalizar",
+            chooseLaterBtnText: "Elegir recetas luego",
+        },
     },
     en: {
-        title: "¡Muchas gracias por tu compra!",
-        subtitle: { firstText: 'Elige las', secondText: 'recetas que recibirás el' },
-        filterBtnText: 'Filtrar recetas',
+        title: "Thanks for your order!",
+        subtitle: { firstText: "Choose the", secondText: "recipes you’ll receive on" },
+        filterBtnText: "Filter recipes",
         recipesBottomBar: {
-            allRecipesChosen: 'Has seleccionado todas las recetas',
+            allRecipesChosen: "You’ve selected all recipes",
             recipesPendingToSelect: {
                 singular: {
-                    firstText: 'Aún te queda',
-                    secondText: 'receta por seleccionar'
+                    firstText: "You still have",
+                    secondText: "recipe to select",
                 },
                 plural: {
-                    firstText: 'Aún te quedan',
-                    secondText: 'recetas por seleccionar'
-                }
+                    firstText: "You still have",
+                    secondText: "recipes to select",
+                },
             },
-            btnText: 'Finalizar',
-            chooseLaterBtnText: 'Elegir recetas luego'
-        }
+            btnText: "Finish",
+            chooseLaterBtnText: "Choose recipes later",
+        },
     },
     ca: {
-        title: "¡Muchas gracias por tu compra!",
-        subtitle: { firstText: 'Elige las', secondText: 'recetas que recibirás el' },
-        filterBtnText: 'Filtrar recetas',
+        title: "Moltes gràcies per la teva compra!",
+        subtitle: { firstText: "Tria les", secondText: "receptes que rebràs el" },
+        filterBtnText: "Filtrar receptes",
         recipesBottomBar: {
-            allRecipesChosen: 'Has seleccionado todas las recetas',
+            allRecipesChosen: "Has seleccionat totes les receptes",
             recipesPendingToSelect: {
                 singular: {
-                    firstText: 'Aún te queda',
-                    secondText: 'receta por seleccionar'
+                    firstText: "Encara et queda",
+                    secondText: "recepta per seleccionar",
                 },
                 plural: {
-                    firstText: 'Aún te quedan',
-                    secondText: 'recetas por seleccionar'
-                }
+                    firstText: "Encara et queden",
+                    secondText: "receptes per seleccionar",
+                },
             },
-            btnText: 'Finalizar',
-            chooseLaterBtnText: 'Elegir recetas luego'
-        }
+            btnText: "Finalitzar",
+            chooseLaterBtnText: "Tria receptes després",
+        },
     },
-}
+};

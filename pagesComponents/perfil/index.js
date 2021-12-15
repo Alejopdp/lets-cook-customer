@@ -55,6 +55,7 @@ const Perfil = (props) => {
     const [subscription, setSubscription] = useState();
     const [swapPlanData, setSwapPlanData] = useState();
     const [subscriptionIdSelected, setSubscriptionIdSelected] = useState();
+    const [reloadCounter, setreloadCounter] = useState(0);
     const userInfo = useUserInfoStore((state) => state.userInfo);
 
     useEffect(() => {
@@ -69,7 +70,7 @@ const Perfil = (props) => {
         };
 
         getProfile();
-    }, [userInfo]);
+    }, [userInfo, router.locale, reloadCounter]);
 
     const handleSetSubscriptionId = async (subscriptionId) => {
         const locale = router.locale;
@@ -106,6 +107,7 @@ const Perfil = (props) => {
         if (res.status === 200) {
             enqueueSnackbar("Plan cambiado con éxito", { variant: "success" });
             setOpenChangePlanModal(false);
+            setreloadCounter(reloadCounter + 1);
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
@@ -221,7 +223,6 @@ const Perfil = (props) => {
         },
     };
 
-    console.log("HISTORILA: ", localeRoutes[router.locale][Routes["historial-pagos"]]);
     return (
         <>
             <Layout disableCallToActionSection>
@@ -361,9 +362,13 @@ const Perfil = (props) => {
                                     </>
                                 ) : (
                                     <EmptyState
-                                        image="/emptyStatePlans.png"
+                                        image="/empty-cart.png"
                                         title={lang.plansEmptyStateTitle}
-                                        text={lang.plansEmptyStateSubtitle}
+                                        text={
+                                            !!props.friendCode
+                                                ? `${lang.plansEmptyStateSubtitleFirstPart} ${lang.withCodeEmptyState} ${props.friendCode} ${lang.plansEmptyStateSubtitleSecondPart}`
+                                                : `${lang.plansEmptyStateSubtitleFirstPart}`
+                                        }
                                     />
                                 )}
                             </Grid>
@@ -404,7 +409,7 @@ const Perfil = (props) => {
                                             </>
                                         ) : (
                                             <EmptyState
-                                                image="/emptyStatePlans.png"
+                                                image="/lc-square-logo.png"
                                                 title={lang.additionalsEmptyStateTitle}
                                                 text={lang.additionalsEmptyStateSubtitle}
                                             />

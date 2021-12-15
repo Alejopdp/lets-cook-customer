@@ -238,7 +238,7 @@ const BonoRegaloConfirmationForm = (props) => {
     const lang = {
         paymentMethodForm: {
             savedCardLabel: "Mis tarjetas guardadas",
-            addNewPaymentMethodLabel: "Ingresar nuevo metodo de pago",
+            addNewPaymentMethodLabel: "Añadir nuevo método de pago",
         },
     };
 
@@ -308,7 +308,7 @@ const BonoRegaloConfirmationForm = (props) => {
                         {!showPaymentForm && (
                             <Grid item xs={12}>
                                 <RoundedButton
-                                    label={freeShipping ? "Continuar y seleccionar recetas" : `Pagar costes de envío (${shippingCost})`}
+                                    label={freeShipping ? "Continuar y seleccionar recetas" : `Pagar Coste de envío (${shippingCost})`}
                                     onClick={handleClickNextButton}
                                     style={{ width: "100%" }}
                                 />

@@ -12,7 +12,7 @@ import FormPaper from "../../molecules/formPaper/formPaper";
 import { Register } from "../../atoms/loginHelpers/loginHelpers";
 import MailStep from "./mailStep";
 import PasswordStep from "./passwordStep";
-import { signUp } from "../../../helpers/serverRequests/customer";
+import { checkIfEmailExists, signUp } from "../../../helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
 import TermsAndConditionsModal from "../../molecules/legalModals/termsAndConditionsModal";
@@ -34,18 +34,25 @@ const SignUpForm = (props) => {
     const [openTycModal, setOpenTycModal] = React.useState(false);
     const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [emailAlreadyExists, setEmailAlreadyExists] = useState(false);
 
     const { enqueueSnackbar } = useSnackbar();
     const { saveInLocalStorage } = useLocalStorage();
 
     var currentInputs = <></>;
 
-    const handleSubmit = (number) => {
+    const handleSubmit = async (number) => {
+        const res = await checkIfEmailExists(formData.email);
+        if (!!res && res.status === 200) {
+            setEmailAlreadyExists(true);
+            return;
+        }
+
         ga.event({
             action: "clic en continuar",
             params: {
                 event_category: `registrarse - ${props.source}`,
-                event_label: "correo electronico",
+                event_label: "correo electrónico",
             },
         });
         setIsLoading(true);
@@ -137,6 +144,7 @@ const SignUpForm = (props) => {
                     handleOpenTycModal={handleOpenTycModal}
                     handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                     source={props.source}
+                    emailAlreadyExists={emailAlreadyExists}
                 />
             );
             break;
@@ -170,6 +178,7 @@ const SignUpForm = (props) => {
                     handleOpenTycModal={handleOpenTycModal}
                     handleOpenPrivacyPolicyModal={handleOpenPrivacyPolicyModal}
                     source={props.source}
+                    emailAlreadyExists={emailAlreadyExists}
                 />
             );
     }

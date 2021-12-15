@@ -74,8 +74,8 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
         if (res.status === 200) {
             enqueueSnackbar("Recetas elegidas correctamente", { variant: "success" });
             router.replace({
-                pathname: `${localeRoutes[router.locale][Routes["detalle-del-plan"]]}`,
-                query: `subscriptionId=${props.subscriptionId}`,
+                pathname: `${localeRoutes[router.locale][Routes.adicionales]}`,
+                // query: `subscriptionId=${props.subscriptionId}`,
             });
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
@@ -167,6 +167,8 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                     selectedItems={filters}
                     handleOnClose={() => setDrawerOpen(false)}
                     handleOnClickApplyButton={_handleClickApplyFilters}
+                    filterTitle={lang.filterTitle}
+                    applyFiltersBtnText={lang.applyFiltersBtnText}
                 />
             )}
         </Container>

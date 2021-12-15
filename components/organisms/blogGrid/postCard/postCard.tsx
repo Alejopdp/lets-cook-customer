@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
         margin: "0 auto",
         borderRadius: "8px",
         marginBottom: theme.spacing(3),
-        cursor: "pointer",
         boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
         webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
         mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
@@ -31,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down("sm")]: {
             borderRadius: "8px 8px 0 0",
         },
+        cursor: "pointer",
     },
     marg1: {
         marginTop: theme.spacing(1),
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
     marg4: {
         marginTop: theme.spacing(4),
+        cursor: "pointer",
     },
     publisher: {
         marginTop: theme.spacing(4),
@@ -67,9 +68,11 @@ const PostCard = (props: PostCardProps) => {
         router.push({ pathname: `/blogs/recetas/${props.post.slug}` });
     };
 
+    console.log(`Image url: ${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${props.post.image.url}`);
+
     return (
-        <Grid container classes={{ root }} onClick={handlePostClick}>
-            <Grid item xs={12} md={4}>
+        <Grid container classes={{ root }}>
+            <Grid item xs={12} md={4} onClick={handlePostClick}>
                 <Image
                     src={`${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${props.post.image.url}`}
                     alt={props.post.image.name}
@@ -81,7 +84,7 @@ const PostCard = (props: PostCardProps) => {
             </Grid>
 
             <Grid item xs={12} md={7} style={{ margin: "0 24px 0 24px" }}>
-                <Typography variant="subtitle1" className={marg4}>
+                <Typography variant="subtitle1" className={marg4} onClick={handlePostClick}>
                     {props.post.title}
                 </Typography>
                 <Typography variant="body1" className={marg1}>

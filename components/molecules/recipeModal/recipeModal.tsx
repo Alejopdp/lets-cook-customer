@@ -28,6 +28,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { RecipeModalProps } from "./interfaces";
 import NutritionalInfoTable from "./nutritionalInfoTable";
 import CarouselComponent from "../carousel/carousel";
+import { useLang } from "@hooks";
 
 const styles = (theme) => ({
     root: {
@@ -74,6 +75,7 @@ const DialogTitle = withStyles(styles)((props) => {
 const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
     const theme = useTheme();
     const isMdUp = useMediaQuery("(min-width:960px)");
+    // const lang = useLang("")
 
     const tools = useMemo(() => {
         return (props.recipe.tools || []).join(", ");
@@ -112,7 +114,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                         style={{ zIndex: 3147483647 }}
                     >
                         <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
-                            Detalle de la receta
+                            {props.recipe.name}
                         </DialogTitle>
 
                         <DialogContent dividers={false}>
@@ -135,15 +137,12 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
                                         <Grid container spacing={2}>
-                                            <Grid item xs={12}>
+                                            {/* <Grid item xs={12}>
                                                 <RecipeImgTags imgTags={props.recipe.imageTags} />
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Typography variant="h6">{props.recipe.name}</Typography>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography variant="body2">{props.recipe.shortDescription}</Typography>
-                                            </Grid>
+                                            </Grid> */}
                                             <Grid item xs={12}>
                                                 <Grid container>
                                                     <Grid item className={props.classes.tag}>
@@ -156,17 +155,23 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
+                                            <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                                <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
+                                                    Información nutricional (cada 100 gramos)
+                                                </Typography>
+                                                <NutritionalInfoTable rows={props.recipe.nutritionalInfo || []} />
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
 
                                 <Grid container spacing={2}>
-                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                    {/* <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
                                             Descripción
                                         </Typography>
                                         <Typography variant="body2">{props.recipe.longDescription}</Typography>
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
                                             Ingredientes
@@ -179,15 +184,9 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
-                                            Herramientas necesarias
+                                            Utensilios necesarios
                                         </Typography>
                                         <Typography variant="body2">{tools}</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} md={6} style={{ marginBottom: theme.spacing(2) }}>
-                                        <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
-                                            Información nutricional (cada 100 gramos)
-                                        </Typography>
-                                        <NutritionalInfoTable rows={props.recipe.nutritionalInfo || []} />
                                     </Grid>
                                 </Grid>
                             </DialogContentText>

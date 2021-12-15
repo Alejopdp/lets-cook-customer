@@ -34,6 +34,8 @@ const LoginBox = (props) => {
     const { enqueueSnackbar } = useSnackbar();
     const theme = useTheme();
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
+    const lang = langs[router.locale];
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -78,12 +80,9 @@ const LoginBox = (props) => {
         setUserInfo(userInfo);
         cookies.set("token", token);
         setIsAuthenticated(true);
-        props.redirect ? router.push("/") : "";
+        props.redirect ? router.push(localeRoutes[router.locale][Routes.perfil]) : "";
         props.handleLogin ? props.handleLogin(userInfo) : "";
     };
-
-    const router = useRouter();
-    const lang = langs[router.locale];
 
     const handleRedirectToSignUp = () => {
         ga.event({

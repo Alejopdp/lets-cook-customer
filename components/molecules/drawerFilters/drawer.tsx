@@ -68,16 +68,7 @@ export const DrawerMenu = ({
                                     {filterPart.title}
                                 </Typography>
                                 {filterPart.items.map((filterItem, keyFilter) => (
-                                    <ListItem
-                                        key={keyFilter}
-                                        dense
-                                        button
-                                        // checked={
-                                        //     filtersSelected.some((filter) => filter.isEqualToFilterValue(filterItem.value)) ||
-                                        //     storeFilters.some((filter) => filter.isEqualToFilterValue(filterItem.value))
-                                        // }
-                                        onClick={() => handleOnClick(filterItem)}
-                                    >
+                                    <ListItem key={keyFilter} dense button onClick={() => handleOnClick(filterItem)}>
                                         <ListItemIcon>
                                             <Checkbox
                                                 edge="start"

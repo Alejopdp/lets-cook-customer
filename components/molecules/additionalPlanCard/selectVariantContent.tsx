@@ -18,39 +18,15 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 // Internal components
 
 const SelectVariantContent = (props: SelectVariantContentProps) => {
-    const lang = props.lang
+    const lang = props.lang;
     const theme = useTheme();
     const router = useRouter();
     const classes = useStylesVariantContent();
     const [selectedAttributes, setselectedAttributes] = useState<{ [key: string]: string }>({});
-    const [selectedFrequency, setselectedFrequency] = useState("");
 
     useEffect(() => {
         setNewVariant();
     }, [selectedAttributes, props.selectedFrequency]);
-
-    const attributesKeyAndValues = useMemo(() => {
-        const map = {};
-
-        for (let variant of props.variants) {
-            for (let attr of variant.attributes) {
-                const mapKey = map[attr[0]];
-                map[attr[0]] = Array.isArray(mapKey) ? [...mapKey, attr[1]] : [attr[1]];
-            }
-
-            if (variant.numberOfPersons) {
-                const key = "Personas";
-                map[key] = Array.isArray(key) ? [...map[key], variant.numberOfPersons] : [variant.numberOfPersons];
-            }
-
-            if (variant.numberOfRecipes) {
-                const key = "Recetas";
-                map[key] = Array.isArray(key) ? [...map[key], variant.numberOfRecipes] : [variant.numberOfRecipes];
-            }
-        }
-
-        return Object.entries(map);
-    }, []);
 
     // const actualValue = useMemo(() => {
     //     const attributesEntries = Object.entries(selectedAttributes);
@@ -71,9 +47,12 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
 
     const setNewVariant = () => {
         const attributesEntries = Object.entries(selectedAttributes);
-
+        console.log(`Entries in setNewVariant: ${attributesEntries}`);
         if (attributesEntries.length > 0) {
+            console.log("Has entries");
             const variant = getPlanVariantWithAttributes(selectedAttributes, props.variants);
+            console.log(`Variant: ${JSON.stringify(variant)}`);
+            console.log(`Selected freq: ${props.selectedFrequency}`);
 
             if (!!variant) {
                 const withoutOldVariant = props.selectedVariants.filter((va) => va.planId !== variant.planId);
@@ -88,6 +67,7 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
     };
 
     const handleAttributeClick = (attrName: string, attrValue: string) => {
+        console.log(`Picking atr: ${attrName} & value ${attrValue}`);
         setselectedAttributes({ ...selectedAttributes, [attrName]: attrValue });
     };
 
@@ -95,14 +75,17 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
 
     return (
         <Box>
-            <Box style={{ cursor: "pointer", display: 'flex', alignItems: 'center', marginBottom: theme.spacing(2) }} onClick={props.handleClickBackToFirstContent}>
+            <Box
+                style={{ cursor: "pointer", display: "flex", alignItems: "center", marginBottom: theme.spacing(2) }}
+                onClick={props.handleClickBackToFirstContent}
+            >
                 <ArrowBackIcon style={{ marginRight: theme.spacing(1), color: "#515151" }} />
                 <Typography variant="h5" color="initial">
                     {props.additionalPlanName}
                 </Typography>
             </Box>
             <Box>
-                {attributesKeyAndValues.map((entry: any, index: number) => (
+                {props.attributesKeysAndValues.map((entry: any, index: number) => (
                     <AttributePicker
                         handleAttributeClick={handleAttributeClick}
                         selectedAttributes={selectedAttributes}
@@ -139,7 +122,9 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                     <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
                         {`${lang.priceText}: ${actualValue}€`}
                     </Typography>
-                    <Typography variant="caption" color='textSecondary'>{lang.taxIncluded}</Typography>
+                    <Typography variant="caption" color="textSecondary">
+                        {lang.taxIncluded}
+                    </Typography>
                 </div>
             )}
         </Box>

@@ -26,12 +26,18 @@ const PlanDetailsDesktop = ({
     lang,
 }: PlanDetailsProps) => {
     const theme = useTheme();
+
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <PlanCard plan={subscription.plan} handleClick={handleClickOpenChangePlanModal} />
+                        <PlanCard
+                            plan={subscription.plan}
+                            handleClick={handleClickOpenChangePlanModal}
+                            portionPrice={subscription.portionPrice}
+                            portionsQuantity={subscription.portionsQuantity}
+                        />
                     </Grid>
                     <Grid item xs={12}>
                         <ShippingAddressCard
@@ -75,7 +81,7 @@ const PlanDetailsDesktop = ({
                                     />
                                 </Grid>
                             )}
-                            {subscription.nextWeekOrder !== null && subscription.canChooseRecipes && (
+                            {subscription.nextWeekOrder !== null && (
                                 <Grid item xs={12}>
                                     <RecipesNextWeekCard
                                         nextWeekOrder={subscription.nextWeekOrder}

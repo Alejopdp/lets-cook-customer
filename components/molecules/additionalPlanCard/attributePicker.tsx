@@ -7,11 +7,14 @@ import { AttributePickerProps } from "./interface";
 const AttributePicker = (props: AttributePickerProps) => {
     return (
         <Box marginBottom={2}>
-            <Typography variant='body2' style={{fontSize:'14px', fontWeight: 600}}>{props.title}</Typography>
+            <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600 }}>
+                {props.title}
+            </Typography>
             <Box display="flex">
                 {props.values.map((value, index) => (
                     <QuantityBox
-                        key={index}
+                        idForHtml={`${Math.random() * Date.now()}${value}${index}${props.title}`}
+                        key={`${value}${index}${props.title}`}
                         label={value}
                         name={value}
                         onChange={() => props.handleAttributeClick(props.title, value)}

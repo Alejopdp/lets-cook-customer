@@ -6,6 +6,6 @@ export const navbarContent = {
         seePlans: "Our plans",
     },
     ca: {
-        seePlans: "Nuestros planes",
+        seePlans: "Els nostres plans",
     },
-}
+};

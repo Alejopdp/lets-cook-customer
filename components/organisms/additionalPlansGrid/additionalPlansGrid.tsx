@@ -26,7 +26,7 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                 min: 1280,
             },
             items: 4,
-            partialVisibilityGutter: 40,
+            // partialVisibilityGutter: 40,
         },
         desktop: {
             breakpoint: {
@@ -34,7 +34,7 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                 min: 960,
             },
             items: 4,
-            partialVisibilityGutter: 40,
+            // partialVisibilityGutter: 40,
         },
         tablet: {
             breakpoint: {
@@ -42,7 +42,7 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                 min: 720,
             },
             items: 2,
-            partialVisibilityGutter: 40,
+            // partialVisibilityGutter: 40,
         },
         mobile: {
             breakpoint: {
@@ -50,7 +50,7 @@ const AdditionalPlansGrid = (props: AdditionalPlansGridProps) => {
                 min: 0,
             },
             items: 1,
-            partialVisibilityGutter: 40,
+            // partialVisibilityGutter: 40,
         },
     };
 

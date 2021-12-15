@@ -35,7 +35,7 @@ const PhoneNumberInput = (props) => {
                 dropdownStyle={{ backgroundColor: theme.palette.background.secondary, color: "gray", width: props.width }}
                 containerStyle={{ width: "100%", fontFamily: paragraphFont, fontSize: "16px" }}
                 specialLabel={props.label}
-                inputProps={{ name: props.name, autoComplete: "no" }}
+                inputProps={{ name: props.name, autoComplete: "no", label: props.label }}
                 onChange={(value, country, event, formattedValue) => {
                     props.handleChange(event);
                 }}

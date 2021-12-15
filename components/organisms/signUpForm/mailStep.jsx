@@ -51,7 +51,14 @@ const MailStep = (props) => {
             />
             <Divider />
             <Grid item xs={12}>
-                <TextInput label={lang.emailInput} name="email" value={props.email} onChange={props.handleChange} />
+                <TextInput
+                    label={lang.emailInput}
+                    name="email"
+                    value={props.email}
+                    onChange={props.handleChange}
+                    helperText={props.emailAlreadyExists ? lang.emailAlreadyExistsError : ""}
+                    hasError={props.emailAlreadyExists}
+                />
             </Grid>
             <Grid item xs={12}>
                 <RoundedButton

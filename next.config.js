@@ -5,7 +5,14 @@ const { i18n } = require("./next-i18next.config");
 module.exports = {
     i18n,
     images: {
-        domains: ["localhost", "cdn.shopify.com", "lets-cook-assets.s3.eu-west-3.amazonaws.com", "images.unsplash.com", "www.facebook.com"],
+        domains: [
+            "localhost",
+            "cdn.shopify.com",
+            "lets-cook-assets.s3.eu-west-3.amazonaws.com",
+            "images.unsplash.com",
+            "www.facebook.com",
+            "lets-cook-blog-assets.s3.eu-west-3.amazonaws.com",
+        ],
     },
     typescript: {
         ignoreBuildErrors: true,

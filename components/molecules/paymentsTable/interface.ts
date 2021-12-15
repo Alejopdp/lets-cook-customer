@@ -6,6 +6,7 @@ interface PaymentOrder {
     humanState: string;
     ordersQty: number;
     discountAmount: number;
+    humanId: string;
 }
 
 export interface PaymentsTableProps {

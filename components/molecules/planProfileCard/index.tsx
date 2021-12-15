@@ -16,7 +16,15 @@ import BoxWithTextButton from "../specificBox/boxWithTextButton";
 import PlanInfoWithStatus from "../planInfo/planInfoWithStatus";
 import Options from "../../atoms/options/Options";
 
-const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpenPlanRecoverModal, lang, handleSetSubscriptionId, handleClickOpenSkipPlanModal, handleClickOpenChangePlanModal }) => {
+const PlanProfileCard = ({
+    plan,
+    handleClickRedirectToPlanDetail,
+    handleClickOpenPlanRecoverModal,
+    lang,
+    handleSetSubscriptionId,
+    handleClickOpenSkipPlanModal,
+    handleClickOpenChangePlanModal,
+}) => {
     const theme = useTheme();
     const router = useRouter();
 
@@ -35,12 +43,14 @@ const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpe
                     planIcon={plan.iconUrl}
                     status={{ value: plan.stateTitle, text: plan.stateHumanTitle }}
                 />
-                <Options
-                    handleSetSubscriptionId={handleSetSubscriptionId}
-                    subscriptionId={plan.id}
-                    handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
-                    handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
-                />
+                {plan.stateTitle !== "SUBSCRIPTION_CANCELLED" && (
+                    <Options
+                        handleSetSubscriptionId={handleSetSubscriptionId}
+                        subscriptionId={plan.id}
+                        handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
+                        handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
+                    />
+                )}
             </div>
             <div style={{ marginBottom: theme.spacing(3), marginTop: theme.spacing(2) }}>
                 <Typography variant="body2" style={{ fontSize: "16px" }}>
@@ -56,7 +66,7 @@ const PlanProfileCard = ({ plan, handleClickRedirectToPlanDetail, handleClickOpe
                 </div>
             )}
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                <RotateRight style={{ fontSize: '24px' }} />
+                <RotateRight style={{ fontSize: "24px" }} />
                 <Typography variant="body2" style={{ fontSize: "14px", marginLeft: "8px" }}>
                     {lang.frequencyText} {translateFrequency(plan.frequency, router.locale).toLocaleLowerCase()}
                 </Typography>

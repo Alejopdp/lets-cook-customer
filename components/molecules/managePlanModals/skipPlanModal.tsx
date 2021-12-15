@@ -51,8 +51,11 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
     const skipWeek = (id: string) => {
         let weekIndexSelected = weeksStore.findIndex((week) => week.id === id);
         let weekToModify = weeksStore[weekIndexSelected];
-        if (weekToModify.state === OrderState.ORDER_BILLED) return;
+        if (weekToModify.state === OrderState.ORDER_BILLED || (weekToModify.isSkipped && !weekToModify.isReanudable)) return;
+
         weekToModify["isSkipped"] = !weekToModify["isSkipped"];
+        weekToModify["isReanudable"] = !weekToModify["isReanudable"];
+        console.log("Week to modify: ", weekToModify);
         setWeeksStore([...weeksStore.slice(0, weekIndexSelected), weekToModify, ...weeksStore.slice(weekIndexSelected + 1)]);
     };
 
@@ -73,11 +76,11 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
         >
             <Grid container spacing={2}>
                 {weeksStore.map((week, index) => (
-                    <Grid key={week.id} item xs={6} sm={3} key={index}>
+                    <Grid key={week.id} item xs={6} sm={3}>
                         <Box
                             className={clsx(
                                 classes.generalBoxStyle,
-                                week.state === OrderState.ORDER_BILLED
+                                week.state === OrderState.ORDER_BILLED || (week.isSkipped && !week.isReanudable)
                                     ? classes.disabled
                                     : week.isSkipped
                                     ? classes.skippedWeek
@@ -98,7 +101,9 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
                                 align="center"
                             >
                                 {week.state === OrderState.ORDER_BILLED
-                                    ? "Pedido cobrado"
+                                    ? lang.billedWeek
+                                    : week.isSkipped && !week.isReanudable
+                                    ? lang.skippedAndNonReanudableOrderText
                                     : week.isSkipped
                                     ? lang.reanudarBtnText
                                     : lang.saltarBtnText}

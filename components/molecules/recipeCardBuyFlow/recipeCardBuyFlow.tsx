@@ -98,7 +98,7 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
                                     smallButton
                                     icon={<AddCircle />}
                                     disabled={!props.isAddable}
-                                    text="Agregar"
+                                    text={lang.addRecipeCardText}
                                     onClick={props.handleClickAddRecipe}
                                     style={{ padding: "6px 16px" }}
                                 />

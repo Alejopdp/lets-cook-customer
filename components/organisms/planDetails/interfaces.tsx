@@ -12,6 +12,7 @@ export interface SkippableOrder {
     weekLabel: string;
     shippingDate: string;
     isSkipped: boolean;
+    isReanudable: boolean;
     state: OrderState;
 }
 
@@ -23,7 +24,7 @@ export interface WeekOrder {
     shippingDate: string;
 }
 
-export interface PlanDetailasSubscription {
+export interface PlanDetailsSubscription {
     subscriptionId: string;
     plan: {
         planName: string;
@@ -62,10 +63,12 @@ export interface PlanDetailasSubscription {
     nextTwelveOrders: SkippableOrder[];
     hasRecipes: boolean;
     canChooseRecipesForNextWeekOrder: boolean;
+    portionsQuantity: number | undefined;
+    portionPrice: number | undefined;
 }
 
 export interface PlanDetailsProps {
-    subscription: PlanDetailasSubscription;
+    subscription: PlanDetailsSubscription;
     swapPlanData: { plans: any; variants: any };
     restrictions: Restriction[];
     reload: () => void;

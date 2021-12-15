@@ -32,12 +32,14 @@ import AdditionalPlansBuyButtons from "components/molecules/additionalPlansBuyBu
 import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import { useLang } from "@hooks";
 
 const CrossSellingStep = (props) => {
     const theme = useTheme();
     const { form, resetBuyFlowState } = useBuyFlow((state) => ({ form: state.form, resetBuyFlowState: state.resetBuyFlowState }));
     const router = useRouter();
     const lang = langs[router.locale];
+    const [faqsLang] = useLang("faqsSection");
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
     const [additionalPlans, setadditionalPlans] = useState<Plan[]>([]);
@@ -53,7 +55,7 @@ const CrossSellingStep = (props) => {
             const res = await getAdditionalPlans(router.locale, form.planCode);
 
             if (res.status === 200) {
-                setadditionalPlans(res.data);
+                setadditionalPlans(res.data.filter((plan) => plan.isActive));
             } else {
                 enqueueSnackbar(res.data.message, { variant: "error" });
             }
@@ -179,7 +181,7 @@ const CrossSellingStep = (props) => {
                     <SectionTitleBuyFlow title={lang.faqs.title} subtitle={lang.faqs.subtitle} />
                     <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                         <Grid container spacing={2}>
-                            {lang.faqs.accordions.map((faq, index) => (
+                            {faqsLang.sections[1].accordions.map((faq, index) => (
                                 <Grid item xs={12}>
                                     <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                                 </Grid>

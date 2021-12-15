@@ -2,22 +2,22 @@ export const userBox = {
     es: {
         titlePlans: "MIS PLANES",
         titleAccountSettings: "CONFIGURACIÓN DE CUENTA",
-        titleHistoryPayments: "HISTORIAL DE PAGOS",
+        titleHistoryPayments: "HISTORIAL DE PEDIDOS",
         titleCloseSession: "CERRAR SESIÓN",
-        myAccount: "MI CUENTA"
+        myAccount: "MI CUENTA",
     },
     en: {
-        titlePlans: "MIS PLANES",
-        titleAccountSettings: "CONFIGURACIÓN DE CUENTA",
-        titleHistoryPayments: "HISTORIAL DE PAGOS",
-        titleCloseSession: "CERRAR SESIÓN",
-        myAccout: "MI CUENTA"
+        titlePlans: "MY PLANS",
+        titleAccountSettings: "ACCOUNT CONFIGURATION",
+        titleHistoryPayments: "PAYMENT HISTORY",
+        titleCloseSession: "LOG OUT",
+        myAccount: "MY ACCOUNT",
     },
     ca: {
-        titlePlans: "MIS PLANES",
-        titleAccountSettings: "CONFIGURACIÓN DE CUENTA",
-        titleHistoryPayments: "HISTORIAL DE PAGOS",
-        titleCloseSession: "CERRAR SESIÓN",
-        myAccout: "MI CUENTA"
+        titlePlans: "ELS MEUS PLANS",
+        titleAccountSettings: "CONFIGURACIÓ DEL COMPTE",
+        titleHistoryPayments: "HISTORIAL DE PAGAMENTS",
+        titleCloseSession: "TANCAR SESSIÓ",
+        myAccount: "EL MEU COMPTE",
     },
-}
+};

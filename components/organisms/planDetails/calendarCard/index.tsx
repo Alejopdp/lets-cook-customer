@@ -1,5 +1,5 @@
 // Utils & Config
-import React from "react";
+import React, { useMemo } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import { useRouter } from "next/router";
 // const langs = require("../../lang").comoFunciona;
@@ -27,12 +27,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CalendarCard = (props: CalendarCardProps) => {
-    const lang = props.lang
+    const lang = props.lang;
     const theme = useTheme();
     const classes = useStyles();
     // const router = useRouter();
     // const lang = langs[router.locale];
 
+    const skipperdOrdersQty = useMemo(() => props.skippedOrders.length, [props.skippedOrders]);
     return (
         <BoxWithTitleAndTextButton title={lang.title} btnText={lang.skipWeekBtnText} handleClick={props.handleClick}>
             <Grid container>
@@ -51,7 +52,16 @@ const CalendarCard = (props: CalendarCardProps) => {
                                 color="textSecondary"
                                 style={{ fontSize: "14px", opacity: 0.7, marginLeft: theme.spacing(0.5) }}
                             >
-                                {lang.skippedWeeksInfo}: {props.skippedOrders.map((order) => `${order.weekLabel}, `)}
+                                {lang.skippedWeeksInfo}:{" "}
+                                {props.skippedOrders.map((order, index) =>
+                                    skipperdOrdersQty === 1
+                                        ? `${order.weekLabel}`
+                                        : index === 0
+                                        ? `${order.weekLabel}`
+                                        : index === skipperdOrdersQty - 1
+                                        ? ` y ${order.weekLabel}`
+                                        : `, ${order.weekLabel}`
+                                )}
                             </Typography>
                         </div>
                     </Grid>

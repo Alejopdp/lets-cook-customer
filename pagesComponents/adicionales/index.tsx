@@ -17,12 +17,14 @@ import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
 import SectionTitleBuyFlow from "components/molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import { useLang } from "@hooks";
 const langs = require("../../lang").crossSellingStep;
 
 const NuevoAcompañamientoPage = (props) => {
     const theme = useTheme();
     const router = useRouter();
     const lang = langs[router.locale];
+    const [faqsLang] = useLang("faqsSection");
     const [additionalPlans, setadditionalPlans] = useState([]);
     const [isLoading, setisLoading] = useState(true);
     const { enqueueSnackbar } = useSnackbar();
@@ -36,7 +38,7 @@ const NuevoAcompañamientoPage = (props) => {
             const res = await getAdditionalPlans(router.locale);
 
             if (res.status === 200) {
-                setadditionalPlans(res.data);
+                setadditionalPlans(res.data.filter((plan) => plan.isActive));
             } else {
                 enqueueSnackbar(res.data.message, { variant: "error" });
             }
@@ -101,19 +103,17 @@ const NuevoAcompañamientoPage = (props) => {
                     <AdditionalPlansBuyButtons
                         totalValue={totalValue}
                         handleSubmitPayment={handleSubmitPayment}
+                        primaryButtonLabel={lang.purchaseBtnText}
                         // handleSecondaryButtonClick={() => router.replace("/perfil")}
                         // secondaryButtonLabel="POR EL MOMENTO NO QUIERO UN NUEVO ACOMPAÑAMIENTO"
                     />
                 </Grid>
                 <Grid container spacing={2} style={{ paddingBottom: theme.spacing(8), paddingTop: theme.spacing(8) }}>
                     <Grid item xs={12}>
-                        <SectionTitleBuyFlow
-                            title="Preguntas frecuentes"
-                            subtitle="¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat"
-                        />
+                        <SectionTitleBuyFlow title={lang.faqs.title} subtitle={lang.faqs.subtitle} />
                         <Grid item xs={12} sm={8} style={{ margin: `0px auto 0px auto` }}>
                             <Grid container spacing={2}>
-                                {lang.faqs.map((faq, index) => (
+                                {faqsLang.sections[1].accordions.map((faq, index) => (
                                     <Grid item xs={12}>
                                         <SimpleAccordion question={faq.question} answer={faq.answer} key={index} />
                                     </Grid>

@@ -195,3 +195,19 @@ export const setupFuturePaymentMethod = async (customerId: string) => {
         return error.response;
     }
 };
+
+export const checkIfEmailExists = async (email: string) => {
+    try {
+        const res = await axios({
+            method: "POST",
+            url: `${apiUrl}/check-if-email-exists`,
+            data: {
+                email,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        return error.response;
+    }
+};

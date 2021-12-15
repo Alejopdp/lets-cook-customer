@@ -1,3 +1,4 @@
+export * from "./404";
 export * from "./avisoLegal";
 export * from "./comoFunciona";
 export * from "./preguntasFrecuentes";
