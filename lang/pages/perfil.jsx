@@ -24,6 +24,7 @@ export const perfil = {
         },
         referalActionBox: {
             text: "Invitá a tus amigos a Let’s Cook con el código de descuento de",
+            miniText: "Tendrás 10€ de descuento por cada amigo que se apunte.",
         },
         planProfileCard: {
             seeDetailsBtnText: "Ver detalle",
@@ -58,6 +59,7 @@ export const perfil = {
         },
         referalActionBox: {
             text: "Invite your friends to Let’s Cook with a discount code",
+            miniText: "You will have 10€ discount for each friend who signs up.",
         },
         planProfileCard: {
             seeDetailsBtnText: "See details",
@@ -92,6 +94,7 @@ export const perfil = {
         },
         referalActionBox: {
             text: "Convida als teus amics a Let’s Cook amb el codi de descompte de",
+            miniText: "Tindràs 10€ de descompte per cada amic que s'hi apunti.",
         },
         planProfileCard: {
             seeDetailsBtnText: "Veure detall",

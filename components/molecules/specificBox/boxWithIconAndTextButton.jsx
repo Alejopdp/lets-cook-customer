@@ -73,6 +73,11 @@ const BoxWithIconAndTextButton = (props) => {
                         style={{ marginTop: theme.spacing(3), color: props.noColor ? null : theme.palette.secondary.main }}
                         startIcon={props.startIcon}
                     />
+                    {!!props.textBelowTextButton && (
+                        <Typography variant="body2" style={{ fontSize: "12px", fontStyle: "italic" }}>
+                            {props.textBelowTextButton}
+                        </Typography>
+                    )}
                 </div>
             </div>
         </GeneralBox>
@@ -83,6 +88,7 @@ BoxWithIconAndTextButton.propTypes = {
     title: PropTypes.string.isRequired,
     btnText: PropTypes.string.isRequired,
     handleClick: PropTypes.func,
+    textBelowTextButton: PropTypes.string,
 };
 
 export default BoxWithIconAndTextButton;

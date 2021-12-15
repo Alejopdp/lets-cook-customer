@@ -18,7 +18,13 @@ const ReferalActionBox = ({ data, lang }) => {
         enqueueSnackbar("Código copiado al portapapeles", { variant: "success" });
     };
     return (
-        <BoxWithIconAndTextButton noColor icon="network" btnText={data.couponCode} handleClick={handleClick}>
+        <BoxWithIconAndTextButton
+            noColor
+            icon="network"
+            btnText={data.couponCode}
+            handleClick={handleClick}
+            textBelowTextButton={lang.miniText}
+        >
             <Typography variant="body2" style={{ fontSize: "16px" }}>
                 {lang.text} {data.discountValue}
             </Typography>
