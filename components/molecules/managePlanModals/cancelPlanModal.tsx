@@ -185,6 +185,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         if (res && res.status === 200) {
             enqueueSnackbar("Plan cambiado correctamente", { variant: "success" });
             props.handleClose();
+            router.replace(localeRoutes[router.locale][Routes.perfil]);
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
