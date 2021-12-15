@@ -4,4 +4,4 @@ function gtag() {
 }
 gtag("js", new Date());
 
-gtag("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_2);
+gtag("config", "AW-731560226");

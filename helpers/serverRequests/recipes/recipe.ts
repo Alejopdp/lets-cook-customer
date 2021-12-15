@@ -24,6 +24,28 @@ export async function getRecipes(locale: string = "es"): Promise<RecipeResponse>
     }
 }
 
+export async function getActualWeekRecipes(locale: string = "es"): Promise<RecipeResponse> {
+    try {
+        const res = await Axios.request<Recipe[]>({
+            method: "GET",
+            // headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
+            url: `${API_URL}/recipe/actual-week`,
+            params: {
+                locale,
+            },
+        });
+        return {
+            status: res.status,
+            data: res.data,
+        };
+    } catch (error) {
+        return {
+            status: 500,
+            error: error.response as string,
+        };
+    }
+}
+
 export async function getNextWeekRecipes(locale: string = "es"): Promise<RecipeResponse> {
     try {
         const res = await Axios.request<Recipe[]>({

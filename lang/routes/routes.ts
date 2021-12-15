@@ -11,7 +11,7 @@ export enum Routes {
     perfil = "perfil",
     planes = "planes",
     "preguntas-frecuentes" = "preguntas-frecuentes",
-    recetas = "menu-semanal",
+    recetas = "recetas",
     "recetas-grid" = "recetas-grid",
     "recuperar-contrasena" = "recuperar-contrasena",
     registrarme = "registrarme",
