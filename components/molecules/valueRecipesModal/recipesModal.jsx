@@ -52,10 +52,7 @@ const RecipesModal = (props) => {
         >
             <Grid container spacing={2}>
                 <Grid item xs={12} style={{ display: "flex" }}>
-                    <img
-                        src="https://st2.depositphotos.com/1053417/11818/i/950/depositphotos_118180400-stock-photo-chinese-food-on-wok.jpg"
-                        className={classes.img}
-                    />
+                    <img src={props.chosenRecipe.recipeImageUrl} className={classes.img} />
                     <Box className={classes.boxRecipeDesc}>
                         <Typography gutterBottom variant="h6">
                             {chosenRecipe.recipeName}
