@@ -4,8 +4,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-
-const Options = ({ handleSetSubscriptionId, subscriptionId, handleClickOpenSkipPlanModal, handleClickOpenChangePlanModal }) => {
+const Options = ({ handleSetSubscriptionId, subscriptionId, handleClickOpenSkipPlanModal, handleClickOpenChangePlanModal, isOneTime }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const ITEM_HEIGHT = 32;
@@ -16,24 +15,25 @@ const Options = ({ handleSetSubscriptionId, subscriptionId, handleClickOpenSkipP
 
     const handleClickOptions = (event) => {
         setAnchorEl(event.currentTarget);
-        handleSetSubscriptionId(subscriptionId)
-
+        handleSetSubscriptionId(subscriptionId);
     };
 
     const handleClickSkipPlanModal = () => {
         handleClickOpenSkipPlanModal();
         handleCloseOptions();
-    }
+    };
 
     const handleClickChangePlan = () => {
         handleClickOpenChangePlanModal();
         handleCloseOptions();
-    }
+    };
 
-    const options = [
-        { id: 1, title: "SALTAR SEMANA", handleClick: handleClickSkipPlanModal },
-        { id: 2, title: "CAMBIAR PLAN", handleClick: handleClickChangePlan },
-    ];
+    const options = isOneTime
+        ? [{ id: 2, title: "CAMBIAR PLAN", handleClick: handleClickChangePlan }]
+        : [
+              { id: 1, title: "SALTAR SEMANA", handleClick: handleClickSkipPlanModal },
+              { id: 2, title: "CAMBIAR PLAN", handleClick: handleClickChangePlan },
+          ];
 
     return (
         <div>
@@ -61,6 +61,6 @@ const Options = ({ handleSetSubscriptionId, subscriptionId, handleClickOpenSkipP
             </Menu>
         </div>
     );
-}
+};
 
 export default Options;

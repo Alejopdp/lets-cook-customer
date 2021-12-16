@@ -35,7 +35,12 @@ const CalendarCard = (props: CalendarCardProps) => {
 
     const skipperdOrdersQty = useMemo(() => props.skippedOrders.length, [props.skippedOrders]);
     return (
-        <BoxWithTitleAndTextButton title={lang.title} btnText={lang.skipWeekBtnText} handleClick={props.handleClick}>
+        <BoxWithTitleAndTextButton
+            title={lang.title}
+            btnText={lang.skipWeekBtnText}
+            handleClick={props.handleClick}
+            hideButton={props.isOneTime}
+        >
             <Grid container>
                 <Grid item xs={12} sm={6}>
                     <DataDisplay title={lang.nextDeliveryTitle} text={props.schedule.nextDelivery} />

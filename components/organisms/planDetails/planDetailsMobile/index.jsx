@@ -33,6 +33,7 @@ const PlanDetailsMobile = ({
                     handleClick={handleClickOpenChangePlanModal}
                     portionPrice={subscription.portionPrice}
                     portionsQuantity={subscription.portionsQuantity}
+                    isOneTime={subscription.isOneTime}
                 />
             </Grid>
             <Grid item xs={12}>
@@ -41,6 +42,7 @@ const PlanDetailsMobile = ({
                     skippedOrders={subscription.skippedOrders}
                     handleClick={handleClickOpenSkipPlanModal}
                     lang={lang.calendarCard}
+                    isOneTime={subscription.isOneTime}
                 />
             </Grid>
             {subscription.hasRecipes && (
