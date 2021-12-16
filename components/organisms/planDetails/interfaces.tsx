@@ -95,4 +95,5 @@ export interface CalendarCardProps {
     skippedOrders: SkippableOrder[];
     handleClick: () => void;
     lang: any;
+    isOneTime: boolean;
 }

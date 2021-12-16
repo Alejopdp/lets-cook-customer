@@ -33,7 +33,7 @@ const PlanCard = (props) => {
     const router = useRouter();
 
     return (
-        <BoxWithTextButton btnText={texts[router.locale].swapPlanButtonText} handleClick={props.handleClick}>
+        <BoxWithTextButton btnText={texts[router.locale].swapPlanButtonText} handleClick={props.handleClick} hideButton={props.isOneTime}>
             <PlanInfoWithStatus
                 style={{ marginBottom: theme.spacing(2) }}
                 planName={props.plan.planName}

@@ -43,8 +43,9 @@ const PlanProfileCard = ({
                     planIcon={plan.iconUrl}
                     status={{ value: plan.stateTitle, text: plan.stateHumanTitle }}
                 />
-                {plan.stateTitle !== "SUBSCRIPTION_CANCELLED" && (
+                {plan.stateTitle !== "SUBSCRIPTION_CANCELLED" && !plan.isOneTime && (
                     <Options
+                        isOneTime={plan.isOneTime}
                         handleSetSubscriptionId={handleSetSubscriptionId}
                         subscriptionId={plan.id}
                         handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}

@@ -24,14 +24,19 @@ const BoxWithTextButton = (props) => {
     return (
         <GeneralBox variant="medium">
             <div style={{ width: "100%" }}>{props.children}</div>
-            <TextButton
-                handleClick={props.handleClick}
-                btnText={props.btnText}
-                style={{
-                    marginTop: theme.spacing(3),
-                    color: props.status === "SUBSCRIPTION_EXPIRED" || props.status === "SUBSCRIPTION_CANCELLED" ? theme.palette.primary.main : null,
-                }}
-            />
+            {!props.hideButton && (
+                <TextButton
+                    handleClick={props.handleClick}
+                    btnText={props.btnText}
+                    style={{
+                        marginTop: theme.spacing(3),
+                        color:
+                            props.status === "SUBSCRIPTION_EXPIRED" || props.status === "SUBSCRIPTION_CANCELLED"
+                                ? theme.palette.primary.main
+                                : null,
+                    }}
+                />
+            )}
         </GeneralBox>
     );
 };
