@@ -18,6 +18,7 @@ export enum Routes {
     adicionales = "adicionales",
     blogRecetas = "blog-recetas",
     blogNoticias = "blog-noticias",
+    "valorar-recetas" = "valorar-recetas",
 }
 
 export const localeRoutes = {
@@ -41,6 +42,7 @@ export const localeRoutes = {
         "recuperar-contrasena": "/recuperar-contrasena",
         registrarme: "/registrarme",
         adicionales: "/adicionales",
+        "valorar-recetas": "/valorar-recetas",
     },
 
     en: {
@@ -63,6 +65,7 @@ export const localeRoutes = {
         "recuperar-contrasena": "/recuperar-contrasena-en",
         registrarme: "/registrarme-en",
         adicionales: "/adicionales-en",
+        "valorar-recetas": "/rate-recipes",
     },
 
     ca: {
@@ -85,6 +88,7 @@ export const localeRoutes = {
         "recuperar-contrasena": "/recuperar-contrasena-ca",
         registrarme: "/registrarme-ca",
         adicionales: "/adicionales-ca",
+        "valorar-recetas": "/valorar-receptes",
     },
 
     Routes,

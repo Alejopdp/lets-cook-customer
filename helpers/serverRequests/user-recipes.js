@@ -5,8 +5,9 @@ export const getRecipesByCustomer = async (id, locale) => {
         const res = await Axios({
             method: "GET",
             headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
-            url: `${process.env.NEXT_PUBLIC_API_URL}/recipe-rating/by-customer/${id}`,
+            url: `${process.env.NEXT_PUBLIC_API_URL}/recipe-rating`,
             params: {
+                customer: id,
                 locale,
             },
         });
@@ -17,12 +18,12 @@ export const getRecipesByCustomer = async (id, locale) => {
     }
 };
 
-export const updateRecipeRating = async (recipeId, rating, comment) => {
+export const updateRecipeRating = async (recipeRaitingId, rating, comment) => {
     try {
         const res = await Axios({
             method: "PUT",
             headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
-            url: `${process.env.NEXT_PUBLIC_API_URL}/recipe-rating/rate/${recipeId}`,
+            url: `${process.env.NEXT_PUBLIC_API_URL}/recipe-rating/${recipeRaitingId}`,
             data: {
                 rating,
                 comment,
@@ -34,7 +35,7 @@ export const updateRecipeRating = async (recipeId, rating, comment) => {
     }
 };
 
-export const deleteRecipe = async (recipeId) => {
+export const deleteRecipeRating = async (recipeId) => {
     try {
         const res = await Axios({
             method: "DELETE",

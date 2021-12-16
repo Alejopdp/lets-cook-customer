@@ -2,9 +2,11 @@ export const valorarRecetas = {
     es: {
         title: "Valorar recetas",
         recipesRatingPendingSubtitle: "Recetas pendientes de valorar",
-        recipesRatedSubtitle: "Recetas pendientes de valorar",
+        recipesRatedSubtitle: "Recetas valoradas",
         foodCard: {
             dontRateBtnLabel: "NO VALORAR ESTA RECETA",
+            deliveredText: "veces entregada",
+            lastShippmentText: "última entrega el",
         },
         recipesModal: {
             title: {
@@ -25,6 +27,8 @@ export const valorarRecetas = {
         recipesRatedSubtitle: "Recetas pendientes de valorar",
         foodCard: {
             dontRateBtnLabel: "NO VALORAR ESTA RECETA",
+            deliveredText: "times delivered",
+            lastShippmentText: "last shippment at",
         },
         recipesModal: {
             title: {
@@ -45,6 +49,8 @@ export const valorarRecetas = {
         recipesRatedSubtitle: "Recetas pendientes de valorar",
         foodCard: {
             dontRateBtnLabel: "NO VALORAR ESTA RECETA",
+            deliveredText: "vegades lliurat",
+            lastShippmentText: "últim lliurament el",
         },
         recipesModal: {
             title: {

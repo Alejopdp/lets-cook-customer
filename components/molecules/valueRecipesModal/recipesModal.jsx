@@ -26,66 +26,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RecipesModal = (props) => {
-    const lang = props.lang
+    const lang = props.lang;
     const theme = useTheme();
     const classes = useStyles();
-    const {
-        chosenRecipe,
-        starValue,
-        handleSecondaryButtonClick,
-        setOpenRecipeModal,
-        recipesToRate,
-        setRecipesToRate,
-        recipesWithRating,
-        setRecipesWithRating,
-        setStarValue,
-        setChosenRecipe,
-    } = props;
+    const { chosenRecipe, starValue, handleSecondaryButtonClick, setStarValue, setChosenRecipe, handleClose } = props;
 
     const [comment, setComment] = useState("");
 
     useEffect(() => {
-        if (chosenRecipe.comment === "") setComment("");
-    }, [chosenRecipe.id]);
-
-    useEffect(() => {
-        if (chosenRecipe.recipeName) setChosenRecipe({ ...chosenRecipe, comment });
-    }, [comment]);
-
+        setComment(chosenRecipe.comment);
+    }, [chosenRecipe.comment]);
     const handleChangeComment = (e) => {
         setComment(e.target.value);
-    };
-
-    const handleQualificationClick = async (recipeId, rating, comment) => {
-        setOpenRecipeModal(false);
-        const res = await updateRecipeRating(recipeId, rating, comment);
-        recipesToRate.map((recipeToRate, i) => {
-            if (recipeToRate.id === chosenRecipe.id) {
-                const recipe = recipesToRate.splice(i, 1).shift();
-                let obj = { ...recipe, rating: parseInt(rating), comment };
-                setRecipesToRate(recipesToRate);
-                setRecipesWithRating(recipesWithRating.concat(obj));
-            }
-        });
-        recipesWithRating.map((recipeWithRating, i) => {
-            if (recipeWithRating.id === chosenRecipe.id) {
-                const recipe = recipesWithRating.splice(i, 1).shift();
-                if (chosenRecipe.comment !== "") {
-                    let obj = { ...recipe, rating: parseInt(rating), comment: chosenRecipe.comment };
-                    setRecipesWithRating(recipesWithRating.concat(obj));
-                } else {
-                    let obj = { ...recipe, rating: parseInt(rating), comment };
-                    setRecipesWithRating(recipesWithRating.concat(obj));
-                }
-            }
-        });
     };
 
     return (
         <Modal
             open={props.open}
-            handleClose={handleSecondaryButtonClick}
-            handlePrimaryButtonClick={() => handleQualificationClick(chosenRecipe.id, starValue, comment)}
+            handleClose={handleClose}
+            handlePrimaryButtonClick={() => props.handlePrimaryButton(starValue, comment)}
             title={chosenRecipe.rating ? lang.title.hasRating : lang.title.hasNotRating}
             primaryButtonText={chosenRecipe.rating ? lang.primaryButtonText.hasRating : lang.primaryButtonText.hasNotRating}
             secondaryButtonText={lang.secondaryButtonText}
@@ -107,7 +66,13 @@ const RecipesModal = (props) => {
                     </Box>
                 </Grid>
                 <Grid item xs={12}>
-                    <SimpleRating setStarValue={setStarValue} starValue={starValue} selectedRecipe={chosenRecipe} isModal={true} />
+                    <SimpleRating
+                        setStarValue={setStarValue}
+                        starValue={starValue}
+                        selectedRecipe={chosenRecipe}
+                        isModal={true}
+                        handleClickOpenRecipeModal={() => ""}
+                    />
                 </Grid>
                 <Grid item xs={12}>
                     <form className={classes.root} noValidate autoComplete="off" style={{ marginTop: "1rem" }}>
@@ -119,7 +84,7 @@ const RecipesModal = (props) => {
                             multiline
                             rows="5"
                             onChange={(e) => handleChangeComment(e)}
-                            value={chosenRecipe.comment}
+                            value={comment}
                         />
                     </form>
                 </Grid>

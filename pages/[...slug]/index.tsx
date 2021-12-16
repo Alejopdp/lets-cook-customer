@@ -18,8 +18,7 @@ import RecetasPage from "../../pagesComponents/recetas/index";
 import RecetasGridPage from "../../pagesComponents/recetas-grid/[id]";
 import RecoverPasswordPage from "../../pagesComponents/recuperar-contrasena/index";
 import SignUpPage from "../../pagesComponents/registrarme/index";
-import { Box, Typography } from "@material-ui/core";
-import { preguntasFrecuentes } from "@lang";
+import RateRecipesPage from "pagesComponents/valorar-recetas/valorarRecetas";
 
 const Pages = (props) => {
     const router = useRouter();
@@ -53,6 +52,9 @@ const Pages = (props) => {
 
             case localeRoutes[router.locale][Routes.planes]:
                 return <PlanesPage />;
+
+            case localeRoutes[router.locale][Routes["valorar-recetas"]]:
+                return <RateRecipesPage />;
 
             case localeRoutes[router.locale][Routes["preguntas-frecuentes"]]:
                 return <PreguntasFrecuentesPage />;

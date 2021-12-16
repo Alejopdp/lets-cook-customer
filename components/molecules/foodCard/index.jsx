@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
         webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
         mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        paddingBottom: 16,
     },
     media: {
         height: "167px",
@@ -37,10 +38,9 @@ export default function FoodCard({
     setStarValue,
     handleDeleteRecipe,
     recipeToRate,
-    lang
+    lang,
 }) {
     const classes = useStyles();
-    const theme = useTheme();
 
     return (
         <>
@@ -48,16 +48,20 @@ export default function FoodCard({
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image="https://st2.depositphotos.com/1053417/11818/i/950/depositphotos_118180400-stock-photo-chinese-food-on-wok.jpg"
+                        image={selectedRecipe.recipeImageUrl}
                         title={selectedRecipe.recipeName}
+                        onClick={(e) => handleClickOpenRecipeModal(selectedRecipe, 0)}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h6" component="h2" className={classes.typography}>
                             {selectedRecipe.recipeName}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {selectedRecipe.label}
-                        </Typography>
+                        {selectedRecipe.qtyDelivered > 0 && (
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {selectedRecipe.qtyDelivered} {lang.deliveredText} ({lang.lastShippmentText}{" "}
+                                {selectedRecipe.lastShippingDate})
+                            </Typography>
+                        )}
                     </CardContent>
                 </CardActionArea>
 
@@ -65,12 +69,12 @@ export default function FoodCard({
                     <SimpleRating
                         selectedRecipe={selectedRecipe}
                         isRated={isRated}
-                        handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                        handleClickOpenRecipeModal={(rating) => handleClickOpenRecipeModal(selectedRecipe, rating)}
                         starValue={starValue}
                         setStarValue={setStarValue}
                     />
                 </CardActions>
-                <CardActions>
+                <CardActions style={{}}>
                     {isRated ? null : (
                         <Button size="small" className={classes.button} onClick={() => handleDeleteRecipe(recipeToRate)}>
                             {lang.dontRateBtnLabel}
