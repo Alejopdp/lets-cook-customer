@@ -12,7 +12,6 @@ import { localeRoutes, Routes } from "lang/routes/routes";
 import { useUserInfoStore } from "@stores";
 
 const RateRecipesActionBox = ({ lang }) => {
-    const theme = useTheme();
     const router = useRouter();
     const userInfo = useUserInfoStore((state) => state.userInfo);
 
