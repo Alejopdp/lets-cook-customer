@@ -69,7 +69,7 @@ const BlogPostCardDetail = ({ post }) => {
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(3), display: "flex" }} alignItems="center">
-                    <Avatar style={{ marginRight: theme.spacing(1) }}>{post.author.picture?.formats?.large?.url}</Avatar>
+                    <Avatar style={{ marginRight: theme.spacing(1) }} src={post.author.picture.url}></Avatar>
                     <Typography variant="body2" style={{ marginRight: "0px" }}>
                         {post.author.name}
                     </Typography>
