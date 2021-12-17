@@ -19,6 +19,10 @@ import CookiesDialog from "../components/molecules/cookiesPolicies/cookiesDialog
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
+export function reportWebVitals(metric) {
+    console.log(metric);
+}
+
 function MyApp(props) {
     const { Component, pageProps } = props;
     const { getFromLocalStorage, resetLocalStorage } = useLocalStorage();
