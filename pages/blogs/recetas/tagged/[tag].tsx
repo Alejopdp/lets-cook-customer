@@ -32,7 +32,8 @@ export async function getServerSideProps(context) {
         }
     }
 
-    const res = await getPosts(context.locale, { categories_in: categoryNameIdMap[context.query.tag] });
+    const tagWithSpaces = context.query.tag.split("-").join(" ");
+    const res = await getPosts(context.locale, { categories_in: categoryNameIdMap[tagWithSpaces] });
 
     return {
         props: {
