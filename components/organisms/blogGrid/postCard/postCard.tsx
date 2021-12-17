@@ -65,10 +65,9 @@ const PostCard = (props: PostCardProps) => {
     const router = useRouter();
 
     const handlePostClick = () => {
-        router.push({ pathname: `/blogs/recetas/${props.post.slug}` });
+        router.push({ pathname: `/blogs/recetas/${props.post.slug?.split(" ").join("-")}` });
     };
 
-    console.log("Author: ", props.post.author.picture.url);
     return (
         <Grid container classes={{ root }}>
             <Grid item xs={12} md={4} onClick={handlePostClick}>
