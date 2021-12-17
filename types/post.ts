@@ -3,7 +3,7 @@ export interface Post {
     title: string;
     description: string;
     categories: PostCategory[];
-    author: { name: string; picture: { formats: { large: { url: string } } } };
+    author: { name: string; picture: { url: _string; formats: { large: { url: string } } } };
     published_at: Date;
     slug: string;
 }

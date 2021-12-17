@@ -20,7 +20,28 @@ import CookiesDialog from "../components/molecules/cookiesPolicies/cookiesDialog
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
 export function reportWebVitals(metric) {
-    console.log(metric);
+    switch (metric.name) {
+        case "FCP":
+            console.log("FCP: ", metric);
+            break;
+        case "LCP":
+            console.log("LCP: ", metric);
+
+            break;
+        case "CLS":
+            console.log("CLS: ", metric);
+
+            break;
+        case "FID":
+            console.log("FID: ", metric);
+
+            break;
+        case "TTFB":
+            console.log("TTFB: ", metric);
+            break;
+        default:
+            break;
+    }
 }
 
 function MyApp(props) {
