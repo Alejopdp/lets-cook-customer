@@ -20,7 +20,6 @@ const BlogGrid = (props) => {
     const [lang] = useLang("recipesBlog");
 
     const postsToShow = useMemo(() => {
-        console.log("Posts: ", props.posts);
         if (!!!router.query || !!!router.query.tag) return props.posts;
 
         return props.posts.filter((post) => post.categories.some((category) => category.name === router.query.tag));
@@ -36,6 +35,8 @@ const BlogGrid = (props) => {
             pathname: `/blogs/recetas/tagged/${value}`,
         });
     };
+
+    console.log("A ver las categories que probablemente es lo que me esta tirando error: ", props.categories);
 
     return (
         <>
