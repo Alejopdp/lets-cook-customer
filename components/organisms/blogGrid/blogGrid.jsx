@@ -22,7 +22,7 @@ const BlogGrid = (props) => {
     const postsToShow = useMemo(() => {
         if (!!!router.query || !!!router.query.tag) return props.posts;
 
-        const tagWithSpaces = router.query.tag.split("-").join(" ");
+        const tagWithSpaces = router.query?.tag?.split("-").join(" ");
 
         return props.posts.filter((post) => post.categories.some((category) => category.name === tagWithSpaces));
     }, [router.query, props.posts]);
@@ -33,7 +33,7 @@ const BlogGrid = (props) => {
             return;
         }
 
-        const slugWithDashes = value.split(" ").join("-");
+        const slugWithDashes = value?.split(" ").join("-");
 
         router.push({
             pathname: `/blogs/recetas/tagged/${slugWithDashes}`,
@@ -49,7 +49,7 @@ const BlogGrid = (props) => {
                     <Box width={200} margin="auto" marginBottom={4}>
                         <SimpleDropdown
                             fullWidth
-                            selectedValue={router.query.tag.split("-").join(" ")}
+                            selectedValue={router.query?.tag?.split("-").join(" ")}
                             options={[lang.allOption, ...props.categories] || []}
                             label={"Etiqueta de blog"}
                             handleChange={(e) => handleTagForFilter(e.target.value)}
