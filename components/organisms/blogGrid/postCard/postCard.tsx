@@ -68,14 +68,14 @@ const PostCard = (props: PostCardProps) => {
         router.push({ pathname: `/blogs/recetas/${props.post.slug}` });
     };
 
-    console.log(`Image url: ${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${props.post.image.url}`);
+    console.log(`Image url: ${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${props.post.image?.url}`);
 
     return (
         <Grid container classes={{ root }}>
             <Grid item xs={12} md={4} onClick={handlePostClick}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${props.post.image.url}`}
-                    alt={props.post.image.name}
+                    src={!!!props.post.image?.url ? `/logo.png` : `${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${props.post.image?.url}`}
+                    alt={props.post.image?.name || "Blog image"}
                     width={300}
                     height={270}
                     layout="responsive"
@@ -95,7 +95,7 @@ const PostCard = (props: PostCardProps) => {
                 </Grid>
 
                 <Grid container direction="row" alignItems="center" className={publisher}>
-                    <Avatar style={{ marginRight: "8px" }}>{props.post.author.picture.formats.large.url}</Avatar>
+                    <Avatar style={{ marginRight: "8px" }}>{props.post.author.picture?.formats?.large?.url || ""}</Avatar>
                     <Typography variant="body2">{props.post.author.name}</Typography>
                     <Typography variant="body2" className={date}>
                         {dateFromISO8601(props.post.published_at, router.locale)}

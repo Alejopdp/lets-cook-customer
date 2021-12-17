@@ -4,7 +4,8 @@ export const getPosts = async (locale, queryParams) => {
     try {
         const res = await Axios({
             method: "GET",
-            url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles`,
+            // url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles`,
+            url: `https://lets-cook-blog.herokuapp.com/articles`,
             params: queryParams,
         });
         return res;
@@ -17,7 +18,8 @@ export const getPostBySlug = async (slug, locale) => {
     try {
         const res = await Axios({
             method: "GET",
-            url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles/${slug}`,
+            url: `https://lets-cook-blog.herokuapp.com/articles/${slug}`,
+            // url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles/${slug}`,
             params: {
                 locale,
             },
@@ -33,7 +35,8 @@ export const getCategories = async (locale) => {
     try {
         const res = await Axios({
             method: "GET",
-            url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/categories`,
+            url: `https://lets-cook-blog.herokuapp.com/categories`,
+            // url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/categories`,
             // params: {
             //     locale,
             // },
@@ -41,6 +44,7 @@ export const getCategories = async (locale) => {
 
         return res;
     } catch (error) {
+        console.log("Error: ", error);
         return error.response;
     }
 };
