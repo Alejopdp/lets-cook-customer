@@ -19,7 +19,6 @@ import RecetasGridPage from "../../pagesComponents/recetas-grid/[id]";
 import RecoverPasswordPage from "../../pagesComponents/recuperar-contrasena/index";
 import SignUpPage from "../../pagesComponents/registrarme/index";
 import RateRecipesPage from "pagesComponents/valorar-recetas/valorarRecetas";
-import Custom404Page from "pages/404";
 
 const Pages = (props) => {
     const router = useRouter();
@@ -79,7 +78,6 @@ const Pages = (props) => {
                 return <Adicionales />;
 
             default:
-                return <Custom404Page />;
                 router.push("/404");
                 return <></>;
         }
