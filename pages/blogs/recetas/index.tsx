@@ -25,8 +25,6 @@ const BlogRecetas = (props) => {
 export async function getServerSideProps(context) {
     const [res, categoriesRes] = await Promise.all([getPosts(context.locale, {}), getCategories(context.locale)]);
 
-    console.log("Res data: ", res.data);
-
     return {
         props: {
             posts: res?.status === 200 ? res?.data : [],
