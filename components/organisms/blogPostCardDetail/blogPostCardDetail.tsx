@@ -1,9 +1,11 @@
 // Utils & Config
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+// import ReactMarkdown from "react-markdown";
 import Parser from "html-react-parser";
 import { dateFromISO8601 } from "../../../helpers/utils/date";
 import { useRouter } from "next/router";
+import { useRemark } from "react-remark";
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -17,6 +19,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Image from "next/image";
 import Avatar from "@material-ui/core/Avatar";
 import { Post } from "types/post";
+import PostContent from "../postContent/postContent";
 
 const useStyles = makeStyles((theme) => ({
     image: {
@@ -80,7 +83,9 @@ const BlogPostCardDetail = ({ post }) => {
             </Grid>
             <Grid container>
                 <Grid item xs={12} className={gridContent}>
-                    {Parser(post.content)}
+                    {/* <ReactMarkdown>{post.content}</ReactMarkdown> */}
+                    <PostContent>{post.content}</PostContent>
+                    {/* {Parser(post.content)} */}
                 </Grid>
             </Grid>
             <Grid container direction="row" style={{ marginTop: theme.spacing(3) }}>
