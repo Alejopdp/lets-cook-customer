@@ -60,8 +60,8 @@ const BlogPostCardDetail = ({ post }) => {
 
                 <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
                     <Image
-                        src={`${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${post.image.url}`}
-                        alt={post.image.name}
+                        src={!!!post.image?.url ? `/logo.png` : `${process.env.NEXT_PUBLIC_BLOG_STORAGE_URL}${post.image?.url}`}
+                        alt={post.image?.name || "Blog image"}
                         width={700}
                         height={350}
                         layout="responsive"
@@ -69,7 +69,7 @@ const BlogPostCardDetail = ({ post }) => {
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(3), display: "flex" }} alignItems="center">
-                    <Avatar style={{ marginRight: theme.spacing(1) }}>{post.author.picture.formats.large.url}</Avatar>
+                    <Avatar style={{ marginRight: theme.spacing(1) }}>{post.author.picture?.formats?.large?.url}</Avatar>
                     <Typography variant="body2" style={{ marginRight: "0px" }}>
                         {post.author.name}
                     </Typography>
