@@ -26,7 +26,7 @@ const ReferalActionBox = ({ data, lang }) => {
             textBelowTextButton={lang.miniText}
         >
             <Typography variant="body2" style={{ fontSize: "16px" }}>
-                {lang.text} {data.discountValue}
+                {lang.text}
             </Typography>
         </BoxWithIconAndTextButton>
     );
