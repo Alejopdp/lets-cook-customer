@@ -19,6 +19,7 @@ import RecetasGridPage from "../../pagesComponents/recetas-grid/[id]";
 import RecoverPasswordPage from "../../pagesComponents/recuperar-contrasena/index";
 import SignUpPage from "../../pagesComponents/registrarme/index";
 import RateRecipesPage from "pagesComponents/valorar-recetas/valorarRecetas";
+import ComoFunciona from "pagesComponents/como-funciona/index";
 
 const Pages = (props) => {
     const router = useRouter();
@@ -33,7 +34,7 @@ const Pages = (props) => {
             case localeRoutes[router.locale][Routes["canjear-bono-regalo"]]:
                 return <CanjearBonoRegaloPage />;
             case localeRoutes[router.locale][Routes["como-funciona"]]:
-                return <CanjearBonoRegaloPage />;
+                return <ComoFunciona />;
 
             case localeRoutes[router.locale][Routes["detalle-del-plan"]]:
                 return <DetalleDelPlanPage />;

@@ -47,6 +47,8 @@ export const localeRoutes = {
 
     en: {
         blogs: "/blog-en",
+        "blog-recetas": "/recetas",
+        "blog-noticias": "/noticias",
         "bono-regalo": "/share-with-a-friend",
         "canjear-bono-regalo": "/redeem-voucher",
         "como-funciona": "/how-does-it-work",
@@ -58,8 +60,7 @@ export const localeRoutes = {
         perfil: "/profile",
         planes: "/plans",
         "preguntas-frecuentes": "/faqs",
-        recetas: "/recipes",
-        "recetas-grid": "/weekly-menu",
+        recetas: "/weekly-menu",
         "recuperar-contrasena": "/recover-password",
         registrarme: "/sign-in",
         adicionales: "/additionals",
@@ -67,6 +68,8 @@ export const localeRoutes = {
 
     ca: {
         blogs: "/blog",
+        "blog-recetas": "/recetas",
+        "blog-noticias": "/noticias",
         "bono-regalo": "/bo-regal",
         "canjear-bono-regalo": "/bescanviar-bo-regal",
         "como-funciona": "/com-funciona",
@@ -78,8 +81,7 @@ export const localeRoutes = {
         perfil: "/perfil",
         planes: "/plans",
         "preguntas-frecuentes": "/preguntes-frequents",
-        recetas: "/receptes",
-        "recetas-grid": "/menu-setmanal",
+        recetas: "/menu-setmanal",
         "recuperar-contrasena": "/recuperar-contrasenya",
         registrarme: "/registrar-me",
         adicionales: "/addicionals",
