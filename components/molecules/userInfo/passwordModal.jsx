@@ -40,7 +40,7 @@ const PasswordModal = (props) => {
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
             fullScreen={true}
-            disabled={!isPassword(newPassword) || newPassword !== repeatNewPassword || isEmpty(newPassword)}
+            disabled={!isPassword(newPassword) || newPassword !== repeatNewPassword || isEmpty(newPassword) || props.isSubmitting}
         >
             <Grid container spacing={2}>
                 <Grid item xs={12}>

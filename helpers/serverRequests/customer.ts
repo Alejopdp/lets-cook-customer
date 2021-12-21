@@ -213,3 +213,21 @@ export const checkIfEmailExists = async (email: string) => {
         return error.response;
     }
 };
+
+export const changePasswordWithoutCode = async (customerEmail: string, newPassword: string) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
+            url: `${apiUrl}/change-password/${customerEmail}`,
+            data: {
+                newPassword,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.error(error);
+        return error.response;
+    }
+};
