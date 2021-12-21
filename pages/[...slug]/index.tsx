@@ -27,7 +27,7 @@ const Pages = (props) => {
 
     const getSectionComponent = (path) => {
         switch (path) {
-            case localeRoutes[router.locale][Routes.blogs]:
+            case localeRoutes[router.locale][Routes["aviso-legal"]]:
                 return <AvisoLegal />;
             case localeRoutes[router.locale][Routes.blogs]:
                 return <BlogPage />;
