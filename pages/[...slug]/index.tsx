@@ -24,6 +24,8 @@ import ComoFunciona from "pagesComponents/como-funciona/index";
 const Pages = (props) => {
     const router = useRouter();
 
+    console.log("PATH: ", router.query.slug?.join("/"));
+
     const getSectionComponent = (path) => {
         switch (path) {
             case localeRoutes[router.locale][Routes.blogs]:
@@ -79,7 +81,9 @@ const Pages = (props) => {
                 return <Adicionales />;
 
             default:
-                router.push("/404");
+                if (!!path && path !== "/") {
+                    router.push("/404");
+                }
                 return <></>;
         }
     };
