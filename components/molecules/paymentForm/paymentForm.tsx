@@ -188,7 +188,31 @@ export const PaymentForm = (props) => {
                         ...props.deliveryData,
                     });
                     updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
-                    setCoupon(BuyFlowInitialStore.form.coupon);
+                    setCoupon({
+                        id: "",
+                        code: "",
+                        discount_type: {
+                            type: "",
+                            value: null,
+                        },
+                        minimum_requirement: {
+                            type: "none",
+                            value: null,
+                        },
+                        apply_to: {
+                            type: "all",
+                            value: [],
+                        },
+                        limites: [],
+                        coupons_by_subscription: {
+                            type: "only_fee",
+                            value: 0,
+                        },
+                        date_rage: {
+                            start: "2021-07-16T12:47:00.000Z",
+                            expire: "2021-07-24T12:51:00.000Z",
+                        },
+                    });
                     form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                         ? goToNextView()
                         : skipRecipeChoiceStep(res.data.subscriptionId);
@@ -247,7 +271,31 @@ export const PaymentForm = (props) => {
                     ...props.deliveryData,
                 });
                 updateUserInfoStoreIfNecessary(res.data.customerPaymentMethods);
-                setCoupon(BuyFlowInitialStore.form.coupon);
+                setCoupon({
+                    id: "",
+                    code: "",
+                    discount_type: {
+                        type: "",
+                        value: null,
+                    },
+                    minimum_requirement: {
+                        type: "none",
+                        value: null,
+                    },
+                    apply_to: {
+                        type: "all",
+                        value: [],
+                    },
+                    limites: [],
+                    coupons_by_subscription: {
+                        type: "only_fee",
+                        value: 0,
+                    },
+                    date_rage: {
+                        start: "2021-07-16T12:47:00.000Z",
+                        expire: "2021-07-24T12:51:00.000Z",
+                    },
+                });
                 form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                     ? goToNextView()
                     : skipRecipeChoiceStep(res.data.subscriptionId);

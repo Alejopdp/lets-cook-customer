@@ -13,7 +13,7 @@ interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
 }
 
-export const CheckoutStep = memo((props: CheckoutStepProps) => {
+export const CheckoutStep = (props: CheckoutStepProps) => {
     const [lang] = useLang("checkoutStep");
     const theme = useTheme();
     const form = useBuyFlow((state) => state.form);
@@ -30,6 +30,7 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
         restrictions: "",
     });
     const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false);
+    const { coupon } = useBuyFlow((state) => ({ coupon: state.form.coupon }));
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -157,6 +158,6 @@ export const CheckoutStep = memo((props: CheckoutStepProps) => {
             <PurchaseConditionsModal open={openPurchaseConditionsModal} handleClose={handleClosePurchaseConditionsModal} />
         </>
     );
-});
+};
 
 export default CheckoutStep;
