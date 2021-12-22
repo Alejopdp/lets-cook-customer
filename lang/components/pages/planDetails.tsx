@@ -93,8 +93,8 @@ export const planDetails = {
             preferredScheduleTitle: "Preferred time frame",
             preferredScheduleTitleEmptyState: "None",
             shippingCostTitle: "Shipping cost",
-            noShippingCostLabel: "Tu próximo pedido no tiene coste de envío",
-            shippingCostLabel: "Tu próximo pedido tiene un coste de envío de ",
+            noShippingCostLabel: "Your next delivery has no shipping cost",
+            shippingCostLabel: "Your next delivery has a shipping cost of ",
         },
         paymentMethodCard: {
             title: "Payment method",
@@ -104,7 +104,7 @@ export const planDetails = {
         calendarCard: {
             title: "Calendar",
             skipWeekBtnText: "Skip week",
-            nextDeliveryTitle: "Next week",
+            nextDeliveryTitle: "Next delivery",
             nextPaymentTitle: "Next payment",
             skippedWeeksInfo: "You’ve skipped the following weeks",
         },

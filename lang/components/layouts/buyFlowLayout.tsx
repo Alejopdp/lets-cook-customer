@@ -12,6 +12,8 @@ export const buyFlowLayout = {
         filterTitle: "Filtrar recetas",
         applyFiltersBtnText: "Aplicar filtros",
         addRecipeCardText: "Añadir",
+        chooseRecipesFirstTitle: "Elige las",
+        chooseRecipesSecondTitle: "recetas que recibirás el",
     },
     en: {
         difficultLevel: "Level of difficulty",
@@ -26,6 +28,8 @@ export const buyFlowLayout = {
         filterTitle: "Filter recipes",
         applyFiltersBtnText: "Apply filters",
         addRecipeCardText: "Add",
+        chooseRecipesFirstTitle: "Choose the",
+        chooseRecipesSecondTitle: "recipes that you'll receive on",
     },
     ca: {
         difficultLevel: "Nivell de dificultat",
@@ -40,5 +44,7 @@ export const buyFlowLayout = {
         filterTitle: "Filtrar receptes",
         applyFiltersBtnText: "Aplicar filtres",
         addRecipeCardText: "Afegir",
+        chooseRecipesFirstTitle: "Tria les",
+        chooseRecipesSecondTitle: "receptes que rebràs el",
     },
 };

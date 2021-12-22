@@ -38,7 +38,7 @@ const ShippingAddressCard = (props) => {
             />
             <DataDisplay
                 title={lang.shippingCostTitle}
-                text={!!props.shippingCost ? [lang.shippingCostLabel, <b>{props.shippingCost} €</b>] : lang.shippingCostLabel}
+                text={!!props.shippingCost ? [lang.shippingCostLabel, <b>{props.shippingCost} €</b>] : lang.noShippingCostLabel}
             />
         </BoxWithTitle>
     );

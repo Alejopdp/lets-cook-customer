@@ -29,6 +29,8 @@ import { RecipeModalProps } from "./interfaces";
 import NutritionalInfoTable from "./nutritionalInfoTable";
 import CarouselComponent from "../carousel/carousel";
 import { useLang } from "@hooks";
+import { translateRecipeDifficulty } from "helpers/utils/i18n";
+import { useRouter } from "next/router";
 
 const styles = (theme) => ({
     root: {
@@ -73,10 +75,10 @@ const DialogTitle = withStyles(styles)((props) => {
 });
 
 const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
+    const router = useRouter();
     const theme = useTheme();
     const isMdUp = useMediaQuery("(min-width:960px)");
-    // const lang = useLang("")
-
+    const [lang] = useLang("recipeModal");
     const tools = useMemo(() => {
         return (props.recipe.tools || []).join(", ");
     }, []);
@@ -151,13 +153,15 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                                     </Grid>
                                                     <Grid item className={props.classes.tag}>
                                                         <SpeedIcon color="primary" style={{ marginRight: theme.spacing(1) }} />
-                                                        <Typography variant="subtitle2">{props.recipe.difficultyLevel}</Typography>
+                                                        <Typography variant="subtitle2">
+                                                            {translateRecipeDifficulty(props.recipe.difficultyLevel, router.locale)}
+                                                        </Typography>
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
                                             <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                                 <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
-                                                    Información nutricional (cada 100 gramos)
+                                                    {lang.nutritionalInfo}
                                                 </Typography>
                                                 <NutritionalInfoTable rows={props.recipe.nutritionalInfo || []} />
                                             </Grid>
@@ -174,7 +178,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                     </Grid> */}
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
-                                            Ingredientes
+                                            {lang.ingredients}
                                         </Typography>
                                         {/* <RecipeVariantsTab
                                             variants={props.recipe.recipeVariants} // TO DO SON RESTRICTIONS ?
@@ -184,7 +188,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
-                                            Utensilios necesarios
+                                            {lang.tools}
                                         </Typography>
                                         <Typography variant="body2">{tools}</Typography>
                                     </Grid>

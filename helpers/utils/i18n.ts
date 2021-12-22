@@ -26,6 +26,10 @@ export const translateShippíngHour = (value: string, locale: string = "es") => 
     return shippingHourMap[value] ? shippingHourMap[value][locale] : value;
 };
 
+export const translateRecipeDifficulty = (value: string, locale: string) => {
+    return difficultyMap[value][locale];
+};
+
 const one_time = {
     es: "Por única vez",
     en: "One time",
@@ -48,4 +52,22 @@ const monthly = {
     es: "Mensual",
     en: "Monthly",
     ca: "Mensual",
+};
+
+const difficultyMap = {
+    Facil: {
+        es: "Fácil",
+        en: "Easy",
+        ca: "Fàcil",
+    },
+    Media: {
+        es: "Media",
+        en: "Medium",
+        ca: "Mitjà",
+    },
+    Dificil: {
+        es: "Díficil",
+        en: "Difficult",
+        ca: "Difícil",
+    },
 };
