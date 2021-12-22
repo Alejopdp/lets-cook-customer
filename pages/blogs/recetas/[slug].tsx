@@ -13,7 +13,7 @@ import { localeRoutes, Routes } from "lang/routes/routes";
 const BlogPostPage = ({ post, error }) => {
     const router = useRouter();
     return (
-        <Layout seoTitle="Blog - Let's cook: Productos frescos y recetas" page="blog post page">
+        <Layout seoTitle={`${post.title} - Let's cook`} page="blog post page">
             <InnerSectionLayout containerMaxWidth="md">
                 <BackButtonTitle url={`${localeRoutes[router.locale][Routes.blogs]}/recetas`} title="Volver al Blog" />
                 <BlogPostCardDetail post={post} />

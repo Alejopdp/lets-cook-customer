@@ -9,20 +9,21 @@ import { getPosts } from "../../helpers/serverRequests/blog";
 import { Layout } from "../../components/layout/index";
 import { useLang } from "@hooks";
 
-const BlogRecetas = (props) => {
+const CocinaBlog = (props) => {
     const [lang] = useLang("recipesBlog");
+
     return (
         <Layout page="blog page">
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-                <BlogsGrid posts={props.posts} hideFilter categories={[]} />
+                <BlogsGrid posts={props.posts || []} hideFilter categories={[]} />
             </InnerSectionLayout>
         </Layout>
     );
 };
 
 export async function getServerSideProps(context) {
-    const res = await getPosts(context.locale, { type: "News" });
+    const res = await getPosts(context.locale, { type: "Cocina" });
 
     return {
         props: {
@@ -30,5 +31,4 @@ export async function getServerSideProps(context) {
         },
     };
 }
-
-export default BlogRecetas;
+export default CocinaBlog;

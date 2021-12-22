@@ -89,7 +89,7 @@ const PostCard = (props: PostCardProps) => {
                     {props.post.description}
                 </Typography>
                 <Grid container direction="row" className={marg2}>
-                    <BlogTagsWithFilter tags={props.post.categories.map((c) => c.name)} />
+                    <BlogTagsWithFilter tags={props.post.categories} />
                 </Grid>
 
                 <Grid container direction="row" alignItems="center" className={publisher}>
