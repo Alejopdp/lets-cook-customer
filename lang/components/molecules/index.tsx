@@ -6,3 +6,4 @@ export * from "./managePlans/cancelPlanModal";
 export * from "./managePlans/swapPlanModal";
 export * from "./managePlans/planRecoverModal";
 export * from "./managePlans/skipPlanModal";
+export * from "./recipeModal";

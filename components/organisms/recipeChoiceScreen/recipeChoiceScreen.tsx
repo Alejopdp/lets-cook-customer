@@ -109,7 +109,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
             <Grid container spacing={2}>
                 <Grid item container justify="center">
                     <TitleBuyFlow
-                        title={`Elige las ${props.maxRecipesQty} recetas que recibirás el ${props.nextDeliveryLabel}`}
+                        title={`${lang.chooseRecipesFirstTitle} ${props.maxRecipesQty} ${lang.chooseRecipesSecondTitle} ${props.nextDeliveryLabel}`}
                         subtitle=""
                     />
                 </Grid>
