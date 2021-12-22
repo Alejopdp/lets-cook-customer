@@ -16,7 +16,7 @@ const RecipesBlog = (props) => {
         <Layout page="blog page">
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-                <BlogsGrid posts={props.posts || []} hideFilter />
+                <BlogsGrid posts={props.posts || []} hideFilter categories={[]} />
             </InnerSectionLayout>
         </Layout>
     );

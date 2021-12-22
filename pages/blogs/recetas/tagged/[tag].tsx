@@ -16,13 +16,14 @@ const TaggedBlogPage = (props) => {
         <Layout>
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-                <BlogsGrid posts={props.posts} categories={props.categories} />
+                <BlogsGrid posts={props.posts} categories={props.categories} shallowRedirection />
             </InnerSectionLayout>
         </Layout>
     );
 };
 
 export async function getServerSideProps(context) {
+    console.log("SSR");
     const categoriesRes = await getCategories(context.locale);
     const categoryNameIdMap: { [categoryName: string]: string } = {};
 
@@ -33,15 +34,12 @@ export async function getServerSideProps(context) {
     }
 
     const tagWithSpaces = context.query.tag.split("-").join(" ");
-    const res = await getPosts(context.locale, { categories_in: categoryNameIdMap[tagWithSpaces] });
+    const res = await getPosts(context.locale, {});
 
     return {
         props: {
             posts: res?.status === 200 ? res?.data : [],
-            categories:
-                categoriesRes.status && categoriesRes.status === 200 && Array.isArray(categoriesRes.data)
-                    ? categoriesRes.data.map((category) => category.name)
-                    : [],
+            categories: categoriesRes.status && categoriesRes.status === 200 && Array.isArray(categoriesRes.data) ? categoriesRes.data : [],
         },
     };
 }

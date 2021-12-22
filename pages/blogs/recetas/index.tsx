@@ -16,7 +16,7 @@ const BlogRecetas = (props) => {
         <Layout>
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-                <BlogsGrid posts={props.posts} categories={props.categories} />
+                <BlogsGrid posts={props.posts} categories={props.categories} shallowRedirection />
             </InnerSectionLayout>
         </Layout>
     );
@@ -29,9 +29,7 @@ export async function getServerSideProps(context) {
         props: {
             posts: res?.status === 200 ? res?.data : [],
             categories:
-                categoriesRes?.status && categoriesRes?.status === 200 && Array.isArray(categoriesRes.data)
-                    ? categoriesRes.data.map((category) => category.name)
-                    : [],
+                categoriesRes?.status && categoriesRes?.status === 200 && Array.isArray(categoriesRes.data) ? categoriesRes.data : [],
         },
     };
 }
