@@ -40,7 +40,7 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
         setExpanded(isExpanded ? panel : expanded === "panel2" ? "panel2" : "panel1");
     };
 
-    const changeToSecondStep = () => {
+    const changeToSecondStep = async () => {
         ga.event({
             action: "clic en continuar",
             params: {
@@ -49,14 +49,25 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
             },
         });
 
+        const googleAddress = await getGeometry(deliveryData.addressName);
+
         updateSubscriber(userInfo.email, {
             phone: deliveryData.phone1,
             name: deliveryData.firstName,
             last_name: deliveryData.lastName,
-            country: "Spain",
-            city: deliveryData.addressName,
-            state: deliveryData.addressName,
-            zip: deliveryData.addressName,
+            country:
+                googleAddress.results[0]?.address_components.find((comp) => comp.types.includes("country"))?.long_name ||
+                deliveryData.addressName ||
+                "España",
+            city:
+                googleAddress.results[0]?.address_components.find((comp) => comp.types.includes("locality"))?.long_name ||
+                deliveryData.addressName,
+            state:
+                googleAddress.results[0]?.address_components.find((comp) => comp.types.includes("administrative_area_level_1"))
+                    ?.long_name || deliveryData.addressName,
+            zip:
+                googleAddress.results[0]?.address_components.find((comp) => comp.types.includes("postal_code"))?.long_name ||
+                deliveryData.addressName,
             shopify_note: deliveryData.restrictions,
         });
 
@@ -72,13 +83,12 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
 
     const handleAddressChange = async (newAddress) => {
         if (newAddress) {
-            const geometry = await getGeometry(newAddress.structured_formatting.main_text);
-
+            const response = await getGeometry(newAddress.structured_formatting.main_text);
             setdeliveryData({
                 ...deliveryData,
                 addressName: newAddress.description,
-                latitude: geometry.lat,
-                longitude: geometry.lng,
+                latitude: response.results[0].geometry.location.lat,
+                longitude: response.results[0].geometry.location.lng,
             });
         }
     };
