@@ -22,7 +22,7 @@ import { Footer } from "@molecules";
 import { CallToActionSection } from "@organisms";
 import { useStyles } from "./styles";
 import { useAuthStore } from "@stores";
-import Head from 'next/head'
+import Head from "next/head";
 
 interface IOption {
     label: string;
@@ -36,11 +36,11 @@ interface IMenuOptions {
 
 interface LayoutProps {
     children: React.ReactNode;
-    menuOptions?: IMenuOptions
+    menuOptions?: IMenuOptions;
 }
 
 // export const Layout = memo(({ children: Component }: LayoutProps ) => {
-export const Layout = props => {
+export const Layout = (props) => {
     const classes = useStyles();
     const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
     const [openDrawerMenu, setOpenDrawerMenu] = useState(false);
@@ -52,36 +52,57 @@ export const Layout = props => {
     return (
         <>
             <Head>
-                <title>{props.seoTitle ? props.seoTitle : 'Let\'s cook: Productos frescos y recetas'}</title>
-                <meta name="description" content={props.seoDescriptionContent ? props.seoDescriptionContent : 'Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana.'} />
-                <meta property="og:site_name" content={props.seoTitle ? props.seoTitle : 'Let\'s cook: Productos frescos y recetas'} />
+                <title>{props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"}</title>
+                <meta
+                    name="description"
+                    content={
+                        props.seoDescriptionContent
+                            ? props.seoDescriptionContent
+                            : "Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."
+                    }
+                />
+                <meta property="og:site_name" content={props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"} />
                 <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
-                <meta property="og:title" content={props.seoTitle ? props.seoTitle : 'Let\'s cook: Productos frescos y recetas'} />
-                <meta property="og:description" content={props.seoDescriptionContent ? props.seoDescriptionContent : 'Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana.'} />
-                <meta property="og:url" content={props.seoOgUrl ? `https://letscooknow.es/${seoOgUrlSlug}` : 'https://letscooknow.es/'} />
+                <meta property="og:title" content={props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"} />
+                <meta
+                    property="og:description"
+                    content={
+                        props.seoDescriptionContent
+                            ? props.seoDescriptionContent
+                            : "Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."
+                    }
+                />
+                <meta property="og:url" content={props.seoOgUrl ? `https://letscooknow.es/${seoOgUrlSlug}` : "https://letscooknow.es/"} />
                 <meta property="og:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={props.seoTitle ? props.seoTitle : 'Let\'s cook: Productos frescos y recetas'} />
-                <meta name="twitter:description" content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana." />
+                <meta name="twitter:title" content={props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"} />
+                <meta
+                    name="twitter:description"
+                    content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."
+                />
                 <link rel="icon" href="/favicon.png" />
+                {!!props.canonicalUrl && <link rel="canonical" href={props.canonicalUrl} />}
             </Head>
             <div className={classes.root}>
                 <CssBaseline />
                 {isAuthenticated ? (
                     <LoggedInNavbar toggleOpeningDrawer={_toggleOpeningDrawer} />
                 ) : (
-                        <NavbarContent page={props.page} toggleOpeningDrawer={_toggleOpeningDrawer} />
-                    )}
+                    <NavbarContent page={props.page} toggleOpeningDrawer={_toggleOpeningDrawer} />
+                )}
                 <nav className={classes.drawer} aria-label="mailbox folders">
                     <Hidden smUp implementation="css">
-                        <NavbarDrawer page={props.page} open={openDrawerMenu} toggleOpeningDrawer={_toggleOpeningDrawer} isAuthenticated={isAuthenticated}/>
+                        <NavbarDrawer
+                            page={props.page}
+                            open={openDrawerMenu}
+                            toggleOpeningDrawer={_toggleOpeningDrawer}
+                            isAuthenticated={isAuthenticated}
+                        />
                     </Hidden>
                 </nav>
                 <main className={classes.content}>
                     {props.children}
-                    {!props.disableCallToActionSection && (
-                        <CallToActionSection page={props.page} />
-                    )}
+                    {!props.disableCallToActionSection && <CallToActionSection page={props.page} />}
                 </main>
                 {!props.disableFooterSection && (
                     <footer>
