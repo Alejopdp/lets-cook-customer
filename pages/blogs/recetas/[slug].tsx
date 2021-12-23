@@ -13,7 +13,12 @@ import { localeRoutes, Routes } from "lang/routes/routes";
 const BlogPostPage = ({ post, error }) => {
     const router = useRouter();
     return (
-        <Layout seoTitle={`${post.title} - Let's cook`} page="blog post page">
+        <Layout
+            seoTitle={`${post.title} - Let's cook`}
+            page="blog post page"
+            seoDescriptionContent={post.description}
+            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas`}
+        >
             <InnerSectionLayout containerMaxWidth="md">
                 <BackButtonTitle url={`${localeRoutes[router.locale][Routes.blogs]}/recetas`} title="Volver al Blog" />
                 <BlogPostCardDetail post={post} />
@@ -24,7 +29,7 @@ const BlogPostPage = ({ post, error }) => {
 
 export default BlogPostPage;
 
-export const getServerSideProps = async (context) => {
+export async function getServerSideProps(context) {
     const slug = context.params.slug;
     const res = await getPostBySlug(slug, context.locale);
 
@@ -34,4 +39,4 @@ export const getServerSideProps = async (context) => {
             error: res.status !== 200 ? "ERROR" : "",
         },
     };
-};
+}

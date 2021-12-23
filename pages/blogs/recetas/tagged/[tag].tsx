@@ -8,12 +8,17 @@ import InnerSectionLayout from "../../../../components/layout/innerSectionLayout
 import TitleOtherPages from "../../../../components/molecules/titleOtherPages/titleOtherPages";
 import BlogsGrid from "../../../../components/organisms/blogGrid/blogGrid";
 import { Layout } from "../../../../components/layout";
+import { useRouter } from "next/router";
 
 const TaggedBlogPage = (props) => {
     const [lang] = useLang("recipesBlog");
+    const router = useRouter();
 
     return (
-        <Layout>
+        <Layout
+            seoTitle={`Blog ${router.query.tag} - Let's cook`}
+            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas/tagged/${router.query.tag}`}
+        >
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <BlogsGrid posts={props.posts} categories={props.categories} shallowRedirection />
@@ -23,7 +28,6 @@ const TaggedBlogPage = (props) => {
 };
 
 export async function getServerSideProps(context) {
-    console.log("SSR");
     const categoriesRes = await getCategories(context.locale);
     const categoryNameIdMap: { [categoryName: string]: string } = {};
 
