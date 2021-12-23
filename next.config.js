@@ -22,6 +22,88 @@ module.exports = {
         // your project has ESLint errors.
         ignoreDuringBuilds: true,
     },
+    async redirections() {
+        return [
+            {
+                source: "/a/l/en",
+                destination: "/en",
+                permanent: false,
+            },
+            {
+                source: "/?lang=en", // Cant catch param} "/?lang=en": // Cant catch param,
+                destination: "/",
+            },
+            { source: "/account/login", destination: "/es/iniciar-sesisón" },
+            { source: "/collections/frontpage", destination: "/es/menu-semanal" },
+            { source: "/pages/preguntas-frecuentes?lang=en", destination: "/en/como-funciona" },
+            { source: "/pages/planes-semanales", destination: "/planes?planSlug=plan-familiar&personas=3&recetas=3" },
+            { source: "https://ca.letscooknow.es/", destination: "/ca" },
+            { source: "/account/login?return_url=/account", destination: "/en/profile" },
+            { source: "/cart", destination: "/" },
+            { source: "/pages/recipe-submitted?product_id=3169772503140", destination: "/" }, // TO DO: Cant catch param} "/pages/recipe-submitted?product_id=3169772503140": // TO DO: Cant catch param,
+            { source: "/pages/subscriptions-list", destination: "/iniciar-sesion" },
+            { source: "/pages/preguntas-frecuentes", destination: "/preguntas-frecuentes" },
+            { source: "/account", destination: "/en/profile" },
+            { source: "/products/plan-gourmet", destination: "/planes?planSlug=plan-gourmet&personas=2&recetas=3" },
+            { source: "/pages/como-funciona", destination: "/en/how-does-it-work" },
+            {
+                source: "/collections/planes-de-suscripcion/products/plan-gourmet",
+                destination: "/planes?planSlug=plan-gourmet&personas=2&recetas=3",
+            },
+            { source: "/products/plan-ahorro", destination: "/planes?planSlug=plan-ahorro&recetas=3&personas=2" },
+            { source: "/tools/recurring/login", destination: "/log-in" },
+            { source: "/collections/plan-semanal-vegetariano", destination: "/planes?planSlug=plan-vegetariano&recetas=3&personas=2" },
+            { source: "/products/plan-vegetariano", destination: "/planes?planSlug=plan-vegetariano&recetas=3&personas=2" },
+            { source: "/pages/recipe-submitted?product_id=3169657585764", destination: "/perfil" },
+            { source: "/pages/preguntas-frecuentes-faq", destination: "/preguntas-frecuentes" },
+            { source: "/collections/adicionales", destination: "/adicionales" },
+            {
+                source: "/collections/planes-de-suscripcion/products/plan-semanal-familiar",
+                destination: "/planes?planSlug=plan-familiar&personas=3&recetas=3",
+            },
+            { source: "/products/adicional-desayunos-saludables", destination: "/adicionales" },
+            {
+                source: "/collections/planes-de-suscripcion/products/plan-ahorro",
+                destination: "/planes?planSlug=plan-ahorro&recetas=3&personas=2",
+            },
+            { source: "/account/register", destination: "/sign-up" },
+            {
+                source: "/collections/planes-de-suscripcion/products/plan-vegetariano",
+                destination: "/planes?planSlug=plan-vegetariano&recetas=3&personas=2",
+            },
+            { source: "/pages/recipe-submitted?product_id=5506177171609", destination: "/iniciar-sesion" },
+            { source: "/products/bono-regalo", destination: "/bono-regalo" },
+            { source: "/a/l/en/pages/planes-semanales", destination: "/planes?planSlug=plan-familiar&personas=3&recetas=3" },
+            { source: "/products/plan-semanal-familiar", destination: "/planes?planSlug=plan-familiar&personas=3&recetas=3" },
+            { source: "/a/l/en/pages/preguntas-frecuentes", destination: "/en/faqs" },
+            { source: "/pages/condiciones-generales-de-contratacion", destination: "/aviso-legal" },
+            { source: "/products/plan-gourmet?variant=27290791247972", destination: "/planes?planSlug=plan-gourmet&personas=2&recetas=3" },
+            { source: "/products/plan-gourmet", destination: "/planes?planSlug=plan-gourmet&personas=2&recetas=3" },
+            { source: "/pages/aviso-legal-y-condiciones-generales-de-uso-del-sitio-web", destination: "/aviso-legal" },
+            { source: "/collections/all", destination: "/menu-semanal" },
+            { source: "/plan-vegano", destination: "/planes?planSlug=plan-vegano&recetas=3&personas=2" },
+            {
+                source: "/collections/planes-de-suscripcion/products/plan-gourmet?variant=27290791247972",
+                destination: "/planes?planSlug=plan-gourmet&personas=2&recetas=3",
+            },
+            {
+                source: "/collections/planes-de-suscripcion/products/plan-semanal-vegano",
+                destination: "/planes?planSlug=plan-vegano&recetas=3&personas=2",
+            },
+            {
+                source: "/collections/planes-de-suscripcion/products/plan-ahorro?variant=25991289798756",
+                destination: "/planes?planSlug=plan-ahorro&recetas=3&personas=2",
+            },
+            {
+                source: "/collections/planes-de-suscripcion/products/plan-ahorro?variant=25991289864292",
+                destination: "/planes?planSlug=plan-ahorro&recetas=3&personas=2",
+            },
+            {
+                source: "/collections/planes-de-suscripcion/products/plan-gourmet?variant=25997667106916",
+                destination: "/planes?planSlug=plan-gourmet&personas=2&recetas=3",
+            },
+        ];
+    },
     // async rewrites() {
     //     return [
     //         {
