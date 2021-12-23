@@ -12,7 +12,12 @@ import { useLang } from "@hooks";
 const BlogRecetas = (props) => {
     const [lang] = useLang("recipesBlog");
     return (
-        <Layout page="blog page">
+        <Layout
+            seoTitle={`Blog noticias - Let's cook`}
+            page="blog post page"
+            seoDescriptionContent="Blog noticias"
+            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/noticias`}
+        >
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <BlogsGrid posts={props.posts} hideFilter categories={[]} />
