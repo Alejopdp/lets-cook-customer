@@ -13,7 +13,12 @@ const CocinaBlog = (props) => {
     const [lang] = useLang("recipesBlog");
 
     return (
-        <Layout page="blog page">
+        <Layout
+            seoTitle={`Blog cocina - Let's cook`}
+            page="blog post page"
+            seoDescriptionContent="Blog cocina"
+            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blog-cocina`}
+        >
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <BlogsGrid posts={props.posts || []} hideFilter categories={[]} />
