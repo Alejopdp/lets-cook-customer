@@ -98,9 +98,8 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
     });
 
     const handleChangeAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
-        setExpanded(isExpanded ? panel : (expanded === "panel3") ? "panel3" : (expanded === "panel2") ? "panel2" : "panel1");
+        setExpanded(isExpanded ? panel : expanded === "panel3" ? "panel3" : expanded === "panel2" ? "panel2" : "panel1");
     };
-
 
     const changeToSecondStep = () => {
         setExpanded("panel2");
@@ -118,13 +117,13 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
 
     const handleAddressChange = async (newAddress) => {
         if (newAddress) {
-            const geometry = await getGeometry(newAddress.structured_formatting.main_text);
+            const response = await getGeometry(newAddress.structured_formatting.main_text);
 
             setdeliveryData({
                 ...deliveryData,
                 addressName: newAddress.description,
-                latitude: geometry.lat,
-                longitude: geometry.lng,
+                latitude: response.results[0].geometry.location.lat,
+                longitude: response.results[0].geometry.location.lng,
             });
         }
     };
@@ -138,7 +137,7 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
         //     !!deliveryData.lastName &&
         //     !!deliveryData.phone1
         // );
-        return true
+        return true;
     };
 
     return (
@@ -165,7 +164,7 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
                                     handleChangeAccordion={handleChangeAccordion}
                                     handleChangeStep={changeToSecondStep}
                                     setDeliveryData={setdeliveryData}
-                                    panelNumber='panel1'
+                                    panelNumber="panel1"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -178,7 +177,7 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
                                     handleChangeAccordion={handleChangeAccordion}
                                     handleChangeStep={changeToThird}
                                     setDeliveryData={setdeliveryData}
-                                    panelNumber='panel2'
+                                    panelNumber="panel2"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -186,7 +185,7 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
                                     expanded={expanded}
                                     handleChangeAccordion={handleChangeAccordion}
                                     deliveryData={deliveryData}
-                                    panelNumber='panel3'
+                                    panelNumber="panel3"
                                 />
                             </Grid>
                         </Grid>

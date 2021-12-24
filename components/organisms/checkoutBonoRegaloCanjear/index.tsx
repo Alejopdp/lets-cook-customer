@@ -120,13 +120,13 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
 
     const handleAddressChange = async (newAddress) => {
         if (newAddress) {
-            const geometry = await getGeometry(newAddress.structured_formatting.main_text);
+            const response = await getGeometry(newAddress.structured_formatting.main_text);
 
             setdeliveryData({
                 ...deliveryData,
                 addressName: newAddress.description,
-                latitude: geometry.lat,
-                longitude: geometry.lng,
+                latitude: response.results[0].geometry.location.lat,
+                longitude: response.results[0].geometry.location.lng,
             });
         }
     };
