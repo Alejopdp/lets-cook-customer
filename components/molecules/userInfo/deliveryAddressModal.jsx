@@ -36,13 +36,13 @@ const DeliveryAddressModal = (props) => {
     };
 
     const handleGoogleInput = async (address) => {
-        const geometry = await getGeometry(address.structured_formatting.main_text);
+        const response = await getGeometry(address.structured_formatting.main_text);
 
         setformData({
             ...formData,
             name: address.description,
-            latitude: geometry.lat,
-            longitude: geometry.lng,
+            latitude: response.results[0].geometry.location.lat,
+            longitude: response.results[0].geometry.location.lng,
         });
     };
 
@@ -88,9 +88,7 @@ const DeliveryAddressModal = (props) => {
 
             <div style={{ display: "flex", marginTop: ".7rem", alignItems: "center" }}>
                 <ErrorOutlineIcon style={{ color: "red" }} />
-                <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>
-                    {lang.helperText}
-                </i>
+                <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>{lang.helperText}</i>
             </div>
         </Modal>
     );

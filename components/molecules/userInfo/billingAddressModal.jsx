@@ -30,13 +30,13 @@ const BillingAddressModal = (props) => {
     };
 
     const handleGoogleInput = async (address) => {
-        const geometry = await getGeometry(address.structured_formatting.main_text);
+        const response = await getGeometry(address.structured_formatting.main_text);
 
         setformData({
             ...formData,
             addressName: address.description,
-            latitude: geometry.lat,
-            longitude: geometry.lng,
+            latitude: response.results[0].geometry.location.lat,
+            longitude: response.results[0].geometry.location.lng,
         });
     };
 
