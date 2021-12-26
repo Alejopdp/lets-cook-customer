@@ -1,5 +1,5 @@
 const { i18n } = require("./next-i18next.config");
-// const routes = require("./lang/routes/routes");
+// const { Routes, localeRoutes } = require("./lang/routes/routes");
 
 // next.config.js
 module.exports = {
@@ -21,6 +21,63 @@ module.exports = {
         // Warning: Dangerously allow production builds to successfully complete even if
         // your project has ESLint errors.
         ignoreDuringBuilds: true,
+    },
+    async rewrites() {
+        return [
+            {
+                source: "/en/faqs",
+                destination: "/en/preguntas-frecuentes",
+                locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
+            },
+            {
+                // source: `/en${localeRoutes["en"][Routes["recetas"]]}`,
+                source: `/en/recipes`,
+                destination: "/en/recetas",
+                locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
+            },
+            {
+                // source: `/ca${localeRoutes["ca"][Routes["recetas"]]}`,
+                source: `/ca/receptes`,
+                destination: "/ca/recetas",
+                locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
+            },
+            {
+                // source: `/en${localeRoutes["en"][Routes["noticias"]]}`,
+                source: `/en/news`,
+                destination: "/en/noticias",
+                locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
+            },
+            {
+                // source: `/ca${localeRoutes["ca"][Routes["noticias"]]}`,
+                source: `/ca/noticies`,
+                destination: "/ca/noticias",
+                locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
+            },
+            {
+                // source: `/en${localeRoutes["en"][Routes["blog-cocina"]]}`,
+                source: `/en/blog-cocina`,
+                destination: "/en/blog-cocina",
+                locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
+            },
+            {
+                // source: `/ca${localeRoutes["ca"][Routes["blog-cocina"]]}`,
+                source: `/ca/blog-cocina`,
+                destination: "/ca/blog-cocina",
+                locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
+            },
+            {
+                // source: `/en${localeRoutes["en"][Routes["aviso-legal"]]}`,
+                source: `/en/aviso-legal`,
+                destination: "/en/aviso-legal",
+                locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
+            },
+            {
+                // source: `/ca${localeRoutes["ca"][Routes["aviso-legal"]]}`,
+                source: `/ca/aviso-legal`,
+                destination: "/ca/aviso-legal",
+                locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
+            },
+        ];
     },
     async redirections() {
         return [

@@ -76,6 +76,11 @@ function MyApp(props) {
             setHasAccepteCookies(hasAcceptedCookies);
             setisLoading(false);
         };
+        // Remove the server-side injected CSS.
+        const jssStyles = document.querySelector("#jss-server-side");
+        if (jssStyles) {
+            jssStyles.parentElement.removeChild(jssStyles);
+        }
         verifyAuthentication();
     }, []);
 
@@ -126,7 +131,8 @@ function MyApp(props) {
                 <SnackbarProvider maxSnack={3}>
                     <Elements stripe={stripePromise}>
                         <CssBaseline />
-                        {!isLoading && <Component {...pageProps} />}
+                        <Component {...pageProps} />
+                        {/* {!isLoading && <Component {...pageProps} />} */}
                     </Elements>
                 </SnackbarProvider>
                 {!isLoading && !hasAcceptedCookies && <CookiesDialog />}

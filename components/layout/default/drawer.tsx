@@ -35,7 +35,11 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
         top: [
             { label: lang.itemHome, path: "/", img: "/icons/checkout/home.svg" },
             { label: lang.itemPlans, path: localeRoutes[router.locale][Routes.planes], img: "/icons/checkout/gestion-del-plan.svg" },
-            { label: lang.itemRecipes, path: localeRoutes[router.locale][Routes.recetas], img: "/icons/checkout/recetas-nuevas.svg" },
+            {
+                label: lang.itemRecipes,
+                path: localeRoutes[router.locale][Routes["menu-semanal"]],
+                img: "/icons/checkout/recetas-nuevas.svg",
+            },
         ],
         bottom: [
             { label: lang.itemHowItWork, path: localeRoutes[router.locale][Routes["como-funciona"]] },

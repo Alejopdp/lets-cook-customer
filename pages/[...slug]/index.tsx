@@ -55,7 +55,7 @@ const Pages = (props) => {
             case localeRoutes[router.locale][Routes["preguntas-frecuentes"]]:
                 return <PreguntasFrecuentesPage />;
 
-            case localeRoutes[router.locale][Routes.recetas]:
+            case localeRoutes[router.locale][Routes["menu-semanal"]]:
                 return <RecetasPage />;
 
             case localeRoutes[router.locale][Routes["valorar-recetas"]]:
@@ -90,7 +90,7 @@ const Pages = (props) => {
             //     return <></>;
 
             // case "/collections/frontpage":
-            //     router.push(localeRoutes["es"][Routes.recetas], undefined, { locale: "es" });
+            //     router.push(localeRoutes["es"][Routes["menu-semanal"]], undefined, { locale: "es" });
             //     return <></>;
 
             // case "/pages/preguntas-frecuentes?lang=en":
@@ -242,7 +242,7 @@ const Pages = (props) => {
             //     return <></>;
 
             // case "/collections/all":
-            //     router.push(localeRoutes["es"][Routes.recetas], undefined, { locale: "es" });
+            //     router.push(localeRoutes["es"][Routes["menu-semanal"]], undefined, { locale: "es" });
             //     return <></>;
 
             // case "/plan-vegano":
