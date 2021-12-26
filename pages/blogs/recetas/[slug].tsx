@@ -9,6 +9,7 @@ import InnerSectionLayout from "../../../components/layout/innerSectionLayout";
 import BackButtonTitle from "../../../components/atoms/backButtonTitle/backButtonTitle";
 import { Layout } from "../../../components/layout/index";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import markdownToHtml from "helpers/utils/markdown";
 
 const BlogPostPage = ({ post, error }) => {
     const router = useRouter();
@@ -35,7 +36,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            post: res.data || null,
+            post: !!res && res.status === 200 ? { ...res.data, content: await markdownToHtml(res.data.content) } : null,
             error: res.status !== 200 ? "ERROR" : "",
         },
     };
