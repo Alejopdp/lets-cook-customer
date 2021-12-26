@@ -57,9 +57,15 @@ export const LangSelector = memo(({ onChangeLang }: LangSelectorProps) => {
         onChangeLang && onChangeLang(locale);
         setOpen(false);
         setLang(locale);
-        router.replace(`${localeRoutes[locale.label][Routes[actualPageName]] || "/"}${actualQueryParams}`, undefined, {
-            locale: locale.label,
-        });
+        router.replace(
+            `${
+                localeRoutes[locale.label][Routes[actualPageName]] || localeRoutes[locale.label][Routes[router.pathname.slice(1)]] || "/"
+            }${actualQueryParams}`,
+            undefined,
+            {
+                locale: locale.label,
+            }
+        );
     };
 
     return (
