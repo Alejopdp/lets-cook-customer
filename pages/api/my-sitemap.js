@@ -6,7 +6,7 @@ export default generateSitemap = async (req, res) => {
     const posts = await getPosts();
 
     // An array with your links
-    const links = posts.map((post) => ({ url: post.slug, changefreq: "daily", priority: 0.3 }));
+    const links = posts.map((post) => ({ url: post.slug, changefreq: "daily", priority: 0.5 }));
 
     // Create a stream to write to
     const stream = new SitemapStream({ hostname: `https://${process.env.NEXT_PUBLIC_DOMAIN}` });
