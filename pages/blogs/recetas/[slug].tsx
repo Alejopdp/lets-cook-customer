@@ -18,7 +18,7 @@ const BlogPostPage = ({ post, error }) => {
             seoTitle={`${post.title} - Let's cook`}
             page="blog post page"
             seoDescriptionContent={post.description}
-            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas`}
+            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas/${router.query.slug}`}
         >
             <InnerSectionLayout containerMaxWidth="md">
                 <BackButtonTitle url={`${localeRoutes[router.locale][Routes.blogs]}/recetas`} title="Volver al Blog" />
