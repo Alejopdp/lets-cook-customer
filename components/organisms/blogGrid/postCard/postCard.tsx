@@ -65,7 +65,7 @@ const PostCard = (props: PostCardProps) => {
     const router = useRouter();
 
     const handlePostClick = () => {
-        router.push({ pathname: `/blogs/recetas/${props.post.slug?.split(" ").join("-")}` });
+        router.push({ pathname: `/blogs/recetas/${props.post.slug}` });
     };
 
     return (

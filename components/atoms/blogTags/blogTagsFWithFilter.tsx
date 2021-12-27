@@ -19,7 +19,7 @@ export const BlogTagsWithFilter = (props: BlogTagsProps) => {
                     key={index}
                     variant="body1"
                     className={tagClass}
-                    onClick={() => router.push({ pathname: `/blogs/recetas/tagged/${tag.slug}` }, undefined, { shallow: true })}
+                    onClick={() => router.push({ pathname: `/blogs/recetas/tagged/${tag.slug}` }, undefined)}
                 >
                     {tag.name}
                 </Typography>
