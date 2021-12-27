@@ -31,11 +31,13 @@ const TitleOtherPages = (props) => {
                     {props.title}
                 </Typography>
             </Grid>
-            <Grid item xs={12}>
-                <Typography variant="body1" color="textSecondary">
-                    {props.subtitle}
-                </Typography>
-            </Grid>
+            {!props.hideSubtitle && (
+                <Grid item xs={12}>
+                    <Typography variant="body1" color="textSecondary">
+                        {props.subtitle}
+                    </Typography>
+                </Grid>
+            )}
         </Grid>
     );
 };
@@ -43,6 +45,7 @@ const TitleOtherPages = (props) => {
 TitleOtherPages.propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
+    hideSubtitle: PropTypes.bool,
     align: PropTypes.string,
     color: PropTypes.string,
 };

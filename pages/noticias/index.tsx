@@ -19,7 +19,7 @@ const BlogRecetas = (props) => {
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/noticias`}
         >
             <InnerSectionLayout containerMaxWidth="md">
-                <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
+                <TitleOtherPages title={lang.title} subtitle={lang.subtitle} hideSubtitle />
                 <BlogsGrid posts={props.posts} hideFilter categories={[]} />
             </InnerSectionLayout>
         </Layout>

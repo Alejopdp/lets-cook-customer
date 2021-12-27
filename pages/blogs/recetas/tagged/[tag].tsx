@@ -20,7 +20,7 @@ const TaggedBlogPage = (props) => {
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas/tagged/${router.query.tag}`}
         >
             <InnerSectionLayout containerMaxWidth="md">
-                <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
+                <TitleOtherPages title={lang.title} subtitle={lang.subtitle} hideSubtitle />
                 <BlogsGrid posts={props.posts} categories={props.categories} hideFilter={false} shallowRedirection={false} />
             </InnerSectionLayout>
         </Layout>
