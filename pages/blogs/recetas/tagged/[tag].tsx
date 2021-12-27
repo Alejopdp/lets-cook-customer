@@ -21,7 +21,7 @@ const TaggedBlogPage = (props) => {
         >
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-                <BlogsGrid posts={props.posts} categories={props.categories} shallowRedirection />
+                <BlogsGrid posts={props.posts} categories={props.categories} hideFilter={false} shallowRedirection={false} />
             </InnerSectionLayout>
         </Layout>
     );
@@ -33,12 +33,12 @@ export async function getServerSideProps(context) {
 
     if (categoriesRes && categoriesRes.status === 200) {
         for (let category of categoriesRes.data) {
-            categoryNameIdMap[category.name] = category.id;
+            categoryNameIdMap[category.slug] = category.id;
         }
     }
 
     const tagWithSpaces = context.query.tag.split("-").join(" ");
-    const res = await getPosts(context.locale, {});
+    const res = await getPosts(context.locale, { categories_in: [categoryNameIdMap[context.query.tag]] });
 
     return {
         props: {

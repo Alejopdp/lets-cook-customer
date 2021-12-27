@@ -21,7 +21,7 @@ const BlogRecetas = (props) => {
         >
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
-                <BlogsGrid posts={props.posts} categories={props.categories} shallowRedirection />
+                <BlogsGrid posts={props.posts} categories={props.categories} shallowRedirection={false} hideFilter={false} />
             </InnerSectionLayout>
         </Layout>
     );
