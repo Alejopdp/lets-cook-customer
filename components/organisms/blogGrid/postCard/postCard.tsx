@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { dateFromISO8601 } from "../../../../helpers/utils/date";
 
 // External components
@@ -82,9 +83,13 @@ const PostCard = (props: PostCardProps) => {
             </Grid>
 
             <Grid item xs={12} md={7} style={{ margin: "0 24px 0 24px" }}>
-                <Typography variant="h2" style={{ fontSize: "22px" }} className={marg4} onClick={handlePostClick}>
-                    {props.post.title}
-                </Typography>
+                <Link href={`/blogs/recetas/${props.post.slug}`}>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                        <Typography variant="h2" style={{ fontSize: "22px" }} className={marg4} onClick={handlePostClick}>
+                            {props.post.title}
+                        </Typography>
+                    </a>
+                </Link>
                 <Typography variant="body1" className={marg1}>
                     {props.post.description}
                 </Typography>

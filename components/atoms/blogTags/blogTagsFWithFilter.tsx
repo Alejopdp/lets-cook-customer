@@ -1,6 +1,7 @@
 // Utils & Config
 import React, { useState } from "react";
 // External components
+import Link from "next/link";
 import Typography from "@material-ui/core/Typography";
 import { useStyles } from "./styles";
 import { BlogTagsProps } from "./interfaces";
@@ -15,14 +16,13 @@ export const BlogTagsWithFilter = (props: BlogTagsProps) => {
     return (
         <>
             {tags.map((tag, index) => (
-                <Typography
-                    key={index}
-                    variant="body1"
-                    className={tagClass}
-                    onClick={() => router.push({ pathname: `/blogs/recetas/tagged/${tag.slug}` }, undefined)}
-                >
-                    {tag.name}
-                </Typography>
+                <Link href={`/blogs/recetas/tagged/${tag.slug}`} passHref key={index}>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                        <Typography variant="body1" className={tagClass}>
+                            {tag.name}
+                        </Typography>
+                    </a>
+                </Link>
             ))}
         </>
     );
