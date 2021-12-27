@@ -22,7 +22,7 @@ export default function BlogCategoriesDropdown(props: BlogCategoriesDropdownProp
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={props.selectedValue}
-                label="Age"
+                label="Tag"
                 onChange={props.handleChange}
             >
                 {props.options.map((option) => (
