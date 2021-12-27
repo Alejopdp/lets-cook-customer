@@ -82,7 +82,7 @@ const PostCard = (props: PostCardProps) => {
             </Grid>
 
             <Grid item xs={12} md={7} style={{ margin: "0 24px 0 24px" }}>
-                <Typography variant="h1" style={{ fontSize: "22px" }} className={marg4} onClick={handlePostClick}>
+                <Typography variant="h2" style={{ fontSize: "22px" }} className={marg4} onClick={handlePostClick}>
                     {props.post.title}
                 </Typography>
                 <Typography variant="body1" className={marg1}>
