@@ -15,10 +15,7 @@ const TaggedBlogPage = (props) => {
     const router = useRouter();
 
     return (
-        <Layout
-            seoTitle={`Blog ${router.query.tag} - Let's cook`}
-            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas/tagged/${router.query.tag}`}
-        >
+        <Layout seoTitle={props.seoTitle} canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas/tagged/${router.query.tag}`}>
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} hideSubtitle />
                 <BlogsGrid posts={props.posts} categories={props.categories} hideFilter={false} shallowRedirection={false} />
@@ -44,6 +41,7 @@ export async function getServerSideProps(context) {
         props: {
             posts: res?.status === 200 ? res?.data : [],
             categories: categoriesRes.status && categoriesRes.status === 200 && Array.isArray(categoriesRes.data) ? categoriesRes.data : [],
+            seoTitle: `Blog ${context.query.tag} - Let's cook`,
         },
     };
 }

@@ -24,6 +24,7 @@ interface NavbarDrawerProps {
     toggleOpeningDrawer: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
     open: boolean;
     isAuthenticated: boolean;
+    page?: string;
 }
 
 const NavbarDrawer = (props: NavbarDrawerProps) => {

@@ -102,14 +102,14 @@ function MyApp(props) {
     return (
         <React.Fragment>
             <Head>
-                <title>Let's cook: Productos frescos y recetas</title>
+                {/* <title>Let's cook: Productos frescos y recetas</title> */}
                 <meta
                     name="description"
                     content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."
                 />
                 <meta property="og:site_name" content="Let's cook: Productos frescos y recetas" />
                 <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
-                <meta property="og:title" content="Let's cook: Productos frescos y recetas" />
+                {/* <meta property="og:title" content="Let's cook: Productos frescos y recetas" /> */}
                 <meta
                     property="og:description"
                     content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."
