@@ -1,19 +1,5 @@
 import React, { memo, useState } from "react";
-import {
-    AppBar,
-    Link,
-    CssBaseline,
-    Divider,
-    Drawer,
-    Hidden,
-    IconButton,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    useTheme,
-    Toolbar,
-} from "@material-ui/core";
+import { CssBaseline, Hidden } from "@material-ui/core";
 import NavbarContent from "./navbarContent";
 import LoggedInNavbar from "./loggedInNavbarContent";
 import NavbarDrawer from "./drawer";
@@ -37,10 +23,18 @@ interface IMenuOptions {
 interface LayoutProps {
     children: React.ReactNode;
     menuOptions?: IMenuOptions;
+    seoTitle?: string;
+    seoDescriptionContent?: string;
+    seoOgUrl?: string;
+    seoOgUrlSlug?: string;
+    disableFooterSection?: boolean;
+    disableCallToActionSection?: boolean;
+    page?: string;
+    canonicalUrl?: string;
 }
 
 // export const Layout = memo(({ children: Component }: LayoutProps ) => {
-export const Layout = (props) => {
+export const Layout = (props: LayoutProps) => {
     const classes = useStyles();
     const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
     const [openDrawerMenu, setOpenDrawerMenu] = useState(false);
@@ -50,7 +44,7 @@ export const Layout = (props) => {
     };
 
     return (
-        <>
+        <div>
             <Head>
                 <title>{props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"}</title>
                 <meta
@@ -72,7 +66,10 @@ export const Layout = (props) => {
                             : "Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."
                     }
                 />
-                <meta property="og:url" content={props.seoOgUrl ? `https://letscooknow.es/${seoOgUrlSlug}` : "https://letscooknow.es/"} />
+                <meta
+                    property="og:url"
+                    content={props.seoOgUrl ? `https://letscooknow.es/${props.seoOgUrlSlug}` : "https://letscooknow.es/"}
+                />
                 <meta property="og:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"} />
@@ -110,7 +107,7 @@ export const Layout = (props) => {
                     </footer>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 export default Layout;

@@ -10,6 +10,7 @@ import SearchBar from "../../components/atoms/searchBar/searchBar";
 import FaqsSection from "../../components/organisms/faqsSection/faqsSection";
 import { Layout } from "../../components/layout/index";
 import { useLang } from "@hooks";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const PreguntasFrecuentes = () => {
     const router = useRouter();
@@ -18,6 +19,7 @@ const PreguntasFrecuentes = () => {
 
     return (
         <Layout
+            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}${localeRoutes[router.locale][Routes["preguntas-frecuentes"]]}`}
             seoTitle="Preguntas frecuentes - Let's cook: Productos frescos y recetas"
             seoOgUrlSlug="preguntas-frecuentes"
             page="preguntas frecuentes"

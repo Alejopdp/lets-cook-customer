@@ -11,6 +11,7 @@ import HowItWorksExtendedSection from "../../components/organisms/howItWorksExte
 import BenefitsSection from "../../components/organisms/sections/BenefitsSection";
 import { Layout } from "../../components/layout/index";
 import { useLang } from "@hooks";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const ComoFunciona = () => {
     const router = useRouter();
@@ -39,7 +40,12 @@ const ComoFunciona = () => {
     ];
 
     return (
-        <Layout seoTitle="Cómo funciona - Let's cook: Productos frescos y recetas" seoOgUrlSlug="como-funciona" page="como funciona">
+        <Layout
+            seoTitle="Cómo funciona - Let's cook: Productos frescos y recetas"
+            seoOgUrlSlug="como-funciona"
+            page="como funciona"
+            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}${localeRoutes[router.locale][Routes["como-funciona"]]}`}
+        >
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <HowItWorksExtendedSection />
