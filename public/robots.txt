@@ -1,2 +1,3 @@
 User-agent: *
 Disallow:
+Sitemap: https://staging.letscooknow.es/api/sitemap.xml
