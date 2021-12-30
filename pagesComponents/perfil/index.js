@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import { useTheme } from "@material-ui/core";
+import { Box, useMediaQuery, useTheme } from "@material-ui/core";
 const langs = require("../../lang").perfil;
 import { swapPlan } from "../../helpers/serverRequests/subscription";
 import { skipOrders } from "../../helpers/serverRequests/order";
@@ -36,10 +36,14 @@ import PlanProfileCard from "../../components/molecules/planProfileCard/";
 import SwapPlanModal from "../../components/molecules/managePlanModals/swapPlanModal";
 import SkipPlanModal from "../../components/molecules/managePlanModals/skipPlanModal";
 import routes, { localeRoutes, Routes } from "../../lang/routes/routes";
+import PendingActionSkeleton from "components/molecules/pendingActionsComponents/pendingActionSkeleton";
+import PlanProfileCardSkeleton from "components/molecules/planProfileCard/planProfileCardSkeleton";
 
 const Perfil = (props) => {
+    const isMdUp = useMediaQuery("(min-width:960px)");
     const theme = useTheme();
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
     const [isReorderingPlan, setIsReorderingPlan] = useState(false);
     const lang = langs[router.locale];
     const { enqueueSnackbar } = useSnackbar();
@@ -67,9 +71,11 @@ const Perfil = (props) => {
             } else {
                 enqueueSnackbar(res.data.message, { variant: "error" });
             }
+
+            setIsLoading(false);
         };
 
-        getProfile();
+        if (!!userInfo.id) getProfile();
     }, [userInfo, router.locale, reloadCounter]);
 
     const handleSetSubscriptionId = async (subscriptionId) => {
@@ -283,11 +289,13 @@ const Perfil = (props) => {
                                     slidesToSlide={1}
                                     swipeable
                                 >
-                                    {data.pendingActions.map((action, index) => (
-                                        <div key={index} style={{ marginRight: theme.spacing(2) }}>
-                                            {getPendingActionComponent(action)}
-                                        </div>
-                                    ))}
+                                    {isLoading
+                                        ? [0, 1, 2].map((item, index) => <PendingActionSkeleton key={index} height={180} />)
+                                        : data.pendingActions.map((action, index) => (
+                                              <div key={index} style={{ marginRight: theme.spacing(2) }}>
+                                                  {getPendingActionComponent(action)}
+                                              </div>
+                                          ))}
                                 </Carousel>
                             </Hidden>
                             {/* Greeting & Pending Actions Desktop */}
@@ -315,11 +323,19 @@ const Perfil = (props) => {
                                             handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}
                                         />
                                     </Grid>
-                                    {data.pendingActions.map((action, index) => (
-                                        <Grid key={index} item xs={12}>
-                                            {getPendingActionComponent(action)}
-                                        </Grid>
-                                    ))}
+                                    {isLoading ? (
+                                        <>
+                                            <PendingActionSkeleton height={180} />
+                                            <PendingActionSkeleton height={180} />
+                                            <PendingActionSkeleton height={180} />
+                                        </>
+                                    ) : (
+                                        data.pendingActions.map((action, index) => (
+                                            <Grid key={index} item xs={12}>
+                                                {getPendingActionComponent(action)}
+                                            </Grid>
+                                        ))
+                                    )}
                                 </Grid>
                             </Hidden>
                         </Grid>
@@ -340,7 +356,16 @@ const Perfil = (props) => {
                                 />
                             </Grid>
                             <Grid container spacing={2} style={{ marginBottom: theme.spacing(5) }}>
-                                {data.principalPlanSubscriptions.length > 0 ? (
+                                {isLoading ? (
+                                    <>
+                                        <Grid item sm={6} xs={12}>
+                                            <PlanProfileCardSkeleton />
+                                        </Grid>{" "}
+                                        <Grid item sm={6} xs={12}>
+                                            <PlanProfileCardSkeleton />
+                                        </Grid>
+                                    </>
+                                ) : data.principalPlanSubscriptions.length > 0 ? (
                                     <>
                                         {data.principalPlanSubscriptions.map((plan, index) => {
                                             return (
@@ -372,7 +397,7 @@ const Perfil = (props) => {
                                     />
                                 )}
                             </Grid>
-                            {data.principalPlanSubscriptions.length > 0 && (
+                            {isLoading ? (
                                 <>
                                     <Grid
                                         container
@@ -388,34 +413,62 @@ const Perfil = (props) => {
                                             handleClick={() => router.push(localeRoutes[router.locale][Routes.adicionales])}
                                         />
                                     </Grid>
+
                                     <Grid container spacing={2} style={{ marginBottom: theme.spacing(5) }}>
-                                        {data.additionalPlanSubscriptions.length > 0 ? (
-                                            <>
-                                                {data.additionalPlanSubscriptions.map((plan, index) => (
-                                                    <Grid key={index} item sm={6} xs={12}>
-                                                        <PlanProfileCard
-                                                            plan={plan}
-                                                            handleClickOpenPlanRecoverModal={() =>
-                                                                handleClickOpenPlanRecoverModal(plan.id, "additionalPlanSubscriptions")
-                                                            }
-                                                            handleClickRedirectToPlanDetail={handleClickRedirectToPlanDetail}
-                                                            lang={lang.planProfileCard}
-                                                            handleSetSubscriptionId={handleSetSubscriptionId}
-                                                            handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
-                                                            handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
-                                                        />
-                                                    </Grid>
-                                                ))}
-                                            </>
-                                        ) : (
-                                            <EmptyState
-                                                image="/lc-square-logo.png"
-                                                title={lang.additionalsEmptyStateTitle}
-                                                text={lang.additionalsEmptyStateSubtitle}
-                                            />
-                                        )}
+                                        <Grid item sm={6} xs={12}>
+                                            <PlanProfileCardSkeleton />
+                                        </Grid>{" "}
+                                        <Grid item sm={6} xs={12}>
+                                            <PlanProfileCardSkeleton />
+                                        </Grid>
                                     </Grid>
                                 </>
+                            ) : (
+                                data.principalPlanSubscriptions.length > 0 && (
+                                    <>
+                                        <Grid
+                                            container
+                                            justify="space-between"
+                                            direction="row"
+                                            alignItems="center"
+                                            spacing={2}
+                                            style={{ marginBottom: theme.spacing(3) }}
+                                        >
+                                            <ProfileTitleWithButton
+                                                title={lang.myAdditionalsTitle}
+                                                btnText={lang.additionalsBtnText}
+                                                handleClick={() => router.push(localeRoutes[router.locale][Routes.adicionales])}
+                                            />
+                                        </Grid>
+                                        <Grid container spacing={2} style={{ marginBottom: theme.spacing(5) }}>
+                                            {data.additionalPlanSubscriptions.length > 0 ? (
+                                                <>
+                                                    {data.additionalPlanSubscriptions.map((plan, index) => (
+                                                        <Grid key={index} item sm={6} xs={12}>
+                                                            <PlanProfileCard
+                                                                plan={plan}
+                                                                handleClickOpenPlanRecoverModal={() =>
+                                                                    handleClickOpenPlanRecoverModal(plan.id, "additionalPlanSubscriptions")
+                                                                }
+                                                                handleClickRedirectToPlanDetail={handleClickRedirectToPlanDetail}
+                                                                lang={lang.planProfileCard}
+                                                                handleSetSubscriptionId={handleSetSubscriptionId}
+                                                                handleClickOpenSkipPlanModal={handleClickOpenSkipPlanModal}
+                                                                handleClickOpenChangePlanModal={handleClickOpenChangePlanModal}
+                                                            />
+                                                        </Grid>
+                                                    ))}
+                                                </>
+                                            ) : (
+                                                <EmptyState
+                                                    image="/lc-square-logo.png"
+                                                    title={lang.additionalsEmptyStateTitle}
+                                                    text={lang.additionalsEmptyStateSubtitle}
+                                                />
+                                            )}
+                                        </Grid>
+                                    </>
+                                )
                             )}
                         </Grid>
                     </Grid>
