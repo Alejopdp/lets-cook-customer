@@ -167,7 +167,7 @@ export const PaymentForm = (props) => {
             phone1: props.deliveryData.phone1,
         };
 
-        const res = await createSubscription(data);
+        const res = await createSubscription(data, router.locale);
 
         if (res.status === 200) {
             if (res.data.payment_status === "requires_action") {
