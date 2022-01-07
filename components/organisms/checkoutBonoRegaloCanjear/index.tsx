@@ -120,7 +120,7 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
 
     const handleAddressChange = async (newAddress) => {
         if (newAddress) {
-            const response = await getGeometry(newAddress.structured_formatting.main_text);
+            const response = await getGeometry(newAddress.description);
 
             setdeliveryData({
                 ...deliveryData,

@@ -30,7 +30,7 @@ const BillingAddressModal = (props) => {
     };
 
     const handleGoogleInput = async (address) => {
-        const response = await getGeometry(address.structured_formatting.main_text);
+        const response = await getGeometry(address.description);
 
         setformData({
             ...formData,
