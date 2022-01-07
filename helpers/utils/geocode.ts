@@ -26,3 +26,18 @@ export const getGeometry = async (address) => {
         return undefined;
     }
 };
+
+// export const getGeometry = async (address) => {
+//     console.log("Address: ", address);
+//     // Get latitude & longitude from address.
+//     try {
+//         //         let address = address.address.split(" ").join("+")
+//         //  let city = address.city.split(" ").join("+")
+//         //  let state = address.state
+//         // const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address},+${city},+${state}&key=${process.env.REACT_APP_GOOGLE_API_KEY}
+//         // const response = await Geocode.fromAddress(address);
+//         // return response;
+//     } catch (error) {
+//         return undefined;
+//     }
+// };
