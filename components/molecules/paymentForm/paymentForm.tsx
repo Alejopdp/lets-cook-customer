@@ -12,14 +12,10 @@ import HttpsOutlinedIcon from "@material-ui/icons/HttpsOutlined";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Image from "next/image";
-import Checkbox from "@material-ui/core/Checkbox";
 
 // Internal components
-import { FormPaperWithIcons } from "@molecules";
-import StripeForm from "../../molecules/stripeForm/stripeForm";
-import { CustomButton, RoundedButton } from "@atoms";
+import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
 import PaymentMethodForm from "../paymentMethodForm/paymentMethodForm";
 import { useBuyFlow, useUserInfoStore, BuyFlowInitialStore } from "@stores";
@@ -403,7 +399,6 @@ export const PaymentForm = (props) => {
                 onChange={props.handleChangeAccordion(props.panelNumber)}
             >
                 <AccordionSummary
-                    // expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                     style={{ cursor: "default", pointerEvents: "none" }}

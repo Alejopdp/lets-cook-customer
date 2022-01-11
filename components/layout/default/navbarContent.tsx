@@ -14,8 +14,9 @@ import { LangSelector } from "@molecules";
 
 // Images and icons
 import MenuIcon from "@material-ui/icons/Menu";
-import { useLang } from "@hooks";
+import { useLang, useLocalStorage } from "@hooks";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import { useUserInfoStore } from "@stores";
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -48,7 +49,14 @@ interface NavbarContentProps {
 }
 
 export const NavbarContent = (props: NavbarContentProps) => {
-    const _handleOnChangeLang = (lang) => {};
+    const { getFromLocalStorage, saveInLocalStorage } = useLocalStorage();
+    const { userInfo, setuserInfo } = useUserInfoStore();
+    const _handleOnChangeLang = (lang) => {
+        const actualUserInfo = getFromLocalStorage("userInfo");
+
+        saveInLocalStorage("userInfo", { ...actualUserInfo, preferredLanguage: lang });
+        setuserInfo({ ...userInfo, preferredLanguage: lang });
+    };
     const classes = useStyles();
     const router = useRouter();
     const [lang] = useLang("navbarContent");
