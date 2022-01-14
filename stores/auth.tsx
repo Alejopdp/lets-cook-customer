@@ -11,6 +11,7 @@ export interface IUserInfoFields {
     phone1: string;
     shippingAddress?: IShippingAddress;
     paymentMethods?: IPaymentMethod[];
+    preferredLanguage: string;
 }
 
 export interface IShippingAddress {

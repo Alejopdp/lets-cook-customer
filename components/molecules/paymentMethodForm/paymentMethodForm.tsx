@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import StripeForm from "components/molecules/stripeForm/stripeForm";
 import { IPaymentMethod } from "@stores";
 import { PaymentMethodFormProps } from "./interfaces";
-import { capitalizeFirstLetter } from "helpers/utils/utils";
 
 const PaymentMethodForm = (props: PaymentMethodFormProps) => {
     const lang = props.lang;
@@ -36,7 +34,7 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                         value="newPaymentMethod"
                         control={<Radio />}
                         label={lang.addNewPaymentMethodLabel}
-                    // onClick={props.setselectedOption}
+                        // onClick={props.setselectedOption}
                     />
                 )}
                 {props.selectedOption === "newPaymentMethod" || props.paymentMethods.length === 0 ? <StripeForm /> : null}
