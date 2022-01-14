@@ -4,7 +4,6 @@ import { Box, Button, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
 
-
 type AdditionalPlansBuyButtonsProps = {
     totalValue: number;
     handleSubmitPayment: () => void;
