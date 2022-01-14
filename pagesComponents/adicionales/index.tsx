@@ -27,6 +27,7 @@ const NuevoAcompañamientoPage = (props) => {
     const [faqsLang] = useLang("faqsSection");
     const [additionalPlans, setadditionalPlans] = useState([]);
     const [isLoading, setisLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const [selectedVariants, setselectedVariants] = useState<PlanVariant[]>([]);
     const [variantsToPay, setvariantsToPay] = useState<PlanVariant[]>([]);
@@ -52,6 +53,7 @@ const NuevoAcompañamientoPage = (props) => {
     }, [variantsToPay]);
 
     const handleSubmitPayment = async () => {
+        setIsSubmitting(true);
         const variants = variantsToPay.map((variant) => ({
             planId: variant.planId,
             variant: { id: variant.id },
@@ -84,6 +86,8 @@ const NuevoAcompañamientoPage = (props) => {
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
+
+        setIsSubmitting(false);
     };
 
     return (
@@ -104,6 +108,7 @@ const NuevoAcompañamientoPage = (props) => {
                         totalValue={totalValue}
                         handleSubmitPayment={handleSubmitPayment}
                         primaryButtonLabel={lang.purchaseBtnText}
+                        isLoadingPayment={isSubmitting}
                         // handleSecondaryButtonClick={() => router.replace("/perfil")}
                         // secondaryButtonLabel="POR EL MOMENTO NO QUIERO UN NUEVO ACOMPAÑAMIENTO"
                     />
