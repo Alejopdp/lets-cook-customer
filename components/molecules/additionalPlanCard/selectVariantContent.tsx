@@ -47,7 +47,6 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
 
     const setNewVariant = () => {
         const attributesEntries = Object.entries(selectedAttributes);
-        console.log(`Entries in setNewVariant: ${attributesEntries}`);
         if (attributesEntries.length > 0) {
             console.log("Has entries");
             const variant = getPlanVariantWithAttributes(selectedAttributes, props.variants);
