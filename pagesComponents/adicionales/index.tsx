@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
 import { useStripe } from "@stripe/react-stripe-js";
 import { Layout } from "@layouts";
 import InnerSectionLayout from "components/layout/innerSectionLayout";

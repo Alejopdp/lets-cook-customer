@@ -19,7 +19,8 @@ const SwapPlanModal = (props) => {
     const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
-
+    
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [planSelected, setPlanSelected] = useState({
         planId: "",
         planVariantId: "",
@@ -49,9 +50,9 @@ const SwapPlanModal = (props) => {
         });
     }, [planSelected.planId]);
 
-    const handleDisableButton = () => {
+    const isDisabled = () => {
         let currentPlanVariantId = props.data?.variants?.find((variant) => variant.active === true)?.planVariantId || "";
-        if (planSelected.planVariantId === currentPlanVariantId) {
+        if (planSelected.planVariantId === currentPlanVariantId || isSubmitting) {
             return true;
         } else {
             return false;
@@ -72,8 +73,10 @@ const SwapPlanModal = (props) => {
         });
     };
 
-    const submitNewPlan = () => {
-        props.handlePrimaryButtonClick(planSelected);
+    const submitNewPlan = async () => {
+        setIsSubmitting(true)
+        await props.handlePrimaryButtonClick(planSelected);
+        setIsSubmitting(false)
     };
 
     return (
@@ -84,7 +87,7 @@ const SwapPlanModal = (props) => {
             title={lang.title}
             primaryButtonText={lang.primaryButtonText}
             secondaryButtonText={lang.secondaryButtonText}
-            disabled={handleDisableButton()}
+            disabled={isDisabled()}
         >
             <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
                 {lang.choosePlanSubtitle}
