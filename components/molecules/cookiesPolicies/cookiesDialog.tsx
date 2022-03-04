@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
 import { Grid, Typography, Paper, Hidden, Button } from "@material-ui/core";
-import { useCookiesStore } from "stores/cookies";
+import { useCookiesStore } from "../../../stores/cookies";
 import { useLang, useLocalStorage } from "@hooks";
+import Link from "next/link"
+import PrivacyPolicyModal from "../legalModals/privacyPolicyModal";
+
 const useStyles = makeStyles((theme: Theme) => ({
     grid: {
         position: "fixed",
@@ -39,6 +42,7 @@ export default function CookiesDialog() {
     const [lang] = useLang("cookiesDialog");
     const router = useRouter();
     const { saveInLocalStorage } = useLocalStorage();
+    const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false);
     const { hasAcceptedCookies, setHasAcceptedCookies } = useCookiesStore((state) => ({
         hasAcceptedCookies: state.hasAcceptedCookies,
         setHasAcceptedCookies: state.setHasAcceptedCookies,
@@ -50,6 +54,10 @@ export default function CookiesDialog() {
         // TO DO: Handle 3rd party cookies depending on the accepted value
     };
 
+    const handleClosePrivacyPolicyModal = () => {
+        setOpenPrivacyPolicyModal(false);
+    };
+
     return (
         <>
             <Grid container direction="row" alignItems="center" justifyContent="center" className={classes.grid}>
@@ -57,7 +65,7 @@ export default function CookiesDialog() {
                     <Paper className={classes.paper}>
                         <Grid container alignItems="center" justifyContent="center">
                             <Grid item xs={12} md={9}>
-                                <Typography variant="body1" align="center" style={{ color: "black" }}>
+                                <Typography variant="body1" align="center" style={{ color: "black", cursor: "pointer" }} onClick={() => setOpenPrivacyPolicyModal(true)}>
                                     {lang.text}
                                 </Typography>
                             </Grid>
@@ -101,6 +109,7 @@ export default function CookiesDialog() {
                         </Grid>
                     </Paper>
                 </Grid>
+            <PrivacyPolicyModal open={openPrivacyPolicyModal} handleClose={handleClosePrivacyPolicyModal} />
             </Grid>
         </>
     );
