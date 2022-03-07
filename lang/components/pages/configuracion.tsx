@@ -48,9 +48,15 @@ export const configuracion = {
             // Modals
             emailModal: {
                 primaryButtonText: "MODIFICAR CORREO ELECTRÓNICO",
+                successPrimaryButtonText: "CONFIRMAR",
                 secondaryButtonText: "CANCELAR",
                 title: "Modificar correo electrónico",
                 newEmail: "Nuevo correo electrónico",
+                successMessage: (email: string): any[] => [
+                    `Te hemos enviado un correo a `,
+                    <b>{email}</b>,
+                    `. Tienes 1 hora para confirmar el cambio de email`,
+                ],
             },
             passwordModal: {
                 primaryButtonText: "MODIFICAR CONTRASEÑA",
@@ -145,9 +151,15 @@ export const configuracion = {
             // Modals
             emailModal: {
                 primaryButtonText: "MODIFY E-MAIL ADDRESS",
+                successPrimaryButtonText: "CONFIRMAR",
                 secondaryButtonText: "CANCEL",
                 title: "Modify e-mail address",
                 newEmail: "New e-mail address",
+                successMessage: (email: string): any[] => [
+                    `Te hemos enviado un correo a `,
+                    <b>{email}</b>,
+                    `. Tienes 1 hora para confirmar el cambio de email`,
+                ],
             },
             passwordModal: {
                 primaryButtonText: "MODIFY PASSWORD",
@@ -243,9 +255,15 @@ export const configuracion = {
             // Modals
             emailModal: {
                 primaryButtonText: "MODIFICAR CORREU ELECTRÒNIC",
+                successPrimaryButtonText: "CONFIRMAR",
                 secondaryButtonText: "CANCEL·LAR",
                 title: "Modificar correu electrònic",
                 newEmail: "Nou correu electrònic",
+                successMessage: (email: string): any[] => [
+                    `Te hemos enviado un correo a `,
+                    <b>{email}</b>,
+                    `. Tienes 1 hora para confirmar el cambio de email`,
+                ],
             },
             passwordModal: {
                 primaryButtonText: "MODIFICAR CONTRASENYA",

@@ -5,6 +5,7 @@ import {
     changeDefaultPaymentMethod,
     changePasswordWithoutCode,
     updateBillingData,
+    sendUpdateEmailEmail,
     updatePersonalData,
     updateShippingAddress,
 } from "../../../helpers/serverRequests/customer";
@@ -32,7 +33,6 @@ import WithSkeleton from "../../molecules/withSkeleton/withSkeleton";
 const UserInfoDetail = (props) => {
     const lang = props.lang;
     const theme = useTheme();
-    const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
     const { setuserInfo, userInfo } = useUserInfoStore(({ setuserInfo, userInfo }) => ({ setuserInfo, userInfo }));
     const { saveInLocalStorage } = useLocalStorage();
     const { enqueueSnackbar } = useSnackbar();
@@ -46,6 +46,7 @@ const UserInfoDetail = (props) => {
     });
     const [openEmailModal, setEmailModal] = useState(false);
     const [isChangePasswordSubmitting, setIsChangePasswordSubmitting] = useState(false);
+    const [isEmailUpdateSubmitting, setIsEmailUpdateSubmitting] = useState(false);
     const [openPasswordModal, setPasswordModal] = useState(false);
     const [openPersonalDataModal, setPersonalDataModal] = useState(false);
     const [openBillingAddressModal, setBillingAddressModal] = useState(false);
@@ -248,6 +249,25 @@ const UserInfoDetail = (props) => {
         }
     };
 
+    const handleUpdateEmail = async (newEmail: string): Promise<boolean> => {
+        setIsEmailUpdateSubmitting(true);
+        const res = await sendUpdateEmailEmail(newEmail, props.customer.id);
+
+        if (res.status === 200) {
+            setcustomerInfo({
+                ...customerInfo,
+                email: newEmail,
+            });
+            // enqueueSnackbar(lang.billingDataSubmit.success, { variant: "success" });
+            setIsEmailUpdateSubmitting(false);
+            return true;
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+            setIsEmailUpdateSubmitting(false);
+            return false;
+        }
+    };
+
     return (
         <>
             <Grid container spacing={2}>
@@ -423,8 +443,9 @@ const UserInfoDetail = (props) => {
                 handleClose={handleCloseEmailModal}
                 primaryButtonText={lang.emailModal.primaryButtonText}
                 secondaryButtonText={lang.emailModal.secondaryButtonText}
-                handlePrimaryButtonClick={handleClickChangeEmail}
+                handlePrimaryButtonClick={handleUpdateEmail}
                 lang={lang.emailModal}
+                isSubmitting={isEmailUpdateSubmitting}
             />
             <PasswordModal
                 open={openPasswordModal}
