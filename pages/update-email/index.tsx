@@ -22,13 +22,13 @@ const UpdateEmailPage = (props) => {
 
             if (res && res.status === 200) {
                 const newUserInfo = { ...userInfo, email: res.data.email };
-                setShowMessage(true);
                 setuserInfo(newUserInfo);
                 saveInLocalStorage("userInfo", newUserInfo);
             } else {
                 console.log("Res data: ", res.data);
                 setError(res?.data?.message ?? "Ocurrió un error inesperado, por favor intente nuevamente");
             }
+            setShowMessage(true);
         };
 
         if (router.query && router.query.token) sendTokenForUpdatingTheEmail();
