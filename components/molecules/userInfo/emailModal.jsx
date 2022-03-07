@@ -13,8 +13,8 @@ import Modal from "../../atoms/modal/modal";
 
 
 const EmailModal = (props) => {
-    const theme = useTheme();
     const lang = props.lang;
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
     const [newEmail, setNewEmail] = useState('')
 
@@ -22,25 +22,35 @@ const EmailModal = (props) => {
         setNewEmail(e.target.value)
     }
 
-    const handleChangeEmail = () => {
-        props.handlePrimaryButtonClick(newEmail);
-        setNewEmail('');
+    const handleChangeEmail = async () => {
+        const succeded= await props.handlePrimaryButtonClick(newEmail);
+
+        if(succeded) {
+            setShowSuccessMessage(true)
+        }
+
+    }
+
+    const handleSuccedButton = () => {
+        setNewEmail("")
+        setShowSuccessMessage(false)
+        props.handleClose()
     }
 
     return (
         <Modal
             open={props.open}
             title={lang.title}
-            handlePrimaryButtonClick={handleChangeEmail}
+            handlePrimaryButtonClick={showSuccessMessage ? handleSuccedButton : handleChangeEmail}
             handleClose={props.handleClose}
-            primaryButtonText={props.primaryButtonText}
+            primaryButtonText={showSuccessMessage ? lang.successPrimaryButtonText : props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
             fullScreen={true}
-            disabled={!isEmail(newEmail)}
+            disabled={!isEmail(newEmail) || props.isSubmitting}
         >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <TextField id="outlined-basic" label={lang.newEmail} variant="outlined" value={newEmail} onChange={handleChange} type='email' style={{ width: '100%' }} />
+                    {!showSuccessMessage ? <TextField id="outlined-basic" label={lang.newEmail} variant="outlined" value={newEmail} onChange={handleChange} type='email' style={{ width: '100%' }}/> : <Typography>{lang.successMessage(newEmail)}</Typography>}
                 </Grid>
             </Grid>
         </Modal>
