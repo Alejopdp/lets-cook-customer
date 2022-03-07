@@ -253,9 +253,9 @@ export const sendUpdateEmailEmail = async (newEmail: string, customerId: string)
 export const updateEmail = async (token: string, customerId: string) => {
     try {
         const res = await axios({
-            method: "POST",
+            method: "PUT",
             headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
-            url: `${apiUrl}/request-email-change/${customerId}`,
+            url: `${apiUrl}/update-email`,
             data: {
                 token,
             },

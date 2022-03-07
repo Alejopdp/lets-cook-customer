@@ -1,25 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "components/layout";
-import { useRouter } from "next";
+import { useRouter } from "next/router";
 import { updateEmail } from "helpers/serverRequests/customer";
 import Typography from "@material-ui/core/Typography";
+import { useUserInfoStore } from "@stores";
+import { useLang, useLocalStorage } from "@hooks";
+import InnerSectionLayout from "components/layout/innerSectionLayout";
+import { Grid } from "@material-ui/core";
 
 const UpdateEmailPage = (props) => {
     const router = useRouter();
+    const [lang] = useLang("updateEmail");
     const [error, setError] = useState("");
     const [showMessage, setShowMessage] = useState(false);
+    const { userInfo, setuserInfo } = useUserInfoStore();
+    const { saveInLocalStorage } = useLocalStorage();
 
     useEffect(() => {
         const sendTokenForUpdatingTheEmail = async () => {
-            const res = await updateEmail(router.query.token ?? "", "");
+            const res = await updateEmail((router.query.token as string) ?? "", "");
 
             if (res && res.status === 200) {
+                const newUserInfo = { ...userInfo, email: res.data.email };
                 setShowMessage(true);
+                setuserInfo(newUserInfo);
+                saveInLocalStorage("userInfo", newUserInfo);
             } else {
+                console.log("Res data: ", res.data);
                 setError(res?.data?.message ?? "Ocurrió un error inesperado, por favor intente nuevamente");
             }
         };
-    }, []);
+
+        if (router.query && router.query.token) sendTokenForUpdatingTheEmail();
+    }, [router.query]);
 
     return (
         <Layout
@@ -27,9 +40,15 @@ const UpdateEmailPage = (props) => {
             seoTitle={`Update email - Let's cook`}
             seoDescriptionContent="Update email"
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/update-email?token=${router.query.token}`}
-            children={undefined}
+            disableCallToActionSection
         >
-            <div>{!showMessage ? <>Loading</> : <Typography>{error ?? "Has cambiado tu correo con éxito"}</Typography>}</div>
+            <InnerSectionLayout>
+                <Grid container>
+                    <Grid item style={{ margin: "auto" }}>
+                        {!showMessage ? <>Loading</> : <Typography>{error || lang.success}</Typography>}
+                    </Grid>
+                </Grid>
+            </InnerSectionLayout>
         </Layout>
     );
 };
