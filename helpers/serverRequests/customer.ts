@@ -231,3 +231,21 @@ export const changePasswordWithoutCode = async (customerEmail: string, newPasswo
         return error.response;
     }
 };
+
+export const sendUpdateEmailEmail = async (newEmail: string, customerId: string) => {
+    try {
+        const res = await axios({
+            method: "POST",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
+            url: `${apiUrl}/request-email-change/${customerId}`,
+            data: {
+                email: newEmail,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.error(error);
+        return error.response;
+    }
+};
