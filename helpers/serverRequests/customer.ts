@@ -267,3 +267,21 @@ export const updateEmail = async (token: string, customerId: string) => {
         return error.response;
     }
 };
+
+export const getCustomerById = async (customerId: string, locale: string) => {
+    try {
+        const res = await axios({
+            method: "GET",
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
+            url: `${apiUrl}/${customerId}`,
+            params: {
+                locale,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.error(error);
+        return error.response;
+    }
+};

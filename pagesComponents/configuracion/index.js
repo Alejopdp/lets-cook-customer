@@ -13,6 +13,7 @@ import UserInfoDetail from "../../components/organisms/userInfo";
 import { getUserInfo } from "../../helpers/serverRequests/user-info";
 import { useUserInfoStore } from "../../stores/auth";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import { getCustomerById } from "helpers/serverRequests/customer";
 
 const UserInfo = (props) => {
     const router = useRouter();
@@ -24,8 +25,8 @@ const UserInfo = (props) => {
 
     useEffect(() => {
         const getData = async () => {
-            if (!router.isReady) return;
-            const res = await getUserInfo(userInfo.id, router.locale);
+            if (!router.isReady || !userInfo || !userInfo.id) return;
+            const res = await getCustomerById(userInfo.id, router.locale);
 
             if (res.status === 200) {
                 setinitialCustomerInfo(res.data);
@@ -38,7 +39,7 @@ const UserInfo = (props) => {
         };
 
         getData();
-    }, [router.isReady]);
+    }, [router.isReady, userInfo]);
 
     return (
         <Layout disableCallToActionSection>

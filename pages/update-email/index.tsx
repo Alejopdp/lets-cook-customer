@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "components/layout";
 import { useRouter } from "next/router";
-import { updateEmail } from "helpers/serverRequests/customer";
+import { getCustomerById, updateEmail } from "helpers/serverRequests/customer";
 import Typography from "@material-ui/core/Typography";
-import { useUserInfoStore } from "@stores";
+import { useAuthStore, useUserInfoStore } from "@stores";
 import { useLang, useLocalStorage } from "@hooks";
 import InnerSectionLayout from "components/layout/innerSectionLayout";
 import { Grid } from "@material-ui/core";
+import Spinner from "@material-ui/core/CircularProgress";
 
 const UpdateEmailPage = (props) => {
     const router = useRouter();
@@ -14,6 +15,7 @@ const UpdateEmailPage = (props) => {
     const [error, setError] = useState("");
     const [showMessage, setShowMessage] = useState(false);
     const { userInfo, setuserInfo } = useUserInfoStore();
+    const { isAuthenticated } = useAuthStore();
     const { saveInLocalStorage } = useLocalStorage();
 
     useEffect(() => {
@@ -21,11 +23,30 @@ const UpdateEmailPage = (props) => {
             const res = await updateEmail((router.query.token as string) ?? "", "");
 
             if (res && res.status === 200) {
-                const newUserInfo = { ...userInfo, email: res.data.email };
-                setuserInfo(newUserInfo);
-                saveInLocalStorage("userInfo", newUserInfo);
+                if (isAuthenticated) {
+                    const customerInfoRes = await getCustomerById(res.data.id, router.locale);
+
+                    if (customerInfoRes && customerInfoRes.status === 200) {
+                        const newUserInfo = {
+                            email: customerInfoRes.data.email,
+                            phone1: customerInfoRes.data.phone1,
+                            phone2: customerInfoRes.data.phone2,
+                            paymentMethods: customerInfoRes.data.paymentMethods,
+                            preferredLanguage: customerInfoRes.data.preferredLanguage,
+                            firstName: customerInfoRes.data.firstName,
+                            lastName: customerInfoRes.data.lastName,
+                            id: customerInfoRes.data.id,
+                            shippingAddress: customerInfoRes.data.shippingAddress,
+                            fullName: customerInfoRes.data.fullName,
+                            permissions: [],
+                            roleTitle: "customer",
+                        };
+
+                        setuserInfo(newUserInfo);
+                        saveInLocalStorage("userInfo", newUserInfo);
+                    }
+                }
             } else {
-                console.log("Res data: ", res.data);
                 setError(res?.data?.message ?? "Ocurrió un error inesperado, por favor intente nuevamente");
             }
             setShowMessage(true);
@@ -45,7 +66,7 @@ const UpdateEmailPage = (props) => {
             <InnerSectionLayout>
                 <Grid container>
                     <Grid item style={{ margin: "auto" }}>
-                        {!showMessage ? <>Loading</> : <Typography>{error || lang.success}</Typography>}
+                        {!showMessage ? <Spinner /> : <Typography>{error || lang.success}</Typography>}
                     </Grid>
                 </Grid>
             </InnerSectionLayout>
