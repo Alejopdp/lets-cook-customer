@@ -480,6 +480,7 @@ const Perfil = (props) => {
                 handleClose={handleClosePlanRecoverModal}
                 handleSubmit={handleRecoverPlanSubmit}
                 lang={lang.planRecoverModal}
+                isSubmitting={isReorderingPlan}
             />
 
             {/* MODALS MANAGE PLAN */}
