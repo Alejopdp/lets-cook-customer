@@ -14,7 +14,7 @@ import { LOCAL_STORAGE_KEYS, useLocalStorage } from "../../../hooks";
 import { translateShippíngHour } from "../../../helpers/utils/i18n";
 // External Components
 import Grid from "@material-ui/core/Grid";
-import { useTheme, useMediaQuery } from "@material-ui/core";
+import { useTheme } from "@material-ui/core";
 
 // Internal Components
 import BoxWithTitleAndTextButton from "../../molecules/specificBox/boxWithTitleAndTextButton";
