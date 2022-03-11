@@ -37,8 +37,8 @@ export const RegisterUserStep = () => {
 
     const handleLogin = (userInfo: IUserInfoFields) => {
         setDeliveryInfo({
-            addressName: userInfo.shippingAddress?.addressName,
-            addressDetails: userInfo.shippingAddress?.addressDetails,
+            addressName: userInfo.shippingAddress?.addressName || userInfo.shippingAddress?.name,
+            addressDetails: userInfo.shippingAddress?.addressDetails || userInfo.shippingAddress?.details,
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
             phone1: userInfo.phone1,
@@ -62,8 +62,8 @@ export const RegisterUserStep = () => {
 
     const handleSignUp = (userInfo: IUserInfoFields, accpetsMarketing: boolean) => {
         setDeliveryInfo({
-            addressName: userInfo.shippingAddress?.addressName,
-            addressDetails: userInfo.shippingAddress?.addressDetails,
+            addressName: userInfo.shippingAddress?.addressName || userInfo.shippingAddress?.name,
+            addressDetails: userInfo.shippingAddress?.addressDetails || userInfo.shippingAddress?.details,
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
             phone1: userInfo.phone1,

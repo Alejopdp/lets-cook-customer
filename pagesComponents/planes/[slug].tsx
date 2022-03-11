@@ -125,9 +125,10 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             });
             setisInitializing(false);
         };
+
         setDeliveryInfo({
-            addressDetails: userInfo.shippingAddress?.addressDetails,
-            addressName: userInfo.shippingAddress?.addressName,
+            addressDetails: userInfo.shippingAddress?.addressDetails || userInfo.shippingAddress?.details,
+            addressName: userInfo.shippingAddress?.addressName || userInfo.shippingAddress?.name,
             phone1: userInfo.phone1,
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
