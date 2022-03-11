@@ -55,7 +55,7 @@ export const configuracion = {
                 successMessage: (email: string): any[] => [
                     `Te hemos enviado un correo a `,
                     <b>{email}</b>,
-                    `. Tienes 1 hora para confirmar el cambio de email`,
+                    `. Tienes 1 hora para confirmar el cambio de correo electrónico.`,
                 ],
             },
             passwordModal: {
@@ -150,15 +150,15 @@ export const configuracion = {
             },
             // Modals
             emailModal: {
-                primaryButtonText: "MODIFY E-MAIL ADDRESS",
-                successPrimaryButtonText: "CONFIRMAR",
+                primaryButtonText: "MODIFY EMAIL",
+                successPrimaryButtonText: "CONFIRM",
                 secondaryButtonText: "CANCEL",
-                title: "Modify e-mail address",
-                newEmail: "New e-mail address",
+                title: "Modify email",
+                newEmail: "New email",
                 successMessage: (email: string): any[] => [
-                    `Te hemos enviado un correo a `,
+                    `We have sent an email to `,
                     <b>{email}</b>,
-                    `. Tienes 1 hora para confirmar el cambio de email`,
+                    ` . You have 1 hour to confirm the change.`,
                 ],
             },
             passwordModal: {
@@ -254,15 +254,15 @@ export const configuracion = {
             },
             // Modals
             emailModal: {
-                primaryButtonText: "MODIFICAR CORREU ELECTRÒNIC",
+                primaryButtonText: "CANVIAR ADREÇA ELECTRÒNICA",
                 successPrimaryButtonText: "CONFIRMAR",
                 secondaryButtonText: "CANCEL·LAR",
-                title: "Modificar correu electrònic",
+                title: "Canviar adreça electrònica",
                 newEmail: "Nou correu electrònic",
                 successMessage: (email: string): any[] => [
-                    `Te hemos enviado un correo a `,
+                    `T'hem enviat un correu electrònic a `,
                     <b>{email}</b>,
-                    `. Tienes 1 hora para confirmar el cambio de email`,
+                    ` . Tens 1 hora per confirmar el canvi d'adreça electrònica.`,
                 ],
             },
             passwordModal: {

@@ -232,12 +232,15 @@ export const changePasswordWithoutCode = async (customerEmail: string, newPasswo
     }
 };
 
-export const sendUpdateEmailEmail = async (newEmail: string, customerId: string) => {
+export const sendUpdateEmailEmail = async (newEmail: string, customerId: string, locale: string) => {
     try {
         const res = await axios({
             method: "POST",
             headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
             url: `${apiUrl}/request-email-change/${customerId}`,
+            params: {
+                locale,
+            },
             data: {
                 email: newEmail,
             },

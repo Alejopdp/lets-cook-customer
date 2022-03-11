@@ -29,8 +29,10 @@ import DeliveryAddressModal from "../../molecules/userInfo/deliveryAddressModal"
 import PaymentMethodModal from "../../molecules/userInfo/paymentMethod";
 import DataPaperSkeleton from "./dataPaperSkeleton";
 import WithSkeleton from "../../molecules/withSkeleton/withSkeleton";
+import { useRouter } from "next/router";
 
 const UserInfoDetail = (props) => {
+    const router = useRouter();
     const lang = props.lang;
     const theme = useTheme();
     const { setuserInfo, userInfo } = useUserInfoStore(({ setuserInfo, userInfo }) => ({ setuserInfo, userInfo }));
@@ -251,14 +253,9 @@ const UserInfoDetail = (props) => {
 
     const handleUpdateEmail = async (newEmail: string): Promise<boolean> => {
         setIsEmailUpdateSubmitting(true);
-        const res = await sendUpdateEmailEmail(newEmail, props.customer.id);
+        const res = await sendUpdateEmailEmail(newEmail, props.customer.id, router.locale);
 
         if (res.status === 200) {
-            setcustomerInfo({
-                ...customerInfo,
-                email: newEmail,
-            });
-            // enqueueSnackbar(lang.billingDataSubmit.success, { variant: "success" });
             setIsEmailUpdateSubmitting(false);
             return true;
         } else {
