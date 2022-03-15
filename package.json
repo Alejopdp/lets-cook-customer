@@ -10,6 +10,7 @@
         "lint": "next lint --dir utils"
     },
     "dependencies": {
+        "@hapi/accept": "^5.0.2",
         "@material-ui/core": "^4.11.4",
         "@material-ui/icons": "^4.11.2",
         "@material-ui/lab": "^4.0.0-alpha.58",
@@ -18,12 +19,17 @@
         "@types/lodash": "^4.14.171",
         "autosuggest-highlight": "^3.1.1",
         "axios": "^0.21.1",
+        "etag": "^1.8.1",
         "firebase": "^8.6.7",
+        "get-orientation": "^1.1.2",
+        "jest-worker": "^27.5.1",
         "js-cookie": "^2.2.1",
         "lodash": "^4.17.21",
         "next": "^12.1.0",
+        "node-html-parser": "^5.3.2",
         "node-sass": "^6.0.0",
         "notistack": "^1.0.9",
+        "raw-body": "^2.5.1",
         "react": "17.0.2",
         "react-dom": "17.0.2",
         "react-geocode": "^0.2.3",
@@ -34,6 +40,7 @@
         "remark-html": "^15.0.1",
         "sitemap": "^7.0.0",
         "swr": "^0.5.6",
+        "watchpack": "^2.3.1",
         "zustand": "^3.5.5"
     },
     "devDependencies": {

@@ -1,15 +1,15 @@
 import { Typography, Container, Grid } from '@material-ui/core';
 import clsx from 'clsx';
 import { Rating } from '@material-ui/lab';
-
 import { useGoogleRatingStyles as useStyles } from "./styles";
 import { GoogleRatingSectionProps } from "./interfaces";
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
+import { getReviews } from '../../../helpers/serverRequests/reviews/'
+
 
 export const GoogleRatingSection = memo((props: GoogleRatingSectionProps) => {
     const classes = useStyles();
     return (
-        // {/* <div className={classes.root}> */}
         <Container maxWidth='lg'>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
@@ -27,7 +27,6 @@ export const GoogleRatingSection = memo((props: GoogleRatingSectionProps) => {
                 </Grid>
             </Grid>
         </Container>
-        // {/* </div> */}
     );
 })
 
