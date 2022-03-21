@@ -35,12 +35,11 @@ import EmptyState from "../../components/molecules/emptyState/emptyState";
 import PlanProfileCard from "../../components/molecules/planProfileCard/";
 import SwapPlanModal from "../../components/molecules/managePlanModals/swapPlanModal";
 import SkipPlanModal from "../../components/molecules/managePlanModals/skipPlanModal";
-import routes, { localeRoutes, Routes } from "../../lang/routes/routes";
+import { localeRoutes, Routes } from "../../lang/routes/routes";
 import PendingActionSkeleton from "components/molecules/pendingActionsComponents/pendingActionSkeleton";
 import PlanProfileCardSkeleton from "components/molecules/planProfileCard/planProfileCardSkeleton";
 
 const Perfil = (props) => {
-    const isMdUp = useMediaQuery("(min-width:960px)");
     const theme = useTheme();
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
@@ -263,7 +262,6 @@ const Perfil = (props) => {
                                             btnText={lang.settingsBtnText}
                                             handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}
                                         />
-                                        {/* </Grid> */}
                                     </Grid>
                                 </Grid>
                                 <Carousel

@@ -12,7 +12,7 @@ import RecoverPasswordMail from "./recoverPasswordMail";
 import RecoverPasswordCode from "./recoverPasswordCode";
 import RecoverPassword from "./recoverPassword";
 import FormPaper from "../../molecules/formPaper/formPaper";
-import { ForgotPassword, Register } from "../../atoms/loginHelpers/loginHelpers";
+import { Register } from "../../atoms/loginHelpers/loginHelpers";
 import { forgotPassword, loginWithEmail, resetPassword, validateRecoverPasswordCode } from "../../../helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
 import { useAuthStore, useUserInfoStore } from "@stores";
