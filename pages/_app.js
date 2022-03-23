@@ -46,7 +46,7 @@ export function reportWebVitals(metric) {
 
 function MyApp(props) {
     const { Component, pageProps } = props;
-    const { getFromLocalStorage, resetLocalStorage, saveInLocalStorage } = useLocalStorage();
+    const { getFromLocalStorage, resetLocalStorage, saveInLocalStorage, removeFromLocalStorage } = useLocalStorage();
     const [isLoading, setisLoading] = useState(true);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
@@ -88,7 +88,8 @@ function MyApp(props) {
                 setUserInfo(userInfo);
                 saveInLocalStorage("userInfo", userInfo);
             } else {
-                resetLocalStorage();
+                removeFromLocalStorage("token");
+                removeFromLocalStorage("userInfo");
             }
 
             setisLoading(false);

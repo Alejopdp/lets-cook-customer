@@ -19,10 +19,16 @@ export const useLocalStorage = () => {
         localStorage.clear();
     };
 
+    const removeFromLocalStorage = (key) => {
+        if (typeof window === "undefined") return false;
+        localStorage.removeItem(key);
+    };
+
     return {
         saveInLocalStorage,
         getFromLocalStorage,
         resetLocalStorage,
+        removeFromLocalStorage,
     };
 };
 
