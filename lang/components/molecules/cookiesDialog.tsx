@@ -2,28 +2,28 @@ export const cookiesDialog = {
     es: {
         text: [
             "En ",
-            <span style={{ fontWeight: "bold" }}>Let's cook now </span>,
+            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
             "usamos ",
-            <span style={{ textDecoration: "underline" }}>cookies </span>,
-            "de terceros para poder personalizar tu experiencia en nuestro sitio.",
+            <span style={{ textDecoration: "underline" }}>cookies de terceros </span>,
+            "para poder personalizar tu experiencia en nuestra web.",
         ],
     },
     en: {
         text: [
-            "In ",
-            <span style={{ fontWeight: "bold" }}>Let's cook now </span>,
+            "At ",
+            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
             "we use ",
-            <span style={{ textDecoration: "underline" }}>3rd party cookies </span>,
-            "in order to customize your experience in our website",
+            <span style={{ textDecoration: "underline" }}>third-party cookies </span>,
+            "to personalise your experience on our website",
         ],
     },
     ca: {
         text: [
             "A ",
-            <span style={{ fontWeight: "bold" }}>Let's cook now </span>,
-            "usem ",
-            <span style={{ textDecoration: "underline" }}>cookies </span>,
-            "de tercers per poder personalitzar la teva experiència al nostre lloc.",
+            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            "fem servir ",
+            <span style={{ textDecoration: "underline" }}>cookies de tercers</span>,
+            "per a poder personalitzar la teva experiència a la nostra web.",
         ],
     },
 };
