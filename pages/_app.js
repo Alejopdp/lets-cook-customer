@@ -84,6 +84,10 @@ function MyApp(props) {
                         id: getCustomerRes.data.id,
                         shippingAddress: getCustomerRes.data.shippingAddress,
                     };
+
+                    if (userInfo.shippingAddress.name) userInfo.shippingAddress.addressName = userInfo.shippingAddress.name;
+                    if (userInfo.shippingAddress.details) userInfo.shippingAddress.addressDetails = userInfo.shippingAddress.details;
+                    console.log("UPDATED DE DE D");
                 }
                 setUserInfo(userInfo);
                 saveInLocalStorage("userInfo", userInfo);

@@ -324,12 +324,12 @@ const UserInfoDetail = (props) => {
                                 >
                                     <DataDisplay
                                         title={lang.shippingAddress.name}
-                                        text={customerInfo.shippingAddress.name}
+                                        text={customerInfo.shippingAddress.addressName}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay
                                         title={lang.shippingAddress.details}
-                                        text={customerInfo.shippingAddress.details}
+                                        text={customerInfo.shippingAddress.addressDetails}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay
