@@ -14,7 +14,7 @@ const UserBox = (props) => {
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const [open, setOpen] = useState(false);
     const anchorRef = useRef();
-    const { resetLocalStorage } = useLocalStorage();
+    const { removeFromLocalStorage } = useLocalStorage();
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const setuserInfo = useUserInfoStore((state) => state.setuserInfo);
     const [lang] = useLang("userBox");
@@ -31,7 +31,8 @@ const UserBox = (props) => {
     const handleSignOut = async () => {
         await router.push("/");
         cookies.remove("token");
-        resetLocalStorage();
+        removeFromLocalStorage("token");
+        removeFromLocalStorage("userInfo");
         setuserInfo({});
         setIsAuthenticated(false);
     };

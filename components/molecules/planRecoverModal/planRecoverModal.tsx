@@ -13,14 +13,11 @@ import TextButton from "../../atoms/textButton/textButton";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Image from "next/image";
 
 // Icons & Images
 import CloseIcon from "@material-ui/icons/Close";

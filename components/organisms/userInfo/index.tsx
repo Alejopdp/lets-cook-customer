@@ -5,6 +5,7 @@ import {
     changeDefaultPaymentMethod,
     changePasswordWithoutCode,
     updateBillingData,
+    sendUpdateEmailEmail,
     updatePersonalData,
     updateShippingAddress,
 } from "../../../helpers/serverRequests/customer";
@@ -13,7 +14,7 @@ import { LOCAL_STORAGE_KEYS, useLocalStorage } from "../../../hooks";
 import { translateShippíngHour } from "../../../helpers/utils/i18n";
 // External Components
 import Grid from "@material-ui/core/Grid";
-import { useTheme, useMediaQuery } from "@material-ui/core";
+import { useTheme } from "@material-ui/core";
 
 // Internal Components
 import BoxWithTitleAndTextButton from "../../molecules/specificBox/boxWithTitleAndTextButton";
@@ -28,11 +29,12 @@ import DeliveryAddressModal from "../../molecules/userInfo/deliveryAddressModal"
 import PaymentMethodModal from "../../molecules/userInfo/paymentMethod";
 import DataPaperSkeleton from "./dataPaperSkeleton";
 import WithSkeleton from "../../molecules/withSkeleton/withSkeleton";
+import { useRouter } from "next/router";
 
 const UserInfoDetail = (props) => {
+    const router = useRouter();
     const lang = props.lang;
     const theme = useTheme();
-    const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
     const { setuserInfo, userInfo } = useUserInfoStore(({ setuserInfo, userInfo }) => ({ setuserInfo, userInfo }));
     const { saveInLocalStorage } = useLocalStorage();
     const { enqueueSnackbar } = useSnackbar();
@@ -46,6 +48,7 @@ const UserInfoDetail = (props) => {
     });
     const [openEmailModal, setEmailModal] = useState(false);
     const [isChangePasswordSubmitting, setIsChangePasswordSubmitting] = useState(false);
+    const [isEmailUpdateSubmitting, setIsEmailUpdateSubmitting] = useState(false);
     const [openPasswordModal, setPasswordModal] = useState(false);
     const [openPersonalDataModal, setPersonalDataModal] = useState(false);
     const [openBillingAddressModal, setBillingAddressModal] = useState(false);
@@ -248,6 +251,20 @@ const UserInfoDetail = (props) => {
         }
     };
 
+    const handleUpdateEmail = async (newEmail: string): Promise<boolean> => {
+        setIsEmailUpdateSubmitting(true);
+        const res = await sendUpdateEmailEmail(newEmail, props.customer.id, router.locale);
+
+        if (res.status === 200) {
+            setIsEmailUpdateSubmitting(false);
+            return true;
+        } else {
+            enqueueSnackbar(res.data.message, { variant: "error" });
+            setIsEmailUpdateSubmitting(false);
+            return false;
+        }
+    };
+
     return (
         <>
             <Grid container spacing={2}>
@@ -307,12 +324,12 @@ const UserInfoDetail = (props) => {
                                 >
                                     <DataDisplay
                                         title={lang.shippingAddress.name}
-                                        text={customerInfo.shippingAddress.name}
+                                        text={customerInfo.shippingAddress.addressName}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay
                                         title={lang.shippingAddress.details}
-                                        text={customerInfo.shippingAddress.details}
+                                        text={customerInfo.shippingAddress.addressDetails}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay
@@ -423,8 +440,9 @@ const UserInfoDetail = (props) => {
                 handleClose={handleCloseEmailModal}
                 primaryButtonText={lang.emailModal.primaryButtonText}
                 secondaryButtonText={lang.emailModal.secondaryButtonText}
-                handlePrimaryButtonClick={handleClickChangeEmail}
+                handlePrimaryButtonClick={handleUpdateEmail}
                 lang={lang.emailModal}
+                isSubmitting={isEmailUpdateSubmitting}
             />
             <PasswordModal
                 open={openPasswordModal}

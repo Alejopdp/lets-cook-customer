@@ -15,10 +15,9 @@ import { getGeometry } from "../../../helpers/utils/geocode";
 
 const DeliveryAddressModal = (props) => {
     const lang = props.lang;
-    const theme = useTheme();
     const [formData, setformData] = useState({
-        name: props.shippingAddress.name,
-        details: props.shippingAddress.details,
+        name: props.shippingAddress.addressName,
+        details: props.shippingAddress.addressDetails,
         preferredShippingHour: props.shippingAddress.preferredShippingHour,
         latitude: props.shippingAddress.latitude,
         longitude: props.shippingAddress.longitude,
@@ -72,7 +71,7 @@ const DeliveryAddressModal = (props) => {
                         id="outlined-basic"
                         label={lang.details}
                         variant="outlined"
-                        value={formData.details}
+                        value={formData.addressDetails}
                         onChange={handleChange}
                     />
                 </Grid>

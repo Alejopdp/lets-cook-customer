@@ -88,53 +88,37 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             });
             const _slug = router.query.planSlug || mainPlans.find((plan) => plan.isDefaultAtCheckout)?.slug || "";
 
-            const {
-                id,
-                slug,
-                variant,
-                redirect,
-                errors: _errors,
-                recipes,
-                planImageUrl,
-                iconLinealWithColorUrl,
-            } = getPlanVariant({ slug: _slug, recipeQty: router.query.recetas || 0, peopleQty: router.query.personas || 0 }, mainPlans);
+            const planVariantData = getPlanVariant(
+                { slug: _slug, recipeQty: router.query.recetas || 0, peopleQty: router.query.personas || 0 },
+                mainPlans
+            );
 
-            if (redirect && !!redirect.destination)
-                router.replace(`${localeRoutes[router.locale][Routes["planes"]]}/${redirect.destination}`);
+            if (planVariantData.redirect && !!planVariantData.redirect.destination)
+                router.replace(`${localeRoutes[router.locale][Routes["planes"]]}/${planVariantData.redirect.destination}`);
 
             setWeekLabel(_plans.data.weekLabel);
             const planUrlParams: PlanUrlParams = {
-                personQty: `${variant?.numberOfPersons || 0}`,
-                recipeQty: `${variant?.numberOfRecipes || 0}`,
-                slug,
-                id,
-                planImageUrl,
-                iconLinealWithColorUrl,
+                personQty: `${planVariantData.variant?.numberOfPersons || 0}`,
+                recipeQty: `${planVariantData.variant?.numberOfRecipes || 0}`,
+                slug: planVariantData.slug,
+                id: planVariantData.id,
+                planImageUrl: planVariantData.planImageUrl,
+                iconLinealWithColorUrl: planVariantData.iconLinealWithColorUrl,
             };
 
             setData({
                 aditionalsPlans,
-                errors: [...errors, _errors],
+                errors: [...errors, planVariantData.errors],
                 isLogged: true,
                 planUrlParams,
                 plans: mainPlans,
-                recipes,
-                redirect,
-                variant,
+                recipes: planVariantData.recipes,
+                redirect: planVariantData.redirect,
+                variant: planVariantData.variant,
                 weekLabel: _plans.data.weekLabel,
             });
             setisInitializing(false);
         };
-        setDeliveryInfo({
-            addressDetails: userInfo.shippingAddress?.addressDetails,
-            addressName: userInfo.shippingAddress?.addressName,
-            phone1: userInfo.phone1,
-            firstName: userInfo.firstName,
-            lastName: userInfo.lastName,
-            restrictions: "",
-            latitude: userInfo.shippingAddress?.latitude,
-            longitude: userInfo.shippingAddress?.longitude,
-        });
 
         if (Array.isArray(userInfo.paymentMethods)) {
             const defaultPaymentMethod: IPaymentMethod | undefined = userInfo.paymentMethods.find((method) => method.isDefault);
@@ -151,6 +135,28 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             setCoupon({ ...BuyFlowInitialStore.form.coupon });
         };
     }, []);
+
+    useEffect(() => {
+        setDeliveryInfo({
+            addressDetails: userInfo.shippingAddress?.addressDetails || userInfo.shippingAddress?.addressDetails,
+            addressName: userInfo.shippingAddress?.addressName || userInfo.shippingAddress?.addressName,
+            phone1: userInfo.phone1,
+            firstName: userInfo.firstName,
+            lastName: userInfo.lastName,
+            restrictions: "",
+            latitude: userInfo.shippingAddress?.latitude,
+            longitude: userInfo.shippingAddress?.longitude,
+        });
+    }, [
+        setDeliveryInfo,
+        userInfo.firstName,
+        userInfo.lastName,
+        userInfo.phone1,
+        userInfo.shippingAddress?.addressDetails,
+        userInfo.shippingAddress?.addressName,
+        userInfo.shippingAddress?.latitude,
+        userInfo.shippingAddress?.longitude,
+    ]);
 
     useEffect(() => {
         if (isAuthenticated) {

@@ -1,0 +1,16 @@
+version: '3'
+services:
+  customer:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    container_name: lets-cook-customer
+    stdin_open: true
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    env_file:
+      - ./.env

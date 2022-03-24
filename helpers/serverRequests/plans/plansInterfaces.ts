@@ -32,4 +32,5 @@ export interface Plan extends PlanVariant {
     icon?: string;
     iconWithColor?: string;
     recipes?: Recipe[];
+    isDefaultAtCheckout: boolean;
 }

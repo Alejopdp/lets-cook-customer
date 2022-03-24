@@ -9,7 +9,7 @@ import useLocalStorage from "../hooks/useLocalStorage/localStorage";
 import cookies from "js-cookie";
 import { useAuthStore, useUserInfoStore } from "../stores/auth";
 import { useCookiesStore } from "../stores/cookies";
-import { verifyToken } from "../helpers/serverRequests/customer";
+import { getCustomerById, verifyToken } from "../helpers/serverRequests/customer";
 import { loadStripe } from "@stripe/stripe-js";
 import { SnackbarProvider } from "notistack";
 import { Elements } from "@stripe/react-stripe-js";
@@ -46,7 +46,7 @@ export function reportWebVitals(metric) {
 
 function MyApp(props) {
     const { Component, pageProps } = props;
-    const { getFromLocalStorage, resetLocalStorage } = useLocalStorage();
+    const { getFromLocalStorage, resetLocalStorage, saveInLocalStorage, removeFromLocalStorage } = useLocalStorage();
     const [isLoading, setisLoading] = useState(true);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
@@ -59,6 +59,9 @@ function MyApp(props) {
     useEffect(() => {
         const verifyAuthentication = async () => {
             const token = await getFromLocalStorage("token");
+            const hasAcceptedCookies = await getFromLocalStorage("HAS_ACCEPTED_COOKIES");
+            setHasAccepteCookies(hasAcceptedCookies);
+
             if (!token) {
                 setisLoading(false);
                 return;
@@ -66,14 +69,33 @@ function MyApp(props) {
             const res = await verifyToken(token);
             if (res.status === 200) {
                 setIsAuthenticated(true);
-                const userInfo = getFromLocalStorage("userInfo");
+                const userInfo = await getFromLocalStorage("userInfo");
+                const getCustomerRes = await getCustomerById(userInfo?.id);
+
+                if (getCustomerRes && getCustomerRes.status === 200) {
+                    userInfo = {
+                        email: getCustomerRes.data.email,
+                        phone1: getCustomerRes.data.phone1,
+                        phone2: getCustomerRes.data.phone2,
+                        paymentMethods: getCustomerRes.data.paymentMethods,
+                        preferredLanguage: getCustomerRes.data.preferredLanguage,
+                        firstName: getCustomerRes.data.firstName,
+                        lastName: getCustomerRes.data.lastName,
+                        id: getCustomerRes.data.id,
+                        shippingAddress: getCustomerRes.data.shippingAddress,
+                    };
+
+                    if (userInfo.shippingAddress.name) userInfo.shippingAddress.addressName = userInfo.shippingAddress.name;
+                    if (userInfo.shippingAddress.details) userInfo.shippingAddress.addressDetails = userInfo.shippingAddress.details;
+                    console.log("UPDATED DE DE D");
+                }
                 setUserInfo(userInfo);
+                saveInLocalStorage("userInfo", userInfo);
             } else {
-                resetLocalStorage();
+                removeFromLocalStorage("token");
+                removeFromLocalStorage("userInfo");
             }
 
-            const hasAcceptedCookies = await getFromLocalStorage("HAS_ACCEPTED_COOKIES");
-            setHasAccepteCookies(hasAcceptedCookies);
             setisLoading(false);
         };
         // Remove the server-side injected CSS.

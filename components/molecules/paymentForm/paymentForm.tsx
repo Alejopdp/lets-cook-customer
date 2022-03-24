@@ -211,7 +211,7 @@ export const PaymentForm = (props) => {
                     });
                     form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                         ? goToNextView()
-                        : skipRecipeChoiceStep(res.data.subscriptionId);
+                        : skipRecipeChoiceStep(res.data.subscriptionId, true);
 
                     router.push({ pathname: router.pathname, query: { checkout: true, ...router.query } }, undefined, { shallow: true });
                     subscribeToMailingListGroup("109309613", userInfo.email, {
@@ -294,7 +294,7 @@ export const PaymentForm = (props) => {
                 });
                 form.canChooseRecipes && Array.isArray(form.planRecipes) && form.planRecipes.length > 0
                     ? goToNextView()
-                    : skipRecipeChoiceStep(res.data.subscriptionId);
+                    : skipRecipeChoiceStep(res.data.subscriptionId, false);
 
                 router.push({ pathname: router.pathname, query: { checkout: true, ...router.query } }, undefined, { shallow: true });
 
@@ -341,9 +341,9 @@ export const PaymentForm = (props) => {
         }
     };
 
-    const skipRecipeChoiceStep = (subscriptionId) => {
+    const skipRecipeChoiceStep = (subscriptionId, sendEmail) => {
         moveNSteps(2);
-        sendWelcomeEmail(subscriptionId);
+        if (sendEmail) sendWelcomeEmail(subscriptionId);
     };
 
     const updateUserInfoStoreIfNecessary = (paymentMethods) => {
