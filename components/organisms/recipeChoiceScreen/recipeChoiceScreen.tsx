@@ -70,12 +70,11 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
             }
         }
         const res = await chooseRecipes(router.query.orderId as string, recipeSelection);
-
         if (res.status === 200) {
             enqueueSnackbar("Recetas elegidas correctamente", { variant: "success" });
             router.replace({
                 pathname: `${localeRoutes[router.locale][Routes.adicionales]}`,
-                // query: `subscriptionId=${props.subscriptionId}`,
+                query: { planId: props.planId },
             });
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
