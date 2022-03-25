@@ -2,8 +2,6 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "@material-ui/core/styles";
-import Link from "next/link";
-// const langs = require("../../lang").comoFunciona;
 import { translateFrequency } from "helpers/utils/i18n";
 import RotateRight from "@material-ui/icons/RotateRight";
 
