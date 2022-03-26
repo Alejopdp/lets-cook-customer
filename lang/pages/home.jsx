@@ -81,6 +81,7 @@ export const home = {
         },
         howItWorksSection: {
             title: "How does it work?",
+            subtitle: "...",
             cards: [
                 {
                     title: "Sign up",
@@ -153,6 +154,7 @@ export const home = {
         },
         howItWorksSection: {
             title: "Com funciona?",
+            subtitle: "...",
             cards: [
                 {
                     title: "Apúnta’t",

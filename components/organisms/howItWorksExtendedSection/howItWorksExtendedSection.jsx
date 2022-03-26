@@ -1,14 +1,14 @@
 // Utils & Config
 import React from "react";
 import { useRouter } from "next/router";
-const langs = require("../../../lang").howItWorksExtendedSection;
 
 // Internal components
 import HowItWorksExtended from "../../molecules/howItWorksExtended/howItWorksExtended";
+import { useLang } from "@hooks";
 
 const HowItWorksExtendedSection = () => {
     const router = useRouter();
-    const lang = langs[router.locale];
+    const [lang] = useLang("comoFunciona");
 
     {
         /*
@@ -24,27 +24,17 @@ const HowItWorksExtendedSection = () => {
                 subtitle={lang.step1.content}
                 image={lang.step1.image}
                 direction="row-reverse"
-                style={{ marginLeft: 'auto' }}
+                style={{ marginLeft: "auto" }}
             />
-            <HowItWorksExtended
-                title={lang.step2.title}
-                subtitle={lang.step2.content}
-                image={lang.step2.image}
-                direction="row"
-            />
+            <HowItWorksExtended title={lang.step2.title} subtitle={lang.step2.content} image={lang.step2.image} direction="row" />
             <HowItWorksExtended
                 title={lang.step3.title}
                 subtitle={lang.step3.content}
                 image={lang.step3.image}
                 direction="row-reverse"
-                style={{ marginLeft: 'auto' }}
+                style={{ marginLeft: "auto" }}
             />
-            <HowItWorksExtended
-                title={lang.step4.title}
-                subtitle={lang.step4.content}
-                image={lang.step4.image}
-                direction="row"
-            />
+            <HowItWorksExtended title={lang.step4.title} subtitle={lang.step4.content} image={lang.step4.image} direction="row" />
         </>
     );
 };
