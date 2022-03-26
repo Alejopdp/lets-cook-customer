@@ -73,6 +73,7 @@ export const localeRoutes = {
         "recuperar-contrasena": "/recover-password",
         registrarme: "/sign-in",
         adicionales: "/additionals",
+        "valorar-recetas": "/rate-recipes",
     },
 
     ca: {
@@ -97,6 +98,7 @@ export const localeRoutes = {
         "recuperar-contrasena": "/recuperar-contrasenya",
         registrarme: "/registrar-me",
         adicionales: "/addicionals",
+        "valorar-recetas": "/valorar-receptes",
     },
 
     Routes,
