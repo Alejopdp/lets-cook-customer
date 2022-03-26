@@ -67,7 +67,7 @@ export const home = {
             btnCaption: "Envío gratis en Barcelona",
         },
         recipesSection: {
-            title: "Hecha un vistazo a las recetas de esta semana",
+            title: "Echa un vistazo a las recetas de esta semana",
             subtitle: "Nuestros chefs preparan recetas variadas cada semana para mantener la llama viva",
         },
     },

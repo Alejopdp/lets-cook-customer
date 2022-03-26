@@ -5,7 +5,7 @@ export const recipeModal = {
         nutritionalInfo: "Información nutricional (cada 100 gramos)",
     },
     en: {
-        ingredients: "Ingredientes",
+        ingredients: "Ingredients",
         tools: "Necessary utensils",
         nutritionalInfo: "Nutritional information (every 100 grams)",
     },
