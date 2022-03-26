@@ -117,7 +117,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                         <Grid item>
                             <RoundedButton
                                 variant="outline"
-                                label="Filtrar recetas"
+                                label={lang.filterTitle}
                                 style={{ backgroundColor: "white", padding: "8px" }}
                                 onClick={() => {
                                     setDrawerOpen(!drawerIsOpen);
@@ -126,7 +126,6 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                                 <Icon component={FilterIcon} />
                             </RoundedButton>
                         </Grid>
-                        {/* <Grid item xs={9} container spacing={2}> */}
                         {filters.map((filter, index) => (
                             <Grid key={index} item>
                                 <Chip

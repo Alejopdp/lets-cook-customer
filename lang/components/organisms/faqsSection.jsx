@@ -310,7 +310,7 @@ export const laEntrega = {
         accordions: [
             {
                 question: "¿Dónde entregáis?",
-                answer: "Entregamos en toda España.\nLa entrega en Barcelona y los pueblos más próximos es gratuita. Fuera del área metropolitana puede ser que se cobre un envío de entre 5€ y 15€. Recibirás tus kits en tu domicilio, o si prefieres en otro lugar como puede ser tu lugar de trabajo.",
+                answer: "Entregamos en toda la península.\nLa entrega en Barcelona y los pueblos más próximos es gratuita. Fuera del área metropolitana puede ser que se cobre un envío de entre 5€ y 15€. Recibirás tus kits en tu domicilio, o si prefieres en otro lugar como puede ser tu lugar de trabajo.",
             },
             {
                 question: "¿Cuándo entregáis?",
@@ -380,7 +380,7 @@ export const buyFlow = {
             },
             {
                 question: "¿Dónde entregáis?",
-                answer: "Entregamos en toda España.\nLa entrega en Barcelona y los pueblos más próximos es gratuita. Fuera del área metropolitana puede ser que se cobre un envío de entre 5€ y 15€. Recibirás tus kits en tu domicilio, o si prefieres en otro lugar como puede ser tu lugar de trabajo.",
+                answer: "Entregamos en toda la península.\nLa entrega en Barcelona y los pueblos más próximos es gratuita. Fuera del área metropolitana puede ser que se cobre un envío de entre 5€ y 15€. Recibirás tus kits en tu domicilio, o si prefieres en otro lugar como puede ser tu lugar de trabajo.",
             },
             {
                 question: "¿Cuándo entregáis?",

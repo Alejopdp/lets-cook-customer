@@ -51,6 +51,7 @@ export const checkoutStep = {
                 firstText: "Tu primer pedido llegará este",
                 secondText: "Recibirás un correo con el horario de entrega. Luego, todas las entregas se realizarán los",
             },
+            week: "semana",
             reviewsText: {
                 firstText: "Tenemos una calificación excelente en",
                 secondText: "opiniones",
@@ -109,6 +110,7 @@ export const checkoutStep = {
                 firstText: "Your first order will arrive this",
                 secondText: "You’ll receive an e-mail with the delivery time. Then, all deliveries will be each",
             },
+            week: "week",
             reviewsText: {
                 firstText: "We have an excellent rating in",
                 secondText: "opinions",
@@ -167,6 +169,7 @@ export const checkoutStep = {
                 firstText: "La teva primera comanda arribarà aquest",
                 secondText: "Rebràs un correu amb l‘horari de lliurament. Després, tots els lliuraments es realitzaran els",
             },
+            week: "setmana",
             reviewsText: {
                 firstText: "Tenim una qualificació excel·lent en",
                 secondText: "opinions",
