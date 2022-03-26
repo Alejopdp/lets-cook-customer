@@ -78,6 +78,30 @@ export const comoFunciona = {
                 "Let’s eat! Enjoy delicious and different meals. The best reward after a busy day, a tasty and healthy dish made for you… and by you!",
             image: "/assets/home/home-cf4-disfruta.jpg",
         },
+        benefitsSection: {
+            cards: [
+                {
+                    title: "Save time",
+                    content:
+                        "We know it’s not in our hands to stop the pace of the world we live in, but we have a solution to help you find moments to take care of yourselves each day.",
+                    image: "/assets/home/save-time.svg",
+                },
+                {
+                    title: "Eat a healthy and varied diet",
+                    content:
+                        "We want to take care of you in every way we can, that’s why we select fresh and local ingredients, and we surprise you with new and varied recipes each week.",
+                    image: "/assets/home/healthy-food.svg",
+                },
+                {
+                    title: "Tackle food waste",
+                    content:
+                        "We don’t throw away any food! At Let’s Cook we select the exact measures of ingredients so that there is nothing left over, but we are generous with the portions for the hungriest tummies.",
+                    image: "/assets/home/foodwaste.svg",
+                },
+            ],
+            btnText: "Find out more",
+            btnCaption: "Free delivery in Barcelona",
+        },
     },
     ca: {
         title: "Com funciona?",
@@ -105,6 +129,30 @@ export const comoFunciona = {
             content:
                 "A sopaaaaar! Disfruta d’un sopar deliciós i diferent. El millor premi després d’un día atrafegat, un menjar bó i saludable fer per a tu… i per tu!",
             image: "/assets/home/home-cf4-disfruta.jpg",
+        },
+        benefitsSection: {
+            cards: [
+                {
+                    title: "Estalvia temps",
+                    content:
+                        "Sabem que no està en les nostres mans aturar el ritme de la societat en la que vivim, però sí aportar una solució amb la que poguem trobar moments per cuidar-nos dia a dia.",
+                    image: "/assets/home/save-time.svg",
+                },
+                {
+                    title: "Menja saludable i variat",
+                    content:
+                        "Volem cuidar-te en tots els sentits, per això seleccionem pels teus sopar, ingredients frescos de proximitat i et sorprendrem cada setmana amb receptes variades.",
+                    image: "/assets/home/healthy-food.svg",
+                },
+                {
+                    title: "Evita el foodwaste",
+                    content:
+                        "El menjar no es llença! En Let’s Cook seleccionem la quantitat d’ingredients exacta perquè no quedin excedents, però som generosos amb les racions pels més famolencs.",
+                    image: "/assets/home/foodwaste.svg",
+                },
+            ],
+            btnText: "Descobreix més",
+            btnCaption: "Lliurament gratuït a Barcelona",
         },
     },
 };
