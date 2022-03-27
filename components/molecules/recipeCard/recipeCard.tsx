@@ -30,6 +30,7 @@ export const RecipeCard = (props: RecipeCardProps) => {
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 cursor: "pointer",
+                borderRadius: '8px',
                 ...props.style,
             }}
             onClick={props.handleClickOpenModal}
@@ -54,8 +55,8 @@ export const RecipeCard = (props: RecipeCardProps) => {
                                 {props.difficultyTag === "Facil"
                                     ? lang.itemEasy
                                     : props.difficultyTag === "Dificil"
-                                    ? lang.itemHard
-                                    : lang.itemMedium}
+                                        ? lang.itemHard
+                                        : lang.itemMedium}
                             </Typography>
                         </Grid>
                     </Grid>
