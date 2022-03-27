@@ -26,7 +26,7 @@ const ComoFunciona = () => {
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}${localeRoutes[router.locale][Routes["como-funciona"]]}`}
         >
             <InnerSectionLayout containerMaxWidth="lg">
-                <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
+                <TitleOtherPages title={lang.title} hideSubtitle />
                 <HowItWorksExtendedSection />
             </InnerSectionLayout>
             <BenefitsSection
