@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     item: {
         paddingLeft: "20px",
         paddingRight: "20px",
-        marginBottom: "15px",
+        // marginBottom: "15px",
         zIndex: 1,
     },
 
@@ -30,13 +30,23 @@ const useStyles = makeStyles((theme: Theme) => ({
         position: "absolute",
         zIndex: 5,
         right: 0,
-        backgroundColor: "transparent",
+        // backgroundColor: "transparent",
+        marginRight: 8,
+        backgroundColor: 'rgba(255,255,255,0.8)',
+        '&:hover': {
+            backgroundColor: 'rgba(255,255,255,1)',
+        }
     },
     backArrow: {
         position: "absolute",
         zIndex: 5,
         left: 0,
-        backgroundColor: "transparent",
+        // backgroundColor: "transparent",
+        marginLeft: 8,
+        backgroundColor: 'rgba(255,255,255,0.8)',
+        '&:hover': {
+            backgroundColor: 'rgba(255,255,255,1)',
+        }
     },
     container: {
         width: "100%",
