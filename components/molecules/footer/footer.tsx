@@ -13,14 +13,15 @@ import PinterestIcon from "@material-ui/icons/Pinterest";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import { Link } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { useLang } from '@hooks';
-
+import { useLang } from "@hooks";
+import { localeRoutes, Routes } from "lang/routes/routes";
+import { useRouter } from "next/router";
 
 export const Footer = () => {
     const classes = useStyles();
     const { logoSection, paymentMethodsSection, root, footer, marg1 } = classes;
-    const [lang] = useLang('footer');
-
+    const [lang] = useLang("footer");
+    const router = useRouter();
     interface ILink {
         name: string;
         url: string;
@@ -33,7 +34,7 @@ export const Footer = () => {
     const _links: ILink[] = [
         {
             name: lang.links.recipes,
-            url: "/recetas",
+            url: localeRoutes[router.locale][Routes["menu-semanal"]],
         },
         // {
         //     name: lang.links.bonoRegalo,
@@ -41,11 +42,11 @@ export const Footer = () => {
         // },
         {
             name: lang.links.howItWorks,
-            url: "/como-funciona",
+            url: localeRoutes[router.locale][Routes["como-funciona"]],
         },
         {
             name: lang.links.faqs,
-            url: "/preguntas-frecuentes",
+            url: localeRoutes[router.locale][Routes["preguntas-frecuentes"]],
         },
         // {
         //     name: lang.links.blog,
@@ -53,10 +54,9 @@ export const Footer = () => {
         // },
         {
             name: lang.links.legal,
-            url: "/aviso-legal",
+            url: localeRoutes[router.locale][Routes["aviso-legal"]],
         },
     ];
-
 
     return (
         <div className={root}>
@@ -82,10 +82,6 @@ export const Footer = () => {
                 </Grid>
 
                 <Grid item xs={6} md={3}>
-                    {/* <Typography variant="subtitle1" className={marg1}>
-                        Menú
-                    </Typography> */}
-
                     {_links.map((link, index) => (
                         <Link href={link.url} key={index} underline="none">
                             <Typography variant="body1" color="textSecondary">
@@ -96,26 +92,15 @@ export const Footer = () => {
                 </Grid>
 
                 <Grid item xs={6} md={3}>
-                    {/* <Typography variant="subtitle1" className={marg1}>
-                        Soporte
-                    </Typography> */}
                     <Link href="mailto:info@letscooknow.es" underline="none" target="_blank" rel="noreferrer noopener">
                         <Typography variant="body1" color="textSecondary">
                             info@letscooknow.es
                         </Typography>
                     </Link>
-                    {/* <Link href="https://wa.me/34686312132" underline="none" target="_blank" rel="noreferrer noopener">
-                        <Typography variant="body1" color="textSecondary">
-                            +34 686 312 132
-                        </Typography>
-                    </Link> */}
                 </Grid>
 
                 <Grid item xs={6} md={3} className={paymentMethodsSection}>
-                    {/* <Typography variant="subtitle1" className={marg1}>
-                        Medios de pago
-                    </Typography> */}
-                    <Image src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
+}                    <Image src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
                 </Grid>
             </Grid>
 
