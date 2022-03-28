@@ -1,0 +1,20 @@
+export const adicionales = {
+    es: {
+        backButtonTitleAdditionals: "Adicionales",
+        backButtonTitleMyProfile: "Mi perfil",
+        title: "¡Enhorabuena! Guardamos tu elección.",
+        subtitle: "Ya puedes ir encendiendo los fogones. ¿Te gustaría disfrutar un adicional con tu plan?",
+    },
+    en: {
+        backButtonTitleAdditionals: "Additionals",
+        backButtonTitleMyProfile: "My profile",
+        title: "Thank you! We have saved your selection.",
+        subtitle: "Now you can start heating up your stoves. Would you like to enjoy an additional product with your plan?",
+    },
+    ca: {
+        backButtonTitleAdditionals: "Addicionals",
+        backButtonTitleMyProfile: "Meu perfil",
+        title: "Enhorabona! Registrem la teva elecció.",
+        subtitle: "Ja pots anar encenent els fogons. T’agradaria gaudir d’un addicional amb el teu pla?",
+    },
+};

@@ -1,6 +1,5 @@
 // Utils & config
 import React, { useState, useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
 import { getAdditionalPlans } from "@helpers";
 import { useSnackbar } from "notistack";
 import { useStripe } from "@stripe/react-stripe-js";
@@ -20,8 +19,7 @@ import { useTheme } from "@material-ui/core";
 import SectionTitleBuyFlow from "../../molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
 
 // Images & icons
-import Payment from "@material-ui/icons/Payment";
-import { CustomButton, RoundedButton, SimpleAccordion } from "@atoms";
+import { SimpleAccordion } from "@atoms";
 import { PlanVariant } from "types/planVariant";
 import {
     createManySubscriptions,
