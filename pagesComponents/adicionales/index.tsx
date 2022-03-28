@@ -17,6 +17,7 @@ import { PaymentOrderState } from "types/paymentOrderState";
 import SectionTitleBuyFlow from "components/molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import { useLang } from "@hooks";
+import { TitleBuyFlow } from "@molecules";
 const langs = require("../../lang").crossSellingStep;
 
 const NuevoAcompañamientoPage = (props) => {
@@ -24,8 +25,8 @@ const NuevoAcompañamientoPage = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
     const [faqsLang] = useLang("faqsSection");
+    const [additionalLang] = useLang("adicionales");
     const [additionalPlans, setadditionalPlans] = useState([]);
-    const [isLoading, setisLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const [selectedVariants, setselectedVariants] = useState<PlanVariant[]>([]);
@@ -92,7 +93,15 @@ const NuevoAcompañamientoPage = (props) => {
     return (
         <Layout disableCallToActionSection disableFooterSection>
             <InnerSectionLayout containerMaxWidth="lg">
-                <BackButtonTitle url={localeRoutes[router.locale][Routes.perfil]} title={"Adicionales"} />
+                <BackButtonTitle
+                    url={localeRoutes[router.locale][Routes.perfil]}
+                    title={router.query.planId ? additionalLang.backButtonTitleMyProfile : additionalLang.backButtonTitleAdditionals}
+                />
+                {router.query.planId && (
+                    <Grid item xs={12}>
+                        <TitleBuyFlow title={additionalLang.title} subtitle={additionalLang.subtitle} />
+                    </Grid>
+                )}
                 <Grid item xs={12} style={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
                     <AdditionalPlansGrid
                         selectedVariants={selectedVariants}
