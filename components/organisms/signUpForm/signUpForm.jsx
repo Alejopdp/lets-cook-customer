@@ -17,9 +17,7 @@ import { useSnackbar } from "notistack";
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
 import TermsAndConditionsModal from "../../molecules/legalModals/termsAndConditionsModal";
 import PrivacyPolicyModal from "../../molecules/legalModals/privacyPolicyModal";
-
-// External Components
-import { Grid } from "@material-ui/core";
+import { localeRoutes, Routes } from "lang/routes/routes";
 
 const SignUpForm = (props) => {
     const [currentStep, setcurrentStep] = useState(0);
