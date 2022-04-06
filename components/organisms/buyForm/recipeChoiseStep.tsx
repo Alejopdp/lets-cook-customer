@@ -83,7 +83,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
 
         if (res.status === 200) {
             gotToNextView();
-            sendWelcomeEmail();
+            // sendWelcomeEmail();
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
@@ -91,7 +91,7 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     };
 
     const handleChooseRecipesLater = () => {
-        sendWelcomeEmail();
+        // sendWelcomeEmail();
         ga.event({
             action: "clic en elegir recetas luego",
             params: {
@@ -136,13 +136,13 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
         selectRecipes(newState);
     };
 
-    const sendWelcomeEmail = async () => {
-        const res = await sendNewSubscriptionWelcomeEmail(subscriptionId);
+    // const sendWelcomeEmail = async () => {
+    //     const res = await sendNewSubscriptionWelcomeEmail(subscriptionId);
 
-        if (!!!res || res.status !== 200) {
-            enqueueSnackbar("Error al enviar email de bienvenida", { variant: "error" });
-        }
-    };
+    //     if (!!!res || res.status !== 200) {
+    //         enqueueSnackbar("Error al enviar email de bienvenida", { variant: "error" });
+    //     }
+    // };
 
     const handleClickOpenFilters = () => {
         ga.event({
