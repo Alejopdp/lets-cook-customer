@@ -24,6 +24,8 @@ const PersonalDataModal = (props) => {
         phone2: props.personalData.phone2,
     });
 
+    console.log("PROPS PREFERRED: ", props.personalData.preferredLanguage);
+
     const handleChange = (e) => {
         setformData({
             ...formData,
@@ -90,7 +92,7 @@ const PersonalDataModal = (props) => {
                     <DatePicker label={lang.birthDate} value={formData.birthDateValue} handleChange={handleChange} name="birthDateValue" />
                 </Grid>
                 <Grid item xs={12}>
-                    <PreferedLanguageInput name="preferredLanguage" value={formData.preferedLanguage} handleChange={handleChange} />
+                    <PreferedLanguageInput name="preferredLanguage" value={formData.preferredLanguage} handleChange={handleChange} />
                 </Grid>
             </Grid>
         </Modal>
