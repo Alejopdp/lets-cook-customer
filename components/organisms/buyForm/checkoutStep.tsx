@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useBuyFlow, useUserInfoStore } from "@stores";
 import { Container, Grid, Typography, useTheme } from "@material-ui/core";
 import { ShipmentForm, PaymentForm, IconsWithText } from "@molecules";

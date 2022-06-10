@@ -35,6 +35,7 @@ const MailStep = (props) => {
             saveInLocalStorage("userInfo", res.data.userInfo);
             setUserInfo(res.data.userInfo);
             cookies.set("token", res.data.token);
+            setIsAuthenticated(true);
             props.signUpRedirect ? router.push("/") : "";
             props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
         } else {

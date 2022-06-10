@@ -60,16 +60,16 @@ const BlogPostCardDetail = ({ post }) => {
                     <Image
                         src={!!!post.image?.url ? `/logo.png` : post.image?.url}
                         alt={post.image?.name || "Blog image"}
-                        width={700}
-                        height={350}
+                        width={1920}
+                        height={1280}
                         layout="responsive"
                         className={image}
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: theme.spacing(3), display: "flex" }} alignItems="center">
-                    <Avatar style={{ marginRight: theme.spacing(1) }} src={post.author.picture.url}></Avatar>
+                    <Avatar style={{ marginRight: theme.spacing(1) }} src={post.author?.picture.url ?? ""}></Avatar>
                     <Typography variant="body2" style={{ marginRight: "0px" }}>
-                        {post.author.name}
+                        {post.author?.name ?? ""}
                     </Typography>
                     <Typography variant="body2" className={date}>
                         {dateFromISO8601(post.published_at, router.locale)}

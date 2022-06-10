@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface PostCardProps {
     post: Post;
+    pathName: string;
 }
 
 const PostCard = (props: PostCardProps) => {
@@ -66,7 +67,7 @@ const PostCard = (props: PostCardProps) => {
     const router = useRouter();
 
     const handlePostClick = () => {
-        router.push({ pathname: `/blogs/recetas/${props.post.slug}` });
+        router.push({ pathname: `${props.pathName}/${props.post.slug}` });
     };
 
     return (
@@ -75,15 +76,15 @@ const PostCard = (props: PostCardProps) => {
                 <Image
                     src={!!!props.post.image?.url ? `/logo.png` : props.post.image?.url}
                     alt={props.post.image?.name || "Blog image"}
-                    width={300}
-                    height={270}
+                    width={1920}
+                    height={1280}
                     layout="responsive"
                     className={image}
                 />
             </Grid>
 
             <Grid item xs={12} md={7} style={{ margin: "0 24px 0 24px" }}>
-                <Link href={`/blogs/recetas/${props.post.slug}`}>
+                <Link href={`${props.pathName}/${props.post.slug}`}>
                     <a style={{ textDecoration: "none", color: "inherit" }}>
                         <Typography variant="h2" style={{ fontSize: "22px" }} className={marg4} onClick={handlePostClick}>
                             {props.post.title}
@@ -98,8 +99,8 @@ const PostCard = (props: PostCardProps) => {
                 </Grid>
 
                 <Grid container direction="row" alignItems="center" className={publisher}>
-                    <Avatar style={{ marginRight: "8px" }} src={props.post.author.picture.url || ""}></Avatar>
-                    <Typography variant="body2">{props.post.author.name}</Typography>
+                    <Avatar style={{ marginRight: "8px" }} src={props.post.author?.picture.url || ""}></Avatar>
+                    <Typography variant="body2">{props.post.author?.name}</Typography>
                     <Typography variant="body2" className={date}>
                         {dateFromISO8601(props.post.published_at, router.locale)}
                     </Typography>
