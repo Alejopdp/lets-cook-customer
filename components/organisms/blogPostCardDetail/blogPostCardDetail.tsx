@@ -60,8 +60,8 @@ const BlogPostCardDetail = ({ post }) => {
                     <Image
                         src={!!!post.image?.url ? `/logo.png` : post.image?.url}
                         alt={post.image?.name || "Blog image"}
-                        width={700}
-                        height={350}
+                        width={1920}
+                        height={1280}
                         layout="responsive"
                         className={image}
                     />

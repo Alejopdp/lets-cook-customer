@@ -76,8 +76,8 @@ const PostCard = (props: PostCardProps) => {
                 <Image
                     src={!!!props.post.image?.url ? `/logo.png` : props.post.image?.url}
                     alt={props.post.image?.name || "Blog image"}
-                    width={300}
-                    height={270}
+                    width={1920}
+                    height={1280}
                     layout="responsive"
                     className={image}
                 />
