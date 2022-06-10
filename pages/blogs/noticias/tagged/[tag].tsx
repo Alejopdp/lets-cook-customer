@@ -16,11 +16,11 @@ const TaggedBlogPage = (props) => {
     const router = useRouter();
 
     return (
-        <Layout seoTitle={props.seoTitle} canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas/tagged/${router.query.tag}`}>
+        <Layout seoTitle={props.seoTitle} canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/noticias/tagged/${router.query.tag}`}>
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} hideSubtitle />
                 <BlogsGrid
-                    pathName="/blogs/recetas"
+                    pathName="/blogs/noticias"
                     posts={props.posts}
                     categories={props.categories}
                     hideFilter={false}
@@ -32,7 +32,7 @@ const TaggedBlogPage = (props) => {
 };
 
 export async function getServerSideProps(context) {
-    const categoriesRes = await getCategories(context.locale, { Type: BlogType.Recipes });
+    const categoriesRes = await getCategories(context.locale, { Type: BlogType.News });
     const categoryNameIdMap: { [categoryName: string]: string } = {};
 
     if (categoriesRes && categoriesRes.status === 200) {
@@ -40,7 +40,6 @@ export async function getServerSideProps(context) {
             categoryNameIdMap[category.slug] = category.id;
         }
     }
-
     const res = await getPosts(context.locale, { categories_in: [categoryNameIdMap[context.query.tag]] });
 
     return {

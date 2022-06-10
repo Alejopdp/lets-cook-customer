@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 
 // Internal components
 import PostCard from "./postCard/postCard";
-import SimpleDropdown from "components/atoms/dropdowns/simpleDropdown";
 import { Box, Grid } from "@material-ui/core";
 import { useLang } from "@hooks";
 import { Post, PostCategory } from "types/post";
@@ -21,6 +20,7 @@ interface BlogGridProps {
     posts: Post[];
     hideFilter: boolean;
     shallowRedirection?: boolean;
+    pathName: string;
 }
 
 const BlogGrid = (props: BlogGridProps) => {
@@ -38,13 +38,13 @@ const BlogGrid = (props: BlogGridProps) => {
 
     const handleTagForFilter = (value) => {
         if (value === lang.allOption) {
-            router.push({ pathname: "/blogs/recetas" });
+            router.push({ pathname: props.pathName });
             return;
         }
 
         router.push(
             {
-                pathname: `/blogs/recetas/tagged/${value}`,
+                pathname: `${props.pathName}/tagged/${value}`,
             },
             undefined,
             { shallow: props.shallowRedirection }
