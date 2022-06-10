@@ -15,15 +15,15 @@ const BlogRecetas = (props) => {
 
     return (
         <Layout
-            seoTitle={`Blog recetas - Let's cook`}
+            seoTitle={`Blog noticias - Let's cook`}
             page="blog post page"
-            seoDescriptionContent="Blog recetas"
-            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas`}
+            seoDescriptionContent="Blog noticias"
+            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/noticias`}
         >
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} hideSubtitle />
                 <BlogsGrid
-                    pathName="/blogs/recetas"
+                    pathName="/blogs/noticias"
                     posts={props.posts}
                     categories={props.categories}
                     shallowRedirection={false}
@@ -36,8 +36,8 @@ const BlogRecetas = (props) => {
 
 export async function getServerSideProps(context) {
     const [res, categoriesRes] = await Promise.all([
-        getPosts(context.locale, { type: BlogType.Recipes }),
-        getCategories(context.locale, { Type: BlogType.Recipes }),
+        getPosts(context.locale, { type: BlogType.News }),
+        getCategories(context.locale, { Type: BlogType.News }),
     ]);
 
     return {

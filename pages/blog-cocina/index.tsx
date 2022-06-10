@@ -8,6 +8,7 @@ import BlogsGrid from "../../components/organisms/blogGrid/blogGrid";
 import { getPosts } from "../../helpers/serverRequests/blog";
 import { Layout } from "../../components/layout/index";
 import { useLang } from "@hooks";
+import { BlogType } from "types/blog";
 
 const CocinaBlog = (props) => {
     const [lang] = useLang("recipesBlog");
@@ -21,14 +22,14 @@ const CocinaBlog = (props) => {
         >
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} hideSubtitle />
-                <BlogsGrid posts={props.posts || []} hideFilter categories={[]} />
+                <BlogsGrid pathName="/blog-cocina" posts={props.posts || []} hideFilter categories={[]} />
             </InnerSectionLayout>
         </Layout>
     );
 };
 
 export async function getServerSideProps(context) {
-    const res = await getPosts(context.locale, { type: "Cocina" });
+    const res = await getPosts(context.locale, { type: BlogType.Cocina });
 
     return {
         props: {

@@ -31,15 +31,16 @@ export const getPostBySlug = async (slug, locale) => {
     }
 };
 
-export const getCategories = async (locale) => {
+export const getCategories = async (locale, queryParams) => {
     try {
         const res = await Axios({
             method: "GET",
             // url: `https://lets-cook-blog.herokuapp.com/categories`,
             url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/categories`,
-            // params: {
-            //     locale,
-            // },
+            params: {
+                // locale,
+                ...queryParams,
+            },
         });
 
         return res;
