@@ -98,8 +98,8 @@ const PostCard = (props: PostCardProps) => {
                 </Grid>
 
                 <Grid container direction="row" alignItems="center" className={publisher}>
-                    <Avatar style={{ marginRight: "8px" }} src={props.post.author.picture.url || ""}></Avatar>
-                    <Typography variant="body2">{props.post.author.name}</Typography>
+                    <Avatar style={{ marginRight: "8px" }} src={props.post.author?.picture.url || ""}></Avatar>
+                    <Typography variant="body2">{props.post.author?.name}</Typography>
                     <Typography variant="body2" className={date}>
                         {dateFromISO8601(props.post.published_at, router.locale)}
                     </Typography>
