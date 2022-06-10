@@ -67,7 +67,7 @@ const BlogGrid = (props: BlogGridProps) => {
                 </Grid>
             )}
             {filteredPosts.map((post, index) => (
-                <PostCard key={post.id} post={post} />
+                <PostCard pathName={props.pathName} key={post.id} post={post} />
             ))}
         </>
     );

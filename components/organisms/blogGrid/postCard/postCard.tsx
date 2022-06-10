@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface PostCardProps {
     post: Post;
+    pathName: string;
 }
 
 const PostCard = (props: PostCardProps) => {
@@ -66,7 +67,7 @@ const PostCard = (props: PostCardProps) => {
     const router = useRouter();
 
     const handlePostClick = () => {
-        router.push({ pathname: `/blogs/recetas/${props.post.slug}` });
+        router.push({ pathname: `${props.pathName}/${props.post.slug}` });
     };
 
     return (
@@ -83,7 +84,7 @@ const PostCard = (props: PostCardProps) => {
             </Grid>
 
             <Grid item xs={12} md={7} style={{ margin: "0 24px 0 24px" }}>
-                <Link href={`/blogs/recetas/${props.post.slug}`}>
+                <Link href={`${props.pathName}/${props.post.slug}`}>
                     <a style={{ textDecoration: "none", color: "inherit" }}>
                         <Typography variant="h2" style={{ fontSize: "22px" }} className={marg4} onClick={handlePostClick}>
                             {props.post.title}
