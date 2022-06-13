@@ -11,6 +11,7 @@ import Modal from "../../atoms/modal/modal";
 import PhoneNumberInput from "../../atoms/phoneNumberInput/phoneNumberInput";
 import PreferedLanguageInput from "../../atoms/preferedLanguageInput/preferedLanguageInput";
 import DatePicker from "../../atoms/datePickerInput/datePickerInput";
+import { getYyyyMmDd } from "helpers/utils/utils";
 
 const PersonalDataModal = (props) => {
     const lang = props.lang;
@@ -18,13 +19,11 @@ const PersonalDataModal = (props) => {
     const [formData, setformData] = useState({
         name: props.personalData.name,
         lastName: props.personalData.lastName,
-        birthDateValue: props.personalData.birthDateValue,
+        birthDate: props.personalData.birthDate,
         preferredLanguage: props.personalData.preferredLanguage,
         phone1: props.personalData.phone1,
         phone2: props.personalData.phone2,
     });
-
-    console.log("PROPS PREFERRED: ", props.personalData.preferredLanguage);
 
     const handleChange = (e) => {
         setformData({
@@ -89,7 +88,12 @@ const PersonalDataModal = (props) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <DatePicker label={lang.birthDate} value={formData.birthDateValue} handleChange={handleChange} name="birthDateValue" />
+                    <DatePicker
+                        label={lang.birthDate}
+                        value={getYyyyMmDd(formData.birthDate)}
+                        handleChange={handleChange}
+                        name="birthDate"
+                    />
                 </Grid>
                 <Grid item xs={12}>
                     <PreferedLanguageInput name="preferredLanguage" value={formData.preferredLanguage} handleChange={handleChange} />

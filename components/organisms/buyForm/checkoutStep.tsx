@@ -8,6 +8,7 @@ import PurchaseConditionsModal from "../../molecules/legalModals/purchaseConditi
 import * as ga from "../../../helpers/ga";
 import { useLang } from "@hooks";
 import { updateSubscriber } from "helpers/serverRequests/mailingList";
+import { getFormattedAddressFromGoogle, OtherAddressInformation } from "helpers/utils/utils";
 
 interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
@@ -28,6 +29,10 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
         latitude: form.deliveryForm?.latitude || "",
         longitude: form.deliveryForm?.longitude || "",
         restrictions: "",
+        city: form.deliveryForm?.city ?? "",
+        province: form.deliveryForm?.province ?? "",
+        country: form.deliveryForm?.country ?? "",
+        postalCode: form.deliveryForm?.postalCode ?? "",
     });
     const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false);
     const { coupon } = useBuyFlow((state) => ({ coupon: state.form.coupon }));
@@ -50,24 +55,16 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
         });
 
         const googleAddress = await getGeometry(deliveryData.addressName);
+        const moreAddresInformation: OtherAddressInformation = getFormattedAddressFromGoogle(googleAddress.results[0]?.address_components);
 
         updateSubscriber(userInfo.email, {
             phone: deliveryData.phone1,
             name: deliveryData.firstName,
             last_name: deliveryData.lastName,
-            country:
-                googleAddress.results[0]?.address_components.find((comp) => comp.types.includes("country"))?.long_name ||
-                deliveryData.addressName ||
-                "España",
-            city:
-                googleAddress.results[0]?.address_components.find((comp) => comp.types.includes("locality"))?.long_name ||
-                deliveryData.addressName,
-            state:
-                googleAddress.results[0]?.address_components.find((comp) => comp.types.includes("administrative_area_level_1"))
-                    ?.long_name || deliveryData.addressName,
-            zip:
-                googleAddress.results[0]?.address_components.find((comp) => comp.types.includes("postal_code"))?.long_name ||
-                deliveryData.addressName,
+            country: moreAddresInformation.country ?? deliveryData.addressName ?? "España",
+            city: moreAddresInformation.city ?? deliveryData.addressName,
+            state: moreAddresInformation.province ?? deliveryData.addressName,
+            zip: moreAddresInformation.postalCode ?? deliveryData.addressName,
             shopify_note: deliveryData.restrictions,
         });
 
@@ -84,12 +81,17 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
     const handleAddressChange = async (newAddress) => {
         if (newAddress) {
             const response = await getGeometry(newAddress.description);
+            const moreAddresInformation: OtherAddressInformation = getFormattedAddressFromGoogle(response.results[0]?.address_components);
 
             setdeliveryData({
                 ...deliveryData,
                 addressName: newAddress.description,
                 latitude: response.results[0].geometry.location.lat,
                 longitude: response.results[0].geometry.location.lng,
+                city: moreAddresInformation.city,
+                province: moreAddresInformation.province,
+                country: moreAddresInformation.country,
+                postalCode: moreAddresInformation.postalCode,
             });
         }
     };

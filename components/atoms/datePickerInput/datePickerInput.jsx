@@ -25,7 +25,11 @@ export default function DatePicker(props) {
                 InputLabelProps={{
                     shrink: true,
                 }}
+                InputProps={{
+                    value: props.value,
+                }}
                 variant="outlined"
+                placeholder="dd/mm/yyyy"
             />
         </form>
     );

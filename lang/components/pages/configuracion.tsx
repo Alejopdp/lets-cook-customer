@@ -15,7 +15,7 @@ export const configuracion = {
                 fullName: "Nombre completo",
                 phone1: "Teléfono (1) (WhatsApp)",
                 phone2: "Teléfono (2)",
-                birthDateValue: "Fecha de nacimiento",
+                birthDate: "Fecha de nacimiento",
                 preferredLanguage: "Idioma de preferencia",
             },
             shippingAddress: {
@@ -118,7 +118,7 @@ export const configuracion = {
                 fullName: "First and last name",
                 phone1: "Phone number (1)",
                 phone2: "Phone number (2)",
-                birthDateValue: "Date of birth",
+                birthDate: "Date of birth",
                 preferredLanguage: "Preferred language",
             },
             shippingAddress: {
@@ -221,7 +221,7 @@ export const configuracion = {
                 fullName: "Nom complert",
                 phone1: "TelÃ©fono (1)",
                 phone2: "TelÃ©fono (2)",
-                birthDateValue: "Data de naixament",
+                birthDate: "Data de naixament",
                 preferredLanguage: "Idioma de preferència",
             },
             shippingAddress: {
