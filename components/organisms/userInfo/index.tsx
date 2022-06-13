@@ -30,6 +30,7 @@ import PaymentMethodModal from "../../molecules/userInfo/paymentMethod";
 import DataPaperSkeleton from "./dataPaperSkeleton";
 import WithSkeleton from "../../molecules/withSkeleton/withSkeleton";
 import { useRouter } from "next/router";
+import { getDdMmYyyy } from "helpers/utils/utils";
 
 const UserInfoDetail = (props) => {
     const router = useRouter();
@@ -295,8 +296,8 @@ const UserInfoDetail = (props) => {
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay
-                                        title={lang.personalData.birthDateValue}
-                                        text={customerInfo.personalData.birthDateValue}
+                                        title={lang.personalData.birthDate}
+                                        text={getDdMmYyyy(customerInfo.personalData.birthDate) ?? ""}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <DataDisplay

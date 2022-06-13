@@ -161,6 +161,10 @@ export const PaymentForm = (props) => {
             customerFirstName: props.deliveryData.firstName,
             customerLastName: props.deliveryData.lastName,
             phone1: props.deliveryData.phone1,
+            shippingCity: props.deliveryData.city,
+            shippingProvince: props.deliveryData.province,
+            shippingCountry: props.deliveryData.country,
+            shippingPostalCode: props.deliveryData.postalCode,
         };
 
         const res = await createSubscription(data, router.locale);

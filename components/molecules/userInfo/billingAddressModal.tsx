@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { getGeometry } from "../../../helpers/utils/geocode";
+import { OtherAddressInformation, getFormattedAddressFromGoogle } from "helpers/utils/utils";
 
 // External components
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
@@ -20,6 +20,10 @@ const BillingAddressModal = (props) => {
         identification: props.billingData.identification,
         latitude: props.billingData.latitude,
         longitude: props.billingData.longitude,
+        city: props.billingData.city,
+        country: props.billingData.country,
+        postalCode: props.billingData.postalCode,
+        province: props.billingData.province,
     });
 
     const handleChange = (e) => {
@@ -31,12 +35,17 @@ const BillingAddressModal = (props) => {
 
     const handleGoogleInput = async (address) => {
         const response = await getGeometry(address.description);
+        const moreAddresInformation: OtherAddressInformation = getFormattedAddressFromGoogle(response.results[0]?.address_components);
 
         setformData({
             ...formData,
             addressName: address.description,
             latitude: response.results[0].geometry.location.lat,
             longitude: response.results[0].geometry.location.lng,
+            city: moreAddresInformation.city,
+            province: moreAddresInformation.province,
+            country: moreAddresInformation.country,
+            postalCode: moreAddresInformation.postalCode,
         });
     };
 

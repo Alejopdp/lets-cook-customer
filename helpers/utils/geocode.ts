@@ -20,7 +20,6 @@ export const getGeometry = async (address) => {
     try {
         const response = await Geocode.fromAddress(address);
         // const location = response.results[0].geometry.location;
-
         return response;
     } catch (error) {
         return undefined;

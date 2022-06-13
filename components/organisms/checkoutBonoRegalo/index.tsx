@@ -6,6 +6,7 @@ import CheckoutDetails from "../../../components/organisms/checkoutDetails";
 import { getGeometry } from "helpers/utils/geocode";
 import { BuyerInfoForm } from "components/molecules/buyerInfoForm";
 import { BeneficiaryInfoForm } from "components/molecules/beneficiaryInfoForm";
+import { getFormattedAddressFromGoogle, OtherAddressInformation } from "helpers/utils/utils";
 
 interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
@@ -95,6 +96,10 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
         phone1: "",
         latitude: "",
         longitude: "",
+        city: "",
+        province: "",
+        country: "",
+        postalCode: "",
     });
 
     const handleChangeAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
@@ -118,12 +123,17 @@ const CheckoutBonoRegalo = memo((props: CheckoutStepProps) => {
     const handleAddressChange = async (newAddress) => {
         if (newAddress) {
             const response = await getGeometry(newAddress.description);
+            const moreAddresInformation: OtherAddressInformation = getFormattedAddressFromGoogle(response.results[0]?.address_components);
 
             setdeliveryData({
                 ...deliveryData,
                 addressName: newAddress.description,
                 latitude: response.results[0].geometry.location.lat,
                 longitude: response.results[0].geometry.location.lng,
+                city: moreAddresInformation.city,
+                province: moreAddresInformation.province,
+                country: moreAddresInformation.country,
+                postalCode: moreAddresInformation.postalCode,
             });
         }
     };

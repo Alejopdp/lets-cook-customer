@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { OtherAddressInformation, getFormattedAddressFromGoogle } from "helpers/utils/utils";
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -21,6 +22,10 @@ const DeliveryAddressModal = (props) => {
         preferredShippingHour: props.shippingAddress.preferredShippingHour,
         latitude: props.shippingAddress.latitude,
         longitude: props.shippingAddress.longitude,
+        city: props.shippingAddress.city,
+        country: props.shippingAddress.country,
+        postalCode: props.shippingAddress.postalCode,
+        province: props.shippingAddress.province,
     });
 
     const handleChangeDeliveryAddress = () => {
@@ -36,12 +41,17 @@ const DeliveryAddressModal = (props) => {
 
     const handleGoogleInput = async (address) => {
         const response = await getGeometry(address.description);
+        const moreAddresInformation: OtherAddressInformation = getFormattedAddressFromGoogle(response.results[0]?.address_components);
 
         setformData({
             ...formData,
             name: address.description,
             latitude: response.results[0].geometry.location.lat,
             longitude: response.results[0].geometry.location.lng,
+            city: moreAddresInformation.city,
+            province: moreAddresInformation.province,
+            country: moreAddresInformation.country,
+            postalCode: moreAddresInformation.postalCode,
         });
     };
 

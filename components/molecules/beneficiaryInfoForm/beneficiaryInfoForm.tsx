@@ -1,5 +1,4 @@
 import React, { memo, useState, useEffect } from "react";
-import { getGeometry } from "../../../helpers/utils/geocode";
 import { getShippingCost } from "@helpers";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
