@@ -13,6 +13,8 @@ import markdownToHtml from "helpers/utils/markdown";
 
 const BlogPostPage = ({ post, error }) => {
     const router = useRouter();
+
+    console.log("Slug cannonical: ", `${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas/${post.slug}`);
     return (
         <Layout
             seoTitle={`${post.title} - Let's cook`}
