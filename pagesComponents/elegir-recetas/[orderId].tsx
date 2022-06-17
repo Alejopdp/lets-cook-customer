@@ -8,27 +8,6 @@ import RecipeChoiceScreen from "components/organisms/recipeChoiceScreen/recipeCh
 import { useSnackbar } from "notistack";
 import { getRecipesForOrder } from "@helpers";
 
-// External components
-
-// Internal components
-
-// export async function getServerSideProps(context) {
-//     const orderId = context.params.orderId;
-//     const locale = context.locale;
-//     const res = await getRecipesForOrder(orderId as string, locale);
-
-//     return {
-//         props: {
-//             error: res.status !== 200,
-//             recipes: res.data.recipes || null,
-//             nextDeliveryLabel: res.data.nextDeliveryLabel || null,
-//             maxRecipesQty: res.data.maxRecipesQty || null,
-//             subscriptionId: res.data.subscriptionId,
-//             actualChosenRecipes: res.data.actualChosenRecipes,
-//         },
-//     };
-// }
-
 const ChooseRecipes = (props) => {
     const router = useRouter();
     const [isLoading, setisLoading] = useState(true);
@@ -38,6 +17,7 @@ const ChooseRecipes = (props) => {
     const [maxRecipesQty, setmaxRecipesQty] = useState(0);
     const [subscriptionId, setsubscriptionId] = useState("");
     const [actualChosenRecipes, setactualChosenRecipes] = useState([]);
+    const [planId, setPlanId] = useState("");
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
@@ -50,6 +30,7 @@ const ChooseRecipes = (props) => {
                 setmaxRecipesQty(res.data.maxRecipesQty);
                 setsubscriptionId(res.data.subscriptionId);
                 setactualChosenRecipes(res.data.actualChosenRecipes);
+                setPlanId(res.data.planId);
             } else {
                 enqueueSnackbar(res && res.data ? res.data.message : "Ocurrió un error inesperado", { variant: "error" });
                 sethasError(true);
@@ -69,6 +50,7 @@ const ChooseRecipes = (props) => {
                         maxRecipesQty={maxRecipesQty}
                         subscriptionId={subscriptionId}
                         actualChosenRecipes={actualChosenRecipes}
+                        planId={planId}
                     />
                 )}
             </InnerSectionLayout>

@@ -83,6 +83,8 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
         return (props.recipe.tools || []).join(", ");
     }, []);
 
+    console.log('props.recipe', props.recipe);
+
     const ingredients = useMemo(() => {
         return props.recipe?.recipeVariants[0]?.ingredients.join(", ") || "";
     }, []);
@@ -116,20 +118,13 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                         style={{ zIndex: 3147483647 }}
                     >
                         <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
-                            {props.recipe.name}
+                            {props.recipe.shortDescription}
                         </DialogTitle>
 
                         <DialogContent dividers={false}>
                             <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
-                                <Grid container spacing={2}>
+                                <Grid container spacing={3} style={{ marginTop: '-32px', marginBottom:16 }}>
                                     <Grid item xs={12} sm={6}>
-                                        {/* <Image
-                                            className={props.classes.image}
-                                            src={props.recipe.imageUrl}
-                                            alt={props.recipe.name}
-                                            width={400}
-                                            height={250}
-                                        /> */}
                                         <CarouselComponent
                                             maxItemsMobile={1}
                                             maxItemsTablet={1}
@@ -138,15 +133,9 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
-                                        <Grid container spacing={2}>
-                                            {/* <Grid item xs={12}>
-                                                <RecipeImgTags imgTags={props.recipe.imageTags} />
-                                            </Grid>
+                                        <Grid container spacing={3}>
                                             <Grid item xs={12}>
-                                                <Typography variant="h6">{props.recipe.name}</Typography>
-                                            </Grid> */}
-                                            <Grid item xs={12}>
-                                                <Grid container>
+                                                <Grid container style={{ paddingTop: 20 }}>
                                                     <Grid item className={props.classes.tag}>
                                                         <TimerIcon color="primary" style={{ marginRight: theme.spacing(1) }} />
                                                         <Typography variant="subtitle2">{props.recipe.cookDuration}</Typography>
@@ -159,38 +148,33 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
-                                            <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                            <Grid item xs={12}>
                                                 <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
-                                                    {lang.nutritionalInfo}
+                                                    {lang.ingredients}
                                                 </Typography>
-                                                <NutritionalInfoTable rows={props.recipe.nutritionalInfo || []} />
+                                                <Typography variant="body2">{ingredients}</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} >
+                                                <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
+                                                    {lang.tools}
+                                                </Typography>
+                                                <Typography variant="body2">{tools}</Typography>
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-
-                                <Grid container spacing={2}>
-                                    {/* <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12} sm={6}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
-                                            Descripción
+                                            {lang.description}
                                         </Typography>
                                         <Typography variant="body2">{props.recipe.longDescription}</Typography>
-                                    </Grid> */}
-                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
-                                        <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
-                                            {lang.ingredients}
-                                        </Typography>
-                                        {/* <RecipeVariantsTab
-                                            variants={props.recipe.recipeVariants} // TO DO SON RESTRICTIONS ?
-                                            // ingredientsLists={[props.recipe.]}
-                                        /> */}
-                                        <Typography variant="body2">{ingredients}</Typography>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(2) }}>
+                                    <Grid item xs={12} sm={6}>
                                         <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
-                                            {lang.tools}
+                                            {lang.nutritionalInfo}
                                         </Typography>
-                                        <Typography variant="body2">{tools}</Typography>
+                                        <NutritionalInfoTable rows={props.recipe.nutritionalInfo || []} />
                                     </Grid>
                                 </Grid>
                             </DialogContentText>

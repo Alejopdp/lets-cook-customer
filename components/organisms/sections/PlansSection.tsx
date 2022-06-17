@@ -60,7 +60,7 @@ export const PlansSection = memo((props: PlansSectionProps) => {
                     <Grid item xs={12}>
                         <Title
                             title={lang.title}
-                            subtitle={lang.subtitle}
+                            hideSubtitle
                         />
                     </Grid>
                     {props.cards.length <= 6 && isLgUp && (

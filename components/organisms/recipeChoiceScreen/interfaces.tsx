@@ -6,4 +6,5 @@ export interface RecipeChoiceScreenProps {
     maxRecipesQty: number;
     subscriptionId: string;
     actualChosenRecipes: RecipeSelection[];
+    planId: string | undefined;
 }

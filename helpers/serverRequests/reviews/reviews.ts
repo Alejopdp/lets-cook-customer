@@ -3,15 +3,16 @@ import { API_URL } from "../serverRequestInterfaces/response";
 import { Review, ReviewResponse } from "./reviewInterfaces";
 
 export async function getReviews(locale: string): Promise<ReviewResponse> {
+    let accountId = ''
+    let locationId = ''
+    let url = `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`
     try {
         const res = await Axios.request<Review[]>({
             method: "GET",
             headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
-            url: `${API_URL}/reviews`,
-            params: {
-                locale,
-            },
+            url: `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`
         });
+        console.log('response getReviews', res)
         return {
             status: res.status,
             data: res.data,
@@ -44,3 +45,4 @@ const data = Array<Review>(10)
         name: review.name + " " + index,
         date: `Hace ${index} días`,
     }));
+

@@ -36,7 +36,7 @@ const NuevoAcompañamientoPage = (props) => {
 
     useEffect(() => {
         const getAdditionalPlanList = async () => {
-            const res = await getAdditionalPlans(router.locale);
+            const res = await getAdditionalPlans(router.locale, router.query.planId as string);
 
             if (res.status === 200) {
                 setadditionalPlans(res.data.filter((plan) => plan.isActive));

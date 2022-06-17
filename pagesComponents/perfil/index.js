@@ -459,7 +459,7 @@ const Perfil = (props) => {
                                                 </>
                                             ) : (
                                                 <EmptyState
-                                                    image="/lc-square-logo.png"
+                                                    image="/empty-cart.png"
                                                     title={lang.additionalsEmptyStateTitle}
                                                     text={lang.additionalsEmptyStateSubtitle}
                                                 />

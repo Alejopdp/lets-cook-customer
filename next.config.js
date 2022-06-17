@@ -67,13 +67,13 @@ module.exports = {
             },
             {
                 // source: `/en${localeRoutes["en"][Routes["aviso-legal"]]}`,
-                source: `/en/aviso-legal`,
+                source: `/en/legal-notice`,
                 destination: "/en/aviso-legal",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },
             {
                 // source: `/ca${localeRoutes["ca"][Routes["aviso-legal"]]}`,
-                source: `/ca/aviso-legal`,
+                source: `/ca/avis-legal`,
                 destination: "/ca/aviso-legal",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },

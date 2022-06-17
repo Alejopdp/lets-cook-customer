@@ -17,6 +17,7 @@ import { loginWithSocialMedia } from "../../../helpers/serverRequests/customer";
 import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
 import { RoundedButton, TextInput } from "@atoms";
 import { Grid } from "@material-ui/core";
+import { hasAccents } from "helpers/utils/utils";
 
 const MailStep = (props) => {
     const router = useRouter();
@@ -57,13 +58,13 @@ const MailStep = (props) => {
                     name="email"
                     value={props.email}
                     onChange={props.handleChange}
-                    helperText={props.emailAlreadyExists ? lang.emailAlreadyExistsError : ""}
-                    hasError={props.emailAlreadyExists}
+                    helperText={props.emailAlreadyExists ? lang.emailAlreadyExistsError : hasAccents(props.email) ? lang.accentError : ""}
+                    hasError={props.emailAlreadyExists || hasAccents(props.email)}
                 />
             </Grid>
             <Grid item xs={12}>
                 <RoundedButton
-                    disabled={!isEmail(props.email)}
+                    disabled={!isEmail(props.email) || hasAccents(props.email)}
                     label={lang.buttonText}
                     onClick={() => props.handleSubmit(1)}
                     style={{ width: "100%" }}
