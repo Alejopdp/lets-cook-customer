@@ -10,7 +10,7 @@ const BlogsPage = (props) => {
             seoTitle={`Blog recetas - Let's cook`}
             page="blog post page"
             seoDescriptionContent="Blog recetas"
-            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas`}
+            canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blog`}
         >
             <InnerSectionLayout containerMaxWidth="md">
                 <TitleOtherPages title={"Blogs"} subtitle={"Blogcitos bl"} hideSubtitle />

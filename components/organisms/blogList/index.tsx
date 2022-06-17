@@ -36,6 +36,8 @@ const blogs = [
 const BlogList = () => {
     const { locale } = useRouter();
 
+    console.log("AKNAKODNAOSKNDiop");
+
     return (
         <Box width={"100%"}>
             {blogs.map((blog, index) => (
