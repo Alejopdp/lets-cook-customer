@@ -14,9 +14,9 @@ export const signupForm = {
         },
     },
     ca: {
-        title: "Crear tu cuenta",
+        title: "Crear el teu compte",
         register: {
-            text: "¿Ya tienes cuenta?",
+            text: "Ja tens compte?",
             boldText: "Entra aquí",
         },
     },

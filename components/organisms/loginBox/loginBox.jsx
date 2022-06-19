@@ -11,13 +11,11 @@ import * as ga from "../../../helpers/ga";
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
 import { TextInput, PasswordInput } from "../../atoms/inputs/inputs";
-import CustomButton from "../../atoms/customButton/customButton";
 import SocialNetworksButtons from "../../atoms/socialNetworksButtons/socialNetworksButtons";
-import { ForgotPassword, Register } from "../../atoms/loginHelpers/loginHelpers";
+import { Register } from "../../atoms/loginHelpers/loginHelpers";
 import Divider from "../../atoms/divider/divider";
 import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
 import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
-import { useSnackbar } from "notistack";
 import { Grid, Typography, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { localeRoutes, Routes } from "lang/routes/routes";
@@ -31,7 +29,6 @@ const LoginBox = (props) => {
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const [serverError, setserverError] = useState("");
-    const { enqueueSnackbar } = useSnackbar();
     const theme = useTheme();
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
@@ -58,7 +55,6 @@ const LoginBox = (props) => {
             saveLoginData(res.data.token, res.data.userInfo);
         } else {
             setserverError(res.data.message);
-            // alert("Error al querer ingresar");
         }
         setIsLoading(false);
     };
@@ -70,7 +66,6 @@ const LoginBox = (props) => {
             saveLoginData(res.data.token, res.data.userInfo);
         } else {
             setserverError(res.data.message);
-            // enqueueSnackbar(res.data.message);
         }
     };
 

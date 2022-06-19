@@ -38,7 +38,7 @@ export const Register = (props: RegisterProps) => {
     );
 };
 
-export const AcceptLegalTerms = props => {
+export const AcceptLegalTerms = (props) => {
     const { link } = useStyles();
 
     const router = useRouter();
@@ -48,7 +48,14 @@ export const AcceptLegalTerms = props => {
         <>
             <Grid item xs={12}>
                 <Typography variant="body2" style={{ fontSize: "14px" }}>
-                    {lang.continuing} <b onClick={props.handleOpenTycModal} style={{ cursor: 'pointer' }}>{lang.terms}</b> {lang.and} <b onClick={props.handleOpenPrivacyPolicyModal} style={{ cursor: 'pointer' }}>{lang.politics}</b>
+                    {lang.continuing}{" "}
+                    <b onClick={props.handleOpenTycModal} style={{ cursor: "pointer" }}>
+                        {lang.terms}
+                    </b>{" "}
+                    {lang.and}{" "}
+                    <b onClick={props.handleOpenPrivacyPolicyModal} style={{ cursor: "pointer" }}>
+                        {lang.politics}
+                    </b>
                 </Typography>
             </Grid>
         </>
