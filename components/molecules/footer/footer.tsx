@@ -1,5 +1,5 @@
 // Utils & Config
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -12,6 +12,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import PinterestIcon from "@material-ui/icons/Pinterest";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import { Link } from "@material-ui/core";
+import NextLink from "next/link";
 import { useStyles } from "./styles";
 import { useLang } from "@hooks";
 import { localeRoutes, Routes } from "lang/routes/routes";
@@ -31,33 +32,37 @@ export const Footer = () => {
         links?: ILink[];
     }
 
-    const _links: ILink[] = [
-        {
-            name: lang.links.recipes,
-            url: localeRoutes[router.locale][Routes["menu-semanal"]],
-        },
-        // {
-        //     name: lang.links.bonoRegalo,
-        //     url: "/bono-regalo",
-        // },
-        {
-            name: lang.links.howItWorks,
-            url: localeRoutes[router.locale][Routes["como-funciona"]],
-        },
-        {
-            name: lang.links.faqs,
-            url: localeRoutes[router.locale][Routes["preguntas-frecuentes"]],
-        },
-        // {
-        //     name: lang.links.blog,
-        //     url: "/blogs/recetas",
-        // },
-        {
-            name: lang.links.legal,
-            url: localeRoutes[router.locale][Routes["aviso-legal"]],
-        },
-    ];
+    const _links: ILink[] = useMemo(
+        () => [
+            {
+                name: lang.links.recipes,
+                url: localeRoutes[router.locale][Routes["menu-semanal"]],
+            },
+            // {
+            //     name: lang.links.bonoRegalo,
+            //     url: "/bono-regalo",
+            // },
+            {
+                name: lang.links.howItWorks,
+                url: localeRoutes[router.locale][Routes["como-funciona"]],
+            },
+            {
+                name: lang.links.faqs,
+                url: localeRoutes[router.locale][Routes["preguntas-frecuentes"]],
+            },
+            // {
+            //     name: lang.links.blog,
+            //     url: "/blogs/recetas",
+            // },
+            {
+                name: lang.links.legal,
+                url: localeRoutes[router.locale][Routes["aviso-legal"]],
+            },
+        ],
+        [router.locale]
+    );
 
+    console.log("Router locale: ", router.locale);
     return (
         <div className={root}>
             <Grid container justify="space-between" className={footer}>
@@ -83,11 +88,11 @@ export const Footer = () => {
 
                 <Grid item xs={6} md={3}>
                     {_links.map((link, index) => (
-                        <Link href={link.url} key={index} underline="none">
-                            <Typography variant="body1" color="textSecondary">
+                        <NextLink href={link.url} key={index}>
+                            <Typography variant="body1" color="textSecondary" style={{ cursor: "pointer", width: "fit-content" }}>
                                 {link.name}
                             </Typography>
-                        </Link>
+                        </NextLink>
                     ))}
                 </Grid>
 
@@ -100,7 +105,7 @@ export const Footer = () => {
                 </Grid>
 
                 <Grid item xs={6} md={3} className={paymentMethodsSection}>
-}                    <Image src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
+                    <Image src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
                 </Grid>
             </Grid>
 
