@@ -26,6 +26,7 @@ import { useSnackbar } from "notistack";
 // Icons & Images
 import EditIcon from "@material-ui/icons/Edit";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { useRouter } from "next/router";
 
 const useStylesAccordion = makeStyles((theme: Theme) =>
     createStyles({
@@ -81,6 +82,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
     const [isShippingAddressInvalid, setisShippingAddressInvalid] = useState(false);
+    const { locale } = useRouter();
 
     useEffect(() => {
         const getShippingCostIfAddressExists = async () => {
@@ -89,8 +91,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
 
             if (!!!newLatitude && !!!newLongitude) return;
 
-            const res = await getShippingCost(newLatitude, newLongitude);
-
+            const res = await getShippingCost(newLatitude, newLongitude, locale);
             if (res.status === 200) {
                 setDeliveryInfo({
                     ...form.deliveryForm,
