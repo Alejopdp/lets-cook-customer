@@ -187,12 +187,6 @@ const Perfil = (props) => {
         handleClosePlanRecoverModal();
     };
 
-    let carouselWidth;
-
-    if (process.browser) {
-        carouselWidth = window.innerWidth;
-    }
-
     const responsive = {
         superLargeDesktop: {
             breakpoint: {
