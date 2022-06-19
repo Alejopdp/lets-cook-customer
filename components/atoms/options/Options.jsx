@@ -3,11 +3,13 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { useRouter } from "next/router";
 
 const Options = ({ handleSetSubscriptionId, subscriptionId, handleClickOpenSkipPlanModal, handleClickOpenChangePlanModal, isOneTime }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const ITEM_HEIGHT = 32;
+    const { locale } = useRouter();
 
     const handleCloseOptions = () => {
         setAnchorEl(null);
@@ -29,10 +31,10 @@ const Options = ({ handleSetSubscriptionId, subscriptionId, handleClickOpenSkipP
     };
 
     const options = isOneTime
-        ? [{ id: 2, title: "CAMBIAR PLAN", handleClick: handleClickChangePlan }]
+        ? [{ id: 2, title: { es: "CAMBIAR PLAN", en: "SWAP PLAN", ca: "CANVIAR PLA" }, handleClick: handleClickChangePlan }]
         : [
-              { id: 1, title: "SALTAR SEMANA", handleClick: handleClickSkipPlanModal },
-              { id: 2, title: "CAMBIAR PLAN", handleClick: handleClickChangePlan },
+              { id: 1, title: { es: "SALTAR SEMANA", en: "SKIP WEEK", ca: "SALTAR SETMANA" }, handleClick: handleClickSkipPlanModal },
+              { id: 2, title: { es: "CAMBIAR PLAN", en: "SWAP PLAN", ca: "CANVIAR PLA" }, handleClick: handleClickChangePlan },
           ];
 
     return (
@@ -55,7 +57,7 @@ const Options = ({ handleSetSubscriptionId, subscriptionId, handleClickOpenSkipP
             >
                 {options.map((option) => (
                     <MenuItem key={option.id} onClick={option.handleClick}>
-                        {option.title}
+                        {option.title[locale]}
                     </MenuItem>
                 ))}
             </Menu>

@@ -9,7 +9,6 @@ import RotateRight from "@material-ui/icons/RotateRight";
 import Typography from "@material-ui/core/Typography";
 
 // Internal components
-
 import BoxWithTextButton from "../specificBox/boxWithTextButton";
 import PlanInfoWithStatus from "../planInfo/planInfoWithStatus";
 import Options from "../../atoms/options/Options";

@@ -54,8 +54,10 @@ export const NavbarContent = (props: NavbarContentProps) => {
     const _handleOnChangeLang = (lang) => {
         const actualUserInfo = getFromLocalStorage("userInfo");
 
-        saveInLocalStorage("userInfo", { ...actualUserInfo, preferredLanguage: lang });
-        setuserInfo({ ...userInfo, preferredLanguage: lang });
+        if (lang === "es" || lang === "en" || lang === "ca") {
+            saveInLocalStorage("userInfo", { ...actualUserInfo, preferredLanguage: lang });
+            setuserInfo({ ...userInfo, preferredLanguage: lang });
+        }
     };
     const classes = useStyles();
     const router = useRouter();
