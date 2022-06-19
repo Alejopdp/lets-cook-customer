@@ -215,7 +215,7 @@ export default function CheckoutDetails(props) {
                         <div style={{ display: "flex" }}>
                             <img width={24} height={24} src="/icons/checkout/informacion-de-envio.svg" />
                             <Typography variant="body2" style={{ fontSize: "14px", paddingLeft: theme.spacing(2) }}>
-                                {lang.shippingDayLabel.firstText} <strong>{form.deliveryForm.nextShippingDate}</strong>.{" "}
+                                {lang.shippingDayLabel.firstText} <strong>{form.deliveryForm.nextShippingDate}</strong>.{""}
                                 {lang.shippingDayLabel.secondText} {form.deliveryForm.shippingDayLabel}
                             </Typography>
                         </div>
