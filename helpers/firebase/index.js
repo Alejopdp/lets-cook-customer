@@ -1,7 +1,7 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { FacebookAuthProvider, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-if (!!!getApps() || !getApps()) {
+if (!!!getApps() || !getApps().length) {
     initializeApp({
         apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY, // Auth / General Use
         // apiKey: "AIzaSyA-ltZYFj5XA3oldGyjQ1ufxONNcdng7IA",
@@ -20,8 +20,8 @@ export const loginWithGoogleAndGetIdToken = async () => {
     try {
         const googleAuthProvider = new GoogleAuthProvider();
         googleAuthProvider.addScope("email");
-        await signInWithPopup(getAuth(getApp()), googleAuthProvider);
-        const token = await getAuth(getApp()).currentUser.getIdToken(true);
+        await signInWithPopup(getAuth(), googleAuthProvider);
+        const token = await getAuth().currentUser.getIdToken(true);
         return { token };
     } catch (error) {
         return { error };
@@ -36,8 +36,8 @@ export const loginWithFacebookAndGetIdToken = async () => {
         facebookAuthProvider.setCustomParameters({
             auth_type: "rerequest",
         });
-        const result = await signInWithPopup(getAuth(getApp()), facebookAuthProvider);
-        const token = await getAuth(getApp()).currentUser.getIdToken(true);
+        const result = await signInWithPopup(getAuth(), facebookAuthProvider);
+        const token = await getAuth().currentUser.getIdToken(true);
         return { token, email: result.user.email };
     } catch (error) {
         return { error };
