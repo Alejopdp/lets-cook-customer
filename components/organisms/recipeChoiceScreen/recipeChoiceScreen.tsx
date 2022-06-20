@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
 import { RecipeChoiceScreenProps } from "./interfaces";
 import { useLang, useRecipesFilters } from "@hooks";
-import _ from "lodash";
 
 // External components
 import { Chip, Container, Grid, Icon, useTheme } from "@material-ui/core";
@@ -60,7 +58,8 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
 
     const handleSubmit = async () => {
         var recipeSelection: { recipeId: string; quantity: number }[] = [];
-        const ordererSelectedRecipes = _.orderBy(selectedRecipes, ["id"], ["asc"]);
+        const ordererSelectedRecipes = [...selectedRecipes];
+        ordererSelectedRecipes.sort((r1, r2) => r1.id.localeCompare(r2.id));
 
         for (let recipe of ordererSelectedRecipes) {
             if (recipeSelection[0] && recipeSelection[0].recipeId === recipe.id) {
