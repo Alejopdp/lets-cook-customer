@@ -68,7 +68,7 @@ export const localeRoutes = {
         perfil: "/profile",
         planes: "/plans",
         "preguntas-frecuentes": "/faqs",
-        recetas: "recipes",
+        recetas: "/recipes",
         "menu-semanal": "/weekly-menu",
         "recuperar-contrasena": "/recover-password",
         registrarme: "/sign-in",

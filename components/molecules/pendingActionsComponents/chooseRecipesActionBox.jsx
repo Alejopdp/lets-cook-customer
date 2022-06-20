@@ -16,7 +16,7 @@ const ChooseRecipesActionBox = ({ data, lang }) => {
 
     return (
         <BoxWithIconAndTextButton
-            handleClick={() => router.push(`${localeRoutes[router.locale][Routes["elegir-recetas"]]}?orderId=${data.orderId}`)}
+            handleClick={() => router.push(`${localeRoutes[router.locale][Routes["elegir-recetas"]]}/${data.orderId}`)}
             icon="test"
             btnText={lang.btnText}
         >

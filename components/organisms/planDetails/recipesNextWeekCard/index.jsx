@@ -43,9 +43,7 @@ const RecipesNextWeekCard = (props) => {
                             <RoundedButton
                                 label={lang.chooseRecipesBtnText}
                                 onClick={() =>
-                                    router.push(
-                                        `${localeRoutes[router.locale][Routes["elegir-recetas"]]}?orderId=${props.nextWeekOrder.id}`
-                                    )
+                                    router.push(`${localeRoutes[router.locale][Routes["elegir-recetas"]]}/${props.nextWeekOrder.id}`)
                                 }
                             />
                         )}
@@ -55,9 +53,7 @@ const RecipesNextWeekCard = (props) => {
                 <BoxWithTitleAndTextButton
                     title={lang.title}
                     btnText={lang.editRecipesBtnText}
-                    handleClick={() =>
-                        router.push(`${localeRoutes[router.locale][Routes["elegir-recetas"]]}?orderId=${props.nextWeekOrder.id}`)
-                    }
+                    handleClick={() => router.push(`${localeRoutes[router.locale][Routes["elegir-recetas"]]}/${props.nextWeekOrder.id}`)}
                     hideButton={!props.canChooseRecipes}
                 >
                     <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px" }}>
