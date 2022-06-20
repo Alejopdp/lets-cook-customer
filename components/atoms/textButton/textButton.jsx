@@ -1,10 +1,9 @@
 // Utils & Config
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, useTheme, useMediaQuery } from "@material-ui/core";
+import { makeStyles, useTheme, useMediaQuery, Button, IconButton } from "@material-ui/core";
 
 // External components
-import { Button, IconButton } from "@material-ui/core/Button";
 import { AddCircleOutline as AddCircleOutlineIcon, Settings as SettingsIcon, Restore as RestoreIcon } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
