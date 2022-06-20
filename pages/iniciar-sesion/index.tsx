@@ -9,9 +9,15 @@ import { Layout } from "../../components/layout/index";
 
 const Login = (props) => {
     return (
-        <Layout seoTitle="Ingresar - Let's cook: Productos frescos y recetas" seoOgUrlSlug='ingresar' disableCallToActionSection disableFooterSection page='ingresar'>
+        <Layout
+            seoTitle="Ingresar - Let's cook: Productos frescos y recetas"
+            seoOgUrlSlug="ingresar"
+            disableCallToActionSection
+            disableFooterSection
+            page="ingresar"
+        >
             <InnerSectionLayout containerMaxWidth="lg">
-                <LoginBox redirect source='outside buyflow' />
+                <LoginBox redirect source="outside buyflow" />
             </InnerSectionLayout>
         </Layout>
     );

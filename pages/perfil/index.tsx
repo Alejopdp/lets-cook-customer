@@ -153,7 +153,7 @@ const Perfil = (props) => {
     };
 
     const handleClickRedirectToPlanDetail = (subscriptionId) => {
-        router.push(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}?subscriptionId=${subscriptionId}`);
+        router.push(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}/${subscriptionId}`);
     };
 
     const getPendingActionComponent = (data) => {
@@ -175,7 +175,7 @@ const Perfil = (props) => {
 
         if (res.status === 200) {
             enqueueSnackbar("Pedido correctamente realizado", { variant: "success" });
-            router.push(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}?subscriptionId=${res.data.subscriptionId}`);
+            router.push(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}/${res.data.subscriptionId}`);
         } else {
             enqueueSnackbar(
                 res && res.data && res.data.message ? res.data.message : "Ocurrió un error inesperado, por favor intente de nuevo",

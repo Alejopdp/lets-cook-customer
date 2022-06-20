@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { cancelSubscription, swapPlan } from "../../../helpers/serverRequests/subscription";
-import { planDetails } from "lang/components/pages/planDetails";
 
 // External Components
 import Hidden from "@material-ui/core/Hidden";
@@ -20,10 +19,11 @@ import { skipOrders } from "helpers/serverRequests/order";
 import { useRouter } from "next/router";
 import { CancellationReason } from "types/cancellation";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import { useLang } from "@hooks";
 
 const PlanDetails = (props: PlanDetailsProps) => {
     const router = useRouter();
-    const lang = planDetails[router.locale];
+    const [lang] = useLang("planDetails");
     const cancelPlanData = {
         reasons: [
             { id: 1, value: CancellationReason.CREATED_BY_ERROR, text: lang.cancelPlanReasonsText.created_by_error },
@@ -106,7 +106,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
 
         if (res.status === 200) {
             enqueueSnackbar(lang.skipPlanSnackbarSuccessText, { variant: "success" });
-            router.replace(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}?subscriptionId=${router.query.subscriptionId}`);
+            router.replace(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}/${router.query.subscriptionId}`);
         } else {
             enqueueSnackbar(res && res.data ? res.data.message : lang.skipPlanSnackbarFailureText, { variant: "error" });
         }

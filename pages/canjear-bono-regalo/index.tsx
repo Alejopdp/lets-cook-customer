@@ -23,7 +23,7 @@ const BonoRegalo = () => {
             seoOgUrlSlug="canjear-bono-regalo"
             disableCallToActionSection
             disableFooterSection={step === 0 ? false : true}
-            page='canjear bono regalo'
+            page="canjear bono regalo"
         >
             <div style={{ paddingTop: "48px" }}>{steps[step]}</div>
         </Layout>

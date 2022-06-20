@@ -19,9 +19,7 @@ const RateRecipesActionBox = ({ lang }) => {
         <BoxWithIconAndTextButton
             icon="rating"
             btnText={lang.btnText}
-            handleClick={() =>
-                router.push({ pathname: localeRoutes[router.locale][Routes["valorar-recetas"]], query: { customer: userInfo.id } })
-            }
+            handleClick={() => router.push({ pathname: `${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}` })}
         >
             <Typography variant="body2" style={{ fontSize: "16px" }}>
                 {lang.text}

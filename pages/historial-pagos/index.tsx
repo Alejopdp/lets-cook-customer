@@ -1,12 +1,9 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
 import { useTheme } from "@material-ui/core/styles";
-import Link from "next/link";
 import { useLang } from "@hooks";
 
 // External components
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import { useUserInfoStore } from "../../stores/auth";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";

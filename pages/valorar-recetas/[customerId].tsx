@@ -20,7 +20,7 @@ const RateRecipesPage = () => {
 
     useEffect(() => {
         const getRatings = async () => {
-            const res = await getRecipesByCustomer(router.query.customer, router.locale);
+            const res = await getRecipesByCustomer(router.query.customerId, router.locale);
 
             if (res && res.status === 200) {
                 setRatings(res.data.filter((recipeRating) => recipeRating.isRateable));
