@@ -10,10 +10,36 @@ import TextField from "@material-ui/core/TextField";
 
 // Internal Components
 import Modal from "../../atoms/modal/modal";
+import { useRouter } from "next/router";
+
+const successMessageMap: TranslatableStaticText = {
+    en: {
+        successMessage: (email: string): any[] => [
+            `We have sent an email to `,
+            <b>{email}</b>,
+            ` . You have 1 hour to confirm the change.`,
+        ],
+    },
+    es: {
+        successMessage: (email: string): any[] => [
+            `Te hemos enviado un correo a `,
+            <b>{email}</b>,
+            `. Tienes 1 hora para confirmar el cambio de correo electrónico.`,
+        ],
+    },
+    ca: {
+        successMessage: (email: string): any[] => [
+            `T'hem enviat un correu electrònic a `,
+            <b>{email}</b>,
+            ` . Tens 1 hora per confirmar el canvi d'adreça electrònica.`,
+        ],
+    },
+};
 
 const EmailModal = (props) => {
     const lang = props.lang;
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const { locale } = useRouter();
 
     const [newEmail, setNewEmail] = useState("");
 
@@ -59,7 +85,7 @@ const EmailModal = (props) => {
                             style={{ width: "100%" }}
                         />
                     ) : (
-                        <Typography>{lang.successMessage(newEmail)}</Typography>
+                        <Typography>{successMessageMap[locale].successMessage(newEmail)}</Typography>
                     )}
                 </Grid>
             </Grid>

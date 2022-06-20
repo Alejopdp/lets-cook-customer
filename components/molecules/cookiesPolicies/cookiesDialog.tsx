@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
 import { Grid, Typography, Paper, Hidden, Button } from "@material-ui/core";
 import { useCookiesStore } from "../../../stores/cookies";
-import { useLang, useLocalStorage } from "@hooks";
-import Link from "next/link"
+import { useLocalStorage } from "@hooks";
 import PrivacyPolicyModal from "../legalModals/privacyPolicyModal";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -37,10 +36,39 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
+const lang = {
+    es: {
+        text: [
+            "En ",
+            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            "usamos ",
+            <span style={{ textDecoration: "underline" }}>cookies de terceros </span>,
+            "para poder personalizar tu experiencia en nuestra web.",
+        ],
+    },
+    en: {
+        text: [
+            "At ",
+            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            "we use ",
+            <span style={{ textDecoration: "underline" }}>third-party cookies </span>,
+            "to personalise your experience on our website",
+        ],
+    },
+    ca: {
+        text: [
+            "A ",
+            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            "fem servir ",
+            <span style={{ textDecoration: "underline" }}>cookies de tercers</span>,
+            "per a poder personalitzar la teva experiència a la nostra web.",
+        ],
+    },
+};
+
 export default function CookiesDialog() {
     const classes = useStyles();
-    const [lang] = useLang("cookiesDialog");
-    const router = useRouter();
+    const { locale } = useRouter();
     const { saveInLocalStorage } = useLocalStorage();
     const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false);
     const { hasAcceptedCookies, setHasAcceptedCookies } = useCookiesStore((state) => ({
@@ -65,8 +93,13 @@ export default function CookiesDialog() {
                     <Paper className={classes.paper}>
                         <Grid container alignItems="center" justifyContent="center">
                             <Grid item xs={12} md={9}>
-                                <Typography variant="body1" align="center" style={{ color: "black", cursor: "pointer" }} onClick={() => setOpenPrivacyPolicyModal(true)}>
-                                    {lang.text}
+                                <Typography
+                                    variant="body1"
+                                    align="center"
+                                    style={{ color: "black", cursor: "pointer" }}
+                                    onClick={() => setOpenPrivacyPolicyModal(true)}
+                                >
+                                    {lang[locale].text}
                                 </Typography>
                             </Grid>
                             <Hidden smDown>
@@ -109,7 +142,7 @@ export default function CookiesDialog() {
                         </Grid>
                     </Paper>
                 </Grid>
-            <PrivacyPolicyModal open={openPrivacyPolicyModal} handleClose={handleClosePrivacyPolicyModal} />
+                <PrivacyPolicyModal open={openPrivacyPolicyModal} handleClose={handleClosePrivacyPolicyModal} />
             </Grid>
         </>
     );

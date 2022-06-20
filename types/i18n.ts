@@ -1,0 +1,1 @@
+type TranslatableStaticText = { es: string | object, en: string | object, ca: string | object };
