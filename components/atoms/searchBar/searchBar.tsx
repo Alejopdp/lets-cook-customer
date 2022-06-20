@@ -1,18 +1,15 @@
 // Utils & Config
 import React from "react";
 import { useRouter } from "next/router";
-import {searchBar as langs} from "@lang";
+import { searchBar as langs } from "@lang";
 
 // External components
-import InputAdornment from "@material-ui/core/InputAdornment";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import FormControl from "@material-ui/core/FormControl";
-import Grid from "@material-ui/core/Grid";
+import { InputAdornment, OutlinedInput, FormControl, Grid } from "@material-ui/core";
 
 // Icons & Images
 import SearchIcon from "@material-ui/icons/Search";
-import { useStyles } from './styles';
-import { SearchBarProps } from './interfaces';
+import { useStyles } from "./styles";
+import { SearchBarProps } from "./interfaces";
 
 export const SearchBar = (props: SearchBarProps) => {
     const classes = useStyles();

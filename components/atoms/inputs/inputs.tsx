@@ -4,14 +4,8 @@ import { useStyles } from "./styles";
 import { TextInputProps, PasswordInputProps } from "./interfaces";
 
 // External components
-import IconButton from "@material-ui/core/IconButton";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Typography from "@material-ui/core/Typography";
+import {IconButton, OutlinedInput, InputLabel, InputAdornment, FormControl, Typography} from "@material-ui/core";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 export const TextInput = (props: TextInputProps) => {
     const { textField, border } = useStyles();

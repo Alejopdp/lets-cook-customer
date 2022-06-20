@@ -1,8 +1,11 @@
 const { i18n } = require("./next-i18next.config");
 // const { Routes, localeRoutes } = require("./lang/routes/routes");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true",
+});
 
 // next.config.js
-module.exports = {
+module.exports = withBundleAnalyzer({
     i18n,
     images: {
         domains: [
@@ -247,4 +250,4 @@ module.exports = {
     //         { source: "/ca/registrarme-ca", destination: "/ca/registrarme", locale: false },
     //     ];
     // },
-};
+});

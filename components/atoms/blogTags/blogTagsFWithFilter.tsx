@@ -2,13 +2,11 @@
 import React, { useState } from "react";
 // External components
 import Link from "next/link";
-import Typography from "@material-ui/core/Typography";
+import {Typography} from "@material-ui/core";
 import { useStyles } from "./styles";
 import { BlogTagsProps } from "./interfaces";
-import { useRouter } from "next/router";
 
 export const BlogTagsWithFilter = (props: BlogTagsProps) => {
-    const router = useRouter();
     const classes = useStyles();
     const { tagClass } = classes;
     const [tags, setTags] = useState(props.tags);
