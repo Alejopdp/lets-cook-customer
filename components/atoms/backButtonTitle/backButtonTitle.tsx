@@ -4,12 +4,11 @@ import { useTheme } from "@material-ui/core/styles";
 import Link from "next/link";
 
 // External components
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
+import { Typography, Grid } from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 
 // Icons & Images
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { ArrowBack as ArrowBackIcon } from "@material-ui/icons";
 
 const BackButtonTitle = (props) => {
     const theme = useTheme();

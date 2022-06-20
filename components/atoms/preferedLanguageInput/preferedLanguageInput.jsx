@@ -1,8 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import { InputLabel, FormControl, Select } from "@material-ui/core/InputLabel";
 import { useLang } from "../../../hooks";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,7 +13,6 @@ const SimpleSelect = (props) => {
     const classes = useStyles();
     const [lang] = useLang("simpleSelect");
 
-    console.log("A VERGA: ", props.value);
     return (
         <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel htmlFor="outlined-age-native-simple">{lang.preferenceLang}</InputLabel>

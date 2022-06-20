@@ -1,14 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Grid, Typography, makeStyles } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
-import { CallMerge } from "@material-ui/icons";
 import { LocationSearchInputProps } from "./intertfaces";
 import { locationSearchInput as langs } from "@lang";
 import { useRouter } from "next/router";

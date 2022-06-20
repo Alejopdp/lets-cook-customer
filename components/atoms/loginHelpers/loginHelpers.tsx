@@ -6,10 +6,7 @@ import { ForgotPasswordProps, RegisterProps } from "./interfaces";
 import { acceptLegalTerms as langs } from "@lang";
 
 // External components
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { Link, Grid } from "@material-ui/core";
-import TermsAndConditionsModal from "../../molecules/legalModals/termsAndConditionsModal";
+import { Link, Grid, Button, Typography } from "@material-ui/core";
 
 // Icons & Images
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";

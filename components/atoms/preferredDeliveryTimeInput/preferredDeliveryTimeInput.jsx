@@ -1,10 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
+import { makeStyles, InputLabel, FormControl, Select } from "@material-ui/core";
 import { useLang } from "../../../hooks";
 import { useRouter } from "next/router";
 
