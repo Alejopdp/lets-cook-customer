@@ -1,0 +1,83 @@
+{
+    "es": {
+        "title": "Historial de pedidos",
+        "paymentsTable": {
+            "billingDate": "Fecha de pago",
+            "id": "Número de pedido",
+            "ordersQty": "Cantidad de planes",
+            "amount": "Importe",
+            "state": "Estado",
+            "labelRowsPerPage": "Filas por página",
+            "rowsPerPageAllOption": "Todos",
+            "labelDisplayedRows": {
+                "firstText": "de",
+                "secondText": "más que"
+            }
+        },
+        "paymentDetailsModal": {
+            "title": "Detalle del pago",
+            "subscriptionPaid": "Planes",
+            "subtotal": "Subtotal",
+            "recipesChoosen": "Recetas elegidas",
+            "recipesNotFound": "No se encontraron recetas",
+            "amountPaidDetails": "Detalle del importe pagado",
+            "shippingCost": "Coste de envío",
+            "discount": "Descuento",
+            "total": "Total"
+        }
+    },
+    "en": {
+        "title": "Payment history",
+        "paymentsTable": {
+            "billingDate": "Payment date",
+            "id": "Order number",
+            "ordersQty": "Plans quantity",
+            "amount": "Total amount",
+            "state": "Status",
+            "labelRowsPerPage": "Rows per page",
+            "rowsPerPageAllOption": "All",
+            "labelDisplayedRows": {
+                "firstText": "from",
+                "secondText": "more than"
+            }
+        },
+        "paymentDetailsModal": {
+            "title": "Payment details",
+            "subscriptionPaid": "Paid subscriptions",
+            "subtotal": "Total amount",
+            "recipesChoosen": "Choosen recipes",
+            "recipesNotFound": "No recipes found",
+            "amountPaidDetails": "Details of paid amount",
+            "shippingCost": "Delivery cost",
+            "discount": "Discount",
+            "total": "Total"
+        }
+    },
+    "ca": {
+        "title": "Historial de comandes",
+        "paymentsTable": {
+            "billingDate": "Data de pagament",
+            "id": "Número de comanda",
+            "ordersQty": "Quantitat",
+            "amount": "Import",
+            "state": "Estat",
+            "labelRowsPerPage": "Files per pàgina",
+            "rowsPerPageAllOption": "Tots",
+            "labelDisplayedRows": {
+                "firstText": "de",
+                "secondText": "mÃ¡s que"
+            }
+        },
+        "paymentDetailsModal": {
+            "title": "Detall del pagament",
+            "subscriptionPaid": "Plans",
+            "subtotal": "Subtotal",
+            "recipesChoosen": "Receptes escogides",
+            "recipesNotFound": "No s’han trobat receptes",
+            "amountPaidDetails": "Detall de l’import pagat",
+            "shippingCost": "Cost d’enviament",
+            "discount": "Descompte",
+            "total": "Total"
+        }
+    }
+}

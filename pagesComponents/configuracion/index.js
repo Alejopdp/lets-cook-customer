@@ -20,7 +20,6 @@ const UserInfo = (props) => {
     const [isLoading, setisLoading] = useState(true);
     const [initialCustomerInfo, setinitialCustomerInfo] = useState({});
     const userInfo = useUserInfoStore((state) => state.userInfo);
-    // const { enqueueSnackbar } = useSnackbar();
     const [lang] = useLang("configuracion");
 
     useEffect(() => {
@@ -31,7 +30,6 @@ const UserInfo = (props) => {
             if (res.status === 200) {
                 setinitialCustomerInfo(res.data);
             } else {
-                // enqueueSnackbar("Error al buscar la información", { variant: "error" });
                 alert("error");
             }
 
