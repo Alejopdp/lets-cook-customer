@@ -7,7 +7,7 @@ export const getPosts = async (locale, queryParams) => {
             method: "GET",
             url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles`,
             // params: { _sort: "createdAt:desc", ...queryParams, _locale: locale },
-            params: { _sort: "createdAt:desc", ...queryParams, _locale: "en" },
+            params: { _sort: "createdAt:desc", ...queryParams, _locale: "es" },
         });
         return res;
     } catch (error) {
@@ -22,7 +22,7 @@ export const getPostBySlug = async (slug, locale) => {
             url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/articles/${slug}`,
             params: {
                 // _locale: locale,
-                _locale: "en",
+                _locale: "es",
             },
         });
 
@@ -40,7 +40,7 @@ export const getCategories = async (locale, queryParams) => {
             url: `${process.env.NEXT_PUBLIC_BLOG_API_URL}/categories`,
             params: {
                 // _locale: locale,
-                _locale: "en",
+                _locale: "es",
                 ...queryParams,
             },
         });
