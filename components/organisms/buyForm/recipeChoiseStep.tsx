@@ -1,7 +1,6 @@
-import React, { memo, useMemo, useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 // Utils & Config
 import { useBuyFlow, useFilterDrawer } from "@stores";
-import _ from "lodash";
 import * as ga from "../../../helpers/ga";
 import { useLang } from "@hooks";
 
@@ -16,7 +15,6 @@ import { RoundedButton } from "@atoms";
 import { TitleBuyFlow, RecipesBottomBar } from "@molecules";
 import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
-import { sendNewSubscriptionWelcomeEmail } from "helpers/serverRequests/subscription";
 import { IFilter } from "@hooks";
 
 interface RecipeChoiseStepProps {
@@ -70,7 +68,8 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
         setIsLoading(true);
 
         var recipeSelection: { recipeId: string; quantity: number }[] = [];
-        const ordererSelectedRecipes = _.orderBy(recipes, ["id"], ["asc"]);
+        const ordererSelectedRecipes = [...selectedRecipes];
+        ordererSelectedRecipes.sort((r1, r2) => r1.id.localeCompare(r2.id));
 
         for (let recipe of ordererSelectedRecipes) {
             if (recipeSelection[0] && recipeSelection[0].recipeId === recipe.id) {
