@@ -49,8 +49,6 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
         const attributesEntries = Object.entries(selectedAttributes);
         if (attributesEntries.length > 0) {
             const variant = getPlanVariantWithAttributes(selectedAttributes, props.variants);
-            console.log(`Variant: ${JSON.stringify(variant)}`);
-            console.log(`Selected freq: ${props.selectedFrequency}`);
 
             if (!!variant) {
                 const withoutOldVariant = props.selectedVariants.filter((va) => va.planId !== variant.planId);
