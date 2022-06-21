@@ -7,33 +7,32 @@ import PlansSection from "../sections/PlansSection";
 import RecipesSection from "../sections/RecipesSection";
 import ReviewsSection from "../sections/ReviewsSection";
 
-import { useStyles } from "./styles";
+import styles from "./styles.module.scss";
 import { HomePageProps } from "./interfaces";
 import { useLang } from "@hooks";
 
 const HomePage = (props: HomePageProps) => {
-    const classes = useStyles();
     const [lang] = useLang("home");
 
     return (
         <>
             <ValuePropositionSection lang={lang.valuePropositionSection} />
-            <div style={{ paddingTop: "32px" }}>
+            <div className={styles.paddingTop32}>
                 <GoogleRatingSection />
             </div>
-            <div className={classes.paddingY8}>
+            <div className={styles.paddingY8}>
                 <HowItWorksSection lang={lang.howItWorksSection} />
             </div>
-            <div className={classes.paddingY8}>
+            <div className={styles.paddingY8}>
                 <PlansSection cards={props.plans} lang={lang.plansSection} />
             </div>
             <div>
                 <BenefitsSection lang={lang.benefitsSection} />
             </div>
-            <div className={classes.paddingY8}>
+            <div className={styles.paddingY8}>
                 <RecipesSection recipes={props.recipes} lang={lang.recipesSection} />
             </div>
-            <div className={classes.paddingY8}>
+            <div className={styles.paddingY8}>
                 <ReviewsSection />
             </div>
         </>

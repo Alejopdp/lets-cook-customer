@@ -4,8 +4,8 @@ import Title from "../../molecules/titleOtherPages/titleOtherPages";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
 
-import { useHowItWorksStyles as useStyles } from "./styles";
-import { HowItWorksSectionProps, HowItWorks } from "./interfaces";
+import classes from "./howItWorksStyles.module.scss";
+import { HowItWorksSectionProps } from "./interfaces";
 import { memo } from "react";
 import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
@@ -13,7 +13,6 @@ import { localeRoutes, Routes } from "lang/routes/routes";
 const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
     const lang = props.lang;
     const theme = useTheme();
-    const classes = useStyles();
     const router = useRouter();
 
     const goToPlans = () => {

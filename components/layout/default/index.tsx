@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { CssBaseline, Hidden } from "@material-ui/core";
-import NavbarContent from "./navbarContent";
-import LoggedInNavbar from "./loggedInNavbarContent";
-import NavbarDrawer from "./drawer";
-import { Footer } from "@molecules";
 import { CallToActionSection } from "@organisms";
-import { useStyles } from "./styles";
+import styles from "./styles.module.scss";
 import { useAuthStore } from "@stores";
 import Head from "next/head";
+import dynamic from "next/dynamic";
+
+const Footer = dynamic(() => import("../../molecules/footer").then((mod) => mod.Footer));
+const LoggedInNavbar = dynamic(() => import("./loggedInNavbarContent"));
+const NavbarDrawer = dynamic(() => import("./drawer"));
+const NavbarContent = dynamic(() => import("./navbarContent"));
 
 interface IOption {
     label: string;
@@ -34,7 +36,6 @@ interface LayoutProps {
 
 // export const Layout = memo(({ children: Component }: LayoutProps ) => {
 export const Layout = (props: LayoutProps) => {
-    const classes = useStyles();
     const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
     const [openDrawerMenu, setOpenDrawerMenu] = useState(false);
 
@@ -79,14 +80,14 @@ export const Layout = (props: LayoutProps) => {
                 <link rel="icon" href="/favicon.png" />
                 {!!props.canonicalUrl && <link rel="canonical" href={props.canonicalUrl} />}
             </Head>
-            <div className={classes.root}>
+            <div className={styles.root}>
                 <CssBaseline />
                 {isAuthenticated ? (
                     <LoggedInNavbar toggleOpeningDrawer={_toggleOpeningDrawer} />
                 ) : (
                     <NavbarContent page={props.page} toggleOpeningDrawer={_toggleOpeningDrawer} />
                 )}
-                <nav className={classes.drawer} aria-label="mailbox folders">
+                <nav className={styles.drawer} aria-label="mailbox folders">
                     <Hidden smUp implementation="css">
                         <NavbarDrawer
                             page={props.page}
@@ -96,7 +97,7 @@ export const Layout = (props: LayoutProps) => {
                         />
                     </Hidden>
                 </nav>
-                <main className={classes.content}>
+                <main className={styles.content}>
                     {props.children}
                     {!props.disableCallToActionSection && <CallToActionSection page={props.page} />}
                 </main>

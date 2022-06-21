@@ -1,0 +1,43 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 24px;
+}
+
+.card {
+    width: 260px;
+    box-sizing: border-box;
+    padding-inline: 8px;
+    text-align: center;
+
+    @media (max-width: 900px) {
+        margin-bottom: 24px;
+    }
+}
+
+.img {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.paddingCardTitle {
+    padding-top: 16px;
+    padding-bottom: 24px;
+}
+
+.smallText {
+    padding-top: 8px;
+    text-align: center;
+}
+
+.gridCard {
+    @media (max-width: 600px) {
+        margin-bottom: 32px;
+    }
+}

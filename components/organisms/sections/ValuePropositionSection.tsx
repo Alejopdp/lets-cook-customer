@@ -1,15 +1,12 @@
-import { makeStyles, Typography, useTheme, Grid, Container } from "@material-ui/core";
+import { Typography, Grid, Container } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
-import { CircularBotton } from "@atoms";
-import ArrowIcon from "@material-ui/icons/ExpandMore";
-import { useValuePropositionStyle as useStyles } from "./styles";
+import classes from "./styles.module.scss";
 import { useRouter } from "next/router";
 import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
 
 export const ValuePropositionSection = (props) => {
     const lang = props.lang;
-    const classes = useStyles();
     const router = useRouter();
 
     const goToPlans = () => {

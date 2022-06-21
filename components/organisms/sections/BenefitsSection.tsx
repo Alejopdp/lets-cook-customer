@@ -1,17 +1,14 @@
-import { makeStyles, Box, useTheme, Typography, Container, Grid, Hidden } from "@material-ui/core";
-import PropTypes from "prop-types";
+import { Box, useTheme, Typography, Container, Grid, Hidden } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
-import BenefitsCard from "../../molecules/benefits/benefits";
-import { useBenefitsStyle as useStyles } from "./styles";
-import { Benefit, BenefitsSectionProps } from "./interfaces";
+import classes from "./benefitsSyles.module.scss";
+import { BenefitsSectionProps } from "./interfaces";
 import TitleOtherPages from "components/molecules/titleOtherPages/titleOtherPages";
 import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
 
 export const BenefitsSection = (props: BenefitsSectionProps) => {
     const lang = props.lang;
-    const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();
 
