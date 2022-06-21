@@ -1,8 +1,6 @@
 // import clsx from "clsx";
-import { Layout } from "@layouts";
 import ValuePropositionSection from "../sections/ValuePropositionSection";
 import BenefitsSection from "../sections/BenefitsSection";
-// import CallToActionSection from "../sections/CallToActionSection";
 import GoogleRatingSection from "../sections/GoogleRatingSection";
 import HowItWorksSection from "../sections/HowItWorksSection";
 import PlansSection from "../sections/PlansSection";
@@ -11,17 +9,14 @@ import ReviewsSection from "../sections/ReviewsSection";
 
 import { useStyles } from "./styles";
 import { HomePageProps } from "./interfaces";
-import { useRouter } from "next/router";
-// const langs = require("../../../lang").home;
-import { useLang } from '@hooks';
-
+import { useLang } from "@hooks";
 
 const HomePage = (props: HomePageProps) => {
     const classes = useStyles();
-    const [lang] = useLang('home');
+    const [lang] = useLang("home");
 
     return (
-        <Layout page='homepage'>
+        <>
             <ValuePropositionSection lang={lang.valuePropositionSection} />
             <div style={{ paddingTop: "32px" }}>
                 <GoogleRatingSection />
@@ -41,7 +36,7 @@ const HomePage = (props: HomePageProps) => {
             <div className={classes.paddingY8}>
                 <ReviewsSection />
             </div>
-        </Layout>
+        </>
     );
 };
 

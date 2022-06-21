@@ -1,10 +1,9 @@
-import React, { memo, useState } from "react";
+import React, { useState } from "react";
 import { CssBaseline, Hidden } from "@material-ui/core";
 import NavbarContent from "./navbarContent";
 import LoggedInNavbar from "./loggedInNavbarContent";
 import NavbarDrawer from "./drawer";
 import { Footer } from "@molecules";
-
 import { CallToActionSection } from "@organisms";
 import { useStyles } from "./styles";
 import { useAuthStore } from "@stores";
