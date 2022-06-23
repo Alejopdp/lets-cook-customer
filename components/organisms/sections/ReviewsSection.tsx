@@ -1,7 +1,6 @@
 // Utils & Config
 import React from "react";
-import { useTheme, useMediaQuery } from "@material-ui/core";
-import clsx from "clsx";
+import { useTheme, useMediaQuery, Box } from "@material-ui/core";
 
 // External Components
 import { Rating } from "@material-ui/lab";
@@ -13,6 +12,7 @@ import "react-multi-carousel/lib/styles.css";
 import GoogleReviewBox from "../../molecules/googleReviewBox/googleReviewBox";
 import { ReviewsSectionProps } from "./interfaces";
 import classes from "./reviewsStyles.module.scss";
+import Image from "next/image";
 
 const data = [
     {
@@ -139,7 +139,10 @@ export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
                         <div className={classes.googleRatingRow}>
-                            <img className={clsx(classes.item, classes.img)} src="/assets/img-google-logo.png" />
+                            <Box className={classes.item}>
+                                <Image src="/assets/img-google-logo.png" height={40} width={118.8} alt="google-logo" />
+                            </Box>
+                            {/* <img className={clsx(classes.item, classes.img)} src="/assets/img-google-logo.png" /> */}
                             <Typography className={classes.item} variant="subtitle1">
                                 Rating
                             </Typography>

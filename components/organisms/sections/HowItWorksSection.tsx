@@ -9,6 +9,7 @@ import { HowItWorksSectionProps } from "./interfaces";
 import { memo } from "react";
 import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import Image from "next/image";
 
 const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
     const lang = props.lang;
@@ -32,7 +33,14 @@ const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
                 <Title title={lang.title} />
                 {(lang.cards || []).map((card, index) => (
                     <Grid key={index} item xs={12} sm={6} md={3} style={{ textAlign: "center" }} className={classes.gridCard}>
-                        <img className={classes.img} src={card.image} />
+                        <Image
+                            src={card.image}
+                            layout="responsive"
+                            width={296}
+                            height={172.66}
+                            className={classes.img}
+                            alt={`how-it-works-${index}`}
+                        />
                         <Typography className={classes.paddingCardTitle} variant="h5" color="initial">
                             {card.title}
                         </Typography>
