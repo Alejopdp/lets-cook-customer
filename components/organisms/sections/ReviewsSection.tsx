@@ -142,7 +142,6 @@ export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
                             <Box className={classes.item}>
                                 <Image src="/assets/img-google-logo.png" height={40} width={118.8} alt="google-logo" />
                             </Box>
-                            {/* <img className={clsx(classes.item, classes.img)} src="/assets/img-google-logo.png" /> */}
                             <Typography className={classes.item} variant="subtitle1">
                                 Rating
                             </Typography>

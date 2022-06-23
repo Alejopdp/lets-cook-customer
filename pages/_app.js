@@ -147,6 +147,8 @@ function MyApp(props) {
                 <link rel="preload" href="/fonts/avenirNextLtPro/AvenirNextLTPro-Regular.otf" as="font" crossOrigin="" />
                 <link rel="preload" href="/fonts/avenirNextLtPro/AvenirNextLTPro-Medium.otf" as="font" crossOrigin="" />
                 <link rel="preload" href="/fonts/avenirNextLtPro/AvenirNextLTPro-Bold.otf" as="font" crossOrigin="" />
+                <link rel="preload" as="image" href="/assets/home/home-principal-desktop.webp" type="image/webp"></link>
+                <link rel="preload" as="image" href="/assets/home/home-principal-mobile.webp" type="image/webp"></link>
             </Head>
             <ThemeProvider theme={theme}>
                 <SnackbarProvider maxSnack={3}>
