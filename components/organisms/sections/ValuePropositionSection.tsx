@@ -27,6 +27,7 @@ export const ValuePropositionSection = (props) => {
     return (
         <div className={classes.root}>
             <Image
+                priority
                 className={classes.image}
                 src={isMdUp ? "/assets/home/home-principal-desktop.webp" : "/assets/home/home-principal-mobile.webp"}
                 alt=""
