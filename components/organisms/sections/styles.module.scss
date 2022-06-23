@@ -1,9 +1,9 @@
 .root {
     min-height: 75vh;
     @media (max-width: 900px) {
-        background-image: url("/assets/home/home-principal-mobile.jpg");
+        background-image: url("/assets/home/home-principal-mobile.webp");
     }
-    background-image: url("/assets/home/home-principal-desktop.jpg");
+    background-image: url("/assets/home/home-principal-desktop.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
