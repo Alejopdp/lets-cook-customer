@@ -1,0 +1,51 @@
+@import "../../../styles/colors.module.scss";
+
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.row {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 24px;
+}
+
+.card {
+    display: flex;
+    height: 400;
+    box-sizing: border-box;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8;
+}
+
+.overlay {
+    display: flex;
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    color: $contrastText;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.cardContent {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 16px;
+    padding-top: 32px;
+    text-align: left;
+}
+
+.cardAction {
+    padding-top: 16px;
+    padding-bottom: 24px;
+}

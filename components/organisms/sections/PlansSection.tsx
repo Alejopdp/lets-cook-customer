@@ -1,18 +1,16 @@
-import { Typography, Container, Grid, useTheme, useMediaQuery } from "@material-ui/core/";
+import { Container, Grid, useTheme, useMediaQuery } from "@material-ui/core/";
 import Title from "../../molecules/titleOtherPages/titleOtherPages";
-import { RoundedButton } from "@atoms";
-import { useRouter } from "next/router";
-import Carousel from "react-multi-carousel";
+// import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Plan } from "@helpers";
-import { usePlansStyles as useStyles } from "./styles";
 import { PlansSectionProps } from "./interfaces";
 import { memo } from "react";
 import PlanCard from "../../molecules/planCard";
+import dynamic from "next/dynamic";
+
+const Carousel = dynamic(() => import("react-multi-carousel"));
 
 export const PlansSection = memo((props: PlansSectionProps) => {
-    const lang = props.lang
-    const classes = useStyles();
+    const lang = props.lang;
     const theme = useTheme();
     const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
     const isLgDown = useMediaQuery(theme.breakpoints.down("md"));
@@ -55,13 +53,10 @@ export const PlansSection = memo((props: PlansSectionProps) => {
 
     return (
         <>
-            <Container maxWidth='none'>
+            <Container maxWidth="none">
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Title
-                            title={lang.title}
-                            hideSubtitle
-                        />
+                        <Title title={lang.title} hideSubtitle />
                     </Grid>
                     {props.cards.length <= 6 && isLgUp && (
                         <Grid item xs={12}>

@@ -20,6 +20,7 @@ const RateRecipesPage = () => {
 
     useEffect(() => {
         const getRatings = async () => {
+            console.log("Customer id: ", router.query.customerId);
             const res = await getRecipesByCustomer(router.query.customerId, router.locale);
 
             if (res && res.status === 200) {
@@ -31,8 +32,8 @@ const RateRecipesPage = () => {
             setIsLoading(false);
         };
 
-        getRatings();
-    }, [reloadCounter]);
+        if (router.query.customerId) getRatings();
+    }, [reloadCounter, router.query]);
 
     return (
         <Layout disableCallToActionSection>

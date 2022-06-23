@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import HomePage from "../components/organisms/home";
 
 import { HomePageProps } from "components/organisms/home/interfaces";
 import { getActualWeekRecipes, getPlans, getRecipes, getReviews } from "@helpers";
+import { Layout } from "@layouts";
 
 export default function Home(props: HomePageProps) {
     return (
-        <div>
+        <Layout page="homepage">
             <HomePage {...props} />
-        </div>
+        </Layout>
     );
 }
 
@@ -17,12 +18,11 @@ export async function getServerSideProps({ locale }) {
         _plans,
         _recipes,
         // _reviews
-    ]
-        = await Promise.all([
-            getPlans(locale),
-            getActualWeekRecipes(locale),
-            // getReviews(locale)
-        ]);
+    ] = await Promise.all([
+        getPlans(locale),
+        getActualWeekRecipes(locale),
+        // getReviews(locale)
+    ]);
 
     const errors = [_plans.error, _recipes.error].filter((e) => !!e);
 

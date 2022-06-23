@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { usePlansStyles as useStyles } from "./styles";
 import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import Image from "next/image";
 const langs = require("../../../lang").home;
 
 const PlanCard = (props) => {
@@ -36,12 +37,13 @@ const PlanCard = (props) => {
             key={props.index}
             className={classes.card}
             style={{
-                backgroundImage: `url(${props.card.imageUrl})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                // backgroundImage: `url(${props.card.imageUrl})`,
+                // backgroundSize: "cover",
+                // backgroundPosition: "center",
                 ...props.style,
             }}
         >
+            <Image src={props.card.imageUrl} alt="" layout="fill" objectFit="cover" objectPosition="center" />
             <div className={classes.overlay}>
                 <div className={classes.cardContent}>
                     <Typography style={{ textAlign: "left", marginBottom: theme.spacing(1) }} variant="h5" color="initial">

@@ -16,25 +16,35 @@ import { RecipeCardProps } from "./interface";
 import TimerIcon from "@material-ui/icons/Timer";
 import SpeedIcon from "@material-ui/icons/Speed";
 import { useLang } from "@hooks";
+import Image from "next/image";
 
 export const RecipeCard = (props: RecipeCardProps) => {
-    const { root, imgTag, tag, marg, textWhite, gradient, titleText } = useStyles();
+    const { root, imgTag, tag, marg, textWhite, gradient, titleText, borderRadius } = useStyles();
     const [lang] = useLang("buyFlowLayout");
 
     return (
         <div
             className={gradient}
             style={{
-                backgroundImage: `url(${props.img})`,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
+                // backgroundImage: `url(${props.img})`,
+                // backgroundSize: "cover",
+                // backgroundRepeat: "no-repeat",
+                // backgroundPosition: "center",
+                position: "relative",
                 cursor: "pointer",
-                borderRadius: '8px',
+                borderRadius: "8px",
                 ...props.style,
             }}
             onClick={props.handleClickOpenModal}
         >
+            <Image
+                src={props.img}
+                alt={props.recipeName}
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+                className={borderRadius}
+            />
             <Card className={root}>
                 <CardContent style={{ height: "20%" }}>
                     <RecipeImgTags imgTags={props.imgTags} />
@@ -55,8 +65,8 @@ export const RecipeCard = (props: RecipeCardProps) => {
                                 {props.difficultyTag === "Facil"
                                     ? lang.itemEasy
                                     : props.difficultyTag === "Dificil"
-                                        ? lang.itemHard
-                                        : lang.itemMedium}
+                                    ? lang.itemHard
+                                    : lang.itemMedium}
                             </Typography>
                         </Grid>
                     </Grid>
