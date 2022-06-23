@@ -2,13 +2,14 @@ import { memo, useState } from "react";
 import { Container, Grid, useMediaQuery, useTheme } from "@material-ui/core";
 import RecipeCard from "../../molecules/recipeCard/recipeCard";
 import TitleOtherPages from "../../molecules/titleOtherPages/titleOtherPages";
-// import classes from "./recipesStyles.module.scss";
 import { RecipesSectionProps } from "./interfaces";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Recipes } from "@stores";
-import RecipeModal from "components/molecules/recipeModal/recipeModal";
 import * as ga from "../../../helpers/ga";
+import dynamic from "next/dynamic";
+
+const Carousel = dynamic(() => import("react-multi-carousel"));
+const RecipeModal = dynamic(() => import("components/molecules/recipeModal/recipeModal"));
 
 export const RecipesSection = memo((props: RecipesSectionProps) => {
     const lang = props.lang;

@@ -1,10 +1,13 @@
 import { Container, Grid, useTheme, useMediaQuery } from "@material-ui/core/";
 import Title from "../../molecules/titleOtherPages/titleOtherPages";
-import Carousel from "react-multi-carousel";
+// import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { PlansSectionProps } from "./interfaces";
 import { memo } from "react";
 import PlanCard from "../../molecules/planCard";
+import dynamic from "next/dynamic";
+
+const Carousel = dynamic(() => import("react-multi-carousel"));
 
 export const PlansSection = memo((props: PlansSectionProps) => {
     const lang = props.lang;
