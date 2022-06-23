@@ -1,13 +1,15 @@
-import { Typography, Grid, Container } from "@material-ui/core";
+import { Typography, Grid, Container, useMediaQuery } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import classes from "./styles.module.scss";
 import { useRouter } from "next/router";
 import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import Image from "next/image";
 
 export const ValuePropositionSection = (props) => {
     const lang = props.lang;
     const router = useRouter();
+    const isMdUp = useMediaQuery("(min-width:900px)");
 
     const goToPlans = () => {
         ga.event({
@@ -24,6 +26,14 @@ export const ValuePropositionSection = (props) => {
 
     return (
         <div className={classes.root}>
+            <Image
+                className={classes.image}
+                src={isMdUp ? "/assets/home/home-principal-desktop.webp" : "/assets/home/home-principal-mobile.webp"}
+                alt=""
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+            />
             <div className={classes.overlay}>
                 <Container maxWidth="md" className={classes.container}>
                     <Grid container spacing={2}>
