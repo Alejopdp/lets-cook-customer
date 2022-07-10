@@ -59,6 +59,7 @@ const Perfil = (props) => {
     const [swapPlanData, setSwapPlanData] = useState();
     const [subscriptionIdSelected, setSubscriptionIdSelected] = useState();
     const [reloadCounter, setreloadCounter] = useState(0);
+    const [isSkippingOrders, setIsSkippingOrders] = useState(false);
     const userInfo = useUserInfoStore((state) => state.userInfo);
 
     useEffect(() => {
@@ -129,6 +130,7 @@ const Perfil = (props) => {
     };
 
     const handlePrimaryButtonClickSkipPlanModal = async (orders) => {
+        setIsSkippingOrders(true);
         const res = await skipOrders(orders);
 
         if (res.status === 200) {
@@ -137,6 +139,7 @@ const Perfil = (props) => {
             enqueueSnackbar("Error al saltar la/s semana/s", { variant: "error" });
         }
         setOpenSkipPlanModal(false);
+        setIsSkippingOrders(false);
     };
 
     // END FUNCTIONS MANAGE PLAN
@@ -492,6 +495,7 @@ const Perfil = (props) => {
                     handlePrimaryButtonClick={handlePrimaryButtonClickSkipPlanModal}
                     data={subscription.nextTwelveOrders}
                     lang={lang.skipPlanModal}
+                    isSubmitting={isSkippingOrders}
                 />
             )}
         </>
