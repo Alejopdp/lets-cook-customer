@@ -46,6 +46,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
     const [openChangePlanModal, setOpenChangePlanModal] = useState(false);
     const [openCancelPlanModal, setOpenCancelPlanModal] = useState(false);
     const [openSkipPlanModal, setOpenSkipPlanModal] = useState(false);
+    const [isSkippingOrders, setIsSkippingOrders] = useState(false);
 
     // Change Plan Modal Functions
 
@@ -102,6 +103,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
     };
 
     const handlePrimaryButtonClickSkipPlanModal = async (orders: SkippableOrder[]) => {
+        setIsSkippingOrders(true);
         const res = await skipOrders(orders);
 
         if (res.status === 200) {
@@ -111,6 +113,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
             enqueueSnackbar(res && res.data ? res.data.message : lang.skipPlanSnackbarFailureText, { variant: "error" });
         }
         setOpenSkipPlanModal(false);
+        setIsSkippingOrders(false);
     };
 
     // Recipes Modal Functions
@@ -124,11 +127,6 @@ const PlanDetails = (props: PlanDetailsProps) => {
         }
 
         setselectedRecipe(recipe);
-        // setRecipeSelectedIndex({
-        //     ...recipeSelectedIndex,
-        //     index: recipeIndex,
-        //     period: period,
-        // });
         setOpenRecipeModal(true);
     };
 
@@ -203,6 +201,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 handlePrimaryButtonClick={handlePrimaryButtonClickSkipPlanModal}
                 data={props.subscription.nextTwelveOrders}
                 lang={lang.skipPlanModal}
+                isSubmitting={isSkippingOrders}
             />
         </>
     );

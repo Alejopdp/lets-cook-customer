@@ -73,6 +73,7 @@ const SkipPlanModal = (props: SkipPlanModalProps) => {
             secondaryButtonText={lang.secondaryButtonText}
             fullScreen={true}
             maxWidth="lg"
+            disabled={props.isSubmitting}
         >
             <Grid container spacing={2}>
                 {weeksStore.map((week, index) => (
