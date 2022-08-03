@@ -100,7 +100,7 @@ export const Footer = () => {
                 </Grid>
 
                 <Grid item xs={6} md={3} className={paymentMethodsSection}>
-}                    <Image src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
+                    <Image src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
                 </Grid>
             </Grid>
 
