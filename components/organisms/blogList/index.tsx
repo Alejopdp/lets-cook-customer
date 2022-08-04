@@ -4,7 +4,7 @@ import BlogCard from "components/molecules/blogCard";
 import { useRouter } from "next/router";
 import CocinaBlogImage from "public/assets/blog-cocina.JPG";
 import NewsBlogImage from "public/assets/blog-noticias.jpg";
-import TextButton from "components/atoms/textButton/textButton";
+import Link from "next/link";
 
 const blogs = [
     // {
@@ -46,8 +46,10 @@ const BlogList = () => {
             {blogs.map((blog, index) => (
                 <BlogCard key={index} title={blog.title[locale]} subtitle={blog.subtitle[locale]} path={blog.path} imagePath={blog.image} />
             ))}
-            <Box width={"100%"} display="none" justifyContent="center" alignContent="center">
-                <TextButton btnText="Recetas" handleClick={() => push("/blogs/recetas")} />
+            <Box width={"100%"} display="flex" justifyContent="center" alignContent="center">
+                <Link href="/blogs/recetas">
+                    <a style={{ color: "#f5f5f5" }}>Recetas</a>
+                </Link>
             </Box>
         </Box>
     );
