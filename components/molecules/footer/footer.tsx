@@ -1,5 +1,5 @@
 // Utils & Config
-import React, { memo } from "react";
+import React, { useMemo } from "react";
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 
 export const Footer = () => {
     const classes = useStyles();
-    const { logoSection, paymentMethodsSection, root, footer, marg1 } = classes;
+    const { logoSection, paymentMethodsSection, root, footer } = classes;
     const [lang] = useLang("footer");
     const router = useRouter();
     interface ILink {
@@ -31,32 +31,35 @@ export const Footer = () => {
         links?: ILink[];
     }
 
-    const _links: ILink[] = [
-        {
-            name: lang.links.recipes,
-            url: localeRoutes[router.locale][Routes["menu-semanal"]],
-        },
-        // {
-        //     name: lang.links.bonoRegalo,
-        //     url: "/bono-regalo",
-        // },
-        {
-            name: lang.links.howItWorks,
-            url: localeRoutes[router.locale][Routes["como-funciona"]],
-        },
-        {
-            name: lang.links.faqs,
-            url: localeRoutes[router.locale][Routes["preguntas-frecuentes"]],
-        },
-        // {
-        //     name: lang.links.blog,
-        //     url: "/blogs/recetas",
-        // },
-        {
-            name: lang.links.legal,
-            url: localeRoutes[router.locale][Routes["aviso-legal"]],
-        },
-    ];
+    const _links: ILink[] = useMemo(
+        () => [
+            {
+                name: lang.links.recipes,
+                url: localeRoutes[router.locale][Routes["menu-semanal"]],
+            },
+            // {
+            //     name: lang.links.bonoRegalo,
+            //     url: "/bono-regalo",
+            // },
+            {
+                name: lang.links.howItWorks,
+                url: localeRoutes[router.locale][Routes["como-funciona"]],
+            },
+            {
+                name: lang.links.faqs,
+                url: localeRoutes[router.locale][Routes["preguntas-frecuentes"]],
+            },
+            {
+                name: lang.links.blog,
+                url: "/blog",
+            },
+            {
+                name: lang.links.legal,
+                url: localeRoutes[router.locale][Routes["aviso-legal"]],
+            },
+        ],
+        [router.locale]
+    );
 
     return (
         <div className={root}>
