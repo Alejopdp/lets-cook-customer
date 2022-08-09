@@ -1,5 +1,5 @@
 // Utils & Config
-import React, { memo, useMemo } from "react";
+import React, { useMemo } from "react";
 
 // External components
 import Typography from "@material-ui/core/Typography";
@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 
 export const Footer = () => {
     const classes = useStyles();
-    const { logoSection, paymentMethodsSection, root, footer, marg1 } = classes;
+    const { logoSection, paymentMethodsSection, root, footer } = classes;
     const [lang] = useLang("footer");
     const router = useRouter();
     interface ILink {
@@ -50,10 +50,10 @@ export const Footer = () => {
                 name: lang.links.faqs,
                 url: localeRoutes[router.locale][Routes["preguntas-frecuentes"]],
             },
-            // {
-            //     name: lang.links.blog,
-            //     url: "/blogs/recetas",
-            // },
+            {
+                name: lang.links.blog,
+                url: "/blog",
+            },
             {
                 name: lang.links.legal,
                 url: localeRoutes[router.locale][Routes["aviso-legal"]],
