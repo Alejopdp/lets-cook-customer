@@ -1,5 +1,6 @@
 export enum Routes {
     "aviso-legal" = "aviso-legal",
+    blog = "blog",
     blogs = "blogs",
     "bono-regalo" = "bono-regalo",
     "canjear-bono-regalo" = "canjear-bono-regalo",
@@ -27,6 +28,7 @@ export enum Routes {
 export const localeRoutes = {
     es: {
         "aviso-legal": "/aviso-legal",
+        blog: "/blog",
         blogs: "/blogs",
         "blog-recetas": "/recetas",
         "blog-noticias": "/noticias",
@@ -53,6 +55,7 @@ export const localeRoutes = {
 
     en: {
         "aviso-legal": "/aviso-legal",
+        blog: "/blog",
         blogs: "/blog-en",
         "blog-recetas": "/recipes",
         "blog-noticias": "/news",
@@ -78,6 +81,7 @@ export const localeRoutes = {
 
     ca: {
         "aviso-legal": "/aviso-legal",
+        blog: "/blog",
         blogs: "/blog",
         "blog-recetas": "/receptes",
         "blog-noticias": "/noticies",
