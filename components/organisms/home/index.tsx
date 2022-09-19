@@ -35,7 +35,7 @@ const HomePage = (props: HomePageProps) => {
             <div className={styles.paddingY8}>
                 <ReviewsSection />
             </div>
-        </>
+        </Layout>
     );
 };
 
