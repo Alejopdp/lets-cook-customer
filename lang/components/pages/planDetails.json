@@ -144,6 +144,12 @@
                 "modalText": "Por favor, indica cual es la razón principal para cancelar tu plan",
                 "inputLabel": "Indica la razón por cancelar."
             }
+        },
+        "snackbars": {
+            "success": {
+                "planSwapped": "Plan cambiado con éxito"
+            },
+            "error": {}
         }
     },
     "en": {
@@ -291,6 +297,12 @@
                 "modalText": "Please let us know the main reason for cancelling your plan",
                 "inputLabel": "Write the reason for cancellation"
             }
+        },
+        "snackbars": {
+            "success": {
+                "planSwapped": "Plan swapped successfully"
+            },
+            "error": {}
         }
     },
     "ca": {
@@ -439,5 +451,11 @@
                 "inputLabel": "Indica quina és la razó de la cancel·lació"
             }
         }
+    },
+    "snackbars": {
+        "success": {
+            "planSwapped": "Pla canviat amb èxit"
+        },
+        "error": {}
     }
 }
