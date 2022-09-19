@@ -5,12 +5,11 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { IconButton } from "@material-ui/core/";
-import Link from "next/link";
+
 const useStyles = makeStyles((theme: Theme) => ({
     item: {
         paddingLeft: "20px",
         paddingRight: "20px",
-        // marginBottom: "15px",
         zIndex: 1,
     },
 
@@ -18,7 +17,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         color: theme.palette.primary.main,
         cursor: "pointer",
         fontSize: 15,
-        // opacity: 0.7,
     },
     dotInactive: {
         color: "grey",
@@ -30,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         position: "absolute",
         zIndex: 5,
         right: 0,
-        // backgroundColor: "transparent",
         marginRight: 8,
         backgroundColor: 'rgba(255,255,255,0.8)',
         '&:hover': {
@@ -41,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         position: "absolute",
         zIndex: 5,
         left: 0,
-        // backgroundColor: "transparent",
         marginLeft: 8,
         backgroundColor: 'rgba(255,255,255,0.8)',
         '&:hover': {
@@ -86,8 +82,6 @@ export default function CarouselComponent(props: CarouselComponentProps) {
 
     const CustomDot = ({ onClick, ...rest }) => {
         const {
-            onMove,
-            index,
             active,
             carouselState: { currentSlide, deviceType },
         } = rest;

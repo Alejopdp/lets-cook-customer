@@ -133,7 +133,6 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             }}
             onInputChange={(event, newInputValue) => {
                 setInputValue(newInputValue);
-                // setValue(newInputValue);
             }}
             renderInput={(params) => {
                 const inputProps = params.inputProps;

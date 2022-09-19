@@ -18,7 +18,7 @@ import Image from "next/image";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
 import PaymentMethodForm from "../paymentMethodForm/paymentMethodForm";
-import { useBuyFlow, useUserInfoStore, BuyFlowInitialStore } from "@stores";
+import { useBuyFlow, useUserInfoStore } from "@stores";
 import { Grid, Typography, useTheme } from "@material-ui/core";
 import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
 import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
@@ -51,13 +51,11 @@ const useStylesAccordion = makeStyles((theme: Theme) =>
 
 export const PaymentForm = (props) => {
     const lang = props.lang;
-    const { chckbox } = useStyles();
     const classes = useStylesAccordion();
     const { getFromLocalStorage, saveInLocalStorage } = useLocalStorage();
     const theme = useTheme();
     const router = useRouter();
     const { userInfo, setuserInfo } = useUserInfoStore(({ userInfo, setuserInfo }) => ({ userInfo, setuserInfo }));
-    // const gotToNextView = useBuyFlow(({ forward }) => forward);
     const stripe = useStripe();
     const [isLoadingPayment, setisLoadingPayment] = useState(false);
     const elements = useElements();
@@ -258,7 +256,7 @@ export const PaymentForm = (props) => {
                     // TO DO: Reject payment in DB
                     await handle3dSecureFailure(res.data.subscriptionId);
                     enqueueSnackbar(
-                        confirmationResponse.error ? confirmationResponse.error.message : "Error al autenticar el método de pago",
+                        confirmationResponse.error ? confirmationResponse.error.message : props.lang.snackbars.error.paymentAuthentication,
                         { variant: "error" }
                     );
                 }
@@ -329,7 +327,7 @@ export const PaymentForm = (props) => {
                     ],
                 });
             } else {
-                enqueueSnackbar("Error al completar el pago", { variant: "error" });
+                enqueueSnackbar(props.lang.snackbars.error.completePayment, { variant: "error" });
             }
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
@@ -341,7 +339,7 @@ export const PaymentForm = (props) => {
         const res = await sendNewSubscriptionWelcomeEmail(subscriptionId);
 
         if (!!!res || res.status !== 200) {
-            enqueueSnackbar("Error al enviar email de bienvenida", { variant: "error" });
+            enqueueSnackbar(props.lang.snackbars.error.completePayment.welcomeEmail, { variant: "error" });
         }
     };
 
@@ -442,6 +440,7 @@ export const PaymentForm = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <CustomCheckboxWithPopup
+                                color="primary"
                                 name="acceptTerms"
                                 checked={areTermsAccepted}
                                 onChange={() => setareTermsAccepted(!areTermsAccepted)}

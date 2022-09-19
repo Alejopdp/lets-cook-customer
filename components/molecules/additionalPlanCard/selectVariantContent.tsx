@@ -1,6 +1,5 @@
 // Utils & config
-import React, { useMemo, useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import { useStylesVariantContent } from "./styles";
 import { useTheme } from "@material-ui/core";
 
@@ -8,7 +7,7 @@ import { useTheme } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import { SelectVariantContentProps } from "./interface";
 import AttributePicker from "./attributePicker";
-import { FormControl, FormControlLabel, Radio, RadioGroup, Typography, Grid } from "@material-ui/core";
+import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@material-ui/core";
 import { getPlanVariantWithAttributes } from "@helpers";
 import { PlanVariant } from "types/planVariant";
 import { translateFrequency } from "helpers/utils/i18n";
@@ -28,23 +27,6 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
         setNewVariant();
     }, [selectedAttributes, props.selectedFrequency]);
 
-    // const actualValue = useMemo(() => {
-    //     const attributesEntries = Object.entries(selectedAttributes);
-    //     if (attributesEntries.length > 0) {
-    //         const variant = getPlanVariantWithAttributes(selectedAttributes, props.variants);
-
-    //         if (!!variant) {
-    //             const withoutOldVariant = props.selectedVariants.filter((va) => va.planId !== variant.planId);
-    //             props.setselectedVariants([...withoutOldVariant, { ...variant, frequency: selectedFrequency }]);
-    //             return variant.price;
-    //         }
-
-    //         return variant ? variant.price : -1;
-    //     } else {
-    //         return props.variants.reduce((acc, variant) => (variant.price < acc || acc === 0 ? variant.price : acc), 0);
-    //     }
-    // }, [selectedAttributes, props.selectedVariants]);
-
     const setNewVariant = () => {
         const attributesEntries = Object.entries(selectedAttributes);
         if (attributesEntries.length > 0) {
@@ -63,7 +45,6 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
     };
 
     const handleAttributeClick = (attrName: string, attrValue: string) => {
-        console.log(`Picking atr: ${attrName} & value ${attrValue}`);
         setselectedAttributes({ ...selectedAttributes, [attrName]: attrValue });
     };
 
@@ -126,7 +107,5 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
         </Box>
     );
 };
-
-SelectVariantContent.propTypes = {};
 
 export default SelectVariantContent;

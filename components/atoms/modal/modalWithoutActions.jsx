@@ -1,12 +1,11 @@
 // Utils & Config
 import React from "react";
-import { makeStyles, withStyles, useTheme } from "@material-ui/core/styles";
+import { withStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // External Components
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-// import DialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -39,17 +38,8 @@ const DialogTitle = withStyles(styles)((props) => {
     );
 });
 
-const useStyles = makeStyles((theme) => ({
-    primaryButtonClass: {
-        "&.Mui-disabled": {
-            opacity: "0.5",
-        },
-    },
-}));
-
 const ModalWithoutActions = (props) => {
     const theme = useTheme();
-    const classes = useStyles();
     const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
     return (
@@ -66,7 +56,7 @@ const ModalWithoutActions = (props) => {
             <DialogTitle id="alert-dialog-title" onClose={props.handleClose}>
                 {props.title}
             </DialogTitle>
-            <DialogContent style={{paddingBottom: theme.spacing(3)}}>{props.children}</DialogContent>
+            <DialogContent style={{ paddingBottom: theme.spacing(3) }}>{props.children}</DialogContent>
         </Dialog>
     );
 };

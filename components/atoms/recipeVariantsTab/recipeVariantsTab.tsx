@@ -32,7 +32,6 @@ export const RecipeVariantsTab = memo((props: RecipeVariantsTabProps) => {
 
     return (
         <div className={classes.root}>
-            {/* <AppBar position="static"> */}
             <Tabs
                 classes={{ indicator: classes.indicator }}
                 value={selectedVariant}
@@ -51,7 +50,6 @@ export const RecipeVariantsTab = memo((props: RecipeVariantsTabProps) => {
                     />
                 ))}
             </Tabs>
-            {/* </AppBar> */}
             <Typography variant="body2">{ingredients}</Typography>
         </div>
     );

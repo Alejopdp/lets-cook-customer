@@ -1,18 +1,14 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import clsx from "clsx";
-import { Divider, Grid, Typography, useTheme, Container } from "@material-ui/core";
+import { Grid, Typography, useTheme, Container } from "@material-ui/core";
 import { Plan, getPlanVariant, Recipe, PlanVariant } from "@helpers";
 import { Recipes, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 import { PlanWithIcon, CustomButton, SimpleAccordion, RoundedButton } from "@atoms";
 import { PlanSize } from "@molecules";
 import RecipesCalculation from "../../../molecules/recipesCalculation/recipesCalculation";
-import RecipesSection from "../../sections/RecipesSection";
 import ReviewsSection from "../../sections/ReviewsSection";
 import { useStyles } from "./styles";
 import { SelectPlanProps, ARGS } from "./interfaces";
-import { PlansList } from "./planesList";
-import { useSnackbar } from "notistack";
 import SectionTitleBuyFlow from "components/molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
 import WeekPlanRecipesSection from "./sections/weekPlanRecipesSection/weekPlanRecipesSection";
 import TermsAndConditionsModal from "../../../molecules/legalModals/termsAndConditionsModal";
@@ -25,7 +21,6 @@ import { useLang } from "@hooks";
 const langs = require("../../../../lang").selectPlanStep;
 
 export const SelectPlanStep = memo((props: SelectPlanProps) => {
-    // const { push: navigateTo, locale: lang } = useRouter();
     const router = useRouter();
     const lang = langs[router.locale];
     const [faqLang] = useLang("faqsSection");
@@ -36,7 +31,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const [recipesOfWeek, setRecipesOfWeek] = useState<Recipe[]>([]);
     const [openTycModal, setOpenTycModal] = useState(false);
     const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = useState(false);
-    const { enqueueSnackbar } = useSnackbar();
     const authStore = useAuthStore();
     const userInfoStore = useUserInfoStore();
 
@@ -168,7 +162,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     };
 
     useEffect(() => {
-        // if (!!!props.initialPlanSettings.id) {
         const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes } = getPlanData(
             props.initialPlanSettings.slug,
             props.plans
@@ -186,7 +179,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         buyFlow.setPlanVariant(props.variant);
         setPlanSize(peopleLabels);
         setRecipesOfWeek(props.recipes);
-        // }
     }, []);
 
     // TyC Modal Functions
@@ -292,7 +284,6 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                                 peopleQty={buyFlow.form.variant?.numberOfPersons}
                                 totalPrice={buyFlow.form.variant?.priceWithOffer || buyFlow.form.variant?.price}
                                 planVariantLabel={buyFlow.form.variant?.label}
-                                // totalPrice={buyFlow.form.variant ?.priceWithOffer || buyFlow.form.variant ?.price}
                                 price={buyFlow.form.variant?.price}
                                 priceWithOffer={buyFlow.form.variant?.priceWithOffer}
                             />

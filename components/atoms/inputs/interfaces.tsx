@@ -9,7 +9,7 @@ export interface TextInputBaseProps {
     helperText?: string;
     inputsProps?: Object;
     onChange: (e: FormEvent) => void;
-    hasError?: boolean;
+    hasError: boolean;
 }
 
 export interface TextInputProps extends TextInputBaseProps {

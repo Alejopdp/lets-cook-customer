@@ -1,8 +1,6 @@
 // Utils & Config
 import React, { useMemo } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-// import { useRouter } from "next/router";
-// const langs = require("../../lang").comoFunciona;
 import { CalendarCardProps } from "../interfaces";
 
 // External Components
@@ -30,8 +28,6 @@ const CalendarCard = (props: CalendarCardProps) => {
     const lang = props.lang;
     const theme = useTheme();
     const classes = useStyles();
-    // const router = useRouter();
-    // const lang = langs[router.locale];
 
     const skipperdOrdersQty = useMemo(() => props.skippedOrders.length, [props.skippedOrders]);
     return (

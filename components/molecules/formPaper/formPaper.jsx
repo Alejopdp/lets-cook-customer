@@ -5,7 +5,6 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 
 // External components
-import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { Grid, Container } from "@material-ui/core";
@@ -14,9 +13,9 @@ const FormPaper = (props) => {
     const { image, shadow, box, mt1, mb2 } = useStyles();
 
     return (
-        <Container maxWidth='md' style={{marginBottom: '40px'}}>
-            <Grid container style={{ justifyContent: 'center', minHeight: '600px' }}>
-                <Grid item xs={6} md={6} className={clsx(image, shadow)} />
+        <Container maxWidth="md" style={{ marginBottom: "40px" }}>
+            <Grid container style={{ justifyContent: "center", minHeight: "600px" }}>
+                <Grid item xs={6} className={clsx(image, shadow)} />
                 <Grid item xs={12} sm={8} md={6}>
                     <Box className={clsx(box, shadow)}>
                         <Grid container spacing={2}>
@@ -24,11 +23,11 @@ const FormPaper = (props) => {
                                 <Typography variant="h5" color="textSecondary">
                                     {props.title}
                                 </Typography>
-                                {props.paragraph &&
+                                {props.paragraph && (
                                     <Typography variant="body2" color="textSecondary" className={mt1}>
                                         {props.paragraph}
                                     </Typography>
-                                }
+                                )}
                             </Grid>
                             {props.children}
                         </Grid>

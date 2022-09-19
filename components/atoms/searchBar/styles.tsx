@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
             marginBottom: theme.spacing(5),
         },
         "& div fieldset.MuiOutlinedInput-notchedOutline": {
-            borderColor: 'white',
+            borderColor: "white",
         },
     },
     padd2: {
@@ -20,11 +20,8 @@ export const useStyles = makeStyles((theme) => ({
     searchBar: {
         borderRadius: "8px",
         backgroundColor: "white",
-        boxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        webkitBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        mozBoxShadow: '0px 3px 16px 0px rgba(0,0,0,0.06)',
-        // '& fieldset.MuiOutlinedInput-notchedOutline': {
-        //     borderColor: 'transparent',
-        // },
+        boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
+        mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.06)",
     },
 }));

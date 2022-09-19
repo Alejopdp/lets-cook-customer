@@ -1,7 +1,7 @@
 import { Checkbox, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography, useTheme } from "@material-ui/core";
 import { useFilterDrawer } from "@stores";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CustomButton from "../../atoms/customButton/customButton";
 import useStyles from "./styles";
 import { IFilter } from "@hooks";
@@ -35,7 +35,6 @@ export const DrawerMenu = ({
     };
 
     const _handleOnClose = (x) => {
-        // setFilters(selectedItems);
         handleOnClose();
     };
 

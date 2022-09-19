@@ -1,11 +1,11 @@
 export const getPlansVarians = {
     es: {
-        error: "The current plan hasn't recipes for this week."
+        error: "El plan actual no tiene recetas para esta semana.",
     },
     en: {
-        error: "The current plan hasn't recipes for this week."
+        error: "The current plan hasn't recipes for this week.",
     },
     ca: {
-        error: "The current plan hasn't recipes for this week."
+        error: "El pla actual no té receptes per aquesta setmana.",
     },
-}
+};

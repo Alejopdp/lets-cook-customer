@@ -1,9 +1,8 @@
 // Utils & Config
 import React from "react";
-import { useTheme } from "@material-ui/core";
 
 // External components
-import { Typography } from "@material-ui/core";
+import { Typography, useTheme } from "@material-ui/core";
 import Image from "next/image";
 import { IconWithTextProps } from "./interfaces";
 

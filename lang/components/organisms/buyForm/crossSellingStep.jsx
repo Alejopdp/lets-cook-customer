@@ -14,6 +14,13 @@ export const crossSellingStep = {
             subtitle: "¿Necesitas ayuda? Revisa nuestras preguntas frecuentes o consulta en nuestro chat",
             accordions: productosAdicionales.es.accordions,
         },
+        snackbars: {
+            success: {},
+            error: {
+                paymentMethodAuthentication: "Error al autenticar el método de pago",
+                paymentCompletion: "Error al completar el pago",
+            },
+        },
     },
     en: {
         title: {
@@ -28,6 +35,13 @@ export const crossSellingStep = {
             subtitle: "Do you need help? Check our frequently asked questions or ask us in our live chat",
             accordions: productosAdicionales.es.accordions,
         },
+        snackbars: {
+            success: {},
+            error: {
+                paymentMethodAuthentication: "Error authenticating payment method",
+                paymentCompletion: "Error completing payment",
+            },
+        },
     },
     ca: {
         title: {
@@ -41,6 +55,13 @@ export const crossSellingStep = {
             title: "Preguntes freqüents",
             subtitle: "Necessites ajuda? Revisa les nostres preguntes freqüents o consulta en el nostre xat",
             accordions: productosAdicionales.es.accordions,
+        },
+        snackbars: {
+            success: {},
+            error: {
+                paymentMethodAuthentication: "Error en autenticar el mètode de pagament",
+                paymentCompletion: "Error en completar el pagament",
+            },
         },
     },
 };

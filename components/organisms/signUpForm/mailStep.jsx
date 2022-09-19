@@ -4,12 +4,11 @@ import PropTypes from "prop-types";
 import { isEmail } from "../../../helpers/regex/regex";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").mailStep;
-import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
+import useLocalStorage, { LOCAL_STORAGE_KEYS } from "../../../hooks/useLocalStorage/localStorage";
 import cookies from "js-cookie";
 import { useTheme } from "@material-ui/core";
 
 // External components
-import CustomButton from "../../atoms/customButton/customButton";
 import SocialNetworksButtons from "../../atoms/socialNetworksButtons/socialNetworksButtons";
 import { AcceptLegalTerms } from "../../atoms/loginHelpers/loginHelpers";
 import Divider from "../../atoms/divider/divider";
@@ -31,10 +30,10 @@ const MailStep = (props) => {
     const handleSocialMediaSubmit = async (token) => {
         const res = await loginWithSocialMedia(token, props.source === "buyFlow");
         if (res.status === 200) {
-            saveInLocalStorage("token", res.data.token);
-            saveInLocalStorage("userInfo", res.data.userInfo);
+            saveInLocalStorage(LOCAL_STORAGE_KEYS.token, res.data.token);
+            saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, res.data.userInfo);
             setUserInfo(res.data.userInfo);
-            cookies.set("token", res.data.token);
+            cookies.set(LOCAL_STORAGE_KEYS.token, res.data.token);
             setIsAuthenticated(true);
             props.signUpRedirect ? router.push("/") : "";
             props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";

@@ -2,7 +2,7 @@
 import React from "react";
 import useStyles from "./styles";
 import { useTheme } from "@material-ui/core";
-import { CustomButton, RecipeImgTags, RoundedButton } from "@atoms";
+import { CustomButton, RecipeImgTags } from "@atoms";
 
 // External components
 import Card from "@material-ui/core/Card";
@@ -17,8 +17,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import AddCircle from "@material-ui/icons/AddCircle";
 import AddCircleOutline from "@material-ui/icons/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import { Box, Button, IconButton } from "@material-ui/core";
-import { useBuyFlow } from "@stores";
+import { Box, IconButton } from "@material-ui/core";
 import { RecipeCardBuyFlowProps } from "./interfaces";
 import { useLang } from "@hooks";
 
@@ -26,7 +25,6 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
     const theme = useTheme();
     const [lang] = useLang("buyFlowLayout");
     const { root, cardCnt, tag, marg } = useStyles();
-    // const { recipes, variant } = useBuyFlow((store) => ({ recipes: store.form.recipes, variant: store.form.variant }));
 
     const hideAddButton = () => {
         const index = props.selectedRecipes.findIndex(({ id }) => id === props.id);

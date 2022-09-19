@@ -14,12 +14,14 @@ import MailStep from "./mailStep";
 import PasswordStep from "./passwordStep";
 import { checkIfEmailExists, signUp } from "../../../helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
-import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
+import useLocalStorage, { LOCAL_STORAGE_KEYS } from "../../../hooks/useLocalStorage/localStorage";
 import TermsAndConditionsModal from "../../molecules/legalModals/termsAndConditionsModal";
 import PrivacyPolicyModal from "../../molecules/legalModals/privacyPolicyModal";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import useAnalytics from "hooks/useAnalytics";
 
 const SignUpForm = (props) => {
+    const { trackSignUpEmailInput, trackSignUpPasswordInput, trackAlreadyHaveAccountClick } = useAnalytics();
     const [currentStep, setcurrentStep] = useState(0);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
@@ -45,14 +47,7 @@ const SignUpForm = (props) => {
             setEmailAlreadyExists(true);
             return;
         }
-
-        ga.event({
-            action: "clic en continuar",
-            params: {
-                event_category: `registrarse - ${props.source}`,
-                event_label: "correo electrónico",
-            },
-        });
+        trackSignUpEmailInput(props.source);
         setIsLoading(true);
         if (currentStep + number < 0 || currentStep + number > 1) alert("error");
         setcurrentStep(currentStep + number);
@@ -74,21 +69,14 @@ const SignUpForm = (props) => {
     };
 
     const handleCreateAccount = async () => {
-        ga.event({
-            action: "clic en registrarme",
-            params: {
-                event_category: `registrarse - ${props.source}`,
-                event_label: "ingrese su contrasena",
-            },
-        });
-
+        trackSignUpPasswordInput(props.source);
         const res = await signUp(formData.email, formData.password, props.source === "buyFlow");
 
         if (res.status === 200) {
-            saveInLocalStorage("userInfo", res.data.userInfo);
+            saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, res.data.userInfo);
             setUserInfo(res.data.userInfo);
-            saveInLocalStorage("token", res.data.token);
-            cookies.set("token", res.data.token);
+            saveInLocalStorage(LOCAL_STORAGE_KEYS.token, res.data.token);
+            cookies.set(LOCAL_STORAGE_KEYS.token, res.data.token);
             setIsAuthenticated(true);
             props.handleSignUp ? props.handleSignUp(res.data.userInfo, formData.sendInfo) : "";
         } else {
@@ -97,13 +85,7 @@ const SignUpForm = (props) => {
     };
 
     const handleRedirect = () => {
-        ga.event({
-            action: "clic en iniciar sesion",
-            params: {
-                event_category: `registrarse - ${props.source}`,
-                event_label: "ya tienes cuenta",
-            },
-        });
+        trackAlreadyHaveAccountClick(source);
         router.push(localeRoutes[router.locale][Routes["iniciar-sesion"]]);
     };
 

@@ -1,13 +1,11 @@
-import React, { memo, useEffect, useMemo } from "react";
-
+import React, { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
 import { AppBar, Toolbar } from "@material-ui/core";
-
 import { StepperBuy, LangSelector } from "@molecules";
-import { useAuthStore, useBuyFlow } from "@stores";
+import { useAuthStore } from "@stores";
 import { useStyles } from "./styles";
+import { useLang } from "@hooks";
 
 interface Step {
     label: string;
@@ -15,40 +13,36 @@ interface Step {
     state: "active" | "inactive";
 }
 
-interface AppBarStepperProps {
-    steps?: Step[];
-}
+export const AppBarStepper = () => {
+    const [lang] = useLang("appBarStepper");
+    console.log("LANG: ", lang);
 
-const _steps: Step[] = [
-    { label: "Seleccionar plan", icon: "/icons/appbar/img-header-select-plan.svg", state: "active" },
-    { label: "Registrarse", icon: "/icons/appbar/img-header-register.svg", state: "inactive" },
-    { label: "Checkout", icon: "/icons/appbar/img-header-checkout.svg", state: "inactive" },
-    { label: "Elegir recetas", icon: "/icons/appbar/img-header-select-recipes.svg", state: "inactive" },
-];
+    const steps: Step[] = useMemo(
+        () => [
+            { label: lang.steps.selectPlan, icon: "/icons/appbar/img-header-select-plan.svg", state: "active" },
+            { label: lang.steps.signUp, icon: "/icons/appbar/img-header-register.svg", state: "inactive" },
+            { label: lang.steps.checkout, icon: "/icons/appbar/img-header-checkout.svg", state: "inactive" },
+            { label: lang.steps.chooseRecipes, icon: "/icons/appbar/img-header-select-recipes.svg", state: "inactive" },
+        ],
+        [lang]
+    );
 
-const loggedInSteps: Step[] = [
-    { label: "Seleccionar plan", icon: "/icons/appbar/img-header-select-plan.svg", state: "active" },
-    { label: "Registrarse", icon: "/icons/appbar/img-header-register.svg", state: "inactive" },
-    { label: "Checkout", icon: "/icons/appbar/img-header-checkout.svg", state: "inactive" },
-    { label: "Elegir recetas", icon: "/icons/appbar/img-header-select-recipes.svg", state: "inactive" },
-];
+    const loggedInSteps: Step[] = useMemo(
+        () => [
+            { label: lang.steps.selectPlan, icon: "/icons/appbar/img-header-select-plan.svg", state: "active" },
+            { label: lang.steps.signUp, icon: "/icons/appbar/img-header-register.svg", state: "inactive" },
+            { label: lang.steps.checkout, icon: "/icons/appbar/img-header-checkout.svg", state: "inactive" },
+            { label: lang.steps.chooseRecipes, icon: "/icons/appbar/img-header-select-recipes.svg", state: "inactive" },
+        ],
+        [lang]
+    );
 
-export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-    const { showRegister, setShowRegister: toggleRegister } = useBuyFlow(({ setShowRegister, showRegister }) => ({
-        setShowRegister,
-        showRegister,
-    }));
 
     const showLoggedInSteps = useMemo(() => {
         return isAuthenticated;
     }, []);
 
-    // useEffect(() => {
-    //     if (isAuthenticated) {
-    //         toggleRegister(false);
-    //     }
-    // }, []);
     const classes = useStyles();
 
     return (
@@ -58,7 +52,6 @@ export const AppBarStepper = ({ steps = _steps }: AppBarStepperProps) => {
                     <Link href="/">
                         <Image src="/logo.png" width={115} height={40} alt="lets-cook-logo" className={classes.cursorPointer} />
                     </Link>
-                    {/* <Image src="/logo.png" width={115} height={40} /> */}
                 </div>
                 <StepperBuy smDowmHide steps={showLoggedInSteps ? loggedInSteps : steps} />
                 <LangSelector />

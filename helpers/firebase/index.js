@@ -4,7 +4,6 @@ import { FacebookAuthProvider, getAuth, GoogleAuthProvider, signInWithPopup } fr
 if (!!!getApps() || !getApps().length) {
     initializeApp({
         apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY, // Auth / General Use
-        // apiKey: "AIzaSyA-ltZYFj5XA3oldGyjQ1ufxONNcdng7IA",
         authDomain: "letscook-001.firebaseapp.com",
         projectId: "letscook-001",
         storageBucket: "letscook-001.appspot.com",

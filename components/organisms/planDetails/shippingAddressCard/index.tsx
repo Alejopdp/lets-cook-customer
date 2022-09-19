@@ -1,23 +1,14 @@
 // Utils & Config
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-// import { useRouter } from "next/router";
-// const langs = require("../../lang").comoFunciona;
-
-// External Components
+import { useTheme } from "@material-ui/core/styles";
 
 // Internal components
 import BoxWithTitle from "../../../molecules/specificBox/boxWithTitle";
 import DataDisplay from "../../../molecules/dataDisplay/dataDisplay";
 
-const useStyles = makeStyles((theme) => ({}));
-
 const ShippingAddressCard = (props) => {
     const lang = props.lang;
     const theme = useTheme();
-    const classes = useStyles();
-    // const router = useRouter();
-    // const lang = langs[router.locale];
 
     return (
         <BoxWithTitle title={lang.title}>

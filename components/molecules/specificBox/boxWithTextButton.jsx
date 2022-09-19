@@ -7,10 +7,6 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import GeneralBox from "../../atoms/generalBox/generalBox";
 import TextButton from "../../atoms/textButton/textButton";
 
-// Icons & Images
-
-const useStyles = makeStyles((theme) => ({}));
-
 const BoxWithTextButton = (props) => {
     const theme = useTheme();
 

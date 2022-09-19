@@ -13,6 +13,7 @@ import GoogleReviewBox from "../../molecules/googleReviewBox/googleReviewBox";
 import { ReviewsSectionProps } from "./interfaces";
 import classes from "./reviewsStyles.module.scss";
 import Image from "next/image";
+import { useLang } from "@hooks";
 
 const data = [
     {
@@ -95,6 +96,7 @@ const data = [
 ];
 
 export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
+    const [lang] = useLang("home");
     const theme = useTheme();
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -143,7 +145,7 @@ export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
                                 <Image src="/assets/img-google-logo.png" height={40} width={118.8} alt="google-logo" />
                             </Box>
                             <Typography className={classes.item} variant="subtitle1">
-                                Rating
+                                {lang.reviewsSection.rating}
                             </Typography>
                         </div>
                     </Grid>
@@ -154,7 +156,7 @@ export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
                             </Typography>
                             <Rating className={classes.item} name="read-only" value={5} readOnly />
                             <Typography className={classes.item} variant="caption">
-                                150 opiniones
+                                150 {lang.reviewsSection.reviews}
                             </Typography>
                         </div>
                     </Grid>

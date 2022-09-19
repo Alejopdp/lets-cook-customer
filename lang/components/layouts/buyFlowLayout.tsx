@@ -14,6 +14,10 @@ export const buyFlowLayout = {
         addRecipeCardText: "Añadir",
         chooseRecipesFirstTitle: "Elige las",
         chooseRecipesSecondTitle: "recetas que recibirás el",
+        snackbars: {
+            success: { recipesChosen: "Recetas elegidas correctamente" },
+            error: {},
+        },
     },
     en: {
         difficultLevel: "Level of difficulty",
@@ -30,6 +34,10 @@ export const buyFlowLayout = {
         addRecipeCardText: "Add",
         chooseRecipesFirstTitle: "Choose the",
         chooseRecipesSecondTitle: "recipes that you'll receive on",
+        snackbars: {
+            success: { recipesChosen: "Correctly chosen recipes" },
+            error: {},
+        },
     },
     ca: {
         difficultLevel: "Nivell de dificultat",
@@ -46,5 +54,9 @@ export const buyFlowLayout = {
         addRecipeCardText: "Afegir",
         chooseRecipesFirstTitle: "Tria les",
         chooseRecipesSecondTitle: "receptes que rebràs el",
+        snackbars: {
+            success: { recipesChosen: "Receptes triades correctament" },
+            error: {},
+        },
     },
 };

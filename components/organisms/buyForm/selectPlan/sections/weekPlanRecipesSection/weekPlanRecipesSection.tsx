@@ -1,14 +1,12 @@
 // Utils & config
 import React, { memo } from "react";
-import { Recipe } from "@helpers";
-import { useRecipesStyles as useStyles } from "./styles";
 import { RecipesSectionProps } from "./interfaces";
 import "react-multi-carousel/lib/styles.css";
 import { useBuyFlow } from "@stores";
-import * as ga from '../../../../../../helpers/ga'
+import * as ga from "../../../../../../helpers/ga";
 
 // External components
-import { GridList, makeStyles, Typography, Container, Grid, useMediaQuery, useTheme } from "@material-ui/core";
+import { Container, Grid, useMediaQuery, useTheme } from "@material-ui/core";
 import Carousel from "react-multi-carousel";
 
 // Internal components
@@ -52,8 +50,7 @@ const responsive = {
 };
 
 export const WeekPlanRecipesSection = memo((props: RecipesSectionProps) => {
-    const lang = props.lang
-    const classes = useStyles();
+    const lang = props.lang;
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const [recipeToView, setRecipeToView] = React.useState(null);
@@ -66,10 +63,10 @@ export const WeekPlanRecipesSection = memo((props: RecipesSectionProps) => {
         ga.event({
             action: "clic en recetas",
             params: {
-                event_category: 'planes',
+                event_category: "planes",
                 event_label: recipe.name.toLowerCase(),
-            }
-        })
+            },
+        });
         setRecipeToView(recipe);
         setOpen(true);
     };

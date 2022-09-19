@@ -1,6 +1,5 @@
 // Utils & Config
 import React, { useState, useEffect, useRef } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { cancelSubscription, swapPlan } from "../../../helpers/serverRequests/subscription";
 
 // External Components
@@ -37,10 +36,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
         ],
     };
 
-    const theme = useTheme();
-    // const lang = langs[router.locale];
     const { enqueueSnackbar } = useSnackbar();
-    const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: -1, period: "" });
     const [selectedRecipe, setselectedRecipe] = useState({});
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
     const [openChangePlanModal, setOpenChangePlanModal] = useState(false);
@@ -62,7 +58,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
         const res = await swapPlan(props.subscription.subscriptionId, newPlan.planId, newPlan.planVariantId);
 
         if (res.status === 200) {
-            enqueueSnackbar("Plan cambiado con éxito", { variant: "success" });
+            enqueueSnackbar(lang.snackbars.success.planSwapped, { variant: "success" });
             setOpenChangePlanModal(false);
             props.reload();
         } else {

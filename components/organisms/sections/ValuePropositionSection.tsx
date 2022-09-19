@@ -2,23 +2,18 @@ import { Typography, Grid, Container, useMediaQuery } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import classes from "./styles.module.scss";
 import { useRouter } from "next/router";
-import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import Image from "next/image";
+import useAnalytics from "hooks/useAnalytics";
 
 export const ValuePropositionSection = (props) => {
+    const { trackHomepageBannerViewPlansclick } = useAnalytics();
     const lang = props.lang;
     const router = useRouter();
     const isMdUp = useMediaQuery("(min-width:900px)");
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en ver planes",
-            params: {
-                event_category: "homepage",
-                event_label: "banner principal",
-            },
-        });
+        trackHomepageBannerViewPlansclick();
         router.push({ pathname: localeRoutes[router.locale][Routes.planes] }, localeRoutes[router.locale][Routes.planes], {
             locale: router.locale,
         });

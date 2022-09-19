@@ -68,7 +68,6 @@ export default function CustomizedAccordions(props: CouponInputAccordionProps) {
                             <ConfirmationNumber style={{ marginRight: theme.spacing(1) }} />
                             <Typography variant='body1' style={{ fontWeight: 500, fontSize:'16px' }}>{props.text}</Typography>
                         </Box>
-                        {/* <KeyboardArrowDown /> */}
                     </Box>
                 </AccordionSummary>
                 <AccordionDetails>

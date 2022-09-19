@@ -6,15 +6,15 @@ export const simpleSelect = {
         catalan: "Catalán",
     },
     en: {
-        preferenceLang: "Idioma de Preferencia",
+        preferenceLang: "Preferred Language",
         spanish: "Spanish",
         english: "English",
         catalan: "Catalán",
     },
     ca: {
-        preferenceLang: "Idioma de Preferencia",
-        spanish: "Español",
-        english: "Inglés",
-        catalan: "Catalán",
+        preferenceLang: "Idioma de Preferència",
+        spanish: "Espanyol",
+        english: "Anglès",
+        catalan: "Català",
     },
 };

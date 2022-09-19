@@ -1,14 +1,10 @@
 // Utils & Config
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-
-// import clsx from "clsx";
+import { useTheme } from "@material-ui/core/styles";
 
 // External components
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import SvgIcon from "@material-ui/core/SvgIcon";
 
 // Internal Components
 import GeneralBox from "../../atoms/generalBox/generalBox";
@@ -18,12 +14,7 @@ import RecipeBook from "../../atoms/icons/RecipeBook";
 import Test from "../../atoms/icons/Test";
 import Rating from "../../atoms/icons/Rating";
 
-// Icons & Images
-
-const useStyles = makeStyles((theme) => ({}));
-
 const BoxWithIconAndTextButton = (props) => {
-    const classes = useStyles();
     const theme = useTheme();
     let Icon;
 

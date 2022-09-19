@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 const langs = require("../../../lang").loginBox;
 import { loginWithEmail, loginWithSocialMedia } from "../../../helpers/serverRequests/customer";
 import cookies from "js-cookie";
-import * as ga from "../../../helpers/ga";
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
@@ -14,13 +13,15 @@ import { TextInput, PasswordInput } from "../../atoms/inputs/inputs";
 import SocialNetworksButtons from "../../atoms/socialNetworksButtons/socialNetworksButtons";
 import { Register } from "../../atoms/loginHelpers/loginHelpers";
 import Divider from "../../atoms/divider/divider";
-import useLocalStorage from "../../../hooks/useLocalStorage/localStorage";
+import useLocalStorage, { LOCAL_STORAGE_KEYS } from "../../../hooks/useLocalStorage/localStorage";
 import { useAuthStore, useUserInfoStore } from "../../../stores/auth";
 import { Grid, Typography, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import useAnalytics from "hooks/useAnalytics";
 
 const LoginBox = (props) => {
+    const { trackLoginClick, trackSignUpClick, trackForgotPasswordClick } = useAnalytics();
     const [values, setValues] = useState({
         password: "",
         email: "",
@@ -39,14 +40,7 @@ const LoginBox = (props) => {
     };
 
     const handleSubmit = async () => {
-        ga.event({
-            action: "clic en ingresar",
-            params: {
-                event_category: `ingresar - ${props.source}`,
-                event_label: "ingresar",
-            },
-        });
-
+        trackLoginClick();
         setIsLoading(true);
 
         const res = await loginWithEmail(values.email, values.password);
@@ -70,34 +64,22 @@ const LoginBox = (props) => {
     };
 
     const saveLoginData = (token, userInfo) => {
-        saveInLocalStorage("token", token);
-        saveInLocalStorage("userInfo", userInfo);
+        saveInLocalStorage(LOCAL_STORAGE_KEYS.token, token);
+        saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, userInfo);
         setUserInfo(userInfo);
-        cookies.set("token", token);
+        cookies.set(LOCAL_STORAGE_KEYS.token, token);
         setIsAuthenticated(true);
         props.redirect ? router.push(localeRoutes[router.locale][Routes.perfil]) : "";
         props.handleLogin ? props.handleLogin(userInfo) : "";
     };
 
     const handleRedirectToSignUp = () => {
-        ga.event({
-            action: "clic en registrate aqui",
-            params: {
-                event_category: `ingresar - ${props.source}`,
-                event_label: "aun no tienes cuenta",
-            },
-        });
+        trackSignUpClick(props.source);
         router.push(localeRoutes[router.locale][Routes.registrarme]);
     };
 
     const handleRedirectToForgotPassword = () => {
-        ga.event({
-            action: "clic en olvide mi contrasena",
-            params: {
-                event_category: `ingresar - ${props.source}`,
-                event_label: "olvide mi contrasena",
-            },
-        });
+        trackForgotPasswordClick(props.source);
         router.push(localeRoutes[router.locale][Routes["recuperar-contrasena"]]);
     };
 

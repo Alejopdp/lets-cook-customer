@@ -1,7 +1,5 @@
 import React from "react";
-
 import SimpleRating from "../starRating/starRating";
-
 import { CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Card, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({

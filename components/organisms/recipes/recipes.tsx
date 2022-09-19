@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Grid, Typography } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 
 import RecipesModal from "../../molecules/valueRecipesModal/recipesModal";
 import FoodCard from "../../molecules/foodCard";
@@ -22,10 +22,7 @@ const baseRating = {
     recipeName: "",
 };
 
-const useStyles = makeStyles((theme) => ({}));
-
 const Recipes = ({ ratings, lang, reload }) => {
-    const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
 
     const theme = useTheme();
@@ -41,10 +38,10 @@ const Recipes = ({ ratings, lang, reload }) => {
         const res = await updateRecipeRating(chosenRecipe.id, points, comment);
 
         if (res && res.status === 200) {
-            enqueueSnackbar("Receta valorada correctamente", { variant: "success" });
+            enqueueSnackbar(lang.recipes.snackbars.success.ratedRecipe, { variant: "success" });
             setOpenRecipeModal(false);
         } else {
-            enqueueSnackbar(res && res.data ? res.data.message : "Ocurrió un error inesperado, intenta nuevamente", { variant: "error" });
+            enqueueSnackbar(res && res.data ? res.data.message : lang.recipes.snackbars.error.unexpectedError, { variant: "error" });
         }
 
         reload();

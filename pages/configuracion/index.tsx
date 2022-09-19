@@ -10,7 +10,6 @@ import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import { Layout } from "../../components/layout/index";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 import UserInfoDetail from "../../components/organisms/userInfo";
-import { getUserInfo } from "../../helpers/serverRequests/user-info";
 import { useUserInfoStore } from "../../stores/auth";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import { getCustomerById } from "helpers/serverRequests/customer";

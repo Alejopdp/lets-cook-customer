@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Box, Button, useTheme } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
@@ -36,7 +35,5 @@ const AdditionalPlansBuyButtons = (props: AdditionalPlansBuyButtonsProps) => {
         </Box>
     );
 };
-
-AdditionalPlansBuyButtons.propTypes = {};
 
 export default AdditionalPlansBuyButtons;

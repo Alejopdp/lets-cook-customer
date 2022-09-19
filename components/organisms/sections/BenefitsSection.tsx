@@ -4,23 +4,18 @@ import { useRouter } from "next/router";
 import classes from "./benefitsSyles.module.scss";
 import { BenefitsSectionProps } from "./interfaces";
 import TitleOtherPages from "components/molecules/titleOtherPages/titleOtherPages";
-import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import Image from "next/image";
+import useAnalytics from "hooks/useAnalytics";
 
 export const BenefitsSection = (props: BenefitsSectionProps) => {
+    const { trackViewPlansAtHomepageClick } = useAnalytics();
     const lang = props.lang;
     const theme = useTheme();
     const router = useRouter();
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en descubre mas",
-            params: {
-                event_category: "homepage",
-                event_label: "beneficios lets cook",
-            },
-        });
+        trackViewPlansAtHomepageClick();
         router.push(localeRoutes[router.locale][Routes.planes]);
     };
 

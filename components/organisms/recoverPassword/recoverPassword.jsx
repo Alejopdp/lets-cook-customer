@@ -10,7 +10,6 @@ import { Typography, Grid } from "@material-ui/core";
 
 // Internal components
 import { PasswordInput } from "../../atoms/inputs/inputs";
-import CustomButton from "../../atoms/customButton/customButton";
 import { RoundedButton } from "@atoms";
 
 const RecoverPassword = (props) => {
@@ -20,9 +19,7 @@ const RecoverPassword = (props) => {
     return (
         <>
             <Grid item xs={12}>
-                <Typography variant="body2">
-                    {lang.paragraph}
-                </Typography>
+                <Typography variant="body2">{lang.paragraph}</Typography>
             </Grid>
             <Grid item xs={12}>
                 <PasswordInput
@@ -39,7 +36,7 @@ const RecoverPassword = (props) => {
                     disabled={!isPassword(props.value)}
                     isLoading={props.isLoading}
                     onClick={props.handleSubmit}
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                 />
             </Grid>
         </>
@@ -49,7 +46,7 @@ const RecoverPassword = (props) => {
 RecoverPassword.propTypes = {
     value: PropTypes.string.isRequired,
     handleChange: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
 };
 
 export default RecoverPassword;

@@ -1,8 +1,8 @@
 // Utils & Config
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Box, useMediaQuery, useTheme } from "@material-ui/core";
-const langs = require("../../lang").perfil;
+import { useTheme } from "@material-ui/core";
+import { perfil } from "../../lang/index";
 import { swapPlan } from "../../helpers/serverRequests/subscription";
 import { skipOrders } from "../../helpers/serverRequests/order";
 import { getSubscriptionById } from "../../helpers/serverRequests/userProfile";
@@ -10,9 +10,6 @@ import { getDataForSwappingAPlan } from "../../helpers/serverRequests/plans";
 import { useUserInfoStore } from "../../stores/auth";
 import { useSnackbar } from "notistack";
 import { reorderPlan } from "../../helpers/serverRequests/subscription";
-
-import Link from "next/link";
-// const langs = require("../../lang").comoFunciona;
 import { getProfileInfo } from "../../helpers/serverRequests/userProfile";
 
 // External Components
@@ -32,19 +29,20 @@ import ChooseRecipesActionBox from "../../components/molecules/pendingActionsCom
 import RateRecipesActionBox from "../../components/molecules/pendingActionsComponents/rateRecipesActionBox";
 import ReferalActionBox from "../../components/molecules/pendingActionsComponents/referalActionBox";
 import EmptyState from "../../components/molecules/emptyState/emptyState";
-import PlanProfileCard from "../../components/molecules/planProfileCard/";
+import PlanProfileCard from "../../components/molecules/planProfileCard";
 import SwapPlanModal from "../../components/molecules/managePlanModals/swapPlanModal";
 import SkipPlanModal from "../../components/molecules/managePlanModals/skipPlanModal";
 import { localeRoutes, Routes } from "../../lang/routes/routes";
 import PendingActionSkeleton from "components/molecules/pendingActionsComponents/pendingActionSkeleton";
 import PlanProfileCardSkeleton from "components/molecules/planProfileCard/planProfileCardSkeleton";
+import { locale } from "types/locale";
 
 const Perfil = (props) => {
     const theme = useTheme();
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
     const [isReorderingPlan, setIsReorderingPlan] = useState(false);
-    const lang = langs[router.locale];
+    const lang = perfil[router.locale as locale];
     const { enqueueSnackbar } = useSnackbar();
     const [openPlanRecoverModal, setOpenPlanRecoverModal] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
@@ -111,7 +109,7 @@ const Perfil = (props) => {
         const res = await swapPlan(subscriptionIdSelected, newPlan.planId, newPlan.planVariantId);
 
         if (res.status === 200) {
-            enqueueSnackbar("Plan cambiado con éxito", { variant: "success" });
+            enqueueSnackbar(lang.snackbars.success.swapedPlan, { variant: "success" });
             setOpenChangePlanModal(false);
             setreloadCounter(reloadCounter + 1);
         } else {
@@ -134,9 +132,9 @@ const Perfil = (props) => {
         const res = await skipOrders(orders);
 
         if (res.status === 200) {
-            enqueueSnackbar("La/s semana/s han sido saltadas correctamente", { variant: "success" });
+            enqueueSnackbar(lang.snackbars.success.skippedWeeks, { variant: "success" });
         } else {
-            enqueueSnackbar("Error al saltar la/s semana/s", { variant: "error" });
+            enqueueSnackbar(lang.snackbars.error.skippedWeeks, { variant: "error" });
         }
         setOpenSkipPlanModal(false);
         setIsSkippingOrders(false);
@@ -177,13 +175,10 @@ const Perfil = (props) => {
         const res = await reorderPlan(selectedPlan.id);
 
         if (res.status === 200) {
-            enqueueSnackbar("Pedido correctamente realizado", { variant: "success" });
-            router.push(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}/${res.data.subscriptionId}`);
+            enqueueSnackbar(lang.snackbars.success.reorderedPlan, { variant: "success" });
+            router.push(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}?subscriptionId=${res.data.subscriptionId}`);
         } else {
-            enqueueSnackbar(
-                res && res.data && res.data.message ? res.data.message : "Ocurrió un error inesperado, por favor intente de nuevo",
-                { variant: "error" }
-            );
+            enqueueSnackbar(res && res.data && res.data.message ? res.data.message : lang.snackbars.error.unexpected, { variant: "error" });
         }
 
         setIsReorderingPlan(false);
@@ -254,7 +249,6 @@ const Perfil = (props) => {
                                             handleClick={() => router.push(localeRoutes[router.locale][Routes["historial-pagos"]])}
                                         />
                                         <TextButton
-                                            noColor
                                             icon="settings"
                                             btnText={lang.settingsBtnText}
                                             handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}
@@ -271,7 +265,6 @@ const Perfil = (props) => {
                                     dotListClass=""
                                     draggable
                                     focusOnSelect={false}
-                                    // infinite
                                     itemClass=""
                                     keyBoardControl
                                     responsive={responsive}
@@ -295,7 +288,7 @@ const Perfil = (props) => {
                             </Hidden>
                             {/* Greeting & Pending Actions Desktop */}
                             <Hidden smDown>
-                                <Grid container direction="column" alignItems="left" spacing={2}>
+                                <Grid container direction="column" alignItems="flex-start" spacing={2}>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(3) }}>
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
                                             {lang.greeting} {userInfo.firstName || ""}
@@ -312,7 +305,6 @@ const Perfil = (props) => {
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(5) }}>
                                         <TextButton
-                                            noColor
                                             icon="settings"
                                             btnText={lang.settingsBtnText}
                                             handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}

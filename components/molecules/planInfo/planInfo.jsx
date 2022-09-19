@@ -1,6 +1,5 @@
 // Utils & Config
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
 // External components
@@ -31,10 +30,6 @@ const PlanInfo = (props) => {
             </Typography>
         </Box>
     );
-};
-
-PlanInfo.propTypes = {
-    // btnText: PropTypes.string.isRequired,
 };
 
 export default PlanInfo;

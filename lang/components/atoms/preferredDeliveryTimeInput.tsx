@@ -3,9 +3,9 @@ export const preferredDeliveryTimeInput = {
         deliveryTime: "Horario de Preferencia de Entrega",
     },
     en: {
-        deliveryTime: "Horario de Preferencia de Entrega",
+        deliveryTime: "Delivery Preference Schedule",
     },
     ca: {
-        deliveryTime: "Horario de Preferencia de Entrega",
+        deliveryTime: "Horari de Preferència de Lliurament",
     },
-}
+};

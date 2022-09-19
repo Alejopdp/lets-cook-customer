@@ -55,6 +55,4 @@ const GeneralBox = (props) => {
     return <Box className={clsx(classes.box, variant)}>{props.children}</Box>;
 };
 
-GeneralBox.propTypes = {};
-
 export default GeneralBox;

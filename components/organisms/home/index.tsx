@@ -1,4 +1,4 @@
-// import clsx from "clsx";
+import { Layout } from "@layouts";
 import ValuePropositionSection from "../sections/ValuePropositionSection";
 import BenefitsSection from "../sections/BenefitsSection";
 import GoogleRatingSection from "../sections/GoogleRatingSection";
@@ -15,7 +15,7 @@ const HomePage = (props: HomePageProps) => {
     const [lang] = useLang("home");
 
     return (
-        <>
+        <Layout page="homepage">
             <ValuePropositionSection lang={lang.valuePropositionSection} />
             <div className={styles.paddingTop32}>
                 <GoogleRatingSection />

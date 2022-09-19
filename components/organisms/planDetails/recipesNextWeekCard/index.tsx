@@ -1,8 +1,7 @@
 // Utils & Config
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
-// const langs = require("../../lang").comoFunciona;
 
 // External Components
 import Typography from "@material-ui/core/Typography";
@@ -16,12 +15,9 @@ import ChosenRecipes from "../chosenRecipes/index";
 import RoundedButton from "../../../atoms/roundedButton/roundedButton";
 import { localeRoutes, Routes } from "lang/routes/routes";
 
-const useStyles = makeStyles((theme) => ({}));
-
 const RecipesNextWeekCard = (props) => {
     const lang = props.lang;
     const theme = useTheme();
-    const classes = useStyles();
     const router = useRouter();
 
     return (
