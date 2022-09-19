@@ -70,6 +70,10 @@ export const home = {
             title: "Echa un vistazo a las recetas de esta semana",
             subtitle: "Nuestros chefs preparan recetas variadas cada semana para mantener la llama viva",
         },
+        reviewsSection: {
+            rating: "Valoración",
+            reviews: "Opiniones",
+        },
     },
     en: {
         valuePropositionSection: {
@@ -144,6 +148,10 @@ export const home = {
             title: "Have a peek at this week’s recipes",
             subtitle: "Our chefs prepare varied recipes each week to keep things exciting",
         },
+        reviewsSection: {
+            rating: "Rating",
+            reviews: "Reviews",
+        },
     },
     ca: {
         valuePropositionSection: {
@@ -216,6 +224,10 @@ export const home = {
         recipesSection: {
             title: "Fes una ullada a les receptes d’aquesta setmana",
             subtitle: "Els nostres xefs preparen receptes variades cada setmana per mantenir la flama encesa",
+        },
+        reviewsSection: {
+            rating: "Valoració",
+            reviews: "Opinions",
         },
     },
 };

@@ -1,7 +1,5 @@
 // Utils & config
 import React from "react";
-import PropTypes from "prop-types";
-import * as ga from '../../../helpers/ga'
 
 // External components
 import Grid from "@material-ui/core/Grid";
@@ -10,23 +8,17 @@ import Grid from "@material-ui/core/Grid";
 import { RecipeCard } from "@molecules";
 import RecipeModal from "../../molecules/recipeModal/recipeModal";
 import RecipeCardBuyFlow from "../../molecules/recipeCardBuyFlow/recipeCardBuyFlow";
-import { useBuyFlow } from "@stores";
 import { RecipesGridProps } from "./interfaces";
 import { useMemo } from "react";
+import useAnalytics from "hooks/useAnalytics";
 
 export const RecipesGrid = (props: RecipesGridProps) => {
+    const { trackChooseRecipesClick } = useAnalytics();
     const [open, setOpen] = React.useState(false);
     const [recipeToView, setRecipeToView] = React.useState(null);
-    const { recipes, selectRecipes } = useBuyFlow(({ form: { recipes }, selectRecipes }) => ({ recipes, selectRecipes }));
 
     const handleClickOpenModal = (recipe) => {
-        ga.event({
-            action: "clic en recetas",
-            params: {
-                event_category: props.recipesSelection ? 'elegir recetas' : 'recetas page',
-                event_label: recipe.name.toLowerCase(),
-            }
-        })
+        trackChooseRecipesClick(recipe.name, props.recipesSelection ? "elegir recetas" : "recetas page");
         setRecipeToView(recipe);
         setOpen(true);
     };

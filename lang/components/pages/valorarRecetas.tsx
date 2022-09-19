@@ -20,49 +20,67 @@ export const valorarRecetas = {
             secondaryButtonText: "Cancelar",
             comments: "Ingrese aqui sus comentarios sobre la receta (opcional)",
         },
+        recipes: {
+            snackbars: {
+                success: { ratedRecipe: "Receta valorada correctamente" },
+                error: { unexpectedError: "Ocurrió un error inesperado, intenta nuevamente" },
+            },
+        },
     },
     en: {
         title: "Rate recipes",
-        recipesRatingPendingSubtitle: "[EN] Recetas pendientes de valorar",
-        recipesRatedSubtitle: "[EN] Recetas valoradas",
+        recipesRatingPendingSubtitle: "Recipes pending evaluation",
+        recipesRatedSubtitle: "Rated recipes",
         foodCard: {
-            dontRateBtnLabel: "[EN] NO VALORAR ESTA RECETA",
+            dontRateBtnLabel: "DO NOT RATE THIS RECIPE",
             deliveredText: "times delivered",
             lastShippmentText: "last shippment at",
         },
         recipesModal: {
             title: {
-                hasRating: "[EN] Modificar calificacion",
-                hasNotRating: "[EN] Calificar receta",
+                hasRating: "Modify rating",
+                hasNotRating: "Rate recipe",
             },
             primaryButtonText: {
-                hasRating: "[EN] Modificar calificacion",
-                hasNotRating: "[EN] Calificar receta",
+                hasRating: "Modify rating",
+                hasNotRating: "Rate recipe",
             },
-            secondaryButtonText: "[EN] Cancelar",
-            comments: "[EN] Ingrese aqui sus comentarios sobre la receta (opcional)",
+            secondaryButtonText: "Cancel",
+            comments: "Enter your comments about the recipe here (optional)",
+        },
+        recipes: {
+            snackbars: {
+                success: { ratedRecipe: "Recipe rated correctly" },
+                error: { unexpectedError: "An unexpected error occurred, please try again" },
+            },
         },
     },
     ca: {
         title: "Valorar receptes",
-        recipesRatingPendingSubtitle: "[CA] Recetas pendientes de valorar",
-        recipesRatedSubtitle: "[CA] Recetas valoradas",
+        recipesRatingPendingSubtitle: "Receptes pendents de valorar",
+        recipesRatedSubtitle: "Receptes valorades",
         foodCard: {
-            dontRateBtnLabel: "[CA] NO VALORAR ESTA RECETA",
+            dontRateBtnLabel: "NO VALORAR AQUESTA RECEPTA",
             deliveredText: "vegades lliurat",
             lastShippmentText: "últim lliurament el",
         },
         recipesModal: {
             title: {
-                hasRating: "[CA] Modificar calificacion",
-                hasNotRating: "[CA] Calificar receta",
+                hasRating: "Modificar qualificació",
+                hasNotRating: "Qualificar recepta",
             },
             primaryButtonText: {
-                hasRating: "[CA] Modificar calificacion",
-                hasNotRating: "[CA] Calificar receta",
+                hasRating: "Modificar qualificació",
+                hasNotRating: "Qualificar recepta",
             },
-            secondaryButtonText: "[CA] Cancelar",
-            comments: "[CA] Ingrese aqui sus comentarios sobre la receta (opcional)",
+            secondaryButtonText: "Cancel·la",
+            comments: "Introduïu aquí els vostres comentaris sobre la recepta (opcional)",
+        },
+    },
+    recipes: {
+        snackbars: {
+            success: { ratedRecipe: "Recepta valorada correctament" },
+            error: { unexpectedError: "Va passar un error inesperat, intenta novament" },
         },
     },
 };

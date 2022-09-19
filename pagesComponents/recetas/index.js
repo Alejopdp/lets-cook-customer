@@ -13,7 +13,6 @@ import { Layout } from "../../components/layout/";
 const Recetas = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
-    const [isLoading, setIsLoading] = useState(true);
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {

@@ -1,25 +1,18 @@
-import { makeStyles, Typography, useTheme, Grid, Container } from "@material-ui/core";
+import { Typography, Grid, Container } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
-import { CircularBotton } from "@atoms";
-import ArrowIcon from "@material-ui/icons/ExpandMore";
 import { useValuePropositionStyle as useStyles } from "./styles";
 import { useRouter } from "next/router";
-import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import useAnalytics from "hooks/useAnalytics";
 
 export const ValuePropositionSection = (props) => {
+    const { trackHomepageBannerViewPlansclick } = useAnalytics();
     const lang = props.lang;
     const classes = useStyles();
     const router = useRouter();
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en ver planes",
-            params: {
-                event_category: "homepage",
-                event_label: "banner principal",
-            },
-        });
+        trackHomepageBannerViewPlansclick();
         router.push({ pathname: localeRoutes[router.locale][Routes.planes] }, localeRoutes[router.locale][Routes.planes], {
             locale: router.locale,
         });

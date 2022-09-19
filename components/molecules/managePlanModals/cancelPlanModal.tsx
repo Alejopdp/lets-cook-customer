@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CancelPlanModal = (props: CancelPlanModalProps) => {
     const lang = props.lang;
-
     const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();

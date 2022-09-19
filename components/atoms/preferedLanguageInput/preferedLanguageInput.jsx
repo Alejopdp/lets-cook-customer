@@ -15,7 +15,6 @@ const SimpleSelect = (props) => {
     const classes = useStyles();
     const [lang] = useLang("simpleSelect");
 
-    console.log("A VERGA: ", props.value);
     return (
         <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel htmlFor="outlined-age-native-simple">{lang.preferenceLang}</InputLabel>

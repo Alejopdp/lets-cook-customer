@@ -28,7 +28,6 @@ import BillingAddressModal from "../../molecules/userInfo/billingAddressModal";
 import DeliveryAddressModal from "../../molecules/userInfo/deliveryAddressModal";
 import PaymentMethodModal from "../../molecules/userInfo/paymentMethod";
 import DataPaperSkeleton from "./dataPaperSkeleton";
-import WithSkeleton from "../../molecules/withSkeleton/withSkeleton";
 import { useRouter } from "next/router";
 import { getDdMmYyyy } from "helpers/utils/utils";
 
@@ -80,10 +79,6 @@ const UserInfoDetail = (props) => {
         setEmailModal(false);
     };
 
-    const handleClickChangeEmail = (newEmail) => {
-        setEmailModal(false);
-    };
-
     // PASSWORD
     const handleClickOpenPasswordModal = () => {
         setPasswordModal(true);
@@ -98,10 +93,10 @@ const UserInfoDetail = (props) => {
         const res = await changePasswordWithoutCode(props.customer.email, newPassword);
 
         if (!!res && res.status === 200) {
-            enqueueSnackbar("Contraseña cambiada con exito", { variant: "success" });
+            enqueueSnackbar(lang.snackbars.success.passwordChanged, { variant: "success" });
             setPasswordModal(false);
         } else {
-            enqueueSnackbar(res && res.data ? res.data.message : "Ocurrió un error inesperado, intenta nuevamente", { variant: "error" });
+            enqueueSnackbar(res && res.data ? res.data.message : lang.snackbars.success.unexpectedError, { variant: "error" });
         }
         setIsChangePasswordSubmitting(false);
     };
@@ -112,10 +107,6 @@ const UserInfoDetail = (props) => {
     };
 
     const handleClickClosePersonalDataModal = () => {
-        setPersonalDataModal(false);
-    };
-
-    const handleClickChangePersonalData = (data) => {
         setPersonalDataModal(false);
     };
 

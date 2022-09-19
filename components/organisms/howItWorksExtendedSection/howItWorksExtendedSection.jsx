@@ -1,22 +1,13 @@
 // Utils & Config
 import React from "react";
-import { useRouter } from "next/router";
 
 // Internal components
 import HowItWorksExtended from "../../molecules/howItWorksExtended/howItWorksExtended";
 import { useLang } from "@hooks";
 
 const HowItWorksExtendedSection = () => {
-    const router = useRouter();
     const [lang] = useLang("comoFunciona");
 
-    {
-        /*
-    No creo que esto sea la solución más elegante
-    Pero es lo unico que se me ocurrió sin saber cómo van a venir los datos!
-    Cualquier cosa me chiflan y vemos como lo acomodamos! -Lionel
-  */
-    }
     return (
         <>
             <HowItWorksExtended

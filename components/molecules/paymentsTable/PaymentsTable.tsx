@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,11 +8,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
-
 import IconButton from "@material-ui/core/IconButton";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import Chip from "@material-ui/core/Chip";
 import PaymentOrderChip from "../../atoms/chips/paymentOrderChip";
 import { PaymentsTableProps } from "./interface";
 
@@ -37,14 +34,9 @@ const PaymentsTable = (props: PaymentsTableProps) => {
         { id: "seeMore", label: "", minWidth: 50 },
     ];
 
-    function createNewData(paymentDate, paymentOrderId, plans, totalAmount, status, seeMore) {
-        return { paymentDate, paymentOrderId, plans, totalAmount, status, seeMore };
-    }
-
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(100);
-    const theme = useTheme();
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

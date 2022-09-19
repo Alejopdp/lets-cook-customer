@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Box, Typography, IconButton } from "@material-ui/core";
 import Remove from "@material-ui/icons/HighlightOff";
 import { AppliedCouponBoxProps } from "./interface";
@@ -17,7 +16,5 @@ const AppliedCouponBox = (props: AppliedCouponBoxProps) => {
         </Box>
     );
 };
-
-AppliedCouponBox.propTypes = {};
 
 export default AppliedCouponBox;

@@ -19,8 +19,7 @@ const SwapPlanModal = (props) => {
     const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
-    
-    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [planSelected, setPlanSelected] = useState({
         planId: "",
         planVariantId: "",
@@ -74,9 +73,9 @@ const SwapPlanModal = (props) => {
     };
 
     const submitNewPlan = async () => {
-        setIsSubmitting(true)
+        setIsSubmitting(true);
         await props.handlePrimaryButtonClick(planSelected);
-        setIsSubmitting(false)
+        setIsSubmitting(false);
     };
 
     return (
@@ -112,7 +111,7 @@ const SwapPlanModal = (props) => {
                 {lang.sizePlanSubtitle}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-native-simple">Variante</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">{lang.sizePlanInputLabel}</InputLabel>
                 <Select
                     native
                     value={planSelected.planVariantId}

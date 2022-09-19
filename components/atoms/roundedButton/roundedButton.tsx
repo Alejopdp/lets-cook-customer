@@ -1,10 +1,9 @@
 import clsx from "clsx";
-import { ButtonBase, makeStyles, Typography, useTheme } from "@material-ui/core";
-import React, { ReactElement } from "react";
-import { memo } from "react";
+import { ButtonBase, Typography } from "@material-ui/core";
+import React from "react";
 import { useStyles } from "./styles";
 import { RoundedButtonProps } from "./interfaces";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export const RoundedButton = ({ variant = "content", label, children: Component, style, ...props }: RoundedButtonProps) => {
     const classes = useStyles();
@@ -23,9 +22,13 @@ export const RoundedButton = ({ variant = "content", label, children: Component,
             {...props}
         >
             <div style={{ marginRight: 4 }}>{Component}</div>
-            <Typography variant="button" style={{ display: 'flex', alignItems: 'center', ...props.textStyle }} className={clsx({ [classes.contentTypography]: variant === "content" })}>
+            <Typography
+                variant="button"
+                style={{ display: "flex", alignItems: "center", ...props.textStyle }}
+                className={clsx({ [classes.contentTypography]: variant === "content" })}
+            >
                 {label}
-                {props.isLoading && <CircularProgress size={16} style={{ marginLeft: '8px', color: 'white' }} />}
+                {props.isLoading && <CircularProgress size={16} style={{ marginLeft: "8px", color: "white" }} />}
             </Typography>
         </ButtonBase>
     );

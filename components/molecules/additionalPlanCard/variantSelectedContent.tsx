@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Box, Typography, useTheme } from "@material-ui/core";
 import { VariantSelectedContentProps } from "./interface";
 import { translateFrequency } from "helpers/utils/i18n";
@@ -55,12 +54,12 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
                 <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
                     {lang.priceText}: {props.variant.priceWithOffer || props.variant.price}€
                 </Typography>
-                <Typography variant="caption" color='textSecondary'>{lang.taxIncluded}</Typography>
+                <Typography variant="caption" color="textSecondary">
+                    {lang.taxIncluded}
+                </Typography>
             </div>
         </Box>
     );
 };
-
-VariantSelectedContent.propTypes = {};
 
 export default VariantSelectedContent;

@@ -1,27 +1,23 @@
 import Typography from "@material-ui/core/Typography";
-import { useTheme, Container, Grid } from "@material-ui/core";
-import Title from "../../molecules/titleOtherPages/titleOtherPages";
-import { RoundedButton } from "@atoms";
-import { useRouter } from "next/router";
+import { Container, Grid } from "@material-ui/core";
 
 import { useHowItWorksStyles as useStyles } from "./styles";
-import { HowItWorksSectionProps, HowItWorks } from "./interfaces";
+import { HowItWorksSectionProps } from "./interfaces";
 import { memo } from "react";
-import SectionTitleBuyFlow from '../../molecules/sectionTitleBuyFlow/sectionTitleBuyFlow';
-
+import SectionTitleBuyFlow from "../../molecules/sectionTitleBuyFlow/sectionTitleBuyFlow";
+import { useLang } from "@hooks";
 
 const HowItWorksSubsection = memo((props: HowItWorksSectionProps) => {
-    const theme = useTheme();
     const classes = useStyles();
-    const router = useRouter();
+    const [lang] = useLang("bonoRegalo");
 
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <SectionTitleBuyFlow
-                        title="¿Cómo funciona?"
-                        subtitle="Lorem impus daenet sim se dae"
+                        title={lang.landing.howItWorksSubsection.sectionTitleBuyFlow.title}
+                        subtitle={lang.landing.howItWorksSubsection.sectionTitleBuyFlow.subtitle}
                     />
                 </Grid>
                 {(props.cards || []).map((card, index) => (

@@ -1,10 +1,9 @@
 // Utils & Config
 import React from "react";
-import PropTypes from "prop-types";
 import { useTheme } from '@material-ui/core';
 
 // External components
-import { Box, Typography } from "@material-ui/core";
+import {  Typography } from "@material-ui/core";
 import Image from "next/image";
 import { IconWithTextProps } from "./interfaces";
 

@@ -1,6 +1,5 @@
 // Utils & Config
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
@@ -58,7 +57,5 @@ const GeneralBox = (props) => {
 
     return <Box className={clsx(classes.box, variant)}>{props.children}</Box>;
 };
-
-GeneralBox.propTypes = {};
 
 export default GeneralBox;

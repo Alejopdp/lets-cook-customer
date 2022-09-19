@@ -10,6 +10,10 @@ export const passwordStep = {
             label: "Quiero recibir información por correo electrónico sobre los productos de Let's Cook y cualquier otra información que pudiera ser de mi interés como promociones y ofertas.",
         },
         buttonText: "Registrarme",
+        snackbars: {
+            success: {},
+            error: { unexpectedError: "Ocurrió un error inesperado" },
+        },
     },
     en: {
         passwordInput: "Enter your password",
@@ -22,6 +26,10 @@ export const passwordStep = {
             label: "I want to receive information via email about Let's Cook's products and any other information that may be of interest, such as special offers and promotions.",
         },
         buttonText: "Register",
+        snackbars: {
+            success: {},
+            error: { unexpectedError: "An unexpected error occurred" },
+        },
     },
     ca: {
         passwordInput: "Crea la teva contrasenya",
@@ -34,5 +42,9 @@ export const passwordStep = {
             label: "Vull rebre informació per correu electrònic sobre els productes de Let's Cook i qualsevol altra informació que poguès ser del meu interés com promocions i ofertes.",
         },
         buttonText: "Registrar-me",
+        snackbars: {
+            success: {},
+            error: { unexpectedError: "Va passar un error inesperat" },
+        },
     },
 };

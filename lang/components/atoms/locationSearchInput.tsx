@@ -1,14 +1,14 @@
 export const locationSearchInput = {
     es: {
-        autoCompleteHint: "Comienze a escribir para ver las sugerencias de direcciones",
-        autoCompleteHintNotFound: "No se encontró ninguna dirección"
+        autoCompleteHint: "Comience a escribir para ver las sugerencias de direcciones",
+        autoCompleteHintNotFound: "No se encontró ninguna dirección",
     },
     en: {
-        autoCompleteHint: "Comienze a escribir para ver las sugerencias de direcciones",
-        autoCompleteHintNotFound: "No se encontró ninguna dirección"
+        autoCompleteHint: "Start typing to see address suggestions",
+        autoCompleteHintNotFound: "No address found",
     },
     ca: {
-        autoCompleteHint: "Comienze a escribir para ver las sugerencias de direcciones",
-        autoCompleteHintNotFound: "No se encontró ninguna dirección"
-    }
-}
+        autoCompleteHint: "Comenceu a escriure per veure els suggeriments d'adreces",
+        autoCompleteHintNotFound: "No s'ha trobat cap adreça",
+    },
+};

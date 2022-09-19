@@ -100,6 +100,10 @@ export const configuracion = {
                 addNewPaymentMethod: "Añadir nueva forma de pago",
                 helperText: "La forma de pago se modificará en todos los planes activos",
             },
+            snackbars: {
+                success: { passwordChanged: "Contraseña cambiada con exito" },
+                error: { unexpectedError: "Ocurrió un error inesperado, intenta nuevamente" },
+            },
         },
     },
     en: {
@@ -202,6 +206,10 @@ export const configuracion = {
                 mySavedCards: "My saved credit cards",
                 addNewPaymentMethod: "Enter new payment method",
                 helperText: "The payment method will be modified in all active plans",
+            },
+            snackbars: {
+                success: { passwordChanged: "Password changed successfully" },
+                error: { unexpectedError: "An unexpected error occurred, please try again" },
             },
         },
     },
@@ -306,6 +314,10 @@ export const configuracion = {
                 mySavedCards: "Les meves targetes guardades",
                 addNewPaymentMethod: "Afegir nou mètode de pagament",
                 helperText: "El mètode de pagament es modificarà en tots els plans actius",
+            },
+            snackbars: {
+                success: { passwordChanged: "La contrasenya s'ha canviat correctament" },
+                error: { unexpectedError: "Va passar un error inesperat, intenta novament" },
             },
         },
     },

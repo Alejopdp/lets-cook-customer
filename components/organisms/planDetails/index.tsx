@@ -1,6 +1,5 @@
 // Utils & Config
 import React, { useState, useEffect, useRef } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { cancelSubscription, swapPlan } from "../../../helpers/serverRequests/subscription";
 import { planDetails } from "lang/components/pages/planDetails";
 
@@ -20,10 +19,11 @@ import { skipOrders } from "helpers/serverRequests/order";
 import { useRouter } from "next/router";
 import { CancellationReason } from "types/cancellation";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import { locale } from "types/locale";
 
 const PlanDetails = (props: PlanDetailsProps) => {
     const router = useRouter();
-    const lang = planDetails[router.locale];
+    const lang = planDetails[router.locale as locale];
     const cancelPlanData = {
         reasons: [
             { id: 1, value: CancellationReason.CREATED_BY_ERROR, text: lang.cancelPlanReasonsText.created_by_error },
@@ -37,10 +37,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
         ],
     };
 
-    const theme = useTheme();
-    // const lang = langs[router.locale];
     const { enqueueSnackbar } = useSnackbar();
-    const [recipeSelectedIndex, setRecipeSelectedIndex] = useState({ index: -1, period: "" });
     const [selectedRecipe, setselectedRecipe] = useState({});
     const [openRecipeModal, setOpenRecipeModal] = useState(false);
     const [openChangePlanModal, setOpenChangePlanModal] = useState(false);
@@ -62,7 +59,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
         const res = await swapPlan(props.subscription.subscriptionId, newPlan.planId, newPlan.planVariantId);
 
         if (res.status === 200) {
-            enqueueSnackbar("Plan cambiado con éxito", { variant: "success" });
+            enqueueSnackbar(lang.snackbars.success.planSwapped, { variant: "success" });
             setOpenChangePlanModal(false);
             props.reload();
         } else {

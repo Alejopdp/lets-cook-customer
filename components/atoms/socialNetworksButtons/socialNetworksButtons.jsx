@@ -2,7 +2,6 @@
 import React from "react";
 import useStyles from "./styles";
 import clsx from "clsx";
-import { useRouter } from "next/router";
 import * as ga from "../../../helpers/ga";
 import { loginWithFacebookAndGetIdToken, loginWithGoogleAndGetIdToken } from "../../../helpers/firebase";
 import { useSnackbar } from "notistack";

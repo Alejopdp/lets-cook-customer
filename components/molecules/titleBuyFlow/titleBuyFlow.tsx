@@ -3,17 +3,12 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // External components
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-    ico: {
-        marginRight: theme.spacing(2),
-        color: theme.palette.primary.main,
-        filter: "sepia(100%) saturate(3457%) hue-rotate(118deg) brightness(99%) contrast(102%)",
-    },
     subttl: {
         marginTop: theme.spacing(1),
-        textAlign: 'center'
+        textAlign: "center",
     },
 }));
 
@@ -23,12 +18,12 @@ interface TitleBuyFlow {
 }
 
 export const TitleBuyFlow = ({ title, subtitle }: TitleBuyFlow) => {
-    const { ico, subttl } = useStyles();
+    const { subttl } = useStyles();
 
     return (
         <>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Typography variant="h5" color="primary" style={{ textAlign: 'center', display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Typography variant="h5" color="primary" style={{ textAlign: "center", display: "flex", alignItems: "center" }}>
                     {title}
                 </Typography>
             </div>
@@ -36,7 +31,7 @@ export const TitleBuyFlow = ({ title, subtitle }: TitleBuyFlow) => {
                 {subtitle}
             </Typography>
         </>
-    )
-}
+    );
+};
 
 export default TitleBuyFlow;

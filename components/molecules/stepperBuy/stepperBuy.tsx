@@ -1,11 +1,11 @@
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import clsx from "clsx";
-import Image from "next/image";
 import { Typography, Breadcrumbs, Hidden } from "@material-ui/core";
 import { useBuyFlow } from "@stores";
 import useStyles from "./styles";
 import InfoIcon from "@material-ui/icons/Help";
 import LightTooltip from "components/atoms/lightTooltip/lightTooltip";
+import { useLang } from "@hooks";
 interface StepperBuyProps {
     steps: {
         icon: string;
@@ -19,15 +19,12 @@ const disabledChooseIconRoute = "/icons/appbar/img-header-select-recipes-disable
 
 export const StepperBuy = memo(({ steps, smUpHide, smDowmHide }: StepperBuyProps) => {
     const classes = useStyles();
-    const { step, showRegister, canChooseRecipes } = useBuyFlow(({ step, showRegister, form }) => ({
+    const [lang] = useLang("stepperBuy");
+    const { step, canChooseRecipes } = useBuyFlow(({ step, showRegister, form }) => ({
         step,
         showRegister,
         canChooseRecipes: form.canChooseRecipes,
     }));
-
-    // const disableChooseRecipeStep = useMemo(() => {
-    //     return !canChooseRecipes && key === steps.length - 1;
-    // }, [canChooseRecipes]);
 
     return (
         <Breadcrumbs
@@ -35,7 +32,6 @@ export const StepperBuy = memo(({ steps, smUpHide, smDowmHide }: StepperBuyProps
             className={clsx(classes.root, { [classes.smDowmHide]: smDowmHide }, { [classes.smUpHide]: smUpHide })}
         >
             {steps.reduce((items, item, key) => {
-                // if (!showRegister && key === 1) return items;
                 return [
                     ...items,
                     <div className={clsx({ [classes.active]: step === key }, classes.breadcrumbContainer)} key={key}>
@@ -55,7 +51,7 @@ export const StepperBuy = memo(({ steps, smUpHide, smDowmHide }: StepperBuyProps
                             {item.label}
                         </Typography>
                         {!canChooseRecipes && key === steps.length - 1 && (
-                            <LightTooltip text="El plan seleccionado no permite la selección de recetas. Te enviaremos las recetas más elegidas de la semana. Cada semana cambiamos las recetas.">
+                            <LightTooltip text={lang.tooltip}>
                                 <InfoIcon style={{ color: "#FD4A4A", fontSize: 16, marginLeft: 16 }} />
                             </LightTooltip>
                         )}

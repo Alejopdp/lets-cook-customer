@@ -5,21 +5,13 @@ import Image from "next/image";
 
 // Internal Components
 import PlanInfo from "../planInfo/planInfo";
-import TextButton from "../../atoms/textButton/textButton";
 
 // External Components
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import Modal from "../../atoms/modal/modal";
 
 // Icons & Images
-import TimerIcon from "@material-ui/icons/Timer";
-import SpeedIcon from "@material-ui/icons/Speed";
-import CloseIcon from "@material-ui/icons/Close";
 import { PaymentDetailsModalProps } from "./interface";
 
 const styles = (theme) => ({
@@ -53,7 +45,6 @@ const styles = (theme) => ({
 const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps) => {
     const theme = useTheme();
     const lang = props.lang;
-    console.log(props.data, "props.data");
 
     return (
         <Modal open={props.open} handleClose={props.handleClose} maxWidth="md" fullScreen title={lang.title}>

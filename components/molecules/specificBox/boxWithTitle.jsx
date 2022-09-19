@@ -2,9 +2,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@material-ui/core/styles";
-// import clsx from "clsx";
-
-// External components
 
 // Internal Components
 import GeneralBox from "../../atoms/generalBox/generalBox";
@@ -14,9 +11,9 @@ const BoxWithTitle = (props) => {
     const theme = useTheme();
 
     return (
-        <GeneralBox variant='medium'>
-            <div style={{ width: '100%' }}>
-                <Typography variant='h6' color='textSecondary' style={{ fontSize: '20px', marginBottom: theme.spacing(2) }}>
+        <GeneralBox variant="medium">
+            <div style={{ width: "100%" }}>
+                <Typography variant="h6" color="textSecondary" style={{ fontSize: "20px", marginBottom: theme.spacing(2) }}>
                     {props.title}
                 </Typography>
                 {props.children}

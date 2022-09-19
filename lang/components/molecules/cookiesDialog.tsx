@@ -7,6 +7,8 @@ export const cookiesDialog = {
             <span style={{ textDecoration: "underline" }}>cookies de terceros </span>,
             "para poder personalizar tu experiencia en nuestra web.",
         ],
+        acceptButton: "Aceptar",
+        denyButton: "Rechazar",
     },
     en: {
         text: [
@@ -16,6 +18,8 @@ export const cookiesDialog = {
             <span style={{ textDecoration: "underline" }}>third-party cookies </span>,
             "to personalise your experience on our website",
         ],
+        acceptButton: "Accept",
+        denyButton: "Deny",
     },
     ca: {
         text: [
@@ -25,5 +29,7 @@ export const cookiesDialog = {
             <span style={{ textDecoration: "underline" }}>cookies de tercers</span>,
             "per a poder personalitzar la teva experiència a la nostra web.",
         ],
+        acceptButton: "Acceptar",
+        denyButton: "Rebutjar",
     },
 };

@@ -9,16 +9,13 @@ import Grid from "@material-ui/core/Grid";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Image from "next/image";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
 // Internal components
-import { FormPaperWithIcons } from "@molecules";
-import { TextInput, CustomButton, RoundedButton } from "@atoms";
+import { TextInput, RoundedButton } from "@atoms";
 import { ShipmentFormProps } from "./interfaces";
-import { useBuyFlow, DeliveryForm, useUserInfoStore } from "@stores";
+import { useBuyFlow, useUserInfoStore } from "@stores";
 import LocationSearchInput from "components/atoms/locationSearchInput/locationSearchiInput";
 import PhoneNumberInput from "components/atoms/phoneNumberInput/phoneNumberInput";
 import { useSnackbar } from "notistack";
@@ -153,6 +150,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 disabled={!!form.deliveryForm?.addressName}
                                 value={props.deliveryData.addressDetails}
                                 onChange={props.handleChange}
+                                hasError={false}
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -162,6 +160,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 value={props.deliveryData.firstName}
                                 onChange={props.handleChange}
                                 disabled={!!form.deliveryForm?.firstName}
+                                hasError={false}
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -171,6 +170,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 value={props.deliveryData?.lastName}
                                 onChange={props.handleChange}
                                 disabled={!!form.deliveryForm?.lastName}
+                                hasError={false}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -201,6 +201,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 label={lang.restrictionsInputLabel}
                                 value={props.deliveryData?.restrictions}
                                 onChange={props.handleChange}
+                                hasError={false}
                             />
                         </Grid>
                         <Grid item xs={12}>

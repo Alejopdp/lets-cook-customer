@@ -1,33 +1,37 @@
-import { Typography, Container, Grid } from '@material-ui/core';
-import clsx from 'clsx';
-import { Rating } from '@material-ui/lab';
+import { Typography, Container, Grid } from "@material-ui/core";
+import clsx from "clsx";
+import { Rating } from "@material-ui/lab";
 import { useGoogleRatingStyles as useStyles } from "./styles";
 import { GoogleRatingSectionProps } from "./interfaces";
-import { memo, useEffect } from 'react';
-import { getReviews } from '../../../helpers/serverRequests/reviews/'
-
+import { memo } from "react";
 
 export const GoogleRatingSection = memo((props: GoogleRatingSectionProps) => {
     const classes = useStyles();
     return (
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                     <div className={classes.googleRatingRow}>
                         <img className={clsx(classes.item, classes.img)} src="/assets/img-google-logo.png" />
-                        <Typography className={classes.item} variant="subtitle1">Rating</Typography>
+                        <Typography className={classes.item} variant="subtitle1">
+                            Rating
+                        </Typography>
                     </div>
                 </Grid>
-                <Grid item xs={12} md={6} style={{ alignSelf: 'center' }}>
+                <Grid item xs={12} md={6} style={{ alignSelf: "center" }}>
                     <div className={classes.textRatingRow}>
-                        <Typography className={classes.item} variant="h6"><b>5.0</b></Typography>
+                        <Typography className={classes.item} variant="h6">
+                            <b>5.0</b>
+                        </Typography>
                         <Rating className={classes.item} name="read-only" value={5} readOnly />
-                        <Typography className={classes.item} variant="caption">150 opiniones</Typography>
+                        <Typography className={classes.item} variant="caption">
+                            150 opiniones
+                        </Typography>
                     </div>
                 </Grid>
             </Grid>
         </Container>
     );
-})
+});
 
 export default GoogleRatingSection;

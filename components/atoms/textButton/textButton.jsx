@@ -3,8 +3,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme, useMediaQuery } from "@material-ui/core";
 
-// import clsx from "clsx";
-
 // External components
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
@@ -17,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
         padding: "0px",
         fontSize: "14px",
         "&:hover": {
-            // backgroundColor: theme.palette.background.paper,
             backgroundColor: "transparent",
         },
     },

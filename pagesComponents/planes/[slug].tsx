@@ -1,5 +1,5 @@
 // Utils & Config
-import React, { memo, useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { getPlans, Plan, Recipe, PlanVariant, getPlanVariant } from "@helpers";
 import { BuyFlowInitialStore, IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 import { useRouter } from "next/router";
@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 // External components
 
 // Internal components
-import { BuyFlowLayout, Layout } from "@layouts";
+import { BuyFlowLayout } from "@layouts";
 import LoggedInNavbar from "../../components/layout/default/loggedInNavbarContent";
 import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "@organisms";
 import CrossSellingStep from "components/organisms/buyForm/crossSellingStep";
@@ -163,22 +163,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             setShowRegister(false);
         }
     }, [isAuthenticated]);
-
-    // const steps = useMemo(
-    //     () => [
-    //         <SelectPlanStep
-    //             initialPlanSettings={props.planUrlParams}
-    //             plans={props.plans}
-    //             variant={props.variant}
-    //             recipes={props.recipes}
-    //         />,
-    //         <RegisterUserStep />,
-    //         <CheckoutStep />,
-    //         <RecipeChoiseStep recipes={props.recipes} />,
-    //         <CrossSellingStep />,
-    //     ],
-    //     []
-    // );
 
     const steps = [
         <SelectPlanStep initialPlanSettings={data.planUrlParams} plans={data.plans} variant={data.variant} recipes={data.recipes} />,

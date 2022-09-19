@@ -14,7 +14,6 @@ export default function SimpleRating({ handleClickOpenRecipeModal, isModal, full
         <div>
             <Box
                 component="fieldset"
-                // borderColor="transparent"
                 style={{
                     display: isModal ? "flex" : null,
                     justifyContent: isModal ? "center" : null,

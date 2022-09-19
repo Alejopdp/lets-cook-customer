@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 // Utils & Config
 import { useBuyFlow, useFilterDrawer } from "@stores";
 import _ from "lodash";
@@ -16,17 +16,12 @@ import { RoundedButton } from "@atoms";
 import { TitleBuyFlow, RecipesBottomBar } from "@molecules";
 import { useSnackbar } from "notistack";
 import { chooseRecipes } from "helpers/serverRequests/order";
-import { sendNewSubscriptionWelcomeEmail } from "helpers/serverRequests/subscription";
 import { IFilter } from "@hooks";
 
-interface RecipeChoiseStepProps {
-    recipes: any[];
-}
-
-export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
+export const RecipeChoiseStep = () => {
     const theme = useTheme();
     const { drawerIsOpen, filters, setDrawerOpen, setFilters } = useFilterDrawer((state) => state);
-    const { planRecipes, recipes, firstOrderId, subscriptionId, firstOrderShippingDate, variant, selectRecipes } = useBuyFlow(
+    const { planRecipes, recipes, firstOrderId, firstOrderShippingDate, variant, selectRecipes } = useBuyFlow(
         ({ form, selectRecipes }) => ({
             planRecipes: form.planRecipes,
             recipes: form.recipes, // TO DO: Returns [] despite of being ok in previous steps
@@ -83,7 +78,6 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
 
         if (res.status === 200) {
             gotToNextView();
-            // sendWelcomeEmail();
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
@@ -91,7 +85,6 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
     };
 
     const handleChooseRecipesLater = () => {
-        // sendWelcomeEmail();
         ga.event({
             action: "clic en elegir recetas luego",
             params: {
@@ -135,14 +128,6 @@ export const RecipeChoiseStep = (props: RecipeChoiseStepProps) => {
         newState.splice(index, 1);
         selectRecipes(newState);
     };
-
-    // const sendWelcomeEmail = async () => {
-    //     const res = await sendNewSubscriptionWelcomeEmail(subscriptionId);
-
-    //     if (!!!res || res.status !== 200) {
-    //         enqueueSnackbar("Error al enviar email de bienvenida", { variant: "error" });
-    //     }
-    // };
 
     const handleClickOpenFilters = () => {
         ga.event({

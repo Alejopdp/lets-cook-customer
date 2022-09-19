@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
 import { RecipeChoiceScreenProps } from "./interfaces";
 import { useLang, useRecipesFilters } from "@hooks";
 import _ from "lodash";
@@ -71,7 +70,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
         }
         const res = await chooseRecipes(router.query.orderId as string, recipeSelection);
         if (res.status === 200) {
-            enqueueSnackbar("Recetas elegidas correctamente", { variant: "success" });
+            enqueueSnackbar(lang.snackbars.success.recipesChosen, { variant: "success" });
             router.replace({
                 pathname: `${localeRoutes[router.locale][Routes.adicionales]}`,
                 query: { planId: props.planId },
@@ -172,7 +171,5 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
         </Container>
     );
 };
-
-RecipeChoiceScreen.propTypes = {};
 
 export default RecipeChoiceScreen;

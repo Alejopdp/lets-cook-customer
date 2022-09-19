@@ -30,8 +30,4 @@ const DataDisplay = (props) => {
     );
 };
 
-DataDisplay.propTypes = {
-    // title: PropTypes.string.isRequired,
-};
-
 export default DataDisplay;

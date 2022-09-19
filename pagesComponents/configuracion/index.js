@@ -10,7 +10,6 @@ import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import { Layout } from "../../components/layout/index";
 import BackButtonTitle from "../../components/atoms/backButtonTitle/backButtonTitle";
 import UserInfoDetail from "../../components/organisms/userInfo";
-import { getUserInfo } from "../../helpers/serverRequests/user-info";
 import { useUserInfoStore } from "../../stores/auth";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import { getCustomerById } from "helpers/serverRequests/customer";
@@ -20,7 +19,6 @@ const UserInfo = (props) => {
     const [isLoading, setisLoading] = useState(true);
     const [initialCustomerInfo, setinitialCustomerInfo] = useState({});
     const userInfo = useUserInfoStore((state) => state.userInfo);
-    // const { enqueueSnackbar } = useSnackbar();
     const [lang] = useLang("configuracion");
 
     useEffect(() => {
@@ -31,7 +29,6 @@ const UserInfo = (props) => {
             if (res.status === 200) {
                 setinitialCustomerInfo(res.data);
             } else {
-                // enqueueSnackbar("Error al buscar la información", { variant: "error" });
                 alert("error");
             }
 

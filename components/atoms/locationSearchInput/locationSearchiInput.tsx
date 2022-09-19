@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
-import { CallMerge } from "@material-ui/icons";
 import { LocationSearchInputProps } from "./intertfaces";
 import { locationSearchInput as langs } from "@lang";
 import { useRouter } from "next/router";
@@ -137,7 +136,6 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             }}
             onInputChange={(event, newInputValue) => {
                 setInputValue(newInputValue);
-                // setValue(newInputValue);
             }}
             renderInput={(params) => {
                 const inputProps = params.inputProps;

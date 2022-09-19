@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 // External components
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Image from "next/image";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,7 +29,6 @@ const HowItWorksExtended = (props) => {
     const theme = useTheme();
 
     return (
-        // <div className={classes.root}>
         <Grid
             container
             spacing={4}
@@ -47,13 +45,9 @@ const HowItWorksExtended = (props) => {
                 <Typography variant="h4" className={classes.marg2}>
                     {props.title}
                 </Typography>
-                <Typography variant="body1">
-                    {props.subtitle}
-                </Typography>
+                <Typography variant="body1">{props.subtitle}</Typography>
             </Grid>
-
         </Grid>
-        // </div>
     );
 };
 

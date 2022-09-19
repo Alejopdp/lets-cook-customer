@@ -1,6 +1,7 @@
 export const LOCAL_STORAGE_KEYS = {
     token: "token",
     userInfo: "userInfo",
+    HAS_ACCEPTED_COOKIES: "HAS_ACCEPTED_COOKIES",
 };
 
 export const useLocalStorage = () => {

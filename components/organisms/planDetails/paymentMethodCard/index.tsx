@@ -1,8 +1,6 @@
 // Utils & Config
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-// import { useRouter } from "next/router";
-// const langs = require("../../lang").comoFunciona;
+import { useTheme } from "@material-ui/core/styles";
 
 // External Components
 
@@ -10,14 +8,9 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import BoxWithTitle from "../../../molecules/specificBox/boxWithTitle";
 import DataDisplay from "../../../molecules/dataDisplay/dataDisplay";
 
-const useStyles = makeStyles((theme) => ({}));
-
 const PaymentMethodCard = (props) => {
     const lang = props.lang;
     const theme = useTheme();
-    const classes = useStyles();
-    // const router = useRouter();
-    // const lang = langs[router.locale];
 
     return (
         <BoxWithTitle title={lang.title}>

@@ -1,0 +1,2 @@
+export const MAILERLITE_MAILING_LIST_GROUP = "109309532"
+export const STRIPE_CARD_PAYMENT_METHOD = "card"

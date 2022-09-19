@@ -68,6 +68,12 @@ export const planDetails = {
         skipPlanModal: skipPlanModal.es,
         swapPlanModal: swapPlanModal.es,
         cancelPlanModal: cancelPlanModal.es,
+        snackbars: {
+            success: {
+                planSwapped: "Plan cambiado con éxito",
+            },
+            error: {},
+        },
     },
     en: {
         backButton: "Plan details",
@@ -134,6 +140,12 @@ export const planDetails = {
         skipPlanModal: skipPlanModal.en,
         swapPlanModal: swapPlanModal.en,
         cancelPlanModal: cancelPlanModal.en,
+        snackbars: {
+            success: {
+                planSwapped: "Plan swapped successfully",
+            },
+            error: {},
+        },
     },
     ca: {
         backButton: "Detalls del pla",
@@ -200,5 +212,11 @@ export const planDetails = {
         skipPlanModal: skipPlanModal.ca,
         swapPlanModal: swapPlanModal.ca,
         cancelPlanModal: cancelPlanModal.ca,
+        snackbars: {
+            success: {
+                planSwapped: "Pla canviat amb èxit",
+            },
+            error: {},
+        },
     },
 };

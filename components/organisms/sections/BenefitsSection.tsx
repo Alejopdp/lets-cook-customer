@@ -1,28 +1,21 @@
-import { makeStyles, Box, useTheme, Typography, Container, Grid, Hidden } from "@material-ui/core";
-import PropTypes from "prop-types";
+import { Box, useTheme, Typography, Container, Grid, Hidden } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
-import BenefitsCard from "../../molecules/benefits/benefits";
 import { useBenefitsStyle as useStyles } from "./styles";
-import { Benefit, BenefitsSectionProps } from "./interfaces";
+import { BenefitsSectionProps } from "./interfaces";
 import TitleOtherPages from "components/molecules/titleOtherPages/titleOtherPages";
-import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import useAnalytics from "hooks/useAnalytics";
 
 export const BenefitsSection = (props: BenefitsSectionProps) => {
+    const { trackViewPlansAtHomepageClick } = useAnalytics();
     const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en descubre mas",
-            params: {
-                event_category: "homepage",
-                event_label: "beneficios lets cook",
-            },
-        });
+        trackViewPlansAtHomepageClick();
         router.push(localeRoutes[router.locale][Routes.planes]);
     };
 

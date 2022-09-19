@@ -5,8 +5,7 @@ import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../theme";
-import useLocalStorage from "../hooks/useLocalStorage/localStorage";
-import cookies from "js-cookie";
+import useLocalStorage, { LOCAL_STORAGE_KEYS } from "../hooks/useLocalStorage/localStorage";
 import { useAuthStore, useUserInfoStore } from "../stores/auth";
 import { useCookiesStore } from "../stores/cookies";
 import { getCustomerById, verifyToken } from "../helpers/serverRequests/customer";
@@ -46,7 +45,7 @@ export function reportWebVitals(metric) {
 
 function MyApp(props) {
     const { Component, pageProps } = props;
-    const { getFromLocalStorage, resetLocalStorage, saveInLocalStorage, removeFromLocalStorage } = useLocalStorage();
+    const { getFromLocalStorage, saveInLocalStorage, removeFromLocalStorage } = useLocalStorage();
     const [isLoading, setisLoading] = useState(true);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
@@ -58,8 +57,8 @@ function MyApp(props) {
 
     useEffect(() => {
         const verifyAuthentication = async () => {
-            const token = await getFromLocalStorage("token");
-            const hasAcceptedCookies = await getFromLocalStorage("HAS_ACCEPTED_COOKIES");
+            const token = await getFromLocalStorage(LOCAL_STORAGE_KEYS.token);
+            const hasAcceptedCookies = await getFromLocalStorage(LOCAL_STORAGE_KEYS.HAS_ACCEPTED_COOKIES);
             setHasAccepteCookies(hasAcceptedCookies);
 
             if (!token) {
@@ -69,7 +68,7 @@ function MyApp(props) {
             const res = await verifyToken(token);
             if (res.status === 200) {
                 setIsAuthenticated(true);
-                const userInfo = await getFromLocalStorage("userInfo");
+                const userInfo = await getFromLocalStorage(LOCAL_STORAGE_KEYS.userInfo);
                 const getCustomerRes = await getCustomerById(userInfo?.id);
 
                 if (getCustomerRes && getCustomerRes.status === 200) {
@@ -89,10 +88,10 @@ function MyApp(props) {
                     if (userInfo.shippingAddress.details) userInfo.shippingAddress.addressDetails = userInfo.shippingAddress.details;
                 }
                 setUserInfo(userInfo);
-                saveInLocalStorage("userInfo", userInfo);
+                saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, userInfo);
             } else {
-                removeFromLocalStorage("token");
-                removeFromLocalStorage("userInfo");
+                removeFromLocalStorage(LOCAL_STORAGE_KEYS.token);
+                removeFromLocalStorage(LOCAL_STORAGE_KEYS.userInfo);
             }
 
             setisLoading(false);

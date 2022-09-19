@@ -23,26 +23,18 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                             <FormControlLabel
                                 value={paymentMethod.id}
                                 control={<Radio />}
-                                // label={capitalizeFirstLetter(paymentMethod.label) || capitalizeFirstLetter(paymentMethod.card)}
                                 label={paymentMethod.label || paymentMethod.card}
                             />
                         ))}
                     </RadioGroup>
                 ) : null}
                 {props.paymentMethods.length > 0 && (
-                    <FormControlLabel
-                        value="newPaymentMethod"
-                        control={<Radio />}
-                        label={lang.addNewPaymentMethodLabel}
-                        // onClick={props.setselectedOption}
-                    />
+                    <FormControlLabel value="newPaymentMethod" control={<Radio />} label={lang.addNewPaymentMethodLabel} />
                 )}
                 {props.selectedOption === "newPaymentMethod" || props.paymentMethods.length === 0 ? <StripeForm /> : null}
             </RadioGroup>
         </FormControl>
     );
 };
-
-PaymentMethodForm.propTypes = {};
 
 export default PaymentMethodForm;

@@ -1,0 +1,27 @@
+export const appBarStepper = {
+    es: {
+        steps: {
+            selectPlan: "Seleccionar plan",
+            signUp: "Registrarse",
+            checkout: "Checkout",
+            chooseRecipes: "Elegir recetas"
+        },
+    },
+    en: {
+        steps: {
+            selectPlan: "Select plan",
+            signUp: "Sign up",
+            checkout: "Checkout",
+            chooseRecipes: "Choose recipes"
+        },
+
+    },
+    ca: {
+        steps: {
+            selectPlan: "Select pla",
+            signUp: "Registrar-se",
+            checkout: "Pagament",
+            chooseRecipes: "Trieu receptes"
+        },
+    }
+}

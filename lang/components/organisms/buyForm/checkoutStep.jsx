@@ -26,6 +26,14 @@ export const checkoutStep = {
             },
             btnText: "Realizar pago",
             btnCaption: "Totalmente flexible y sin permanencia. Puedes cancelar, cambiar o saltar semana cuando quieras.",
+            snackbars: {
+                succes: {},
+                error: {
+                    paymentAuthentication: "Error al autenticar el método de pago",
+                    completePayment: "Error al completar el pago",
+                    welcomeEmail: "Error al enviar email de bienvenida",
+                },
+            },
         },
         iconsWithText: {
             firstItem: "Economiza tu tiempo",
@@ -85,6 +93,14 @@ export const checkoutStep = {
             },
             btnText: "Make payment",
             btnCaption: "Totally flexible and without lock-up period. You can cancel, modify your plan or skip weeks at any time.",
+            snackbars: {
+                succes: {},
+                error: {
+                    paymentAuthentication: "Error authenticating payment method",
+                    completePayment: "Error completing payment",
+                    welcomeEmail: "Error sending welcome email",
+                },
+            },
         },
         iconsWithText: {
             firstItem: "Save time",
@@ -144,6 +160,14 @@ export const checkoutStep = {
             },
             btnText: "Realitzar pagament",
             btnCaption: "Totalment flexible i sense permanència. Pots cancel·lar, canviar o saltar setmana quan vulguis.",
+            snackbars: {
+                succes: {},
+                error: {
+                    paymentAuthentication: "Error en autenticar el mètode de pagament",
+                    completePayment: "Error en completar el pagament",
+                    welcomeEmail: "Error en enviar correu electrònic de benvinguda",
+                },
+            },
         },
         iconsWithText: {
             firstItem: "Estalvia temps",

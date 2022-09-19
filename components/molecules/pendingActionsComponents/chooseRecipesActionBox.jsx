@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 import { localeRoutes, Routes } from "lang/routes/routes";
 
 const ChooseRecipesActionBox = ({ data, lang }) => {
-    const theme = useTheme();
     const router = useRouter();
 
     return (

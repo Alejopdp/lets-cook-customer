@@ -4,13 +4,14 @@ import { getAdditionalPlans } from "@helpers";
 import { useSnackbar } from "notistack";
 import { useStripe } from "@stripe/react-stripe-js";
 import * as ga from "../../../helpers/ga";
-const langs = require("../../../lang").crossSellingStep;
+// const langs = require("../../../lang").crossSellingStep;
+import * as langs from "../../../lang";
 
 // External components
-import { Box, Button, Container, Grid, Icon } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import TitleBuyFlow from "components/molecules/titleBuyFlow/titleBuyFlow";
 import AdditionalPlansGrid from "../additionalPlansGrid/additionalPlansGrid";
-import { useBuyFlow, useCrossSellingStore, useUserInfoStore } from "@stores";
+import { useBuyFlow, useUserInfoStore } from "@stores";
 import { Plan } from "types/plan";
 import { useRouter } from "next/router";
 import { useTheme } from "@material-ui/core";
@@ -21,29 +22,25 @@ import SectionTitleBuyFlow from "../../molecules/sectionTitleBuyFlow/sectionTitl
 // Images & icons
 import { SimpleAccordion } from "@atoms";
 import { PlanVariant } from "types/planVariant";
-import {
-    createManySubscriptions,
-    handle3dSecureFailure,
-    handle3dSecureFailureForManySubscriptions,
-} from "helpers/serverRequests/subscription";
+import { createManySubscriptions, handle3dSecureFailureForManySubscriptions } from "helpers/serverRequests/subscription";
 import AdditionalPlansBuyButtons from "components/molecules/additionalPlansBuyButtons/additionalPlansBuyButtons";
 import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import { useLang } from "@hooks";
+import { locale } from "types/locale";
 
-const CrossSellingStep = (props) => {
+const CrossSellingStep = () => {
     const theme = useTheme();
     const { form, resetBuyFlowState } = useBuyFlow((state) => ({ form: state.form, resetBuyFlowState: state.resetBuyFlowState }));
     const router = useRouter();
-    const lang = langs[router.locale];
+    const lang = langs.crossSellingStep[router.locale as locale];
     const [faqsLang] = useLang("faqsSection");
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
     const [additionalPlans, setadditionalPlans] = useState<Plan[]>([]);
     const [selectedVariants, setselectedVariants] = useState<PlanVariant[]>([]);
     const [variantsToPay, setvariantsToPay] = useState<PlanVariant[]>([]);
-    // const selectedPlans = useCrossSellingStore((state) => state.selectedPlans);
     const [isLoadingPayment, setisLoadingPayment] = useState(false);
     const stripe = useStripe();
 
@@ -117,7 +114,7 @@ const CrossSellingStep = (props) => {
                 } else {
                     await handle3dSecureFailureForManySubscriptions(res.data.subscriptionsIds);
                     enqueueSnackbar(
-                        confirmationResponse.error ? confirmationResponse.error.message : "Error al autenticar el método de pago",
+                        confirmationResponse.error ? confirmationResponse.error.message : lang.snackbars.error.paymentMethodAuthentication,
                         { variant: "error" }
                     );
                 }
@@ -125,7 +122,7 @@ const CrossSellingStep = (props) => {
                 await router.push(localeRoutes[router.locale][Routes.perfil]);
                 resetBuyFlowState();
             } else {
-                enqueueSnackbar("Error al completar el pago", { variant: "error" });
+                enqueueSnackbar(lang.snackbars.error.paymentCompletion, { variant: "error" });
             }
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
@@ -192,5 +189,4 @@ const CrossSellingStep = (props) => {
     );
 };
 
-CrossSellingStep.propTypes = {};
 export default CrossSellingStep;

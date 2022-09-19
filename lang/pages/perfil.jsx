@@ -35,6 +35,17 @@ export const perfil = {
         skipPlanModal: skipPlanModal.es,
         swapPlanModal: swapPlanModal.es,
         planRecoverModal: planRecoverModal.es,
+        snackbars: {
+            success: {
+                skippedWeeks: "La/s semana/s han sido saltadas correctamente",
+                swapedPlan: "Plan cambiado con éxito",
+                reorderedPlan: "Pedido correctamente realizado",
+            },
+            error: {
+                skippedWeeks: "Error al saltar la/s semana/s",
+                unexpected: "Ha ocurrido un error inesperado, por favor intente nuevamente",
+            },
+        },
     },
     en: {
         greeting: "Hello",
@@ -70,6 +81,17 @@ export const perfil = {
         skipPlanModal: skipPlanModal.en,
         swapPlanModal: swapPlanModal.en,
         planRecoverModal: planRecoverModal.en,
+        snackbars: {
+            success: {
+                skippedWeeks: "Weeks successfully skipped",
+                swapedPlan: "Plan successfully swaped",
+                reorderedPlan: "Plan successfully reordered",
+            },
+            error: {
+                skippedWeeks: "An error has ocurred",
+                unexpected: "An error has ocurred",
+            },
+        },
     },
     ca: {
         greeting: "Hola",
@@ -105,5 +127,16 @@ export const perfil = {
         skipPlanModal: skipPlanModal.ca,
         swapPlanModal: swapPlanModal.ca,
         planRecoverModal: planRecoverModal.ca,
+        snackbars: {
+            success: {
+                skippedWeeks: "Setmanes omeses correctament",
+                swapedPlan: "El pla s'ha intercanviat correctament",
+                reorderedPlan: "El pla s'ha reordenat correctament",
+            },
+            error: {
+                skippedWeeks: "S'ha produït un error",
+                unexpected: "S'ha produït un error",
+            },
+        },
     },
 };
