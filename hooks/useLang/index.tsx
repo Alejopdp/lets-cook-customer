@@ -1,16 +1,15 @@
 import { useRouter } from "next/router";
-import * as Langs from '@lang';
-type LangsType = [any, any];
+import * as Langs from "@lang";
 
-export const useLang = (componentName: string): LangsType => {
+export const useLang = (componentName: keyof typeof Langs) => {
     const router = useRouter();
     const lang = Langs[componentName][router.locale];
-    return [lang, Langs]
-}
+    return [lang, Langs];
+};
 
-export const getLang = (componentName: string, locale: string): LangsType => {
+export const getLang = (componentName: string, locale: string) => {
     const lang = Langs[componentName][locale];
-    return [lang, Langs]
-}
+    return [lang, Langs];
+};
 
 export default useLang;

@@ -1,6 +1,5 @@
 // Utils & Config
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
@@ -9,34 +8,33 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Image from "next/image";
-
-
+import { SubscriptionState } from "types/subscription";
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
     },
     text: {
-        fontSize: '18px',
+        fontSize: "18px",
         fontWeight: 600,
         marginLeft: theme.spacing(1.5),
         marginRight: theme.spacing(2),
     },
     chip: {
-        textTransform: 'uppercase',
+        textTransform: "uppercase",
         fontWeight: 500,
-        color: 'white',
+        color: "white",
     },
     chipStatusActive: {
         backgroundColor: theme.palette.primary.main,
     },
     chipStatusCancelled: {
-        backgroundColor: '#FC1919',
+        backgroundColor: "#FC1919",
     },
     chipStatusExpired: {
         backgroundColor: theme.palette.secondary.main,
-    }
+    },
 }));
 
 const PlanInfoWithStatus = (props) => {
@@ -44,20 +42,19 @@ const PlanInfoWithStatus = (props) => {
 
     let chipBackgroundColor;
     switch (props.status.value) {
-        case 'SUBSCRIPTION_ACTIVE':
+        case SubscriptionState.SUBSCRIPTION_ACTIVE:
             chipBackgroundColor = classes.chipStatusActive;
             break;
-        case 'SUBSCRIPTION_CANCELLED':
+        case SubscriptionState.SUBSCRIPTION_CANCELLED:
             chipBackgroundColor = classes.chipStatusCancelled;
             break;
-        case 'SUBSCRIPTION_EXPIRED':
+        case SubscriptionState.SUBSCRIPTION_EXPIRED:
             chipBackgroundColor = classes.chipStatusExpired;
             break;
         default:
             chipBackgroundColor = classes.chipStatusActive;
             break;
     }
-
 
     return (
         <Box className={classes.container} style={props.style}>
@@ -68,10 +65,6 @@ const PlanInfoWithStatus = (props) => {
             <Chip label={props.status.text} className={clsx(classes.chip, chipBackgroundColor)} />
         </Box>
     );
-};
-
-PlanInfoWithStatus.propTypes = {
-    // btnText: PropTypes.string.isRequired,
 };
 
 export default PlanInfoWithStatus;
