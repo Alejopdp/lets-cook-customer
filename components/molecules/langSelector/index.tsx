@@ -46,9 +46,15 @@ export const LangSelector = memo(({ onChangeLang }: LangSelectorProps) => {
 
     const _handleOptionSelected = (locale: ILan) => {
         const actualPageName = router.pathname.split("/")[1];
-        const newBaseUrl = `${localeRoutes[locale.label][Routes[actualPageName]]}`;
+        const newBaseUrl = `${localeRoutes[locale.label][Routes[actualPageName]] ?? "/"}`;
         const slugs = `/${router.pathname.split("/").slice(2).join("/")}`;
 
+        console.log("SPLIT: ", router.pathname.split("/"));
+        console.log("Actual page name: ", actualPageName);
+        console.log("New Base URL: ", newBaseUrl);
+        console.log("Slugs: ", slugs);
+
+        // return;
         onChangeLang && onChangeLang(locale);
         setOpen(false);
         setLang(locale);
