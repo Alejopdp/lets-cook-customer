@@ -1,30 +1,27 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { getShippingCost } from "@helpers";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 // External components
-import { Box, Typography, useTheme } from "@material-ui/core";
-import ErrorIcon from "@material-ui/icons/Error";
+import { Typography, useTheme } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Image from "next/image";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
 // Internal components
-import { FormPaperWithIcons } from "@molecules";
-import { TextInput, CustomButton, RoundedButton } from "@atoms";
+import { TextInput, RoundedButton } from "@atoms";
 import { BuyerInfoFormProps } from "./interfaces";
-import { useBuyFlow, DeliveryForm, useUserInfoStore } from "@stores";
+import { useBuyFlow, useUserInfoStore } from "@stores";
 import PhoneNumberInput from "../../atoms/phoneNumberInput/phoneNumberInput";
 import { useSnackbar } from "notistack";
 
 // Icons & Images
 import EditIcon from "@material-ui/icons/Edit";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { useLang } from "@hooks";
 
 const useStylesAccordion = makeStyles((theme: Theme) =>
     createStyles({
@@ -51,6 +48,7 @@ const useStylesAccordion = makeStyles((theme: Theme) =>
 
 export const BuyerInfoForm = memo((props: BuyerInfoFormProps) => {
     const theme = useTheme();
+    const [lang] = useLang("bonoRegalo");
     const classes = useStylesAccordion();
     const { setDeliveryInfo, form } = useBuyFlow(({ setDeliveryInfo, form }) => ({ setDeliveryInfo, form }));
     const userInfo = useUserInfoStore((state) => state.userInfo);
@@ -58,8 +56,8 @@ export const BuyerInfoForm = memo((props: BuyerInfoFormProps) => {
 
     useEffect(() => {
         const getShippingCostIfAddressExists = async () => {
-            const newLatitude = props.deliveryData ?.latitude || userInfo.shippingAddress ?.latitude;
-            const newLongitude = props.deliveryData ?.longitude || userInfo.shippingAddress ?.longitude;
+            const newLatitude = props.deliveryData?.latitude || userInfo.shippingAddress?.latitude;
+            const newLongitude = props.deliveryData?.longitude || userInfo.shippingAddress?.longitude;
 
             if (!!!newLatitude && !!!newLongitude) return;
 
@@ -78,7 +76,7 @@ export const BuyerInfoForm = memo((props: BuyerInfoFormProps) => {
         };
 
         getShippingCostIfAddressExists();
-    }, [props.deliveryData ?.latitude, props.deliveryData ?.longitude]);
+    }, [props.deliveryData?.latitude, props.deliveryData?.longitude]);
 
     return (
         <>
@@ -87,16 +85,12 @@ export const BuyerInfoForm = memo((props: BuyerInfoFormProps) => {
                 expanded={props.expanded === props.panelNumber}
                 onChange={props.handleChangeAccordion(props.panelNumber)}
             >
-                <AccordionSummary
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
-                    style={{ cursor: "default" }}
-                >
+                <AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header" style={{ cursor: "default" }}>
                     <Grid item container justify="space-between" alignItems="center">
                         <Grid item className={classes.title}>
                             <Image src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} />
                             <Typography variant="h6" color="textSecondary" className={classes.titleMargin}>
-                                Tus datos (comprador)
+                                {lang.buyerInfoForm.title}
                             </Typography>
                         </Grid>
                         {props.expanded !== props.panelNumber && (
@@ -114,8 +108,8 @@ export const BuyerInfoForm = memo((props: BuyerInfoFormProps) => {
                         <Grid item xs={6}>
                             <TextInput
                                 name="buyerName"
-                                label="Nombre"
-                                disabled={!!form.deliveryForm ?.addressName}
+                                label={lang.buyerInfoForm.accordionDetails.name.label}
+                                disabled={!!form.deliveryForm?.addressName}
                                 value={props.deliveryData.addressDetails}
                                 onChange={props.handleChange}
                             />
@@ -123,23 +117,23 @@ export const BuyerInfoForm = memo((props: BuyerInfoFormProps) => {
                         <Grid item xs={6}>
                             <TextInput
                                 name="buyerSurname"
-                                label="Apellido/s"
-                                disabled={!!form.deliveryForm ?.addressName}
+                                label={lang.buyerInfoForm.accordionDetails.surname.label}
+                                disabled={!!form.deliveryForm?.addressName}
                                 value={props.deliveryData.addressDetails}
                                 onChange={props.handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <PhoneNumberInput
-                                value={props.deliveryData ?.phone1}
-                                name="phone1"
+                                value={props.deliveryData?.phone1}
+                                name={lang.buyerInfoForm.accordionDetails.phone.label}
                                 handleChange={props.handleChange}
-                                disabled={!!form.deliveryForm ?.phone1}
+                                disabled={!!form.deliveryForm?.phone1}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <RoundedButton
-                                label="Continuar"
+                                label={lang.buyerInfoForm.accordionDetails.continue.label}
                                 onClick={props.handleChangeStep}
                                 style={{ width: "100%" }}
                                 disabled={!props.isFormCompleted()}

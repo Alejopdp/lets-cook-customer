@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Divider, Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles } from "@material-ui/core";
 import Image from "next/image";
 import { LoginButton } from "@atoms";

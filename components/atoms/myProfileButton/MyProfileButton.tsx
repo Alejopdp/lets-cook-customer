@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { ButtonBase, Typography } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { MyProfileButtonProps } from "./interfaces";

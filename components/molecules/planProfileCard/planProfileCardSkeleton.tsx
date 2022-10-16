@@ -7,7 +7,6 @@ import clsx from "clsx";
 // Internal components
 import { Box } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import GeneralBox from "components/atoms/generalBox/generalBox";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme: any) => ({
@@ -29,16 +28,13 @@ const useStyles = makeStyles((theme: any) => ({
 
 const PlanProfileCardSkeleton = ({ plan, lang }) => {
     const theme = useTheme();
-    const router = useRouter();
     const classes = useStyles();
 
     return (
         <Box className={clsx(classes.box)}>
             <div style={{ display: "flex", width: "100%", flexDirection: "row", alignItems: "center" }}>
-                {/* <Box display="flex"> */}
                 <Skeleton variant="circle" height={64} width={64} style={{ marginRight: theme.spacing(2) }} />
                 <Skeleton variant="rect" width="100%" />
-                {/* </Box> */}
             </div>
             <div style={{ marginBottom: theme.spacing(2), marginTop: theme.spacing(1), width: "100%" }}>
                 <Skeleton variant="text" width="80%" height={24} />

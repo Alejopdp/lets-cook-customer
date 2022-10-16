@@ -1,9 +1,9 @@
-import firebase from "firebase";
+import { getApp, getApps, initializeApp } from "firebase/app";
+import { FacebookAuthProvider, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-if (!!!firebase.apps || !firebase.apps.length) {
-    firebase.initializeApp({
+if (!!!getApps() || !getApps().length) {
+    initializeApp({
         apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY, // Auth / General Use
-        // apiKey: "AIzaSyA-ltZYFj5XA3oldGyjQ1ufxONNcdng7IA",
         authDomain: "letscook-001.firebaseapp.com",
         projectId: "letscook-001",
         storageBucket: "letscook-001.appspot.com",
@@ -12,15 +12,15 @@ if (!!!firebase.apps || !firebase.apps.length) {
         measurementId: "G-H8MH6HPP8X",
     });
 } else {
-    firebase.app(); // if already initialized, use that one
+    getApp(); // if already initialized, use that one
 }
 
 export const loginWithGoogleAndGetIdToken = async () => {
     try {
-        const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+        const googleAuthProvider = new GoogleAuthProvider();
         googleAuthProvider.addScope("email");
-        await firebase.auth().signInWithPopup(googleAuthProvider);
-        const token = await firebase.auth().currentUser.getIdToken(true);
+        await signInWithPopup(getAuth(), googleAuthProvider);
+        const token = await getAuth().currentUser.getIdToken(true);
         return { token };
     } catch (error) {
         return { error };
@@ -29,14 +29,14 @@ export const loginWithGoogleAndGetIdToken = async () => {
 
 export const loginWithFacebookAndGetIdToken = async () => {
     try {
-        const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+        const facebookAuthProvider = new FacebookAuthProvider();
         facebookAuthProvider.addScope("public_profile");
         facebookAuthProvider.addScope("email");
         facebookAuthProvider.setCustomParameters({
             auth_type: "rerequest",
         });
-        const result = await firebase.auth().signInWithPopup(facebookAuthProvider);
-        const token = await firebase.auth().currentUser.getIdToken(true);
+        const result = await signInWithPopup(getAuth(), facebookAuthProvider);
+        const token = await getAuth().currentUser.getIdToken(true);
         return { token, email: result.user.email };
     } catch (error) {
         return { error };

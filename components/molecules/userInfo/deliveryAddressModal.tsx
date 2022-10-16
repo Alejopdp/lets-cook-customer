@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { OtherAddressInformation, getFormattedAddressFromGoogle } from "helpers/utils/utils";
 
 // External components
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { useTheme } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 
@@ -27,10 +25,6 @@ const DeliveryAddressModal = (props) => {
         postalCode: props.shippingAddress.postalCode,
         province: props.shippingAddress.province,
     });
-
-    const handleChangeDeliveryAddress = () => {
-        props.handlePrimaryButtonClick(formData);
-    };
 
     const handleChange = (e) => {
         setformData({
@@ -71,7 +65,7 @@ const DeliveryAddressModal = (props) => {
         >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <LocationSearchInput name="name" handleChange={handleGoogleInput} value={formData.name} />
+                    <LocationSearchInput name="name" handleChange={handleGoogleInput} value={formData.name} label={""} disabled={false} />
                 </Grid>
 
                 <Grid item xs={12}>

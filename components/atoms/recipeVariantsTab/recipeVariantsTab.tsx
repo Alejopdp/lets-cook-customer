@@ -1,11 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { useTheme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-
+import { Tabs, Typography, Tab, Box, useTheme } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { RecipeVariantsTabProps, TabPanelProps } from "./interfaces";
 
@@ -38,7 +32,6 @@ export const RecipeVariantsTab = memo((props: RecipeVariantsTabProps) => {
 
     return (
         <div className={classes.root}>
-            {/* <AppBar position="static"> */}
             <Tabs
                 classes={{ indicator: classes.indicator }}
                 value={selectedVariant}
@@ -57,7 +50,6 @@ export const RecipeVariantsTab = memo((props: RecipeVariantsTabProps) => {
                     />
                 ))}
             </Tabs>
-            {/* </AppBar> */}
             <Typography variant="body2">{ingredients}</Typography>
         </div>
     );

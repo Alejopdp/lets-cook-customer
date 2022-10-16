@@ -1,5 +1,5 @@
 // Utils & Config
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 // External Components
@@ -15,7 +15,7 @@ import CheckBoxIcon from "@material-ui/icons/CheckBox";
 const useStyles = makeStyles((theme) => ({}));
 
 const CantGetKitsNextWeek = (props) => {
-    const lang = props.lang
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
 

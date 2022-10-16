@@ -1,29 +1,21 @@
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, useTheme, Container, Grid } from "@material-ui/core";
+import { useTheme, Container, Grid } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
-import { memo } from "react";
 import { useRouter } from "next/router";
-
-import { useCallToActionStyle as useStyles } from "./styles";
+import classes from "./callToActionStyles.module.scss";
 import { CallToActionSectionProps } from "./interfaces";
-import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import useAnalytics from "hooks/useAnalytics";
 const langs = require("../../../lang").callToActionSection;
 
-export const CallToActionSection = memo((props: CallToActionSectionProps) => {
-    const classes = useStyles();
+export const CallToActionSection = (props: CallToActionSectionProps) => {
+    const { trackCallToActionClickAtHomepage } = useAnalytics();
     const theme = useTheme();
     const router = useRouter();
     const lang = langs[router.locale];
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en me interesa",
-            params: {
-                event_category: props.page ? props.page : "undefined page",
-                event_label: "call to action",
-            },
-        });
+        trackCallToActionClickAtHomepage(props.page);
         router.push(localeRoutes[router.locale][Routes.planes]);
     };
 
@@ -53,4 +45,4 @@ export const CallToActionSection = memo((props: CallToActionSectionProps) => {
             </Container>
         </div>
     );
-});
+};

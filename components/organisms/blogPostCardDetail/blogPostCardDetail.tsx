@@ -1,5 +1,5 @@
 // Utils & Config
-import React from "react";
+import React, { FC } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { dateFromISO8601 } from "../../../helpers/utils/date";
 import { useRouter } from "next/router";
@@ -40,7 +40,7 @@ interface BlogPostCardDetailProps {
     post: Post;
 }
 
-const BlogPostCardDetail = ({ post }) => {
+const BlogPostCardDetail: FC<BlogPostCardDetailProps> = ({ post }) => {
     const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();

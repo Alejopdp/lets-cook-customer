@@ -2,11 +2,16 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        position: "relative",
         borderRadius: "8px",
         height: 250,
         background: "rgb(0,0,0)",
         background: "linear-gradient(0deg, rgba(0,0,0,0.9444152661064426) 0%, rgba(0,0,0,0) 100%)",
         zIndex: "99",
+    },
+
+    borderRadius: {
+        borderRadius: "8px",
     },
     gradient: {
         borderRadius: "8px",

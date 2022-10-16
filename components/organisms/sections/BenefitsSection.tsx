@@ -1,28 +1,21 @@
-import { makeStyles, Box, useTheme, Typography, Container, Grid, Hidden } from "@material-ui/core";
-import PropTypes from "prop-types";
+import { Box, useTheme, Typography, Container, Grid, Hidden } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
 import { useRouter } from "next/router";
-import BenefitsCard from "../../molecules/benefits/benefits";
-import { useBenefitsStyle as useStyles } from "./styles";
-import { Benefit, BenefitsSectionProps } from "./interfaces";
+import classes from "./benefitsSyles.module.scss";
+import { BenefitsSectionProps } from "./interfaces";
 import TitleOtherPages from "components/molecules/titleOtherPages/titleOtherPages";
-import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import Image from "next/image";
+import useAnalytics from "hooks/useAnalytics";
 
 export const BenefitsSection = (props: BenefitsSectionProps) => {
+    const { trackViewPlansAtHomepageClick } = useAnalytics();
     const lang = props.lang;
-    const classes = useStyles();
     const theme = useTheme();
     const router = useRouter();
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en descubre mas",
-            params: {
-                event_category: "homepage",
-                event_label: "beneficios lets cook",
-            },
-        });
+        trackViewPlansAtHomepageClick();
         router.push(localeRoutes[router.locale][Routes.planes]);
     };
 
@@ -32,13 +25,27 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                 {props.enableTitleSection && <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />}
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={5} style={{ alignSelf: "center" }}>
-                        <img className={classes.img} src="/assets/home/home-atributos.jpg" alt="atributos" />
+                        <Image
+                            className={classes.img}
+                            src="/assets/home/home-atributos.webp"
+                            alt="atributos"
+                            layout="responsive"
+                            width={504}
+                            height={341.25}
+                        />
                     </Grid>
                     <Grid item xs={12} md={7} style={{ alignSelf: "center" }}>
                         {lang.cards.map((card, index) => (
                             <div key={index} className={classes.card}>
                                 <div className={classes.cardIcon}>
-                                    <img src={card.image} alt={card.title} className={classes.icon} />
+                                    <Image
+                                        src={card.image}
+                                        alt={card.title}
+                                        className={classes.icon}
+                                        width={32}
+                                        height={32}
+                                        layout="fixed"
+                                    />
                                 </div>
                                 <div>
                                     <Typography variant="h5" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>

@@ -1,6 +1,6 @@
 // Utils & Config
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
 // External components

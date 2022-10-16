@@ -60,13 +60,13 @@ const BlogGrid = (props: BlogGridProps) => {
                             fullWidth
                             selectedValue={router.query?.tag || lang.allOption}
                             options={[{ name: lang.allOption, slug: lang.allOption, id: lang.allOption }, ...props.categories] || []}
-                            label={"Etiqueta de blog"}
+                            label={lang.categoryDropdownLabel}
                             handleChange={(e) => handleTagForFilter(e.target.value)}
                         />
                     </Box>
                 </Grid>
             )}
-            {filteredPosts.map((post, index) => (
+            {filteredPosts.map((post) => (
                 <PostCard pathName={props.pathName} key={post.id} post={post} />
             ))}
         </>

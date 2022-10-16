@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import CocinaBlogImage from "public/assets/blog-cocina.JPG";
 import NewsBlogImage from "public/assets/blog-noticias.jpg";
 import Link from "next/link";
+import { useLang } from "@hooks";
 
 const blogs = [
     // {
@@ -39,7 +40,8 @@ const blogs = [
 ];
 
 const BlogList = () => {
-    const { locale, push } = useRouter();
+    const { locale } = useRouter();
+    const [lang] = useLang("recipesBlog");
 
     return (
         <Box width={"100%"}>
@@ -48,7 +50,7 @@ const BlogList = () => {
             ))}
             <Box width={"100%"} display="flex" justifyContent="center" alignContent="center">
                 <Link href="/blogs/recetas">
-                    <a style={{ color: "#f5f5f5" }}>Recetas</a>
+                    <a style={{ color: "#f5f5f5" }}>{lang.recipes}</a>
                 </Link>
             </Box>
         </Box>

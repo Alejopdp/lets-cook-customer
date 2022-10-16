@@ -1,0 +1,16 @@
+{
+    "extends": "next",
+    "plugins": ["unused-imports"],
+    "rules": {
+        "class-name": 0,
+        "display-name": 0,
+        "react/jsx-key": 0,
+        "no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+            "warn",
+            { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+        ],
+        "react/display-name": [0, { "ignoreTranspilerName": false }]
+    }
+}

@@ -1,21 +1,18 @@
 import { memo, useState } from "react";
-import { GridList, makeStyles, Typography, Container, Grid, useMediaQuery, useTheme } from "@material-ui/core";
-import PropTypes from "prop-types";
-import RoundedButton from "../../atoms/roundedButton/roundedButton";
+import { Container, Grid, useMediaQuery, useTheme } from "@material-ui/core";
 import RecipeCard from "../../molecules/recipeCard/recipeCard";
 import TitleOtherPages from "../../molecules/titleOtherPages/titleOtherPages";
-import { Recipe } from "@helpers";
-import { useRecipesStyles as useStyles } from "./styles";
 import { RecipesSectionProps } from "./interfaces";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Recipes } from "@stores";
-import RecipeModal from "components/molecules/recipeModal/recipeModal";
-import * as ga from '../../../helpers/ga'
+import * as ga from "../../../helpers/ga";
+import dynamic from "next/dynamic";
+
+const Carousel = dynamic(() => import("react-multi-carousel"));
+const RecipeModal = dynamic(() => import("components/molecules/recipeModal/recipeModal"));
 
 export const RecipesSection = memo((props: RecipesSectionProps) => {
-    const lang = props.lang
-    const classes = useStyles();
+    const lang = props.lang;
     const [isModalOpen, setisModalOpen] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState({});
     const theme = useTheme();
@@ -27,10 +24,10 @@ export const RecipesSection = memo((props: RecipesSectionProps) => {
         ga.event({
             action: "clic en recetas",
             params: {
-                event_category: 'homepage',
+                event_category: "homepage",
                 event_label: recipe.name.toLowerCase(),
-            }
-        })
+            },
+        });
         setSelectedRecipe(recipe);
         setisModalOpen(true);
     };
@@ -75,11 +72,7 @@ export const RecipesSection = memo((props: RecipesSectionProps) => {
             <Container maxWidth="xl">
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <TitleOtherPages
-                            title={lang.title}
-                            subtitle={lang.subtitle}
-                            titleAlign="center"
-                        />
+                        <TitleOtherPages title={lang.title} subtitle={lang.subtitle} titleAlign="center" />
                     </Grid>
                     {props.recipes.length <= 4 && isLgUp && (
                         <Grid item xs={12}>

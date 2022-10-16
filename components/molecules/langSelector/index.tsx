@@ -45,26 +45,27 @@ export const LangSelector = memo(({ onChangeLang }: LangSelectorProps) => {
     };
 
     const _handleOptionSelected = (locale: ILan) => {
-        const actualPageName = Object.keys(localeRoutes[router.locale]).find(
-            (key) => localeRoutes[router.locale][key] === `/${router.query.slug?.join("/")}` || ""
-        )!;
-        const actualQueryParams = Object.entries(router.query).reduce(
-            (acc, entry, index) =>
-                entry[0] === "slug" ? acc : index === 0 ? `?${entry[0]}=${entry[1]}` : `${acc}&${entry[0]}=${entry[1]}`,
-            ""
-        );
+        const actualPageName = router.pathname.split("/")[1];
+        const newBaseUrl = `${localeRoutes[locale.label][Routes[actualPageName]] ?? "/"}`;
+        const slugs = `/${router.pathname.split("/").slice(2).join("/")}`;
 
+        console.log("SPLIT: ", router.pathname.split("/"));
+        console.log("Actual page name: ", actualPageName);
+        console.log("New Base URL: ", newBaseUrl);
+        console.log("Slugs: ", slugs);
+
+        // return;
         onChangeLang && onChangeLang(locale);
         setOpen(false);
         setLang(locale);
+
         router.replace(
-            `${
-                localeRoutes[locale.label][Routes[actualPageName]] || localeRoutes[locale.label][Routes[router.pathname.slice(1)]] || "/"
-            }${actualQueryParams}`,
-            undefined,
             {
-                locale: locale.label,
-            }
+                pathname: `${newBaseUrl}${slugs === "/" ? "" : slugs}`,
+                query: { ...router.query },
+            },
+            undefined,
+            { locale: locale.label }
         );
     };
 

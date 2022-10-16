@@ -1,8 +1,8 @@
 // Utils & Config
-import React, { useState } from "react";
+import React from "react";
 import { Typography } from "@material-ui/core";
 import { BlogTagsProps } from "./interfaces";
-import { useStyles } from './styles';
+import { useStyles } from "./styles";
 
 export const BlogTagsWhiteBg = (props: BlogTagsProps) => {
     const classes = useStyles();
@@ -15,6 +15,5 @@ export const BlogTagsWhiteBg = (props: BlogTagsProps) => {
                 </Typography>
             ))}
         </>
-
     );
 };

@@ -1,25 +1,19 @@
-import { makeStyles, Typography, useTheme, Grid, Container } from "@material-ui/core";
+import { Typography, Grid, Container, useMediaQuery } from "@material-ui/core";
 import { RoundedButton } from "@atoms";
-import { CircularBotton } from "@atoms";
-import ArrowIcon from "@material-ui/icons/ExpandMore";
-import { useValuePropositionStyle as useStyles } from "./styles";
+import classes from "./styles.module.scss";
 import { useRouter } from "next/router";
-import * as ga from "../../../helpers/ga";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import Image from "next/image";
+import useAnalytics from "hooks/useAnalytics";
 
 export const ValuePropositionSection = (props) => {
+    const { trackHomepageBannerViewPlansclick } = useAnalytics();
     const lang = props.lang;
-    const classes = useStyles();
     const router = useRouter();
+    const isMdUp = useMediaQuery("(min-width:900px)");
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en ver planes",
-            params: {
-                event_category: "homepage",
-                event_label: "banner principal",
-            },
-        });
+        trackHomepageBannerViewPlansclick();
         router.push({ pathname: localeRoutes[router.locale][Routes.planes] }, localeRoutes[router.locale][Routes.planes], {
             locale: router.locale,
         });
@@ -27,6 +21,15 @@ export const ValuePropositionSection = (props) => {
 
     return (
         <div className={classes.root}>
+            <Image
+                priority
+                className={classes.image}
+                src={isMdUp ? "/assets/home/home-principal-desktop.webp" : "/assets/home/home-principal-mobile.webp"}
+                alt=""
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+            />
             <div className={classes.overlay}>
                 <Container maxWidth="md" className={classes.container}>
                     <Grid container spacing={2}>

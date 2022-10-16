@@ -1,0 +1,461 @@
+{
+    "es": {
+        "backButton": "Detalle del plan",
+        "cancelPlanReasonsText": {
+            "created_by_error": "Se ha creado por error",
+            "cant_get_kits_next_week": "No puedo recibir los kits la próxima semana",
+            "special_diet": "Tengo una dieta especial",
+            "move_abroad": "Me voy a vivir fuera por tiempo indeterminado",
+            "dont_like_meal_kits": "No me gustan los kits para cocinar (meal kits)",
+            "had_problems_with_letscook": "He tenido problemas con Let’s Cook",
+            "price_too_high": "El precio es muy alto",
+            "other_reason": "Otra razón"
+        },
+        "cancelPlanBtnText": "Cancelar plan",
+        "cancelPlanSnackbarSuccessText": "El plan se canceló correctamente",
+        "cancelPlanSnackbarFailureText": "Error al cancelar el plan",
+        "skipPlanSnackbarSuccessText": "La/s semana/s han sido saltadas correctamente",
+        "skipPlanSnackbarFailureText": "Error al saltar la/s semana/s",
+        "shippingAddressCard": {
+            "title": "Dirección de entrega",
+            "addressNameTitle": "Dirección",
+            "addressDetailsTitle": "Piso / Puerta / Aclaraciones",
+            "preferredScheduleTitle": "Horario de preferencia",
+            "preferredScheduleTitleEmptyState": "Sin seleccionar",
+            "shippingCostTitle": "Coste de envío",
+            "noShippingCostLabel": "Tu próximo pedido no tiene coste de envío",
+            "shippingCostLabel": "Tu próximo pedido tiene un coste de envío de "
+        },
+        "paymentMethodCard": {
+            "title": "Forma de pago",
+            "cardLabelTitle": "Tarjeta",
+            "expirationDateLabelTitle": "Vencimiento"
+        },
+        "calendarCard": {
+            "title": "Calendario",
+            "skipWeekBtnText": "Saltar semana",
+            "nextDeliveryTitle": "Próxima entrega",
+            "nextPaymentTitle": "Próximo cargo",
+            "skippedWeeksInfo": "Has saltado las siguientes semanas"
+        },
+        "recipesActualWeekCard": {
+            "title": "Recetas de la semana actual",
+            "hasChosenRecipesForActualWeek": {
+                "text": "Estas son las recetas que recibirás el"
+            },
+            "hasNotChosenRecipesForActualWeek": {
+                "withoutRecipesAndCanChooseText": "No has seleccionado recetas para la entrega del",
+                "withoutRecipesAndCantChooseText": "Estamos eligiendo por tí las recetas de la semana actual",
+                "withoutRecipesAndCantChooseSubtext": "Elegiremos por tí las recetas de esta semana"
+            }
+        },
+        "recipesNextWeekCard": {
+            "title": "Recetas de la próxima semana",
+            "chooseRecipesBtnText": "Elegir recetas",
+            "editRecipesBtnText": "Modificar recetas",
+            "hasChosenRecipesForNextWeek": {
+                "text": "Estas son las recetas que recibirás el"
+            },
+            "hasNotChosenRecipesForNextWeek": {
+                "withoutRecipesAndCanChooseText": "Ya puedes elegir tus recetas para la entrega del",
+                "withoutRecipesAndCantChooseText": "Estamos eligiendo por tí las recetas de la semana siguiente"
+            }
+        },
+        "skipPlanModal": {
+            "title": "Saltar semana",
+            "primaryButtonText": "Guardar cambios",
+            "secondaryButtonText": "Cancelar",
+            "reanudarBtnText": "Reanudar",
+            "saltarBtnText": "Saltar",
+            "skippedAndNonReanudableOrderText": "Semana saltada",
+            "billedWeek": "Pedido cobrado"
+        },
+        "swapPlanModal": {
+            "title": "Cambiar plan",
+            "primaryButtonText": "Cambiar plan",
+            "secondaryButtonText": "Cancelar",
+            "choosePlanSubtitle": "1. Elige tu plan",
+            "choosePlanInputLabel": "Plan",
+            "sizePlanSubtitle": "2. Elige el tamaño de tu plan",
+            "sizePlanInputLabel": "Variante"
+        },
+        "cancelPlanModal": {
+            "title": "Cancelar plan",
+            "subtitle": "¿Por qué quieres cancelar el plan?",
+            "cancellationText": "Razones de cancelación",
+            "cancellationInputLabel": "Razones de cancelación",
+            "createdByError": {
+                "primaryButtonText": "Cancelar plan",
+                "secondaryButtonText": "Cerrar",
+                "modalText": "Gracias por corregirlo. Cualquier consulta, no dudes en enviarnos un correo a",
+                "emailText": "info@letscooknow.es",
+                "additionalComments": "Comentarios adicionales"
+            },
+            "cantGetKitsNextWeek": {
+                "primaryButtonText": "Saltar semana",
+                "secondaryButtonText": "No gracias, quiero cancelar.",
+                "modalText": "Si lo que quieres es hacer una pausa por una o varias semana, recomendamos saltar semanas en lugar de cancelar el plan",
+                "weekAlreadySkipped": "Semana ya saltada",
+                "inputLabel": "Semanas a saltar"
+            },
+            "specialDiet": {
+                "primaryButtonText": "Ajustar dieta",
+                "secondaryButtonText": "No gracias, quiero cancelar.",
+                "modalText": "Si tienes alguna intolerancia (como gluten o lactosa) o dieta especial (como vegano), lo puedes comunicar y nosotros enviaremos ingredientes que se adapten a tus requerimientos",
+                "inputLabel": "Indique su dieta"
+            },
+            "moveAbroad": {
+                "primaryButtonText": "Cancelar plan",
+                "secondaryButtonText": "Cerrar",
+                "modalText": "Muchas gracias por acompañarnos durante este tiempo. Que tengas suerte en tu nueva etapa. Sería de gran ayuda si nos dejaras una reseña.",
+                "reviewText": "Dejar una reseña en Google"
+            },
+            "dontLikeMealKits": {
+                "primaryButtonText": "Cancelar plan",
+                "secondaryButtonText": "Cerrar",
+                "modalText": "¡Muchas gracias por probarlos! ¿Qué es lo que no te gusta de los kits para cocinar (meal kits)?",
+                "inputLabel": "Escribe aquí tus comentarios"
+            },
+            "hadProblemsWithLetsCook": {
+                "primaryButtonText": "Cancelar plan",
+                "secondaryButtonText": "Cerrar",
+                "modalText": "¡Lo sentimos mucho! Por favor, informa a continuación cuales fueron los problemas que has tenido e intentaremos que no vuelvan a suceder.",
+                "inputLabel": "Indica qué problemas has tenido"
+            },
+            "priceTooHigh": {
+                "primaryButtonText": "Cambiar plan",
+                "secondaryButtonText": "No gracias, quiero cancelar.",
+                "economyPlan": {
+                    "modalText": "El precio del plan ahorro es el más bajo que podemos ofrecer. Let’s Cook recibe descuentos por comprar en cantidad y lo traducimos directamente al precio en los planes ahorro.",
+                    "totalPrice": "Precio total",
+                    "alsoWeCanOfferLowerVariants": "También podemos ofrecerte reducir raciones del plan actual.",
+                    "seeOptions": "Ver opciones"
+                },
+                "lowerVariants": {
+                    "modalText": "A continuación encontrarás una lista de opciones de tu plan actual",
+                    "inputLabel": "Variante",
+                    "alsoWeCanOfferEconomyPlan": "También podemos ofrecerte cambiar a un plan más económico.",
+                    "seeOptions": "Ver opciones"
+                }
+            },
+            "otherReason": {
+                "primaryButtonText": "Cancelar plan",
+                "secondaryButtonText": "Cerrar",
+                "modalText": "Por favor, indica cual es la razón principal para cancelar tu plan",
+                "inputLabel": "Indica la razón por cancelar."
+            }
+        },
+        "snackbars": {
+            "success": {
+                "planSwapped": "Plan cambiado con éxito"
+            },
+            "error": {}
+        }
+    },
+    "en": {
+        "backButton": "Plan details",
+        "cancelPlanReasonsText": {
+            "created_by_error": "Created by mistake",
+            "cant_get_kits_next_week": "I can’t receive the kits next week",
+            "special_diet": "I have a special diet",
+            "move_abroad": "I’m moving away indefinitely",
+            "dont_like_meal_kits": "I don’t like the meal kits",
+            "had_problems_with_letscook": "I’ve had problems with Let’s cook",
+            "price_too_high": "It’s too expensive",
+            "other_reason": "Other reason"
+        },
+        "cancelPlanBtnText": "Cancel plan",
+        "cancelPlanSnackbarSuccessText": "The plan has been cancelled correctly",
+        "cancelPlanSnackbarFailureText": "An error occurred while cancelling the plan",
+        "skipPlanSnackbarSuccessText": "The week(s) has/have been skipped correctly",
+        "skipPlanSnackbarFailureText": "An error occurred while skipping (the) week(s)",
+        "shippingAddressCard": {
+            "title": "Shipping address",
+            "addressNameTitle": "Address",
+            "addressDetailsTitle": "Apartment / Door / Comments",
+            "preferredScheduleTitle": "Preferred time frame",
+            "preferredScheduleTitleEmptyState": "None",
+            "shippingCostTitle": "Shipping cost",
+            "noShippingCostLabel": "Your next delivery has no shipping cost",
+            "shippingCostLabel": "Your next delivery has a shipping cost of "
+        },
+        "paymentMethodCard": {
+            "title": "Payment method",
+            "cardLabelTitle": "Card",
+            "expirationDateLabelTitle": "Expiry date"
+        },
+        "calendarCard": {
+            "title": "Calendar",
+            "skipWeekBtnText": "Skip week",
+            "nextDeliveryTitle": "Next delivery",
+            "nextPaymentTitle": "Next payment",
+            "skippedWeeksInfo": "You’ve skipped the following weeks"
+        },
+        "recipesActualWeekCard": {
+            "title": "Recipes for the current week",
+            "hasChosenRecipesForActualWeek": {
+                "text": "These are the recipes you’ll receive on"
+            },
+            "hasNotChosenRecipesForActualWeek": {
+                "withoutRecipesAndCanChooseText": "You haven’t selected any recipes for the delivery on",
+                "withoutRecipesAndCantChooseText": "For this week we’re choosing the recipes for you",
+                "withoutRecipesAndCantChooseSubtext": "For this week we’ll choose the recipes for you"
+            }
+        },
+        "recipesNextWeekCard": {
+            "title": "Next week’s recipes",
+            "chooseRecipesBtnText": "Choose recipes",
+            "editRecipesBtnText": "Modify recipes",
+            "hasChosenRecipesForNextWeek": {
+                "text": "These are the recipes you’ll receive on"
+            },
+            "hasNotChosenRecipesForNextWeek": {
+                "withoutRecipesAndCanChooseText": "Now you can choose your recipes for delivery on",
+                "withoutRecipesAndCantChooseText": "For next week we’ll choose the recipes for you"
+            }
+        },
+        "skipPlanModal": {
+            "title": "Skip week",
+            "primaryButtonText": "Save changes",
+            "secondaryButtonText": "Cancel",
+            "reanudarBtnText": "Resume",
+            "saltarBtnText": "Skip",
+            "skippedAndNonReanudableOrderText": "Skipped week",
+            "billedWeek": "Order billed"
+        },
+        "swapPlanModal": {
+            "title": "Change plan",
+            "primaryButtonText": "Change plan",
+            "secondaryButtonText": "Cancel",
+            "choosePlanSubtitle": "1. Choose your plan",
+            "choosePlanInputLabel": "Plan",
+            "sizePlanSubtitle": "2. Choose the size of your plan",
+            "sizePlanInputLabel": "Option"
+        },
+        "cancelPlanModal": {
+            "title": "Cancel plan",
+            "subtitle": "Why do you want to cancel your plan?",
+            "cancellationText": "Reason for cancelation",
+            "cancellationInputLabel": "Reason for cancelation",
+            "createdByError": {
+                "primaryButtonText": "Cancel plan",
+                "secondaryButtonText": "Close",
+                "modalText": "Thanks for correcting it. For any queries, don’t hesitate to contact us at",
+                "emailText": "info@letscooknow.es",
+                "additionalComments": "Additional comments"
+            },
+            "cantGetKitsNextWeek": {
+                "primaryButtonText": "Skip week",
+                "secondaryButtonText": "No thanks, I want to cancel",
+                "modalText": "I you want to take a break for one or several weeks, we recommend you skipping weeks as opposed to cancelling your plan",
+                "weekAlreadySkipped": "Week already skipped",
+                "inputLabel": "Weeks to skip"
+            },
+            "specialDiet": {
+                "primaryButtonText": "Adjust diet",
+                "secondaryButtonText": "No thanks, I want to cancel",
+                "modalText": "If you have any allergies (i.e. gluten or lactose) or a special diet (i.e. vegan), you can just let us know and we’ll send you ingredients adapted to your dietary requirements",
+                "inputLabel": "Explain your diet"
+            },
+            "moveAbroad": {
+                "primaryButtonText": "Cancel plan",
+                "secondaryButtonText": "Close",
+                "modalText": "Thanks for staying with us all this time. We wish you all the best going forward. We’d very much appreciate hearing your feedback.",
+                "reviewText": "Write your review in Google"
+            },
+            "dontLikeMealKits": {
+                "primaryButtonText": "Cancel plan",
+                "secondaryButtonText": "Close",
+                "modalText": "Thanks for trying us out! What is it that you don’t like about the meal kits?",
+                "inputLabel": "Leave your comments here"
+            },
+            "hadProblemsWithLetsCook": {
+                "primaryButtonText": "Cancel plan",
+                "secondaryButtonText": "Close",
+                "modalText": "We’re so sorry to hear this! Please let us know what problems you experienced so that we can make sure they don’t happen again.",
+                "inputLabel": "Please describe the problems you had"
+            },
+            "priceTooHigh": {
+                "primaryButtonText": "Change plan",
+                "secondaryButtonText": "No thanks, I want to cancel",
+                "economyPlan": {
+                    "modalText": "The prices in the surprise plan are the lowest we can offer. Let’s cook enjoy discounts for buying large amounts of local produce, this is why we can lower the prices in the surprise plan",
+                    "totalPrice": "Total price",
+                    "alsoWeCanOfferLowerVariants": "We also give you the option to reduce the number of servings in your current plan.",
+                    "seeOptions": "See options"
+                },
+                "lowerVariants": {
+                    "modalText": "Here you’ll find a list of options in your current plan",
+                    "inputLabel": "Option",
+                    "alsoWeCanOfferEconomyPlan": "We also give you the option to swap to a lower priced plan",
+                    "seeOptions": "See options"
+                }
+            },
+            "otherReason": {
+                "primaryButtonText": "Cancel plan",
+                "secondaryButtonText": "Close",
+                "modalText": "Please let us know the main reason for cancelling your plan",
+                "inputLabel": "Write the reason for cancellation"
+            }
+        },
+        "snackbars": {
+            "success": {
+                "planSwapped": "Plan swapped successfully"
+            },
+            "error": {}
+        }
+    },
+    "ca": {
+        "backButton": "Detalls del pla",
+        "cancelPlanReasonsText": {
+            "created_by_error": "S’ha creat per error",
+            "cant_get_kits_next_week": "No puc rebre els kits la propera setmana",
+            "special_diet": "Tinc una dieta especial",
+            "move_abroad": "Marxo a viure fora per un temps indeterminat",
+            "dont_like_meal_kits": "No m’agraden els kits per cuinar (meal kits)",
+            "had_problems_with_letscook": "He tingut problemes amb Let’s Cook",
+            "price_too_high": "El preu és massa elevat",
+            "other_reason": "Una altra raó"
+        },
+        "cancelPlanBtnText": "Cancel·lar pla",
+        "cancelPlanSnackbarSuccessText": "El pla s’ha cancel·lat correctament",
+        "cancelPlanSnackbarFailureText": "Error al cancel·lar el pla",
+        "skipPlanSnackbarSuccessText": "La/es setmana/es han estat saltades correctament",
+        "skipPlanSnackbarFailureText": "Error al saltar la/es setmana/es",
+        "shippingAddressCard": {
+            "title": "Direcció de lliurament",
+            "addressNameTitle": "Direcció",
+            "addressDetailsTitle": "Pis / Porta / Aclaracions",
+            "preferredScheduleTitle": "Horari de preferència",
+            "preferredScheduleTitleEmptyState": "Sense seleccionar",
+            "shippingCostTitle": "Cost d'enviament",
+            "noShippingCostLabel": "La teva propera comanda no té cost d'enviament",
+            "shippingCostLabel": "La teva propera comanda té un cost d'enviament de "
+        },
+        "paymentMethodCard": {
+            "title": "Mètode de pagament",
+            "cardLabelTitle": "Targeta",
+            "expirationDateLabelTitle": "Venciment"
+        },
+        "calendarCard": {
+            "title": "Calendari",
+            "skipWeekBtnText": "Saltar setmana",
+            "nextDeliveryTitle": "Proper lliurament",
+            "nextPaymentTitle": "Proper càrrec",
+            "skippedWeeksInfo": "Has saltat les següents setmanes"
+        },
+        "recipesActualWeekCard": {
+            "title": "Receptes de la setmana actual",
+            "hasChosenRecipesForActualWeek": {
+                "text": "Aquestes són les receptes que rebràs el"
+            },
+            "hasNotChosenRecipesForActualWeek": {
+                "withoutRecipesAndCanChooseText": "No has seleccionat receptes pel lliurament del",
+                "withoutRecipesAndCantChooseText": "Estem triant per tu les receptes de la setmana actual",
+                "withoutRecipesAndCantChooseSubtext": "Triem por tu les receptes d’aquesta setmana"
+            }
+        },
+        "recipesNextWeekCard": {
+            "title": "Receptes de la propera setmana",
+            "chooseRecipesBtnText": "Tria receptes",
+            "editRecipesBtnText": "Modificar receptes",
+            "hasChosenRecipesForNextWeek": {
+                "text": "Aquestes són les receptes que rebràs el"
+            },
+            "hasNotChosenRecipesForNextWeek": {
+                "withoutRecipesAndCanChooseText": "Ja pots triar les teves receptes pel lliurament del",
+                "withoutRecipesAndCantChooseText": "Estem triant per tu les receptes de la setmana següent"
+            }
+        },
+        "skipPlanModal": {
+            "title": "Saltar setmana",
+            "primaryButtonText": "Guardar canvis",
+            "secondaryButtonText": "Cancel·lar",
+            "reanudarBtnText": "Rependre",
+            "saltarBtnText": "Saltar",
+            "skippedAndNonReanudableOrderText": "Setmana saltada",
+            "billedWeek": "Comanda facturada"
+        },
+        "swapPlanModal": {
+            "title": "Canviar pla",
+            "primaryButtonText": "Canviar pla",
+            "secondaryButtonText": "Cancel·lar",
+            "choosePlanSubtitle": "1. Tria el teu pla",
+            "choosePlanInputLabel": "Pla",
+            "sizePlanSubtitle": "2. Tria el tamany del teu pla",
+            "sizePlanInputLabel": "Variant"
+        },
+        "cancelPlanModal": {
+            "title": "Cancel·lar pla",
+            "subtitle": "Per què vols cancel·lar el pla?",
+            "cancellationText": "Raons de la cancel·lació",
+            "cancellationInputLabel": "Raons de la cancel·lació",
+            "createdByError": {
+                "primaryButtonText": "Cancel·lar pla",
+                "secondaryButtonText": "Tancar",
+                "modalText": "Gràcies per corregir-ho. Qualsevol consulta, no dubtis en enviar-nos un correu a",
+                "emailText": "info@letscooknow.es",
+                "additionalComments": "Comentaris addicionals"
+            },
+            "cantGetKitsNextWeek": {
+                "primaryButtonText": "Saltar setmana",
+                "secondaryButtonText": "No gràcies, desitjo cancel·lar",
+                "modalText": "Si el que vols és fer una pausa per una o varies setmanes, recomanem saltar setmanes en lloc de cancel·lar el pla",
+                "weekAlreadySkipped": "Setmana ja saltada",
+                "inputLabel": "Setmanes a saltar"
+            },
+            "specialDiet": {
+                "primaryButtonText": "Ajustar dieta",
+                "secondaryButtonText": "No gràcies, desitjo cancel·lar",
+                "modalText": "Si tens alguna intolerància (com gluten o lactosa) o dieta especial (com vegà), pots comunicar-ho i nosaltres enviarem ingredients que s’adapten als teus requeriments",
+                "inputLabel": "Indiqui la seva dieta"
+            },
+            "moveAbroad": {
+                "primaryButtonText": "Cancel·lar pla",
+                "secondaryButtonText": "Tancar",
+                "modalText": "Moltes gràcies per acompanyar-nos durant aquest temps. Que tinguis sort en la teva nova etapa. T’agraïm si poguessis escriure una resenya.",
+                "reviewText": "Escriure una resenya en Google"
+            },
+            "dontLikeMealKits": {
+                "primaryButtonText": "Cancel·lar pla",
+                "secondaryButtonText": "Tancar",
+                "modalText": "Moltes gràcies per tastar-nos! Què és allò que no t’agrada dels kits per cuinar (meal kits)?",
+                "inputLabel": "Escrigui aquí els seus comentaris"
+            },
+            "hadProblemsWithLetsCook": {
+                "primaryButtonText": "Cancel·lar pla",
+                "secondaryButtonText": "Tancar",
+                "modalText": "Ho sentim molt! Si us plau, informa’ns a continuació de quins van ser els problemes que has tingut i intentarem que no tornin a succeir",
+                "inputLabel": "Indica quins problemes has tingut"
+            },
+            "priceTooHigh": {
+                "primaryButtonText": "Canviar pla",
+                "secondaryButtonText": "No gràcies, desitjo cancel·lar",
+                "economyPlan": {
+                    "modalText": "El preu del pla estalvi és el més econòmic que podem oferir-te. Let’s Cook rep descomptes per comprar en gran volum i ho traslladem directament al preu en els plans estalvi.",
+                    "totalPrice": "Preu final",
+                    "alsoWeCanOfferLowerVariants": "També podem oferir-te una reducció de les racions del teu pla actual.",
+                    "seeOptions": "Veure opcions"
+                },
+                "lowerVariants": {
+                    "modalText": "A continuació trobaràs un llistat d’opcions del teu pla actual",
+                    "inputLabel": "Variant",
+                    "alsoWeCanOfferEconomyPlan": "També podem oferir-te canviar a un pla més econòmic.",
+                    "seeOptions": "Veure opcions"
+                }
+            },
+            "otherReason": {
+                "primaryButtonText": "Cancel·lar pla",
+                "secondaryButtonText": "Tancar",
+                "modalText": "Si us plau, indica quina és la raó principal per cancel·lar el teu pla",
+                "inputLabel": "Indica quina és la razó de la cancel·lació"
+            }
+        }
+    },
+    "snackbars": {
+        "success": {
+            "planSwapped": "Pla canviat amb èxit"
+        },
+        "error": {}
+    }
+}

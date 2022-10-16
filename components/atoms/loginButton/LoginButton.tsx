@@ -1,8 +1,7 @@
-import { memo } from "react";
 import { ButtonBase, Typography } from "@material-ui/core";
 import { PersonOutlineRounded } from "@material-ui/icons";
-import { useStyles } from './styles';
-import { LoginButtonProps } from './interfaces';
+import { useStyles } from "./styles";
+import { LoginButtonProps } from "./interfaces";
 import { useLang } from "@hooks";
 
 export const LoginButton = (props: LoginButtonProps) => {
@@ -13,14 +12,16 @@ export const LoginButton = (props: LoginButtonProps) => {
             focusRipple
             className={classes.loginButton}
             style={{
-                color: '#515151',
+                color: "#515151",
                 border: props.border ? "solid 1px gray" : "none",
-                ...props.style
+                ...props.style,
             }}
             onClick={props.goToLogin}
         >
             <PersonOutlineRounded style={{ marginRight: 4 }} />
-            <Typography variant="button" color='textPrimary'>{lang.singin}</Typography>
+            <Typography variant="button" color="textPrimary">
+                {lang.singin}
+            </Typography>
         </ButtonBase>
     );
 };

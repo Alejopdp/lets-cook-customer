@@ -2,8 +2,8 @@ import { memo } from "react";
 import clsx from "clsx";
 import { AppBar, Toolbar, Typography, Grid, Button, Box, useTheme, useMediaQuery } from "@material-ui/core";
 import { CheckCircleOutline, ErrorOutlineOutlined } from "@material-ui/icons";
-import { CustomButton, RoundedButton } from "@atoms";
-import { useBuyFlow, useRecipesBottomBar } from "@stores";
+import { RoundedButton } from "@atoms";
+import { useRecipesBottomBar } from "@stores";
 import useStyles from "./styles";
 import Hidden from "@material-ui/core/Hidden";
 import { recipeChoiseStep } from "lang/components/organisms/buyForm/recipeChoiseStep";
@@ -23,11 +23,6 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
     const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
-    const { recipes, variant, forward } = useBuyFlow((store) => ({
-        recipes: store.form.recipes,
-        variant: store.form.variant,
-        forward: store.forward,
-    }));
     const isOpen = useRecipesBottomBar(({ isOpen }) => isOpen);
     const isXsDown = useMediaQuery(theme.breakpoints.down("xs"));
 

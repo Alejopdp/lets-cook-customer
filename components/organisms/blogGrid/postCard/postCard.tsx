@@ -1,6 +1,5 @@
 // Utils & config
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -109,7 +108,5 @@ const PostCard = (props: PostCardProps) => {
         </Grid>
     );
 };
-
-PostCard.propTypes = {};
 
 export default PostCard;

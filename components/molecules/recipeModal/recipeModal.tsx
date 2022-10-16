@@ -3,23 +3,14 @@ import React, { useMemo } from "react";
 import { withStyles, useTheme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 
-// Internal Components
-import RecipeImgTags from "../../atoms/recipeImgTags/recipeImgTags";
-import RecipeVariantsTab from "../../atoms/recipeVariantsTab/recipeVariantsTab";
-import NutritionalInformationTable from "../../atoms/nutritionalInformationTable/nutritionalInformationTable";
-
 // External Components
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Image from "next/image";
 
 // Icons & Images
 import TimerIcon from "@material-ui/icons/Timer";
@@ -83,8 +74,6 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
         return (props.recipe.tools || []).join(", ");
     }, []);
 
-    console.log('props.recipe', props.recipe);
-
     const ingredients = useMemo(() => {
         return props.recipe?.recipeVariants[0]?.ingredients.join(", ") || "";
     }, []);
@@ -94,12 +83,6 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
             item: url,
             component: <img className={props.classes.image} src={url} alt={index} width="100%" />,
         }));
-        // return props.recipe.imagesUrls.map((url: string, index: number) => ({
-        //     item: url,
-        //     component: (
-        //         <Image className={props.classes.image} src={props.recipe.imageUrl} alt={props.recipe.name} width={400} height={250} />
-        //     ),
-        // }));
     }, []);
 
     return (
@@ -123,7 +106,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
 
                         <DialogContent dividers={false}>
                             <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
-                                <Grid container spacing={3} style={{ marginTop: '-32px', marginBottom:16 }}>
+                                <Grid container spacing={3} style={{ marginTop: "-32px", marginBottom: 16 }}>
                                     <Grid item xs={12} sm={6}>
                                         <CarouselComponent
                                             maxItemsMobile={1}
@@ -154,7 +137,7 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                                 </Typography>
                                                 <Typography variant="body2">{ingredients}</Typography>
                                             </Grid>
-                                            <Grid item xs={12} >
+                                            <Grid item xs={12}>
                                                 <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
                                                     {lang.tools}
                                                 </Typography>

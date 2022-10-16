@@ -1,11 +1,10 @@
 // Utils & config
-import React, { useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { useStyles } from "./styles";
 import { useLang } from "@hooks";
 
 // External components
-import { Typography, Box, useTheme } from "@material-ui/core";
+import { Box, useTheme } from "@material-ui/core";
 
 // Internal components
 import { RoundedButton } from "@atoms";

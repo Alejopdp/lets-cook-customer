@@ -1,8 +1,10 @@
 const { i18n } = require("./next-i18next.config");
-// const { Routes, localeRoutes } = require("./lang/routes/routes");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true",
+});
 
 // next.config.js
-module.exports = {
+module.exports = withBundleAnalyzer({
     i18n,
     images: {
         domains: [
@@ -24,55 +26,98 @@ module.exports = {
     },
     async rewrites() {
         return [
+            { source: "/en/profile", destination: "/en/perfil", locale: false },
+            { source: "/ca/perfil", destination: "/ca/perfil", locale: false },
+
+            { source: "/en/share-with-a-friend", destination: "/en/bono-regalo", locale: false },
+            { source: "/ca/bo-regal", destination: "/ca/bono-regalo", locale: false },
+
+            { source: "/en/redeem-voucher", destination: "/en/canjear-bono-regalo", locale: false },
+            { source: "/ca/bescanviar-bo-regal", destination: "/ca/canjear-bono-regalo", locale: false },
+
+            { source: "/en/how-does-it-work", destination: "/en/como-funciona", locale: false },
+            { source: "/ca/com-funciona", destination: "/ca/como-funciona", locale: false },
+
+            { source: "/en/config", destination: "/en/configuracion", locale: false },
+            { source: "/ca/configuracio", destination: "/ca/configuracion", locale: false },
+
+            { source: "/en/plans-details/:subscriptionId", destination: "/en/detalle-del-plan/:subscriptionId", locale: false },
+            { source: "/ca/detall-del-pla/:subscriptionId", destination: "/ca/detalle-del-plan/:subscriptionId", locale: false },
+
+            { source: "/en/choose-recipes/:orderId", destination: "/en/elegir-recetas/:orderId", locale: false },
+            { source: "/ca/triar-receptes/:orderId", destination: "/ca/elegir-recetas/:orderId", locale: false },
+
+            { source: "/en/payments-history", destination: "/en/historial-pagos", locale: false },
+            { source: "/ca/historial-pagaments", destination: "/ca/historial-pagos", locale: false },
+
+            { source: "/en/log-in", destination: "/en/iniciar-sesion", locale: false },
+            { source: "/ca/iniciar-sessio", destination: "/ca/iniciar-sesion", locale: false },
+
+            { source: "/en/plans", destination: "/en/planes", locale: false },
+            { source: "/ca/plans", destination: "/ca/planes", locale: false },
+
+            { source: "/en/weekly-menu", destination: "/en/menu-semanal", locale: false },
+            { source: "/ca/menu-setmanal", destination: "/ca/menu-semanal", locale: false },
+
+            { source: "/en/recover-password", destination: "/en/recuperar-contrasena", locale: false },
+            { source: "/ca/recuperar-contrasenya", destination: "/ca/recuperar-contrasena", locale: false },
+
+            { source: "/en/sign-in", destination: "/en/registrarme", locale: false },
+            { source: "/ca/registrar-me", destination: "/ca/registrarme", locale: false },
+
+            { source: "/en/additionals", destination: "/en/adicionales", locale: false },
+            { source: "/ca/addicionals", destination: "/ca/adicionales", locale: false },
+
+            { source: "/en/rate-recipes/:customerId", destination: "/en/valorar-recetas/:customerId", locale: false },
+            { source: "/ca/valorar-receptes/:customerId", destination: "/ca/valorar-recetas/:customerId", locale: false },
+
             {
                 source: "/en/faqs",
                 destination: "/en/preguntas-frecuentes",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },
+
             {
-                // source: `/en${localeRoutes["en"][Routes["recetas"]]}`,
+                source: "/ca/preguntes-frequents",
+                destination: "/ca/preguntas-frecuentes",
+                locale: false,
+            },
+            {
                 source: `/en/recipes`,
                 destination: "/en/recetas",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },
             {
-                // source: `/ca${localeRoutes["ca"][Routes["recetas"]]}`,
                 source: `/ca/receptes`,
                 destination: "/ca/recetas",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },
             {
-                // source: `/en${localeRoutes["en"][Routes["noticias"]]}`,
                 source: `/en/news`,
                 destination: "/en/noticias",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },
             {
-                // source: `/ca${localeRoutes["ca"][Routes["noticias"]]}`,
                 source: `/ca/noticies`,
                 destination: "/ca/noticias",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },
             {
-                // source: `/en${localeRoutes["en"][Routes["blog-cocina"]]}`,
                 source: `/en/blog-cocina`,
                 destination: "/en/blog-cocina",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },
             {
-                // source: `/ca${localeRoutes["ca"][Routes["blog-cocina"]]}`,
                 source: `/ca/blog-cocina`,
                 destination: "/ca/blog-cocina",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },
             {
-                // source: `/en${localeRoutes["en"][Routes["aviso-legal"]]}`,
                 source: `/en/legal-notice`,
                 destination: "/en/aviso-legal",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
             },
             {
-                // source: `/ca${localeRoutes["ca"][Routes["aviso-legal"]]}`,
                 source: `/ca/avis-legal`,
                 destination: "/ca/aviso-legal",
                 locale: false, // Use `locale: false` so that the prefix matches the desired locale correctly
@@ -191,60 +236,4 @@ module.exports = {
             },
         ];
     },
-    // async rewrites() {
-    //     return [
-    //         {
-    //             source: "/en/adicionales",
-    //             destination: "/en/adicionales-[EN]",
-    //             locale: false,
-    //         },
-    //         {
-    //             source: "/ca/adicionales",
-    //             destination: "/ca/adicionales-[CA]",
-    //             locale: false,
-    //         },
-    //         {
-    //             source: "/en/aviso-legal",
-    //             destination: "/en/aviso-legal-[EN]",
-    //             locale: false,
-    //         },
-    //         {
-    //             source: "/ca/aviso-legal",
-    //             destination: "/ca/aviso-legal-[CA]",
-    //             locale: false,
-    //         },
-    //         { source: "/en/blogs", destination: "/en/blogs", locale: false },
-    //         { source: "/ca/blogs", destination: "/ca/blogs", locale: false },
-    //         { source: "/en/bono-regalo", destination: "/en/bono-regalo-[EN]", locale: false },
-    //         { source: "/ca/bono-regalo", destination: "/ca/bono-regalo-[CA]", locale: false },
-    //         { source: "/en/canjear-bono-regalo-en", destination: "/en/canjear-bono-regalo", locale: false },
-    //         { source: "/ca/canjear-bono-regalo-ca", destination: "/ca/canjear-bono-regalo", locale: false },
-    //         { source: "/en/como-funciona-en", destination: "/en/como-funciona", locale: false },
-    //         { source: "/ca/como-funciona-ca", destination: "/ca/como-funciona", locale: false },
-    //         { source: `/en${routes.configuracion.en}`, destination: "/en/configuracion", locale: false },
-    //         { source: `/ca${routes.configuracion.ca}`, destination: "/ca/configuracion", locale: false },
-    //         { source: "/en/detalle-del-plan-en", destination: "/en/detalle-del-plan", locale: false },
-    //         { source: "/ca/detalle-del-plan-ca", destination: "/ca/detalle-del-plan", locale: false },
-    //         { source: "/en/elegir-recetas-en", destination: "/en/elegir-recetas", locale: false },
-    //         { source: "/ca/elegir-recetas-ca", destination: "/ca/elegir-recetas", locale: false },
-    //         { source: "/en/historial-pagos-en", destination: "/en/historial-pagos", locale: false },
-    //         { source: "/ca/historial-pagos-ca", destination: "/ca/historial-pagos", locale: false },
-    //         { source: "/en/iniciar-sesion-en", destination: "/en/iniciar-sesion", locale: false },
-    //         { source: "/ca/iniciar-sesion-ca", destination: "/ca/iniciar-sesion", locale: false },
-    //         { source: "/en/perfil-en", destination: "/en/perfil", locale: false },
-    //         { source: "/ca/perfil-ca", destination: "/ca/perfil", locale: false },
-    //         { source: "/en/planes-en", destination: "/en/planes", locale: false },
-    //         { source: "/ca/planes-ca", destination: "/ca/planes", locale: false },
-    //         { source: "/en/preguntas-frecuentes-en", destination: "/en/preguntas-frecuentes", locale: false },
-    //         { source: "/ca/preguntas-frecuentes-ca", destination: "/ca/preguntas-frecuentes", locale: false },
-    //         { source: "/en/recetas-en", destination: "/en/recetas", locale: false },
-    //         { source: "/ca/recetas-ca", destination: "/ca/recetas", locale: false },
-    //         { source: "/en/recetas-grid-en", destination: "/en/recetas-grid", locale: false },
-    //         { source: "/ca/recetas-grid-ca", destination: "/ca/recetas-grid", locale: false },
-    //         { source: "/en/recuperar-contrasena-en", destination: "/en/recuperar-contrasena", locale: false },
-    //         { source: "/ca/recuperar-contrasena-ca", destination: "/ca/recuperar-contrasena", locale: false },
-    //         { source: "/en/registrarme-en", destination: "/en/registrarme", locale: false },
-    //         { source: "/ca/registrarme-ca", destination: "/ca/registrarme", locale: false },
-    //     ];
-    // },
-};
+});

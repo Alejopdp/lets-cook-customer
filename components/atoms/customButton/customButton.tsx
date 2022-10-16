@@ -1,6 +1,4 @@
-import { ReactNode } from "react";
 import clsx from "clsx";
-
 import { Button, Box } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { CustomButtonProps } from "./interfaces";

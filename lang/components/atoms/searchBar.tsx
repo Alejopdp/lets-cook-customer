@@ -6,6 +6,6 @@ export const searchBar = {
         placeholder: "Search...",
     },
     ca: {
-        placeholder: "Search...",
+        placeholder: "Cerca...",
     },
 };

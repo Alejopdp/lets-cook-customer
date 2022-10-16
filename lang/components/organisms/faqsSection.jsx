@@ -310,7 +310,7 @@ export const laEntrega = {
         accordions: [
             {
                 question: "¿Dónde entregáis?",
-                answer: "Entregamos en toda la península.\nLa entrega en Barcelona y los pueblos más próximos es gratuita. Fuera del área metropolitana puede ser que se cobre un envío de entre 5€ y 15€. Recibirás tus kits en tu domicilio, o si prefieres en otro lugar como puede ser tu lugar de trabajo.",
+                answer: "Entregamos en toda la península.\nLa entrega en Madrid y Barcelona (y pueblos cercanos) es gratuita. Fuera de estas áreas puede ser que se cobre un envío de entre 5€ y 15€. Recibirás tus kits en tu domicilio, o si prefieres en otro lugar como puede ser tu lugar de trabajo.",
             },
             {
                 question: "¿Cuándo entregáis?",
@@ -327,7 +327,7 @@ export const laEntrega = {
         accordions: [
             {
                 question: "Where do you deliver?",
-                answer: "We deliver throughout Catalonia. Deliveries in Barcelona and towns close by are free. Outside the metropolitan area, a delivery fee ranging from €5-15 may be charged. You will receive your kits at your home, or if you prefer another place such as your workplace.",
+                answer: "Deliveries are available throughout the whole Spanish peninsula.\nDeliveries in Madrid and Barcelona (and nearby towns) are at no cost. Outside these areas, a fee of €5-15 may be charged. You will receive your kits at your home, or if you prefer in another place such as your workplace.",
             },
             {
                 question: "When do you deliver?",
@@ -344,7 +344,8 @@ export const laEntrega = {
         accordions: [
             {
                 question: "On feu lliuraments?",
-                answer: "Fem lliuraments a tota Catalunua. El lliurament a Barcelona i als pobles més propers és gratuït. Fora de l’àrea metropolitana és possible que es realitzi un cobrament d’entre 5€ i 15€. Rebràs els teus kits al teu domicili o, si ho prefereixes en un altre lloc com pot ser el teu lloc de feina.",
+
+                answer: "El servei de lliurament està disponible en tota la península.\nA Madrid i Barcelona (i pobles pròxims) és gratuït. Fora d'aquestes àrees pot ser que es cobri un tarifa de 5-15€. Rebràs els teus kits a casa, o si prefereixes en un altre lloc com pot ser a la teva feina.",
             },
             {
                 question: "Quan feu els lliuraments?",

@@ -3,7 +3,7 @@ import useStyles from "./styles";
 import clsx from "clsx";
 
 // External components
-import Typography from "@material-ui/core/Typography";
+import { Typography } from "@material-ui/core";
 import { QuantityBoxProps } from "./interfaces";
 
 export const QuantityBox = (props: QuantityBoxProps) => {

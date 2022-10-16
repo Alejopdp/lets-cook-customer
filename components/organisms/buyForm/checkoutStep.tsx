@@ -35,7 +35,6 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
         postalCode: form.deliveryForm?.postalCode ?? "",
     });
     const [openPurchaseConditionsModal, setOpenPurchaseConditionsModal] = useState(false);
-    const { coupon } = useBuyFlow((state) => ({ coupon: state.form.coupon }));
 
     useEffect(() => {
         window.scrollTo(0, 0);

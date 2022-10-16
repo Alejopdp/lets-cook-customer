@@ -1,18 +1,17 @@
 // Utils & Config
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useBuyFlow } from "../../../stores/buyFlow";
 import { IPaymentMethod, IUserInfoFields } from "@stores";
 import { useTheme } from "@material-ui/core";
-import * as ga from "../../../helpers/ga";
 
 // Internal components
 import SignUpForm from "../signUpForm/signUpForm";
 import LoginBox from "../loginBox/loginBox";
-import RecoverPassword from "../recoverPassword/recoverPassword";
 import RecoverPasswordForm from "../recoverPassword/recoverPasswordForm";
 import { subscribeToMailingListGroup, updateSubscriber } from "helpers/serverRequests/mailingList";
 import { useRouter } from "next/router";
+import { MAILERLITE_MAILING_LIST_GROUP, STRIPE_CARD_PAYMENT_METHOD } from "constants/constants";
+import useAnalytics from "hooks/useAnalytics";
 
 enum View {
     SIGN_IN = "SIGN_IN",
@@ -21,6 +20,7 @@ enum View {
 }
 
 export const RegisterUserStep = () => {
+    const { trackBuyFlowForgotPassword, trackBuyFlowSignUp, trackBuyFlowSignUpForgotPassword, trackBuyflowLogin } = useAnalytics();
     const theme = useTheme();
     const router = useRouter();
     const [actualView, setactualView] = useState<View>(View.SIGN_UP);
@@ -52,10 +52,13 @@ export const RegisterUserStep = () => {
             setPaymentMethod({
                 id: defaultPaymentMethod?.id || "",
                 stripeId: "",
-                type: defaultPaymentMethod ? "card" : "",
+                type: defaultPaymentMethod ? STRIPE_CARD_PAYMENT_METHOD : "",
             });
         }
-        subscribeToMailingListGroup("109309532", userInfo.email, { planName: form.planName, planVariantLabel: form.planDescription });
+        subscribeToMailingListGroup(MAILERLITE_MAILING_LIST_GROUP, userInfo.email, {
+            planName: form.planName,
+            planVariantLabel: form.planDescription,
+        });
         setShowRegister(false);
         gotToNextView();
     };
@@ -77,10 +80,10 @@ export const RegisterUserStep = () => {
             setPaymentMethod({
                 id: defaultPaymentMethod?.id || "",
                 stripeId: "",
-                type: defaultPaymentMethod ? "card" : "",
+                type: defaultPaymentMethod ? STRIPE_CARD_PAYMENT_METHOD : "",
             });
         }
-        subscribeToMailingListGroup("109309532", userInfo.email, {
+        subscribeToMailingListGroup(MAILERLITE_MAILING_LIST_GROUP, userInfo.email, {
             planName: form.planName,
             planVariantLabel: form.planDescription,
         }).then((res) =>
@@ -97,46 +100,22 @@ export const RegisterUserStep = () => {
     };
 
     const goToSignIn = () => {
-        ga.event({
-            action: "clic en iniciar sesion",
-            params: {
-                event_category: `registrarse - buyflow`,
-                event_label: "ya tienes cuenta",
-            },
-        });
+        trackBuyflowLogin();
         setactualView(View.SIGN_IN);
     };
 
     const goToForgotPassword = () => {
-        ga.event({
-            action: "clic en olvide mi contrasena",
-            params: {
-                event_category: `ingresar - buyflow`,
-                event_label: "olvide mi contrasena",
-            },
-        });
+        trackBuyFlowForgotPassword();
         setactualView(View.FORGOT_PASSWORD);
     };
 
     const goToSignUpFromLogin = () => {
-        ga.event({
-            action: "clic en registrate aqui",
-            params: {
-                event_category: `ingresar - buyflow`,
-                event_label: "aun no tienes cuenta",
-            },
-        });
+        trackBuyFlowSignUp();
         setactualView(View.SIGN_UP);
     };
 
     const goToSignUpFromForgotPassword = () => {
-        ga.event({
-            action: "clic en registrate aqui",
-            params: {
-                event_category: `recupero de contrasena - buyflow`,
-                event_label: "aun no tienes cuenta",
-            },
-        });
+        trackBuyFlowSignUpForgotPassword();
         setactualView(View.SIGN_UP);
     };
 

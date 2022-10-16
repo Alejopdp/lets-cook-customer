@@ -125,7 +125,7 @@ export const comoFunciona = {
             image: "/assets/home/home-cf3-cocina.jpg",
         },
         step4: {
-            title: "Disfruta",
+            title: "Gaudeix",
             content:
                 "A sopaaaaar! Disfruta d’un sopar deliciós i diferent. El millor premi després d’un día atrafegat, un menjar bó i saludable fer per a tu… i per tu!",
             image: "/assets/home/home-cf4-disfruta.jpg",

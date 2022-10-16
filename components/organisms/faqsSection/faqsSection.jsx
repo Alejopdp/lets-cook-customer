@@ -1,7 +1,6 @@
 // Utils & Config
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import clsx from "clsx";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").faqsSection;
 
@@ -70,18 +69,9 @@ const FaqsSection = (props) => {
               })
         : faqsLang.sections;
 
-    console.log("Sections: ", filteredSections);
-
     return (
         <div className={classes.root}>
-            <Grid
-                container
-                spacing={6}
-                justify="center"
-                alignItems="start"
-                // className={classes.margin0}
-                style={{ marginBottom: theme.spacing(10) }}
-            >
+            <Grid container spacing={6} justify="center" alignItems="start" style={{ marginBottom: theme.spacing(10) }}>
                 {filteredSections.length === 0 ? (
                     <EmptyState title={lang.emptyState.title} text={lang.emptyState.text} />
                 ) : (

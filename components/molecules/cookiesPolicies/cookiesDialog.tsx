@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
-import { useRouter } from "next/router";
+import React from "react";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Grid, Typography, Paper, Hidden, Button } from "@material-ui/core";
 import { useCookiesStore } from "../../../stores/cookies";
-import { useLang, useLocalStorage } from "@hooks";
-import Link from "next/link"
+import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
 import PrivacyPolicyModal from "../legalModals/privacyPolicyModal";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme: Theme) => ({
     grid: {
@@ -37,19 +36,49 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
+const langs = {
+    es: {
+        text: [
+            "En ",
+            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            "usamos ",
+            <span style={{ textDecoration: "underline" }}>cookies de terceros </span>,
+            "para poder personalizar tu experiencia en nuestra web.",
+        ],
+    },
+    en: {
+        text: [
+            "At ",
+            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            "we use ",
+            <span style={{ textDecoration: "underline" }}>third-party cookies </span>,
+            "to personalise your experience on our website",
+        ],
+    },
+    ca: {
+        text: [
+            "A ",
+            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            "fem servir ",
+            <span style={{ textDecoration: "underline" }}>cookies de tercers</span>,
+            "per a poder personalitzar la teva experiència a la nostra web.",
+        ],
+    },
+};
+
 export default function CookiesDialog() {
+    const { locale } = useRouter();
+    const lang = langs[locale];
     const classes = useStyles();
-    const [lang] = useLang("cookiesDialog");
-    const router = useRouter();
     const { saveInLocalStorage } = useLocalStorage();
     const [openPrivacyPolicyModal, setOpenPrivacyPolicyModal] = React.useState(false);
-    const { hasAcceptedCookies, setHasAcceptedCookies } = useCookiesStore((state) => ({
+    const { setHasAcceptedCookies } = useCookiesStore((state) => ({
         hasAcceptedCookies: state.hasAcceptedCookies,
         setHasAcceptedCookies: state.setHasAcceptedCookies,
     }));
 
     const handleCookies = (hasAccepted: boolean) => {
-        if (hasAccepted) saveInLocalStorage("HAS_ACCEPTED_COOKIES", true);
+        if (hasAccepted) saveInLocalStorage(LOCAL_STORAGE_KEYS.HAS_ACCEPTED_COOKIES, true);
         setHasAcceptedCookies(true);
         // TO DO: Handle 3rd party cookies depending on the accepted value
     };
@@ -65,7 +94,12 @@ export default function CookiesDialog() {
                     <Paper className={classes.paper}>
                         <Grid container alignItems="center" justifyContent="center">
                             <Grid item xs={12} md={9}>
-                                <Typography variant="body1" align="center" style={{ color: "black", cursor: "pointer" }} onClick={() => setOpenPrivacyPolicyModal(true)}>
+                                <Typography
+                                    variant="body1"
+                                    align="center"
+                                    style={{ color: "black", cursor: "pointer" }}
+                                    onClick={() => setOpenPrivacyPolicyModal(true)}
+                                >
                                     {lang.text}
                                 </Typography>
                             </Grid>
@@ -73,12 +107,12 @@ export default function CookiesDialog() {
                                 <Grid item xs={12} md={3} container direction="column" alignItems="center" justifyContent="center">
                                     <Grid item xs={12}>
                                         <Button onClick={() => handleCookies(true)} color="primary">
-                                            Aceptar
+                                            {lang.acceptButton}
                                         </Button>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Button onClick={() => handleCookies(false)} style={{ color: "red" }}>
-                                            Rechazar
+                                            {lang.denyButton}
                                         </Button>
                                     </Grid>
                                 </Grid>
@@ -96,12 +130,12 @@ export default function CookiesDialog() {
                                 >
                                     <Grid item>
                                         <Button onClick={() => handleCookies(true)} color="primary">
-                                            Aceptar
+                                            {lang.acceptButton}
                                         </Button>
                                     </Grid>
                                     <Grid item>
                                         <Button onClick={() => handleCookies(false)} style={{ color: "red" }}>
-                                            Rechazar
+                                            {lang.denyButton}
                                         </Button>
                                     </Grid>
                                 </Grid>
@@ -109,7 +143,7 @@ export default function CookiesDialog() {
                         </Grid>
                     </Paper>
                 </Grid>
-            <PrivacyPolicyModal open={openPrivacyPolicyModal} handleClose={handleClosePrivacyPolicyModal} />
+                <PrivacyPolicyModal open={openPrivacyPolicyModal} handleClose={handleClosePrivacyPolicyModal} />
             </Grid>
         </>
     );

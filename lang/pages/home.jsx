@@ -13,25 +13,25 @@ export const home = {
                     title: "Apúntate",
                     content:
                         "Elige el plan que más se adapte a ti. Escoge la cantidad de días y raciones por día que quieres que te llevemos cada semana. ¡No te aburrirás, tenemos más de 15 recetas diferentes cada semana!",
-                    image: "/assets/home/home-cf1-apuntate.jpg",
+                    image: "/assets/home/home-cf1-apuntate.webp",
                 },
                 {
                     title: "Recibe",
                     content:
                         "Cada martes recibirás con ilusión tus kits personalizados con los ingredientes frescos necesarios y exactos para preparar las recetas que has elegido.",
-                    image: "/assets/home/home-cf2-recibe.jpg",
+                    image: "/assets/home/home-cf2-recibe.webp",
                 },
                 {
                     title: "Cocina",
                     content:
                         "Saca el chef que llevas dentro y tómate la calma para cocinar. Cuentas con la ayuda de nuestras recetas y videorecetas. ¡Son muy fáciles de preparar!",
-                    image: "/assets/home/home-cf3-cocina.jpg",
+                    image: "/assets/home/home-cf3-cocina.webp",
                 },
                 {
                     title: "Disfruta",
                     content:
                         "¡A cenaaaaar! Disfruta de una cena deliciosa y diferente. El mejor premio para un día ajetreado, un manjar rico y saludable hecho para ti… ¡y por ti!",
-                    image: "/assets/home/home-cf4-disfruta.jpg",
+                    image: "/assets/home/home-cf4-disfruta.webp",
                 },
             ],
             btnText: "Empieza a cocinar",
@@ -70,6 +70,10 @@ export const home = {
             title: "Echa un vistazo a las recetas de esta semana",
             subtitle: "Nuestros chefs preparan recetas variadas cada semana para mantener la llama viva",
         },
+        reviewsSection: {
+            rating: "Valoración",
+            reviews: "Opiniones",
+        },
     },
     en: {
         valuePropositionSection: {
@@ -87,25 +91,25 @@ export const home = {
                     title: "Sign up",
                     content:
                         "Pick the plan that best suits you. Select the number of days and servings per day that you want us to deliver weekly. You won't get bored, you’ll have more than 15 different recipes to choose from each week!",
-                    image: "/assets/home/home-cf1-apuntate.jpg",
+                    image: "/assets/home/home-cf1-apuntate.webp",
                 },
                 {
                     title: "Receive",
                     content:
                         "Every Tuesday you’ll be excited to receive your personalised kits with fresh ingredients in the exact measures to prepare the recipes you have chosen.",
-                    image: "/assets/home/home-cf2-recibe.jpg",
+                    image: "/assets/home/home-cf2-recibe.webp",
                 },
                 {
                     title: "Cook",
                     content:
                         "Bring out your inner chef and get in the mood for cooking. With the help of our recipes and video recipes you’ll see they are very easy to prepare!",
-                    image: "/assets/home/home-cf3-cocina.jpg",
+                    image: "/assets/home/home-cf3-cocina.webp",
                 },
                 {
                     title: "Enjoy",
                     content:
                         "Let’s eat! Enjoy delicious and different meals. The best reward after a busy day, a tasty and healthy dish made for you… and by you!",
-                    image: "/assets/home/home-cf4-disfruta.jpg",
+                    image: "/assets/home/home-cf4-disfruta.webp",
                 },
             ],
             btnText: "Get cooking",
@@ -144,6 +148,10 @@ export const home = {
             title: "Have a peek at this week’s recipes",
             subtitle: "Our chefs prepare varied recipes each week to keep things exciting",
         },
+        reviewsSection: {
+            rating: "Rating",
+            reviews: "Reviews",
+        },
     },
     ca: {
         valuePropositionSection: {
@@ -160,25 +168,25 @@ export const home = {
                     title: "Apúnta’t",
                     content:
                         "Tria el pla que més s’adapti a tu. Tria la quantitat de dies i racions per dia que vols rebre cada setmana. No t’avorriràs, tenim més de 15 receptes diferents cada setmana!",
-                    image: "/assets/home/home-cf1-apuntate.jpg",
+                    image: "/assets/home/home-cf1-apuntate.webp",
                 },
                 {
                     title: "Rep",
                     content:
                         "Cada dimarts rebràs amb il·lusió els teus kits personalizats amb els ingredients frescos necessaris i exactes per preparar les receptes que has triat.",
-                    image: "/assets/home/home-cf2-recibe.jpg",
+                    image: "/assets/home/home-cf2-recibe.webp",
                 },
                 {
                     title: "Cuina",
                     content:
                         "Treu el xef que portes a dins i pren-te el temps per cuinar. Tens l’ajuda de les nostres receptes i videoreceptes. Són molt fàcils de preparar!",
-                    image: "/assets/home/home-cf3-cocina.jpg",
+                    image: "/assets/home/home-cf3-cocina.webp",
                 },
                 {
                     title: "Disfruta",
                     content:
                         "A sopaaaaar! Disfruta d’un sopar deliciós i diferent. El millor premi després d’un dia atrafegat, un menjar deliciós i saludable fet per a tu… i per tu!",
-                    image: "/assets/home/home-cf4-disfruta.jpg",
+                    image: "/assets/home/home-cf4-disfruta.webp",
                 },
             ],
             btnText: "Comença a cuinar",
@@ -216,6 +224,10 @@ export const home = {
         recipesSection: {
             title: "Fes una ullada a les receptes d’aquesta setmana",
             subtitle: "Els nostres xefs preparen receptes variades cada setmana per mantenir la flama encesa",
+        },
+        reviewsSection: {
+            rating: "Valoració",
+            reviews: "Opinions",
         },
     },
 };

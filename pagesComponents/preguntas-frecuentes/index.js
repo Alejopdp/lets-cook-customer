@@ -9,7 +9,6 @@ import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOth
 import SearchBar from "../../components/atoms/searchBar/searchBar";
 import FaqsSection from "../../components/organisms/faqsSection/faqsSection";
 import { Layout } from "../../components/layout/index";
-import { useLang } from "@hooks";
 
 const PreguntasFrecuentes = () => {
     const router = useRouter();

@@ -1,14 +1,9 @@
 // Utils & config
 import React from "react";
-import PropTypes from "prop-types";
-import { useTheme } from "@material-ui/core/styles";
 
 // External components
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
-import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
-import { Typography } from "@material-ui/core";
+import {FormControlLabel, Checkbox} from '@material-ui/core';
+import { RadioButtonUnchecked as CircleUnchecked , CheckCircle as CircleCheckedFilled} from '@material-ui/icons';
 
 // Internal components
 import { RoundedCheckboxProps } from './interfaces';

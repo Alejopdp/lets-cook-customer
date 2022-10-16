@@ -1,15 +1,12 @@
 // Utils & Config
 import React from "react";
-import { useStyles } from "./styles";
 import { useRouter } from "next/router";
-import { LegalTextSection as langs } from '@lang';
+import { LegalTextSection as langs } from "@lang";
 
 // External components
-import Grid from "@material-ui/core/Grid";
-import { Typography } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 
 export const LegalTextSection = () => {
-    const classes = useStyles();
     const router = useRouter();
     const lang = langs[router.locale];
 
