@@ -11,7 +11,6 @@ import "react-multi-carousel/lib/styles.css";
 
 // Internal Components
 import GoogleReviewBox from "../../molecules/googleReviewBox/googleReviewBox";
-import { Review } from "@helpers";
 import { ReviewsSectionProps } from "./interfaces";
 import { useReviewsStyles } from "./styles";
 
@@ -185,7 +184,7 @@ export const ReviewsSection = ({ reviews = data }: ReviewsSectionProps) => {
                     slidesToSlide={1}
                     swipeable
                 >
-                    {reviews.map((review, index) => (
+                    {(reviews ?? []).map((review, index) => (
                         <GoogleReviewBox key={index} review={review} />
                     ))}
                 </Carousel>

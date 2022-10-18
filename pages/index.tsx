@@ -15,7 +15,7 @@ export default function Home(props: HomePageProps) {
 export async function getServerSideProps({ locale }) {
     const [_plans, _recipes, _reviews] = await Promise.all([getPlans(locale), getActualWeekRecipes(locale), getReviews(locale)]);
 
-    const errors = [_plans.error, _recipes.error].filter((e) => !!e);
+    const errors = [_plans.error, _recipes.error, _reviews.error].filter((e) => !!e);
 
     if (errors.length) {
         console.warn("***-> Errors: ", errors);
@@ -25,7 +25,8 @@ export async function getServerSideProps({ locale }) {
         props: {
             plans: _plans.data.plans || [],
             recipes: _recipes.data || [],
-            reviews: _reviews || [],
+            //@ts-ignore
+            reviews: _reviews.data || [],
             errors,
         },
     };
