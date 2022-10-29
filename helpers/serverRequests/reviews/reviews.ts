@@ -3,16 +3,14 @@ import { API_URL } from "../serverRequestInterfaces/response";
 import { Review, ReviewResponse } from "./reviewInterfaces";
 
 export async function getReviews(locale: string): Promise<ReviewResponse> {
-    let accountId = ''
-    let locationId = ''
-    let url = `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`
     try {
         const res = await Axios.request<Review[]>({
             method: "GET",
-            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
-            url: `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews`
+            url: `${API_URL}/business/reviews`,
+            params: {
+                locale
+            }
         });
-        console.log('response getReviews', res)
         return {
             status: res.status,
             data: res.data,
@@ -24,25 +22,3 @@ export async function getReviews(locale: string): Promise<ReviewResponse> {
         };
     }
 }
-
-export const getDemoReviews = async (locale: string): Promise<ReviewResponse> => ({
-    status: 200,
-    data,
-});
-
-const data = Array<Review>(10)
-    .fill({
-        id: 1,
-        name: "Ricardo Sánchez",
-        avatar: { src: "/static/images/avatar/1.jpg", alt: "Ricardo Sánchez" },
-        stars: 5,
-        date: "",
-        text: "Super recomendado!!!!! Realmente muy simple hacer platos deliciosos!! Todo organizado, explicado y de primera calidad!!! Me encanta todas las semanas tener sus platos a preparar en casa. Es divertido y muy simple! Encima ecofriendly Gracias!!!!!",
-    })
-    .map((review, index) => ({
-        ...review,
-        id: index,
-        name: review.name + " " + index,
-        date: `Hace ${index} días`,
-    }));
-

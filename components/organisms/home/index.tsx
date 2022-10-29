@@ -33,7 +33,7 @@ const HomePage = (props: HomePageProps) => {
                 <RecipesSection recipes={props.recipes} lang={lang.recipesSection} />
             </div>
             <div className={styles.paddingY8}>
-                <ReviewsSection />
+                <ReviewsSection reviews={props.reviews} />
             </div>
         </Layout>
     );
