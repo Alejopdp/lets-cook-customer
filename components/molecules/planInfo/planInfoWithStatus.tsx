@@ -8,6 +8,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Image from "next/image";
+import { SubscriptionState } from "types/subscription";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -41,13 +42,13 @@ const PlanInfoWithStatus = (props) => {
 
     let chipBackgroundColor;
     switch (props.status.value) {
-        case "SUBSCRIPTION_ACTIVE":
+        case SubscriptionState.SUBSCRIPTION_ACTIVE:
             chipBackgroundColor = classes.chipStatusActive;
             break;
-        case "SUBSCRIPTION_CANCELLED":
+        case SubscriptionState.SUBSCRIPTION_CANCELLED:
             chipBackgroundColor = classes.chipStatusCancelled;
             break;
-        case "SUBSCRIPTION_EXPIRED":
+        case SubscriptionState.SUBSCRIPTION_EXPIRED:
             chipBackgroundColor = classes.chipStatusExpired;
             break;
         default:
