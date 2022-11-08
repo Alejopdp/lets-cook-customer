@@ -64,7 +64,7 @@ export const RecipeChoiseStep = () => {
         setIsLoading(true);
 
         var recipeSelection: { recipeId: string; quantity: number }[] = [];
-        const ordererSelectedRecipes = [...selectedRecipes];
+        const ordererSelectedRecipes = [...recipes];
         ordererSelectedRecipes.sort((r1, r2) => r1.id.localeCompare(r2.id));
 
         for (let recipe of ordererSelectedRecipes) {
@@ -108,7 +108,7 @@ export const RecipeChoiseStep = () => {
             action: "clic en agregar receta",
             params: {
                 event_category: "elegir recetas",
-                event_label: recipe.name.toLowerCase(),
+                event_label: recipe.name?.toLowerCase() ?? "",
             },
         });
         selectRecipes([...recipes, recipe]);
