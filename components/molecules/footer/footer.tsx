@@ -62,7 +62,6 @@ export const Footer = () => {
         [router.locale]
     );
 
-    console.log("Router locale: ", router.locale);
     return (
         <div className={root}>
             <Grid container justify="space-between" className={footer}>
