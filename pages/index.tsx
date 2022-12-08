@@ -2,15 +2,10 @@ import React from "react";
 import HomePage from "../components/organisms/home";
 
 import { HomePageProps } from "components/organisms/home/interfaces";
-import { Layout } from "@layouts";
 import { getActualWeekRecipes, getPlans, getReviews } from "@helpers";
 
 export default function Home(props: HomePageProps) {
-    return (
-        <Layout page="homepage">
-            <HomePage {...props} />
-        </Layout>
-    );
+    return <HomePage {...props} />;
 }
 
 export async function getServerSideProps({ locale }) {

@@ -34,7 +34,6 @@ interface LayoutProps {
     canonicalUrl?: string;
 }
 
-// export const Layout = memo(({ children: Component }: LayoutProps ) => {
 export const Layout = (props: LayoutProps) => {
     const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
     const [openDrawerMenu, setOpenDrawerMenu] = useState(false);
