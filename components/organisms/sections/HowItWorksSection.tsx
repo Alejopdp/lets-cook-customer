@@ -34,6 +34,7 @@ const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
                 {(lang.cards || []).map((card, index) => (
                     <Grid key={index} item xs={12} sm={6} md={3} style={{ textAlign: "center" }} className={classes.gridCard}>
                         <Image
+                        unoptimized
                             src={card.image}
                             layout="responsive"
                             width={296}

@@ -88,7 +88,7 @@ export const BuyerInfoForm = memo((props: BuyerInfoFormProps) => {
                 <AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header" style={{ cursor: "default" }}>
                     <Grid item container justify="space-between" alignItems="center">
                         <Grid item className={classes.title}>
-                            <Image src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} />
+                            <Image unoptimized src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} />
                             <Typography variant="h6" color="textSecondary" className={classes.titleMargin}>
                                 {lang.buyerInfoForm.title}
                             </Typography>

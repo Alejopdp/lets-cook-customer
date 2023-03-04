@@ -1,6 +1,6 @@
 // Utils & Config
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import {  useTheme } from "@material-ui/core/styles";
 
 // External Components
 import Typography from "@material-ui/core/Typography";
@@ -20,7 +20,7 @@ const RecipesActualWeekCard = (props) => {
             {!props.hasChosenRecipesForActualWeek ? (
                 <BoxWithTitle title={lang.title}>
                     <Box style={{ textAlign: "center", marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
-                        <Image src="/assets/userProfile/recipesEmptyState.svg" width="80" height="80" />
+                        <Image alt="recipe-empty-state" unoptimized src="/assets/userProfile/recipesEmptyState.svg" width="80" height="80" />
                         <Typography
                             variant="body2"
                             color="textSecondary"

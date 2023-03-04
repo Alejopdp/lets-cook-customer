@@ -3,8 +3,7 @@ import { getShippingCost } from "@helpers";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 // External components
-import { Box, Typography, useTheme } from "@material-ui/core";
-import ErrorIcon from "@material-ui/icons/Error";
+import { Typography, useTheme } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -96,7 +95,7 @@ export const BeneficiaryInfoForm = memo((props: BeneficiaryInfoFormProps) => {
                 >
                     <Grid item container justify="space-between" alignItems="center">
                         <Grid item className={classes.title}>
-                            <Image src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} />
+                            <Image src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} unoptimized/>
                             <Typography variant="h6" color="textSecondary" className={classes.titleMargin}>
                                 Datos del beneficiario
                             </Typography>

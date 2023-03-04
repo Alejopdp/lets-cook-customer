@@ -23,15 +23,15 @@ export const LangSelector = memo(({ onChangeLang }: LangSelectorProps) => {
     const languages: ILangs = {
         es: {
             label: "es",
-            icon: <Image src="/assets/img-lang-es.png" width={24} height={24} />,
+            icon: <Image unoptimized src="/assets/img-lang-es.png" width={24} height={24} />,
         },
         en: {
             label: "en",
-            icon: <Image src="/assets/img-lang-en.png" width={24} height={24} />,
+            icon: <Image unoptimized src="/assets/img-lang-en.png" width={24} height={24} />,
         },
         ca: {
             label: "ca",
-            icon: <Image src="/assets/img-lang-ca.png" width={24} height={24} />,
+            icon: <Image unoptimized src="/assets/img-lang-ca.png" width={24} height={24} />,
         },
     };
 

@@ -86,7 +86,7 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                                                 }}
                                                 key={index}
                                             >
-                                                <Image src={recipe.imageUrl} width={74} height={48} alt={recipe.name} />
+                                                <Image unoptimized src={recipe.imageUrl} width={74} height={48} alt={recipe.name} />
                                                 <Typography variant="body2" color="textSecondary" style={{ marginLeft: theme.spacing(2) }}>
                                                     {recipe.name}
                                                 </Typography>

@@ -22,7 +22,7 @@ export const FormPaperWithIcons = (props: FormPaperWithIconsProps) => {
         <Paper className={paper}>
             <Grid item container justify="space-between" alignItems="center" style={{ marginBottom: theme.spacing(3) }}>
                 <Grid item className={title}>
-                    {props.initialIcon && <Image src={props.initialIcon} height={32} width={32} />}
+                    {props.initialIcon && <Image unoptimized src={props.initialIcon} height={32} width={32} />}
                     <Typography variant="h6" color="textSecondary" className={titleMargin}>
                         {props.title}
                     </Typography>

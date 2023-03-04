@@ -26,6 +26,7 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={5} style={{ alignSelf: "center" }}>
                         <Image
+                        unoptimized
                             className={classes.img}
                             src="/assets/home/home-atributos.webp"
                             alt="atributos"
@@ -39,6 +40,7 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                             <div key={index} className={classes.card}>
                                 <div className={classes.cardIcon}>
                                     <Image
+                                    unoptimized
                                         src={card.image}
                                         alt={card.title}
                                         className={classes.icon}

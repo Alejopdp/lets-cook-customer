@@ -75,7 +75,7 @@ export const SocialNetworksButtons = (props) => {
             </Grid> */}
             <Grid item xs={12}>
                 <Button className={clsx(button, google)} onClick={handleGoogleLogin}>
-                    <Image src="/assets/google.png" width={20} height={20} />
+                    <Image src="/assets/google.png" width={20} height={20} unoptimized/>
                     <Typography variant="h6" className={txt}>
                         {lang.google}
                     </Typography>

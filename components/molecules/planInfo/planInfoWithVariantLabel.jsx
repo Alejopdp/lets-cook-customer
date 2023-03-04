@@ -1,6 +1,5 @@
 // Utils & Config
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
 // External components
@@ -28,7 +27,7 @@ const PlanInfoWithVariantLabel = (props) => {
 
     return (
         <Box className={classes.container} style={props.style}>
-            <Image src={props.planIcon} width={32} height={32} />
+            <Image unoptimized src={props.planIcon} width={32} height={32} />
             <div className={classes.textContainer}>
                 <Typography variant="body1" className={classes.text}>
                     {props.planName}

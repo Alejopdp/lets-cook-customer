@@ -1,9 +1,8 @@
 // Utils & config
 import React, { FormEvent } from "react";
-import PropTypes from "prop-types";
 
 // External components
-import { IconButton, Toolbar, AppBar, Hidden, makeStyles, Button } from "@material-ui/core";
+import { IconButton, Toolbar, AppBar, makeStyles } from "@material-ui/core";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -58,7 +57,7 @@ export const NavbarContent = (props: ToggleOpeningDrawerProps) => {
                 </IconButton>
                 <div className={classes.logo}>
                     <Link href="/">
-                        <Image src="/logo.png" width={115} height={40} className={classes.cursorPointer} />
+                        <Image src="/logo.png" width={115} height={40} className={classes.cursorPointer} unoptimized/>
                     </Link>
                 </div>
                 <UserBox />

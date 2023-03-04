@@ -43,7 +43,7 @@ const PlanSelector = (props: PlanSelectorProps) => {
     return (
         <Box display="flex" paddingY={4}>
             <Box marginRight={3}>
-                <Image src={props.planIcon} alt={props.planName} width={32} height={32} />
+                <Image unoptimized src={props.planIcon} alt={props.planName} width={32} height={32} />
             </Box>
             <Box display="flex" justifyContent="space-between" alignItems="flex-start" style={{width:'100%'}}>
                 <Box>

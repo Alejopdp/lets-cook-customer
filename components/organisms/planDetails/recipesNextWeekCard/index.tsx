@@ -25,7 +25,7 @@ const RecipesNextWeekCard = (props) => {
             {!props.hasChosenRecipesForNextWeek ? (
                 <BoxWithTitle title={lang.title}>
                     <Box style={{ textAlign: "center", marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
-                        <Image src="/assets/userProfile/recipesEmptyState.svg" width="80" height="80" />
+                        <Image unoptimized src="/assets/userProfile/recipesEmptyState.svg" width="80" height="80" />
                         <Typography
                             variant="body2"
                             color="textSecondary"
