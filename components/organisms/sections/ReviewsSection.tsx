@@ -3,7 +3,6 @@ import React from "react";
 // External Components
 import { Rating } from "@material-ui/lab";
 import { Typography, Container, Grid, useTheme, useMediaQuery, Box } from "@material-ui/core";
-import clsx from "clsx";
 
 // External Components
 import Carousel from "react-multi-carousel";
@@ -63,7 +62,7 @@ export const ReviewsSection = ({ reviews = [] }: ReviewsSectionProps) => {
                     <Grid item xs={12} md={6}>
                         <div className={classes.googleRatingRow}>
                             <Box className={classes.item}>
-                                <Image src="/assets/img-google-logo.png" height={40} width={118.8} alt="google-logo" />
+                                <Image unoptimized src="/assets/img-google-logo.png" height={40} width={118.8} alt="google-logo" />
                             </Box>
                             <Typography className={classes.item} variant="subtitle1">
                                 {lang.reviewsSection.rating}

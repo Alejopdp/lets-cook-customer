@@ -11,7 +11,7 @@ export const IconWithText = (props: IconWithTextProps) => {
 
     return (
         <>
-            <Image src={props.src} height={40} width={40} />
+            <Image src={props.src} height={40} width={40} unoptimized/>
             <Typography variant="subtitle2" style={{ fontSize: "14px", fontWeight: 600, marginTop: theme.spacing(1) }}>
                 {props.text}
             </Typography>

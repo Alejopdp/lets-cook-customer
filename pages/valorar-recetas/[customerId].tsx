@@ -20,7 +20,6 @@ const RateRecipesPage = () => {
 
     useEffect(() => {
         const getRatings = async () => {
-            console.log("Customer id: ", router.query.customerId);
             const res = await getRecipesByCustomer(router.query.customerId, router.locale);
 
             if (res && res.status === 200) {

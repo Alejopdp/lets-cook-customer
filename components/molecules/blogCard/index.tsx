@@ -45,7 +45,7 @@ const BlogCard = ({ title, subtitle, path, imagePath }: BlogCardProps) => {
     return (
         <Grid container classes={{ root }}>
             <Grid item xs={12} md={4} onClick={handleCardClick}>
-                <Image src={imagePath ?? `/logo.png`} alt={"Blog image"} width={1920} height={1280} layout="responsive" className={image} />
+                <Image unoptimized src={imagePath ?? `/logo.png`} alt={"Blog image"} width={1920} height={1280} layout="responsive" className={image} />
             </Grid>
 
             <Grid item xs={12} md={7} style={{ margin: "0 24px 0 24px" }}>

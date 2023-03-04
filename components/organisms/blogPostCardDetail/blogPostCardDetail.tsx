@@ -58,6 +58,7 @@ const BlogPostCardDetail: FC<BlogPostCardDetailProps> = ({ post }) => {
 
                 <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
                     <Image
+                    unoptimized
                         src={!!!post.image?.url ? `/logo.png` : post.image?.url}
                         alt={post.image?.name || "Blog image"}
                         width={1920}

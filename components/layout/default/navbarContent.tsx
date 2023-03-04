@@ -99,7 +99,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
                 </IconButton>
                 <div className={classes.logo}>
                     <Link href="/">
-                        <Image src="/logo.png" width={115} height={40} alt="lets-cook-logo" className={classes.cursorPointer} />
+                        <Image src="/logo.png" width={115} height={40} alt="lets-cook-logo" className={classes.cursorPointer} unoptimized/>
                     </Link>
                 </div>
                 <Hidden xsDown implementation="css">

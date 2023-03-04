@@ -67,7 +67,7 @@ export const Footer = () => {
             <Grid container justify="space-between" className={footer}>
                 <Grid item xs={12} md={3} className={logoSection}>
                     <Link href="/">
-                        <Image src="/logo.png" width={174} height={60} alt="Lets cook now" />
+                        <Image unoptimized src="/logo.png" width={174} height={60} alt="Lets cook now" />
                     </Link>
                     <Grid style={{ marginTop: "16px" }}>
                         <Link href="https://www.instagram.com/letscook.now/" target="_blank" rel="noreferrer noopener">
@@ -104,7 +104,7 @@ export const Footer = () => {
                 </Grid>
 
                 <Grid item xs={6} md={3} className={paymentMethodsSection}>
-                    <Image src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
+                    <Image  unoptimized src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
                 </Grid>
             </Grid>
 

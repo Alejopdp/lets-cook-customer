@@ -12,7 +12,7 @@ export const GoogleRatingSection = memo((props: GoogleRatingSectionProps) => {
                 <Grid item xs={12} md={6}>
                     <div className={classes.googleRatingRow}>
                         <Box className={classes.item}>
-                            <Image src="/assets/img-google-logo.png" height={40} width={118.8} alt="google-logo" />
+                            <Image unoptimized src="/assets/img-google-logo.png" height={40} width={118.8} alt="google-logo" />
                         </Box>
                         <Typography className={classes.item} variant="subtitle1">
                             Rating

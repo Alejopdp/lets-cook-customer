@@ -26,7 +26,7 @@ const ChosenRecipes = (props) => {
             {props.recipes.map((recipe, index) => (
                 <Box key={index} style={{ display: "flex", justifyContent: "space-between", marginTop: theme.spacing(3) }}>
                     <Box style={{ display: "flex", alignItems: "center" }}>
-                        <Image className={classes.recipeImage} src={recipe.imageUrl} alt={recipe.name} width={87} height={56} />
+                        <Image unoptimized className={classes.recipeImage} src={recipe.imageUrl} alt={recipe.name} width={87} height={56} />
                         <Typography
                             variant="body2"
                             color="textSecondary"

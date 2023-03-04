@@ -79,6 +79,7 @@ const PostCard = (props: PostCardProps) => {
                     height={1280}
                     layout="responsive"
                     className={image}
+                    unoptimized
                 />
             </Grid>
 
