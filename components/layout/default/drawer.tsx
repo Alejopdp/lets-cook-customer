@@ -107,7 +107,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
                 {menuOptions.top.map((option, index) => (
                     <ListItem button component="a" onClick={() => goToPage(option.label, option.path)} key={index}>
                         <ListItemIcon>
-                            <Image src={option.img} alt={option.label} width={24} height={24} />
+                            <Image src={option.img} alt={option.label} width={24} height={24} unoptimized/>
                         </ListItemIcon>
                         <ListItemText primary={option.label} />
                     </ListItem>

@@ -44,6 +44,7 @@ export const RecipeCard = (props: RecipeCardProps) => {
                 objectFit="cover"
                 objectPosition="center"
                 className={borderRadius}
+                unoptimized
             />
             <Card className={root}>
                 <CardContent style={{ height: "20%" }}>

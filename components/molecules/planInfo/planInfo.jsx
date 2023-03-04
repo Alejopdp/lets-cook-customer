@@ -24,7 +24,7 @@ const PlanInfo = (props) => {
 
     return (
         <Box className={classes.container} style={props.style}>
-            <Image src={props.planIcon} width={32} height={32} />
+            <Image unoptimized src={props.planIcon} width={32} height={32} />
             <Typography variant="body1" className={classes.text}>
                 {props.planName}
             </Typography>
