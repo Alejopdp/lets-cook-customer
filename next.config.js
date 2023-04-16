@@ -25,7 +25,7 @@ const securityHeaders = [
     {
         key: 'Content-Security-Policy',
         value: ContentSecurityPolicy.replace(/\s{2,}/g, ' ').trim()
-      }
+      },
     // {
     //     key: "X-DNS-Prefetch-Control",
     //     value: "on",
@@ -72,7 +72,7 @@ module.exports = withBundleAnalyzer({
     async headers() {
         return [{
             source: '/(.*)',
-            securityHeaders
+            headers: securityHeaders
         }]  
     },
     async rewrites() {
