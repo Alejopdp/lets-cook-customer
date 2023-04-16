@@ -3,6 +3,46 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
     enabled: process.env.ANALYZE === "true",
 });
 
+const ContentSecurityPolicy = `
+  default-src 'self';
+  script-src 'self';
+  frame-src *.letscooknow.es
+  style-src 'self' *.letscooknow.es;
+  font-src 'self';  
+`
+
+
+const securityHeaders = [
+    {
+        key: 'Content-Security-Policy',
+        value: ContentSecurityPolicy.replace(/\s{2,}/g, ' ').trim()
+      },
+      {
+          key: "X-Frame-Options",
+          value: "deny",
+      }
+    // {
+    //     key: "X-DNS-Prefetch-Control",
+    //     value: "on",
+    // },
+    // {
+    //     key: "Strict-Transport-Security",
+    //     value: "max-age=31536000; includeSubDomains; preload",
+    // },
+    // {
+    //     key: "X-Content-Type-Options",
+    //     value: "nosniff",
+    // },
+    // {
+    //     key: "X-XSS-Protection",
+    //     value: "1; mode=block",
+    // },
+    // {
+    //     key: "Referrer-Policy",
+    //     value: "same-origin",
+    // },
+];
+
 // next.config.js
 module.exports = withBundleAnalyzer({
     i18n,
@@ -23,6 +63,12 @@ module.exports = withBundleAnalyzer({
         // Warning: Dangerously allow production builds to successfully complete even if
         // your project has ESLint errors.
         ignoreDuringBuilds: true,
+    },
+    async headers() {
+        return [{
+            source: '/(.*)',
+            securityHeaders
+        }]  
     },
     async rewrites() {
         return [
