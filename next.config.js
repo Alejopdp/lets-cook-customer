@@ -3,6 +3,36 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
     enabled: process.env.ANALYZE === "true",
 });
 
+const ContentSecurityPolicy = `default-src 'self'; script-src 'report-sample' 'self' 'unsafe-eval' 'unsafe-inline' http://js-na1.hs-scripts.com https://connect.facebook.net https://googleads.g.doubleclick.net https://js-na1.hs-scripts.com https://js.hs-analytics.net https://js.hs-banner.com https://js.stripe.com https://js.usemessages.com https://maps.googleapis.com https://script.hotjar.com https://static-tracking.klaviyo.com https://static.hotjar.com https://static.klaviyo.com http://static.klaviyo.com https://static.mailerlite.com https://vercel.live https://www.google-analytics.com https://www.googletagmanager.com https://cdnjs.cloudflare.com https://assets.calendly.com https://js.hsforms.net https://js.hsleadflows.net; style-src 'unsafe-inline' 'self' https://static.mailerlite.com https://assets.calendly.com; object-src 'none'; base-uri 'self'; connect-src 'self' http://localhost:3001 https://api.hubspot.com https://api.letscooknow.es https://api.staging.letscooknow.es https://content.hotjar.io https://in.hotjar.com https://maps.googleapis.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.google-analytics.com wss://wsp24.hotjar.com https://forms.hsforms.com https://api.hscollectedforms.com; font-src 'self' https://script.hotjar.com; frame-src 'self' https://app.hubspot.com https://js.stripe.com https://www.facebook.com https://assets.calendly.com; img-src 'self' data: https://lets-cook-assets.s3.eu-west-3.amazonaws.com https://lets-cook-blog-assets.s3.eu-west-3.amazonaws.com https://lh3.googleusercontent.com https://track.hubspot.com https://www.facebook.com https://www.google-analytics.com https://www.google.com https://www.google.es https://www.googletagmanager.com; manifest-src 'self'; media-src 'self'; report-uri https://643c2f5df1e3671a2913697f.endpoint.csper.io/?v=1; worker-src 'none';`
+
+
+const securityHeaders = [
+    {
+        key: 'Content-Security-Policy',
+        value: ContentSecurityPolicy.replace(/\s{2,}/g, ' ').trim()
+      },
+    // {
+    //     key: "X-DNS-Prefetch-Control",
+    //     value: "on",
+    // },
+    // {
+    //     key: "Strict-Transport-Security",
+    //     value: "max-age=31536000; includeSubDomains; preload",
+    // },
+    // {
+    //     key: "X-Content-Type-Options",
+    //     value: "nosniff",
+    // },
+    // {
+    //     key: "X-XSS-Protection",
+    //     value: "1; mode=block",
+    // },
+    // {
+    //     key: "Referrer-Policy",
+    //     value: "same-origin",
+    // },
+];
+
 // next.config.js
 module.exports = withBundleAnalyzer({
     i18n,
@@ -23,6 +53,12 @@ module.exports = withBundleAnalyzer({
         // Warning: Dangerously allow production builds to successfully complete even if
         // your project has ESLint errors.
         ignoreDuringBuilds: true,
+    },
+    async headers() {
+        return [{
+            source: '/(.*)',
+            headers: securityHeaders
+        }]  
     },
     async rewrites() {
         return [
