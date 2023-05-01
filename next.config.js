@@ -3,22 +3,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
     enabled: process.env.ANALYZE === "true",
 });
 
-const ContentSecurityPolicy = `
-default-src 'self';
-script-src 'report-sample' 'self' https://connect.facebook.net/signals/config/* https://googleads.g.doubleclick.net/pagead/viewthroughconversion/* https://js-na1.hs-scripts.com/* https://js.hs-analytics.net/analytics/* https://js.hs-banner.com/v2/* https://js.stripe.com/v3 https://js.usemessages.com/conversations-embed.js https://maps.googleapis.com/maps/api/js https://script.hotjar.com/modules.* https://static-tracking.klaviyo.com/onsite/js/static.* https://static.hotjar.com/c/hotjar-* https://static.klaviyo.com/onsite/js/runtime.* https://static.mailerlite.com/js/universal.js https://vercel.live/_next-live/feedback/feedback.js https://www.google-analytics.com/analytics.js https://www.googletagmanager.com/gtag/js https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/* https://assets.calendly.com/assets/external/widget.js https://js.hsforms.net/forms/shell.js https://js.hsleadflows.net/leadflows.js;
-style-src 'report-sample' 'self' https://static.mailerlite.com https://assets.calendly.com/assets/external/widget.css;
-object-src 'none';
-base-uri 'self';
-connect-src 'self' https://api.hubspot.com https://api.letscooknow.es https://api.staging.letscooknow.es https://content.hotjar.io https://in.hotjar.com https://maps.googleapis.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.google-analytics.com wss://wsp24.hotjar.com https://forms.hsforms.com https://api.hscollectedforms.com;
-font-src 'self' https://script.hotjar.com;
-frame-src 'self' https://app.hubspot.com https://js.stripe.com https://www.facebook.com https://assets.calendly.com;
-img-src 'self' data: https://lets-cook-assets.s3.eu-west-3.amazonaws.com https://lets-cook-blog-assets.s3.eu-west-3.amazonaws.com https://lh3.googleusercontent.com https://track.hubspot.com https://www.facebook.com https://www.google-analytics.com https://www.google.com https://www.google.es https://www.googletagmanager.com;
-manifest-src 'self';
-media-src 'self';
-report-uri https://643c2f5df1e3671a2913697f.endpoint.csper.io/?v=1;
-worker-src 'none';
-
-`
+const ContentSecurityPolicy = `default-src 'self'; script-src 'report-sample' 'self' https://connect.facebook.net https://googleads.g.doubleclick.net https://js-na1.hs-scripts.com https://js.hs-analytics.net https://js.hs-banner.com https://js.stripe.com https://js.usemessages.com https://maps.googleapis.com https://script.hotjar.com https://static-tracking.klaviyo.com https://static.hotjar.com https://static.klaviyo.com https://static.mailerlite.com https://vercel.live https://www.google-analytics.com https://www.googletagmanager.com https://cdnjs.cloudflare.com https://assets.calendly.com https://js.hsforms.net https://js.hsleadflows.net; style-src 'report-sample' 'self' https://static.mailerlite.com https://assets.calendly.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://api.hubspot.com https://api.letscooknow.es https://api.staging.letscooknow.es https://content.hotjar.io https://in.hotjar.com https://maps.googleapis.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.google-analytics.com wss://wsp24.hotjar.com https://forms.hsforms.com https://api.hscollectedforms.com; font-src 'self' https://script.hotjar.com; frame-src 'self' https://app.hubspot.com https://js.stripe.com https://www.facebook.com https://assets.calendly.com; img-src 'self' data: https://lets-cook-assets.s3.eu-west-3.amazonaws.com https://lets-cook-blog-assets.s3.eu-west-3.amazonaws.com https://lh3.googleusercontent.com https://track.hubspot.com https://www.facebook.com https://www.google-analytics.com https://www.google.com https://www.google.es https://www.googletagmanager.com; manifest-src 'self'; media-src 'self'; report-uri https://643c2f5df1e3671a2913697f.endpoint.csper.io/?v=1; worker-src 'none';`
 
 
 const securityHeaders = [
