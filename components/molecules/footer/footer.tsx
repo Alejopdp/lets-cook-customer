@@ -64,7 +64,7 @@ export const Footer = () => {
 
     return (
         <div className={root}>
-            <Grid container justify="space-between" className={footer}>
+            <Grid container justifyContent="space-between" className={footer}>
                 <Grid item xs={12} md={3} className={logoSection}>
                     <Link href="/">
                         <Image unoptimized src="/logo.png" width={174} height={60} alt="Lets cook now" />
