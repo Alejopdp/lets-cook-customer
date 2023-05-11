@@ -11,7 +11,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import PinterestIcon from "@material-ui/icons/Pinterest";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import { Link } from "@material-ui/core";
+import { Box, Link } from "@material-ui/core";
 import NextLink from "next/link";
 import { useStyles } from "./styles";
 import { useLang } from "@hooks";
@@ -86,20 +86,19 @@ export const Footer = () => {
                 </Grid>
 
                 <Grid item xs={6} md={3}>
+                    <Box display={"flex"} flexDirection={"column"} fontSize={16}>
+
                     {_links.map((link, index) => (
                         <NextLink href={link.url} key={index}>
-                            <Typography variant="body1" color="textSecondary" style={{ cursor: "pointer", width: "fit-content" }}>
                                 {link.name}
-                            </Typography>
                         </NextLink>
                     ))}
+                    </Box>
                 </Grid>
 
                 <Grid item xs={6} md={3}>
-                    <Link href="mailto:info@letscooknow.es" underline="none" target="_blank" rel="noreferrer noopener">
-                        <Typography variant="body1" color="textSecondary">
+                    <Link href="mailto:info@letscooknow.es" underline="none" target="_blank" rel="noreferrer noopener" style={{fontSize: 16 }} color="textSecondary">
                             info@letscooknow.es
-                        </Typography>
                     </Link>
                 </Grid>
 
