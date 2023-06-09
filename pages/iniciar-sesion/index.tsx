@@ -1,14 +1,51 @@
 // Utils & Config
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Internal Components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import LoginBox from "../../components/organisms/loginBox/loginBox";
-import { verifyToken } from "../../helpers/serverRequests/customer";
+import { loginWithSocialMedia, verifyToken } from "../../helpers/serverRequests/customer";
 import { Layout } from "../../components/layout/index";
 import { getAuth, getRedirectResult } from "firebase/auth";
+import { useRouter } from "next/router";
+import { Routes, localeRoutes } from "lang/routes/routes";
+import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
+import { useAuthStore, useUserInfoStore } from "@stores";
+import cookies from "js-cookie";
+import { Box, CircularProgress } from "@material-ui/core";
+
+// HandleLogin submit y guardar todo en local storaage
+// Poner un spinner para no volver a mostrar el login
+// Redireccioanar a donde haya que redireccionar
 
 const Login = (props) => {
+    const [isCheckingRedirect, setIsCheckingRedirect] = useState(true)
+    const {  saveInLocalStorage } = useLocalStorage();
+    const {  setuserInfo } = useUserInfoStore();
+    const {push, locale} = useRouter()
+    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+
+    const saveLoginData = (token, userInfo) => {
+        saveInLocalStorage(LOCAL_STORAGE_KEYS.token, token);
+        saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, userInfo);
+        setuserInfo(userInfo);
+        cookies.set(LOCAL_STORAGE_KEYS.token, token);
+        setIsAuthenticated(true);
+        push(localeRoutes[locale][Routes.perfil])
+    };
+
+
+    const handleSocialMediaSubmit = async (token, email = "") => {
+        const res = await loginWithSocialMedia(token, email, false);
+
+        if (res.status === 200) {
+            saveLoginData(res.data.token, res.data.userInfo);
+        } else {
+            // setserverError(res.data.message);
+            setIsCheckingRedirect(false)
+        }
+    };
+
 
     useEffect(() => {
         const handleLoginRedirect = async () => {
@@ -19,8 +56,10 @@ const Login = (props) => {
                 const accessToken = await user.getIdToken()
                 
                 console.log("Access token: ", accessToken)
+                handleSocialMediaSubmit(accessToken, user.email)        
+            } else {
+                setIsCheckingRedirect(false)
             }
-            console.log("A ver el resulted user: ", result?.user)
         }
         handleLoginRedirect()
     }, []);
@@ -33,7 +72,8 @@ const Login = (props) => {
             page="ingresar"
         >
             <InnerSectionLayout containerMaxWidth="lg">
-                <LoginBox redirect source="outside buyflow" />
+                {isCheckingRedirect && <Box width={"100%"} display={"flex"} justifyContent={"center"}><CircularProgress /></Box>}
+                {!isCheckingRedirect && <LoginBox redirect source="outside buyflow" />}
             </InnerSectionLayout>
         </Layout>
     );
