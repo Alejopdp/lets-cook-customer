@@ -1,13 +1,29 @@
 // Utils & Config
-import React from "react";
+import React, { useEffect } from "react";
 
 // Internal Components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import LoginBox from "../../components/organisms/loginBox/loginBox";
 import { verifyToken } from "../../helpers/serverRequests/customer";
 import { Layout } from "../../components/layout/index";
+import { getAuth, getRedirectResult } from "firebase/auth";
 
 const Login = (props) => {
+
+    useEffect(() => {
+        const handleLoginRedirect = async () => {
+
+            const result = await getRedirectResult(getAuth())
+            if (result?.user) {
+                const { user } = result;
+                const accessToken = await user.getIdToken()
+                
+                console.log("Access token: ", accessToken)
+            }
+            console.log("A ver el resulted user: ", result?.user)
+        }
+        handleLoginRedirect()
+    }, []);
     return (
         <Layout
             seoTitle="Ingresar - Let's cook: Productos frescos y recetas"

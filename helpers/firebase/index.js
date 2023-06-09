@@ -1,5 +1,5 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
-import { FacebookAuthProvider, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { FacebookAuthProvider, getAuth, getRedirectResult, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
 
 if (!!!getApps() || !getApps().length) {
     initializeApp({
@@ -19,9 +19,11 @@ export const loginWithGoogleAndGetIdToken = async () => {
     try {
         const googleAuthProvider = new GoogleAuthProvider();
         googleAuthProvider.addScope("email");
-        await signInWithPopup(getAuth(), googleAuthProvider);
-        const token = await getAuth().currentUser.getIdToken(true);
-        return { token };
+        // await signInWithPopup(getAuth(), googleAuthProvider);
+        await signInWithRedirect(getAuth(), googleAuthProvider)
+        // const token = await getAuth().currentUser.getIdToken(true);
+        // console.log("A ver el token: ", token)
+        return { token: "" };
     } catch (error) {
         return { error };
     }
