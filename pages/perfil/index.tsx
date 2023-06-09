@@ -298,13 +298,6 @@ const Perfil = (props) => {
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                                         <Link href={localeRoutes[router.locale][Routes["historial-pagos"]]}><a><IconButton size="small" style={props.style} onClick={props.handleClick}><Restore/></IconButton><Typography display="inline" variant="button" >{lang.paymentHistoryBtnText}</Typography></a></Link>
-                                        <TextButton
-                                            style={{ marginRight: "14px" }}
-                                            noColor
-                                            icon="time"
-                                            btnText={lang.paymentHistoryBtnText}
-                                            handleClick={() => router.push(localeRoutes[router.locale][Routes["historial-pagos"]])}
-                                        />
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(5) }}>
                                         <TextButton
