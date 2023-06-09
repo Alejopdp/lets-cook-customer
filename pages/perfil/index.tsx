@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useTheme } from "@material-ui/core";
+import { IconButton, useTheme } from "@material-ui/core";
 import { perfil } from "../../lang/index";
 import { swapPlan } from "../../helpers/serverRequests/subscription";
 import { skipOrders } from "../../helpers/serverRequests/order";
@@ -36,6 +36,8 @@ import { localeRoutes, Routes } from "../../lang/routes/routes";
 import PendingActionSkeleton from "components/molecules/pendingActionsComponents/pendingActionSkeleton";
 import PlanProfileCardSkeleton from "components/molecules/planProfileCard/planProfileCardSkeleton";
 import { locale } from "types/locale";
+import Link from "next/link";
+import { Restore } from "@material-ui/icons";
 
 const Perfil = (props) => {
     const theme = useTheme();
@@ -295,6 +297,7 @@ const Perfil = (props) => {
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                                        <Link href={localeRoutes[router.locale][Routes["historial-pagos"]]}><a><IconButton size="small" style={props.style} onClick={props.handleClick}><Restore/></IconButton><Typography display="inline" variant="button" >{lang.paymentHistoryBtnText}</Typography></a></Link>
                                         <TextButton
                                             style={{ marginRight: "14px" }}
                                             noColor

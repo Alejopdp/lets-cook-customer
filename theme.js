@@ -35,7 +35,7 @@ const theme = createTheme({
         subtitle2: { fontFamily: fonts.titleFont, fontWeight: 500, fontSize: '16px' },
         body1: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: '16px' },
         body2: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: '15px' },
-        button: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '14px' },
+        button: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '14px', textTransform: 'uppercase' },
     },
 
     overrides: {
