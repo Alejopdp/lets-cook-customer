@@ -15,7 +15,6 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
 import * as ga from "../helpers/ga";
 import CookiesDialog from "../components/molecules/cookiesPolicies/cookiesDialog";
-import {  getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
@@ -57,50 +56,8 @@ function MyApp(props) {
     }));
     const router = useRouter();
 
-    const saveLoginData = (token, userInfo) => {
-        saveInLocalStorage(LOCAL_STORAGE_KEYS.token, token);
-        saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, userInfo);
-        setUserInfo(userInfo);
-        cookies.set(LOCAL_STORAGE_KEYS.token, token);
-        setIsAuthenticated(true);
-        // props.redirect ? router.push(localeRoutes[router.locale][Routes.perfil]) : "";
-        // props.handleLogin ? props.handleLogin(userInfo) : "";
-    };
-
-
-    const handleSocialMediaSubmit = async (token, email = "") => {
-        const res = await loginWithSocialMedia(token, email);
-
-        if (res.status === 200) {
-            saveLoginData(res.data.token, res.data.userInfo);
-        } else {
-            setserverError(res.data.message);
-        }
-    };
-
-    const isUserAuthenticatedWithGoogle = async () => {
-        const googleProvider = new GoogleAuthProvider()
-        console.log("Teting Auth w google")
-        const auth = getAuth();
-        console.log("Auth: ", auth)
-
-        const result = await getRedirectResult(auth);
-        console.log("Hay resultado: ", result)
-
-        if (result) {
-            const credential = googleProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            
-            await handleSocialMediaSubmit(token, result.user.email);
-        }
-
-
-
-    }
-
     useEffect(() => {
         const verifyAuthentication = async () => {
-            // await isUserAuthenticatedWithGoogle()
             const token = await getFromLocalStorage(LOCAL_STORAGE_KEYS.token);
             const hasAcceptedCookies = await getFromLocalStorage(LOCAL_STORAGE_KEYS.HAS_ACCEPTED_COOKIES);
             setHasAccepteCookies(hasAcceptedCookies);

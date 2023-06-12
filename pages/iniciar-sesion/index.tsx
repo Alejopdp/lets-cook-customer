@@ -14,10 +14,6 @@ import { useAuthStore, useUserInfoStore } from "@stores";
 import cookies from "js-cookie";
 import { Box, CircularProgress } from "@material-ui/core";
 
-// HandleLogin submit y guardar todo en local storaage
-// Poner un spinner para no volver a mostrar el login
-// Redireccioanar a donde haya que redireccionar
-
 const Login = (props) => {
     const [isCheckingRedirect, setIsCheckingRedirect] = useState(true)
     const {  saveInLocalStorage } = useLocalStorage();
@@ -72,7 +68,7 @@ const Login = (props) => {
             page="ingresar"
         >
             <InnerSectionLayout containerMaxWidth="lg">
-                {isCheckingRedirect && <Box width={"100%"} display={"flex"} justifyContent={"center"}><CircularProgress /></Box>}
+                {isCheckingRedirect && <Box position={"fixed"} top={"50%"} left={"50%"}><CircularProgress /></Box>}
                 {!isCheckingRedirect && <LoginBox redirect source="outside buyflow" />}
             </InnerSectionLayout>
         </Layout>
