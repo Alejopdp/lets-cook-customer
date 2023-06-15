@@ -15,16 +15,12 @@ import { Box, CircularProgress } from "@material-ui/core";
 import { useAuth } from "contexts/auth.context";
 
 const Login = (props) => {
-    // const [isCheckingRedirect, setIsCheckingRedirect] = useState(true)
-    const {  saveInLocalStorage } = useLocalStorage();
-    const {  setuserInfo } = useUserInfoStore();
     const {push, locale} = useRouter()
-    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const {handleLoginRedirect, isCheckingRedirect} = useAuth()
 
     useEffect(() => {
         
-        handleLoginRedirect(localeRoutes[locale][Routes.perfil])
+        handleLoginRedirect(`${process.env.NEXT_PUBLIC_DOMAIN}${localeRoutes[locale][Routes.perfil]}`)
     }, []);
     return (
         <Layout
