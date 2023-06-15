@@ -6,7 +6,6 @@ import { loginWithSocialMedia } from 'helpers/serverRequests/customer';
 import { LOCAL_STORAGE_KEYS, useLocalStorage } from '@hooks';
 import cookies from "js-cookie";
 import { useAuthStore, useUserInfoStore } from '@stores';
-import { Routes, localeRoutes } from 'lang/routes/routes';
 
 
 
@@ -32,9 +31,10 @@ provider.addScope('email');
 interface AuthContextProps {
   isVerifyingAuth: boolean;
   user: User | null;
-  signInWithGoogle: () => void;
+  signInWithGoogle: (callback?: () => void) => void;
   isCheckingRedirect: boolean,
-  handleLoginRedirect: (redirectTo: string) => void
+  setIsCheckingRedirect: (isCheckingRedirect: boolean) => void,
+  handleLoginRedirect: (redirectTo: string, callback?: () => void) => void
 
 }
 
@@ -43,7 +43,8 @@ const AuthContext = createContext<AuthContextProps>({
   user: null,
   signInWithGoogle: () => {},
   isCheckingRedirect: true,
-  handleLoginRedirect: (handleLoginRedirect: string) => {}
+  setIsCheckingRedirect: (isCheckingRedirect: boolean) => {},
+  handleLoginRedirect: (redirectTo: string, callback?: () => void) => {}
 });
 
 const useAuth = () => useContext(AuthContext);
@@ -60,38 +61,41 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
 
   const signInWithGoogle = () => {
    signInWithRedirect(getAuth(firebaseApp), provider);
+   
   };
-
-  const saveLoginData = (token, userInfo) => {
+  const saveLoginData = (token, userInfo, callback?: () => void) => {
     saveInLocalStorage(LOCAL_STORAGE_KEYS.token, token);
     saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, userInfo);
     setUserInfo(userInfo);
     cookies.set(LOCAL_STORAGE_KEYS.token, token);
     setIsAuthenticated(true);
-    // props.redirect ? push(localeRoutes[locale][Routes.perfil]) : "";
-    // props.handleLogin ? props.handleLogin(userInfo) : "";
+    //@ts-ignore
+    if (callback) callback(userInfo)
 };
 
-  const handleUserLoggedIm = async (accessToken: string, email: string) => {
+  const handleUserLoggedIm = async (accessToken: string, email: string, callback?: () => void) => {
     const res = await loginWithSocialMedia(accessToken, email, false); //TODO: CHange it 
 
     if (res.status === 200) {
-        saveLoginData(res.data.token, res.data.userInfo);
+        saveLoginData(res.data.token, res.data.userInfo, callback);
       } else {
         setserverError(res.data.message);
       }
     }
     
-    const handleLoginRedirect = async (redirectTo: string) => {
+    const handleLoginRedirect = async (redirectTo: string, callback?: () => void) => {
       
       const result = await getRedirectResult(getAuth(firebaseApp))
       if (result?.user) {
         const { user } = result;
         const accessToken = await user.getIdToken()
         
-        console.log("Access token: ", accessToken)
-        await handleUserLoggedIm(accessToken, user.email)
-        await push(redirectTo)
+        await handleUserLoggedIm(accessToken, user.email, callback)
+        const url = new URL(redirectTo)
+        const pathname = url.pathname;
+        const searchParams = new URLSearchParams(url.search);
+        const query = Object.fromEntries(searchParams.entries());
+        await push({pathname, query})
         setIsCheckingRedirect(false)
 
   } else {
@@ -160,7 +164,8 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
     user,
     signInWithGoogle,
     isCheckingRedirect,
-    handleLoginRedirect
+    handleLoginRedirect,
+    setIsCheckingRedirect
 
   };
 

@@ -52,7 +52,7 @@ export const SocialNetworksButtons = (props) => {
             },
         });
 
-        const { token, error } = await signInWithGoogle();
+        await signInWithGoogle();
 
         // if (!!token) {
         //     props.handleSubmit(token);

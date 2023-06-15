@@ -51,8 +51,6 @@ export default function CheckoutDetails(props) {
     const { form, setCoupon, toFirstStep } = useBuyFlow(({ form, setCoupon, toFirstStep }) => ({ form, setCoupon, toFirstStep }));
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const { enqueueSnackbar } = useSnackbar();
-    const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
-    const router = useRouter();
 
     const planVariantPrice = form.variant?.priceWithOffer || form.variant?.price;
     const calculateTotalValue = () => {
@@ -67,16 +65,6 @@ export default function CheckoutDetails(props) {
     };
 
     const totalValue = calculateTotalValue();
-    // const totalValue = useMemo(() => {
-    //     const shippingCost = form.deliveryForm?.hasNextShipping ? 0 : form.deliveryForm?.shippingCost || 0;
-    //     if (!form.coupon?.id) return (Math.round(planVariantPrice * 100) + Math.round(shippingCost * 100)) / 100;
-
-    //     return form.coupon?.discount_type.type === "percent"
-    //         ? `${roundTwoDecimals(planVariantPrice - (planVariantPrice * form.coupon?.discount_type.value) / 100 + shippingCost)}€`
-    //         : form.coupon?.discount_type.type === "fix" || form.coupon?.discount_type.type === "fixed"
-    //         ? `${roundTwoDecimals(planVariantPrice - form.coupon?.discount_type.value + shippingCost)}`
-    //         : planVariantPrice;
-    // }, [form.coupon, form.deliveryForm?.shippingCost, planVariantPrice, form.coupon?.id]);
 
     const handleCouponSubmit = async (couponCode: string) => {
         ga.event({
