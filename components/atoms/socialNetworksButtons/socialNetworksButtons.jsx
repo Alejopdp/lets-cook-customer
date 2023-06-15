@@ -10,11 +10,14 @@ import { useSnackbar } from "notistack";
 import { Button, Typography, Grid } from "@material-ui/core";
 import Image from "next/image";
 import { useLang } from "@hooks";
+import { useAuth } from "contexts/auth.context";
 
 export const SocialNetworksButtons = (props) => {
     const { button, facebook, google, txt } = useStyles();
     const { enqueueSnackbar } = useSnackbar();
     const [lang] = useLang("socialNetworksButtons");
+    const {signInWithGoogle} = useAuth()
+
 
     const handleFacebookLogin = async () => {
         ga.event({
@@ -25,18 +28,19 @@ export const SocialNetworksButtons = (props) => {
             },
         });
 
-        const { token, error, email } = await loginWithFacebookAndGetIdToken();
+        await loginWithFacebookAndGetIdToken();
+        // const { token, error, email } = await loginWithFacebookAndGetIdToken();
 
-        if (!!token) {
-            props.handleSubmit(token, email);
-        } else {
-            enqueueSnackbar(
-                error.code === "auth/account-exists-with-different-credential"
-                    ? "El email ha sido registrado con otro autenticador. Por favor, pruebe iniciando sesión de otra manera"
-                    : error.message,
-                { variant: "error" }
-            );
-        }
+        // if (!!token) {
+        //     props.handleSubmit(token, email);
+        // } else {
+        //     enqueueSnackbar(
+        //         error.code === "auth/account-exists-with-different-credential"
+        //             ? "El email ha sido registrado con otro autenticador. Por favor, pruebe iniciando sesión de otra manera"
+        //             : error.message,
+        //         { variant: "error" }
+        //     );
+        // }
     };
 
     const handleGoogleLogin = async () => {
@@ -48,19 +52,19 @@ export const SocialNetworksButtons = (props) => {
             },
         });
 
-        const { token, error } = await loginWithGoogleAndGetIdToken();
+        const { token, error } = await signInWithGoogle();
 
-        if (!!token) {
-            props.handleSubmit(token);
-        } else {
-            enqueueSnackbar(
-                error.code === "auth/account-exists-with-different-credential"
-                    ? "El email ha sido registrado con otro autenticador. Por favor, pruebe iniciando sesión de otra manera"
-                    : error.message,
-                { variant: "error" }
-            );
-            // enqueueSnackbar(lang.googleError);
-        }
+        // if (!!token) {
+        //     props.handleSubmit(token);
+        // } else {
+        //     enqueueSnackbar(
+        //         error.code === "auth/account-exists-with-different-credential"
+        //             ? "El email ha sido registrado con otro autenticador. Por favor, pruebe iniciando sesión de otra manera"
+        //             : error.message,
+        //         { variant: "error" }
+        //     );
+        //     // enqueueSnackbar(lang.googleError);
+        // }
     };
 
     return (
