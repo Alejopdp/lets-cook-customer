@@ -8,14 +8,11 @@ import {  verifyToken } from "../../helpers/serverRequests/customer";
 import { Layout } from "../../components/layout/index";
 import { useRouter } from "next/router";
 import { Routes, localeRoutes } from "lang/routes/routes";
-import { LOCAL_STORAGE_KEYS, useLocalStorage } from "@hooks";
-import { useAuthStore, useUserInfoStore } from "@stores";
-import cookies from "js-cookie";
 import { Box, CircularProgress } from "@material-ui/core";
 import { useAuth } from "contexts/auth.context";
 
 const Login = (props) => {
-    const {push, locale} = useRouter()
+    const { locale} = useRouter()
     const {handleLoginRedirect, isCheckingRedirect} = useAuth()
 
     useEffect(() => {
