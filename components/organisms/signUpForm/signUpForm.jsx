@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 const langs = require("../../../lang").signupForm;
 import { useUserInfoStore, useAuthStore } from "../../../stores/auth";
 import cookies from "js-cookie";
-import * as ga from "../../../helpers/ga";
 
 // Internal components
 import FormPaper from "../../molecules/formPaper/formPaper";
