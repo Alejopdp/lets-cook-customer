@@ -177,16 +177,19 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     useEffect(() => {
         console.log("SAFARI - Is authenticated?: ", isAuthenticated)
         console.log("SAFARI - data plans: ", data.plans)
-        if (data.plans.length > 0) {
+        if (!isAuthenticated && data.plans.length > 0) {
             handleLoginRedirect(window.location.href, () => {
                 initializePlanWithParams()
                 moveNSteps(2)
             })
         }
 
-        // if (isAuthenticated) setIsCheckingRedirect(false)
+        if (isAuthenticated) {
+            setShowRegister(false);
+            setIsCheckingRedirect(false)
+        }
 
-    }, [data.plans])
+    }, [data.plans, isAuthenticated])
 
     useEffect(() => {
         setDeliveryInfo({
@@ -210,11 +213,11 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         userInfo.shippingAddress?.longitude,
     ]);
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            setShowRegister(false);
-        }
-    }, [isAuthenticated]);
+    // useEffect(() => {
+    //     if (isAuthenticated) {
+    //         setShowRegister(false);
+    //     }
+    // }, [isAuthenticated]);
 
     const steps = [
         <SelectPlanStep initialPlanSettings={data.planUrlParams} plans={data.plans} variant={data.variant} recipes={data.recipes} />,

@@ -85,22 +85,29 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
     
     const handleLoginRedirect = async (redirectTo: string, callback?: () => void) => {
       
-      const result = await getRedirectResult(getAuth(firebaseApp))
-      if (result?.user) {
-        const { user } = result;
-        const accessToken = await user.getIdToken()
-        
-        await handleUserLoggedIm(accessToken, user.email, callback)
-        const url = new URL(redirectTo)
-        const pathname = url.pathname;
-        const searchParams = new URLSearchParams(url.search);
-        const query = Object.fromEntries(searchParams.entries());
-        await push({pathname, query})
+      try {
+        const result = await getRedirectResult(getAuth(firebaseApp))
+        console.log("Firebase sign in result: ", result)
+        if (result?.user) {
+          const { user } = result;
+          const accessToken = await user.getIdToken()
+          
+          await handleUserLoggedIm(accessToken, user.email, callback)
+          const url = new URL(redirectTo)
+          const pathname = url.pathname;
+          const searchParams = new URLSearchParams(url.search);
+          const query = Object.fromEntries(searchParams.entries());
+          await push({pathname, query})
+          setIsCheckingRedirect(false)
+  
+    } else {
         setIsCheckingRedirect(false)
-
-  } else {
-      setIsCheckingRedirect(false)
-  }
+    }
+        
+      } catch (error) {
+        console.log("Sign in error: ", error)
+        setIsCheckingRedirect(false)
+      }
 }
 
   // useEffect(() => {
