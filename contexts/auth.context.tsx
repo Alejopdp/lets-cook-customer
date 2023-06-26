@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import {   initializeApp, FirebaseApp } from 'firebase/app';
+import {   initializeApp, FirebaseApp, FirebaseOptions } from 'firebase/app';
 import {GoogleAuthProvider, User, getAuth, getRedirectResult, onAuthStateChanged, signInWithRedirect} from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { loginWithSocialMedia } from 'helpers/serverRequests/customer';
@@ -10,9 +10,8 @@ import { useAuthStore, useUserInfoStore } from '@stores';
 
 
 // Configuración de Firebase  
-const firebaseConfig = {
-        apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY, // Auth / General Use
-        authDomain: "app.staging.letscooknow.es",
+const firebaseConfig: FirebaseOptions = {
+        apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
         projectId: "letscook-001",
         storageBucket: "letscook-001.appspot.com",
         messagingSenderId: "859787193343",
