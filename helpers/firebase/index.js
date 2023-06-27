@@ -24,6 +24,7 @@ export const loginWithGoogleAndGetIdToken = async () => {
         const token = await getAuth().currentUser.getIdToken(true);
         return { token };
     } catch (error) {
+        console.log("Error: ", error)
         return { error };
     }
 };
