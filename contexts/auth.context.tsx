@@ -12,6 +12,7 @@ import { useAuthStore, useUserInfoStore } from '@stores';
 // Configuración de Firebase  
 const firebaseConfig: FirebaseOptions = {
         apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
+        authDomain: "auth.letscooknow.es",
         projectId: "letscook-001",
         storageBucket: "letscook-001.appspot.com",
         messagingSenderId: "859787193343",
