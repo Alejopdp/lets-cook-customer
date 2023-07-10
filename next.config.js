@@ -63,6 +63,7 @@ module.exports = withBundleAnalyzer({
     },
     async rewrites() {
         return [
+            {source: "/__/auth/:path*", destination: "https://auth.letscooknow.es/__/auth/:path*"},
             { source: "/en/profile", destination: "/en/perfil", locale: false },
             { source: "/ca/perfil", destination: "/ca/perfil", locale: false },
 
