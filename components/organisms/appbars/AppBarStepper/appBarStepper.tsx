@@ -15,7 +15,6 @@ interface Step {
 
 export const AppBarStepper = () => {
     const [lang] = useLang("appBarStepper");
-    console.log("LANG: ", lang);
 
     const steps: Step[] = useMemo(
         () => [

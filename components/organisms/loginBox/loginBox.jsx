@@ -53,7 +53,7 @@ const LoginBox = (props) => {
         setIsLoading(false);
     };
 
-    const handleSocialMediaSubmit = async (token, email = "") => {
+     const handleSocialMediaSubmit = async (token, email = "") => {
         const res = await loginWithSocialMedia(token, email);
 
         if (res.status === 200) {

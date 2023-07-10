@@ -1,13 +1,24 @@
 // Utils & Config
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Internal Components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import LoginBox from "../../components/organisms/loginBox/loginBox";
-import { verifyToken } from "../../helpers/serverRequests/customer";
+import {  verifyToken } from "../../helpers/serverRequests/customer";
 import { Layout } from "../../components/layout/index";
+import { useRouter } from "next/router";
+import { Routes, localeRoutes } from "lang/routes/routes";
+import { Box, CircularProgress } from "@material-ui/core";
+import { useAuth } from "contexts/auth.context";
 
 const Login = (props) => {
+    const { locale} = useRouter()
+    const {handleLoginRedirect, isCheckingRedirect} = useAuth()
+
+    useEffect(() => {
+        
+        handleLoginRedirect(`${process.env.NEXT_PUBLIC_DOMAIN}${localeRoutes[locale][Routes.perfil]}`)
+    }, []);
     return (
         <Layout
             seoTitle="Ingresar - Let's cook: Productos frescos y recetas"
@@ -17,7 +28,8 @@ const Login = (props) => {
             page="ingresar"
         >
             <InnerSectionLayout containerMaxWidth="lg">
-                <LoginBox redirect source="outside buyflow" />
+                {isCheckingRedirect && <Box position={"fixed"} top={"50%"} left={"50%"}><CircularProgress /></Box>}
+                {!isCheckingRedirect && <LoginBox redirect source="outside buyflow" />}
             </InnerSectionLayout>
         </Layout>
     );

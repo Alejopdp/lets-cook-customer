@@ -34,6 +34,14 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     const authStore = useAuthStore();
     const userInfoStore = useUserInfoStore();
 
+    useEffect(() => {
+        const href = window.location.href;
+        if (!href.includes("planSlug")) {
+
+        }
+        
+    }, [])
+
     const getPlanData = (
         slug: string,
         plans: Plan[]
@@ -179,6 +187,24 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
         buyFlow.setPlanVariant(props.variant);
         setPlanSize(peopleLabels);
         setRecipesOfWeek(props.recipes);
+        const href = window.location.href;
+        if (!href.includes("planSlug")) {
+            console.log("Buyflow: ", buyFlow)
+            router.replace(
+                {
+                    pathname: `${localeRoutes[router.locale][Routes.planes]}`,
+                    query: {
+                        planSlug: buyFlow.form.planSlug,
+                        recetas: buyFlow.form.variant?.numberOfRecipes,
+                        personas: buyFlow.form.variant?.numberOfPersons,
+                    },
+                },
+                undefined,
+                {
+                    shallow: true,
+                }
+            );
+        }
     }, []);
 
     // TyC Modal Functions
