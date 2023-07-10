@@ -70,7 +70,8 @@ export interface IAuthStore extends IAuth {
     setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
+
 export const useAuthStore = create<IAuthStore>((set) => ({
     isAuthenticated: false,
-    setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
+    setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated })
 }));

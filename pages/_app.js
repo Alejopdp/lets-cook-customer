@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../theme";
 import useLocalStorage, { LOCAL_STORAGE_KEYS } from "../hooks/useLocalStorage/localStorage";
 import { useAuthStore, useUserInfoStore } from "../stores/auth";
+import { AuthProvider } from "../contexts/auth.context";
 import { useCookiesStore } from "../stores/cookies";
 import { getCustomerById, verifyToken } from "../helpers/serverRequests/customer";
 import { loadStripe } from "@stripe/stripe-js";
@@ -15,6 +16,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
 import * as ga from "../helpers/ga";
 import CookiesDialog from "../components/molecules/cookiesPolicies/cookiesDialog";
+
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
@@ -153,7 +155,9 @@ function MyApp(props) {
                 <SnackbarProvider maxSnack={3}>
                     <Elements stripe={stripePromise}>
                         <CssBaseline />
+                        <AuthProvider>
                         <Component {...pageProps} />
+                        </AuthProvider>
                         {/* {!isLoading && <Component {...pageProps} />} */}
                     </Elements>
                 </SnackbarProvider>

@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { memo, useEffect, useState } from "react";
 import { getPlans, Plan, Recipe, PlanVariant, getPlanVariant } from "@helpers";
-import { BuyFlowInitialStore, IPaymentMethod, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
+import { BuyFlowInitialStore, IPaymentMethod, Recipes, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 import { useRouter } from "next/router";
 
 // External components
@@ -11,8 +11,9 @@ import { BuyFlowLayout } from "@layouts";
 import LoggedInNavbar from "../../components/layout/default/loggedInNavbarContent";
 import { SelectPlanStep, RegisterUserStep, CheckoutStep, RecipeChoiseStep } from "@organisms";
 import CrossSellingStep from "components/organisms/buyForm/crossSellingStep";
-import { Box } from "@material-ui/core";
-import { localeRoutes, Routes } from "lang/routes/routes";
+import { Box, CircularProgress } from "@material-ui/core";
+import { useAuth } from "contexts/auth.context";
+import { Routes, localeRoutes } from "lang/routes/routes";
 
 export interface PlansErrors {
     plans?: string;
@@ -41,8 +42,9 @@ export interface PlanesPageProps {
 
 const PlanesPage = memo((props: PlanesPageProps) => {
     const router = useRouter();
-    const step = useBuyFlow(({ step }) => step);
+    const {step, moveNSteps,selectPlanRecipes,setPlanCode, setPlanVariant} = useBuyFlow(({ step, moveNSteps,selectPlanRecipes,setPlanCode, setPlanVariant   }) => {return {step, moveNSteps,selectPlanRecipes,setPlanCode, setPlanVariant}});
     const userInfo = useUserInfoStore((state) => state.userInfo);
+    const {isCheckingRedirect, handleLoginRedirect, setIsCheckingRedirect} = useAuth()
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const { setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon, resetBuyFlowState } = useBuyFlow(
         ({ setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon, resetBuyFlowState }) => ({
@@ -67,6 +69,44 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         redirect: {},
     });
 
+    const getPlanData = (): { peopleLabels: string; planName: string; planDescription: string; canChooseRecipes: boolean; planRecipes: Recipes[] } => {
+        const planSelect = data.plans.find((plan) => plan.slug === data.planUrlParams.slug);
+
+        const peopleLabels = planSelect.variants?.reduce((_planSize, _variant) => {
+            const valueIsIncluded = (_planSize[_variant.numberOfPersons] || []).includes(_variant.numberOfRecipes);
+
+            if (valueIsIncluded || !_variant?.numberOfPersons) {
+                return _planSize;
+            }
+
+            _planSize[_variant.numberOfPersons] = [...(_planSize[_variant.numberOfPersons] || []), _variant.numberOfRecipes];
+            return _planSize;
+        }, {});
+
+        return {
+            peopleLabels,
+            planName: planSelect.name,
+            planDescription: planSelect.description,
+            canChooseRecipes: planSelect.abilityToChooseRecipes,
+            planRecipes: planSelect.recipes,
+        };
+    };
+
+    const initializePlanWithParams = () => {
+        const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes } = getPlanData();
+        selectPlanRecipes(planRecipes);
+        setPlanCode(
+            data.planUrlParams.id,
+            data.planUrlParams.planSlug,
+            planName,
+            planDescription,
+            canChooseRecipes,
+            data.planUrlParams.planImageUrl,
+            data.planUrlParams.iconLinealWithColorUrl
+        );
+        setPlanVariant(data.variant);
+    }
+
     useEffect(() => {
         const initialize = async () => {
             const [_plans] = await Promise.all([getPlans(router.locale)]);
@@ -75,26 +115,25 @@ const PlanesPage = memo((props: PlanesPageProps) => {
 
             const errors = [_plans.error].filter((e) => !!e);
 
-            if (errors.length) {
-                console.warn("***-> Errors: ", errors);
-            }
-
-            _plans.data?.plans.forEach((plan, index) => {
+            _plans.data?.plans.forEach((plan) => {
                 if (plan.type === "Main" || plan.type === "Principal") {
                     mainPlans.push(plan);
                 } else {
                     aditionalsPlans.push(plan);
                 }
             });
-            const _slug = router.query.planSlug || mainPlans.find((plan) => plan.isDefaultAtCheckout)?.slug || "";
-
+            const searchParams = new URL(window.location.href).searchParams
+            const slug = searchParams.get('planSlug') || mainPlans.find((plan) => plan.isDefaultAtCheckout)?.slug || "";
             const planVariantData = getPlanVariant(
-                { slug: _slug, recipeQty: router.query.recetas || 0, peopleQty: router.query.personas || 0 },
+                { slug, recipeQty: searchParams.get("recetas") || 0, peopleQty: searchParams.get("personas") || 0 },
                 mainPlans
             );
-
-            if (planVariantData.redirect && !!planVariantData.redirect.destination)
-                router.replace(`${localeRoutes[router.locale][Routes["planes"]]}/${planVariantData.redirect.destination}`);
+            
+            if (!window.location.href.includes("planSlug") && planVariantData.redirect && !!planVariantData.redirect.destination) {
+                const searchParams = new URLSearchParams(planVariantData.redirect.destination)
+                const query = Object.fromEntries(searchParams.entries());
+                router.replace({pathname: localeRoutes[router.locale][Routes.planes], query});
+            }
 
             setWeekLabel(_plans.data.weekLabel);
             const planUrlParams: PlanUrlParams = {
@@ -105,7 +144,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 planImageUrl: planVariantData.planImageUrl,
                 iconLinealWithColorUrl: planVariantData.iconLinealWithColorUrl,
             };
-
             setData({
                 aditionalsPlans,
                 errors: [...errors, planVariantData.errors],
@@ -137,6 +175,23 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     }, []);
 
     useEffect(() => {
+        console.log("SAFARI - Is authenticated?: ", isAuthenticated)
+        console.log("SAFARI - data plans: ", data.plans)
+        if (!isAuthenticated && data.plans.length > 0) {
+            handleLoginRedirect(window.location.href, () => {
+                initializePlanWithParams()
+                moveNSteps(2)
+            })
+        }
+
+        if (isAuthenticated) {
+            setShowRegister(false);
+            setIsCheckingRedirect(false)
+        }
+
+    }, [data.plans, isAuthenticated])
+
+    useEffect(() => {
         setDeliveryInfo({
             addressDetails: userInfo.shippingAddress?.addressDetails || userInfo.shippingAddress?.addressDetails,
             addressName: userInfo.shippingAddress?.addressName || userInfo.shippingAddress?.addressName,
@@ -158,11 +213,11 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         userInfo.shippingAddress?.longitude,
     ]);
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            setShowRegister(false);
-        }
-    }, [isAuthenticated]);
+    // useEffect(() => {
+    //     if (isAuthenticated) {
+    //         setShowRegister(false);
+    //     }
+    // }, [isAuthenticated]);
 
     const steps = [
         <SelectPlanStep initialPlanSettings={data.planUrlParams} plans={data.plans} variant={data.variant} recipes={data.recipes} />,
@@ -178,7 +233,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             <CrossSellingStep />
         </Box>
     ) : (
-        <BuyFlowLayout isInitializing={isInitializing}>{steps[step]}</BuyFlowLayout>
+        <BuyFlowLayout isInitializing={isInitializing}>{isCheckingRedirect ? <Box position={"fixed"} top={"50%"} left={"50%"}><CircularProgress /></Box> : steps[step]}</BuyFlowLayout>
     );
 });
 
