@@ -76,7 +76,7 @@ export const ReviewsSection = ({ reviews = [] }: ReviewsSectionProps) => {
                             </Typography>
                             <Rating className={classes.item} name="read-only" value={5} readOnly />
                             <Typography className={classes.item} variant="caption">
-                                150 {lang.reviewsSection.reviews}
+                                428 {lang.reviewsSection.reviews}
                             </Typography>
                         </div>
                     </Grid>
