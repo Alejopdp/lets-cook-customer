@@ -175,8 +175,9 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     }, []);
 
     useEffect(() => {
-        console.log("SAFARI - Is authenticated?: ", isAuthenticated)
-        console.log("SAFARI - data plans: ", data.plans)
+        console.error("SAFARI - Is authenticated?: ", isAuthenticated)
+        console.error("SAFARI - data plans: ", data.plans)
+        console.error()
         if (!isAuthenticated && data.plans.length > 0) {
             handleLoginRedirect(window.location.href, () => {
                 initializePlanWithParams()

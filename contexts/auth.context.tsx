@@ -87,7 +87,7 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
       
       try {
         const result = await getRedirectResult(getAuth(firebaseApp))
-        console.log("Firebase sign in result: ", result)
+        console.error("Firebase sign in result: ", result)
         if (result?.user) {
           const { user } = result;
           const accessToken = await user.getIdToken()
