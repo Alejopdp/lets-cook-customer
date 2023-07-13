@@ -58,7 +58,6 @@ function MyApp(props) {
     const router = useRouter();
 
     useEffect(() => {
-        ola
         const verifyAuthentication = async () => {
             const token = await getFromLocalStorage(LOCAL_STORAGE_KEYS.token);
             const hasAcceptedCookies = await getFromLocalStorage(LOCAL_STORAGE_KEYS.HAS_ACCEPTED_COOKIES);
