@@ -3,6 +3,7 @@ import React, { memo, useEffect, useState } from "react";
 import { getPlans, Plan, Recipe, PlanVariant, getPlanVariant } from "@helpers";
 import { BuyFlowInitialStore, IPaymentMethod, Recipes, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 import { useRouter } from "next/router";
+import * as Sentry from "@sentry/browser";
 
 // External components
 
@@ -178,6 +179,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         console.log("SAFARI - Is authenticated?: ", isAuthenticated)
         console.log("SAFARI - data plans: ", data.plans)
         if (!isAuthenticated && data.plans.length > 0) {
+            Sentry.captureMessage("User it's not authenticated and plans have been loaded")                
             handleLoginRedirect(window.location.href, () => {
                 initializePlanWithParams()
                 moveNSteps(2)
