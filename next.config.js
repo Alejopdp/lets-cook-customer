@@ -2,7 +2,6 @@ const { i18n } = require("./next-i18next.config");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
     enabled: process.env.ANALYZE === "true",
 });
-const {withSentryConfig} = require("@sentry/nextjs");
 
 const ContentSecurityPolicy = `default-src 'self'; script-src 'report-sample' 'self' 'unsafe-eval' 'unsafe-inline' https://identitytoolkit.googleapis.com https://apis.google.com https://ws.hotjar.com/api/v2 http://js-na1.hs-scripts.com https://connect.facebook.net https://googleads.g.doubleclick.net https://js-na1.hs-scripts.com https://js.hs-analytics.net https://js.hs-banner.com https://js.stripe.com https://js.usemessages.com https://maps.googleapis.com https://script.hotjar.com https://static-tracking.klaviyo.com https://static.hotjar.com https://static.klaviyo.com http://static.klaviyo.com https://static.mailerlite.com https://vercel.live https://www.google-analytics.com https://www.googletagmanager.com https://cdnjs.cloudflare.com https://assets.calendly.com https://js.hsforms.net https://js.hsleadflows.net; style-src 'unsafe-inline' 'self' https://static.mailerlite.com https://assets.calendly.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://securetoken.googleapis.com/ https://identitytoolkit.googleapis.com https://identitytoolkit.googleapis.com http://localhost:3001 https://api.hubspot.com https://api.letscooknow.es https://api.staging.letscooknow.es https://content.hotjar.io https://in.hotjar.com https://maps.googleapis.com https://region1.analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.google-analytics.com wss://wsp24.hotjar.com https://forms.hsforms.com https://api.hscollectedforms.com; font-src 'self' https://script.hotjar.com; frame-src 'self' https://auth.letscooknow.es http://auth.letscooknow.es https://letscook-001.firebaseapp.com/ https://app.hubspot.com https://js.stripe.com https://www.facebook.com https://static.mailerlite.com https://assets.calendly.com; img-src 'self' data: https://lets-cook-assets.s3.eu-west-3.amazonaws.com https://lets-cook-blog-assets.s3.eu-west-3.amazonaws.com https://lh3.googleusercontent.com https://track.hubspot.com https://www.facebook.com https://www.google-analytics.com https://www.google.com https://www.google.es https://www.googletagmanager.com; manifest-src 'self'; media-src 'self'; report-uri https://643c2f5df1e3671a2913697f.endpoint.csper.io/?v=1; worker-src 'none';`;
 
@@ -33,20 +32,7 @@ const securityHeaders = [
     // },
 ];
 
-const sentryWebpackPluginOptions = {
-org: "lets-cook-now",
-project: "lets-cook-now",
-authToken: process.env.SENTRY_AUTH_TOKEN,
-silent: true
-}
 const nextConfig = {
-    sentry: {
-        hideSourceMaps: true,
-        widenClientFileUpload: true,
-        transpileClientSDK: true,
-        tunnelRoute: "/monitoring",
-        disableLogger: true
-    },
     i18n,
     images: {
         domains: [
@@ -290,4 +276,34 @@ const nextConfig = {
 }
 
 // next.config.js
-module.exports = withSentryConfig(withBundleAnalyzer(nextConfig), sentryWebpackPluginOptions)
+module.exports = withBundleAnalyzer(nextConfig)
+
+
+// Injected content via Sentry wizard below
+
+const { withSentryConfig } = require("@sentry/nextjs");
+
+module.exports = withSentryConfig(
+  module.exports,
+  {
+    silent: true,
+    org: "lets-cook-now",
+    project: "customer-frontend",
+  },
+  {
+    // Upload a larger set of source maps for prettier stack traces (increases build time)
+    widenClientFileUpload: true,
+
+    // Transpiles SDK to be compatible with IE11 (increases bundle size)
+    transpileClientSDK: true,
+
+    // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
+    tunnelRoute: "/monitoring",
+
+    // Hides source maps from generated client bundles
+    hideSourceMaps: true,
+
+    // Automatically tree-shake Sentry logger statements to reduce bundle size
+    disableLogger: true,
+  }
+);
