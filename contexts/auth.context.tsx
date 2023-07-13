@@ -6,8 +6,7 @@ import { loginWithSocialMedia } from 'helpers/serverRequests/customer';
 import { LOCAL_STORAGE_KEYS, useLocalStorage } from '@hooks';
 import cookies from "js-cookie";
 import { useAuthStore, useUserInfoStore } from '@stores';
-
-
+import * as Sentry from "@sentry/browser";
 
 // Configuración de Firebase  
 const firebaseConfig: FirebaseOptions = {
@@ -87,7 +86,8 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
       
       try {
         const result = await getRedirectResult(getAuth(firebaseApp))
-        console.error("Firebase sign in result: ", result)
+        console.log("Firebase sign in result: ", result)
+        Sentry.captureMessage("Firebase sign in result: ")                
         if (result?.user) {
           const { user } = result;
           const accessToken = await user.getIdToken()
@@ -107,6 +107,7 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
       } catch (error) {
         console.log("Sign in error: ", error)
         setIsCheckingRedirect(false)
+        Sentry.captureException(error)
       }
 }
 
