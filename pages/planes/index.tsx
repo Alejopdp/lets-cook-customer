@@ -133,7 +133,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             if (!window.location.href.includes("planSlug") && planVariantData.redirect && !!planVariantData.redirect.destination) {
                 const searchParams = new URLSearchParams(planVariantData.redirect.destination)
                 const query = Object.fromEntries(searchParams.entries());
-                router.replace({pathname: localeRoutes[router.locale][Routes.planes], query});
+                // router.replace({pathname: localeRoutes[router.locale][Routes.planes], query});
             }
 
             setWeekLabel(_plans.data.weekLabel);
