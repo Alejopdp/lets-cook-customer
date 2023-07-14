@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../theme";
 import useLocalStorage, { LOCAL_STORAGE_KEYS } from "../hooks/useLocalStorage/localStorage";
 import { useAuthStore, useUserInfoStore } from "../stores/auth";
+import { AuthProvider } from "../contexts/auth.context";
 import { useCookiesStore } from "../stores/cookies";
 import { getCustomerById, verifyToken } from "../helpers/serverRequests/customer";
 import { loadStripe } from "@stripe/stripe-js";
@@ -15,6 +16,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
 import * as ga from "../helpers/ga";
 import CookiesDialog from "../components/molecules/cookiesPolicies/cookiesDialog";
+
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
@@ -122,14 +124,12 @@ function MyApp(props) {
     return (
         <React.Fragment>
             <Head>
-                {/* <title>Let's cook: Productos frescos y recetas</title> */}
                 <meta
                     name="description"
                     content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."
                 />
                 <meta property="og:site_name" content="Let's cook: Productos frescos y recetas" />
                 <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
-                {/* <meta property="og:title" content="Let's cook: Productos frescos y recetas" /> */}
                 <meta
                     property="og:description"
                     content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."
@@ -153,7 +153,9 @@ function MyApp(props) {
                 <SnackbarProvider maxSnack={3}>
                     <Elements stripe={stripePromise}>
                         <CssBaseline />
+                        <AuthProvider>
                         <Component {...pageProps} />
+                        </AuthProvider>
                         {/* {!isLoading && <Component {...pageProps} />} */}
                     </Elements>
                 </SnackbarProvider>
