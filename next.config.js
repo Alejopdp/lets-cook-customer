@@ -62,7 +62,7 @@ const nextConfig = {
     },
     async rewrites() {
         return [
-            {source: "/__/auth/:path*", destination: "https://auth.letscooknow.es/__/auth/:path*"},
+            {source: "/__/auth/:path*", destination: "https://letscook-001.firebaseapp.com/__/auth/:path*"},
             { source: "/en/profile", destination: "/en/perfil", locale: false },
             { source: "/ca/perfil", destination: "/ca/perfil", locale: false },
 

@@ -11,7 +11,7 @@ import * as Sentry from "@sentry/browser";
 // Configuración de Firebase  
 const firebaseConfig: FirebaseOptions = {
         apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
-        authDomain: "auth.letscooknow.es",
+        authDomain: process.env.NEXT_PUBLIC_FRONTEND_DOMAIN,
         projectId: "letscook-001",
         storageBucket: "letscook-001.appspot.com",
         messagingSenderId: "859787193343",
