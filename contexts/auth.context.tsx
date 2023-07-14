@@ -11,7 +11,8 @@ import * as Sentry from "@sentry/browser";
 // Configuración de Firebase  
 const firebaseConfig: FirebaseOptions = {
         apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
-        authDomain: "auth.letscooknow.es",
+        authDomain: "staging.letscooknow.es",
+        // authDomain: "letscook-001.firebaseapp.com",
         projectId: "letscook-001",
         storageBucket: "letscook-001.appspot.com",
         messagingSenderId: "859787193343",
@@ -22,10 +23,6 @@ const firebaseConfig: FirebaseOptions = {
 
 var firebaseApp: FirebaseApp
 firebaseApp = initializeApp(firebaseConfig, "DEFAULT")
-
-const provider = new GoogleAuthProvider();
-provider.addScope('profile');
-provider.addScope('email');
 
 interface AuthContextProps {
   isVerifyingAuth: boolean;
@@ -59,6 +56,11 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
   const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
 
   const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    provider.addScope("https://www.googleapis.com/auth/plus.login")
+
    signInWithRedirect(getAuth(firebaseApp), provider);
    
   };
