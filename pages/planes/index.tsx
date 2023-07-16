@@ -176,11 +176,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     }, []);
 
     useEffect(() => {
-        console.error("SAFARI - Is authenticated?: ", isAuthenticated)
-        console.error("SAFARI - data plans: ", data.plans)
-        console.error()
         if (!isAuthenticated && data.plans.length > 0) {
-            Sentry.captureMessage("User it's not authenticated and plans have been loaded")                
             handleLoginRedirect(window.location.href, () => {
                 initializePlanWithParams()
                 moveNSteps(2)
