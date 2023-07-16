@@ -52,7 +52,7 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
   const [isVerifyingAuth, setVerifyingAuth] = useState(true);
   const [isCheckingRedirect, setIsCheckingRedirect] = useState(true)
   const [user, setUser] = useState<User | null>(null);
-  const {query, push, locale} = useRouter()
+  const {push} = useRouter()
   const [serverError, setserverError] = useState("");
   const { saveInLocalStorage } = useLocalStorage();
   const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
@@ -86,8 +86,6 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
       
       try {
         const result = await getRedirectResult(getAuth(firebaseApp))
-        console.log("Firebase sign in result: ", result)
-        Sentry.captureMessage("Firebase sign in result: ")                
         if (result?.user) {
           const { user } = result;
           const accessToken = await user.getIdToken()
@@ -105,7 +103,6 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
     }
         
       } catch (error) {
-        console.log("Sign in error: ", error)
         setIsCheckingRedirect(false)
         Sentry.captureException(error)
       }
