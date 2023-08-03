@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { IconButton, useTheme } from "@material-ui/core";
+import { IconButton, useTheme, Icon } from "@material-ui/core";
 import { perfil } from "../../lang/index";
 import { swapPlan } from "../../helpers/serverRequests/subscription";
 import { skipOrders } from "../../helpers/serverRequests/order";
@@ -37,7 +37,7 @@ import PendingActionSkeleton from "components/molecules/pendingActionsComponents
 import PlanProfileCardSkeleton from "components/molecules/planProfileCard/planProfileCardSkeleton";
 import { locale } from "types/locale";
 import Link from "next/link";
-import { Restore } from "@material-ui/icons";
+import { Restore, Settings, Star } from "@material-ui/icons";
 
 const Perfil = (props) => {
     const theme = useTheme();
@@ -237,12 +237,12 @@ const Perfil = (props) => {
                                     justify="space-between"
                                     style={{ marginBottom: theme.spacing(5) }}
                                 >
-                                    <Grid item xs={9}>
+                                    <Grid item xs={6}>
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
                                             {lang.greeting} {userInfo.firstName || ""}
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={3} style={{ textAlign: "right" }}>
+                                    <Grid item xs={6} style={{ textAlign: "right" }}>
                                         <TextButton
                                             style={{ marginRight: theme.spacing(2) }}
                                             noColor
@@ -251,10 +251,16 @@ const Perfil = (props) => {
                                             handleClick={() => router.push(localeRoutes[router.locale][Routes["historial-pagos"]])}
                                         />
                                         <TextButton
+                                            style={{ marginRight: theme.spacing(2) }}
                                             icon="settings"
                                             btnText={lang.settingsBtnText}
                                             handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}
                                         />
+                                        <TextButton
+                                            icon="star"
+                                            btnText={lang.rateRecipesBtnText}
+                                            handleClick={() => router.push(`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`)}
+                                        />                                        
                                     </Grid>
                                 </Grid>
                                 <Carousel
@@ -296,21 +302,26 @@ const Perfil = (props) => {
                                             {lang.greeting} {userInfo.firstName || ""}
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                                        <Link href={localeRoutes[router.locale][Routes["historial-pagos"]]}><a><IconButton size="small" style={props.style} onClick={props.handleClick}><Restore/></IconButton><Typography display="inline" variant="button" >{lang.paymentHistoryBtnText}</Typography></a></Link>
+                                    <Grid item xs={12}>
+                                        <Link href={localeRoutes[router.locale][Routes["historial-pagos"]]}><a style={{ display: 'flex', alignItems: 'center' }}><Icon style={{marginRight: 8}} onClick={props.handleClick}><Restore/></Icon><Typography variant="button">{lang.paymentHistoryBtnText}</Typography></a></Link>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(5) }}>
-                                        <TextButton
-                                            icon="settings"
-                                            btnText={lang.settingsBtnText}
-                                            handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}
-                                        />
+                                    <Grid item xs={12}>
+                                        <Link href={localeRoutes[router.locale][Routes["configuracion"]]}>
+                                            <a style={{ display: 'flex', alignItems: 'center' }}>
+                                                <Icon style={{ marginRight: 8 }} onClick={props.handleClick}><Settings /></Icon>
+                                                <Typography display="inline" variant="button" >{lang.settingsBtnText}</Typography>
+                                            </a>
+                                        </Link>
+</Grid>
+                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(4) }}>
+                                        <Link href={`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`}><a style={{ display: 'flex', alignItems: 'center' }}><Icon style={{marginRight: 8}} onClick={props.handleClick}><Star/></Icon><Typography display="inline" variant="button" >{lang.rateRecipesBtnText}</Typography></a></Link>
                                     </Grid>
+
                                     {isLoading ? (
                                         <>
-                                            <PendingActionSkeleton height={180} />
-                                            <PendingActionSkeleton height={180} />
-                                            <PendingActionSkeleton height={180} />
+                                            <PendingActionSkeleton height={280} />
+                                            <PendingActionSkeleton height={280} />
+                                            <PendingActionSkeleton height={280} />
                                         </>
                                     ) : (
                                         data.pendingActions.map((action, index) => (

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { makeStyles, useTheme, useMediaQuery, Button, IconButton } from "@material-ui/core";
 
 // External components
-import { AddCircleOutline as AddCircleOutlineIcon, Settings as SettingsIcon, Restore as RestoreIcon } from "@material-ui/icons";
+import { AddCircleOutline as AddCircleOutlineIcon, Settings as SettingsIcon, Restore as RestoreIcon, Star as StarIcon } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     textButton: {
@@ -35,7 +35,7 @@ const TextButton = (props) => {
                 <SettingsIcon style={!isSmDown ? { marginRight: "6px" } : null} />
             ) : props.icon === "time" ? (
                 <RestoreIcon style={!isSmDown ? { marginRight: "6px" } : null} />
-            ) : null}
+            ) : props.icon === "star" ? (<StarIcon style={!isSmDown ? { marginRight: "6px" } : null} />) : null}
         </IconButton>
     ) : (
         <Button
@@ -53,7 +53,7 @@ const TextButton = (props) => {
                 <SettingsIcon style={!isSmDown ? { marginRight: "6px" } : null} />
             ) : props.icon === "time" ? (
                 <RestoreIcon style={!isSmDown ? { marginRight: "6px" } : null} />
-            ) : null}
+            ) : props.icon === "star" ? (<StarIcon style={!isSmDown ? { marginRight: "6px" } : null} />) : null}
             {props.btnText}
         </Button>
     );
