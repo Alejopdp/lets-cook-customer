@@ -108,9 +108,9 @@ const Recipes = ({ ratings, lang, reload }) => {
                             </Grid>
                         );
                     })}
-                <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
+                {ratings && ratings.filter((rating) => rating.isRated).length > 0 && <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
                     <Typography variant="h5">{lang.recipesRatedSubtitle}</Typography>
-                </Grid>
+                </Grid>}
                 {ratings
                     .filter((rating) => rating.isRated)
                     .map((recipeWithRating) => {
