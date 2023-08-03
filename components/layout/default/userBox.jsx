@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
-import { Button, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core";
+import {  useRef, useState } from "react";
+import { Button,  ListItemText, Menu, MenuItem } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useAuthStore, useUserInfoStore } from "@stores";
 import { useRouter } from "next/router";
@@ -9,7 +9,7 @@ import cookies from "js-cookie";
 import { useLang, useLocalStorage } from "@hooks";
 import { localeRoutes, Routes } from "lang/routes/routes";
 
-const UserBox = (props) => {
+const UserBox = () => {
     const router = useRouter();
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const [open, setOpen] = useState(false);
@@ -54,6 +54,12 @@ const UserBox = (props) => {
                 path: localeRoutes[router.locale][Routes["historial-pagos"]],
                 handler: () => _handleOptionSelected(localeRoutes[router.locale][Routes["historial-pagos"]]),
             },
+            {
+                title: lang.titleRateRecipes,
+                path: `${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`,
+                handler: () => _handleOptionSelected(`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`),
+            },
+
             { title: lang.titleCloseSession, path: "/", handler: handleSignOut },
         ],
         en: [
@@ -67,6 +73,11 @@ const UserBox = (props) => {
                 title: lang.titleHistoryPayments,
                 path: localeRoutes[router.locale][Routes["historial-pagos"]],
                 handler: () => _handleOptionSelected(localeRoutes[router.locale][Routes["historial-pagos"]]),
+            },
+            {
+                title: lang.titleRateRecipes,
+                path: `${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`,
+                handler: () => _handleOptionSelected(`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`),
             },
             { title: lang.titleCloseSession, path: "/", handler: handleSignOut },
         ],
