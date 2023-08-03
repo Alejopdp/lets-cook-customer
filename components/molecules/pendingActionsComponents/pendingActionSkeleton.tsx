@@ -9,7 +9,7 @@ interface PendingActionSkeletonProps {
 
 export default function PendingActionSkeleton(props: PendingActionSkeletonProps) {
     return (
-        <Box marginBottom={2} marginRight={2}>
+        <Box marginBottom={2} marginRight={2} width={"100%"}>
             <GeneralBox variant="small">
                 <Box display="flex" width="100%">
                     <Skeleton variant="circle" width={72} height={72} style={{ marginRight: 16 }} />
