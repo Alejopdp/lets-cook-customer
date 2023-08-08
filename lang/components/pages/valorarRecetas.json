@@ -1,5 +1,9 @@
 {
     "es": {
+        "emptyState": {
+            "title": "Aún no tienes recetas valoradas ni por valorar",
+            "text": "Espera a recibir por lo menos una para que nos cuente lo buena que está!"
+        },
         "title": "Valorar recetas",
         "recipesRatingPendingSubtitle": "Recetas pendientes de valorar",
         "recipesRatedSubtitle": "Recetas valoradas",
@@ -29,6 +33,11 @@
         }
     },
     "en": {
+        "emptyState": {
+            "title": "You don't have rated or to rate recipes yet",
+            "text": "Wait to receive at least one to tell us how good it is!"
+        },
+
         "title": "Rate recipes",
         "recipesRatingPendingSubtitle": "Recipes pending evaluation",
         "recipesRatedSubtitle": "Rated recipes",
@@ -58,6 +67,11 @@
         }
     },
     "ca": {
+        "emptyState": {
+            "title": "Encara no tens receptes valorades ni per valorar",
+            "text": "Espera a rebre per lo menys una perquè ens digui lo bona que està!"
+        },
+
         "title": "Valorar receptes",
         "recipesRatingPendingSubtitle": "Receptes pendents de valorar",
         "recipesRatedSubtitle": "Receptes valorades",
