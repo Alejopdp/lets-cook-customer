@@ -56,7 +56,7 @@ export default function FoodCard({
                         </Typography>
                         {selectedRecipe.qtyDelivered > 0 && (
                             <Typography variant="body2" color="textSecondary" component="p">
-                                {selectedRecipe.qtyDelivered} {lang.deliveredText} ({lang.lastShippmentText}{" "}
+                                {`${selectedRecipe.qtyDelivered} ${selectedRecipe.qtyDelivered ? lang.oneTimeDeliveredText : lang.deliveredText} `}  ({lang.lastShippmentText}{" "}
                                 {selectedRecipe.lastShippingDate})
                             </Typography>
                         )}
