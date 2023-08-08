@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-
 import { Grid, Typography } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-
 import RecipesModal from "../../molecules/valueRecipesModal/recipesModal";
 import FoodCard from "../../molecules/foodCard";
 import { deleteRecipeRating, updateRecipeRating } from "../../../helpers/serverRequests/user-recipes";
 import { useSnackbar } from "notistack";
 import { RecipeRating } from "types/recipeRating";
+import EmptyState from "components/molecules/emptyState/emptyState";
 
 const baseRating = {
     comment: "",
@@ -79,9 +78,12 @@ const Recipes = ({ ratings, lang, reload }) => {
     return (
         <>
             <Grid container spacing={2}>
-                <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                {ratings && ratings.length === 0 && <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                    <EmptyState text={lang.emptyState.text} title={lang.emptyState.title}/>
+                </Grid>}
+                {ratings.filter(rating => !rating.isRated).length > 0 && <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                     <Typography variant="h5">{lang.recipesRatingPendingSubtitle}</Typography>
-                </Grid>
+                </Grid>}
                 {ratings
                     .filter((rating) => !rating.isRated)
                     .map((recipeToRate) => {
