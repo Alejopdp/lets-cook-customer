@@ -9,12 +9,16 @@ import { getRecipesByCustomer } from "../../helpers/serverRequests/user-recipes"
 import { useLang } from "@hooks";
 import { useSnackbar } from "notistack";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import SearchInput from "components/atoms/searchInput";
+import { Box, Grid, useTheme } from "@material-ui/core";
 
 const RateRecipesPage = () => {
     const router = useRouter();
+    const theme = useTheme();
     const [lang] = useLang("valorarRecetas");
     const [ratings, setRatings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [searchText, setSearchText] = useState("");
     const [reloadCounter, setReloadCounter] = useState(0);
     const { enqueueSnackbar } = useSnackbar();
 
@@ -38,7 +42,13 @@ const RateRecipesPage = () => {
         <Layout disableCallToActionSection>
             <InnerSectionLayout containerMaxWidth="lg">
                 <BackButtonTitle url={localeRoutes[router.locale][Routes.perfil]} title={lang.title} />
-                {!isLoading && <Recipes ratings={ratings || []} lang={lang} reload={() => setReloadCounter(reloadCounter + 1)} />}
+                <Grid container style={{ marginBottom: theme.spacing(3) }}>
+                    <Grid item xs={12} md={4}>
+                        <SearchInput searchValue={searchText} setsearchValue={setSearchText } placeholder={lang.searchBarPlaceholder}/>    
+                    </Grid>
+
+                </Grid>
+                {!isLoading && <Recipes searchText={searchText} ratings={ratings || []} lang={lang} reload={() => setReloadCounter(reloadCounter + 1)} />}
             </InnerSectionLayout>
         </Layout>
     );
