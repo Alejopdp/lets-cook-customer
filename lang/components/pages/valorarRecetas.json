@@ -1,6 +1,7 @@
 {
     "es": {
         "searchBarPlaceholder": "Buscar recetas",
+        "emptySearchState": "No se encontraron recetas que coincidan con",
         "emptyState": {
             "title": "Aún no tienes recetas valoradas ni por valorar",
             "text": "Espera a recibir por lo menos una para que nos cuente lo buena que está!"
@@ -8,8 +9,6 @@
         "title": "Valorar recetas",
         "recipesRatingPendingSubtitle": "Recetas pendientes de valorar",
         "recipesRatedSubtitle": "Recetas valoradas",
-        "recipesRatingPendingEmptyState": "No tienes recetas pendientes de valorar que coincidan con",
-        "recipesRatedEmptyState": "No tienes recetas valoradas que coincidan con",
         "foodCard": {
             "dontRateBtnLabel": "NO VALORAR ESTA RECETA",
             "oneTimeDeliveredText": "vez entregada",
@@ -37,6 +36,7 @@
     },
     "en": {
         "searchBarPlaceholder": "Search recipes",
+        "emptySearchState": "No recipes matching with",
         "emptyState": {
             "title": "You don't have rated or to rate recipes yet",
             "text": "Wait to receive at least one to tell us how good it is!"
@@ -45,9 +45,6 @@
         "title": "Rate recipes",
         "recipesRatingPendingSubtitle": "Recipes pending evaluation",
         "recipesRatedSubtitle": "Rated recipes",
-        "recipesRatingPendingEmptyState": "You don't have recipes pending to rate that match with",
-        "recipesRatedEmptyState": "You don't have rated recipes that match with",
-
         "foodCard": {
             "dontRateBtnLabel": "DO NOT RATE THIS RECIPE",
             "oneTimeDeliveredText": "time delivered",
@@ -75,13 +72,11 @@
     },
     "ca": {
         "searchBarPlaceholder": "Cerca receptes",
+        "emptySearchState": "No s'han trobat receptes que coincideixin amb",
         "emptyState": {
             "title": "Encara no tens receptes valorades ni per valorar",
             "text": "Espera a rebre per lo menys una perquè ens digui lo bona que està!"
         },
-        "recipesRatingPendingEmptyState": "No tens receptes pendents de valorar que coincideixin amb",
-        "recipesRatedEmptyState": "No tens receptes valorades que coincideixin amb",
-
         "title": "Valorar receptes",
         "recipesRatingPendingSubtitle": "Receptes pendents de valorar",
         "recipesRatedSubtitle": "Receptes valorades",
