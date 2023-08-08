@@ -39,11 +39,12 @@ const Recipes = ({ ratings, lang, reload }) => {
         if (res && res.status === 200) {
             enqueueSnackbar(lang.recipes.snackbars.success.ratedRecipe, { variant: "success" });
             setOpenRecipeModal(false);
+            setChosenRecipe({...baseRating});
+            reload();
         } else {
             enqueueSnackbar(res && res.data ? res.data.message : lang.recipes.snackbars.error.unexpectedError, { variant: "error" });
         }
 
-        reload();
     };
 
     const handleClickOpenRecipeModal = (selectedRating: RecipeRating, starValue: number) => {
