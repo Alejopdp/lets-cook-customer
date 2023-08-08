@@ -76,18 +76,20 @@ const Recipes = ({ ratings, lang, reload, searchText }) => {
         setRecipesWithRating([]);
     }, []);
 
-    return ratings && ratings.length === 0 ? <Grid container spacing={2}>
+    return ratings && !searchText && ratings.length === 0 ? <Grid container spacing={2}>
 <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                     <EmptyState text={lang.emptyState.text} title={lang.emptyState.title}/>
                 </Grid>
     </Grid> : (
         <>
             <Grid container spacing={2}>
-                {ratings.filter(rating =>  !rating.isRated).length > 0 && <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                    <Typography variant="h5">{lang.recipesRatingPendingSubtitle}</Typography>
+            {searchText && ratings && ratings.filter(rating => rating.recipeName.toLowerCase().includes(searchText.toLowerCase())).length === 0 &&
+            <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                    <EmptyState title={`${lang.emptySearchState} "${searchText}"`} text=""/>
                 </Grid>}
-                {ratings.filter(rating =>  !rating.isRated).length > 0 && ratings.filter((rating) =>  searchText ? !rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : !rating.isRated).length === 0 && <EmptyState title={`${lang.recipesRatingPendingEmptyState} "${searchText}"`} text="" />}
-                
+                {ratings.filter(rating =>  searchText ? !rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : !rating.isRated).length > 0 && <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                    <Typography variant="h5">{lang.recipesRatingPendingSubtitle}</Typography>
+                </Grid>}                 
                 {ratings
                     .filter((rating) =>  searchText ? !rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : !rating.isRated)
                     .map((recipeToRate) => {
@@ -113,11 +115,9 @@ const Recipes = ({ ratings, lang, reload, searchText }) => {
                             </Grid>
                         );
                     })}
-                {ratings && ratings.filter((rating) =>  rating.isRated).length > 0 && <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
+                {ratings && ratings.filter((rating) =>  searchText ? rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : rating.isRated).length > 0 && <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
                     <Typography variant="h5">{lang.recipesRatedSubtitle}</Typography>
                 </Grid>}
-                {ratings && ratings.filter((rating) =>  rating.isRated).length > 0 && ratings.filter((rating) =>  searchText ? rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : rating.isRated).length === 0 && <EmptyState title={`${lang.recipesRatedEmptyState} "${searchText}"`} text="" />}
-
                 {ratings
                     .filter((rating) => searchText ? rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : rating.isRated)
                     .map((recipeWithRating) => {
