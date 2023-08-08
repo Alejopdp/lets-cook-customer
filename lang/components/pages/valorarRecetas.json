@@ -5,6 +5,7 @@
         "recipesRatedSubtitle": "Recetas valoradas",
         "foodCard": {
             "dontRateBtnLabel": "NO VALORAR ESTA RECETA",
+            "oneTimeDeliveredText": "vez entregada",
             "deliveredText": "veces entregada",
             "lastShippmentText": "última entrega el"
         },
@@ -33,6 +34,7 @@
         "recipesRatedSubtitle": "Rated recipes",
         "foodCard": {
             "dontRateBtnLabel": "DO NOT RATE THIS RECIPE",
+            "oneTimeDeliveredText": "time delivered",
             "deliveredText": "times delivered",
             "lastShippmentText": "last shippment at"
         },
@@ -61,6 +63,7 @@
         "recipesRatedSubtitle": "Receptes valorades",
         "foodCard": {
             "dontRateBtnLabel": "NO VALORAR AQUESTA RECEPTA",
+            "oneTimeDeliveredText": "vegada lliurada",
             "deliveredText": "vegades lliurat",
             "lastShippmentText": "últim lliurament el"
         },
