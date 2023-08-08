@@ -21,7 +21,7 @@ const baseRating = {
     recipeName: "",
 };
 
-const Recipes = ({ ratings, lang, reload }) => {
+const Recipes = ({ ratings, lang, reload, searchText }) => {
     const { enqueueSnackbar } = useSnackbar();
 
     const theme = useTheme();
@@ -76,26 +76,28 @@ const Recipes = ({ ratings, lang, reload }) => {
         setRecipesWithRating([]);
     }, []);
 
-    return (
+    return ratings && ratings.length === 0 ? <Grid container spacing={2}>
+<Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                    <EmptyState text={lang.emptyState.text} title={lang.emptyState.title}/>
+                </Grid>
+    </Grid> : (
         <>
             <Grid container spacing={2}>
-                {ratings && ratings.length === 0 && <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                    <EmptyState text={lang.emptyState.text} title={lang.emptyState.title}/>
-                </Grid>}
-                {ratings.filter(rating => !rating.isRated).length > 0 && <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                {ratings.filter(rating =>  !rating.isRated).length > 0 && <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                     <Typography variant="h5">{lang.recipesRatingPendingSubtitle}</Typography>
                 </Grid>}
+                {ratings.filter(rating =>  !rating.isRated).length > 0 && ratings.filter((rating) =>  searchText ? !rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : !rating.isRated).length === 0 && <EmptyState title={`${lang.recipesRatingPendingEmptyState} "${searchText}"`} text="" />}
+                
                 {ratings
-                    .filter((rating) => !rating.isRated)
+                    .filter((rating) =>  searchText ? !rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : !rating.isRated)
                     .map((recipeToRate) => {
                         return (
-                            <Grid item xs={12} md={3} key={recipeToRate.id} onClick={() => setChosenRecipe(recipeToRate)}>
+                            <Grid item xs={12} sm={4} md={3} key={recipeToRate.id} onClick={() => setChosenRecipe(recipeToRate)}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12}>
                                         <FoodCard
                                             selectedRecipe={recipeToRate}
                                             isRated={recipeToRate.isRated}
-                                            height="339px"
                                             handleClickOpenRecipeModal={handleClickOpenRecipeModal}
                                             starValue={starValue}
                                             setStarValue={setStarValue}
@@ -111,20 +113,21 @@ const Recipes = ({ ratings, lang, reload }) => {
                             </Grid>
                         );
                     })}
-                {ratings && ratings.filter((rating) => rating.isRated).length > 0 && <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
+                {ratings && ratings.filter((rating) =>  rating.isRated).length > 0 && <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
                     <Typography variant="h5">{lang.recipesRatedSubtitle}</Typography>
                 </Grid>}
+                {ratings && ratings.filter((rating) =>  rating.isRated).length > 0 && ratings.filter((rating) =>  searchText ? rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : rating.isRated).length === 0 && <EmptyState title={`${lang.recipesRatedEmptyState} "${searchText}"`} text="" />}
+
                 {ratings
-                    .filter((rating) => rating.isRated)
+                    .filter((rating) => searchText ? rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : rating.isRated)
                     .map((recipeWithRating) => {
                         return (
-                            <Grid item xs={12} md={3} key={recipeWithRating.id} onClick={() => setChosenRecipe(recipeWithRating)}>
+                            <Grid item xs={12} sm={4} md={3} key={recipeWithRating.id} onClick={() => setChosenRecipe(recipeWithRating)}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12}>
                                         <FoodCard
                                             selectedRecipe={recipeWithRating}
                                             isRated={true}
-                                            height="310px"
                                             handleClickOpenRecipeModal={handleClickOpenRecipeModal}
                                             starValue={starValue}
                                             setStarValue={setStarValue}

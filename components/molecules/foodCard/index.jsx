@@ -60,6 +60,7 @@ export default function FoodCard({
                                 {selectedRecipe.lastShippingDate})
                             </Typography>
                         )}
+                        
                     </CardContent>
                 </CardActionArea>
 
