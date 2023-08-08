@@ -232,7 +232,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             <CrossSellingStep />
         </Box>
     ) : (
-        <BuyFlowLayout isInitializing={isInitializing}>{isCheckingRedirect ? <Box position={"fixed"} top={"50%"} left={"50%"}><CircularProgress /></Box> : steps[step]}</BuyFlowLayout>
+        <BuyFlowLayout isInitializing={isInitializing}>{isCheckingRedirect || true ? <Box position={"fixed"} top={"50%"} left={"50%"} display="flex" justifyContent="center" alignItems="center" style={{ transform: 'translate(-50%, -50%)' }}><CircularProgress /></Box> : steps[step]}</BuyFlowLayout>
     );
 });
 
