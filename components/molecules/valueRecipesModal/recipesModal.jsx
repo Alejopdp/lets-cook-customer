@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 const RecipesModal = (props) => {
     const lang = props.lang;
-    const theme = useTheme();
     const classes = useStyles();
     const { chosenRecipe, starValue, handleSecondaryButtonClick, setStarValue, setChosenRecipe, handleClose } = props;
 
@@ -36,6 +35,7 @@ const RecipesModal = (props) => {
     useEffect(() => {
         setComment(chosenRecipe.comment);
     }, [chosenRecipe.comment]);
+    
     const handleChangeComment = (e) => {
         setComment(e.target.value);
     };
