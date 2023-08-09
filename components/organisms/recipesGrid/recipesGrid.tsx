@@ -27,18 +27,6 @@ export const RecipesGrid = (props: RecipesGridProps) => {
         setOpen(false);
     };
 
-    // const handleClickAddRecipe = (recipe) => {
-    //     selectRecipes([...recipes, recipe]);
-    // };
-
-    // const handleClickRemoveRecipe = ({ id: _id }) => {
-    //     const index = recipes.find(({ id }) => id !== _id);
-    //     if (index === undefined) return;
-    //     const newState = [...recipes];
-    //     newState.splice(index, 1);
-    //     selectRecipes(newState);
-    // };
-
     const selectedRecipesQty = useMemo(() => {
         return props.recipesPage ? 0 : props.selectedRecipes.length;
     }, [props.selectedRecipes]);
@@ -91,6 +79,8 @@ export const RecipesGrid = (props: RecipesGridProps) => {
                                 handleClickAddRecipe={() => props.handleClickAddRecipe(recipe)}
                                 handleClickRemoveRecipe={() => props.handleClickRemoveRecipe({ id: recipe.id as string })}
                                 isAddable={selectedRecipesQty < props.maxRecipesQty}
+                                userRating={recipe.userRating}
+                                otherUsersRating={recipe.averageRating}
                             />
                         </Grid>
                     ))}

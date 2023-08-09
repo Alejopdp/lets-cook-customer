@@ -9,7 +9,7 @@ export default function Home(props: HomePageProps) {
 }
 
 export async function getServerSideProps({ locale }) {
-    const [_plans, _recipes, _reviews] = await Promise.all([getPlans(locale), getActualWeekRecipes(locale), getReviews(locale)]);
+    const [_plans, _recipes, _reviews] = await Promise.all([getPlans(locale, true), getActualWeekRecipes(locale), getReviews(locale)]);
 
     const errors = [_plans.error, _recipes.error, _reviews.error].filter((e) => !!e);
 

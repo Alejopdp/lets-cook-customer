@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { Layout } from "@layouts";
 import InnerSectionLayout from "components/layout/innerSectionLayout";
-import BackButtonTitle from "components/atoms/backButtonTitle/backButtonTitle";
 import RecipeChoiceScreen from "components/organisms/recipeChoiceScreen/recipeChoiceScreen";
 import { useSnackbar } from "notistack";
 import { getRecipesForOrder } from "@helpers";

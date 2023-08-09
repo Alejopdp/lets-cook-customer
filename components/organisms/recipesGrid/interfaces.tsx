@@ -1,7 +1,6 @@
-import { Recipe } from "@helpers";
 import { Recipes } from "../../../stores/index";
 export interface RecipesGridProps {
-    recipes: Recipe[] | Recipes[]; // USe only one
+    recipes: Recipes[];
     recipesPage?: boolean;
     recipesSelection?: boolean;
     maxRecipesQty: number;

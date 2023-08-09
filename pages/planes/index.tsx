@@ -3,9 +3,6 @@ import React, { memo, useEffect, useState } from "react";
 import { getPlans, Plan, Recipe, PlanVariant, getPlanVariant } from "@helpers";
 import { BuyFlowInitialStore, IPaymentMethod, Recipes, useAuthStore, useBuyFlow, useUserInfoStore } from "@stores";
 import { useRouter } from "next/router";
-import * as Sentry from "@sentry/browser";
-
-// External components
 
 // Internal components
 import { BuyFlowLayout } from "@layouts";
@@ -110,7 +107,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
 
     useEffect(() => {
         const initialize = async () => {
-            const [_plans] = await Promise.all([getPlans(router.locale)]);
+            const [_plans] = await Promise.all([getPlans(router.locale, false)]);
             const mainPlans: Plan[] = [];
             const aditionalsPlans: Plan[] = [];
 
@@ -217,7 +214,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     //         setShowRegister(false);
     //     }
     // }, [isAuthenticated]);
-
+console.log("DATA RECIPES: ", data.recipes)
     const steps = [
         <SelectPlanStep initialPlanSettings={data.planUrlParams} plans={data.plans} variant={data.variant} recipes={data.recipes} />,
         <RegisterUserStep />,
