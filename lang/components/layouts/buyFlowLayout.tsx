@@ -18,6 +18,9 @@ export const buyFlowLayout = {
             success: { recipesChosen: "Recetas elegidas correctamente" },
             error: {},
         },
+        lastRating: "Última valoración",
+        lastRatingEmptyState: "Aún no has valorado esta receta",
+        otherUsersRating: "Otros usuarios",
     },
     en: {
         difficultLevel: "Level of difficulty",
@@ -38,6 +41,10 @@ export const buyFlowLayout = {
             success: { recipesChosen: "Correctly chosen recipes" },
             error: {},
         },
+        lastRating: "Last rating",
+        lastRatingEmptyState: "You haven't rated this recipe yet",
+        otherUsersRating: "Other users",
+
     },
     ca: {
         difficultLevel: "Nivell de dificultat",
@@ -58,5 +65,9 @@ export const buyFlowLayout = {
             success: { recipesChosen: "Receptes triades correctament" },
             error: {},
         },
+        lastRating: "Última valoració",
+        lastRatingEmptyState: "Encara no has valorat aquesta recepta",
+        otherUsersRating: "Altres usuaris",
+
     },
 };
