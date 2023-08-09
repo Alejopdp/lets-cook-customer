@@ -1,8 +1,9 @@
 // Utils & Config
 import React from "react";
 import useStyles from "./styles";
-import { useTheme } from "@material-ui/core";
+import { Divider, useTheme } from "@material-ui/core";
 import { CustomButton, RecipeImgTags } from "@atoms";
+import Rating from "@material-ui/lab/Rating";
 
 // External components
 import Card from "@material-ui/core/Card";
@@ -62,7 +63,7 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={12} >
                         <Grid container spacing={2} justifyContent="space-between">
                             <Grid item xs={hideAddButton()}>
                                 <IconButton style={{ padding: "0px" }} onClick={() => props.handleClickOpenModal()}>
@@ -103,6 +104,12 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
                             )}
                         </Grid>
                     </Grid>
+                    {!props.userRating && !props.otherUsersRating ? <></> :<>
+                    <Divider style={{width: "100%", marginTop: theme.spacing(2), marginBottom: theme.spacing(2)}} />
+                    <Grid item xs={12}><Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>{!props.userRating ? <Typography variant="body2" color="initial" style={{fontSize: 14, fontWeight: 500, fontStyle: "italic"}}>Aún no has valorado esta receta</Typography> : <><Typography variant="body2" color="initial" style={{fontSize: 14, fontWeight: 500}}>Última valoración</Typography><Rating readOnly value={props.userRating}/></>}</Box></Grid>
+                    <Grid item xs={12}><Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}><Typography variant="body1" color="initial" style={{fontSize: 14, fontWeight: 500}}>Otros usuarios</Typography><Rating readOnly value={props.otherUsersRating} precision={0.1}/></Box></Grid>                    
+                    </> }
+                    
                 </Grid>
             </CardContent>
         </Card>

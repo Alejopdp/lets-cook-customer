@@ -19,11 +19,11 @@ export const getDataForSwappingAPlan = async (subscriptionId: string, locale?: s
     }
 };
 
-export async function getPlans(locale: string): Promise<PlanResponse> {
+export async function getPlans(locale: string, isRunningInServer: boolean): Promise<PlanResponse> {
     try {
         const res = await Axios.request<Plan[]>({
             method: "GET",
-            // headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
+            headers: { authorization: isRunningInServer ? "" : JSON.parse(window.localStorage.getItem("token")) },
             url: `${API_URL}/plan/plans/week`,
             params: {
                 locale,

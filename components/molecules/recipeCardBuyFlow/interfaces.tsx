@@ -7,4 +7,6 @@ export interface RecipeCardBuyFlowProps extends Recipe {
     isAddable: boolean;
     maxRecipesQty: number;
     selectedRecipes: any[];
+    userRating: number;
+    otherUsersRating: number;
 }
