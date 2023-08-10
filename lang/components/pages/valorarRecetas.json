@@ -9,6 +9,7 @@
         "title": "Valorar recetas",
         "recipesRatingPendingSubtitle": "Recetas pendientes de valorar",
         "recipesRatedSubtitle": "Recetas valoradas",
+        "dontRateRecipesSubtitle": "Recetas sin valoración",
         "foodCard": {
             "dontRateBtnLabel": "NO VALORAR ESTA RECETA",
             "oneTimeDeliveredText": "vez entregada",
@@ -45,6 +46,7 @@
         "title": "Rate recipes",
         "recipesRatingPendingSubtitle": "Recipes pending evaluation",
         "recipesRatedSubtitle": "Rated recipes",
+        "dontRateRecipesSubtitle": "Recipes without rating",
         "foodCard": {
             "dontRateBtnLabel": "DO NOT RATE THIS RECIPE",
             "oneTimeDeliveredText": "time delivered",
@@ -80,6 +82,7 @@
         "title": "Valorar receptes",
         "recipesRatingPendingSubtitle": "Receptes pendents de valorar",
         "recipesRatedSubtitle": "Receptes valorades",
+        "dontRateRecipesSubtitle": "Receptes sense valoració",
         "foodCard": {
             "dontRateBtnLabel": "NO VALORAR AQUESTA RECEPTA",
             "oneTimeDeliveredText": "vegada lliurada",
