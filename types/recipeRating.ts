@@ -9,4 +9,5 @@ export interface RecipeRating {
     lastShippingDate: string | Date;
     qtyDelivered: number;
     isRated: boolean;
+    dontRate: boolean;
 }
