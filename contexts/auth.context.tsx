@@ -6,7 +6,7 @@ import { loginWithSocialMedia } from 'helpers/serverRequests/customer';
 import { LOCAL_STORAGE_KEYS, useLocalStorage } from '@hooks';
 import cookies from "js-cookie";
 import { useAuthStore, useUserInfoStore } from '@stores';
-import * as Sentry from "@sentry/browser";
+// import * as Sentry from "@sentry/browser";
 
 // Configuración de Firebase  
 const firebaseConfig: FirebaseOptions = {
@@ -104,7 +104,7 @@ const AuthProvider: React.FC<{children: any}> = ({ children }: {children: any}) 
         
       } catch (error) {
         setIsCheckingRedirect(false)
-        Sentry.captureException(error)
+        // Sentry.captureException(error)
       }
 }
 
