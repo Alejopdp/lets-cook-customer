@@ -61,6 +61,12 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
                         <Typography variant="subtitle1" style={{ fontSize: "16px" }}>
                             {props.name}
                         </Typography>
+                        <Box display={"flex"} visibility={!props.otherUsersRating ? "hidden" : "default"}>
+                        <Typography variant="body1" style={{ fontSize: "14px", fontWeight: 500, marginRight: 8 }}>
+                            {props.otherUsersRating}
+                        </Typography>
+                            <Rating readOnly value={props.otherUsersRating} precision={0.1} size="small" />
+                            </Box>
                     </Grid>
 
                     <Grid item xs={12} >
@@ -104,11 +110,8 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
                             )}
                         </Grid>
                     </Grid>
-                    {!props.userRating && !props.otherUsersRating ? <></> :<>
                     <Divider style={{width: "100%", marginTop: theme.spacing(2), marginBottom: theme.spacing(2)}} />
-                    <Grid item xs={12}><Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>{!props.userRating ? <Typography variant="body2" color="initial" style={{fontSize: 14, fontWeight: 500, fontStyle: "italic"}}>{lang.lastRatingEmptyState}</Typography> : <><Typography variant="body2" color="initial" style={{fontSize: 14, fontWeight: 500}}>{lang.lastRating}</Typography><Rating readOnly value={props.userRating}/></>}</Box></Grid>
-                    <Grid item xs={12}><Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}><Typography variant="body1" color="initial" style={{fontSize: 14, fontWeight: 500}}>{lang.otherUsersRating}</Typography><Rating readOnly value={props.otherUsersRating} precision={0.1}/></Box></Grid>                    
-                    </> }
+                    <Grid item xs={12}><Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} visibility={!props.userRating ? "hidden" : "default"}><><Typography variant="body2" color="initial" style={{fontSize: 14, fontWeight: 500}}>{lang.lastRating}</Typography><Box display={"flex"}><Typography variant="body2" color="initial" style={{fontSize: 14, fontWeight: 500, marginRight: 8}}>{props.userRating}</Typography><Rating readOnly value={props.userRating} size="small"/></Box></></Box></Grid>
                     
                 </Grid>
             </CardContent>
