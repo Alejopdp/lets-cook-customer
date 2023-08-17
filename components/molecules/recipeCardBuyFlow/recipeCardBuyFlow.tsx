@@ -63,7 +63,7 @@ export const RecipeCardBuyFlow = (props: RecipeCardBuyFlowProps) => {
                         </Typography>
                         <Box display={"flex"} visibility={!props.otherUsersRating ? "hidden" : "default"}>
                         <Typography variant="body1" style={{ fontSize: "14px", fontWeight: 500, marginRight: 8 }}>
-                            {props.otherUsersRating}
+                            {props.otherUsersRating ? props.otherUsersRating.toFixed(1) : ""}
                         </Typography>
                             <Rating readOnly value={props.otherUsersRating} precision={0.1} size="small" />
                             </Box>
