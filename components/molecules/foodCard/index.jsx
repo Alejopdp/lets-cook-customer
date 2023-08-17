@@ -37,6 +37,7 @@ export default function FoodCard({
     handleDeleteRecipe,
     recipeToRate,
     lang,
+    dontRate
 }) {
     const classes = useStyles();
 
@@ -74,7 +75,7 @@ export default function FoodCard({
                     />
                 </CardActions>
                 <CardActions style={{}}>
-                    {isRated ? null : (
+                    {isRated || dontRate ? null : (
                         <Button size="small" className={classes.button} onClick={() => handleDeleteRecipe(recipeToRate)}>
                             {lang.dontRateBtnLabel}
                         </Button>

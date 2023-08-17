@@ -3,12 +3,13 @@
         "searchBarPlaceholder": "Buscar recetas",
         "emptySearchState": "No se encontraron recetas que coincidan con",
         "emptyState": {
-            "title": "Aún no tienes recetas valoradas ni por valorar",
+            "title": "Aún no has recibido tus primeros kits, vuelve aquí la semana que viene y ¡cuéntanos lo bien que te fue con nuestras recetas!",
             "text": "Espera a recibir por lo menos una para que nos cuente lo buena que está!"
         },
         "title": "Valorar recetas",
         "recipesRatingPendingSubtitle": "Recetas pendientes de valorar",
         "recipesRatedSubtitle": "Recetas valoradas",
+        "dontRateRecipesSubtitle": "Recetas sin valoración",
         "foodCard": {
             "dontRateBtnLabel": "NO VALORAR ESTA RECETA",
             "oneTimeDeliveredText": "vez entregada",
@@ -38,13 +39,14 @@
         "searchBarPlaceholder": "Search recipes",
         "emptySearchState": "No recipes matching with",
         "emptyState": {
-            "title": "You don't have rated or to rate recipes yet",
+            "title": "You haven't received your first kits yet, come back here next week and let us know how well our recipes went!",
             "text": "Wait to receive at least one to tell us how good it is!"
         },
 
         "title": "Rate recipes",
         "recipesRatingPendingSubtitle": "Recipes pending evaluation",
         "recipesRatedSubtitle": "Rated recipes",
+        "dontRateRecipesSubtitle": "Recipes without rating",
         "foodCard": {
             "dontRateBtnLabel": "DO NOT RATE THIS RECIPE",
             "oneTimeDeliveredText": "time delivered",
@@ -74,12 +76,13 @@
         "searchBarPlaceholder": "Cerca receptes",
         "emptySearchState": "No s'han trobat receptes que coincideixin amb",
         "emptyState": {
-            "title": "Encara no tens receptes valorades ni per valorar",
+            "title": "Encara no has rebut els teus primers kits, torna aquí la setmana que ve i explica'ns com et va anar de bé amb les nostres receptes!",
             "text": "Espera a rebre per lo menys una perquè ens digui lo bona que està!"
         },
         "title": "Valorar receptes",
         "recipesRatingPendingSubtitle": "Receptes pendents de valorar",
         "recipesRatedSubtitle": "Receptes valorades",
+        "dontRateRecipesSubtitle": "Receptes sense valoració",
         "foodCard": {
             "dontRateBtnLabel": "NO VALORAR AQUESTA RECEPTA",
             "oneTimeDeliveredText": "vegada lliurada",

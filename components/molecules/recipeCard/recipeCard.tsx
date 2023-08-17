@@ -26,10 +26,7 @@ export const RecipeCard = (props: RecipeCardProps) => {
         <div
             className={gradient}
             style={{
-                // backgroundImage: `url(${props.img})`,
-                // backgroundSize: "cover",
-                // backgroundRepeat: "no-repeat",
-                // backgroundPosition: "center",
+
                 position: "relative",
                 cursor: "pointer",
                 borderRadius: "8px",

@@ -78,7 +78,7 @@ const Recipes = ({ ratings, lang, reload, searchText }) => {
 
     return ratings && !searchText && ratings.length === 0 ? <Grid container spacing={2}>
 <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                    <EmptyState text={lang.emptyState.text} title={lang.emptyState.title}/>
+                    <EmptyState title={lang.emptyState.title}/>
                 </Grid>
     </Grid> : (
         <>
@@ -87,11 +87,11 @@ const Recipes = ({ ratings, lang, reload, searchText }) => {
             <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                     <EmptyState title={`${lang.emptySearchState} "${searchText}"`} text=""/>
                 </Grid>}
-                {ratings.filter(rating =>  searchText ? !rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : !rating.isRated).length > 0 && <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
+                {ratings.filter(rating =>  searchText ? !rating.isRated && !rating.dontRate && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : !rating.isRated  && !rating.dontRate).length > 0 && <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                     <Typography variant="h5">{lang.recipesRatingPendingSubtitle}</Typography>
                 </Grid>}                 
                 {ratings
-                    .filter((rating) =>  searchText ? !rating.isRated && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : !rating.isRated)
+                    .filter((rating) =>  searchText ? !rating.isRated && !rating.dontRate && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : !rating.isRated && !rating.dontRate)
                     .map((recipeToRate) => {
                         return (
                             <Grid item xs={12} sm={4} md={3} key={recipeToRate.id} onClick={() => setChosenRecipe(recipeToRate)}>
@@ -136,6 +136,34 @@ const Recipes = ({ ratings, lang, reload, searchText }) => {
                                             setRecipesToRate={setRecipesToRate}
                                             handleDeleteRecipe={handleDeleteRecipe}
                                             lang={lang.foodCard}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        );
+                    })}
+                    {ratings && ratings.filter((rating) =>  searchText ? rating.dontRate && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : rating.dontRate).length > 0 && <Grid item xs={12} style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(1) }}>
+                    <Typography variant="h5">{lang.dontRateRecipesSubtitle}</Typography>
+                </Grid>}
+                {ratings
+                    .filter((rating) => searchText ? rating.dontRate && rating.recipeName.toLowerCase().includes(searchText.toLowerCase()) : rating.dontRate)
+                    .map((recipeWithRating) => {
+                        return (
+                            <Grid item xs={12} sm={4} md={3} key={recipeWithRating.id} onClick={() => setChosenRecipe(recipeWithRating)}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <FoodCard
+                                            selectedRecipe={recipeWithRating}
+                                            isRated={false}
+                                            handleClickOpenRecipeModal={handleClickOpenRecipeModal}
+                                            starValue={starValue}
+                                            setStarValue={setStarValue}
+                                            chosenRecipe={chosenRecipe}
+                                            recipesToRate={recipesToRate}
+                                            setRecipesToRate={setRecipesToRate}
+                                            handleDeleteRecipe={handleDeleteRecipe}
+                                            lang={lang.foodCard}
+                                            dontRate={recipeWithRating.dontRate}
                                         />
                                     </Grid>
                                 </Grid>

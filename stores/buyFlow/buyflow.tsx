@@ -29,6 +29,8 @@ export type Recipes = {
     recipeVariants: RecipeVariant[];
     nutritionalInfo: { key: string; value: string }[];
     imagesUrls: string[];
+    userRating?: number
+    averageRating?: number
 };
 
 export interface DeliveryForm {
