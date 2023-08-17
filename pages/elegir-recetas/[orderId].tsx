@@ -35,8 +35,8 @@ const ChooseRecipes = (props) => {
             }
             setisLoading(false);
         };
-        getData();
-    }, []);
+        if (router.query.orderId) getData();
+    }, [router.query]);
 
     return (
         <Layout disableCallToActionSection disableFooterSection>
@@ -55,7 +55,5 @@ const ChooseRecipes = (props) => {
         </Layout>
     );
 };
-
-ChooseRecipes.propTypes = {};
 
 export default ChooseRecipes;
