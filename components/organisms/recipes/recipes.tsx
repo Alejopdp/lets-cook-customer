@@ -78,7 +78,7 @@ const Recipes = ({ ratings, lang, reload, searchText }) => {
 
     return ratings && !searchText && ratings.length === 0 ? <Grid container spacing={2}>
 <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
-                    <EmptyState text={lang.emptyState.text} title={lang.emptyState.title}/>
+                    <EmptyState title={lang.emptyState.title}/>
                 </Grid>
     </Grid> : (
         <>
