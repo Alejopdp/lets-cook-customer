@@ -18,7 +18,7 @@ export const buyFlowLayout = {
             success: { recipesChosen: "Recetas elegidas correctamente" },
             error: {},
         },
-        lastRating: "Última valoración",
+        lastRating: "Tu valoración",
         lastRatingEmptyState: "Aún no has valorado esta receta",
         otherUsersRating: "Otros usuarios",
     },
@@ -41,7 +41,7 @@ export const buyFlowLayout = {
             success: { recipesChosen: "Correctly chosen recipes" },
             error: {},
         },
-        lastRating: "Last rating",
+        lastRating: "Your review",
         lastRatingEmptyState: "You haven't rated this recipe yet",
         otherUsersRating: "Other users",
 
@@ -65,7 +65,7 @@ export const buyFlowLayout = {
             success: { recipesChosen: "Receptes triades correctament" },
             error: {},
         },
-        lastRating: "Última valoració",
+        lastRating: "La teva valoració",
         lastRatingEmptyState: "Encara no has valorat aquesta recepta",
         otherUsersRating: "Altres usuaris",
 
