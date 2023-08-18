@@ -13,9 +13,10 @@ export const GoogleReviewBox = (props: GoogleReviewBoxProps) => {
         <Box className={classes.reviewBox}>
             <Grid container spacing={2}>
                 <Grid item xs={12} className={classes.flexCenter}>
-                    <Avatar alt={props.review.name} src={props.review.avatar} className={classes.avatarLarge} />
-                    <div className={classes.marginLeft2}>
-                        <Typography variant="subtitle1" color="textPrimary">
+                    {/* <Avatar alt={props.review.name} src={props.review.avatar} className={classes.avatarLarge} /> */}
+                    <div>
+                    {/* <div className={classes.marginLeft2}> */}
+                        <Typography variant="subtitle1" color="textPrimary" >
                             {props.review.name}
                         </Typography>
                         <div className={classes.flexCenterRating}>
