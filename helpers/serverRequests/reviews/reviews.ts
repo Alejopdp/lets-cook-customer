@@ -11,6 +11,7 @@ export async function getReviews(locale: string): Promise<ReviewResponse> {
                 locale
             }
         });
+        console.log("RES HEADERS: ", res.headers)
         return {
             status: res.status,
             data: res.data,
