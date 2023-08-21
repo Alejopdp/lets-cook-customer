@@ -22,7 +22,7 @@ const PlanDetailsDesktop = ({
     handleClickOpenSkipPlanModal,
     handleClickOpenRecipeModal,
     lang,
-}: PlanDetailsProps) => {
+}: PlanDetailsPro1ps) => {
     const theme = useTheme();
 
     return (
@@ -43,6 +43,7 @@ const PlanDetailsDesktop = ({
                             shippingAddress={subscription.shippingAddress}
                             lang={lang.shippingAddressCard}
                             shippingCost={subscription.shippingCost}
+                            hideShippingCost={subscription.plan.state.stateTitle !== "SUBSCRIPTION_ACTIVE"}
                         />
                     </Grid>
                     <Grid item xs={12}>
