@@ -74,7 +74,8 @@ const PlanDetailsMobile = ({
                     shippingAddress={subscription.shippingAddress}
                     lang={lang.shippingAddressCard}
                     shippingCost={subscription.shippingCost}
-                />
+                    hideShippingCost={subscription.plan.state.stateTitle !== "SUBSCRIPTION_ACTIVE"}
+                    />
             </Grid>
             <Grid item xs={12}>
                 <PaymentMethodCard paymentMethod={subscription.paymentMethod} lang={lang.paymentMethodCard} />

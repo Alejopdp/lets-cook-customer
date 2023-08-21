@@ -27,10 +27,10 @@ const ShippingAddressCard = (props) => {
                 text={props.shippingAddress.preferredSchedule || lang.preferredScheduleTitleEmptyState}
                 style={{ marginBottom: theme.spacing(2) }}
             />
-            <DataDisplay
+            {!props.hideShippingCost && <DataDisplay
                 title={lang.shippingCostTitle}
                 text={!!props.shippingCost ? [lang.shippingCostLabel, <b>{props.shippingCost} €</b>] : lang.noShippingCostLabel}
-            />
+            />}
         </BoxWithTitle>
     );
 };
