@@ -1,7 +1,7 @@
 // Utils & Config
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import {  useTheme } from "@material-ui/core/styles";
 
 // Internal Components
 import GeneralBox from "../../atoms/generalBox/generalBox";

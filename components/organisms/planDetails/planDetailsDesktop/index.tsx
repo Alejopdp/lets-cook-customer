@@ -48,7 +48,7 @@ const PlanDetailsDesktop = ({
                     <Grid item xs={12}>
                         <PaymentMethodCard paymentMethod={subscription.paymentMethod} lang={lang.paymentMethodCard} />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} style={{visibility: subscription.plan.state.stateTitle === "SUBSCRIPTION_ACTIVE" ? "visible" : "hidden"}}>
                         <TextButton
                             handleClick={handleClickOpenCancelPlanModal}
                             btnText={lang.cancelPlanBtnText}
@@ -66,6 +66,7 @@ const PlanDetailsDesktop = ({
                             handleClick={handleClickOpenSkipPlanModal}
                             lang={lang.calendarCard}
                             isOneTime={subscription.isOneTime}
+                            planState={subscription.plan.state.stateTitle}
                         />
                     </Grid>
                     {subscription.hasRecipes && (

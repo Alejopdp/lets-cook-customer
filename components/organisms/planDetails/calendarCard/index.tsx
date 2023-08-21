@@ -35,15 +35,15 @@ const CalendarCard = (props: CalendarCardProps) => {
             title={lang.title}
             btnText={lang.skipWeekBtnText}
             handleClick={props.handleClick}
-            hideButton={props.isOneTime}
+            hideButton={props.isOneTime || props.planState !== "SUBSCRIPTION_ACTIVE"}
         >
             <Grid container>
                 <Grid item xs={12} sm={6}>
-                    <DataDisplay title={lang.nextDeliveryTitle} text={props.schedule.nextDelivery} />
+                    <DataDisplay title={lang.nextDeliveryTitle} text={props.schedule.nextDelivery.charAt(0).toUpperCase() + props.schedule.nextDelivery.slice(1)} />
                 </Grid>
-                <Grid item xs={12} sm={6} className={classes.nextChargeGrid}>
-                    <DataDisplay title={lang.nextPaymentTitle} text={props.schedule.nextPayment} />
-                </Grid>
+                {props.planState === "SUBSCRIPTION_ACTIVE" && <Grid item xs={12} sm={6} className={classes.nextChargeGrid}>
+                    <DataDisplay title={lang.nextPaymentTitle} text={props.schedule.nextPayment.charAt(0).toUpperCase() + props.schedule.nextPayment.slice(1) } />
+                </Grid>}
                 {props.skippedOrders.length > 0 && (
                     <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
                         <div style={{ display: "flex", alignItems: "center" }}>
