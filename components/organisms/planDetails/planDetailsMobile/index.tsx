@@ -79,13 +79,13 @@ const PlanDetailsMobile = ({
             <Grid item xs={12}>
                 <PaymentMethodCard paymentMethod={subscription.paymentMethod} lang={lang.paymentMethodCard} />
             </Grid>
-            <Grid item xs={12}>
+            {subscription.plan.state.stateTitle === "SUBSCRIPTION_ACTIVE" && <Grid item xs={12}>
                 <TextButton
                     handleClick={handleClickOpenCancelPlanModal}
                     btnText={lang.cancelPlanBtnText}
                     style={{ color: "#FC1919", marginTop: theme.spacing(2) }}
                 />
-            </Grid>
+            </Grid>}
         </Grid>
     );
 };

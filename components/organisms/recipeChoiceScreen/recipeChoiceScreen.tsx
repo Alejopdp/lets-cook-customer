@@ -68,7 +68,7 @@ const RecipeChoiceScreen = (props: RecipeChoiceScreenProps) => {
                 recipeSelection = [{ recipeId: recipe.id, quantity: 1 }, ...recipeSelection];
             }
         }
-        const res = await chooseRecipes(router.query.orderId as string, recipeSelection);
+        const res = await chooseRecipes(router.query.orderId as string, recipeSelection, false);
         if (res.status === 200) {
             enqueueSnackbar(lang.snackbars.success.recipesChosen, { variant: "success" });
             router.replace({

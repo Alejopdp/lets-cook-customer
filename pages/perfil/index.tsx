@@ -178,7 +178,7 @@ const Perfil = (props) => {
 
         if (res.status === 200) {
             enqueueSnackbar(lang.snackbars.success.reorderedPlan, { variant: "success" });
-            router.push(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}?subscriptionId=${res.data.subscriptionId}`);
+            router.push(`${localeRoutes[router.locale][Routes["detalle-del-plan"]]}/${res.data.subscriptionId}`);
         } else {
             enqueueSnackbar(res && res.data && res.data.message ? res.data.message : lang.snackbars.error.unexpected, { variant: "error" });
         }
