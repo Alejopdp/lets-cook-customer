@@ -74,7 +74,7 @@ export const RecipeChoiseStep = () => {
                 recipeSelection = [{ recipeId: recipe.id, quantity: 1 }, ...recipeSelection];
             }
         }
-        const res = await chooseRecipes(firstOrderId, recipeSelection);
+        const res = await chooseRecipes(firstOrderId, recipeSelection, true);
 
         if (res.status === 200) {
             gotToNextView();

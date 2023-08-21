@@ -62,6 +62,7 @@ const TextButton = (props) => {
 TextButton.propTypes = {
     btnText: PropTypes.string.isRequired,
     handleClick: PropTypes.func,
+    style: PropTypes.object
 };
 
 export default TextButton;

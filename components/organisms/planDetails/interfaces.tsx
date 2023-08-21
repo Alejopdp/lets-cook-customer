@@ -97,4 +97,5 @@ export interface CalendarCardProps {
     handleClick: () => void;
     lang: any;
     isOneTime: boolean;
+    planState: string;
 }
