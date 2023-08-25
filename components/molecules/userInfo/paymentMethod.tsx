@@ -10,7 +10,6 @@ import { SetupIntent, StripeError } from "@stripe/stripe-js";
 
 const PaymentMethodModal = (props) => {
     const lang = props.lang;
-    const theme = useTheme();
     const { enqueueSnackbar } = useSnackbar();
     const stripe = useStripe();
     const elements = useElements();
@@ -107,9 +106,25 @@ const PaymentMethodModal = (props) => {
             secondaryButtonText={props.secondaryButtonText}
         >
             <FormControl component="fieldset" style={{ width: "100%" }}>
-                <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChangePaymentMethod}>
-                    <FormControlLabel value="card" control={<Radio />} label={lang.mySavedCards} />
-                    {value === "card" ? (
+                <RadioGroup aria-label="savedCards" name="savedCards" value={value} onChange={handleChangePaymentMethod}>
+                    <FormControlLabel
+                        value="card"
+                        onChange={() => {
+                            setValue("card");
+                            setselectedSavedCard(props.initialData.filter((pm) => pm.id !== "wallet")[0]);
+                        }}
+                        control={
+                            <Radio
+                                checked={props.initialData.some((pm) => pm.id !== "wallet" && pm.id === selectedSavedCard)}
+                                onChange={() => {
+                                    setValue("card");
+                                    setselectedSavedCard(props.initialData.filter((pm) => pm.id !== "wallet")[0].id);
+                                }}
+                            />
+                        }
+                        label={lang.mySavedCards}
+                    />
+                    {value === "card" || value === "wallet" ? (
                         <RadioGroup
                             aria-label="gender"
                             name="savedCards"
@@ -117,28 +132,44 @@ const PaymentMethodModal = (props) => {
                             onChange={(e) => setselectedSavedCard(e.target.value)}
                             style={{ marginLeft: "2rem" }}
                         >
-                            {props.initialData.map((paymentMethod) => (
-                                <FormControlLabel
-                                    value={paymentMethod.id}
-                                    control={<Radio />}
-                                    label={`${paymentMethod.card} - ${paymentMethod.expirationDate}`}
-                                    checked={paymentMethod.id === selectedSavedCard}
-                                />
-                            ))}
+                            {props.initialData
+                                .filter((pm) => pm.id !== "wallet")
+                                .map((paymentMethod) => (
+                                    <FormControlLabel
+                                        value={paymentMethod.id}
+                                        control={<Radio />}
+                                        label={`${paymentMethod.card} - ${paymentMethod.expirationDate}`}
+                                        checked={paymentMethod.id === selectedSavedCard}
+                                    />
+                                ))}
                         </RadioGroup>
                     ) : null}
+                    {props.initialData.some((pm) => pm.id === "wallet") && (
+                        <FormControlLabel
+                            value="wallet"
+                            onChange={() => {
+                                setselectedSavedCard("wallet");
+                                setValue("wallet");
+                            }}
+                            control={<Radio checked={selectedSavedCard === "wallet"} />}
+                            label={"Monedero"}
+                        />
+                    )}
                     <FormControlLabel
                         value="newPaymentMethod"
                         control={<Radio />}
                         label={lang.addNewPaymentMethod}
-                    // onClick={() => handleClickPaymentMethod()}
+                        onChange={() => {
+                            setselectedSavedCard("");
+                            setValue("newPaymentMethod");
+                        }}
                     />
                     {value === "newPaymentMethod" ? <StripeForm /> : null}
                 </RadioGroup>
             </FormControl>
             <div style={{ display: "flex", marginTop: ".7rem", alignItems: "center" }}>
-                <ErrorOutlineIcon style={{ color: "red" }} />
-                <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>{lang.helperText}</i>
+                <ErrorOutlineIcon style={{ color: "red", marginRight: 8 }} />
+                <i style={{ fontStyle: "italic", alignSelf: "end" }}>{lang.helperText}</i>
             </div>
         </Modal>
     );
