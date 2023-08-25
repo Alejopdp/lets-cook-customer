@@ -37,7 +37,7 @@ import PendingActionSkeleton from "components/molecules/pendingActionsComponents
 import PlanProfileCardSkeleton from "components/molecules/planProfileCard/planProfileCardSkeleton";
 import { locale } from "types/locale";
 import Link from "next/link";
-import { Restore, Settings, Star } from "@material-ui/icons";
+import { Restore, Settings, Star,AttachMoney } from "@material-ui/icons";
 
 const Perfil = (props) => {
     const theme = useTheme();
@@ -260,7 +260,13 @@ const Perfil = (props) => {
                                             icon="star"
                                             btnText={lang.rateRecipesBtnText}
                                             handleClick={() => router.push(`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`)}
-                                        />                                        
+                                        />
+                                        <TextButton
+                                            icon="wallet"
+                                            btnText={lang.rateRecipesBtnText}
+                                            handleClick={() => router.push(`${localeRoutes[router.locale][Routes["monedero"]]}/${userInfo.id}`)}
+                                        />
+
                                     </Grid>
                                 </Grid>
                                 <Carousel
@@ -313,9 +319,14 @@ const Perfil = (props) => {
                                             </a>
                                         </Link>
 </Grid>
-                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(4) }}>
+                                    <Grid item xs={12} >
                                         <Link href={`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`}><a style={{ display: 'flex', alignItems: 'center' }}><Icon style={{marginRight: 8}} onClick={props.handleClick}><Star/></Icon><Typography display="inline" variant="button" >{lang.rateRecipesBtnText}</Typography></a></Link>
                                     </Grid>
+
+                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(4) }}>
+                                        <Link href={`${localeRoutes[router.locale][Routes["monedero"]]}?customer=${userInfo.id}`}><a style={{ display: 'flex', alignItems: 'center' }}><Icon style={{marginRight: 8}} onClick={props.handleClick}><AttachMoney/></Icon><Typography display="inline" variant="button" >{lang.walletText}</Typography></a></Link>
+                                    </Grid>
+
 
                                     {isLoading ? (
                                         <>

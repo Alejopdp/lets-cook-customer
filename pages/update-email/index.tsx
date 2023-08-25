@@ -40,6 +40,7 @@ const UpdateEmailPage = (props) => {
                             fullName: customerInfoRes.data.fullName,
                             permissions: [],
                             roleTitle: "customer",
+                            wallet: customerInfoRes.data.wallet,
                         };
 
                         setuserInfo(newUserInfo);

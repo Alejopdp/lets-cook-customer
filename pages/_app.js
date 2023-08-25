@@ -84,6 +84,7 @@ function MyApp(props) {
                         lastName: getCustomerRes.data.lastName,
                         id: getCustomerRes.data.id,
                         shippingAddress: getCustomerRes.data.shippingAddress,
+                        wallet: getCustomerRes.data.wallet,
                     };
 
                     if (userInfo.shippingAddress.name) userInfo.shippingAddress.addressName = userInfo.shippingAddress.name;

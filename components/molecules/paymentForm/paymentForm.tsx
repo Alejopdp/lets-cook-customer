@@ -97,16 +97,17 @@ export const PaymentForm = (props) => {
 
     const handlePaymentMethodTypeChange = (e) => {
         const value = e.target.value;
+        console.log("A ver que pija pasa type change: ", value);
+
         setPaymentMethod({
-            id: "",
-            stripeId: "",
+            ...form.paymentMethod,
             type: value,
         });
     };
 
     const handleSelectedCardChange = (e) => {
         const value = e.target.value;
-
+        console.log("A ver que pija pasa en selected card: ", value);
         setPaymentMethod({
             ...form.paymentMethod,
             id: value,
