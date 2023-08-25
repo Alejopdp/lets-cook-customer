@@ -100,12 +100,12 @@
             },
             "secondaryButtonText": "Cancel·la",
             "comments": "Introduïu aquí els vostres comentaris sobre la recepta (opcional)"
-        }
-    },
-    "recipes": {
-        "snackbars": {
-            "success": { "ratedRecipe": "Recepta valorada correctament" },
-            "error": { "unexpectedError": "Va passar un error inesperat, intenta novament" }
+        },
+        "recipes": {
+            "snackbars": {
+                "success": { "ratedRecipe": "Recepta valorada correctament" },
+                "error": { "unexpectedError": "Va passar un error inesperat, intenta novament" }
+            }
         }
     }
 }
