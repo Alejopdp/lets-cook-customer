@@ -57,7 +57,11 @@ type ToggleButtonProps = {
 export default function ToggleButton(props: ToggleButtonProps) {
     return (
         <FormGroup>
-            <FormControlLabel label="" control={<IOSSwitch checked={props.isChecked} onChange={props.onChange} />} />
+            <FormControlLabel
+                style={{ marginLeft: 0 }}
+                label=""
+                control={<IOSSwitch checked={props.isChecked} onChange={props.onChange} />}
+            />
         </FormGroup>
     );
 }
