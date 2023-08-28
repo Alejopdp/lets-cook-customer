@@ -1,7 +1,7 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {  useTheme, Icon } from "@material-ui/core";
+import { useTheme, Icon, Box } from "@material-ui/core";
 import { perfil } from "../../lang/index";
 import { swapPlan } from "../../helpers/serverRequests/subscription";
 import { skipOrders } from "../../helpers/serverRequests/order";
@@ -37,7 +37,7 @@ import PendingActionSkeleton from "components/molecules/pendingActionsComponents
 import PlanProfileCardSkeleton from "components/molecules/planProfileCard/planProfileCardSkeleton";
 import { locale } from "types/locale";
 import Link from "next/link";
-import { Restore, Settings, Star,AttachMoney } from "@material-ui/icons";
+import { Restore, Settings, Star, AttachMoney } from "@material-ui/icons";
 
 const Perfil = (props) => {
     const theme = useTheme();
@@ -237,37 +237,47 @@ const Perfil = (props) => {
                                     justify="space-between"
                                     style={{ marginBottom: theme.spacing(5) }}
                                 >
-                                    <Grid item xs={6}>
+                                    <Box
+                                        display="flex"
+                                        justifyContent={"space-between"}
+                                        alignContent={"center"}
+                                        flexWrap={"wrap"}
+                                        width="100%"
+                                    >
                                         <Typography variant="h4" style={{ fontSize: "24px", color: theme.palette.text.black }}>
                                             {lang.greeting} {userInfo.firstName || ""}
                                         </Typography>
-                                    </Grid>
-                                    <Grid item xs={6} style={{ textAlign: "right" }}>
-                                        <TextButton
-                                            style={{ marginRight: theme.spacing(2) }}
-                                            noColor
-                                            icon="time"
-                                            btnText={lang.paymentHistoryBtnText}
-                                            handleClick={() => router.push(localeRoutes[router.locale][Routes["historial-pagos"]])}
-                                        />
-                                        <TextButton
-                                            style={{ marginRight: theme.spacing(2) }}
-                                            icon="settings"
-                                            btnText={lang.settingsBtnText}
-                                            handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}
-                                        />
-                                        <TextButton
-                                            icon="star"
-                                            btnText={lang.rateRecipesBtnText}
-                                            handleClick={() => router.push(`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`)}
-                                        />
-                                        <TextButton
-                                            icon="wallet"
-                                            btnText={lang.rateRecipesBtnText}
-                                            handleClick={() => router.push(`${localeRoutes[router.locale][Routes["monedero"]]}/${userInfo.id}`)}
-                                        />
-
-                                    </Grid>
+                                        <Box>
+                                            <TextButton
+                                                style={{ marginRight: theme.spacing(2) }}
+                                                noColor
+                                                icon="time"
+                                                btnText={lang.paymentHistoryBtnText}
+                                                handleClick={() => router.push(localeRoutes[router.locale][Routes["historial-pagos"]])}
+                                            />
+                                            <TextButton
+                                                style={{ marginRight: theme.spacing(2) }}
+                                                icon="settings"
+                                                btnText={lang.settingsBtnText}
+                                                handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}
+                                            />
+                                            <TextButton
+                                                style={{ marginRight: theme.spacing(2) }}
+                                                icon="star"
+                                                btnText={lang.rateRecipesBtnText}
+                                                handleClick={() =>
+                                                    router.push(`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`)
+                                                }
+                                            />
+                                            <TextButton
+                                                icon="wallet"
+                                                btnText={lang.rateRecipesBtnText}
+                                                handleClick={() =>
+                                                    router.push(`${localeRoutes[router.locale][Routes["monedero"]]}/${userInfo.id}`)
+                                                }
+                                            />
+                                        </Box>
+                                    </Box>
                                 </Grid>
                                 <Carousel
                                     additionalTransfrom={0}
@@ -309,24 +319,52 @@ const Perfil = (props) => {
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Link href={localeRoutes[router.locale][Routes["historial-pagos"]]}><a style={{ display: 'flex', alignItems: 'center' }}><Icon style={{marginRight: 8}} onClick={props.handleClick}><Restore/></Icon><Typography variant="button">{lang.paymentHistoryBtnText}</Typography></a></Link>
+                                        <Link href={localeRoutes[router.locale][Routes["historial-pagos"]]}>
+                                            <a style={{ display: "flex", alignItems: "center" }}>
+                                                <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
+                                                    <Restore />
+                                                </Icon>
+                                                <Typography variant="button">{lang.paymentHistoryBtnText}</Typography>
+                                            </a>
+                                        </Link>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Link href={localeRoutes[router.locale][Routes["configuracion"]]}>
-                                            <a style={{ display: 'flex', alignItems: 'center' }}>
-                                                <Icon style={{ marginRight: 8 }} onClick={props.handleClick}><Settings /></Icon>
-                                                <Typography display="inline" variant="button" >{lang.settingsBtnText}</Typography>
+                                            <a style={{ display: "flex", alignItems: "center" }}>
+                                                <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
+                                                    <Settings />
+                                                </Icon>
+                                                <Typography display="inline" variant="button">
+                                                    {lang.settingsBtnText}
+                                                </Typography>
                                             </a>
                                         </Link>
-</Grid>
-                                    <Grid item xs={12} >
-                                        <Link href={`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`}><a style={{ display: 'flex', alignItems: 'center' }}><Icon style={{marginRight: 8}} onClick={props.handleClick}><Star/></Icon><Typography display="inline" variant="button" >{lang.rateRecipesBtnText}</Typography></a></Link>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Link href={`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`}>
+                                            <a style={{ display: "flex", alignItems: "center" }}>
+                                                <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
+                                                    <Star />
+                                                </Icon>
+                                                <Typography display="inline" variant="button">
+                                                    {lang.rateRecipesBtnText}
+                                                </Typography>
+                                            </a>
+                                        </Link>
                                     </Grid>
 
                                     <Grid item xs={12} style={{ marginBottom: theme.spacing(4) }}>
-                                        <Link href={`${localeRoutes[router.locale][Routes["monedero"]]}?customer=${userInfo.id}`}><a style={{ display: 'flex', alignItems: 'center' }}><Icon style={{marginRight: 8}} onClick={props.handleClick}><AttachMoney/></Icon><Typography display="inline" variant="button" >{lang.walletText}</Typography></a></Link>
+                                        <Link href={`${localeRoutes[router.locale][Routes["monedero"]]}?customer=${userInfo.id}`}>
+                                            <a style={{ display: "flex", alignItems: "center" }}>
+                                                <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
+                                                    <AttachMoney />
+                                                </Icon>
+                                                <Typography display="inline" variant="button">
+                                                    {lang.walletText}
+                                                </Typography>
+                                            </a>
+                                        </Link>
                                     </Grid>
-
 
                                     {isLoading ? (
                                         <>
