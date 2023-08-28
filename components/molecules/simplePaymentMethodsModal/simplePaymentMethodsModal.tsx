@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import { Radio, RadioGroup, FormControlLabel, FormControl, Typography } from "@material-ui/core";
-import Modal from "../../components/atoms/modal/modal";
+import Modal from "../../atoms/modal/modal";
 import { capitalizeFirstLetter } from "helpers/utils/utils";
 
 type SimplePaymentMethodModalProps = {
