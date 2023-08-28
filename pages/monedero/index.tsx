@@ -1,7 +1,18 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useTheme, Typography, Box, Button, TextField, Checkbox, FormGroup, FormControlLabel } from "@material-ui/core";
+import {
+    useTheme,
+    Typography,
+    Box,
+    Button,
+    TextField,
+    Checkbox,
+    FormGroup,
+    FormControlLabel,
+    Grid,
+    useMediaQuery,
+} from "@material-ui/core";
 import { useUserInfoStore } from "../../stores/auth";
 
 // Internal components
@@ -12,13 +23,13 @@ import DataDisplay from "components/molecules/dataDisplay/dataDisplay";
 import InnerSectionLayout from "components/layout/innerSectionLayout";
 import TextButton from "components/atoms/textButton/textButton";
 import WrappedTimePicker from "components/atoms/timePicker";
-import SimplePaymentMethodModal from "../../components/molecules/simplePaymentMethodsModal/simplePaymentMethodsModal";
-import AmountToChargeModal from "../../components/molecules/chargeAmountModal/chargeAmountModal";
 import { chargeMoneyToWallet, updateWallet } from "helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
 import { capitalizeFirstLetter } from "helpers/utils/utils";
 import BackButtonTitle from "components/atoms/backButtonTitle/backButtonTitle";
 import { Routes, localeRoutes } from "lang/routes/routes";
+import AmountToChargeModal from "components/molecules/chargeAmountModal/chargeAmountModal";
+import SimplePaymentMethodModal from "components/molecules/simplePaymentMethodsModal/simplePaymentMethodsModal";
 
 const dayItems = [
     { label: "Lunes", value: 1, checked: false, name: "Lunes" },
@@ -41,6 +52,7 @@ const WalletPage = (props) => {
     const [openPaymentMethod, setOpenPaymentMethod] = useState(false);
     const [isSubmitButtonVisible, setIsSubmitButtonVisible] = useState(false);
     const router = useRouter();
+    const isMdUp = useMediaQuery(useTheme().breakpoints.up("md"));
 
     useEffect(() => {
         if (userInfo && hour === null) {
@@ -122,31 +134,45 @@ const WalletPage = (props) => {
                     >
                         <Box marginBottom={4}>
                             <BoxWithTextButton hideButton>
-                                <Box
-                                    display="flex"
-                                    justifyContent={"space-between"}
-                                    alignContent={"center"}
-                                    width={"100%"}
-                                    height={"100%"}
-                                    alignSelf={"center"}
-                                >
-                                    <Box>
-                                        <Typography variant="h2" color="initial">
-                                            €{userInfo.wallet?.balance ?? 0}
-                                        </Typography>
-                                        <Typography variant="subtitle1" color="initial">
-                                            Saldo actual
-                                        </Typography>
-                                    </Box>
-                                    <Button
-                                        onClick={() => setIsAmountToChargeModalOpen(true)}
-                                        variant="contained"
-                                        color="primary"
-                                        style={{ borderRadius: 60, paddingRight: 32, paddingLeft: 32 }}
-                                    >
-                                        Cargar saldo
-                                    </Button>
-                                </Box>
+                                <Grid container>
+                                    <Grid item xs={12} md={6} diplay={"flex"}>
+                                        <Box
+                                            display={"flex"}
+                                            flexDirection={isMdUp ? "column" : "row"}
+                                            marginX={isMdUp ? "unset" : "auto"}
+                                            width={"fit-content"}
+                                            marginBottom={isMdUp ? 0 : 2}
+                                            alignItems={"center"}
+                                        >
+                                            <Typography
+                                                display="inline"
+                                                variant="h2"
+                                                color="initial"
+                                                style={{ marginRight: isMdUp ? 0 : 16 }}
+                                            >
+                                                €{userInfo.wallet?.balance ?? 0}
+                                            </Typography>
+                                            <Typography display="inline" variant="subtitle1" color="initial">
+                                                Saldo actual
+                                            </Typography>
+                                        </Box>
+                                    </Grid>
+                                    <Grid item xs={12} md={6} style={{ display: "flex" }}>
+                                        <Button
+                                            onClick={() => setIsAmountToChargeModalOpen(true)}
+                                            variant="contained"
+                                            color="primary"
+                                            style={{
+                                                borderRadius: 60,
+                                                paddingRight: 32,
+                                                paddingLeft: 32,
+                                                margin: isMdUp ? "0 0 0 auto" : "0 auto",
+                                            }}
+                                        >
+                                            Cargar saldo
+                                        </Button>
+                                    </Grid>
+                                </Grid>
                             </BoxWithTextButton>
                         </Box>
 
@@ -164,7 +190,7 @@ const WalletPage = (props) => {
                                         }}
                                     />
                                     <Typography
-                                        variant="h4"
+                                        variant={isMdUp ? "h4" : "subtitle1"}
                                         color="initial"
                                         style={{ cursor: "pointer", userSelect: "none" }}
                                         onClick={() => {
@@ -187,7 +213,7 @@ const WalletPage = (props) => {
                                     >
                                         Importe a Cargar
                                     </Typography>
-                                    <Box width={"50%"}>
+                                    <Box width={isMdUp ? "50%" : "100%"}>
                                         <TextField
                                             fullWidth
                                             id="outlined-basic"
@@ -245,7 +271,7 @@ const WalletPage = (props) => {
                                             />
                                         ))}
                                     </FormGroup>
-                                    <Box width={"50%"}>
+                                    <Box width={isMdUp ? "50%" : "100%"}>
                                         <WrappedTimePicker
                                             value={hour}
                                             onChange={(date) => {
@@ -282,7 +308,7 @@ const WalletPage = (props) => {
                                         borderRadius: 60,
                                         paddingRight: 32,
                                         paddingLeft: 32,
-                                        marginLeft: "auto",
+                                        margin: isMdUp ? "0 0 0 auto" : "auto",
                                         visibility: isSubmitButtonVisible ? "visible" : "hidden",
                                     }}
                                 >
