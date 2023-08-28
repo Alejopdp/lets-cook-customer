@@ -7,7 +7,16 @@ import {  useTheme } from "@material-ui/core/styles";
 import GeneralBox from "../../atoms/generalBox/generalBox";
 import TextButton from "../../atoms/textButton/textButton";
 
-const BoxWithTextButton = (props) => {
+type BoxWithTextButtonProps = {
+    hideButton: boolean;
+    status?: "SUBSCRIPTION_DELIVERED" | "SUBSCRIPTION_CANCELLED" | "SUBSCRIPTION_ACTIVE";
+    btnText?: string;
+    children: React.ReactNode;
+    handleClick?: () => void;
+    style?: React.CSSProperties;
+};
+
+const BoxWithTextButton = (props: BoxWithTextButtonProps) => {
     const theme = useTheme();
 
     return (
@@ -28,10 +37,6 @@ const BoxWithTextButton = (props) => {
             )}
         </GeneralBox>
     );
-};
-
-BoxWithTextButton.propTypes = {
-    btnText: PropTypes.string.isRequired,
 };
 
 export default BoxWithTextButton;
