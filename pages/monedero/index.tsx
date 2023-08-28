@@ -1,51 +1,336 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {  useTheme, Icon, Container, Typography, Box } from "@material-ui/core";
-import { perfil } from "../../lang/index";
-import { swapPlan } from "../../helpers/serverRequests/subscription";
-import { skipOrders } from "../../helpers/serverRequests/order";
-import { getSubscriptionById } from "../../helpers/serverRequests/userProfile";
-import { getDataForSwappingAPlan } from "../../helpers/serverRequests/plans";
+import { useTheme, Typography, Box, Button, TextField, Checkbox, FormGroup, FormControlLabel } from "@material-ui/core";
 import { useUserInfoStore } from "../../stores/auth";
-import { useSnackbar } from "notistack";
-import { reorderPlan } from "../../helpers/serverRequests/subscription";
-import { getProfileInfo } from "../../helpers/serverRequests/userProfile";
-
-// External Components
-import Grid from "@material-ui/core/Grid";
-
 
 // Internal components
-import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import { Layout } from "../../components/layout/index";
-import EmptyState from "components/molecules/emptyState/emptyState";
-import Image from "next/image";
+import BoxWithTextButton from "components/molecules/specificBox/boxWithTextButton";
+import ToggleButton from "components/atoms/toggleButton";
+import DataDisplay from "components/molecules/dataDisplay/dataDisplay";
+import InnerSectionLayout from "components/layout/innerSectionLayout";
+import TextButton from "components/atoms/textButton/textButton";
+import WrappedTimePicker from "components/atoms/timePicker";
+import SimplePaymentMethodModal from "./simplePaymentMethodsModal";
+import AmountToChargeModal from "./chargeAmountModal";
+import { chargeMoneyToWallet, updateWallet } from "helpers/serverRequests/customer";
+import { useSnackbar } from "notistack";
+import { capitalizeFirstLetter } from "helpers/utils/utils";
+import BackButtonTitle from "components/atoms/backButtonTitle/backButtonTitle";
+import { Routes, localeRoutes } from "lang/routes/routes";
 
-const Perfil = (props) => {
+const dayItems = [
+    { label: "Lunes", value: 1, checked: false, name: "Lunes" },
+    { label: "Martes", value: 2, checked: false, name: "Martes" },
+    { label: "Miércoles", value: 3, checked: false, name: "Miércoles" },
+    { label: "Jueves", value: 4, checked: false, name: "Jueves" },
+    { label: "Viernes", value: 5, checked: false, name: "Viernes" },
+    { label: "Sábado", value: 6, checked: false, name: "Sábado" },
+    { label: "Domingo", value: 0, checked: false, name: "Domingo" },
+];
+
+const WalletPage = (props) => {
     const theme = useTheme();
-    const userInfo = useUserInfoStore((state) => state.userInfo);
+    const { enqueueSnackbar } = useSnackbar();
+    const [hour, setHour] = useState<Date | null>(null);
+    const { userInfo, setUserInfo } = useUserInfoStore((state) => ({ userInfo: state.userInfo, setUserInfo: state.setuserInfo }));
+    const [isAmountToChargeModalOpen, setIsAmountToChargeModalOpen] = useState(false);
+    const [isChargingMoney, setIsChargingMoney] = useState(false);
+    const [isSubmittingUpdate, setIsSubmittingUpdate] = useState(false);
+    const [openPaymentMethod, setOpenPaymentMethod] = useState(false);
+    const [isSubmitButtonVisible, setIsSubmitButtonVisible] = useState(false);
     const router = useRouter();
 
-    console.log("User info: ", userInfo)
+    useEffect(() => {
+        if (userInfo && hour === null) {
+            setHour(
+                userInfo.wallet?.datesOfCharge[0]
+                    ? new Date(
+                          0,
+                          0,
+                          0,
+                          parseInt(userInfo.wallet?.datesOfCharge[0].hour),
+                          parseInt(userInfo.wallet?.datesOfCharge[0].minute)
+                      )
+                    : null
+            );
+        }
+    }, [userInfo]);
+
+    async function handleSelectPaymentMethod(paymentMethodId: string) {
+        setUserInfo({ ...userInfo, wallet: { ...userInfo.wallet, paymentMethodForCharging: paymentMethodId } });
+        setIsSubmitButtonVisible(true);
+
+        setOpenPaymentMethod(false);
+    }
+
+    async function handleChargeMoney(amountToCharge: number, paymentMethodId?: string) {
+        setIsChargingMoney(true);
+        const res = await chargeMoneyToWallet(userInfo.id, amountToCharge, paymentMethodId);
+
+        if (res.status === 200) {
+            setUserInfo({
+                ...userInfo,
+                wallet: {
+                    ...userInfo.wallet,
+                    //@ts-ignore
+                    balance: parseFloat(userInfo.wallet.balance ?? "0") + parseFloat(amountToCharge),
+                },
+            });
+            enqueueSnackbar("Saldo cargado correctamente", { variant: "success" });
+            setIsAmountToChargeModalOpen(false);
+        } else {
+            enqueueSnackbar(res.data.message ?? "Ocurrió un error al cargar el dinero", { variant: "error" });
+        }
+        setIsChargingMoney(false);
+    }
+
+    async function submitUpdateWallet() {
+        setIsSubmittingUpdate(true);
+
+        const res = await updateWallet(userInfo.id, {
+            ...userInfo.wallet,
+            datesOfCharge: userInfo.wallet?.datesOfCharge.map((date) => ({
+                ...date,
+                hour: new Date(hour).getHours().toString(),
+                minute: new Date(hour).getMinutes().toString(),
+            })),
+        });
+
+        if (res.status === 200) {
+            enqueueSnackbar("Monedero actualizado correctamente", { variant: "success" });
+            setIsSubmitButtonVisible(false);
+        } else {
+            enqueueSnackbar(res.data.message ?? "Ocurrió un error al actualizar el monedero", { variant: "error" });
+        }
+        setIsSubmittingUpdate(false);
+    }
 
     return (
         <>
             <Layout disableCallToActionSection>
-               
-            <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignContent={"center"} width={"100%"} margin={"auto"}>
+                <InnerSectionLayout containerMaxWidth="lg">
+                    <BackButtonTitle url={localeRoutes[router.locale][Routes.perfil]} title={"Monedero"} />
+                    <Box
+                        display={"flex"}
+                        flexDirection={"column"}
+                        justifyContent={"center"}
+                        alignContent={"center"}
+                        width={"90%"}
+                        margin={"auto"}
+                    >
+                        <Box marginBottom={4}>
+                            <BoxWithTextButton hideButton>
+                                <Box
+                                    display="flex"
+                                    justifyContent={"space-between"}
+                                    alignContent={"center"}
+                                    width={"100%"}
+                                    height={"100%"}
+                                    alignSelf={"center"}
+                                >
+                                    <Box>
+                                        <Typography variant="h2" color="initial">
+                                            €{userInfo.wallet?.balance ?? 0}
+                                        </Typography>
+                                        <Typography variant="subtitle1" color="initial">
+                                            Saldo actual
+                                        </Typography>
+                                    </Box>
+                                    <Button
+                                        onClick={() => setIsAmountToChargeModalOpen(true)}
+                                        variant="contained"
+                                        color="primary"
+                                        style={{ borderRadius: 60, paddingRight: 32, paddingLeft: 32 }}
+                                    >
+                                        Cargar saldo
+                                    </Button>
+                                </Box>
+                            </BoxWithTextButton>
+                        </Box>
 
-                <Image unoptimized src={props.image || "/wallet-empty-state.svg"} alt="búsqueda vacía" width={150} height={150} />
-                <Typography variant="h6" align="center" color="textPrimary" style={{ marginTop: theme.spacing(3) }}>
-                    Monedero
-                </Typography>
+                        <BoxWithTextButton hideButton>
+                            <Box display={"flex"} flexDirection={"column"}>
+                                <Box display="flex" marginBottom={5} alignContent={"center"} alignItems={"center"}>
+                                    <ToggleButton
+                                        isChecked={userInfo.wallet?.isEnabled}
+                                        onChange={() => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                wallet: { ...userInfo.wallet, isEnabled: !userInfo.wallet.isEnabled },
+                                            });
+                                            setIsSubmitButtonVisible(true);
+                                        }}
+                                    />
+                                    <Typography
+                                        variant="h4"
+                                        color="initial"
+                                        style={{ cursor: "pointer", userSelect: "none" }}
+                                        onClick={() => {
+                                            setUserInfo({
+                                                ...userInfo,
+                                                wallet: { ...userInfo.wallet, isEnabled: !userInfo.wallet.isEnabled },
+                                            });
+
+                                            setIsSubmitButtonVisible(true);
+                                        }}
+                                    >
+                                        Recarga autómatica habilitada
+                                    </Typography>
+                                </Box>
+                                <Box marginBottom={4}>
+                                    <Typography
+                                        variant="subtitle2"
+                                        color="textSecondary"
+                                        style={{ fontSize: "14px", marginBottom: theme.spacing(1) }}
+                                    >
+                                        Importe a Cargar
+                                    </Typography>
+                                    <Box width={"50%"}>
+                                        <TextField
+                                            fullWidth
+                                            id="outlined-basic"
+                                            name="amountCharge"
+                                            label="Importe"
+                                            type="number"
+                                            variant="outlined"
+                                            value={userInfo.wallet.amountToCharge}
+                                            onChange={(e) => {
+                                                setUserInfo({
+                                                    ...userInfo,
+                                                    wallet: { ...userInfo.wallet, amountToCharge: parseInt(e.target.value) },
+                                                });
+                                                setIsSubmitButtonVisible(true);
+                                            }}
+                                        />
+                                    </Box>
+                                </Box>
+                                <Box marginBottom={4}>
+                                    <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px" }}>
+                                        Días y horario de carga
+                                    </Typography>
+                                    <FormGroup style={{ display: "flex", flexDirection: "row", marginBottom: 16 }}>
+                                        {dayItems.map((item) => (
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        color="primary"
+                                                        checked={userInfo.wallet?.datesOfCharge.some(
+                                                            (date) => date.dayNumber === item.value
+                                                        )}
+                                                        onChange={() => {
+                                                            const newDatesOfCharge = [...userInfo.wallet?.datesOfCharge];
+                                                            if (newDatesOfCharge.some((date) => date.dayNumber === item.value)) {
+                                                                newDatesOfCharge.splice(
+                                                                    newDatesOfCharge.findIndex((date) => date.dayNumber === item.value),
+                                                                    1
+                                                                );
+                                                            } else {
+                                                                newDatesOfCharge.push({
+                                                                    dayNumber: item.value,
+                                                                    hour: "",
+                                                                    minute: "",
+                                                                });
+                                                            }
+                                                            setUserInfo({
+                                                                ...userInfo,
+                                                                wallet: { ...userInfo.wallet, datesOfCharge: newDatesOfCharge },
+                                                            });
+                                                            setIsSubmitButtonVisible(true);
+                                                        }}
+                                                    />
+                                                }
+                                                label={item.label}
+                                            />
+                                        ))}
+                                    </FormGroup>
+                                    <Box width={"50%"}>
+                                        <WrappedTimePicker
+                                            value={hour}
+                                            onChange={(date) => {
+                                                setHour(date);
+                                                setIsSubmitButtonVisible(true);
+                                            }}
+                                            label="Horario de carga"
+                                        />
+                                    </Box>
+                                </Box>
+                                <Box marginBottom={4}>
+                                    <DataDisplay
+                                        title={"Tarjeta"}
+                                        text={
+                                            capitalizeFirstLetter(
+                                                userInfo.paymentMethods.find((pm) => pm.id === userInfo.wallet?.paymentMethodForCharging)
+                                                    ?.card ?? ""
+                                            ) ?? "No hay tarjeta seleccionada"
+                                        }
+                                        style={{ marginBottom: theme.spacing(2) }}
+                                    />
+                                    <TextButton
+                                        btnText={"Modificar tarjeta"}
+                                        style={{ marginTop: theme.spacing(2), fontWeight: "600" }}
+                                        handleClick={() => setOpenPaymentMethod(true)}
+                                    />
+                                </Box>
+                                <Button
+                                    onClick={submitUpdateWallet}
+                                    disabled={isSubmittingUpdate}
+                                    variant="contained"
+                                    color="primary"
+                                    style={{
+                                        borderRadius: 60,
+                                        paddingRight: 32,
+                                        paddingLeft: 32,
+                                        marginLeft: "auto",
+                                        visibility: isSubmitButtonVisible ? "visible" : "hidden",
+                                    }}
+                                >
+                                    Guardar
+                                </Button>
+                            </Box>
+                        </BoxWithTextButton>
+
+                        {isAmountToChargeModalOpen && (
+                            <AmountToChargeModal
+                                open={isAmountToChargeModalOpen}
+                                handleClose={() => setIsAmountToChargeModalOpen(false)}
+                                handleSubmit={handleChargeMoney}
+                                primaryButtonText={"Guardar"}
+                                secondaryButtonText={"Cancelar"}
+                                title="Cargar saldo"
+                                paymentMethods={userInfo.paymentMethods}
+                                walletPaymentMethodId={userInfo.wallet?.paymentMethodForCharging}
+                                isSubmitting={isChargingMoney}
+                            />
+                        )}
+
+                        {openPaymentMethod && (
+                            <SimplePaymentMethodModal
+                                open={openPaymentMethod}
+                                handleClose={() => setOpenPaymentMethod(false)}
+                                selectedWalletPaymentMethodId={userInfo.wallet?.paymentMethodForCharging}
+                                handleSelectPaymentMethod={handleSelectPaymentMethod}
+                                primaryButtonText={"Guardar"}
+                                secondaryButtonText={"Cancelar"}
+                                initialData={userInfo.paymentMethods}
+                                customerId={userInfo.id}
+                                title="Seleccionar método de cobro"
+                            />
+                        )}
+                        {/* 
+                    <Image unoptimized src={props.image || "/wallet-empty-state.svg"} alt="búsqueda vacía" width={150} height={150} />
+                    <Typography variant="h6" align="center" color="textPrimary" style={{ marginTop: theme.spacing(3) }}>
+                        Monedero
+                    </Typography>
                     <Typography variant="body2" align="center" color="textSecondary" style={{ marginTop: theme.spacing(1) }}>
                         Proximamente
-                    </Typography>
-            </Box>
+                    </Typography> */}
+                    </Box>
+                </InnerSectionLayout>
             </Layout>
         </>
     );
 };
 
-export default Perfil;
+export default WalletPage;
