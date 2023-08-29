@@ -45,8 +45,8 @@ const AmountToChargeModal = (props: ChargeAmountModal) => {
                             label="Importe"
                             InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
                             type="number"
-                            error={amountToCharge < 5}
-                            helperText={amountToCharge < 5 ? "El importe mínimo es de $5" : ""}
+                            error={!!amountToCharge && amountToCharge < 5}
+                            helperText={!!amountToCharge && amountToCharge < 5 ? "El importe mínimo es de $5" : ""}
                             FormHelperTextProps={{ style: { fontStyle: "italic", marginLeft: 0 } }}
                             variant="outlined"
                             value={amountToCharge}
@@ -70,7 +70,9 @@ const AmountToChargeModal = (props: ChargeAmountModal) => {
                                 <FormControlLabel
                                     value={paymentMethod.id}
                                     control={<Radio color="primary" />}
-                                    label={`${capitalizeFirstLetter(paymentMethod.card)} - ${paymentMethod.expirationDate}`}
+                                    label={`${paymentMethod.card ? capitalizeFirstLetter(paymentMethod.card) : paymentMethod.card} - ${
+                                        paymentMethod.expirationDate
+                                    }`}
                                     checked={paymentMethod.id === selectedCard}
                                 />
                             ))}

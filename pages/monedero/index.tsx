@@ -302,12 +302,10 @@ const WalletPage = (props) => {
                                 <Box marginBottom={4}>
                                     <DataDisplay
                                         title={"Tarjeta"}
-                                        text={
-                                            capitalizeFirstLetter(
-                                                userInfo.paymentMethods.find((pm) => pm.id === userInfo.wallet?.paymentMethodForCharging)
-                                                    ?.card ?? ""
-                                            ) ?? "No hay tarjeta seleccionada"
-                                        }
+                                        text={capitalizeFirstLetter(
+                                            userInfo.paymentMethods.find((pm) => pm.id === userInfo.wallet?.paymentMethodForCharging)
+                                                ?.card ?? "No hay tarjeta seleccionada"
+                                        )}
                                         style={{ marginBottom: theme.spacing(2) }}
                                     />
                                     <TextButton
