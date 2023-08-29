@@ -44,7 +44,9 @@ const SimplePaymentMethodModal = (props: SimplePaymentMethodModalProps) => {
                             <FormControlLabel
                                 value={paymentMethod.id}
                                 control={<Radio color="primary" />}
-                                label={`${capitalizeFirstLetter(paymentMethod.card)} - ${paymentMethod.expirationDate}`}
+                                label={`${paymentMethod.card ? capitalizeFirstLetter(paymentMethod.card) : paymentMethod.card} - ${
+                                    paymentMethod.expirationDate
+                                }`}
                                 checked={paymentMethod.id === selectedCard}
                             />
                         ))}
