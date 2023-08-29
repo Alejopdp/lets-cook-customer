@@ -112,6 +112,17 @@ const WalletPage = (props) => {
 
         if (res.status === 200) {
             enqueueSnackbar("Monedero actualizado correctamente", { variant: "success" });
+            setUserInfo({
+                ...userInfo,
+                wallet: {
+                    ...userInfo.wallet,
+                    datesOfCharge: userInfo.wallet?.datesOfCharge.map((date) => ({
+                        ...date,
+                        hour: new Date(hour).getHours().toString(),
+                        minute: new Date(hour).getMinutes().toString(),
+                    })),
+                },
+            });
             setIsSubmitButtonVisible(false);
         } else {
             enqueueSnackbar(res.data.message ?? "Ocurrió un error al actualizar el monedero", { variant: "error" });
