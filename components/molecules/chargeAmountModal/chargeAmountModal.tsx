@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormControl, TextField, Typography, Box, RadioGroup, FormControlLabel, Radio } from "@material-ui/core";
+import { FormControl, TextField, Typography, Box, RadioGroup, FormControlLabel, Radio, InputAdornment } from "@material-ui/core";
 import Modal from "../../atoms/modal/modal";
 import { IPaymentMethod } from "@stores";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
@@ -30,7 +30,7 @@ const AmountToChargeModal = (props: ChargeAmountModal) => {
             handlePrimaryButtonClick={() => props.handleSubmit(amountToCharge, selectedCard)}
             primaryButtonText={props.primaryButtonText}
             secondaryButtonText={props.secondaryButtonText}
-            disabled={props.isSubmitting}
+            disabled={props.isSubmitting || amountToCharge < 5 || !!!amountToCharge}
         >
             <FormControl component="fieldset" style={{ width: "100%" }}>
                 <Box marginBottom={4}>
@@ -43,7 +43,11 @@ const AmountToChargeModal = (props: ChargeAmountModal) => {
                             id="outlined-basic"
                             name="amountCharge"
                             label="Importe"
+                            InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
                             type="number"
+                            error={amountToCharge < 5}
+                            helperText={amountToCharge < 5 ? "El importe mínimo es de $5" : ""}
+                            FormHelperTextProps={{ style: { fontStyle: "italic", marginLeft: 0 } }}
                             variant="outlined"
                             value={amountToCharge}
                             onChange={(e) => setAmountToCharge(parseFloat(e.target.value))}

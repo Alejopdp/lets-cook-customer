@@ -1,5 +1,6 @@
 // Utils & Config
 import React, { useState, useEffect } from "react";
+import Big from "big.js";
 import { useRouter } from "next/router";
 import {
     useTheme,
@@ -12,6 +13,7 @@ import {
     FormControlLabel,
     Grid,
     useMediaQuery,
+    InputAdornment,
 } from "@material-ui/core";
 import { useUserInfoStore } from "../../stores/auth";
 
@@ -87,7 +89,7 @@ const WalletPage = (props) => {
                 wallet: {
                     ...userInfo.wallet,
                     //@ts-ignore
-                    balance: parseFloat(userInfo.wallet.balance ?? "0") + parseFloat(amountToCharge),
+                    balance: Number(new Big(parseFloat(userInfo.wallet.balance ?? "0")).plus(new Big(parseFloat(amountToCharge)))),
                 },
             });
             enqueueSnackbar("Saldo cargado correctamente", { variant: "success" });
@@ -233,10 +235,14 @@ const WalletPage = (props) => {
                                             type="number"
                                             variant="outlined"
                                             value={userInfo.wallet.amountToCharge}
+                                            InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+                                            error={userInfo.wallet.amountToCharge < 5}
+                                            helperText={userInfo.wallet?.amountToCharge < 5 ? "El importe mínimo es de $5" : ""}
+                                            FormHelperTextProps={{ style: { fontStyle: "italic", marginLeft: 0 } }}
                                             onChange={(e) => {
                                                 setUserInfo({
                                                     ...userInfo,
-                                                    wallet: { ...userInfo.wallet, amountToCharge: parseInt(e.target.value) },
+                                                    wallet: { ...userInfo.wallet, amountToCharge: parseFloat(e.target.value) },
                                                 });
                                                 setIsSubmitButtonVisible(true);
                                             }}
@@ -320,7 +326,7 @@ const WalletPage = (props) => {
                                         paddingRight: 32,
                                         paddingLeft: 32,
                                         margin: isMdUp ? "0 0 0 auto" : "auto",
-                                        visibility: isSubmitButtonVisible ? "visible" : "hidden",
+                                        visibility: isSubmitButtonVisible && userInfo.wallet?.amountToCharge >= 5 ? "visible" : "hidden",
                                     }}
                                 >
                                     Guardar
