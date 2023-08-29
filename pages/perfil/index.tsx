@@ -262,20 +262,22 @@ const Perfil = (props) => {
                                                 handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}
                                             />
                                             <TextButton
-                                                style={{ marginRight: theme.spacing(2) }}
+                                                style={{ marginRight: userInfo.wallet ? "initial" : theme.spacing(2) }}
                                                 icon="star"
                                                 btnText={lang.rateRecipesBtnText}
                                                 handleClick={() =>
                                                     router.push(`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`)
                                                 }
                                             />
-                                            <TextButton
-                                                icon="wallet"
-                                                btnText={lang.rateRecipesBtnText}
-                                                handleClick={() =>
-                                                    router.push(`${localeRoutes[router.locale][Routes["monedero"]]}/${userInfo.id}`)
-                                                }
-                                            />
+                                            {userInfo.wallet && (
+                                                <TextButton
+                                                    icon="wallet"
+                                                    btnText={lang.rateRecipesBtnText}
+                                                    handleClick={() =>
+                                                        router.push(`${localeRoutes[router.locale][Routes["monedero"]]}/${userInfo.id}`)
+                                                    }
+                                                />
+                                            )}
                                         </Box>
                                     </Box>
                                 </Grid>
@@ -340,7 +342,7 @@ const Perfil = (props) => {
                                             </a>
                                         </Link>
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid item xs={12} style={{ marginBottom: userInfo.wallet ? "initial" : theme.spacing(4) }}>
                                         <Link href={`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`}>
                                             <a style={{ display: "flex", alignItems: "center" }}>
                                                 <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
@@ -353,18 +355,20 @@ const Perfil = (props) => {
                                         </Link>
                                     </Grid>
 
-                                    <Grid item xs={12} style={{ marginBottom: theme.spacing(4) }}>
-                                        <Link href={`${localeRoutes[router.locale][Routes["monedero"]]}?customer=${userInfo.id}`}>
-                                            <a style={{ display: "flex", alignItems: "center" }}>
-                                                <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
-                                                    <AttachMoney />
-                                                </Icon>
-                                                <Typography display="inline" variant="button">
-                                                    {lang.walletText}
-                                                </Typography>
-                                            </a>
-                                        </Link>
-                                    </Grid>
+                                    {userInfo.wallet && (
+                                        <Grid item xs={12} style={{ marginBottom: theme.spacing(4) }}>
+                                            <Link href={`${localeRoutes[router.locale][Routes["monedero"]]}?customer=${userInfo.id}`}>
+                                                <a style={{ display: "flex", alignItems: "center" }}>
+                                                    <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
+                                                        <AttachMoney />
+                                                    </Icon>
+                                                    <Typography display="inline" variant="button">
+                                                        {lang.walletText}
+                                                    </Typography>
+                                                </a>
+                                            </Link>
+                                        </Grid>
+                                    )}
 
                                     {isLoading ? (
                                         <>
