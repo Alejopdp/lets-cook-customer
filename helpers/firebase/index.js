@@ -25,6 +25,7 @@ export const loginWithGoogleAndGetIdToken = async () => {
         // console.log("A ver el token: ", token)
         return { token: "" };
     } catch (error) {
+        console.log("Error: ", error)
         return { error };
     }
 };

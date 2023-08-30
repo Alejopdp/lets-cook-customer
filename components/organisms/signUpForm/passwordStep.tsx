@@ -1,6 +1,5 @@
 // Utils & Config
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { isPassword } from "../../../helpers/regex/regex";
 import { useRouter } from "next/router";
 import * as langs from "../../../lang";
@@ -21,11 +20,25 @@ import { loginWithSocialMedia } from "helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
 import { locale } from "types/locale";
 
-const PasswordStep = (props) => {
+type PasswordStepProps = {
+    password: string;
+    authorize: boolean;
+    sendInfo: boolean;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSubmit: () => void;
+    handleCheckboxesChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleOpenTycModal: () => void;
+    handleOpenPrivacyPolicyModal: () => void;
+    signUpRedirect?: boolean;
+    handleSignUp?: (userInfo) => void;
+    isLoading?: boolean;
+    source?: string;
+};
+
+const PasswordStep = (props: PasswordStepProps) => {
     const router = useRouter();
     const theme = useTheme();
     const lang = langs.passwordStep[router.locale as locale];
-    const [serverError, setserverError] = useState("");
     const { saveInLocalStorage } = useLocalStorage();
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const { enqueueSnackbar } = useSnackbar();
@@ -40,7 +53,6 @@ const PasswordStep = (props) => {
             props.signUpRedirect ? router.push("/") : "";
             props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
         } else {
-            setserverError(res.data.message);
             enqueueSnackbar(res && res.data ? res.data.message : lang.snackbars.error.unexpectedError, { variant: "error" });
         }
     };
@@ -98,15 +110,6 @@ const PasswordStep = (props) => {
             </Grid>
         </>
     );
-};
-
-PasswordStep.propTypes = {
-    password: PropTypes.string.isRequired,
-    authorize: PropTypes.bool.isRequired,
-    sendInfo: PropTypes.bool.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    handleCheckboxesChange: PropTypes.func.isRequired,
 };
 
 export default PasswordStep;

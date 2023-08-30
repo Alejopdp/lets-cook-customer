@@ -1,9 +1,8 @@
 // Utils & config
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").signupForm;
-import { useUserInfoStore, useAuthStore } from "../../../stores/auth";
+import { useUserInfoStore, useAuthStore, IUserInfoFields } from "../../../stores/auth";
 import cookies from "js-cookie";
 
 // Internal components
@@ -19,7 +18,15 @@ import PrivacyPolicyModal from "../../molecules/legalModals/privacyPolicyModal";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import useAnalytics from "hooks/useAnalytics";
 
-const SignUpForm = (props) => {
+type SignUpFormProps = {
+    handleCreateAccount: () => void;
+    handleRedirect: () => void;
+    handleSignUp: (userInfo: IUserInfoFields, accpetsMarketing?: boolean) => void;
+    redirect: boolean;
+    source: string;
+};
+
+const SignUpForm = (props: SignUpFormProps) => {
     const { trackSignUpEmailInput, trackSignUpPasswordInput, trackAlreadyHaveAccountClick } = useAnalytics();
     const [currentStep, setcurrentStep] = useState(0);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
@@ -84,7 +91,7 @@ const SignUpForm = (props) => {
     };
 
     const handleRedirect = () => {
-        trackAlreadyHaveAccountClick(source);
+        trackAlreadyHaveAccountClick(props.source);
         router.push(localeRoutes[router.locale][Routes["iniciar-sesion"]]);
     };
 
@@ -170,20 +177,13 @@ const SignUpForm = (props) => {
                     text={lang.register.text}
                     boldText={lang.register.boldText}
                     handleRedirect={props.handleRedirect || handleRedirect}
+                    isSubmitting={false}
                 />
             </FormPaper>
             <TermsAndConditionsModal open={openTycModal} handleClose={handleCloseTycModal} />
             <PrivacyPolicyModal open={openPrivacyPolicyModal} handleClose={handleClosePrivacyPolicyModal} />
         </>
     );
-};
-
-SignUpForm.propTypes = {
-    handleCreateAccount: PropTypes.func,
-    handleRedirect: PropTypes.func,
-    handleSignUp: PropTypes.func,
-    redirect: PropTypes.bool,
-    source: PropTypes.string,
 };
 
 export default SignUpForm;
