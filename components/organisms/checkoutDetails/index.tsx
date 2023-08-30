@@ -231,7 +231,7 @@ export default function CheckoutDetails(props) {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Typography variant="body2" style={{ fontSize: "13px" }}>
-                                {lang.reviewsText.firstText} <strong>150 {lang.reviewsText.secondText}</strong>
+                                {lang.reviewsText.firstText} <strong>428 {lang.reviewsText.secondText}</strong>
                             </Typography>
                         </Grid>
                     </Grid>

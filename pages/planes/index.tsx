@@ -12,6 +12,8 @@ import CrossSellingStep from "components/organisms/buyForm/crossSellingStep";
 import { Box, CircularProgress } from "@material-ui/core";
 import { useAuth } from "contexts/auth.context";
 import { Routes, localeRoutes } from "lang/routes/routes";
+import { subscribeToMailingListGroup, updateSubscriber } from "helpers/serverRequests/mailingList";
+import { MAILERLITE_MAILING_LIST_GROUP } from "constants/constants";
 
 export interface PlansErrors {
     plans?: string;
@@ -40,9 +42,13 @@ export interface PlanesPageProps {
 
 const PlanesPage = memo((props: PlanesPageProps) => {
     const router = useRouter();
-    const {step, moveNSteps,selectPlanRecipes,setPlanCode, setPlanVariant} = useBuyFlow(({ step, moveNSteps,selectPlanRecipes,setPlanCode, setPlanVariant   }) => {return {step, moveNSteps,selectPlanRecipes,setPlanCode, setPlanVariant}});
+    const { step, moveNSteps, selectPlanRecipes, setPlanCode, setPlanVariant } = useBuyFlow(
+        ({ step, moveNSteps, selectPlanRecipes, setPlanCode, setPlanVariant }) => {
+            return { step, moveNSteps, selectPlanRecipes, setPlanCode, setPlanVariant };
+        }
+    );
     const userInfo = useUserInfoStore((state) => state.userInfo);
-    const {isCheckingRedirect, handleLoginRedirect, setIsCheckingRedirect} = useAuth()
+    const { isCheckingRedirect, handleLoginRedirect, setIsCheckingRedirect } = useAuth();
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const { setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon, resetBuyFlowState } = useBuyFlow(
         ({ setDeliveryInfo, setPaymentMethod, setShowRegister, setWeekLabel, setCoupon, resetBuyFlowState }) => ({
@@ -67,7 +73,13 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         redirect: {},
     });
 
-    const getPlanData = (): { peopleLabels: string; planName: string; planDescription: string; canChooseRecipes: boolean; planRecipes: Recipes[] } => {
+    const getPlanData = (): {
+        peopleLabels: string;
+        planName: string;
+        planDescription: string;
+        canChooseRecipes: boolean;
+        planRecipes: Recipes[];
+    } => {
         const planSelect = data.plans.find((plan) => plan.slug === data.planUrlParams.slug);
 
         const peopleLabels = planSelect.variants?.reduce((_planSize, _variant) => {
@@ -103,7 +115,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             data.planUrlParams.iconLinealWithColorUrl
         );
         setPlanVariant(data.variant);
-    }
+    };
 
     useEffect(() => {
         const initialize = async () => {
@@ -120,17 +132,17 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                     aditionalsPlans.push(plan);
                 }
             });
-            const searchParams = new URL(window.location.href).searchParams
-            const slug = searchParams.get('planSlug') || mainPlans.find((plan) => plan.isDefaultAtCheckout)?.slug || "";
+            const searchParams = new URL(window.location.href).searchParams;
+            const slug = searchParams.get("planSlug") || mainPlans.find((plan) => plan.isDefaultAtCheckout)?.slug || "";
             const planVariantData = getPlanVariant(
                 { slug, recipeQty: searchParams.get("recetas") || 0, peopleQty: searchParams.get("personas") || 0 },
                 mainPlans
             );
-            
+
             if (!window.location.href.includes("planSlug") && planVariantData.redirect && !!planVariantData.redirect.destination) {
-                const searchParams = new URLSearchParams(planVariantData.redirect.destination)
+                const searchParams = new URLSearchParams(planVariantData.redirect.destination);
                 const query = Object.fromEntries(searchParams.entries());
-                router.replace({pathname: localeRoutes[router.locale][Routes.planes], query});
+                router.replace({ pathname: localeRoutes[router.locale][Routes.planes], query });
             }
 
             setWeekLabel(_plans.data.weekLabel);
@@ -175,17 +187,16 @@ const PlanesPage = memo((props: PlanesPageProps) => {
     useEffect(() => {
         if (!isAuthenticated && data.plans.length > 0) {
             handleLoginRedirect(window.location.href, () => {
-                initializePlanWithParams()
-                moveNSteps(2)
-            })
+                initializePlanWithParams();
+                moveNSteps(2);
+            });
         }
 
         if (isAuthenticated) {
             setShowRegister(false);
-            setIsCheckingRedirect(false)
+            setIsCheckingRedirect(false);
         }
-
-    }, [data.plans, isAuthenticated])
+    }, [data.plans, isAuthenticated]);
 
     useEffect(() => {
         setDeliveryInfo({
@@ -209,12 +220,6 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         userInfo.shippingAddress?.longitude,
     ]);
 
-    // useEffect(() => {
-    //     if (isAuthenticated) {
-    //         setShowRegister(false);
-    //     }
-    // }, [isAuthenticated]);
-console.log("DATA RECIPES: ", data.recipes)
     const steps = [
         <SelectPlanStep initialPlanSettings={data.planUrlParams} plans={data.plans} variant={data.variant} recipes={data.recipes} />,
         <RegisterUserStep />,
@@ -229,7 +234,23 @@ console.log("DATA RECIPES: ", data.recipes)
             <CrossSellingStep />
         </Box>
     ) : (
-        <BuyFlowLayout isInitializing={isInitializing}>{isCheckingRedirect ? <Box position={"fixed"} top={"50%"} left={"50%"}><CircularProgress /></Box> : steps[step]}</BuyFlowLayout>
+        <BuyFlowLayout isInitializing={isInitializing}>
+            {isCheckingRedirect ? (
+                <Box
+                    position={"fixed"}
+                    top={"50%"}
+                    left={"50%"}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    style={{ transform: "translate(-50%, -50%)" }}
+                >
+                    <CircularProgress />
+                </Box>
+            ) : (
+                steps[step]
+            )}
+        </BuyFlowLayout>
     );
 });
 

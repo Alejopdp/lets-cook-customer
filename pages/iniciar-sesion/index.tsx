@@ -1,5 +1,5 @@
 // Utils & Config
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // Internal Components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
@@ -28,7 +28,7 @@ const Login = (props) => {
             page="ingresar"
         >
             <InnerSectionLayout containerMaxWidth="lg">
-                {isCheckingRedirect && <Box position={"fixed"} top={"50%"} left={"50%"}><CircularProgress /></Box>}
+                {isCheckingRedirect && <Box position={"fixed"} top={"50%"} left={"50%"} display="flex" justifyContent="center" alignItems="center" style={{ transform: 'translate(-50%, -50%)' }}><CircularProgress /></Box>}
                 {!isCheckingRedirect && <LoginBox redirect source="outside buyflow" />}
             </InnerSectionLayout>
         </Layout>

@@ -26,7 +26,7 @@ export const GoogleRatingSection = memo((props: GoogleRatingSectionProps) => {
                         </Typography>
                         <Rating className={classes.item} name="read-only" value={5} readOnly />
                         <Typography className={classes.item} variant="caption">
-                            150 opiniones
+                            428 opiniones
                         </Typography>
                     </div>
                 </Grid>

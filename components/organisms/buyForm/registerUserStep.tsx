@@ -12,7 +12,6 @@ import { subscribeToMailingListGroup, updateSubscriber } from "helpers/serverReq
 import { useRouter } from "next/router";
 import { MAILERLITE_MAILING_LIST_GROUP, STRIPE_CARD_PAYMENT_METHOD } from "constants/constants";
 import useAnalytics from "hooks/useAnalytics";
-import { useAuth } from "contexts/auth.context";
 
 enum View {
     SIGN_IN = "SIGN_IN",
@@ -33,8 +32,6 @@ export const RegisterUserStep = () => {
             form,
         })
     );
-    // const {signInWithGoogle} = useAuth()
-
     const gotToNextView = useBuyFlow(({ forward }) => forward);
 
     const handleLogin = (userInfo: IUserInfoFields) => {

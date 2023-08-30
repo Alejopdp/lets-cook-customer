@@ -3,8 +3,7 @@ import React from "react";
 import useStyles from "./styles";
 import clsx from "clsx";
 import * as ga from "../../../helpers/ga";
-import { loginWithFacebookAndGetIdToken, loginWithGoogleAndGetIdToken } from "../../../helpers/firebase";
-import { useSnackbar } from "notistack";
+import { loginWithFacebookAndGetIdToken } from "../../../helpers/firebase";
 
 // External components
 import { Button, Typography, Grid } from "@material-ui/core";
@@ -14,19 +13,9 @@ import { useAuth } from "contexts/auth.context";
 
 export const SocialNetworksButtons = (props) => {
     const { button, facebook, google, txt } = useStyles();
-    const { enqueueSnackbar } = useSnackbar();
     const [lang] = useLang("socialNetworksButtons");
-    const {signInWithGoogle} = useAuth()
+    const { signInWithGoogle } = useAuth();
 
-
-    const handleFacebookLogin = async () => {
-        ga.event({
-            action: "clic en continuar con rrss",
-            params: {
-                event_category: `registrarse - ${props.source}`,
-                event_label: "facebook",
-            },
-        });
 
         await loginWithFacebookAndGetIdToken();
         // const { token, error, email } = await loginWithFacebookAndGetIdToken();
@@ -79,7 +68,7 @@ export const SocialNetworksButtons = (props) => {
             </Grid> */}
             <Grid item xs={12}>
                 <Button className={clsx(button, google)} onClick={handleGoogleLogin}>
-                    <Image src="/assets/google.png" width={20} height={20} unoptimized/>
+                    <Image src="/assets/google.png" width={20} height={20} unoptimized />
                     <Typography variant="h6" className={txt}>
                         {lang.google}
                     </Typography>

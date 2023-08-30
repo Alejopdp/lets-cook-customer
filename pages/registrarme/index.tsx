@@ -14,6 +14,7 @@ const Signup = () => {
     const handleSignUp = () => {
         router.push("/");
     };
+
     return (
         <Layout
             disableCallToActionSection
@@ -23,7 +24,13 @@ const Signup = () => {
             page="registrarme"
         >
             <InnerSectionLayout containerMaxWidth="lg">
-                <SignUpForm handleSignUp={handleSignUp} source="outside buyflow" />
+                <SignUpForm
+                    handleSignUp={handleSignUp}
+                    source="outside buyflow"
+                    handleCreateAccount={undefined}
+                    handleRedirect={undefined}
+                    redirect={false}
+                />
             </InnerSectionLayout>
         </Layout>
     );
