@@ -17,11 +17,13 @@ import TermsAndConditionsModal from "../../molecules/legalModals/termsAndConditi
 import PrivacyPolicyModal from "../../molecules/legalModals/privacyPolicyModal";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import useAnalytics from "hooks/useAnalytics";
+import { subscribeToMailingListGroup, updateSubscriber } from "helpers/serverRequests/mailingList";
+import { MAILERLITE_MAILING_LIST_GROUP } from "constants/constants";
 
 type SignUpFormProps = {
     handleCreateAccount: () => void;
     handleRedirect: () => void;
-    handleSignUp: (userInfo: IUserInfoFields, accpetsMarketing?: boolean) => void;
+    handleSignUp: () => void;
     redirect: boolean;
     source: string;
 };
@@ -84,10 +86,21 @@ const SignUpForm = (props: SignUpFormProps) => {
             saveInLocalStorage(LOCAL_STORAGE_KEYS.token, res.data.token);
             cookies.set(LOCAL_STORAGE_KEYS.token, res.data.token);
             setIsAuthenticated(true);
-            props.handleSignUp ? props.handleSignUp(res.data.userInfo, formData.sendInfo) : "";
+            subscribeToMailerLite(res.data.userInfo.email, res.data.userInfo.id, formData.sendInfo);
+            props.handleSignUp ? props.handleSignUp() : "";
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
+    };
+
+    const subscribeToMailerLite = (email: string, userId: string, acceptsMarketing: boolean) => {
+        subscribeToMailingListGroup(MAILERLITE_MAILING_LIST_GROUP, email, undefined).then((res) =>
+            updateSubscriber(email, {
+                shopify_accepts_marketing: acceptsMarketing ? 1 : 0,
+                shopify_id: userId,
+                language: router.locale === "es" ? "esp" : router.locale === "en" ? "ing" : "cat",
+            })
+        );
     };
 
     const handleRedirect = () => {
