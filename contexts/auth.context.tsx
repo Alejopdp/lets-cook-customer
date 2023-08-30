@@ -113,7 +113,6 @@ const AuthProvider: React.FC<{ children: any }> = ({ children }: { children: any
             }
         } catch (error) {
             setIsCheckingRedirect(false);
-            // Sentry.captureException(error)
         }
     };
     const value = {
