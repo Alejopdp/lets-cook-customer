@@ -62,7 +62,7 @@ const nextConfig = {
     },
     async rewrites() {
         return [
-            {source: "/__/auth/:path*", destination: "https://letscook-001.firebaseapp.com/__/auth/:path*"},
+            { source: "/__/auth/:path*", destination: "https://letscook-001.firebaseapp.com/__/auth/:path*" },
             { source: "/en/profile", destination: "/en/perfil", locale: false },
             { source: "/ca/perfil", destination: "/ca/perfil", locale: false },
 
@@ -273,37 +273,36 @@ const nextConfig = {
             },
         ];
     },
-}
+};
 
 // next.config.js
-module.exports = withBundleAnalyzer(nextConfig)
-
+module.exports = withBundleAnalyzer(nextConfig);
 
 // Injected content via Sentry wizard below
 
 const { withSentryConfig } = require("@sentry/nextjs");
 
 module.exports = withSentryConfig(
-  module.exports,
-  {
-    silent: true,
-    org: "lets-cook-now",
-    project: "customer-frontend",
-  },
-  {
-    // Upload a larger set of source maps for prettier stack traces (increases build time)
-    widenClientFileUpload: true,
+    module.exports,
+    {
+        silent: true,
+        org: "lets-cook-now",
+        project: "customer-frontend",
+    },
+    {
+        // Upload a larger set of source maps for prettier stack traces (increases build time)
+        widenClientFileUpload: true,
 
-    // Transpiles SDK to be compatible with IE11 (increases bundle size)
-    transpileClientSDK: true,
+        // Transpiles SDK to be compatible with IE11 (increases bundle size)
+        transpileClientSDK: true,
 
-    // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
-    tunnelRoute: "/monitoring",
+        // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
+        tunnelRoute: "/monitoring",
 
-    // Hides source maps from generated client bundles
-    hideSourceMaps: true,
+        // Hides source maps from generated client bundles
+        hideSourceMaps: true,
 
-    // Automatically tree-shake Sentry logger statements to reduce bundle size
-    disableLogger: true,
-  }
+        // Automatically tree-shake Sentry logger statements to reduce bundle size
+        disableLogger: true,
+    }
 );

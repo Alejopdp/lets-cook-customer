@@ -1,9 +1,8 @@
 // Utils & config
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").signupForm;
-import { useUserInfoStore, useAuthStore } from "../../../stores/auth";
+import { useUserInfoStore, useAuthStore, IUserInfoFields } from "../../../stores/auth";
 import cookies from "js-cookie";
 
 // Internal components
@@ -18,8 +17,18 @@ import TermsAndConditionsModal from "../../molecules/legalModals/termsAndConditi
 import PrivacyPolicyModal from "../../molecules/legalModals/privacyPolicyModal";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import useAnalytics from "hooks/useAnalytics";
+import { subscribeToMailingListGroup, updateSubscriber } from "helpers/serverRequests/mailingList";
+import { MAILERLITE_MAILING_LIST_GROUP } from "constants/constants";
 
-const SignUpForm = (props) => {
+type SignUpFormProps = {
+    handleCreateAccount: () => void;
+    handleRedirect: () => void;
+    handleSignUp: () => void;
+    redirect: boolean;
+    source: string;
+};
+
+const SignUpForm = (props: SignUpFormProps) => {
     const { trackSignUpEmailInput, trackSignUpPasswordInput, trackAlreadyHaveAccountClick } = useAnalytics();
     const [currentStep, setcurrentStep] = useState(0);
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
@@ -77,14 +86,25 @@ const SignUpForm = (props) => {
             saveInLocalStorage(LOCAL_STORAGE_KEYS.token, res.data.token);
             cookies.set(LOCAL_STORAGE_KEYS.token, res.data.token);
             setIsAuthenticated(true);
-            props.handleSignUp ? props.handleSignUp(res.data.userInfo, formData.sendInfo) : "";
+            subscribeToMailerLite(res.data.userInfo.email, res.data.userInfo.id, formData.sendInfo);
+            props.handleSignUp ? props.handleSignUp() : "";
         } else {
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
     };
 
+    const subscribeToMailerLite = (email: string, userId: string, acceptsMarketing: boolean) => {
+        subscribeToMailingListGroup(MAILERLITE_MAILING_LIST_GROUP, email, undefined).then((res) =>
+            updateSubscriber(email, {
+                shopify_accepts_marketing: acceptsMarketing ? 1 : 0,
+                shopify_id: userId,
+                language: router.locale === "es" ? "esp" : router.locale === "en" ? "ing" : "cat",
+            })
+        );
+    };
+
     const handleRedirect = () => {
-        trackAlreadyHaveAccountClick(source);
+        trackAlreadyHaveAccountClick(props.source);
         router.push(localeRoutes[router.locale][Routes["iniciar-sesion"]]);
     };
 
@@ -170,20 +190,13 @@ const SignUpForm = (props) => {
                     text={lang.register.text}
                     boldText={lang.register.boldText}
                     handleRedirect={props.handleRedirect || handleRedirect}
+                    isSubmitting={false}
                 />
             </FormPaper>
             <TermsAndConditionsModal open={openTycModal} handleClose={handleCloseTycModal} />
             <PrivacyPolicyModal open={openPrivacyPolicyModal} handleClose={handleClosePrivacyPolicyModal} />
         </>
     );
-};
-
-SignUpForm.propTypes = {
-    handleCreateAccount: PropTypes.func,
-    handleRedirect: PropTypes.func,
-    handleSignUp: PropTypes.func,
-    redirect: PropTypes.bool,
-    source: PropTypes.string,
 };
 
 export default SignUpForm;

@@ -1,5 +1,5 @@
 // Utils & Config
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // Internal Components
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
