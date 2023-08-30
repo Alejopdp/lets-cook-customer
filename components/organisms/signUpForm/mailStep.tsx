@@ -1,12 +1,10 @@
 // Utils & config
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { isEmail } from "../../../helpers/regex/regex";
 import { useRouter } from "next/router";
 const langs = require("../../../lang").mailStep;
 import useLocalStorage, { LOCAL_STORAGE_KEYS } from "../../../hooks/useLocalStorage/localStorage";
 import cookies from "js-cookie";
-import { useTheme } from "@material-ui/core";
 
 // External components
 import SocialNetworksButtons from "../../atoms/socialNetworksButtons/socialNetworksButtons";
@@ -18,17 +16,28 @@ import { RoundedButton, TextInput } from "@atoms";
 import { Grid } from "@material-ui/core";
 import { hasAccents } from "helpers/utils/utils";
 
-const MailStep = (props) => {
+type MailStepProps = {
+    email: string;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSubmit: (step: number) => void;
+    emailAlreadyExists: boolean;
+    signUpRedirect?: boolean;
+    handleSignUp?: (userInfo: any) => void;
+    handleOpenTycModal?: () => void;
+    handleOpenPrivacyPolicyModal?: () => void;
+    source?: string;
+};
+
+
+const MailStep = (props: MailStepProps) => {
     const router = useRouter();
     const lang = langs[router.locale];
-    const [serverError, setserverError] = useState("");
     const { saveInLocalStorage } = useLocalStorage();
     const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
-    const theme = useTheme();
 
     const handleSocialMediaSubmit = async (token) => {
-        const res = await loginWithSocialMedia(token, props.source === "buyFlow");
+        const res = await loginWithSocialMedia(token, "", props.source === "buyFlow");
         if (res.status === 200) {
             saveInLocalStorage(LOCAL_STORAGE_KEYS.token, res.data.token);
             saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, res.data.userInfo);
@@ -38,7 +47,6 @@ const MailStep = (props) => {
             props.signUpRedirect ? router.push("/") : "";
             props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
         } else {
-            setserverError(res.data.message);
             alert("Error al querer ingresar");
         }
     };
@@ -71,14 +79,6 @@ const MailStep = (props) => {
             </Grid>
         </>
     );
-};
-
-MailStep.propTypes = {
-    email: PropTypes.string.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    signUpRedirect: PropTypes.bool,
-    handleSignUp: PropTypes.func,
 };
 
 export default MailStep;
