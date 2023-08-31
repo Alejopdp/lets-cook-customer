@@ -38,6 +38,7 @@ import PlanProfileCardSkeleton from "components/molecules/planProfileCard/planPr
 import { locale } from "types/locale";
 import Link from "next/link";
 import { Restore, Settings, Star, AttachMoney } from "@material-ui/icons";
+import { Skeleton } from "@material-ui/lab";
 
 const Perfil = (props) => {
     const theme = useTheme();
@@ -248,13 +249,17 @@ const Perfil = (props) => {
                                             {lang.greeting} {userInfo.firstName || ""}
                                         </Typography>
                                         <Box>
-                                            <TextButton
-                                                style={{ marginRight: theme.spacing(2) }}
-                                                noColor
-                                                icon="time"
-                                                btnText={lang.paymentHistoryBtnText}
-                                                handleClick={() => router.push(localeRoutes[router.locale][Routes["historial-pagos"]])}
-                                            />
+                                            {isLoading || true ? (
+                                                <Skeleton />
+                                            ) : (
+                                                <TextButton
+                                                    style={{ marginRight: theme.spacing(2) }}
+                                                    noColor
+                                                    icon="time"
+                                                    btnText={lang.paymentHistoryBtnText}
+                                                    handleClick={() => router.push(localeRoutes[router.locale][Routes["historial-pagos"]])}
+                                                />
+                                            )}
                                             <TextButton
                                                 style={{ marginRight: theme.spacing(2) }}
                                                 icon="settings"
@@ -322,7 +327,13 @@ const Perfil = (props) => {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Link href={localeRoutes[router.locale][Routes["historial-pagos"]]}>
-                                            <a style={{ display: "flex", alignItems: "center" }}>
+                                            <a
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    visibility: isLoading ? "hidden" : "visible",
+                                                }}
+                                            >
                                                 <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
                                                     <Restore />
                                                 </Icon>
@@ -332,7 +343,13 @@ const Perfil = (props) => {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Link href={localeRoutes[router.locale][Routes["configuracion"]]}>
-                                            <a style={{ display: "flex", alignItems: "center" }}>
+                                            <a
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    visibility: isLoading ? "hidden" : "visible",
+                                                }}
+                                            >
                                                 <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
                                                     <Settings />
                                                 </Icon>
@@ -344,7 +361,13 @@ const Perfil = (props) => {
                                     </Grid>
                                     <Grid item xs={12} style={{ marginBottom: userInfo.wallet ? "initial" : theme.spacing(4) }}>
                                         <Link href={`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`}>
-                                            <a style={{ display: "flex", alignItems: "center" }}>
+                                            <a
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    visibility: isLoading ? "hidden" : "visible",
+                                                }}
+                                            >
                                                 <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
                                                     <Star />
                                                 </Icon>
@@ -358,7 +381,13 @@ const Perfil = (props) => {
                                     {userInfo.wallet && (
                                         <Grid item xs={12} style={{ marginBottom: theme.spacing(4) }}>
                                             <Link href={`${localeRoutes[router.locale][Routes["monedero"]]}?customer=${userInfo.id}`}>
-                                                <a style={{ display: "flex", alignItems: "center" }}>
+                                                <a
+                                                    style={{
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        visibility: isLoading ? "hidden" : "visible",
+                                                    }}
+                                                >
                                                     <Icon style={{ marginRight: 8 }} onClick={props.handleClick}>
                                                         <AttachMoney />
                                                     </Icon>
