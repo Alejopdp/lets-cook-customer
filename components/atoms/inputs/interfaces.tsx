@@ -13,8 +13,11 @@ export interface TextInputBaseProps {
 }
 
 export interface TextInputProps extends TextInputBaseProps {
+    handleSubmit?: () => void;
     placeholder?: string;
     type?: string;
 }
 
-export interface PasswordInputProps extends TextInputBaseProps {}
+export interface PasswordInputProps extends TextInputBaseProps {
+    handleSubmit?: () => void;
+}

@@ -74,6 +74,7 @@ const PasswordStep = (props: PasswordStepProps) => {
                     labelWidth={200}
                     helperText={lang.passwordHelperText}
                     hasError={false}
+                    handleSubmit={!props.authorize || !isPassword(props.password) ? undefined : props.handleSubmit}
                 />
             </Grid>
             <Grid item xs={12}>
@@ -101,7 +102,7 @@ const PasswordStep = (props: PasswordStepProps) => {
             </Grid>
             <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>
                 <RoundedButton
-                    disabled={!props.authorize || !isPassword(props.password)}
+                    disabled={!props.authorize || !isPassword(props.password) || props.isLoading}
                     isLoading={props.isLoading}
                     label={lang.buttonText}
                     onClick={props.handleSubmit}

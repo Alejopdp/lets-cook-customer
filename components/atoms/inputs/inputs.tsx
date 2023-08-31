@@ -4,8 +4,8 @@ import { useStyles } from "./styles";
 import { TextInputProps, PasswordInputProps } from "./interfaces";
 
 // External components
-import {IconButton, OutlinedInput, InputLabel, InputAdornment, FormControl, Typography} from "@material-ui/core";
-import {Visibility, VisibilityOff} from "@material-ui/icons";
+import { IconButton, OutlinedInput, InputLabel, InputAdornment, FormControl, Typography } from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export const TextInput = (props: TextInputProps) => {
     const { textField, border } = useStyles();
@@ -19,6 +19,11 @@ export const TextInput = (props: TextInputProps) => {
                 {props.label}
             </InputLabel>
             <OutlinedInput
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" && props.handleSubmit) {
+                        props.handleSubmit();
+                    }
+                }}
                 style={{ fontSize: "16px" }}
                 className={border}
                 name={props.name}
@@ -58,6 +63,11 @@ export const PasswordInput = (props: PasswordInputProps) => {
                 {props.label}
             </InputLabel>
             <OutlinedInput
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" && props.handleSubmit) {
+                        props.handleSubmit();
+                    }
+                }}
                 style={{ fontSize: "16px" }}
                 className={border}
                 type={values.showPassword ? "text" : "password"}

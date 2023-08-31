@@ -23,7 +23,7 @@ import { MAILERLITE_MAILING_LIST_GROUP } from "constants/constants";
 type SignUpFormProps = {
     handleCreateAccount: () => void;
     handleRedirect: () => void;
-    handleSignUp: () => void;
+    handleSignUp: (userInfo: IUserInfoFields) => void;
     redirect: boolean;
     source: string;
 };
@@ -77,6 +77,7 @@ const SignUpForm = (props: SignUpFormProps) => {
     };
 
     const handleCreateAccount = async () => {
+        setIsLoading(true);
         trackSignUpPasswordInput(props.source);
         const res = await signUp(formData.email, formData.password, props.source === "buyFlow");
 
@@ -86,9 +87,10 @@ const SignUpForm = (props: SignUpFormProps) => {
             saveInLocalStorage(LOCAL_STORAGE_KEYS.token, res.data.token);
             cookies.set(LOCAL_STORAGE_KEYS.token, res.data.token);
             setIsAuthenticated(true);
-            subscribeToMailerLite(res.data.userInfo.email, res.data.userInfo.id, formData.sendInfo);
-            props.handleSignUp ? props.handleSignUp() : "";
+            if (props.source !== "buyFlow") subscribeToMailerLite(res.data.userInfo.email, res.data.userInfo.id, formData.sendInfo);
+            props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
         } else {
+            setIsLoading(false);
             enqueueSnackbar(res.data.message, { variant: "error" });
         }
     };
