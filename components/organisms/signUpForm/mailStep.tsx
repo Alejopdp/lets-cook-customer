@@ -44,6 +44,7 @@ const MailStep = (props: MailStepProps) => {
                     onChange={props.handleChange}
                     helperText={props.emailAlreadyExists ? lang.emailAlreadyExistsError : hasAccents(props.email) ? lang.accentError : ""}
                     hasError={props.emailAlreadyExists || hasAccents(props.email)}
+                    handleSubmit={() => props.handleSubmit(1)}
                 />
             </Grid>
             <Grid item xs={12}>

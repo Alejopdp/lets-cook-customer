@@ -49,11 +49,11 @@ const LoginBox = (props) => {
             saveLoginData(res.data.token, res.data.userInfo);
         } else {
             setserverError(res.data.message);
+            setIsLoading(false);
         }
-        setIsLoading(false);
     };
 
-     const handleSocialMediaSubmit = async (token, email = "") => {
+    const handleSocialMediaSubmit = async (token, email = "") => {
         const res = await loginWithSocialMedia(token, email);
 
         if (res.status === 200) {
@@ -88,7 +88,13 @@ const LoginBox = (props) => {
             <SocialNetworksButtons handleSubmit={handleSocialMediaSubmit} source={props.source} />
             <Divider />
             <Grid item xs={12}>
-                <TextInput label={lang.emailInput} name="email" value={values.email} onChange={handleChange("email")} />
+                <TextInput
+                    label={lang.emailInput}
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange("email")}
+                    handleSubmit={handleSubmit}
+                />
             </Grid>
             <Grid item xs={12}>
                 <PasswordInput
@@ -98,6 +104,7 @@ const LoginBox = (props) => {
                     onChange={handleChange("password")}
                     helperText={serverError}
                     hasError={!!serverError}
+                    handleSubmit={handleSubmit}
                 />
             </Grid>
             <Grid item xs={12}>
@@ -112,7 +119,7 @@ const LoginBox = (props) => {
             </Grid>
             <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>
                 <RoundedButton
-                    disabled={!isEmail(values.email) || isEmpty(values.password)}
+                    disabled={!isEmail(values.email) || isEmpty(values.password) || isLoading}
                     isLoading={isLoading}
                     label={lang.buttonText}
                     onClick={handleSubmit}
