@@ -13,7 +13,13 @@ import { CouponInputProps } from "./interface";
 const CouponInput = (props: CouponInputProps) => {
     return (
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-            <TextInput onChange={props.onChange} label="Cupón de descuento" name={props.name} value={props.value} />
+            <TextInput
+                onChange={props.onChange}
+                label="Cupón de descuento"
+                name={props.name}
+                value={props.value}
+                handleSubmit={props.handleSubmit}
+            />
             <Fab color="primary" style={{ marginLeft: 8, width: "40px", height: "40px" }} onClick={props.handleSubmit}>
                 <ChevronRight />
             </Fab>
