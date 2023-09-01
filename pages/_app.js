@@ -50,6 +50,7 @@ function MyApp(props) {
     const { getFromLocalStorage, saveInLocalStorage, removeFromLocalStorage } = useLocalStorage();
     const [isLoading, setisLoading] = useState(true);
     const { setUserInfo, userInfo } = useUserInfoStore((state) => ({ setUserInfo: state.setuserInfo, userInfo: state.userInfo }));
+
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const { hasAcceptedCookies, setHasAccepteCookies } = useCookiesStore((state) => ({
         hasAcceptedCookies: state.hasAcceptedCookies,
@@ -156,16 +157,20 @@ function MyApp(props) {
                         <CssBaseline />
                         <AuthProvider>
                             <Component {...pageProps} />
-                            <Script src="https://www.googletagmanager.com/gtag/js?id=306376821" strategy="afterInteractive" />
-                            <Script id="google-analytics-script" strategy="afterInteractive">
-                                {`
+                            {!isLoading && (
+                                <>
+                                    <Script src="https://www.googletagmanager.com/gtag/js?id=G-306376821" strategy="afterInteractive" />
+                                    <Script id="google-analytics-script" strategy="afterInteractive">
+                                        {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
-          gtag('config', '306376821', { 'debug_mode':true, 'user_id': '${userInfo.email ?? ""}' });
+          gtag('config', 'G-306376821', { 'user_id': '${userInfo?.email}' });
         `}
-                            </Script>
+                                    </Script>
+                                </>
+                            )}
                         </AuthProvider>
                         {/* {!isLoading && <Component {...pageProps} />} */}
                     </Elements>
