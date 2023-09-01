@@ -156,14 +156,14 @@ function MyApp(props) {
                         <CssBaseline />
                         <AuthProvider>
                             <Component {...pageProps} />
-                            <Script src="https://www.googletagmanager.com/gtag/js?id=306376821" />
-                            <Script id="google-analytics">
+                            <Script src="https://www.googletagmanager.com/gtag/js?id=306376821" strategy="afterInteractive" />
+                            <Script id="google-analytics-script" strategy="afterInteractive">
                                 {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
-          gtag('config', '306376821', { 'debug_mode':true, 'user_id': "${userInfo.email ?? ""}" });
+          gtag('config', '306376821', { 'debug_mode':true, 'user_id': '${userInfo.email ?? ""}' });
         `}
                             </Script>
                         </AuthProvider>
