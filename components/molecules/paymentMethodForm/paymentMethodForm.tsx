@@ -19,13 +19,15 @@ const PaymentMethodForm = (props: PaymentMethodFormProps) => {
                         onChange={props.setselectedSavedCard}
                         style={{ marginLeft: "2rem" }}
                     >
-                        {props.paymentMethods.map((paymentMethod: IPaymentMethod) => (
-                            <FormControlLabel
-                                value={paymentMethod.id}
-                                control={<Radio />}
-                                label={paymentMethod.label || paymentMethod.card}
-                            />
-                        ))}
+                        {props.paymentMethods
+                            .filter((pm) => pm.id !== "wallet")
+                            .map((paymentMethod: IPaymentMethod) => (
+                                <FormControlLabel
+                                    value={paymentMethod.id}
+                                    control={<Radio />}
+                                    label={paymentMethod.label || paymentMethod.card}
+                                />
+                            ))}
                     </RadioGroup>
                 ) : null}
                 {props.paymentMethods.length > 0 && (

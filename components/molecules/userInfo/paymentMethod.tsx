@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import StripeForm from "../stripeForm/stripeForm";
 import { useSnackbar } from "notistack";
-import { Typography, Radio, RadioGroup, FormControlLabel, FormControl, Grid, makeStyles, TextField, useTheme } from "@material-ui/core";
+import { Radio, RadioGroup, FormControlLabel, FormControl } from "@material-ui/core";
 import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
 import Modal from "../../atoms/modal/modal";
 import { setupFuturePaymentMethod } from "../../../helpers/serverRequests/customer";
@@ -10,7 +10,6 @@ import { SetupIntent, StripeError } from "@stripe/stripe-js";
 
 const PaymentMethodModal = (props) => {
     const lang = props.lang;
-    const theme = useTheme();
     const { enqueueSnackbar } = useSnackbar();
     const stripe = useStripe();
     const elements = useElements();
@@ -117,21 +116,23 @@ const PaymentMethodModal = (props) => {
                             onChange={(e) => setselectedSavedCard(e.target.value)}
                             style={{ marginLeft: "2rem" }}
                         >
-                            {props.initialData.map((paymentMethod) => (
-                                <FormControlLabel
-                                    value={paymentMethod.id}
-                                    control={<Radio />}
-                                    label={`${paymentMethod.card} - ${paymentMethod.expirationDate}`}
-                                    checked={paymentMethod.id === selectedSavedCard}
-                                />
-                            ))}
+                            {props.initialData
+                                .filter((pm) => pm.id !== "wallet")
+                                .map((paymentMethod) => (
+                                    <FormControlLabel
+                                        value={paymentMethod.id}
+                                        control={<Radio />}
+                                        label={`${paymentMethod.card} - ${paymentMethod.expirationDate}`}
+                                        checked={paymentMethod.id === selectedSavedCard}
+                                    />
+                                ))}
                         </RadioGroup>
                     ) : null}
                     <FormControlLabel
                         value="newPaymentMethod"
                         control={<Radio />}
                         label={lang.addNewPaymentMethod}
-                    // onClick={() => handleClickPaymentMethod()}
+                        // onClick={() => handleClickPaymentMethod()}
                     />
                     {value === "newPaymentMethod" ? <StripeForm /> : null}
                 </RadioGroup>

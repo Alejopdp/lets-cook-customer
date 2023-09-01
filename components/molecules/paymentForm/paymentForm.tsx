@@ -229,7 +229,7 @@ export const PaymentForm = (props) => {
 
                     //@ts-ignore
                     window.gtag("event", "conversion", {
-                        send_to: `${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_2}/mpJaCLTs6aUBEKLy6twC`,
+                        send_to: `${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}/mpJaCLTs6aUBEKLy6twC`,
                         value: 1.0,
                         currency: "EUR",
                         transaction_id: "",
