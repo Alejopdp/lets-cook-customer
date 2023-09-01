@@ -36,7 +36,8 @@
             "skipWeekBtnText": "Saltar semana",
             "nextDeliveryTitle": "Próxima entrega",
             "nextPaymentTitle": "Próximo cargo",
-            "skippedWeeksInfo": "Has saltado las siguientes semanas"
+            "skippedWeeksInfo": "Has saltado las siguientes semanas",
+            "skippedWeeksInfoOnlyOne": "Has saltado la siguiente semana"
         },
         "recipesActualWeekCard": {
             "title": "Recetas de la semana actual",
@@ -189,7 +190,8 @@
             "skipWeekBtnText": "Skip week",
             "nextDeliveryTitle": "Next delivery",
             "nextPaymentTitle": "Next payment",
-            "skippedWeeksInfo": "You’ve skipped the following weeks"
+            "skippedWeeksInfo": "You’ve skipped the following weeks",
+            "skippedWeeksInfoOnlyOne": "You’ve skipped the following week"
         },
         "recipesActualWeekCard": {
             "title": "Recipes for the current week",
@@ -342,7 +344,8 @@
             "skipWeekBtnText": "Saltar setmana",
             "nextDeliveryTitle": "Proper lliurament",
             "nextPaymentTitle": "Proper càrrec",
-            "skippedWeeksInfo": "Has saltat les següents setmanes"
+            "skippedWeeksInfo": "Has saltat les següents setmanes",
+            "skippedWeeksInfoOnlyOne": "Has saltat la següent setmana"
         },
         "recipesActualWeekCard": {
             "title": "Receptes de la setmana actual",
