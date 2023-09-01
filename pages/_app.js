@@ -159,14 +159,14 @@ function MyApp(props) {
                             <Component {...pageProps} />
                             {!isLoading && (
                                 <>
-                                    <Script src="https://www.googletagmanager.com/gtag/js?id=G-306376821" strategy="afterInteractive" />
+                                    <Script src="https://www.googletagmanager.com/gtag/js?id=G-E4N3ER3H0G" strategy="afterInteractive" />
                                     <Script id="google-analytics-script" strategy="afterInteractive">
                                         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
-          gtag('config', 'G-306376821', { 'user_id': '${userInfo?.email}' });
+          gtag('config', 'G-E4N3ER3H0G', { 'user_id': '${userInfo?.email}' });
         `}
                                     </Script>
                                 </>
