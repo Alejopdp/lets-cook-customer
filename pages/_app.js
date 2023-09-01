@@ -1,6 +1,7 @@
 // External components
 import "../styles/globals.scss";
 import React, { useEffect, useState } from "react";
+import Script from "next/script";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,7 +17,6 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
 import * as ga from "../helpers/ga";
 import CookiesDialog from "../components/molecules/cookiesPolicies/cookiesDialog";
-
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
@@ -49,7 +49,7 @@ function MyApp(props) {
     const { Component, pageProps } = props;
     const { getFromLocalStorage, saveInLocalStorage, removeFromLocalStorage } = useLocalStorage();
     const [isLoading, setisLoading] = useState(true);
-    const setUserInfo = useUserInfoStore((state) => state.setuserInfo);
+    const { setUserInfo, userInfo } = useUserInfoStore((state) => ({ setUserInfo: state.setuserInfo, userInfo: state.userInfo }));
     const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
     const { hasAcceptedCookies, setHasAccepteCookies } = useCookiesStore((state) => ({
         hasAcceptedCookies: state.hasAcceptedCookies,
@@ -108,7 +108,8 @@ function MyApp(props) {
 
     useEffect(() => {
         const handleRouteChange = (url) => {
-            ga.pageview(url);
+            console.log("Route changed");
+            ga.pageview(url, userInfo.email);
         };
         //When the component is mounted, subscribe to router changes
         //and log those page views
@@ -154,7 +155,17 @@ function MyApp(props) {
                     <Elements stripe={stripePromise}>
                         <CssBaseline />
                         <AuthProvider>
-                        <Component {...pageProps} />
+                            <Component {...pageProps} />
+                            <Script src="https://www.googletagmanager.com/gtag/js?id=306376821" />
+                            <Script id="google-analytics">
+                                {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', '306376821', { 'debug_mode':true, 'user_id': "${userInfo.email ?? ""}" });
+        `}
+                            </Script>
                         </AuthProvider>
                         {/* {!isLoading && <Component {...pageProps} />} */}
                     </Elements>
