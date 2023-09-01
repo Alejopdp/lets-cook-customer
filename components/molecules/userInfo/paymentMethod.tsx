@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import StripeForm from "../stripeForm/stripeForm";
 import { useSnackbar } from "notistack";
-import { Typography, Radio, RadioGroup, FormControlLabel, FormControl, Grid, makeStyles, TextField, useTheme } from "@material-ui/core";
+import { Radio, RadioGroup, FormControlLabel, FormControl } from "@material-ui/core";
 import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
 import Modal from "../../atoms/modal/modal";
 import { setupFuturePaymentMethod } from "../../../helpers/serverRequests/customer";

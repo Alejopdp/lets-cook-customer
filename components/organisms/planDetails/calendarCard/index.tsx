@@ -39,11 +39,19 @@ const CalendarCard = (props: CalendarCardProps) => {
         >
             <Grid container>
                 <Grid item xs={12} sm={6}>
-                    <DataDisplay title={lang.nextDeliveryTitle} text={props.schedule.nextDelivery.charAt(0).toUpperCase() + props.schedule.nextDelivery.slice(1)} />
+                    <DataDisplay
+                        title={lang.nextDeliveryTitle}
+                        text={props.schedule.nextDelivery.charAt(0).toUpperCase() + props.schedule.nextDelivery.slice(1)}
+                    />
                 </Grid>
-                {props.planState === "SUBSCRIPTION_ACTIVE" && <Grid item xs={12} sm={6} className={classes.nextChargeGrid}>
-                    <DataDisplay title={lang.nextPaymentTitle} text={props.schedule.nextPayment.charAt(0).toUpperCase() + props.schedule.nextPayment.slice(1) } />
-                </Grid>}
+                {props.planState === "SUBSCRIPTION_ACTIVE" && (
+                    <Grid item xs={12} sm={6} className={classes.nextChargeGrid}>
+                        <DataDisplay
+                            title={lang.nextPaymentTitle}
+                            text={props.schedule.nextPayment.charAt(0).toUpperCase() + props.schedule.nextPayment.slice(1)}
+                        />
+                    </Grid>
+                )}
                 {props.skippedOrders.length > 0 && (
                     <Grid item xs={12} style={{ marginTop: theme.spacing(3) }}>
                         <div style={{ display: "flex", alignItems: "center" }}>
@@ -53,14 +61,14 @@ const CalendarCard = (props: CalendarCardProps) => {
                                 color="textSecondary"
                                 style={{ fontSize: "14px", opacity: 0.7, marginLeft: theme.spacing(0.5) }}
                             >
-                                {lang.skippedWeeksInfo}:{" "}
+                                {skipperdOrdersQty === 1 ? lang.skippedWeeksInfoOnlyOne : lang.skippedWeeksInfo}:{" "}
                                 {props.skippedOrders.map((order, index) =>
                                     skipperdOrdersQty === 1
-                                        ? `${order.weekLabel}`
+                                        ? `${order.weekLabel}.`
                                         : index === 0
                                         ? `${order.weekLabel}`
                                         : index === skipperdOrdersQty - 1
-                                        ? ` y ${order.weekLabel}`
+                                        ? ` y ${order.weekLabel}.`
                                         : `, ${order.weekLabel}`
                                 )}
                             </Typography>

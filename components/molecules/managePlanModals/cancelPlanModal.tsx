@@ -99,10 +99,10 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
         const res = await skippOrdersFromCancellationModal(weeksToSkip);
 
         if (res.status === 200) {
-            enqueueSnackbar("Semanas salteadas correctamente", { variant: "success" });
+            enqueueSnackbar("Semanas saltadas correctamente", { variant: "success" });
             router.reload();
         } else {
-            enqueueSnackbar("Error al saltear las semanas", { variant: "error" });
+            enqueueSnackbar("Error al saltar las semanas", { variant: "error" });
         }
         props.handleClose();
     };
