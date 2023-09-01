@@ -163,7 +163,7 @@ function MyApp(props) {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
-          gtag('config', '306376821', { 'debug_mode':true });
+          gtag('config', '306376821', { 'debug_mode':true, 'user_id': "${userInfo.email ?? ""}" });
         `}
                             </Script>
                         </AuthProvider>
