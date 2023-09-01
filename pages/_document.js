@@ -1,4 +1,5 @@
 import React from "react";
+import Script from "next/script";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import theme from "../theme";
@@ -23,13 +24,11 @@ export default class MyDocument extends Document {
                     <script async src="/script/hotjar.js"></script>
                     <script async src="/script/ml.js"></script>
                     <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/5350114.js"></script>
-                    <script
-                        async
-                        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_2}`}
-                    ></script>
-                    <script async src="/script/google.js"></script>
+
+                    {/* <Script src="https://www.google-analytics.com/analytics.js" /> */}
+                    {/* <script async src="/script/google.js"></script> */}
                     <meta name="p:domain_verify" content="cf716535d91b916766dee3945c922d08" />
-                    <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
+                    {/* <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
                     <script
                         dangerouslySetInnerHTML={{
                             __html: `
@@ -41,9 +40,9 @@ export default class MyDocument extends Document {
                         });
                     `,
                         }}
-                    />
+                    /> */}
                     {/* <!-- Google Tag Manager --> */}
-                    <script
+                    {/* <script
                         dangerouslySetInnerHTML={{
                             __html: `
                         (function(w,d,s,l,i) {w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -52,19 +51,19 @@ export default class MyDocument extends Document {
                         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
                         })(window,document,'script','dataLayer','GTM-5M7F3L5');`,
                         }}
-                    />
-                    {/* <!-- End Google Tag Manager --> */}
+                    /> */}
+                    {/*<!-- End Google Tag Manager -->*/}
                 </Head>
                 <body>
                     {/* <!-- Google Tag Manager (noscript) --> */}
-                    <noscript>
+                    {/* <noscript>
                         <iframe
                             src="https://www.googletagmanager.com/ns.html?id=GTM-5M7F3L5"
                             height="0"
                             width="0"
                             style={{ display: "none", visibility: "hidden" }}
                         ></iframe>
-                    </noscript>
+                    </noscript> */}
                     {/* <!-- End Google Tag Manager (noscript) → */}
                     <Main />
                     <NextScript />
