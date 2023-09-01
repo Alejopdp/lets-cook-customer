@@ -14,7 +14,7 @@ import { LOCAL_STORAGE_KEYS, useLocalStorage } from "../../../hooks";
 import { translateShippíngHour } from "../../../helpers/utils/i18n";
 // External Components
 import Grid from "@material-ui/core/Grid";
-import { useTheme } from "@material-ui/core";
+import { Typography, useTheme } from "@material-ui/core";
 
 // Internal Components
 import BoxWithTitleAndTextButton from "../../molecules/specificBox/boxWithTitleAndTextButton";
@@ -384,17 +384,34 @@ const UserInfoDetail = (props) => {
                                     title={lang.paymentMethod.title}
                                     btnText={lang.paymentMethod.updateBtnLabel}
                                     handleClick={() => handleClickOpenPaymentMethodModal()}
+                                    hideButton={defaultPaymentMethod && defaultPaymentMethod.id === "wallet"}
                                 >
-                                    <DataDisplay
-                                        title={lang.paymentMethod.card}
-                                        text={defaultPaymentMethod.card}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <DataDisplay
-                                        title={lang.paymentMethod.expirationDate}
-                                        text={defaultPaymentMethod.expirationDate}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
+                                    {defaultPaymentMethod && (
+                                        <>
+                                            {defaultPaymentMethod.id === "wallet" ? (
+                                                <Typography
+                                                    variant="body2"
+                                                    color="textSecondary"
+                                                    style={{ fontSize: "16px", fontStyle: props.text ? "normal" : "italic" }}
+                                                >
+                                                    {lang.paymentMethod.usingWallet}
+                                                </Typography>
+                                            ) : (
+                                                <>
+                                                    <DataDisplay
+                                                        title={lang.paymentMethod.card}
+                                                        text={defaultPaymentMethod.card}
+                                                        style={{ marginBottom: theme.spacing(2) }}
+                                                    />
+                                                    <DataDisplay
+                                                        title={lang.paymentMethod.expirationDate}
+                                                        text={defaultPaymentMethod.expirationDate}
+                                                        style={{ marginBottom: theme.spacing(2) }}
+                                                    />
+                                                </>
+                                            )}
+                                        </>
+                                    )}
                                 </BoxWithTitleAndTextButton>
                             )}
                         </Grid>

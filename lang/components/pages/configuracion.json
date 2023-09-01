@@ -35,7 +35,8 @@
                 "title": "Forma de pago",
                 "updateBtnLabel": "MODIFICAR método DE PAGO",
                 "card": "Tarjeta",
-                "expirationDate": "Vencimiento"
+                "expirationDate": "Vencimiento",
+                "usingWallet": "Utilizando monedero"
             },
             "customerInfo": {
                 "title": "Datos de la cuenta",
@@ -134,7 +135,8 @@
                 "title": "Payment method",
                 "updateBtnLabel": "MODIFY PAYMENT METHOD",
                 "card": "Card details",
-                "expirationDate": "Expiration date"
+                "expirationDate": "Expiration date",
+                "usingWallet": "Using wallet"
             },
             "customerInfo": {
                 "title": "Account information",
@@ -233,7 +235,8 @@
                 "title": "Mètode de pagament",
                 "updateBtnLabel": "MODIFICAR MÈTODE DE PAGAMENT",
                 "card": "Targeta",
-                "expirationDate": "Venciment"
+                "expirationDate": "Venciment",
+                "usingWallet": "Utilitzant moneder"
             },
             "customerInfo": {
                 "title": "Dades del compte",
