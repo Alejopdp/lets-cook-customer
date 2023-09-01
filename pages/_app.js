@@ -166,7 +166,7 @@ function MyApp(props) {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
-          gtag('config', 'G-E4N3ER3H0G', { 'user_id': '${userInfo?.email}' });
+          gtag('config', 'G-E4N3ER3H0G', { 'debug_mode': true, 'user_id': '${userInfo?.email}' });
         `}
                                     </Script>
                                 </>
