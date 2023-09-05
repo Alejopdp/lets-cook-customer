@@ -1,4 +1,3 @@
-import React from "react";
 import * as ga from "../../helpers/ga";
 
 const useAnalytics = () => {
