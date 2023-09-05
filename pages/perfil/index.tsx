@@ -274,7 +274,7 @@ const Perfil = (props) => {
                                                     router.push(`${localeRoutes[router.locale][Routes["valorar-recetas"]]}/${userInfo.id}`)
                                                 }
                                             />
-                                            {userInfo.wallet && (
+                                            {/* {userInfo.wallet && (
                                                 <TextButton
                                                     icon="wallet"
                                                     btnText={lang.rateRecipesBtnText}
@@ -282,7 +282,7 @@ const Perfil = (props) => {
                                                         router.push(`${localeRoutes[router.locale][Routes["monedero"]]}/${userInfo.id}`)
                                                     }
                                                 />
-                                            )}
+                                            )} */}
                                         </Box>
                                     </Box>
                                 </Grid>
@@ -378,7 +378,7 @@ const Perfil = (props) => {
                                         </Link>
                                     </Grid>
 
-                                    {userInfo.wallet && (
+                                    {/* {userInfo.wallet && (
                                         <Grid item xs={12} style={{ marginBottom: theme.spacing(4) }}>
                                             <Link href={`${localeRoutes[router.locale][Routes["monedero"]]}?customer=${userInfo.id}`}>
                                                 <a
@@ -397,7 +397,7 @@ const Perfil = (props) => {
                                                 </a>
                                             </Link>
                                         </Grid>
-                                    )}
+                                    )} */}
 
                                     {isLoading ? (
                                         <>
