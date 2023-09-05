@@ -173,7 +173,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             setPaymentMethod({
                 id: defaultPaymentMethod?.id || "",
                 stripeId: "",
-                type: defaultPaymentMethod ? "card" : "newPaymentMethod",
+                type: defaultPaymentMethod?.id === "wallet" ? "wallet" : defaultPaymentMethod ? "card" : "newPaymentMethod",
             });
         }
 

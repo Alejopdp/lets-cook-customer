@@ -43,6 +43,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
     const [openCancelPlanModal, setOpenCancelPlanModal] = useState(false);
     const [openSkipPlanModal, setOpenSkipPlanModal] = useState(false);
     const [isSkippingOrders, setIsSkippingOrders] = useState(false);
+    const [isCancellingPlan, setIsCancellingPlan] = useState(false);
 
     // Change Plan Modal Functions
 
@@ -77,6 +78,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
     };
 
     const handlePrimaryButtonClickCancelPlanModal = async (reason, comment) => {
+        setIsCancellingPlan(true);
         const res = await cancelSubscription(props.subscription.subscriptionId, reason.value, comment);
 
         if (res.status === 200) {
@@ -84,6 +86,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
             router.replace(localeRoutes[router.locale][Routes.perfil]);
         } else {
             enqueueSnackbar(lang.cancelPlanSnackbarFailureText, { variant: "error" });
+            setIsCancellingPlan(false);
         }
         setOpenCancelPlanModal(false);
     };
@@ -189,6 +192,7 @@ const PlanDetails = (props: PlanDetailsProps) => {
                 actualPlan={props.subscription.plan}
                 actualPlanVariant={props.subscription.actualPlanVariant}
                 lang={lang.cancelPlanModal}
+                isSubmitting={isCancellingPlan}
             />
             <SkipPlanModal
                 open={openSkipPlanModal}

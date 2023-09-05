@@ -90,7 +90,6 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
 
     const handleClickCancel = () => {
         props.handlePrimaryButtonClick(reasonSelected, cancellationComments);
-        props.handleClose();
     };
 
     // Skip Weeks Functions
@@ -354,7 +353,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
             secondaryButtonColor={secondaryBtnColor}
             secondaryButtonText={secondaryBtnText}
             fullScreen={true}
-            disabled={isModalPrimaryButtonDisabled()}
+            disabled={isModalPrimaryButtonDisabled() || props.isSubmitting}
         >
             <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
                 {lang.subtitle}
