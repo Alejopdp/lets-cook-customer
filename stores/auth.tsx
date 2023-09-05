@@ -12,6 +12,7 @@ export interface IUserInfoFields {
     shippingAddress?: IShippingAddress;
     paymentMethods?: IPaymentMethod[];
     preferredLanguage: string;
+    wallet?: Wallet | undefined;
 }
 
 export interface IShippingAddress {
@@ -25,11 +26,22 @@ export interface IPaymentMethod {
     id: string;
     label: string;
     isDefault: string;
+    expirationDate: string;
     card?: string;
 }
 export interface IUserInfo {
     userInfo: IUserInfoFields;
 }
+
+export type Wallet = {
+    id: string;
+    balance: number;
+    amountToCharge: number;
+    paymentMethodForCharging: string;
+    last4Numbers: string;
+    isEnabled: boolean;
+    datesOfCharge: { dayNumber: number; hour: string; minute: string }[];
+};
 
 interface IUserInfoStore extends IUserInfo {
     setuserInfo: (userInfo: IUserInfoFields) => void;
@@ -45,6 +57,7 @@ const initialState: IUserInfo = {
         email: "",
         roleTitle: "",
         permissions: [],
+        preferredLanguage: "",
         shippingAddress: {
             addressDetails: "",
             addressName: "",
@@ -52,6 +65,15 @@ const initialState: IUserInfo = {
             longitude: null,
         },
         paymentMethods: [],
+        wallet: {
+            id: "",
+            balance: 0,
+            amountToCharge: 0,
+            paymentMethodForCharging: "",
+            last4Numbers: "",
+            isEnabled: false,
+            datesOfCharge: [],
+        },
     },
 };
 
@@ -70,8 +92,7 @@ export interface IAuthStore extends IAuth {
     setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
-
 export const useAuthStore = create<IAuthStore>((set) => ({
     isAuthenticated: false,
-    setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated })
+    setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
 }));

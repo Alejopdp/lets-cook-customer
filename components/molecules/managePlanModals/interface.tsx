@@ -13,4 +13,5 @@ export interface CancelPlanModalProps {
     actualPlan: Plan;
     actualPlanVariant: PlanVariant;
     lang: any;
+    isSubmitting: boolean;
 }

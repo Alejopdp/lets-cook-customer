@@ -18,7 +18,6 @@ import PlanDetails from "../../components/organisms/planDetails";
 import { localeRoutes, Routes } from "lang/routes/routes";
 
 const PlanDetailsPage = () => {
-    const theme = useTheme();
     const router = useRouter();
     const { enqueueSnackbar } = useSnackbar();
     const [lang] = useLang("planDetails");

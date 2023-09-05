@@ -16,22 +16,6 @@ export const SocialNetworksButtons = (props) => {
     const [lang] = useLang("socialNetworksButtons");
     const { signInWithGoogle } = useAuth();
 
-
-        await loginWithFacebookAndGetIdToken();
-        // const { token, error, email } = await loginWithFacebookAndGetIdToken();
-
-        // if (!!token) {
-        //     props.handleSubmit(token, email);
-        // } else {
-        //     enqueueSnackbar(
-        //         error.code === "auth/account-exists-with-different-credential"
-        //             ? "El email ha sido registrado con otro autenticador. Por favor, pruebe iniciando sesión de otra manera"
-        //             : error.message,
-        //         { variant: "error" }
-        //     );
-        // }
-    };
-
     const handleGoogleLogin = async () => {
         ga.event({
             action: "clic en continuar con rrss",

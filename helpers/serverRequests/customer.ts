@@ -1,3 +1,4 @@
+import { Wallet } from "@stores";
 import axios from "axios";
 const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/customer`;
 const userApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/user`;
@@ -288,3 +289,39 @@ export const getCustomerById = async (customerId: string, locale: string) => {
         return error.response;
     }
 };
+
+export const updateWallet = async (customerId: string, wallet: Wallet) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/wallet/${customerId}`,
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
+            data: {
+                ...wallet,
+            },
+        });
+
+        return res
+    } catch (error) {
+        return error.response;
+    }
+}
+
+
+export const chargeMoneyToWallet = async (customerId: string, amountToCharge: number, paymentMethodId?: string) => {
+    try {
+        const res = await axios({
+            method: "PUT",
+            url: `${apiUrl}/wallet/charge/${customerId}`,
+            headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
+            data: {
+                amountToCharge,
+                paymentMethodId
+            },
+        });
+
+        return res
+    } catch (error) {
+        return error.response;
+    }
+}

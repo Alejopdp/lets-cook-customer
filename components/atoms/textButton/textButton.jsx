@@ -1,10 +1,16 @@
 // Utils & Config
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, useTheme, useMediaQuery, Button, IconButton } from "@material-ui/core";
+import { makeStyles, useTheme, useMediaQuery, Button, IconButton, Icon } from "@material-ui/core";
 
 // External components
-import { AddCircleOutline as AddCircleOutlineIcon, Settings as SettingsIcon, Restore as RestoreIcon, Star as StarIcon } from "@material-ui/icons";
+import {
+    AddCircleOutline as AddCircleOutlineIcon,
+    Settings as SettingsIcon,
+    Restore as RestoreIcon,
+    Star as StarIcon,
+    AttachMoney as WalletIcon,
+} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     textButton: {
@@ -32,10 +38,14 @@ const TextButton = (props) => {
             {props.icon === "plus-circle-outline" ? (
                 <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
             ) : props.icon === "settings" ? (
-                <SettingsIcon style={!isSmDown ? { marginRight: "6px" } : null} />
+                <SettingsIcon />
             ) : props.icon === "time" ? (
-                <RestoreIcon style={!isSmDown ? { marginRight: "6px" } : null} />
-            ) : props.icon === "star" ? (<StarIcon style={!isSmDown ? { marginRight: "6px" } : null} />) : null}
+                <RestoreIcon />
+            ) : props.icon === "star" ? (
+                <StarIcon />
+            ) : props.icon === "wallet" ? (
+                <WalletIcon />
+            ) : null}
         </IconButton>
     ) : (
         <Button
@@ -48,12 +58,16 @@ const TextButton = (props) => {
             startIcon={props.startIcon}
         >
             {props.icon === "plus-circle-outline" ? (
-                <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : null} />
+                <AddCircleOutlineIcon style={!isSmDown ? { marginRight: "6px" } : { color: theme.palette.text.primary }} />
             ) : props.icon === "settings" ? (
-                <SettingsIcon style={!isSmDown ? { marginRight: "6px" } : null} />
+                <SettingsIcon />
             ) : props.icon === "time" ? (
-                <RestoreIcon style={!isSmDown ? { marginRight: "6px" } : null} />
-            ) : props.icon === "star" ? (<StarIcon style={!isSmDown ? { marginRight: "6px" } : null} />) : null}
+                <RestoreIcon />
+            ) : props.icon === "star" ? (
+                <StarIcon />
+            ) : props.icon === "wallet" ? (
+                <WalletIcon />
+            ) : null}
             {props.btnText}
         </Button>
     );
