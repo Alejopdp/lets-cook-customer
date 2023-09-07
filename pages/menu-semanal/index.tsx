@@ -9,11 +9,13 @@ import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import TitleOtherPages from "../../components/molecules/titleOtherPages/titleOtherPages";
 import RecipesGrid from "../../components/organisms/recipesGrid/recipesGrid";
 import { Layout } from "../../components/layout/";
+import { useSnackbar } from "notistack";
 
 const Recetas = (props) => {
     const router = useRouter();
     const lang = langs[router.locale];
     const [recipes, setRecipes] = useState([]);
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         const getRecipes = async () => {
