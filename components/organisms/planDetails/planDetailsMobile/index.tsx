@@ -41,6 +41,7 @@ const PlanDetailsMobile = ({
                     handleClick={handleClickOpenSkipPlanModal}
                     lang={lang.calendarCard}
                     isOneTime={subscription.isOneTime}
+                    planState={subscription.plan.state.stateTitle}
                 />
             </Grid>
             {subscription.hasRecipes && (
@@ -75,18 +76,20 @@ const PlanDetailsMobile = ({
                     lang={lang.shippingAddressCard}
                     shippingCost={subscription.shippingCost}
                     hideShippingCost={subscription.plan.state.stateTitle !== "SUBSCRIPTION_ACTIVE"}
-                    />
+                />
             </Grid>
             <Grid item xs={12}>
                 <PaymentMethodCard paymentMethod={subscription.paymentMethod} lang={lang.paymentMethodCard} />
             </Grid>
-            {subscription.plan.state.stateTitle === "SUBSCRIPTION_ACTIVE" && <Grid item xs={12}>
-                <TextButton
-                    handleClick={handleClickOpenCancelPlanModal}
-                    btnText={lang.cancelPlanBtnText}
-                    style={{ color: "#FC1919", marginTop: theme.spacing(2) }}
-                />
-            </Grid>}
+            {subscription.plan.state.stateTitle === "SUBSCRIPTION_ACTIVE" && (
+                <Grid item xs={12}>
+                    <TextButton
+                        handleClick={handleClickOpenCancelPlanModal}
+                        btnText={lang.cancelPlanBtnText}
+                        style={{ color: "#FC1919", marginTop: theme.spacing(2) }}
+                    />
+                </Grid>
+            )}
         </Grid>
     );
 };
