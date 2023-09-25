@@ -66,6 +66,9 @@ const nextConfig = {
             { source: "/en/profile", destination: "/en/perfil", locale: false },
             { source: "/ca/perfil", destination: "/ca/perfil", locale: false },
 
+            { source: "/en/wallet", destination: "/en/monedero", locale: false },
+            { source: "/ca/moneder", destination: "/ca/monedero", locale: false },
+
             { source: "/en/share-with-a-friend", destination: "/en/bono-regalo", locale: false },
             { source: "/ca/bo-regal", destination: "/ca/bono-regalo", locale: false },
 
