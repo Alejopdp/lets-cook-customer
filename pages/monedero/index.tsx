@@ -387,7 +387,16 @@ const WalletPage = (props) => {
                             WalletDataBox
                         )}
 
-                        {WalletMovementsLog}
+                        {isLoading ? (
+                            <Skeleton
+                                animation="wave"
+                                width={"100%"}
+                                height={500}
+                                style={{ transform: "initial", marginBottom: 24 }}
+                            ></Skeleton>
+                        ) : (
+                            WalletMovementsLog
+                        )}
 
                         {isAmountToChargeModalOpen && (
                             <AmountToChargeModal
