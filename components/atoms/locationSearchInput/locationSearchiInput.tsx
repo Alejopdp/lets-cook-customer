@@ -72,7 +72,12 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
         () =>
             throttle((request, callback) => {
                 autocompleteService.current.getPlacePredictions(
-                    { ...request, componentRestrictions: { country: process.env.NODE_ENV !== "production" ? ["es", "pt"] : "es" } },
+                    {
+                        ...request,
+                        componentRestrictions: {
+                            country: process.env.NEXT_PUBLIC_FRONTEND_DOMAIN !== "letscooknow.es" ? ["es", "pt"] : "es",
+                        },
+                    },
                     callback
                 );
             }, 200),
