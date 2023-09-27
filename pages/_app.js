@@ -17,6 +17,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
 import * as ga from "../helpers/ga";
 import CookiesDialog from "../components/molecules/cookiesPolicies/cookiesDialog";
+import TagManager from "react-gtm-module";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
@@ -59,6 +60,7 @@ function MyApp(props) {
     const router = useRouter();
 
     useEffect(() => {
+        TagManager.initialize({ gtmId: "GTM-5M7F3L5" });
         const verifyAuthentication = async () => {
             const token = await getFromLocalStorage(LOCAL_STORAGE_KEYS.token);
             const hasAcceptedCookies = await getFromLocalStorage(LOCAL_STORAGE_KEYS.HAS_ACCEPTED_COOKIES);
@@ -113,12 +115,8 @@ function MyApp(props) {
             console.log("Route changed");
             ga.pageview(url, userInfo.email);
         };
-        //When the component is mounted, subscribe to router changes
-        //and log those page views
         router.events.on("routeChangeComplete", handleRouteChange);
 
-        // If the component is unmounted, unsubscribe
-        // from the event with the `off` method
         return () => {
             router.events.off("routeChangeComplete", handleRouteChange);
         };
