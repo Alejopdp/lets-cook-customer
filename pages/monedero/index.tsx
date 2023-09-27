@@ -32,6 +32,8 @@ import BackButtonTitle from "components/atoms/backButtonTitle/backButtonTitle";
 import { Routes, localeRoutes } from "lang/routes/routes";
 import AmountToChargeModal from "components/molecules/chargeAmountModal/chargeAmountModal";
 import SimplePaymentMethodModal from "components/molecules/simplePaymentMethodsModal/simplePaymentMethodsModal";
+import { Skeleton } from "@material-ui/lab";
+import WalletMovementLog from "components/atoms/walletMovementLog";
 
 const dayItems = [
     { label: "Lunes", value: 1, checked: false, name: "Lunes" },
@@ -46,15 +48,30 @@ const dayItems = [
 const WalletPage = (props) => {
     const theme = useTheme();
     const { enqueueSnackbar } = useSnackbar();
+    const [isLoading, setIsLoading] = useState(true);
     const [hour, setHour] = useState<Date | null>(null);
     const { userInfo, setUserInfo } = useUserInfoStore((state) => ({ userInfo: state.userInfo, setUserInfo: state.setuserInfo }));
     const [isAmountToChargeModalOpen, setIsAmountToChargeModalOpen] = useState(false);
     const [isChargingMoney, setIsChargingMoney] = useState(false);
+    const [isWalletEnabled, setIsWalletEnabled] = useState(userInfo.wallet?.isEnabled);
     const [isSubmittingUpdate, setIsSubmittingUpdate] = useState(false);
     const [openPaymentMethod, setOpenPaymentMethod] = useState(false);
     const [isSubmitButtonVisible, setIsSubmitButtonVisible] = useState(false);
+    const [amountToCharge, setAmountToCharge] = useState(userInfo.wallet?.amountToCharge);
+    const [datesOfCharge, setDatesOfCharge] = useState(userInfo.wallet?.datesOfCharge);
     const router = useRouter();
     const isMdUp = useMediaQuery(useTheme().breakpoints.up("md"));
+
+    useEffect(() => {
+        setHour(
+            userInfo.wallet?.datesOfCharge[0]
+                ? new Date(0, 0, 0, parseInt(userInfo.wallet?.datesOfCharge[0].hour), parseInt(userInfo.wallet?.datesOfCharge[0].minute))
+                : null
+        );
+        setIsWalletEnabled(userInfo.wallet?.isEnabled);
+        setIsSubmitButtonVisible(false);
+        setAmountToCharge(userInfo.wallet?.amountToCharge);
+    }, [router.asPath]);
 
     useEffect(() => {
         if (userInfo && hour === null) {
@@ -70,6 +87,11 @@ const WalletPage = (props) => {
                     : null
             );
         }
+
+        setDatesOfCharge(userInfo.wallet?.datesOfCharge);
+        setIsWalletEnabled(userInfo.wallet?.isEnabled);
+        setAmountToCharge(userInfo.wallet?.amountToCharge);
+        if (userInfo && userInfo.id) setIsLoading(false);
     }, [userInfo]);
 
     async function handleSelectPaymentMethod(paymentMethodId: string) {
@@ -90,6 +112,7 @@ const WalletPage = (props) => {
                     ...userInfo.wallet,
                     //@ts-ignore
                     balance: Number(new Big(parseFloat(userInfo.wallet.balance ?? "0")).plus(new Big(parseFloat(amountToCharge)))),
+                    walletMovementsLogs: res.data.walletMovementsLogs,
                 },
             });
             enqueueSnackbar("Saldo cargado correctamente", { variant: "success" });
@@ -105,7 +128,9 @@ const WalletPage = (props) => {
 
         const res = await updateWallet(userInfo.id, {
             ...userInfo.wallet,
-            datesOfCharge: userInfo.wallet?.datesOfCharge.map((date) => ({
+            isEnabled: isWalletEnabled,
+            amountToCharge,
+            datesOfCharge: datesOfCharge.map((date) => ({
                 ...date,
                 hour: new Date(hour).getHours().toString(),
                 minute: new Date(hour).getMinutes().toString(),
@@ -118,11 +143,14 @@ const WalletPage = (props) => {
                 ...userInfo,
                 wallet: {
                     ...userInfo.wallet,
-                    datesOfCharge: userInfo.wallet?.datesOfCharge.map((date) => ({
+                    amountToCharge,
+                    isEnabled: isWalletEnabled,
+                    datesOfCharge: datesOfCharge.map((date) => ({
                         ...date,
                         hour: new Date(hour).getHours().toString(),
                         minute: new Date(hour).getMinutes().toString(),
                     })),
+                    walletMovementsLogs: res.data.walletMovementsLogs,
                 },
             });
             setIsSubmitButtonVisible(false);
@@ -131,6 +159,201 @@ const WalletPage = (props) => {
         }
         setIsSubmittingUpdate(false);
     }
+
+    var WalletBalanceBox = (
+        <Box marginBottom={4}>
+            <BoxWithTextButton hideButton>
+                <Grid container>
+                    <Grid item xs={12} md={6} diplay={"flex"}>
+                        <Box
+                            display={"flex"}
+                            flexDirection={isMdUp ? "column" : "row"}
+                            marginX={isMdUp ? "unset" : "auto"}
+                            width={"fit-content"}
+                            marginBottom={isMdUp ? 0 : 2}
+                            alignItems={"center"}
+                        >
+                            <Typography display="inline" variant="h2" color="initial" style={{ marginRight: isMdUp ? 0 : 16 }}>
+                                €{userInfo.wallet?.balance ?? 0}
+                            </Typography>
+                            <Typography display="inline" variant="subtitle1" color="initial">
+                                Saldo actual
+                            </Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} md={6} style={{ display: "flex" }}>
+                        <Button
+                            onClick={() => setIsAmountToChargeModalOpen(true)}
+                            variant="contained"
+                            color="primary"
+                            style={{
+                                borderRadius: 60,
+                                paddingRight: 32,
+                                paddingLeft: 32,
+                                margin: isMdUp ? "0 0 0 auto" : "0 auto",
+                            }}
+                        >
+                            Cargar saldo
+                        </Button>
+                    </Grid>
+                </Grid>
+            </BoxWithTextButton>
+        </Box>
+    );
+
+    var WalletDataBox = (
+        <Box marginBottom={4}>
+            <BoxWithTextButton hideButton>
+                <Box display={"flex"} flexDirection={"column"}>
+                    <Box display="flex" marginBottom={5} alignContent={"center"} alignItems={"center"}>
+                        <ToggleButton
+                            isChecked={isWalletEnabled}
+                            onChange={() => {
+                                setIsWalletEnabled(!isWalletEnabled);
+                                setIsSubmitButtonVisible(true);
+                            }}
+                        />
+                        <Typography
+                            variant={isMdUp ? "h4" : "subtitle1"}
+                            color="initial"
+                            style={{ cursor: "pointer", userSelect: "none" }}
+                            onClick={() => {
+                                setIsWalletEnabled(!isWalletEnabled);
+                                setIsSubmitButtonVisible(true);
+                            }}
+                        >
+                            Recarga autómatica habilitada
+                        </Typography>
+                    </Box>
+                    <Box marginBottom={4}>
+                        <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px", marginBottom: theme.spacing(1) }}>
+                            Importe a Cargar
+                        </Typography>
+                        <Box width={isMdUp ? "50%" : "100%"}>
+                            <TextField
+                                fullWidth
+                                id="outlined-basic"
+                                name="amountCharge"
+                                label="Importe"
+                                type="number"
+                                variant="outlined"
+                                value={amountToCharge}
+                                InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+                                error={amountToCharge < 5}
+                                helperText={amountToCharge < 5 ? "El importe mínimo es de $5" : ""}
+                                FormHelperTextProps={{ style: { fontStyle: "italic", marginLeft: 0 } }}
+                                onChange={(e) => {
+                                    setAmountToCharge(parseFloat(e.target.value));
+                                    setIsSubmitButtonVisible(true);
+                                }}
+                            />
+                        </Box>
+                    </Box>
+                    <Box marginBottom={4}>
+                        <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px" }}>
+                            Días y horario de carga
+                        </Typography>
+                        <FormGroup style={{ display: "flex", flexDirection: "row", marginBottom: 16 }}>
+                            {dayItems.map((item) => (
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            color="primary"
+                                            checked={datesOfCharge.some((date) => date.dayNumber === item.value)}
+                                            onChange={() => {
+                                                const newDatesOfCharge = [...datesOfCharge];
+                                                if (newDatesOfCharge.some((date) => date.dayNumber === item.value)) {
+                                                    newDatesOfCharge.splice(
+                                                        newDatesOfCharge.findIndex((date) => date.dayNumber === item.value),
+                                                        1
+                                                    );
+                                                } else {
+                                                    newDatesOfCharge.push({
+                                                        dayNumber: item.value,
+                                                        hour: "",
+                                                        minute: "",
+                                                    });
+                                                }
+                                                setDatesOfCharge(newDatesOfCharge);
+                                                setIsSubmitButtonVisible(true);
+                                            }}
+                                        />
+                                    }
+                                    label={item.label}
+                                />
+                            ))}
+                        </FormGroup>
+                        <Box width={isMdUp ? "50%" : "100%"}>
+                            <WrappedTimePicker
+                                value={hour}
+                                onChange={(date) => {
+                                    setHour(date);
+                                    setIsSubmitButtonVisible(true);
+                                }}
+                                label="Horario de carga"
+                            />
+                        </Box>
+                    </Box>
+                    <Box marginBottom={4}>
+                        <DataDisplay
+                            title={"Tarjeta"}
+                            text={capitalizeFirstLetter(
+                                userInfo.paymentMethods.find((pm) => pm.id === userInfo.wallet?.paymentMethodForCharging)?.card ??
+                                    "No hay tarjeta seleccionada"
+                            )}
+                            style={{ marginBottom: theme.spacing(2) }}
+                        />
+                        <TextButton
+                            btnText={"Modificar tarjeta"}
+                            style={{ marginTop: theme.spacing(2), fontWeight: "600" }}
+                            handleClick={() => setOpenPaymentMethod(true)}
+                        />
+                    </Box>
+                    <Button
+                        onClick={submitUpdateWallet}
+                        disabled={isSubmittingUpdate}
+                        variant="contained"
+                        color="primary"
+                        style={{
+                            borderRadius: 60,
+                            paddingRight: 32,
+                            paddingLeft: 32,
+                            margin: isMdUp ? "0 0 0 auto" : "auto",
+                            visibility: isSubmitButtonVisible && amountToCharge >= 5 ? "visible" : "hidden",
+                        }}
+                    >
+                        Guardar
+                    </Button>
+                </Box>
+            </BoxWithTextButton>
+        </Box>
+    );
+
+    var WalletMovementsLog = (
+        <BoxWithTextButton hideButton>
+            <Box display="flex" marginBottom={5} alignContent={"center"} alignItems={"center"}>
+                <Typography variant={isMdUp ? "h4" : "subtitle1"} color="initial">
+                    Movimientos de Monedero
+                </Typography>
+            </Box>
+            <Box display={"flex"} flexDirection={"column"}>
+                {userInfo.wallet.walletMovementsLogs.map((log, index) => (
+                    <Box
+                        marginX={-2}
+                        paddingX={2}
+                        key={index}
+                        height={80}
+                        display={"flex"}
+                        alignItems={"center"}
+                        justifyContent={"space-between"}
+                        bgcolor={index % 2 !== 0 ? "#FAFAFA" : "inherit"}
+                    >
+                        <WalletMovementLog amount={log.amount} createdAt={log.createdAt} title={log.title} />
+                    </Box>
+                ))}
+            </Box>
+        </BoxWithTextButton>
+    );
 
     return (
         <>
@@ -145,192 +368,35 @@ const WalletPage = (props) => {
                         width={"90%"}
                         margin={"auto"}
                     >
-                        <Box marginBottom={4}>
-                            <BoxWithTextButton hideButton>
-                                <Grid container>
-                                    <Grid item xs={12} md={6} diplay={"flex"}>
-                                        <Box
-                                            display={"flex"}
-                                            flexDirection={isMdUp ? "column" : "row"}
-                                            marginX={isMdUp ? "unset" : "auto"}
-                                            width={"fit-content"}
-                                            marginBottom={isMdUp ? 0 : 2}
-                                            alignItems={"center"}
-                                        >
-                                            <Typography
-                                                display="inline"
-                                                variant="h2"
-                                                color="initial"
-                                                style={{ marginRight: isMdUp ? 0 : 16 }}
-                                            >
-                                                €{userInfo.wallet?.balance ?? 0}
-                                            </Typography>
-                                            <Typography display="inline" variant="subtitle1" color="initial">
-                                                Saldo actual
-                                            </Typography>
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} md={6} style={{ display: "flex" }}>
-                                        <Button
-                                            onClick={() => setIsAmountToChargeModalOpen(true)}
-                                            variant="contained"
-                                            color="primary"
-                                            style={{
-                                                borderRadius: 60,
-                                                paddingRight: 32,
-                                                paddingLeft: 32,
-                                                margin: isMdUp ? "0 0 0 auto" : "0 auto",
-                                            }}
-                                        >
-                                            Cargar saldo
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </BoxWithTextButton>
-                        </Box>
+                        {isLoading ? (
+                            <Skeleton animation="wave" width={"100%"}>
+                                {WalletBalanceBox}
+                            </Skeleton>
+                        ) : (
+                            WalletBalanceBox
+                        )}
 
-                        <BoxWithTextButton hideButton>
-                            <Box display={"flex"} flexDirection={"column"}>
-                                <Box display="flex" marginBottom={5} alignContent={"center"} alignItems={"center"}>
-                                    <ToggleButton
-                                        isChecked={userInfo.wallet?.isEnabled}
-                                        onChange={() => {
-                                            setUserInfo({
-                                                ...userInfo,
-                                                wallet: { ...userInfo.wallet, isEnabled: !userInfo.wallet.isEnabled },
-                                            });
-                                            setIsSubmitButtonVisible(true);
-                                        }}
-                                    />
-                                    <Typography
-                                        variant={isMdUp ? "h4" : "subtitle1"}
-                                        color="initial"
-                                        style={{ cursor: "pointer", userSelect: "none" }}
-                                        onClick={() => {
-                                            setUserInfo({
-                                                ...userInfo,
-                                                wallet: { ...userInfo.wallet, isEnabled: !userInfo.wallet.isEnabled },
-                                            });
+                        {isLoading ? (
+                            <Skeleton
+                                animation="wave"
+                                width={"100%"}
+                                height={500}
+                                style={{ transform: "initial", marginBottom: 24 }}
+                            ></Skeleton>
+                        ) : (
+                            WalletDataBox
+                        )}
 
-                                            setIsSubmitButtonVisible(true);
-                                        }}
-                                    >
-                                        Recarga autómatica habilitada
-                                    </Typography>
-                                </Box>
-                                <Box marginBottom={4}>
-                                    <Typography
-                                        variant="subtitle2"
-                                        color="textSecondary"
-                                        style={{ fontSize: "14px", marginBottom: theme.spacing(1) }}
-                                    >
-                                        Importe a Cargar
-                                    </Typography>
-                                    <Box width={isMdUp ? "50%" : "100%"}>
-                                        <TextField
-                                            fullWidth
-                                            id="outlined-basic"
-                                            name="amountCharge"
-                                            label="Importe"
-                                            type="number"
-                                            variant="outlined"
-                                            value={userInfo.wallet.amountToCharge}
-                                            InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
-                                            error={userInfo.wallet.amountToCharge < 5}
-                                            helperText={userInfo.wallet?.amountToCharge < 5 ? "El importe mínimo es de $5" : ""}
-                                            FormHelperTextProps={{ style: { fontStyle: "italic", marginLeft: 0 } }}
-                                            onChange={(e) => {
-                                                setUserInfo({
-                                                    ...userInfo,
-                                                    wallet: { ...userInfo.wallet, amountToCharge: parseFloat(e.target.value) },
-                                                });
-                                                setIsSubmitButtonVisible(true);
-                                            }}
-                                        />
-                                    </Box>
-                                </Box>
-                                <Box marginBottom={4}>
-                                    <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px" }}>
-                                        Días y horario de carga
-                                    </Typography>
-                                    <FormGroup style={{ display: "flex", flexDirection: "row", marginBottom: 16 }}>
-                                        {dayItems.map((item) => (
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        color="primary"
-                                                        checked={userInfo.wallet?.datesOfCharge.some(
-                                                            (date) => date.dayNumber === item.value
-                                                        )}
-                                                        onChange={() => {
-                                                            const newDatesOfCharge = [...userInfo.wallet?.datesOfCharge];
-                                                            if (newDatesOfCharge.some((date) => date.dayNumber === item.value)) {
-                                                                newDatesOfCharge.splice(
-                                                                    newDatesOfCharge.findIndex((date) => date.dayNumber === item.value),
-                                                                    1
-                                                                );
-                                                            } else {
-                                                                newDatesOfCharge.push({
-                                                                    dayNumber: item.value,
-                                                                    hour: "",
-                                                                    minute: "",
-                                                                });
-                                                            }
-                                                            setUserInfo({
-                                                                ...userInfo,
-                                                                wallet: { ...userInfo.wallet, datesOfCharge: newDatesOfCharge },
-                                                            });
-                                                            setIsSubmitButtonVisible(true);
-                                                        }}
-                                                    />
-                                                }
-                                                label={item.label}
-                                            />
-                                        ))}
-                                    </FormGroup>
-                                    <Box width={isMdUp ? "50%" : "100%"}>
-                                        <WrappedTimePicker
-                                            value={hour}
-                                            onChange={(date) => {
-                                                setHour(date);
-                                                setIsSubmitButtonVisible(true);
-                                            }}
-                                            label="Horario de carga"
-                                        />
-                                    </Box>
-                                </Box>
-                                <Box marginBottom={4}>
-                                    <DataDisplay
-                                        title={"Tarjeta"}
-                                        text={capitalizeFirstLetter(
-                                            userInfo.paymentMethods.find((pm) => pm.id === userInfo.wallet?.paymentMethodForCharging)
-                                                ?.card ?? "No hay tarjeta seleccionada"
-                                        )}
-                                        style={{ marginBottom: theme.spacing(2) }}
-                                    />
-                                    <TextButton
-                                        btnText={"Modificar tarjeta"}
-                                        style={{ marginTop: theme.spacing(2), fontWeight: "600" }}
-                                        handleClick={() => setOpenPaymentMethod(true)}
-                                    />
-                                </Box>
-                                <Button
-                                    onClick={submitUpdateWallet}
-                                    disabled={isSubmittingUpdate}
-                                    variant="contained"
-                                    color="primary"
-                                    style={{
-                                        borderRadius: 60,
-                                        paddingRight: 32,
-                                        paddingLeft: 32,
-                                        margin: isMdUp ? "0 0 0 auto" : "auto",
-                                        visibility: isSubmitButtonVisible && userInfo.wallet?.amountToCharge >= 5 ? "visible" : "hidden",
-                                    }}
-                                >
-                                    Guardar
-                                </Button>
-                            </Box>
-                        </BoxWithTextButton>
+                        {isLoading ? (
+                            <Skeleton
+                                animation="wave"
+                                width={"100%"}
+                                height={500}
+                                style={{ transform: "initial", marginBottom: 24 }}
+                            ></Skeleton>
+                        ) : (
+                            WalletMovementsLog
+                        )}
 
                         {isAmountToChargeModalOpen && (
                             <AmountToChargeModal
@@ -359,14 +425,6 @@ const WalletPage = (props) => {
                                 title="Seleccionar método de cobro"
                             />
                         )}
-                        {/* 
-                    <Image unoptimized src={props.image || "/wallet-empty-state.svg"} alt="búsqueda vacía" width={150} height={150} />
-                    <Typography variant="h6" align="center" color="textPrimary" style={{ marginTop: theme.spacing(3) }}>
-                        Monedero
-                    </Typography>
-                    <Typography variant="body2" align="center" color="textSecondary" style={{ marginTop: theme.spacing(1) }}>
-                        Proximamente
-                    </Typography> */}
                     </Box>
                 </InnerSectionLayout>
             </Layout>

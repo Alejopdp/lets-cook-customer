@@ -12,8 +12,6 @@ import CrossSellingStep from "components/organisms/buyForm/crossSellingStep";
 import { Box, CircularProgress } from "@material-ui/core";
 import { useAuth } from "contexts/auth.context";
 import { Routes, localeRoutes } from "lang/routes/routes";
-import { subscribeToMailingListGroup, updateSubscriber } from "helpers/serverRequests/mailingList";
-import { MAILERLITE_MAILING_LIST_GROUP } from "constants/constants";
 
 export interface PlansErrors {
     plans?: string;
@@ -165,6 +163,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
                 variant: planVariantData.variant,
                 weekLabel: _plans.data.weekLabel,
             });
+
             setisInitializing(false);
         };
 
@@ -196,7 +195,22 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             setShowRegister(false);
             setIsCheckingRedirect(false);
         }
-    }, [data.plans, isAuthenticated]);
+
+        if (
+            isAuthenticated &&
+            window.location.href.includes("step=2") &&
+            step === 0 &&
+            data.plans.length > 0 &&
+            !isCheckingRedirect &&
+            !isInitializing
+        ) {
+            moveNSteps(2);
+        }
+
+        if (!isAuthenticated && window.location.href.includes("step=2") && step === 0 && !isCheckingRedirect && !isInitializing) {
+            moveNSteps(1);
+        }
+    }, [data.plans, isAuthenticated, isCheckingRedirect, step, isInitializing]);
 
     useEffect(() => {
         setDeliveryInfo({

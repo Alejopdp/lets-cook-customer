@@ -41,6 +41,15 @@ export type Wallet = {
     last4Numbers: string;
     isEnabled: boolean;
     datesOfCharge: { dayNumber: number; hour: string; minute: string }[];
+    walletMovementsLogs: WalletMovement[];
+};
+
+export type WalletMovement = {
+    type: string;
+    title: string;
+    description: string;
+    createdAt: string;
+    amount: number;
 };
 
 interface IUserInfoStore extends IUserInfo {
@@ -73,6 +82,7 @@ const initialState: IUserInfo = {
             last4Numbers: "",
             isEnabled: false,
             datesOfCharge: [],
+            walletMovementsLogs: [],
         },
     },
 };

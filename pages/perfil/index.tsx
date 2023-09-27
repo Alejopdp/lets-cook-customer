@@ -249,17 +249,13 @@ const Perfil = (props) => {
                                             {lang.greeting} {userInfo.firstName || ""}
                                         </Typography>
                                         <Box>
-                                            {isLoading || true ? (
-                                                <Skeleton />
-                                            ) : (
-                                                <TextButton
-                                                    style={{ marginRight: theme.spacing(2) }}
-                                                    noColor
-                                                    icon="time"
-                                                    btnText={lang.paymentHistoryBtnText}
-                                                    handleClick={() => router.push(localeRoutes[router.locale][Routes["historial-pagos"]])}
-                                                />
-                                            )}
+                                            <TextButton
+                                                style={{ marginRight: theme.spacing(2) }}
+                                                noColor
+                                                icon="time"
+                                                btnText={lang.paymentHistoryBtnText}
+                                                handleClick={() => router.push(localeRoutes[router.locale][Routes["historial-pagos"]])}
+                                            />
                                             <TextButton
                                                 style={{ marginRight: theme.spacing(2) }}
                                                 icon="settings"
@@ -267,7 +263,9 @@ const Perfil = (props) => {
                                                 handleClick={() => router.push(localeRoutes[router.locale][Routes.configuracion])}
                                             />
                                             <TextButton
-                                                style={{ marginRight: userInfo.wallet ? "initial" : theme.spacing(2) }}
+                                                style={{
+                                                    marginRight: userInfo.wallet ? "initial" : theme.spacing(2),
+                                                }}
                                                 icon="star"
                                                 btnText={lang.rateRecipesBtnText}
                                                 handleClick={() =>
@@ -276,6 +274,9 @@ const Perfil = (props) => {
                                             />
                                             {/* {userInfo.wallet && (
                                                 <TextButton
+                                                    style={{
+                                                        visibility: isLoading ? "hidden" : "visible",
+                                                    }}
                                                     icon="wallet"
                                                     btnText={lang.rateRecipesBtnText}
                                                     handleClick={() =>
