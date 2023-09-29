@@ -1,8 +1,6 @@
 // Utils & config
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
 import { useRouter } from "next/router";
-import { useSnackbar } from "notistack";
 import { useLang } from "@hooks";
 
 // Internal Components

@@ -4,6 +4,9 @@ import Modal from "../../atoms/modal/modal";
 import { IPaymentMethod } from "@stores";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import { capitalizeFirstLetter } from "helpers/utils/utils";
+import { monedero } from "../../../lang/index";
+import { useRouter } from "next/router";
+import { locale } from "types/locale";
 
 type ChargeAmountModal = {
     open: boolean;
@@ -18,6 +21,8 @@ type ChargeAmountModal = {
 };
 
 const AmountToChargeModal = (props: ChargeAmountModal) => {
+    const router = useRouter();
+    const lang = monedero[router.locale as locale];
     const [amountToCharge, setAmountToCharge] = useState(0);
     const [selectedCard, setSelectedCard] = useState(props.walletPaymentMethodId);
 
@@ -35,18 +40,18 @@ const AmountToChargeModal = (props: ChargeAmountModal) => {
             <FormControl component="fieldset" style={{ width: "100%" }}>
                 <Box marginBottom={4}>
                     <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px", marginBottom: 16 }}>
-                        Importe a Cargar
+                        {lang.chargeWalletModal.amountInputLabel}
                     </Typography>
                     <Box width={"50%"}>
                         <TextField
                             fullWidth
                             id="outlined-basic"
                             name="amountCharge"
-                            label="Importe"
+                            label={lang.chargeWalletModal.amountTochargeInputPlaceholder}
                             InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
                             type="number"
                             error={!!amountToCharge && amountToCharge < 5}
-                            helperText={!!amountToCharge && amountToCharge < 5 ? "El importe mínimo es de $5" : ""}
+                            helperText={!!amountToCharge && amountToCharge < 5 ? lang.minimumAmountToCharge : ""}
                             FormHelperTextProps={{ style: { fontStyle: "italic", marginLeft: 0 } }}
                             variant="outlined"
                             value={amountToCharge}
@@ -56,7 +61,7 @@ const AmountToChargeModal = (props: ChargeAmountModal) => {
                 </Box>
                 <Box>
                     <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px", marginBottom: 8 }}>
-                        Mis tarjetas
+                        {lang.chargeWalletModal.myCards}
                     </Typography>
                     <RadioGroup
                         aria-label="gender"
@@ -81,9 +86,7 @@ const AmountToChargeModal = (props: ChargeAmountModal) => {
             </FormControl>
             <div style={{ display: "flex", marginTop: "16px", alignItems: "center" }}>
                 <ErrorOutlineIcon color="secondary" style={{ marginRight: 8 }} />
-                <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>
-                    La tarjeta que selecciones solo se usará para esta carga, no quedará seleccionada para otra operación.
-                </i>
+                <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>{lang.chargeWalletModal.myCardsWarning}</i>
             </div>
         </Modal>
     );

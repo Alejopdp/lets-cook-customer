@@ -16,6 +16,7 @@ import {
     InputAdornment,
 } from "@material-ui/core";
 import { useUserInfoStore } from "../../stores/auth";
+import { monedero } from "../../lang/index";
 
 // Internal components
 import { Layout } from "../../components/layout/index";
@@ -34,19 +35,52 @@ import AmountToChargeModal from "components/molecules/chargeAmountModal/chargeAm
 import SimplePaymentMethodModal from "components/molecules/simplePaymentMethodsModal/simplePaymentMethodsModal";
 import { Skeleton } from "@material-ui/lab";
 import WalletMovementLog from "components/atoms/walletMovementLog";
+import { locale } from "types/locale";
 
 const dayItems = [
-    { label: "Lunes", value: 1, checked: false, name: "Lunes" },
-    { label: "Martes", value: 2, checked: false, name: "Martes" },
-    { label: "Miércoles", value: 3, checked: false, name: "Miércoles" },
-    { label: "Jueves", value: 4, checked: false, name: "Jueves" },
-    { label: "Viernes", value: 5, checked: false, name: "Viernes" },
-    { label: "Sábado", value: 6, checked: false, name: "Sábado" },
-    { label: "Domingo", value: 0, checked: false, name: "Domingo" },
+    { label: { es: "Lunes", en: "Monday", ca: "Dilluns" }, value: 1, checked: false, name: { es: "Lunes", en: "Monday", ca: "Dilluns" } },
+    {
+        label: { es: "Martes", en: "Tuesday", ca: "Dimarts" },
+        value: 2,
+        checked: false,
+        name: { es: "Martes", en: "Tuesday", ca: "Dimarts" },
+    },
+    {
+        label: { es: "Miércoles", en: "Wednesday", ca: "Dimecres" },
+        value: 3,
+        checked: false,
+        name: { es: "Miércoles", en: "Wednesday", ca: "Dimecres" },
+    },
+    {
+        label: { es: "Jueves", en: "Thursday", ca: "Dijous" },
+        value: 4,
+        checked: false,
+        name: { es: "Jueves", en: "Thursday", ca: "Dijous" },
+    },
+    {
+        label: { es: "Viernes", en: "Friday", ca: "Divendres" },
+        value: 5,
+        checked: false,
+        name: { es: "Viernes", en: "Friday", ca: "Divendres" },
+    },
+    {
+        label: { es: "Sábado", en: "Saturday", ca: "Dissabte" },
+        value: 6,
+        checked: false,
+        name: { es: "Sábado", en: "Saturday", ca: "Dissabte" },
+    },
+    {
+        label: { es: "Domingo", en: "Sunday", ca: "Diumenge" },
+        value: 0,
+        checked: false,
+        name: { es: "Domingo", en: "Sunday", ca: "Diumenge" },
+    },
 ];
 
 const WalletPage = (props) => {
     const theme = useTheme();
+    const router = useRouter();
+    const lang = monedero[router.locale as locale];
     const { enqueueSnackbar } = useSnackbar();
     const [isLoading, setIsLoading] = useState(true);
     const [hour, setHour] = useState<Date | null>(null);
@@ -59,7 +93,6 @@ const WalletPage = (props) => {
     const [isSubmitButtonVisible, setIsSubmitButtonVisible] = useState(false);
     const [amountToCharge, setAmountToCharge] = useState(userInfo.wallet?.amountToCharge);
     const [datesOfCharge, setDatesOfCharge] = useState(userInfo.wallet?.datesOfCharge);
-    const router = useRouter();
     const isMdUp = useMediaQuery(useTheme().breakpoints.up("md"));
 
     useEffect(() => {
@@ -103,7 +136,7 @@ const WalletPage = (props) => {
 
     async function handleChargeMoney(amountToCharge: number, paymentMethodId?: string) {
         setIsChargingMoney(true);
-        const res = await chargeMoneyToWallet(userInfo.id, amountToCharge, paymentMethodId);
+        const res = await chargeMoneyToWallet(userInfo.id, amountToCharge, router.locale, paymentMethodId);
 
         if (res.status === 200) {
             setUserInfo({
@@ -115,10 +148,10 @@ const WalletPage = (props) => {
                     walletMovementsLogs: res.data.walletMovementsLogs,
                 },
             });
-            enqueueSnackbar("Saldo cargado correctamente", { variant: "success" });
+            enqueueSnackbar(lang.snackbars.walletChargeSuccess, { variant: "success" });
             setIsAmountToChargeModalOpen(false);
         } else {
-            enqueueSnackbar(res.data.message ?? "Ocurrió un error al cargar el dinero", { variant: "error" });
+            enqueueSnackbar(res.data.message ?? lang.snackbars.walletChargeError, { variant: "error" });
         }
         setIsChargingMoney(false);
     }
@@ -126,19 +159,23 @@ const WalletPage = (props) => {
     async function submitUpdateWallet() {
         setIsSubmittingUpdate(true);
 
-        const res = await updateWallet(userInfo.id, {
-            ...userInfo.wallet,
-            isEnabled: isWalletEnabled,
-            amountToCharge,
-            datesOfCharge: datesOfCharge.map((date) => ({
-                ...date,
-                hour: new Date(hour).getHours().toString(),
-                minute: new Date(hour).getMinutes().toString(),
-            })),
-        });
+        const res = await updateWallet(
+            userInfo.id,
+            {
+                ...userInfo.wallet,
+                isEnabled: isWalletEnabled,
+                amountToCharge,
+                datesOfCharge: datesOfCharge.map((date) => ({
+                    ...date,
+                    hour: new Date(hour).getHours().toString(),
+                    minute: new Date(hour).getMinutes().toString(),
+                })),
+            },
+            router.locale
+        );
 
         if (res.status === 200) {
-            enqueueSnackbar("Monedero actualizado correctamente", { variant: "success" });
+            enqueueSnackbar(lang.snackbars.walletUpdateSuccess, { variant: "success" });
             setUserInfo({
                 ...userInfo,
                 wallet: {
@@ -155,7 +192,7 @@ const WalletPage = (props) => {
             });
             setIsSubmitButtonVisible(false);
         } else {
-            enqueueSnackbar(res.data.message ?? "Ocurrió un error al actualizar el monedero", { variant: "error" });
+            enqueueSnackbar(res.data.message ?? lang.snackbars.walletUpdateError, { variant: "error" });
         }
         setIsSubmittingUpdate(false);
     }
@@ -177,7 +214,7 @@ const WalletPage = (props) => {
                                 €{userInfo.wallet?.balance ?? 0}
                             </Typography>
                             <Typography display="inline" variant="subtitle1" color="initial">
-                                Saldo actual
+                                {lang.walletBalance}
                             </Typography>
                         </Box>
                     </Grid>
@@ -193,7 +230,7 @@ const WalletPage = (props) => {
                                 margin: isMdUp ? "0 0 0 auto" : "0 auto",
                             }}
                         >
-                            Cargar saldo
+                            {lang.chargeWalletButtonText}
                         </Button>
                     </Grid>
                 </Grid>
@@ -222,25 +259,25 @@ const WalletPage = (props) => {
                                 setIsSubmitButtonVisible(true);
                             }}
                         >
-                            Recarga autómatica habilitada
+                            {lang.automaticRechargeEnabled}
                         </Typography>
                     </Box>
                     <Box marginBottom={4}>
                         <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px", marginBottom: theme.spacing(1) }}>
-                            Importe a Cargar
+                            {lang.amountToChargeInputLabel}
                         </Typography>
                         <Box width={isMdUp ? "50%" : "100%"}>
                             <TextField
                                 fullWidth
                                 id="outlined-basic"
                                 name="amountCharge"
-                                label="Importe"
+                                label={lang.amountTochargeInputPlaceholder}
                                 type="number"
                                 variant="outlined"
                                 value={amountToCharge}
                                 InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
                                 error={amountToCharge < 5}
-                                helperText={amountToCharge < 5 ? "El importe mínimo es de $5" : ""}
+                                helperText={amountToCharge < 5 ? lang.minimumAmountToCharge : ""}
                                 FormHelperTextProps={{ style: { fontStyle: "italic", marginLeft: 0 } }}
                                 onChange={(e) => {
                                     setAmountToCharge(parseFloat(e.target.value));
@@ -251,7 +288,7 @@ const WalletPage = (props) => {
                     </Box>
                     <Box marginBottom={4}>
                         <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px" }}>
-                            Días y horario de carga
+                            {lang.daysOfChargeTitle}
                         </Typography>
                         <FormGroup style={{ display: "flex", flexDirection: "row", marginBottom: 16 }}>
                             {dayItems.map((item) => (
@@ -279,7 +316,7 @@ const WalletPage = (props) => {
                                             }}
                                         />
                                     }
-                                    label={item.label}
+                                    label={item.label[router.locale]}
                                 />
                             ))}
                         </FormGroup>
@@ -290,21 +327,23 @@ const WalletPage = (props) => {
                                     setHour(date);
                                     setIsSubmitButtonVisible(true);
                                 }}
-                                label="Horario de carga"
+                                label={lang.hourInputTitle}
+                                cancelButtonText={lang.dateTimePicker.cancelButtonText}
+                                confirmButtonText={lang.dateTimePicker.confirmButtonText}
                             />
                         </Box>
                     </Box>
                     <Box marginBottom={4}>
                         <DataDisplay
-                            title={"Tarjeta"}
+                            title={lang.cardTitle}
                             text={capitalizeFirstLetter(
                                 userInfo.paymentMethods.find((pm) => pm.id === userInfo.wallet?.paymentMethodForCharging)?.card ??
-                                    "No hay tarjeta seleccionada"
+                                    lang.noCardSelected
                             )}
                             style={{ marginBottom: theme.spacing(2) }}
                         />
                         <TextButton
-                            btnText={"Modificar tarjeta"}
+                            btnText={lang.updateCardButtonText}
                             style={{ marginTop: theme.spacing(2), fontWeight: "600" }}
                             handleClick={() => setOpenPaymentMethod(true)}
                         />
@@ -322,7 +361,7 @@ const WalletPage = (props) => {
                             visibility: isSubmitButtonVisible && amountToCharge >= 5 ? "visible" : "hidden",
                         }}
                     >
-                        Guardar
+                        {lang.saveButtonText}
                     </Button>
                 </Box>
             </BoxWithTextButton>
@@ -333,7 +372,7 @@ const WalletPage = (props) => {
         <BoxWithTextButton hideButton>
             <Box display="flex" marginBottom={5} alignContent={"center"} alignItems={"center"}>
                 <Typography variant={isMdUp ? "h4" : "subtitle1"} color="initial">
-                    Movimientos de Monedero
+                    {lang.walletMovementsTitle}
                 </Typography>
             </Box>
             <Box display={"flex"} flexDirection={"column"}>
@@ -403,9 +442,9 @@ const WalletPage = (props) => {
                                 open={isAmountToChargeModalOpen}
                                 handleClose={() => setIsAmountToChargeModalOpen(false)}
                                 handleSubmit={handleChargeMoney}
-                                primaryButtonText={"Guardar"}
-                                secondaryButtonText={"Cancelar"}
-                                title="Cargar saldo"
+                                primaryButtonText={lang.chargeWalletModal.confirmButtonText}
+                                secondaryButtonText={lang.chargeWalletModal.cancelButtonText}
+                                title={lang.chargeWalletModal.title}
                                 paymentMethods={userInfo.paymentMethods}
                                 walletPaymentMethodId={userInfo.wallet?.paymentMethodForCharging}
                                 isSubmitting={isChargingMoney}
@@ -418,11 +457,11 @@ const WalletPage = (props) => {
                                 handleClose={() => setOpenPaymentMethod(false)}
                                 selectedWalletPaymentMethodId={userInfo.wallet?.paymentMethodForCharging}
                                 handleSelectPaymentMethod={handleSelectPaymentMethod}
-                                primaryButtonText={"Guardar"}
-                                secondaryButtonText={"Cancelar"}
+                                primaryButtonText={lang.updatePaymentMethodModal.saveButtonText}
+                                secondaryButtonText={lang.updatePaymentMethodModal.cancelButtonText}
                                 initialData={userInfo.paymentMethods}
                                 customerId={userInfo.id}
-                                title="Seleccionar método de cobro"
+                                title={lang.updatePaymentMethodModal.title}
                             />
                         )}
                     </Box>
