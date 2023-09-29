@@ -74,7 +74,7 @@ function MyApp(props) {
             if (res.status === 200) {
                 setIsAuthenticated(true);
                 const userInfo = await getFromLocalStorage(LOCAL_STORAGE_KEYS.userInfo);
-                const getCustomerRes = await getCustomerById(userInfo?.id);
+                const getCustomerRes = await getCustomerById(userInfo?.id, router.locale);
 
                 if (getCustomerRes && getCustomerRes.status === 200) {
                     userInfo = {

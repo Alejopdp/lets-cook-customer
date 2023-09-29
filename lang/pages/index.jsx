@@ -7,3 +7,4 @@ export * from "./recetas";
 export * from "./home";
 export * from "./perfil";
 export * from "./update-email";
+export * from "./monedero";

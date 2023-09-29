@@ -3,6 +3,9 @@ import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import { Radio, RadioGroup, FormControlLabel, FormControl, Typography } from "@material-ui/core";
 import Modal from "../../atoms/modal/modal";
 import { capitalizeFirstLetter } from "helpers/utils/utils";
+import { useRouter } from "next/router";
+import { monedero } from "../../../lang/index";
+import { locale } from "types/locale";
 
 type SimplePaymentMethodModalProps = {
     open: boolean;
@@ -17,6 +20,8 @@ type SimplePaymentMethodModalProps = {
 };
 
 const SimplePaymentMethodModal = (props: SimplePaymentMethodModalProps) => {
+    const router = useRouter();
+    const lang = monedero[router.locale as locale];
     const [selectedCard, setSelectedCard] = useState(props.selectedWalletPaymentMethodId);
 
     const handleSubmit = async () => {
@@ -35,7 +40,7 @@ const SimplePaymentMethodModal = (props: SimplePaymentMethodModalProps) => {
         >
             <FormControl component="fieldset" style={{ width: "100%" }}>
                 <Typography variant="subtitle2" color="initial">
-                    Mis tarjetas
+                    {lang.updatePaymentMethodModal.myCards}
                 </Typography>
                 <RadioGroup aria-label="gender" name="savedCards" value={selectedCard} onChange={(e) => setSelectedCard(e.target.value)}>
                     {props.initialData
@@ -55,9 +60,7 @@ const SimplePaymentMethodModal = (props: SimplePaymentMethodModalProps) => {
 
             <div style={{ display: "flex", marginTop: "16px", alignItems: "center" }}>
                 <ErrorOutlineIcon color="secondary" style={{ marginRight: 8 }} />
-                <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>
-                    Si quieres agregar un nuevo método de pago deberás hacerlo desde tu configuración
-                </i>
+                <i style={{ marginLeft: ".2rem", fontStyle: "italic" }}>{lang.updatePaymentMethodModal.warningText}</i>
             </div>
         </Modal>
     );
