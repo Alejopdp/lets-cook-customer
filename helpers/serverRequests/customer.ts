@@ -290,12 +290,13 @@ export const getCustomerById = async (customerId: string, locale: string) => {
     }
 };
 
-export const updateWallet = async (customerId: string, wallet: Wallet) => {
+export const updateWallet = async (customerId: string, wallet: Wallet, locale: string) => {
     try {
         const res = await axios({
             method: "PUT",
             url: `${apiUrl}/wallet/${customerId}`,
             headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
+            params: { locale },
             data: {
                 ...wallet,
             },
@@ -308,12 +309,13 @@ export const updateWallet = async (customerId: string, wallet: Wallet) => {
 }
 
 
-export const chargeMoneyToWallet = async (customerId: string, amountToCharge: number, paymentMethodId?: string) => {
+export const chargeMoneyToWallet = async (customerId: string, amountToCharge: number, locale: string, paymentMethodId?: string) => {
     try {
         const res = await axios({
             method: "PUT",
             url: `${apiUrl}/wallet/charge/${customerId}`,
             headers: { authorization: JSON.parse(window.localStorage.getItem("token")) },
+            params: { locale },
             data: {
                 amountToCharge,
                 paymentMethodId
