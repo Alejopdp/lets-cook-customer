@@ -35,7 +35,7 @@ export const monedero = {
         updatePaymentMethodModal: {
             title: "Seleccionar tarjeta",
             myCards: "Mis tarjetas",
-            warningText: "Si quieres agregar un nuevo método de pago deberás hacerlo desde tu configuración.",
+            warningText: "Si quieres añadir un nuevo método de pago puedes hacerlo desde el apartado de configuración.",
             cancelButtonText: "CANCELAR",
             saveButtonText: "GUARDAR",
         },
