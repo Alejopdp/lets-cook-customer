@@ -17,7 +17,7 @@ const PreguntasFrecuentes = () => {
 
     return (
         <Layout
-            seoTitle="Preguntas frecuentes - Let's cook: Productos frescos y recetas"
+            seoTitle="Preguntas frecuentes - LetsCook: Productos frescos y recetas"
             seoOgUrlSlug="preguntas-frecuentes"
             page="preguntas frecuentes"
         >

@@ -7,13 +7,13 @@ import BlogList from "components/organisms/blogList";
 const BlogsPage = (props) => {
     return (
         <Layout
-            seoTitle={`Conoce Let's Cook`}
+            seoTitle={`Conoce LetsCook`}
             page="blog post page"
-            seoDescriptionContent="Conoce Let's Cook"
+            seoDescriptionContent="Conoce LetsCook"
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blog`}
         >
             <InnerSectionLayout containerMaxWidth="md">
-                <TitleOtherPages title={"Conoce Let's Cook"} hideSubtitle />
+                <TitleOtherPages title={"Conoce LetsCook"} hideSubtitle />
                 <BlogList />
             </InnerSectionLayout>
         </Layout>

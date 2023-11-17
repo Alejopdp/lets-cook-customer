@@ -9,7 +9,7 @@ import { useLang } from "@hooks";
 
 const blogs = [
     // {
-    //     title: { en: "Conoce Let's Cook", es: "Conoce Let's Cook", ca: "Conoce Let's Cook" },
+    //     title: { en: "Conoce LetsCook", es: "Conoce LetsCook", ca: "Conoce LetsCook" },
     //     subtitle: {
     //         en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ",
     //         es: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ",

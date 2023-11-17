@@ -20,7 +20,7 @@ const BonoRegalo = () => {
 
     return (
         <Layout
-            seoTitle="Bono regalo - Let's cook: Productos frescos y recetas"
+            seoTitle="Bono regalo - LetsCook: Productos frescos y recetas"
             seoOgUrlSlug="bono-regalo"
             disableCallToActionSection
             disableFooterSection={step === 0 ? false : true}

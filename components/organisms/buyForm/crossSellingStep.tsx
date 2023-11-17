@@ -81,7 +81,7 @@ const CrossSellingStep = () => {
 
         // ga.purchase({
         //     transaction_id: res.data.subscriptionId,
-        //     affiliation: "Let's cook website",
+        //     affiliation: "LetsCook website",
         //     value: 0,
         //     currency: "EUR",
         //     tax: 0,

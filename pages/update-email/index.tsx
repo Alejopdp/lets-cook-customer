@@ -59,7 +59,7 @@ const UpdateEmailPage = (props) => {
     return (
         <Layout
             page="Update email"
-            seoTitle={`Update email - Let's cook`}
+            seoTitle={`Update email - LetsCook`}
             seoDescriptionContent="Update email"
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/update-email?token=${router.query.token}`}
             disableCallToActionSection

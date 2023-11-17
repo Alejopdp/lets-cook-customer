@@ -15,7 +15,7 @@ const BlogPostPage = ({ post, error }) => {
     const router = useRouter();
     return (
         <Layout
-            seoTitle={`${post.title} - Let's cook`}
+            seoTitle={`${post.title} - LetsCook`}
             page="blog post page"
             seoDescriptionContent={post.description}
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/noticias/${post.slug}`}

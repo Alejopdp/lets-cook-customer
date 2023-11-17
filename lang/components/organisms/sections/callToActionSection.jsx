@@ -1,7 +1,7 @@
 export const callToActionSection = {
     es: {
         title: "Descubre tu chef interior",
-        subtitle: "Empieza a cocinar ingredientes frescos y de proximidad con Let's cook.",
+        subtitle: "Empieza a cocinar ingredientes frescos y de proximidad con LetsCook.",
         btnText: "Me interesa",
         btnCaption: "Sin compromiso de permanencia",
     },
@@ -13,7 +13,7 @@ export const callToActionSection = {
     },
     ca: {
         title: "Descobreix el teu xef interior",
-        subtitle: "Comença a cuinar ingredients frescos i de proximitat amb Let's cook.",
+        subtitle: "Comença a cuinar ingredients frescos i de proximitat amb LetsCook.",
         btnText: "M’interessa",
         btnCaption: "Sense compromís de permanència",
     },

@@ -20,7 +20,7 @@ const ComoFunciona = () => {
 
     return (
         <Layout
-            seoTitle="Cómo funciona - Let's cook: Productos frescos y recetas"
+            seoTitle="Cómo funciona - LetsCook: Productos frescos y recetas"
             seoOgUrlSlug="como-funciona"
             page="como funciona"
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}${localeRoutes[router.locale][Routes["como-funciona"]]}`}

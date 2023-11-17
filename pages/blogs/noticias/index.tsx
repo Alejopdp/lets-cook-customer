@@ -15,7 +15,7 @@ const BlogRecetas = (props) => {
 
     return (
         <Layout
-            seoTitle={`Blog noticias - Let's cook`}
+            seoTitle={`Blog noticias - LetsCook`}
             page="blog post page"
             seoDescriptionContent="Blog noticias"
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/noticias`}
