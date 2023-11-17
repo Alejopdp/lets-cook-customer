@@ -20,7 +20,7 @@ const PreguntasFrecuentes = () => {
     return (
         <Layout
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}${localeRoutes[router.locale][Routes["preguntas-frecuentes"]]}`}
-            seoTitle="Preguntas frecuentes - Let's cook: Productos frescos y recetas"
+            seoTitle="Preguntas frecuentes - LetsCook: Productos frescos y recetas"
             seoOgUrlSlug="preguntas-frecuentes"
             page="preguntas frecuentes"
         >

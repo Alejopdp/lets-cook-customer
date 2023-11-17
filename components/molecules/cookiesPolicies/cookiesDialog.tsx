@@ -40,7 +40,7 @@ const langs = {
     es: {
         text: [
             "En ",
-            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            <span style={{ fontWeight: "bold" }}>LetsCook </span>,
             "usamos ",
             <span style={{ textDecoration: "underline" }}>cookies de terceros </span>,
             "para poder personalizar tu experiencia en nuestra web.",
@@ -51,7 +51,7 @@ const langs = {
     en: {
         text: [
             "At ",
-            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            <span style={{ fontWeight: "bold" }}>LetsCook </span>,
             "we use ",
             <span style={{ textDecoration: "underline" }}>third-party cookies </span>,
             "to personalise your experience on our website",
@@ -62,7 +62,7 @@ const langs = {
     ca: {
         text: [
             "A ",
-            <span style={{ fontWeight: "bold" }}>Let's cook </span>,
+            <span style={{ fontWeight: "bold" }}>LetsCook </span>,
             "fem servir ",
             <span style={{ textDecoration: "underline" }}>cookies de tercers</span>,
             "per a poder personalitzar la teva experiència a la nostra web.",

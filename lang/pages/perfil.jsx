@@ -25,7 +25,7 @@ export const perfil = {
             text: "Tienes recetas pendientes de valorar. ¡Tu opinión nos ayuda a mejorar!",
         },
         referalActionBox: {
-            text: "Invita a tus amigos a probar Let's cook con 10€ de descuento en su primera semana utilizando el código",
+            text: "Invita a tus amigos a probar LetsCook con 10€ de descuento en su primera semana utilizando el código",
             miniText: "Tendrás 10€ de descuento por cada amigo que se apunte.",
         },
         planProfileCard: {
@@ -73,7 +73,7 @@ export const perfil = {
             text: "You have recipes pending evaluation. Your opinions help us improve!",
         },
         referalActionBox: {
-            text: "Invite your friends to try Let's cook with a 10€ discount on their first week using the code",
+            text: "Invite your friends to try LetsCook with a 10€ discount on their first week using the code",
             miniText: "You will have 10€ discount for each friend who signs up.",
         },
         planProfileCard: {
@@ -121,7 +121,7 @@ export const perfil = {
             text: "Tens receptes pendents de valorar. La teva opinió ens ajuda a millorar!",
         },
         referalActionBox: {
-            text: "Convida els teus amics a provar Let's cook amb 10€ de descompte en la primera setmana utilitzant el codi",
+            text: "Convida els teus amics a provar LetsCook amb 10€ de descompte en la primera setmana utilitzant el codi",
             miniText: "Tindràs 10€ de descompte per cada amic que s'hi apunti.",
         },
         planProfileCard: {

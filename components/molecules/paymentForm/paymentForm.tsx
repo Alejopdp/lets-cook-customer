@@ -238,7 +238,7 @@ export const PaymentForm = (props) => {
 
                     ga.purchase({
                         transaction_id: res.data.subscriptionId,
-                        affiliation: "Let's cook website",
+                        affiliation: "LetsCook website",
                         value: res.data.amountBilled,
                         currency: "EUR",
                         tax: res.data.tax,
@@ -312,7 +312,7 @@ export const PaymentForm = (props) => {
                 });
                 ga.purchase({
                     transaction_id: res.data.subscriptionId,
-                    affiliation: "Let's cook website",
+                    affiliation: "LetsCook website",
                     value: res.data.amountBilled,
                     currency: "EUR",
                     tax: res.data.tax,

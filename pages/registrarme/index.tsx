@@ -19,7 +19,7 @@ const Signup = () => {
         <Layout
             disableCallToActionSection
             disableFooterSection
-            seoTitle="Registrarme - Let's cook: Productos frescos y recetas"
+            seoTitle="Registrarme - LetsCook: Productos frescos y recetas"
             seoOgUrlSlug="registrarme"
             page="registrarme"
         >

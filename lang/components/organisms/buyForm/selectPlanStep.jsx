@@ -24,7 +24,7 @@ export const selectPlanStep = {
             faqs: buyFlow.es.faqs,
         },
         footerSection: {
-            copyright: "Let's Cook 2021 © - Todos los derechos reservados",
+            copyright: "LetsCook 2021 © - Todos los derechos reservados",
             termsAndConditions: "Términos y condiciones",
             privacyPolicy: "Política de privacidad",
         },
@@ -52,7 +52,7 @@ export const selectPlanStep = {
             faqs: buyFlow.es.faqs,
         },
         footerSection: {
-            copyright: "Let's Cook 2021 © - All rights reserved",
+            copyright: "LetsCook 2021 © - All rights reserved",
             termsAndConditions: "Terms and conditions",
             privacyPolicy: "Privacy Policy",
         },
@@ -80,7 +80,7 @@ export const selectPlanStep = {
             faqs: buyFlow.es.faqs,
         },
         footerSection: {
-            copyright: "Let's Cook 2021 © - Tots els drets reservats",
+            copyright: "LetsCook 2021 © - Tots els drets reservats",
             termsAndConditions: "Termes i condicions",
             privacyPolicy: "Política de privacitat",
         },

@@ -154,7 +154,7 @@ export const productosAdicionales = {
             },
             {
                 question: "Y si compro el plan adicional de vinos, ¿recibiré el mismo vino todas las semanas?",
-                answer: "Al darte de alta eliges la gama y el tipo que quieras recibir semanalmente. Dentro de gama y tipo, Let's cook cambia los vinos cada mes para que puedas probar diferentes vinos orgánicos y de proximidad.",
+                answer: "Al darte de alta eliges la gama y el tipo que quieras recibir semanalmente. Dentro de gama y tipo, LetsCook cambia los vinos cada mes para que puedas probar diferentes vinos orgánicos y de proximidad.",
             },
             {
                 question: "Y si quiero cambiar de tipo de plan adicional para la semana que viene, ¿qué hago?",
@@ -191,7 +191,7 @@ export const productosAdicionales = {
             },
             {
                 question: "If I buy the additional product plan with wine, will I receive the same wines every week?",
-                answer: "When you sign up, you choose the price range and type (red, white or rosé) that you want to receive weekly. Let's cook changes the wines every month so that you can try different organic and local wines.",
+                answer: "When you sign up, you choose the price range and type (red, white or rosé) that you want to receive weekly. LetsCook changes the wines every month so that you can try different organic and local wines.",
             },
             {
                 question: "If I only want to change the type of additional product plan for the following week, what do I do?",
@@ -228,7 +228,7 @@ export const productosAdicionales = {
             },
             {
                 question: "I si compro el pla addicional de vins, ¿rebré el mateix vi totes les setmanas?",
-                answer: "Al donar-te d’alta tries la gamma i el tipus de vins que voldràs rebre setmanalmente. Dins de cada gamma i tipus, Let's cook canviarà els vins cada mes per què puguis provar diferents vins orgàics i de proximitat.",
+                answer: "Al donar-te d’alta tries la gamma i el tipus de vins que voldràs rebre setmanalmente. Dins de cada gamma i tipus, LetsCook canviarà els vins cada mes per què puguis provar diferents vins orgàics i de proximitat.",
             },
             {
                 question: "i si vull canviar de tipus de pla addicional per la setmana que ve, ¿què haig de fer?",
