@@ -39,14 +39,14 @@ export const BuyFlowLayout = memo(({ children: Component, isInitializing }: BuyF
     return (
         <>
             <Head>
-                <title>Planes semanales - Let's cook: Productos frescos y recetas</title>
+                <title>Planes semanales - LetsCook: Productos frescos y recetas</title>
                 <meta
                     name="description"
                     content="Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos"
                 />
-                <meta property="og:site_name" content="Planes semanales - Let's cook: Productos frescos y recetas" />
+                <meta property="og:site_name" content="Planes semanales - LetsCook: Productos frescos y recetas" />
                 <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
-                <meta property="og:title" content="Let's cook: Productos frescos y recetas" />
+                <meta property="og:title" content="LetsCook: Productos frescos y recetas" />
                 <meta
                     property="og:description"
                     content="Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos"
@@ -54,7 +54,7 @@ export const BuyFlowLayout = memo(({ children: Component, isInitializing }: BuyF
                 <meta property="og:url" content="https://letscooknow.es/planes" />
                 <meta property="og:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Let's cook: Productos frescos y recetas" />
+                <meta name="twitter:title" content="LetsCook: Productos frescos y recetas" />
                 <meta
                     name="twitter:description"
                     content="Tenemos planes para todas las necesidades. Descubre el tuyo desde 4,5 €/ración. Envío gratis en Barcelona y pueblos cercanos"

@@ -45,7 +45,7 @@ export const Layout = (props: LayoutProps) => {
     return (
         <div>
             <Head>
-                <title>{props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"}</title>
+                <title>{props.seoTitle ? props.seoTitle : "LetsCook: Productos frescos y recetas"}</title>
                 <meta
                     name="description"
                     content={
@@ -54,9 +54,9 @@ export const Layout = (props: LayoutProps) => {
                             : "Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."
                     }
                 />
-                <meta property="og:site_name" content={props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"} />
+                <meta property="og:site_name" content={props.seoTitle ? props.seoTitle : "LetsCook: Productos frescos y recetas"} />
                 <meta property="og:image" content="https://i.ibb.co/s31H9Lz/logo-Letscook.jpg" />
-                <meta property="og:title" content={props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"} />
+                <meta property="og:title" content={props.seoTitle ? props.seoTitle : "LetsCook: Productos frescos y recetas"} />
                 <meta
                     property="og:description"
                     content={
@@ -71,7 +71,7 @@ export const Layout = (props: LayoutProps) => {
                 />
                 <meta property="og:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={props.seoTitle ? props.seoTitle : "Let's cook: Productos frescos y recetas"} />
+                <meta name="twitter:title" content={props.seoTitle ? props.seoTitle : "LetsCook: Productos frescos y recetas"} />
                 <meta
                     name="twitter:description"
                     content="Llevamos a tu casa todo lo que necesitas para preparar la cena. Productos frescos y recetas para cocinar platos buenos y ricos cada semana."

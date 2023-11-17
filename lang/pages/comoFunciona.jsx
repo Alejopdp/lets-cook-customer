@@ -27,7 +27,7 @@ export const comoFunciona = {
             image: "/assets/home/home-cf4-disfruta.jpg",
         },
         benefitsSection: {
-            title: "Beneficios de Let's Cook",
+            title: "Beneficios de LetsCook",
             subtitle: "...",
             cards: [
                 {

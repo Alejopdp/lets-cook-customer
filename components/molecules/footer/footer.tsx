@@ -87,29 +87,38 @@ export const Footer = () => {
 
                 <Grid item xs={6} md={3}>
                     <Box display={"flex"} flexDirection={"column"} fontSize={16}>
-
-                    {_links.map((link, index) => (
-                        <NextLink href={link.url} key={index}>
+                        {_links.map((link, index) => (
+                            <NextLink href={link.url} key={index}>
                                 {link.name}
-                        </NextLink>
-                    ))}
+                            </NextLink>
+                        ))}
                     </Box>
                 </Grid>
 
                 <Grid item xs={6} md={3}>
-                    <Link href="mailto:info@letscooknow.es" underline="none" target="_blank" rel="noreferrer noopener" style={{fontSize: 16 }} color="textSecondary">
-                            info@letscooknow.es
+                    <Link
+                        href="mailto:info@letscooknow.es"
+                        underline="none"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        style={{ fontSize: 16 }}
+                        color="textSecondary"
+                    >
+                        info@letscooknow.es
                     </Link>
                 </Grid>
 
-                <Grid item xs={6} md={3} className={paymentMethodsSection}>
-                    <Image  unoptimized src="/payment.png" width={548} height={181} alt="Pagos con tarjeta online" />
+                <Grid item xs={12} md={3} className={paymentMethodsSection}>
+                    <Image unoptimized src="/payments.png" width={367} height={181} alt="Pagos con tarjeta online" />
                 </Grid>
             </Grid>
 
+            <Grid item xs={12} className={footer} style={{ display: "flex", justifyContent: "center" }}>
+                <Image unoptimized src="/logos-enisa.png" width={1184} height={200} alt="Enisa" />
+            </Grid>
             <Grid item xs={12} className={footer}>
                 <Typography variant="body2" style={{ fontSize: "13px" }}>
-                    {lang.copyright}
+                    LetsCook {new Date().getFullYear()} © - {lang.copyright}
                 </Typography>
             </Grid>
         </div>

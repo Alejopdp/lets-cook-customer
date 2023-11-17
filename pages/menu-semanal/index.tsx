@@ -32,7 +32,7 @@ const Recetas = (props) => {
     }, []);
 
     return (
-        <Layout seoTitle="Recetas - Let's cook: Productos frescos y recetas" seoOgUrlSlug="recetas" page="recetas">
+        <Layout seoTitle="Recetas - LetsCook: Productos frescos y recetas" seoOgUrlSlug="recetas" page="recetas">
             <InnerSectionLayout containerMaxWidth="lg">
                 <TitleOtherPages title={lang.title} subtitle={lang.subtitle} />
                 <RecipesGrid recipesPage recipes={recipes} />

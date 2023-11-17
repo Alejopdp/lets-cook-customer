@@ -16,7 +16,7 @@ const AvisoLegal = () => {
 
     return (
         <Layout
-            seoTitle="Aviso legal - Let's cook: Productos frescos y recetas"
+            seoTitle="Aviso legal - LetsCook: Productos frescos y recetas"
             page="aviso legal"
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}${localeRoutes[router.locale][Routes["aviso-legal"]]}`}
         >

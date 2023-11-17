@@ -8,7 +8,7 @@
             "blog": "Blog",
             "legal": "Aviso legal"
         },
-        "copyright": "Let's Cook 2021 © - Todos los derechos reservados"
+        "copyright": "Todos los derechos reservados"
     },
     "en": {
         "links": {
@@ -19,7 +19,7 @@
             "blog": "Blog",
             "legal": "Legal disclaimer"
         },
-        "copyright": "Let's Cook 2021 © - All rights reserved"
+        "copyright": "All rights reserved"
     },
     "ca": {
         "links": {
@@ -30,6 +30,6 @@
             "blog": "Blog",
             "legal": "Avís legal"
         },
-        "copyright": "Let's Cook 2021 © - Tots els drets reservats"
+        "copyright": "Tots els drets reservats"
     }
 }

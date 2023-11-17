@@ -17,7 +17,7 @@ const BlogPostPage = ({ post, error }) => {
     console.log("Slug cannonical: ", `${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas/${post.slug}`);
     return (
         <Layout
-            seoTitle={`${post.title} - Let's cook`}
+            seoTitle={`${post.title} - LetsCook`}
             page="blog post page"
             seoDescriptionContent={post.description}
             canonicalUrl={`${process.env.NEXT_PUBLIC_DOMAIN}/blogs/recetas/${post.slug}`}
