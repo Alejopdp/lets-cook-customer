@@ -537,6 +537,7 @@ const Perfil = (props) => {
                                                     ))}
                                                 </>
                                             ) : (
+                                                // sad
                                                 <EmptyState
                                                     image="/empty-cart.png"
                                                     title={lang.additionalsEmptyStateTitle}
