@@ -70,7 +70,7 @@ export const Footer = () => {
                         <Image unoptimized src="/logo.png" width={174} height={60} alt="Lets cook now" />
                     </Link>
                     <Grid style={{ marginTop: "16px" }}>
-                        <Link href="https://www.instagram.com/letscook.now/" target="_blank" rel="noreferrer noopener">
+                        <Link href="https://www.instagram.com/letscook.es/" target="_blank" rel="noreferrer noopener">
                             <InstagramIcon style={{ margin: "8px" }} />
                         </Link>
                         <Link href="https://www.facebook.com/Lets-cook-2399683106933532/" target="_blank" rel="noreferrer noopener">
