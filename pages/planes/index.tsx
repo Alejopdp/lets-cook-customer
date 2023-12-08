@@ -187,7 +187,8 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         if (!isAuthenticated && data.plans.length > 0) {
             handleLoginRedirect(window.location.href, () => {
                 initializePlanWithParams();
-                moveNSteps(2);
+                const stepsToMove = window.location.href.includes("step=2") ? 1 : 2;
+                moveNSteps(stepsToMove);
             });
         }
 
