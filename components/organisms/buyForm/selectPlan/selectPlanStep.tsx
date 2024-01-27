@@ -97,13 +97,13 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             console.log("***->Oops!", errors);
         }
 
-        ga.event({
-            action: `clic en ${plan.slug}`,
-            params: {
-                event_category: "planes",
-                event_label: plan.slug,
-            },
-        });
+        // ga.event({
+        //     action: `clic en ${plan.slug}`,
+        //     params: {
+        //         event_category: "planes",
+        //         event_label: plan.slug,
+        //     },
+        // });
 
         const { peopleLabels, planName, planRecipes } = getPlanData(plan.slug, props.plans);
         setPlanSize(peopleLabels);
@@ -245,13 +245,13 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     };
 
     const handleClickSelectPlan = () => {
-        ga.event({
-            action: "clic en seleccionar plan",
-            params: {
-                event_category: "planes",
-                event_label: `${buyFlow.form.planSlug}_${buyFlow.form.variant.numberOfPersons}-personas_${buyFlow.form.variant.numberOfRecipes}-recetas`,
-            },
-        });
+        // ga.event({
+        //     action: "clic en seleccionar plan",
+        //     params: {
+        //         event_category: "planes",
+        //         event_label: `${buyFlow.form.planSlug}_${buyFlow.form.variant.numberOfPersons}-personas_${buyFlow.form.variant.numberOfRecipes}-recetas`,
+        //     },
+        // });
 
         if (authStore.isAuthenticated) {
             subscribeToMailingListGroup("109309532", userInfoStore.userInfo.email, {

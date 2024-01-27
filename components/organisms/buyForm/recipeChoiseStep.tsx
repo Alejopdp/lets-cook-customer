@@ -41,25 +41,25 @@ export const RecipeChoiseStep = () => {
     }, []);
 
     const handleRemoveFilter = (filter: IFilter) => {
-        ga.event({
-            action: "clic en remover filtro",
-            params: {
-                event_category: "elegir recetas",
-                event_label: filter.value.toLowerCase(),
-            },
-        });
+        // ga.event({
+        //     action: "clic en remover filtro",
+        //     params: {
+        //         event_category: "elegir recetas",
+        //         event_label: filter.value.toLowerCase(),
+        //     },
+        // });
         const newFilterState = filters.filter((f) => !filter.isEqualToFilterValue(f.value));
         setFilters(newFilterState);
     };
 
     const handleSubmit = async () => {
-        ga.event({
-            action: "clic en finalizar",
-            params: {
-                event_category: "elegir recetas",
-                event_label: "finalizar",
-            },
-        });
+        // ga.event({
+        //     action: "clic en finalizar",
+        //     params: {
+        //         event_category: "elegir recetas",
+        //         event_label: "finalizar",
+        //     },
+        // });
 
         setIsLoading(true);
 
@@ -85,13 +85,13 @@ export const RecipeChoiseStep = () => {
     };
 
     const handleChooseRecipesLater = () => {
-        ga.event({
-            action: "clic en elegir recetas luego",
-            params: {
-                event_category: "elegir recetas",
-                event_label: "elegir recetas luego",
-            },
-        });
+        // ga.event({
+        //     action: "clic en elegir recetas luego",
+        //     params: {
+        //         event_category: "elegir recetas",
+        //         event_label: "elegir recetas luego",
+        //     },
+        // });
         gotToNextView();
     };
 
@@ -104,24 +104,24 @@ export const RecipeChoiseStep = () => {
     }, [filters]);
 
     const handleClickAddRecipe = (recipe) => {
-        ga.event({
-            action: "clic en agregar receta",
-            params: {
-                event_category: "elegir recetas",
-                event_label: recipe.name?.toLowerCase() ?? "",
-            },
-        });
+        // ga.event({
+        //     action: "clic en agregar receta",
+        //     params: {
+        //         event_category: "elegir recetas",
+        //         event_label: recipe.name?.toLowerCase() ?? "",
+        //     },
+        // });
         selectRecipes([...recipes, recipe]);
     };
 
     const handleClickRemoveRecipe = ({ id: _id }) => {
-        ga.event({
-            action: "clic en remover receta",
-            params: {
-                event_category: "elegir recetas",
-                event_label: "remover receta",
-            },
-        });
+        // ga.event({
+        //     action: "clic en remover receta",
+        //     params: {
+        //         event_category: "elegir recetas",
+        //         event_label: "remover receta",
+        //     },
+        // });
         const index = recipes.findIndex(({ id }) => id === _id);
         if (index === -1) return;
         const newState = [...recipes];
@@ -130,13 +130,13 @@ export const RecipeChoiseStep = () => {
     };
 
     const handleClickOpenFilters = () => {
-        ga.event({
-            action: "clic en filtrar recetas",
-            params: {
-                event_category: "elegir recetas",
-                event_label: "visualizar filtros",
-            },
-        });
+        // ga.event({
+        //     action: "clic en filtrar recetas",
+        //     params: {
+        //         event_category: "elegir recetas",
+        //         event_label: "visualizar filtros",
+        //     },
+        // });
         setDrawerOpen(!drawerIsOpen);
     };
 

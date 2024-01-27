@@ -63,13 +63,13 @@ const CrossSellingStep = () => {
     }, [variantsToPay]);
 
     const handleSubmitPayment = async () => {
-        ga.event({
-            action: "clic en pagar productos adicionales",
-            params: {
-                event_category: "cross-selling",
-                event_label: "agregar productos adicionales",
-            },
-        });
+        // ga.event({
+        //     action: "clic en pagar productos adicionales",
+        //     params: {
+        //         event_category: "cross-selling",
+        //         event_label: "agregar productos adicionales",
+        //     },
+        // });
 
         setisLoadingPayment(true);
 
@@ -131,13 +131,13 @@ const CrossSellingStep = () => {
     };
 
     const handleNotAddingAdditionalPlans = async () => {
-        ga.event({
-            action: "clic en no quiero añadir ningun adicional",
-            params: {
-                event_category: "cross-selling",
-                event_label: "no quiero añadir ningun adicional",
-            },
-        });
+        // ga.event({
+        //     action: "clic en no quiero añadir ningun adicional",
+        //     params: {
+        //         event_category: "cross-selling",
+        //         event_label: "no quiero añadir ningun adicional",
+        //     },
+        // });
         await router.push(localeRoutes[router.locale][Routes.perfil]);
         resetBuyFlowState();
     };

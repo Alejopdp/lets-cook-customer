@@ -33,13 +33,13 @@ export const SocialNetworksButtons = (props) => {
     };
 
     const handleGoogleLogin = async () => {
-        ga.event({
-            action: "clic en continuar con rrss",
-            params: {
-                event_category: `registrarse - ${props.source}`,
-                event_label: "google",
-            },
-        });
+        // ga.event({
+        //     action: "clic en continuar con rrss",
+        //     params: {
+        //         event_category: `registrarse - ${props.source}`,
+        //         event_label: "google",
+        //     },
+        // });
 
         await signInWithGoogle();
 
