@@ -58,7 +58,7 @@ function MyApp(props) {
     const router = useRouter();
 
     useEffect(() => {
-        TagManager.initialize({ gtmId: "GTM-5M7F3L5" });
+        TagManager.initialize({ gtmId: "GTM-5M7F3L5", dataLayer: [{}] });
         const verifyAuthentication = async () => {
             const token = await getFromLocalStorage(LOCAL_STORAGE_KEYS.token);
             const hasAcceptedCookies = await getFromLocalStorage(LOCAL_STORAGE_KEYS.HAS_ACCEPTED_COOKIES);
