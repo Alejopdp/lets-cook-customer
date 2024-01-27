@@ -77,6 +77,7 @@ const PlanesPage = memo((props: PlanesPageProps) => {
         planDescription: string;
         canChooseRecipes: boolean;
         planRecipes: Recipes[];
+        planSku: string;
     } => {
         const planSelect = data.plans.find((plan) => plan.slug === data.planUrlParams.slug);
 
@@ -97,11 +98,12 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             planDescription: planSelect.description,
             canChooseRecipes: planSelect.abilityToChooseRecipes,
             planRecipes: planSelect.recipes,
+            planSku: planSelect.sku,
         };
     };
 
     const initializePlanWithParams = () => {
-        const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes } = getPlanData();
+        const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes, planSku } = getPlanData();
         selectPlanRecipes(planRecipes);
         setPlanCode(
             data.planUrlParams.id,
@@ -110,7 +112,8 @@ const PlanesPage = memo((props: PlanesPageProps) => {
             planDescription,
             canChooseRecipes,
             data.planUrlParams.planImageUrl,
-            data.planUrlParams.iconLinealWithColorUrl
+            data.planUrlParams.iconLinealWithColorUrl,
+            planSku
         );
         setPlanVariant(data.variant);
     };

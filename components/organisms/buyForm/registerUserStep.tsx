@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useBuyFlow } from "../../../stores/buyFlow";
 import { IPaymentMethod, IUserInfoFields } from "@stores";
 import { useTheme } from "@material-ui/core";
+import TagManager from "react-gtm-module";
 
 // Internal components
 import SignUpForm from "../signUpForm/signUpForm";
@@ -60,6 +61,13 @@ export const RegisterUserStep = () => {
         });
         setShowRegister(false);
         gotToNextView();
+        TagManager.dataLayer({
+            dataLayer: {
+                event: "login",
+                method: "Google/Mail",
+                id: userInfo.id,
+            },
+        });
     };
 
     const handleSignUp = (userInfo: IUserInfoFields, accpetsMarketing: boolean) => {
@@ -93,6 +101,14 @@ export const RegisterUserStep = () => {
                 shopify_last_order_name: `${form.planName} / ${form.variant.label}`,
             })
         );
+
+        TagManager.dataLayer({
+            dataLayer: {
+                event: "login",
+                method: "Google/Mail",
+                id: userInfo.id,
+            },
+        });
 
         setShowRegister(false);
         gotToNextView();

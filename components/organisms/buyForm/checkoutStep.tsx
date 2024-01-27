@@ -9,6 +9,35 @@ import * as ga from "../../../helpers/ga";
 import { useLang } from "@hooks";
 import { updateSubscriber } from "helpers/serverRequests/mailingList";
 import { getFormattedAddressFromGoogle, OtherAddressInformation } from "helpers/utils/utils";
+import TagManager from "react-gtm-module";
+
+export const skuPlanMap = {
+    PLGOUR: {
+        name: "Plan Gourmet",
+        wordpressId: "4410",
+        index: 1,
+    },
+    PLFML1: {
+        name: "Plan Familiar",
+        wordpressId: "4394",
+        index: 2,
+    },
+    PLVEGE: {
+        name: "Plan Vegetariano",
+        wordpressId: "4352",
+        index: 3,
+    },
+    PLVEGA: {
+        name: "Plan Vegano",
+        wordpressId: "4330",
+        index: 4,
+    },
+    PLAHOR: {
+        name: "Plan Sorpresa",
+        wordpressId: "4021",
+        index: 5,
+    },
+};
 
 interface CheckoutStepProps {
     // handleSubmitPayment: () => void;
@@ -38,6 +67,26 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+
+        TagManager.dataLayer({
+            dataLayer: {
+                event: "begin_checkout",
+                ecommerce: {
+                    items: [
+                        {
+                            item_name: skuPlanMap[form.planSku as keyof typeof skuPlanMap].name,
+                            item_id: skuPlanMap[form.planSku as keyof typeof skuPlanMap].wordpressId,
+                            price: form.variant?.priceWithOffer ?? form.variant?.price,
+                            item_brand: "LetsCook",
+                            item_category: form.variant?.numberOfPersons,
+                            item_category2: form.variant?.numberOfRecipes,
+                            index: skuPlanMap[form.planSku as keyof typeof skuPlanMap].index,
+                            quantity: 1,
+                        },
+                    ],
+                },
+            },
+        });
     }, []);
 
     const handleChangeAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
@@ -67,6 +116,25 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
             shopify_note: deliveryData.restrictions,
         });
 
+        TagManager.dataLayer({
+            dataLayer: {
+                event: "add_shipping_info",
+                ecommerce: {
+                    items: [
+                        {
+                            item_name: skuPlanMap[form.planSku as keyof typeof skuPlanMap].name,
+                            item_id: skuPlanMap[form.planSku as keyof typeof skuPlanMap].wordpressId,
+                            item_brand: "LetsCook",
+                            item_category: form.variant?.numberOfPersons,
+                            item_category2: form.variant?.numberOfRecipes,
+                            price: form.variant?.priceWithOffer ?? form.variant?.price,
+                            index: skuPlanMap[form.planSku as keyof typeof skuPlanMap].index,
+                            quantity: 1,
+                        },
+                    ],
+                },
+            },
+        });
         setExpanded("panel2");
     };
 

@@ -29,8 +29,8 @@ export type Recipes = {
     recipeVariants: RecipeVariant[];
     nutritionalInfo: { key: string; value: string }[];
     imagesUrls: string[];
-    userRating?: number
-    averageRating?: number
+    userRating?: number;
+    averageRating?: number;
 };
 
 export interface DeliveryForm {
@@ -69,6 +69,7 @@ export interface BuyFlowStore {
         subscriptionId: string;
         firstOrderShippingDate: string;
         canChooseRecipes: boolean;
+        planSku: string;
     };
 }
 
@@ -113,7 +114,8 @@ export interface Store extends BuyFlowStore {
         description: string,
         canChooseRecipes: boolean,
         planImageUrl: string,
-        planIconWithColorUrl: string
+        planIconWithColorUrl: string,
+        planSku: string
     ) => void;
     setPlanVariant: (variant: Partial<PlanVariant>) => void;
     setCoupon: (coupon: Partial<Coupon>) => void;
@@ -133,6 +135,7 @@ export const BuyFlowInitialStore: BuyFlowStore = {
         planDescription: "",
         planSlug: "",
         weekLabel: "",
+        planSku: "",
         variant: {
             id: "",
             sku: "",
@@ -238,7 +241,8 @@ const store = devtools<Store>((set, get) => ({
         description: string = "",
         canChooseRecipes: boolean,
         planImageUrl: string = "",
-        planIconWithColorUrl: string = ""
+        planIconWithColorUrl: string = "",
+        planSku: string = ""
     ) => {
         const form = get().form;
         form.planCode = code;
@@ -248,6 +252,7 @@ const store = devtools<Store>((set, get) => ({
         form.canChooseRecipes = canChooseRecipes;
         form.planImageUrl = planImageUrl;
         form.planIconWithColorUrl = planIconWithColorUrl;
+        form.planSku = planSku;
         set({ form });
     },
     setDeliveryInfo: (deliveryForm: DeliveryForm) => {
