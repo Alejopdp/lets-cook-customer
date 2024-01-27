@@ -1,11 +1,11 @@
 // Utils & Config
 import React, { useState } from "react";
-import useStyles from "./styles";
 import { useStripe, useElements, CardNumberElement } from "@stripe/react-stripe-js";
 import { createSubscription, handle3dSecureFailure, sendNewSubscriptionWelcomeEmail } from "../../../helpers/serverRequests/subscription";
 import { useSnackbar } from "notistack";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import * as ga from "../../../helpers/ga";
+var md5 = require("md5");
 
 // External components
 import HttpsOutlinedIcon from "@material-ui/icons/HttpsOutlined";
@@ -25,6 +25,8 @@ import { updatePaymentOrderState } from "helpers/serverRequests/paymentOrder";
 import { PaymentOrderState } from "types/paymentOrderState";
 import CustomCheckboxWithPopup from "../../atoms/customCheckbox/customCheckboxWithPopup";
 import { subscribeToMailingListGroup, updateSubscriber } from "helpers/serverRequests/mailingList";
+import TagManager from "react-gtm-module";
+import { skuPlanMap } from "@organisms";
 
 const useStylesAccordion = makeStyles((theme: Theme) =>
     createStyles({
@@ -97,7 +99,6 @@ export const PaymentForm = (props) => {
 
     const handlePaymentMethodTypeChange = (e) => {
         const value = e.target.value;
-        console.log("A ver que pija pasa type change: ", value);
 
         setPaymentMethod({
             ...form.paymentMethod,
@@ -107,7 +108,6 @@ export const PaymentForm = (props) => {
 
     const handleSelectedCardChange = (e) => {
         const value = e.target.value;
-        console.log("A ver que pija pasa en selected card: ", value);
         setPaymentMethod({
             ...form.paymentMethod,
             id: value,
@@ -130,6 +130,25 @@ export const PaymentForm = (props) => {
     };
 
     const handleSubmitPayment = async () => {
+        TagManager.dataLayer({
+            dataLayer: {
+                event: "add_payment_info",
+                ecommerce: {
+                    items: [
+                        {
+                            item_name: skuPlanMap[form.planSku as keyof typeof skuPlanMap].name,
+                            price: form.variant?.priceWithOffer ?? form.variant?.price,
+                            item_id: skuPlanMap[form.planSku as keyof typeof skuPlanMap].wordpressId,
+                            item_brand: "LetsCook",
+                            item_category: form.variant?.numberOfPersons,
+                            item_category2: form.variant?.numberOfRecipes,
+                            index: skuPlanMap[form.planSku as keyof typeof skuPlanMap].index,
+                            quantity: 1,
+                        },
+                    ],
+                },
+            },
+        });
         ga.event({
             action: "clic en realizar pago",
             params: {
@@ -175,10 +194,39 @@ export const PaymentForm = (props) => {
                 });
 
                 if (confirmationResponse.paymentIntent && confirmationResponse.paymentIntent.status === "succeeded") {
+                    TagManager.dataLayer({
+                        dataLayer: {
+                            event: "purchase",
+                            ecommerce: {
+                                items: [
+                                    {
+                                        item_name: skuPlanMap[form.planSku as keyof typeof skuPlanMap].name,
+                                        item_id: skuPlanMap[form.planSku as keyof typeof skuPlanMap].wordpressId,
+                                        item_brand: "LetsCook",
+                                        price: form.variant?.priceWithOffer ?? form.variant?.price,
+                                        item_category: form.variant?.numberOfPersons,
+                                        item_category2: form.variant?.numberOfRecipes,
+                                        index: skuPlanMap[form.planSku as keyof typeof skuPlanMap].index,
+                                        quantity: 1,
+                                        transaction_id: res.data.paymentOrderId,
+                                        affiliation: "",
+                                        value: form.variant?.priceWithOffer ?? form.variant?.price,
+                                        tax: Math.round((form.variant?.priceWithOffer ?? form.variant?.price) * 0.1 * 100) / 100,
+                                        shipping: form.deliveryForm.shippingCost,
+                                        currency: "EUR",
+                                        coupon: form.coupon?.code ?? "",
+                                        md5: md5(userInfo.email),
+                                    },
+                                ],
+                            },
+                        },
+                    });
+
                     const updatePaymentOrderRes = await updatePaymentOrderState(
                         res.data.paymentOrderId,
                         PaymentOrderState.PAYMENT_ORDER_BILLED
                     );
+
                     setSubscriptionId(res.data.subscriptionId);
                     setFirstOrderId(res.data.firstOrderId);
                     setFirstOrderShippingDate(res.data.firstOrderShippingDate);
@@ -262,6 +310,34 @@ export const PaymentForm = (props) => {
                     );
                 }
             } else if (res.data.payment_status === "succeeded") {
+                TagManager.dataLayer({
+                    dataLayer: {
+                        event: "purchase",
+                        ecommerce: {
+                            items: [
+                                {
+                                    item_name: skuPlanMap[form.planSku as keyof typeof skuPlanMap].name,
+                                    item_id: skuPlanMap[form.planSku as keyof typeof skuPlanMap].wordpressId,
+                                    item_brand: "LetsCook",
+                                    price: form.variant?.priceWithOffer ?? form.variant?.price,
+                                    item_category: form.variant?.numberOfPersons,
+                                    item_category2: form.variant?.numberOfRecipes,
+                                    index: skuPlanMap[form.planSku as keyof typeof skuPlanMap].index,
+                                    quantity: 1,
+                                    transaction_id: res.data.paymentOrderId,
+                                    affiliation: "",
+                                    value: form.variant?.priceWithOffer ?? form.variant?.price,
+                                    tax: Math.round((form.variant?.priceWithOffer ?? form.variant?.price) * 0.1 * 100) / 100,
+                                    shipping: form.deliveryForm.shippingCost,
+                                    currency: "EUR",
+                                    coupon: form.coupon?.code ?? "",
+                                    md5: md5(userInfo.email),
+                                },
+                            ],
+                        },
+                    },
+                });
+
                 setSubscriptionId(res.data.subscriptionId);
                 setFirstOrderId(res.data.firstOrderId);
                 setFirstOrderShippingDate(res.data.firstOrderShippingDate);

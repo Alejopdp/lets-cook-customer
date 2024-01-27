@@ -37,15 +37,20 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     useEffect(() => {
         const href = window.location.href;
         if (!href.includes("planSlug")) {
-
         }
-        
-    }, [])
+    }, []);
 
     const getPlanData = (
         slug: string,
         plans: Plan[]
-    ): { peopleLabels: string; planName: string; planDescription: string; canChooseRecipes: boolean; planRecipes: Recipes[] } => {
+    ): {
+        peopleLabels: string;
+        planName: string;
+        planDescription: string;
+        canChooseRecipes: boolean;
+        planRecipes: Recipes[];
+        planSku: string;
+    } => {
         const planSelect = plans.find((plan) => plan.slug === slug);
 
         const peopleLabels = planSelect.variants?.reduce((_planSize, _variant) => {
@@ -65,6 +70,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             planDescription: planSelect.description,
             canChooseRecipes: planSelect.abilityToChooseRecipes,
             planRecipes: planSelect.recipes,
+            planSku: planSelect.sku,
         };
     };
 
@@ -110,7 +116,8 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             plan.description,
             plan.abilityToChooseRecipes,
             plan.imageUrl || "",
-            plan.iconWithColor || ""
+            plan.iconWithColor || "",
+            plan.sku
         );
         navigate(variant, id, slug);
     };
@@ -151,7 +158,16 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
 
     const navigate = (variant: PlanVariant, planId: string, slug?: string) => {
         buyFlow.setPlanVariant(variant);
-        buyFlow.setPlanCode(planId, slug, buyFlow.form.planName, buyFlow.form.planDescription, buyFlow.form.canChooseRecipes);
+        buyFlow.setPlanCode(
+            planId,
+            slug,
+            buyFlow.form.planName,
+            buyFlow.form.planDescription,
+            buyFlow.form.canChooseRecipes,
+            buyFlow.form.planImageUrl,
+            buyFlow.form.planIconWithColorUrl,
+            buyFlow.form.planSku
+        );
 
         router.replace(
             {
@@ -170,7 +186,7 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
     };
 
     useEffect(() => {
-        const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes } = getPlanData(
+        const { peopleLabels, planName, planDescription, canChooseRecipes, planRecipes, planSku } = getPlanData(
             props.initialPlanSettings.slug,
             props.plans
         );
@@ -182,14 +198,15 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
             planDescription,
             canChooseRecipes,
             props.initialPlanSettings.planImageUrl,
-            props.initialPlanSettings.iconLinealWithColorUrl
+            props.initialPlanSettings.iconLinealWithColorUrl,
+            planSku
         );
         buyFlow.setPlanVariant(props.variant);
         setPlanSize(peopleLabels);
         setRecipesOfWeek(props.recipes);
         const href = window.location.href;
         if (!href.includes("planSlug")) {
-            console.log("Buyflow: ", buyFlow)
+            console.log("Buyflow: ", buyFlow);
             router.replace(
                 {
                     pathname: `${localeRoutes[router.locale][Routes.planes]}`,

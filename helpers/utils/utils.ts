@@ -81,5 +81,4 @@ export const getFormattedAddressFromGoogle = (address_components?: { long_name: 
         postalCode: address_components.find(component => component.types.includes("postal_code"))?.long_name ?? ""
     }
 
-
 }
