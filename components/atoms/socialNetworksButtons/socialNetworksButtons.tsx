@@ -20,13 +20,13 @@ export const SocialNetworksButtons = (props: SocialNetworksButtonsProps) => {
     const { signInWithGoogle } = useAuth();
 
     const handleGoogleLogin = async () => {
-        ga.event({
-            action: "clic en continuar con rrss",
-            params: {
-                event_category: `registrarse - ${props.source}`,
-                event_label: "google",
-            },
-        });
+        // ga.event({
+        //     action: "clic en continuar con rrss",
+        //     params: {
+        //         event_category: `registrarse - ${props.source}`,
+        //         event_label: "google",
+        //     },
+        // });
 
         signInWithGoogle();
     };

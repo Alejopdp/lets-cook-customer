@@ -67,13 +67,13 @@ export default function CheckoutDetails(props) {
     const totalValue = calculateTotalValue();
 
     const handleCouponSubmit = async (couponCode: string) => {
-        ga.event({
-            action: "clic en aplicar cupon",
-            params: {
-                event_category: "checkout",
-                event_label: "cupon de descuento",
-            },
-        });
+        // ga.event({
+        //     action: "clic en aplicar cupon",
+        //     params: {
+        //         event_category: "checkout",
+        //         event_label: "cupon de descuento",
+        //     },
+        // });
         const res = await getCouponValidation(couponCode, userInfo.id, form.deliveryForm?.shippingCost, form.planCode, form.variant?.id);
 
         if (res.status === 200) {
@@ -112,13 +112,13 @@ export default function CheckoutDetails(props) {
     };
 
     const handleClickEditPlan = () => {
-        ga.event({
-            action: "clic en editar plan",
-            params: {
-                event_category: "checkout",
-                event_label: form.planSlug,
-            },
-        });
+        // ga.event({
+        //     action: "clic en editar plan",
+        //     params: {
+        //         event_category: "checkout",
+        //         event_label: form.planSlug,
+        //     },
+        // });
         // TO DO: Change plan
         // router.push("/planes");
         toFirstStep();

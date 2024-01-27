@@ -149,13 +149,13 @@ export const PaymentForm = (props) => {
                 },
             },
         });
-        ga.event({
-            action: "clic en realizar pago",
-            params: {
-                event_category: "checkout",
-                event_label: "métodos de pago",
-            },
-        });
+        // ga.event({
+        //     action: "clic en realizar pago",
+        //     params: {
+        //         event_category: "checkout",
+        //         event_label: "métodos de pago",
+        //     },
+        // });
 
         setisLoadingPayment(true);
         if (form.paymentMethod.type === "newPaymentMethod" || !!!userInfo.paymentMethods || userInfo.paymentMethods?.length === 0) {

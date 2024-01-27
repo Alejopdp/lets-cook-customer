@@ -15,13 +15,13 @@ const PlanCard = (props) => {
     const lang = langs[locale].plansSection;
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en lo quiero",
-            params: {
-                event_category: "homepage",
-                event_label: props.card.slug,
-            },
-        });
+        // ga.event({
+        //     action: "clic en lo quiero",
+        //     params: {
+        //         event_category: "homepage",
+        //         event_label: props.card.slug,
+        //     },
+        // });
         navigateTo({
             pathname: `${localeRoutes[locale][Routes["planes"]]}`,
             query: {
