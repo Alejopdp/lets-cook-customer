@@ -51,35 +51,35 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
     };
 
     const goToLogin = () => {
-        ga.event({
-            action: "clic en iniciar sesion",
-            params: {
-                event_category: props.page ? props.page : "undefined page",
-                event_label: "sidebar",
-            },
-        });
+        // ga.event({
+        //     action: "clic en iniciar sesion",
+        //     params: {
+        //         event_category: props.page ? props.page : "undefined page",
+        //         event_label: "sidebar",
+        //     },
+        // });
         router.push(localeRoutes[router.locale][Routes["iniciar-sesion"]]);
     };
 
     const goToMyProfile = () => {
-        ga.event({
-            action: "clic en mi perfil",
-            params: {
-                event_category: props.page ? props.page : "undefined page",
-                event_label: "sidebar",
-            },
-        });
+        // ga.event({
+        //     action: "clic en mi perfil",
+        //     params: {
+        //         event_category: props.page ? props.page : "undefined page",
+        //         event_label: "sidebar",
+        //     },
+        // });
         router.push(localeRoutes[router.locale][Routes["perfil"]]);
     };
 
     const goToPage = (sectionName, path) => {
-        ga.event({
-            action: `clic en ${sectionName.toLowerCase()}`,
-            params: {
-                event_category: "menu hamburguesa",
-                event_label: sectionName.toLowerCase(),
-            },
-        });
+        // ga.event({
+        //     action: `clic en ${sectionName.toLowerCase()}`,
+        //     params: {
+        //         event_category: "menu hamburguesa",
+        //         event_label: sectionName.toLowerCase(),
+        //     },
+        // });
         router.push(path);
     };
 
@@ -107,7 +107,7 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
                 {menuOptions.top.map((option, index) => (
                     <ListItem button component="a" onClick={() => goToPage(option.label, option.path)} key={index}>
                         <ListItemIcon>
-                            <Image src={option.img} alt={option.label} width={24} height={24} unoptimized/>
+                            <Image src={option.img} alt={option.label} width={24} height={24} unoptimized />
                         </ListItemIcon>
                         <ListItemText primary={option.label} />
                     </ListItem>

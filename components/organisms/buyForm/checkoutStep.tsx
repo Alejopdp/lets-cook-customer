@@ -94,13 +94,13 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
     };
 
     const changeToSecondStep = async () => {
-        ga.event({
-            action: "clic en continuar",
-            params: {
-                event_category: "checkout",
-                event_label: "datos de entrega",
-            },
-        });
+        // ga.event({
+        //     action: "clic en continuar",
+        //     params: {
+        //         event_category: "checkout",
+        //         event_label: "datos de entrega",
+        //     },
+        // });
 
         const googleAddress = await getGeometry(deliveryData.addressName);
         const moreAddresInformation: OtherAddressInformation = getFormattedAddressFromGoogle(googleAddress.results[0]?.address_components);

@@ -17,13 +17,13 @@ const HowItWorksSection = memo((props: HowItWorksSectionProps) => {
     const router = useRouter();
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en empieza a cocinar",
-            params: {
-                event_category: "homepage",
-                event_label: "como funciona",
-            },
-        });
+        // ga.event({
+        //     action: "clic en empieza a cocinar",
+        //     params: {
+        //         event_category: "homepage",
+        //         event_label: "como funciona",
+        //     },
+        // });
         router.push(localeRoutes[router.locale][Routes.planes]);
     };
 

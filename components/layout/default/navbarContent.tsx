@@ -64,24 +64,24 @@ export const NavbarContent = (props: NavbarContentProps) => {
     const [lang] = useLang("navbarContent");
 
     const goToPlans = () => {
-        ga.event({
-            action: "clic en nuestros planes",
-            params: {
-                event_category: props.page ? props.page : "undefined page",
-                event_label: "cabecera",
-            },
-        });
+        // ga.event({
+        //     action: "clic en nuestros planes",
+        //     params: {
+        //         event_category: props.page ? props.page : "undefined page",
+        //         event_label: "cabecera",
+        //     },
+        // });
         router.push(localeRoutes[router.locale][Routes.planes]);
     };
 
     const goToLogin = () => {
-        ga.event({
-            action: "clic en iniciar sesion",
-            params: {
-                event_category: props.page ? props.page : "undefined page",
-                event_label: "cabecera",
-            },
-        });
+        // ga.event({
+        //     action: "clic en iniciar sesion",
+        //     params: {
+        //         event_category: props.page ? props.page : "undefined page",
+        //         event_label: "cabecera",
+        //     },
+        // });
         router.push(localeRoutes[router.locale][Routes["iniciar-sesion"]]);
     };
 
@@ -99,7 +99,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
                 </IconButton>
                 <div className={classes.logo}>
                     <Link href="/">
-                        <Image src="/logo.png" width={115} height={40} alt="lets-cook-logo" className={classes.cursorPointer} unoptimized/>
+                        <Image src="/logo.png" width={115} height={40} alt="lets-cook-logo" className={classes.cursorPointer} unoptimized />
                     </Link>
                 </div>
                 <Hidden xsDown implementation="css">

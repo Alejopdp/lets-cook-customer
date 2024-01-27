@@ -21,13 +21,13 @@ export const RecipesSection = memo((props: RecipesSectionProps) => {
     const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
 
     const handleClickOpenModal = (recipe: Recipes) => {
-        ga.event({
-            action: "clic en recetas",
-            params: {
-                event_category: "homepage",
-                event_label: recipe.name.toLowerCase(),
-            },
-        });
+        // ga.event({
+        //     action: "clic en recetas",
+        //     params: {
+        //         event_category: "homepage",
+        //         event_label: recipe.name.toLowerCase(),
+        //     },
+        // });
         setSelectedRecipe(recipe);
         setisModalOpen(true);
     };
