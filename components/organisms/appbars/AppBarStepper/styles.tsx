@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
-        backgroundColor: theme.palette.background.paper
+        backgroundColor: "#E83429",
     },
     cursorPointer: { cursor: "pointer" },
 }));

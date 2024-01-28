@@ -1,5 +1,5 @@
 import { memo, useRef, useState } from "react";
-import { Button, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core";
+import { Button, ListItemIcon, ListItemText, Menu, MenuItem, useTheme } from "@material-ui/core";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Routes, localeRoutes } from "lang/routes/routes";
@@ -18,23 +18,23 @@ export interface ILangs {
 interface LangSelectorProps {
     onChangeLang?: (args?: ILan) => void;
 }
+const languages: ILangs = {
+    es: {
+        label: "es",
+        icon: <Image unoptimized src="/assets/img-lang-es.png" width={24} height={24} />,
+    },
+    en: {
+        label: "en",
+        icon: <Image unoptimized src="/assets/img-lang-en.png" width={24} height={24} />,
+    },
+    ca: {
+        label: "ca",
+        icon: <Image unoptimized src="/assets/img-lang-ca.png" width={24} height={24} />,
+    },
+};
 
 export const LangSelector = memo(({ onChangeLang }: LangSelectorProps) => {
-    const languages: ILangs = {
-        es: {
-            label: "es",
-            icon: <Image unoptimized src="/assets/img-lang-es.png" width={24} height={24} />,
-        },
-        en: {
-            label: "en",
-            icon: <Image unoptimized src="/assets/img-lang-en.png" width={24} height={24} />,
-        },
-        ca: {
-            label: "ca",
-            icon: <Image unoptimized src="/assets/img-lang-ca.png" width={24} height={24} />,
-        },
-    };
-
+    const theme = useTheme();
     const [open, setOpen] = useState(false);
     const anchorRef = useRef();
     const router = useRouter();
@@ -71,7 +71,7 @@ export const LangSelector = memo(({ onChangeLang }: LangSelectorProps) => {
                 aria-haspopup="true"
                 ref={anchorRef}
                 startIcon={lang.icon}
-                style={{ marginLeft: "16px" }}
+                style={{ marginLeft: "16px", color: theme.palette.text.secondary }}
                 onClick={_toggleOpen}
             >
                 {lang.label}

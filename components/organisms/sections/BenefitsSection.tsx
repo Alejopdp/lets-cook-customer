@@ -26,7 +26,7 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={5} style={{ alignSelf: "center" }}>
                         <Image
-                        unoptimized
+                            unoptimized
                             className={classes.img}
                             src="/assets/home/home-atributos.webp"
                             alt="atributos"
@@ -40,7 +40,7 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                             <div key={index} className={classes.card}>
                                 <div className={classes.cardIcon}>
                                     <Image
-                                    unoptimized
+                                        unoptimized
                                         src={card.image}
                                         alt={card.title}
                                         className={classes.icon}
@@ -50,11 +50,11 @@ export const BenefitsSection = (props: BenefitsSectionProps) => {
                                     />
                                 </div>
                                 <div>
-                                    <Typography variant="h5" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
+                                    <Typography variant="h5" color="textPrimary" style={{ marginBottom: theme.spacing(1) }}>
                                         {card.title}
                                     </Typography>
                                     <Hidden smDown>
-                                        <Typography variant="body1" color="textSecondary">
+                                        <Typography variant="body1" color="textPrimary">
                                             {card.content}
                                         </Typography>
                                     </Hidden>

@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
     image: {
         borderRadius: "8px 0 0 8px",
-        backgroundImage: "url(https://i.postimg.cc/ncHrXQLM/beneficios.jpg)",
+        backgroundImage: "url(/cocina-con-lets-cook.jpg)",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",

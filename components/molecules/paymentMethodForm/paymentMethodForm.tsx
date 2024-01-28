@@ -3,7 +3,6 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/c
 import StripeForm from "components/molecules/stripeForm/stripeForm";
 import { IPaymentMethod } from "@stores";
 import { PaymentMethodFormProps } from "./interfaces";
-import { ValuePropositionSection } from "@organisms";
 
 const PaymentMethodForm = (props: PaymentMethodFormProps) => {
     const lang = props.lang;

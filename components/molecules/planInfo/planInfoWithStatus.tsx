@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 600,
         marginLeft: theme.spacing(1.5),
         marginRight: theme.spacing(2),
+        color: theme.palette.primary.main,
     },
     chip: {
         textTransform: "uppercase",

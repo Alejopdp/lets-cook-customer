@@ -12,8 +12,8 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
     const theme = useTheme();
     const router = useRouter();
     return (
-        <Box>
-            <Typography variant="h5" color="initial" style={{ marginBottom: theme.spacing(2) }}>
+        <Box style={{ color: theme.palette.primary.main }}>
+            <Typography variant="h5" color="textPrimary" style={{ marginBottom: theme.spacing(2) }}>
                 {props.additionalPlanName}
             </Typography>
             {props.variant && (
@@ -21,10 +21,14 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
                     <Box marginBottom={3}>
                         {props.variant.attributes.map((attr, index) => (
                             <>
-                                <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}>
+                                <Typography
+                                    color="textPrimary"
+                                    variant="body2"
+                                    style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}
+                                >
                                     {attr[0]}
                                 </Typography>
-                                <Typography key={index} variant="body2">
+                                <Typography color="textPrimary" key={index} variant="body2">
                                     {attr[1]}
                                 </Typography>
                             </>
@@ -33,10 +37,14 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
                     {props.variant.numberOfPersons && (
                         <Box marginBottom={3}>
                             <>
-                                <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}>
+                                <Typography
+                                    color="textPrimary"
+                                    variant="body2"
+                                    style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}
+                                >
                                     {lang.planSizeText}
                                 </Typography>
-                                <Typography variant="body2">
+                                <Typography color="textPrimary" variant="body2">
                                     {props.variant.numberOfPersons} personas / {props.variant.numberOfRecipes} recetas
                                 </Typography>
                             </>
@@ -46,7 +54,7 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
             )}
             <Box display="flex" alignItems="center">
                 <RotateRight style={{ marginRight: 8 }} />
-                <Typography variant="body2" style={{ fontSize: "16px" }}>
+                <Typography color="textPrimary" variant="body2" style={{ fontSize: "16px" }}>
                     {lang.frequencyText} {translateFrequency(props.selectedFrequency, router.locale).toLowerCase()}
                 </Typography>
             </Box>
@@ -54,7 +62,7 @@ const VariantSelectedContent = (props: VariantSelectedContentProps) => {
                 <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
                     {lang.priceText}: {props.variant.priceWithOffer || props.variant.price}€
                 </Typography>
-                <Typography variant="caption" color="textSecondary">
+                <Typography variant="caption" color="textPrimary">
                     {lang.taxIncluded}
                 </Typography>
             </div>

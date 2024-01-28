@@ -1,7 +1,6 @@
 // Utils & config
 import React, { FormEvent } from "react";
 import { useRouter } from "next/router";
-import * as ga from "../../../helpers/ga";
 
 // External components
 import { IconButton, Toolbar, AppBar, Hidden, makeStyles } from "@material-ui/core";
@@ -21,6 +20,7 @@ import { useUserInfoStore } from "@stores";
 const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(2),
+        backgroundColor: "#9AFF77",
         [theme.breakpoints.up("sm")]: {
             display: "none",
         },
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: "#E83429",
     },
     cursorPointer: { cursor: "pointer" },
 }));
@@ -98,13 +98,20 @@ export const NavbarContent = (props: NavbarContentProps) => {
                     <MenuIcon />
                 </IconButton>
                 <div className={classes.logo}>
-                    <Link href="/">
-                        <Image src="/logo.png" width={115} height={40} alt="lets-cook-logo" className={classes.cursorPointer} unoptimized />
+                    <Link href="https://letscook.es">
+                        <Image
+                            src="/logo.png"
+                            width={152}
+                            height={59.5 / 2}
+                            alt="lets-cook-logo"
+                            className={classes.cursorPointer}
+                            unoptimized
+                        />
                     </Link>
                 </div>
                 <Hidden xsDown implementation="css">
                     <LoginButton goToLogin={goToLogin} />
-                    <RoundedButton label={lang.seePlans} variant="content" onClick={goToPlans}></RoundedButton>
+                    <RoundedButton label={lang.seePlans} onClick={goToPlans}></RoundedButton>
                 </Hidden>
                 <LangSelector onChangeLang={_handleOnChangeLang} />
             </Toolbar>

@@ -58,7 +58,7 @@ const CalendarCard = (props: CalendarCardProps) => {
                             <InfoOutlinedIcon fontSize="small" color="secondary" />
                             <Typography
                                 variant="body2"
-                                color="textSecondary"
+                                color="textPrimary"
                                 style={{ fontSize: "14px", opacity: 0.7, marginLeft: theme.spacing(0.5) }}
                             >
                                 {skipperdOrdersQty === 1 ? lang.skippedWeeksInfoOnlyOne : lang.skippedWeeksInfo}:{" "}

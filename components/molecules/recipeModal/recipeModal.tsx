@@ -121,40 +121,56 @@ const RecipeModal = withStyles(styles)((props: RecipeModalProps) => {
                                                 <Grid container style={{ paddingTop: 20 }}>
                                                     <Grid item className={props.classes.tag}>
                                                         <TimerIcon color="primary" style={{ marginRight: theme.spacing(1) }} />
-                                                        <Typography variant="subtitle2">{props.recipe.cookDuration}</Typography>
+                                                        <Typography variant="subtitle2" color="textPrimary">
+                                                            {props.recipe.cookDuration}
+                                                        </Typography>
                                                     </Grid>
                                                     <Grid item className={props.classes.tag}>
                                                         <SpeedIcon color="primary" style={{ marginRight: theme.spacing(1) }} />
-                                                        <Typography variant="subtitle2">
+                                                        <Typography color="textPrimary">
                                                             {translateRecipeDifficulty(props.recipe.difficultyLevel, router.locale)}
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="textPrimary"
+                                                    style={{ marginBottom: theme.spacing(1) }}
+                                                >
                                                     {lang.ingredients}
                                                 </Typography>
-                                                <Typography variant="body2">{ingredients}</Typography>
+                                                <Typography variant="body2" color="textPrimary">
+                                                    {ingredients}
+                                                </Typography>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="textPrimary"
+                                                    style={{ marginBottom: theme.spacing(1) }}
+                                                >
                                                     {lang.tools}
                                                 </Typography>
-                                                <Typography variant="body2">{tools}</Typography>
+                                                <Typography variant="body2" color="textPrimary">
+                                                    {tools}
+                                                </Typography>
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid container spacing={3}>
                                     <Grid item xs={12} sm={6}>
-                                        <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
+                                        <Typography variant="subtitle1" color="textPrimary" style={{ marginBottom: theme.spacing(1) }}>
                                             {lang.description}
                                         </Typography>
-                                        <Typography variant="body2">{props.recipe.longDescription}</Typography>
+                                        <Typography variant="body2" color="textPrimary">
+                                            {props.recipe.longDescription}
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
-                                        <Typography variant="subtitle1" style={{ marginBottom: theme.spacing(1) }}>
+                                        <Typography variant="subtitle1" color="textPrimary" style={{ marginBottom: theme.spacing(1) }}>
                                             {lang.nutritionalInfo}
                                         </Typography>
                                         <NutritionalInfoTable rows={props.recipe.nutritionalInfo || []} />

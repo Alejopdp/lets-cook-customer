@@ -1,6 +1,6 @@
 // Utils & Config
 import React from "react";
-import {  useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 
 // External Components
 import Typography from "@material-ui/core/Typography";
@@ -20,10 +20,16 @@ const RecipesActualWeekCard = (props) => {
             {!props.hasChosenRecipesForActualWeek ? (
                 <BoxWithTitle title={lang.title}>
                     <Box style={{ textAlign: "center", marginTop: theme.spacing(2), marginBottom: theme.spacing(2) }}>
-                        <Image alt="recipe-empty-state" unoptimized src="/assets/userProfile/recipesEmptyState.svg" width="80" height="80" />
+                        <Image
+                            alt="recipe-empty-state"
+                            unoptimized
+                            src="/assets/userProfile/recipesEmptyState.svg"
+                            width="80"
+                            height="80"
+                        />
                         <Typography
                             variant="body2"
-                            color="textSecondary"
+                            color="textPrimary"
                             style={{ fontSize: "16px", marginTop: theme.spacing(1), marginBottom: theme.spacing(0.5) }}
                         >
                             {props.canChooseRecipes
@@ -31,7 +37,7 @@ const RecipesActualWeekCard = (props) => {
                                 : lang.hasNotChosenRecipesForActualWeek.withoutRecipesAndCantChooseText}
                         </Typography>
                         {props.canChooseRecipes && (
-                            <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px" }}>
+                            <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px" }}>
                                 {lang.hasNotChosenRecipesForActualWeek.withoutRecipesAndCantChooseSubtext}
                             </Typography>
                         )}
@@ -39,7 +45,7 @@ const RecipesActualWeekCard = (props) => {
                 </BoxWithTitle>
             ) : (
                 <BoxWithTitle title={lang.title}>
-                    <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px" }}>
+                    <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px" }}>
                         {lang.hasChosenRecipesForActualWeek.text} {props.actualWeekOrder.shippingDate}
                     </Typography>
                     <ChosenRecipes

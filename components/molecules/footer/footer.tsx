@@ -11,7 +11,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import PinterestIcon from "@material-ui/icons/Pinterest";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import { Box, Link } from "@material-ui/core";
+import { Box, Link, useTheme } from "@material-ui/core";
 import NextLink from "next/link";
 import { useStyles } from "./styles";
 import { useLang } from "@hooks";
@@ -23,6 +23,8 @@ export const Footer = () => {
     const { logoSection, paymentMethodsSection, root, footer } = classes;
     const [lang] = useLang("footer");
     const router = useRouter();
+    const theme = useTheme();
+
     interface ILink {
         name: string;
         url: string;
@@ -63,24 +65,21 @@ export const Footer = () => {
     );
 
     return (
-        <div className={root}>
+        <div className={root} style={{ backgroundColor: theme.palette.primary.main, color: theme.palette.background.default }}>
             <Grid container justifyContent="space-between" className={footer}>
                 <Grid item xs={12} md={3} className={logoSection}>
-                    <Link href="/">
-                        <Image unoptimized src="/logo.png" width={174} height={60} alt="Lets cook now" />
-                    </Link>
                     <Grid style={{ marginTop: "16px" }}>
-                        <Link href="https://www.instagram.com/letscook.now/" target="_blank" rel="noreferrer noopener">
-                            <InstagramIcon style={{ margin: "8px" }} />
+                        <Link href="https://www.instagram.com/letscook.es/" target="_blank" rel="noreferrer noopener">
+                            <InstagramIcon style={{ margin: "8px", color: theme.palette.text.secondary }} />
                         </Link>
                         <Link href="https://www.facebook.com/Lets-cook-2399683106933532/" target="_blank" rel="noreferrer noopener">
-                            <FacebookIcon style={{ margin: "8px" }} />
+                            <FacebookIcon style={{ margin: "8px", color: theme.palette.text.secondary }} />
                         </Link>
                         <Link href="https://www.pinterest.es/letscooknowes/" target="_blank" rel="noreferrer noopener">
-                            <PinterestIcon style={{ margin: "8px" }} />
+                            <PinterestIcon style={{ margin: "8px", color: theme.palette.text.secondary }} />
                         </Link>
                         <Link href="https://www.youtube.com/channel/UCWmWuYmsvW5H2BWykUCAmZg" target="_blank" rel="noreferrer noopener">
-                            <YouTubeIcon style={{ margin: "8px" }} />
+                            <YouTubeIcon style={{ margin: "8px", color: theme.palette.text.secondary }} />
                         </Link>
                     </Grid>
                 </Grid>
@@ -111,6 +110,9 @@ export const Footer = () => {
                 <Grid item xs={12} md={3} className={paymentMethodsSection}>
                     <Image unoptimized src="/payments.png" width={367} height={181} alt="Pagos con tarjeta online" />
                 </Grid>
+            </Grid>
+            <Grid item xs={12} className={footer} style={{ display: "flex", justifyContent: "center" }}>
+                <Image unoptimized src="/LogoLetsCookR.png" width={1414} height={276} alt="LetsCookR" />
             </Grid>
 
             <Grid item xs={12} className={footer} style={{ display: "flex", justifyContent: "center" }}>

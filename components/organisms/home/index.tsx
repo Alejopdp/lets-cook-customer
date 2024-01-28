@@ -10,9 +10,11 @@ import ReviewsSection from "../sections/ReviewsSection";
 import styles from "./styles.module.scss";
 import { HomePageProps } from "./interfaces";
 import { useLang } from "@hooks";
+import { useTheme } from "@material-ui/core";
 
 const HomePage = (props: HomePageProps) => {
     const [lang] = useLang("home");
+    const theme = useTheme();
 
     return (
         <Layout page="homepage">
@@ -27,7 +29,7 @@ const HomePage = (props: HomePageProps) => {
                 <PlansSection cards={props.plans} lang={lang.plansSection} />
             </div>
             <div>
-                <BenefitsSection lang={lang.benefitsSection} />
+                <BenefitsSection backgroundColor={theme.palette.background.default} lang={lang.benefitsSection} />
             </div>
             <div className={styles.paddingY8}>
                 <RecipesSection recipes={props.recipes} lang={lang.recipesSection} />

@@ -20,10 +20,10 @@ const DataDisplay = (props) => {
 
     return (
         <Box style={props.style}>
-            <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px", marginBottom: theme.spacing(1) }}>
+            <Typography variant="subtitle2" color="textPrimary" style={{ fontSize: "14px", marginBottom: theme.spacing(1) }}>
                 {props.title}
             </Typography>
-            <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", fontStyle: props.text ? "normal" : "italic" }}>
+            <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px", fontStyle: props.text ? "normal" : "italic" }}>
                 {props.text || lang[router.locale].none}
             </Typography>
         </Box>

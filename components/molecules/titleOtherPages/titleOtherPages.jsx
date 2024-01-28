@@ -33,7 +33,7 @@ const TitleOtherPages = (props) => {
             </Grid>
             {!props.hideSubtitle && (
                 <Grid item xs={12}>
-                    <Typography variant="body1" color="textSecondary">
+                    <Typography variant="body1" color="textPrimary">
                         {props.subtitle}
                     </Typography>
                 </Grid>

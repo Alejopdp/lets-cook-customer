@@ -26,6 +26,7 @@ firebaseApp = initializeApp(firebaseConfig, "DEFAULT");
 
 interface AuthContextProps {
     isVerifyingAuth: boolean;
+    setVerifyingAuth: React.Dispatch<React.SetStateAction<boolean>>;
     user: User | null;
     signInWithGoogle: (callback?: () => void) => void;
     isCheckingRedirect: boolean;
@@ -35,6 +36,7 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps>({
     isVerifyingAuth: true,
+    setVerifyingAuth: () => {},
     user: null,
     signInWithGoogle: () => {},
     isCheckingRedirect: true,
@@ -117,6 +119,7 @@ const AuthProvider: React.FC<{ children: any }> = ({ children }: { children: any
     };
     const value = {
         isVerifyingAuth,
+        setVerifyingAuth,
         user,
         signInWithGoogle,
         isCheckingRedirect,

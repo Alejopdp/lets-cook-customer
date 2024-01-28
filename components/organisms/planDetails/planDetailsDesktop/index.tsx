@@ -13,7 +13,6 @@ import CalendarCard from "../calendarCard/index";
 import RecipesActualWeekCard from "../recipesActualWeekCard/index";
 import RecipesNextWeekCard from "../recipesNextWeekCard/index";
 import TextButton from "../../../atoms/textButton/textButton";
-import { PlanDetailsProps } from "../interfaces";
 
 const PlanDetailsDesktop = ({
     subscription,
@@ -49,7 +48,11 @@ const PlanDetailsDesktop = ({
                     <Grid item xs={12}>
                         <PaymentMethodCard paymentMethod={subscription.paymentMethod} lang={lang.paymentMethodCard} />
                     </Grid>
-                    <Grid item xs={12} style={{visibility: subscription.plan.state.stateTitle === "SUBSCRIPTION_ACTIVE" ? "visible" : "hidden"}}>
+                    <Grid
+                        item
+                        xs={12}
+                        style={{ visibility: subscription.plan.state.stateTitle === "SUBSCRIPTION_ACTIVE" ? "visible" : "hidden" }}
+                    >
                         <TextButton
                             handleClick={handleClickOpenCancelPlanModal}
                             btnText={lang.cancelPlanBtnText}

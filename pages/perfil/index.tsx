@@ -7,7 +7,7 @@ import { swapPlan } from "../../helpers/serverRequests/subscription";
 import { skipOrders } from "../../helpers/serverRequests/order";
 import { getSubscriptionById } from "../../helpers/serverRequests/userProfile";
 import { getDataForSwappingAPlan } from "../../helpers/serverRequests/plans";
-import { useUserInfoStore } from "../../stores/auth";
+import { useAuthStore, useUserInfoStore } from "../../stores/auth";
 import { useSnackbar } from "notistack";
 import { reorderPlan } from "../../helpers/serverRequests/subscription";
 import { getProfileInfo } from "../../helpers/serverRequests/userProfile";
@@ -38,7 +38,7 @@ import PlanProfileCardSkeleton from "components/molecules/planProfileCard/planPr
 import { locale } from "types/locale";
 import Link from "next/link";
 import { Restore, Settings, Star, AttachMoney } from "@material-ui/icons";
-import { Skeleton } from "@material-ui/lab";
+import { useAuth } from "contexts/auth.context";
 
 const Perfil = (props) => {
     const theme = useTheme();
@@ -62,6 +62,13 @@ const Perfil = (props) => {
     const [reloadCounter, setreloadCounter] = useState(0);
     const [isSkippingOrders, setIsSkippingOrders] = useState(false);
     const userInfo = useUserInfoStore((state) => state.userInfo);
+    const { isVerifyingAuth } = useAuth();
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+    useEffect(() => {
+        console.log({ isVerifyingAuth, isAuthenticated });
+        if (!isVerifyingAuth && !isAuthenticated) router.push(localeRoutes[router.locale][Routes.planes]);
+    }, [isVerifyingAuth, isAuthenticated]);
 
     useEffect(() => {
         const getProfile = async () => {
@@ -464,7 +471,9 @@ const Perfil = (props) => {
                                     </>
                                 ) : (
                                     <EmptyState
-                                        image="/empty-cart.png"
+                                        image="/LogoLetsCookR.png"
+                                        width={141.4}
+                                        height={27.6}
                                         title={lang.plansEmptyStateTitle}
                                         text={
                                             !!props.friendCode

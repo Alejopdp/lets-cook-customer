@@ -117,8 +117,8 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                 <AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header" style={{ cursor: "default" }}>
                     <Grid item container justify="space-between" alignItems="center">
                         <Grid item className={classes.title}>
-                            <Image  unoptimized src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} />
-                            <Typography variant="h6" color="textSecondary" className={classes.titleMargin}>
+                            <Image unoptimized src="/icons/checkout/informacion-de-envio.svg" height={32} width={32} />
+                            <Typography variant="h6" color="primary" className={classes.titleMargin}>
                                 {lang.title}
                             </Typography>
                         </Grid>
@@ -151,6 +151,7 @@ export const ShipmentForm = memo((props: ShipmentFormProps) => {
                                 value={props.deliveryData.addressDetails}
                                 onChange={props.handleChange}
                                 hasError={false}
+                                placeholder="Piso / puerta / aclaraciones"
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>

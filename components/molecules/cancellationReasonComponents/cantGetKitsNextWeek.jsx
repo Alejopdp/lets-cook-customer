@@ -21,7 +21,7 @@ const CantGetKitsNextWeek = (props) => {
 
     return (
         <>
-            <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
+            <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
                 {lang.modalText}
             </Typography>
             <Autocomplete

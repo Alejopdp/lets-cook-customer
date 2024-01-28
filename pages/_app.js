@@ -8,7 +8,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../theme";
 import useLocalStorage, { LOCAL_STORAGE_KEYS } from "../hooks/useLocalStorage/localStorage";
 import { useAuthStore, useUserInfoStore } from "../stores/auth";
-import { AuthProvider } from "../contexts/auth.context";
+import { AuthProvider, useAuth } from "../contexts/auth.context";
 import { useCookiesStore } from "../stores/cookies";
 import { getCustomerById, verifyToken } from "../helpers/serverRequests/customer";
 import { loadStripe } from "@stripe/stripe-js";
@@ -58,6 +58,7 @@ function MyApp(props) {
         setHasAccepteCookies: state.setHasAcceptedCookies,
     }));
     const router = useRouter();
+    const { setVerifyingAuth } = useAuth();
 
     useEffect(() => {
         TagManager.initialize({ gtmId: "GTM-5M7F3L5", dataLayer: [{}] });
@@ -67,6 +68,8 @@ function MyApp(props) {
             setHasAccepteCookies(hasAcceptedCookies);
 
             if (!token) {
+                console.log({ token });
+                setVerifyingAuth(false);
                 setisLoading(false);
                 return;
             }
@@ -100,6 +103,7 @@ function MyApp(props) {
                 removeFromLocalStorage(LOCAL_STORAGE_KEYS.userInfo);
             }
 
+            setVerifyingAuth(false);
             setisLoading(false);
         };
         // Remove the server-side injected CSS.

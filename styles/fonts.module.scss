@@ -2,12 +2,12 @@
 // @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap");
 
 // Families
-// $title-font: "Poppins", sans-serif;
-// $paragraph-font: "Open Sans", sans-serif;
-$title-font: "Avenir Next LT Pro", sans-serif;
-$paragraph-font: "Avenir Next LT Pro", sans-serif;
+// $texts-font: "Poppins", sans-serif;
+// $buttons-font: "Open Sans", sans-serif;
+$texts-font: "Fraunces", sans-serif;
+$buttons-font: "GT-America-Mono", sans-serif;
 
 :export {
-    titleFont: $title-font;
-    paragraphFont: $paragraph-font;
+    textsFont: $texts-font;
+    buttonsFont: $buttons-font;
 }

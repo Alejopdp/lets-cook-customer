@@ -26,7 +26,6 @@ export const RecipeCard = (props: RecipeCardProps) => {
         <div
             className={gradient}
             style={{
-
                 position: "relative",
                 cursor: "pointer",
                 borderRadius: "8px",
@@ -51,15 +50,15 @@ export const RecipeCard = (props: RecipeCardProps) => {
                 <CardContent style={{ height: "80%", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
                     <Grid container>
                         <Grid item className={tag}>
-                            <TimerIcon color="primary" className={marg} style={{ fontSize: "20px" }} />
-                            <Typography variant="subtitle2" style={{ fontSize: "13px" }}>
+                            <Image src={"/time.png"} width={17} height={15} />
+                            <Typography variant="subtitle2" style={{ fontSize: "13px", marginLeft: 8 }}>
                                 {props.timeTag}
                             </Typography>
                         </Grid>
 
                         <Grid item className={tag}>
-                            <SpeedIcon color="primary" className={marg} style={{ fontSize: "20px" }} />
-                            <Typography variant="subtitle2" style={{ fontSize: "13px" }}>
+                            <Image src={"/dificultad.png"} width={17} height={15} />
+                            <Typography variant="subtitle2" style={{ fontSize: "13px", marginLeft: 8 }}>
                                 {props.difficultyTag === "Facil"
                                     ? lang.itemEasy
                                     : props.difficultyTag === "Dificil"

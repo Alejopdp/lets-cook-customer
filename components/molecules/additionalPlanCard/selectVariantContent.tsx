@@ -57,7 +57,7 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                 onClick={props.handleClickBackToFirstContent}
             >
                 <ArrowBackIcon style={{ marginRight: theme.spacing(1), color: "#515151" }} />
-                <Typography variant="h5" color="initial">
+                <Typography variant="h5" color="textPrimary">
                     {props.additionalPlanName}
                 </Typography>
             </Box>
@@ -72,7 +72,7 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                     />
                 ))}
             </Box>
-            <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }}>
+            <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600, marginBottom: theme.spacing(1) }} color="textPrimary">
                 {lang.frequencyText}
             </Typography>
             <FormControl component="fieldset" style={{ width: "100%" }}>
@@ -81,6 +81,7 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                     name="frequency"
                     value={props.selectedFrequency}
                     onChange={(e, value) => props.setselectedFrequency(value)}
+                    color="textPrimary"
                 >
                     {props.frequencies &&
                         props.frequencies.map((freq) => (
@@ -88,7 +89,7 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                                 className={classes.formControlRadio}
                                 checked={freq === props.selectedFrequency}
                                 value={freq}
-                                control={<Radio size="small" checked={freq === props.selectedFrequency} />}
+                                control={<Radio size="small" checked={freq === props.selectedFrequency} color="primary" />}
                                 label={translateFrequency(freq, router.locale)}
                             />
                         ))}
@@ -99,7 +100,7 @@ const SelectVariantContent = (props: SelectVariantContentProps) => {
                     <Typography color="primary" style={{ fontSize: 18, fontWeight: "bold" }}>
                         {`${lang.priceText}: ${actualValue}€`}
                     </Typography>
-                    <Typography variant="caption" color="textSecondary">
+                    <Typography variant="caption" color="textPrimary">
                         {lang.taxIncluded}
                     </Typography>
                 </div>

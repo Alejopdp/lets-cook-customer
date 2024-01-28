@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
     activeWeek: {
         backgroundColor: "white",
-        color: theme.palette.text.secondary,
+        color: theme.palette.primary.main,
         border: "1px solid rgba(0,0,0,0.1)",
     },
     skippedWeek: {

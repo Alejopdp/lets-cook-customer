@@ -8,11 +8,17 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         paddingInline: theme.spacing(2),
     },
+    "text-visited": {
+        color: "#9AFF77",
+    },
     visited: {
-        color: theme.palette.primary.main,
         filter: "invert(53%) sepia(100%) saturate(3457%) hue-rotate(118deg) brightness(99%) contrast(102%)",
     },
+    cantChooseRecipes: {
+        color: "#ccc",
+    },
     active: {
+        color: "#9AFF77",
         fontWeight: "bold",
     },
     breadcrumbContainer: {
@@ -22,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     icon: {
         marginInline: theme.spacing(1),
         alignItems: "center",
-        display: "flex"
+        display: "flex",
     },
     separator: {
         width: 10,
@@ -32,15 +38,15 @@ export const useStyles = makeStyles((theme) => ({
     smUpHide: {
         display: "flex",
         [theme.breakpoints.up("sm")]: {
-            display: "none"
-        }
+            display: "none",
+        },
     },
     smDowmHide: {
         display: "none",
         [theme.breakpoints.up("sm")]: {
-            display: "flex"
-        }
-    }
+            display: "flex",
+        },
+    },
 }));
 
 export default useStyles;
