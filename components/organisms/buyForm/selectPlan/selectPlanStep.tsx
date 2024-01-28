@@ -269,7 +269,9 @@ export const SelectPlanStep = memo((props: SelectPlanProps) => {
                 <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
                     {/* PLAN CARRUSEL */}
                     <Grid item xs={12}>
-                        <Typography variant="h5">{lang.choosePlanTitle}</Typography>
+                        <Typography variant="h5" color="textPrimary">
+                            {lang.choosePlanTitle}
+                        </Typography>
                     </Grid>
                     <Grid container spacing={2} style={{ marginTop: theme.spacing(2), justifyContent: "center" }}>
                         {props.plans.map((plan, index) => {

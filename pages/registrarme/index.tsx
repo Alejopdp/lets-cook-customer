@@ -7,12 +7,13 @@ import { Layout } from "../../components/layout/index";
 import InnerSectionLayout from "../../components/layout/innerSectionLayout";
 import SignUpForm from "../../components/organisms/signUpForm/signUpForm";
 import { verifyToken } from "../../helpers/serverRequests/customer";
+import { Routes, localeRoutes } from "lang/routes/routes";
 
 const Signup = () => {
     const router = useRouter();
 
     const handleSignUp = () => {
-        router.push("/");
+        router.push(localeRoutes[router.locale][Routes.perfil]);
     };
 
     return (

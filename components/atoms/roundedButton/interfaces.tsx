@@ -10,6 +10,7 @@ export interface RoundedButtonProps {
     props?: any;
     onClick?: () => void;
     disabled?: boolean;
-    textStyle?: object
-    isLoading?:boolean;
+    textStyle?: object;
+    isLoading?: boolean;
+    isLogginButton: boolean;
 }

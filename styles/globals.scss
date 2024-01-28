@@ -1,3 +1,5 @@
+@import "./colors.module.scss";
+
 html,
 body {
     padding: 0;
@@ -18,31 +20,68 @@ div.MuiAutocomplete-popper {
     z-index: 4147483647;
 }
 
+// @font-face {
+//     font-family: "Avenir Next LT Pro";
+//     src: url("/fonts/avenirNextLtPro/AvenirNextLTPro-Regular.otf");
+//     font-style: normal;
+//     font-weight: 400;
+//     font-display: swap;
+// }
+
+// @font-face {
+//     font-family: "Avenir Next LT Pro";
+//     src: url("/fonts/avenirNextLtPro/AvenirNextLTPro-Medium.otf");
+//     font-style: normal;
+//     font-weight: 500;
+//     font-display: swap;
+// }
+
+// @font-face {
+//     font-family: "Avenir Next LT Pro";
+//     src: url("/fonts/avenirNextLtPro/AvenirNextLTPro-Bold.otf");
+//     font-style: normal;
+//     font-weight: 700;
+//     font-display: swap;
+// }
+
 @font-face {
-    font-family: "Avenir Next LT Pro";
-    src: url("/fonts/avenirNextLtPro/AvenirNextLTPro-Regular.otf");
+    font-family: "GT-America-Mono";
+    src: url("/fonts/gt-america/GT-America-Mono-Light.otf");
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fraunces";
+    src: url("/fonts/fraunces/Fraunces-Light.ttf");
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fraunces";
+    src: url("/fonts/fraunces/Fraunces-Regular.ttf");
     font-style: normal;
     font-weight: 400;
     font-display: swap;
 }
-
 @font-face {
-    font-family: "Avenir Next LT Pro";
-    src: url("/fonts/avenirNextLtPro/AvenirNextLTPro-Medium.otf");
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Avenir Next LT Pro";
-    src: url("/fonts/avenirNextLtPro/AvenirNextLTPro-Bold.otf");
+    font-family: "Fraunces";
+    src: url("/fonts/fraunces/Fraunces-Bold.ttf");
     font-style: normal;
     font-weight: 700;
     font-display: swap;
 }
 
+
+
 li.react-multi-carousel-item {
     padding-left: 0px;
     padding-right: 0px;
+}
+
+div.MuiInputBase-root.Mui-disabled {
+    color: $primary-color!important;
 }

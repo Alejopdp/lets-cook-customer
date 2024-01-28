@@ -29,7 +29,7 @@ const ChosenRecipes = (props) => {
                         <Image unoptimized className={classes.recipeImage} src={recipe.imageUrl} alt={recipe.name} width={87} height={56} />
                         <Typography
                             variant="body2"
-                            color="textSecondary"
+                            color="textPrimary"
                             style={{ fontSize: "18px", fontWeight: 500, marginLeft: theme.spacing(2) }}
                         >
                             {recipe.name}

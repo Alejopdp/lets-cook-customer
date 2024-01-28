@@ -15,12 +15,18 @@ const EmptyState = (props) => {
     return (
         <Container maxWidth="sm">
             <Grid item xs={12} style={{ textAlign: "center" }}>
-                <Image unoptimized src={props.image || "/empty-state.png"} alt="búsqueda vacía" width={150} height={150} />
+                <Image
+                    unoptimized
+                    src={props.image || "/empty-state.png"}
+                    alt="búsqueda vacía"
+                    width={props.width ?? 150}
+                    height={props.height ?? 150}
+                />
                 <Typography variant="h6" color="textPrimary" style={{ marginTop: theme.spacing(3) }}>
                     {props.title}
                 </Typography>
                 {props.text && (
-                    <Typography variant="body2" color="textSecondary" style={{ marginTop: theme.spacing(1) }}>
+                    <Typography variant="body2" color="textPrimary" style={{ marginTop: theme.spacing(1) }}>
                         {props.text}
                     </Typography>
                 )}

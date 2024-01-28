@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import {  useRef, useState } from "react";
-import { Button,  ListItemText, Menu, MenuItem } from "@material-ui/core";
+import { useRef, useState } from "react";
+import { Button, ListItemText, Menu, MenuItem, useTheme } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useAuthStore, useUserInfoStore } from "@stores";
 import { useRouter } from "next/router";
@@ -10,6 +10,7 @@ import { useLang, useLocalStorage } from "@hooks";
 import { localeRoutes, Routes } from "lang/routes/routes";
 
 const UserBox = () => {
+    const theme = useTheme();
     const router = useRouter();
     const userInfo = useUserInfoStore((state) => state.userInfo);
     const [open, setOpen] = useState(false);
@@ -29,7 +30,7 @@ const UserBox = () => {
     };
 
     const handleSignOut = async () => {
-        await router.push("/");
+        await router.push("https://letscook.es");
         cookies.remove("token");
         removeFromLocalStorage("token");
         removeFromLocalStorage("userInfo");
@@ -90,14 +91,21 @@ const UserBox = () => {
                 aria-controls="simple-menu"
                 aria-haspopup="true"
                 ref={anchorRef}
-                startIcon={<AccountCircle />}
-                endIcon={<ExpandMore />}
-                style={{ marginLeft: "16px" }}
+                startIcon={<AccountCircle color={theme.palette.background.default} />}
+                endIcon={<ExpandMore color={theme.palette.background.default} />}
+                style={{ marginLeft: "16px", color: theme.palette.background.default }}
                 onClick={_toggleOpen}
             >
                 {userInfo.firstName || lang.myAccount}
             </Button>
-            <Menu id="simple-menu" anchorEl={anchorRef.current} keepMounted open={open} onClose={_toggleOpen} style={{ marginTop: "40px" }}>
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorRef.current}
+                keepMounted
+                open={open}
+                onClose={_toggleOpen}
+                style={{ marginTop: "40px", color: theme.palette.background.default }}
+            >
                 {options["es"].map((item, index) => (
                     <MenuItem key={index} onClick={item.handler}>
                         <ListItemText primary={item.title} />

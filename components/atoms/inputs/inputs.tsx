@@ -4,18 +4,19 @@ import { useStyles } from "./styles";
 import { TextInputProps, PasswordInputProps } from "./interfaces";
 
 // External components
-import { IconButton, OutlinedInput, InputLabel, InputAdornment, FormControl, Typography } from "@material-ui/core";
+import { IconButton, OutlinedInput, InputLabel, InputAdornment, FormControl, Typography, useTheme } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export const TextInput = (props: TextInputProps) => {
+    const theme = useTheme();
     const { textField, border } = useStyles();
 
     const labelRef = React.useRef();
     const labelWidth = labelRef.current ? labelRef.current.clientWidth : 220;
 
     return (
-        <FormControl variant="outlined" className={textField}>
-            <InputLabel ref={labelRef} style={{ fontSize: "16px" }}>
+        <FormControl variant="outlined" className={textField} color="primary">
+            <InputLabel ref={labelRef} style={{ fontSize: "16px", color: theme.palette.primary.main }}>
                 {props.label}
             </InputLabel>
             <OutlinedInput
@@ -24,7 +25,7 @@ export const TextInput = (props: TextInputProps) => {
                         props.handleSubmit();
                     }
                 }}
-                style={{ fontSize: "16px" }}
+                style={{ fontSize: "16px", color: theme.palette.primary.main }}
                 className={border}
                 name={props.name}
                 value={props.value}
@@ -35,7 +36,7 @@ export const TextInput = (props: TextInputProps) => {
                 disabled={props.disabled}
             />
             {props.helperText && (
-                <Typography variant="caption" color={props.hasError ? "error" : "textPrimary"} style={{ marginTop: "4px" }}>
+                <Typography variant="caption" color={props.hasError ? "error" : "primary"} style={{ marginTop: "4px" }}>
                     {props.helperText}
                 </Typography>
             )}
@@ -44,6 +45,7 @@ export const TextInput = (props: TextInputProps) => {
 };
 
 export const PasswordInput = (props: PasswordInputProps) => {
+    const theme = useTheme();
     const { textField, border } = useStyles();
 
     const [values, setValues] = React.useState({
@@ -59,7 +61,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
 
     return (
         <FormControl variant="outlined" className={textField}>
-            <InputLabel ref={labelRef} style={{ fontSize: "16px" }}>
+            <InputLabel ref={labelRef} style={{ fontSize: "16px", color: theme.palette.primary.main }}>
                 {props.label}
             </InputLabel>
             <OutlinedInput

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TextField, Grid, Typography, makeStyles } from "@material-ui/core";
+import { TextField, Grid, Typography, makeStyles, useTheme } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import parse from "autosuggest-highlight/parse";
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         "& label.MuiFormLabel-root": {
             fontSize: "16px",
+            color: theme.palette.primary.main,
         },
         "& div.MuiInputBase-root": {
             borderRadius: "8px",
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     icon: {
-        color: theme.palette.text.secondary,
+        color: theme.palette.primary.main,
         marginRight: theme.spacing(2),
     },
     autocompleteRoot: {
@@ -45,10 +46,15 @@ const useStyles = makeStyles((theme) => ({
     endAdornment: {
         display: "none",
     },
+
+    noOptions: {
+        color: theme.palette.primary.main,
+    },
 }));
 
 const LocationSearchInput = (props: LocationSearchInputProps) => {
     const classes = useStyles();
+    const theme = useTheme();
     const [value, setValue] = React.useState(null);
     const [inputValue, setInputValue] = React.useState("");
     const [options, setOptions] = React.useState([]);
@@ -115,7 +121,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
     return (
         <Autocomplete
             id="google-map-demo"
-            classes={{ endAdornment: classes.endAdornment, root: classes.autocompleteRoot }}
+            classes={{ endAdornment: classes.endAdornment, root: classes.autocompleteRoot, noOptions: classes.noOptions }}
             fullWidth
             getOptionLabel={(option) => (typeof option === "string" ? option : option.description)}
             filterOptions={(x) => x}
@@ -126,6 +132,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             value={props.value}
             disabled={props.disabled}
             noOptionsText={!!props.value ? lang.autoCompleteHintNotFound : lang.autoCompleteHint}
+            style={{ color: theme.palette.primary.main }}
             onChange={(event, newValue) => {
                 setOptions(newValue ? [newValue, ...options] : options);
                 setValue(newValue);
@@ -150,6 +157,8 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                         disabled={props.disabled}
                         autoComplete="no"
                         inputProps={inputProps}
+                        color="primary"
+                        style={{ color: theme.palette.primary.main }}
                     />
                 );
             }}
@@ -176,7 +185,7 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
                                 </span>
                             ))}
 
-                            <Typography variant="body2" color="textSecondary">
+                            <Typography variant="body2" color="primary">
                                 {option?.structured_formatting.secondary_text || ""}
                             </Typography>
                         </Grid>

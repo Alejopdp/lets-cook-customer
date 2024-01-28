@@ -45,12 +45,12 @@ const PlanSelector = (props: PlanSelectorProps) => {
             <Box marginRight={3}>
                 <Image unoptimized src={props.planIcon} alt={props.planName} width={32} height={32} />
             </Box>
-            <Box display="flex" justifyContent="space-between" alignItems="flex-start" style={{width:'100%'}}>
+            <Box display="flex" justifyContent="space-between" alignItems="flex-start" style={{ width: "100%" }}>
                 <Box>
                     <Typography variant="body1" className={classes.text}>
                         {props.planName}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
+                    <Typography variant="body2" color="primary" style={{ fontSize: "16px", marginBottom: theme.spacing(1) }}>
                         {props.planVariantLabel}
                     </Typography>
                 </Box>
@@ -61,7 +61,5 @@ const PlanSelector = (props: PlanSelectorProps) => {
         </Box>
     );
 };
-
-PlanSelector.propTypes = {};
 
 export default PlanSelector;

@@ -21,13 +21,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SpecialDiet = (props) => {
-    const lang = props.lang
+    const lang = props.lang;
     const classes = useStyles();
     const theme = useTheme();
 
     return (
         <>
-            <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
+            <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
                 {lang.modalText}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl} style={{ marginBottom: theme.spacing(3) }}>

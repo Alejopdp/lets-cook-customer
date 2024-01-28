@@ -67,7 +67,7 @@ const Modal = (props) => {
                     onClick={props.handleSecondaryButtonClick ? props.handleSecondaryButtonClick : props.handleClose}
                     style={{
                         textAlign: "right",
-                        color: props.secondaryButtonColor ? props.secondaryButtonColor : theme.palette.text.secondary,
+                        color: props.secondaryButtonColor ? props.secondaryButtonColor : theme.palette.secondary.main,
                     }}
                 >
                     {props.secondaryButtonText}

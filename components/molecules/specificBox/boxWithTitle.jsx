@@ -13,7 +13,7 @@ const BoxWithTitle = (props) => {
     return (
         <GeneralBox variant="medium">
             <div style={{ width: "100%" }}>
-                <Typography variant="h6" color="textSecondary" style={{ fontSize: "20px", marginBottom: theme.spacing(2) }}>
+                <Typography variant="h6" color="textPrimary" style={{ fontSize: "20px", marginBottom: theme.spacing(2) }}>
                     {props.title}
                 </Typography>
                 {props.children}

@@ -1,22 +1,20 @@
 // Utils & Config
-import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import React from "react";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 // External Components
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
 
 // Internal Components
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
-        '& .MuiFormControl-root': {
-            width: '100%'
-        }
-    }
+        "& .MuiFormControl-root": {
+            width: "100%",
+        },
+    },
 }));
-
 
 const HadProblemsWithLetscook = (props) => {
     const lang = props.lang;
@@ -24,7 +22,7 @@ const HadProblemsWithLetscook = (props) => {
     const theme = useTheme();
     return (
         <>
-            <Typography variant='body2' color='textSecondary' style={{ fontSize: '16px', marginBottom: theme.spacing(3) }}>
+            <Typography variant="body2" color="textPimary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
                 {lang.modalText}
             </Typography>
             <div className={classes.root}>
@@ -40,6 +38,6 @@ const HadProblemsWithLetscook = (props) => {
             </div>
         </>
     );
-}
+};
 
 export default HadProblemsWithLetscook;

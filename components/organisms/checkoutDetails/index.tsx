@@ -187,7 +187,7 @@ export default function CheckoutDetails(props) {
                     <CheckoutValueItem title={lang.finalPrice} value={totalValue} />
                 )}
                 <div style={{ display: "flex", justifyContent: "flex-end", marginTop: theme.spacing(0.5) }}>
-                    <Typography variant="caption" color="textSecondary">
+                    <Typography variant="caption" color="primary">
                         {lang.taxIncluded}
                     </Typography>
                 </div>
@@ -208,12 +208,7 @@ export default function CheckoutDetails(props) {
                             </Typography>
                         </div>
                     )}
-                    {/* Agregar foto del plan seleccionado */}
-                    {/* <img
-                        src={form.planImageUrl}
-                        alt="checkout-image"
-                        style={{ width: "100%", borderRadius: "8px", marginTop: theme.spacing(4) }}
-                    /> */}
+
                     <Grid container spacing={2} alignItems="center" style={{ marginTop: theme.spacing(4) }}>
                         <Grid item xs={12} sm={6}>
                             <div style={{ display: "flex", marginBottom: theme.spacing(1) }}>

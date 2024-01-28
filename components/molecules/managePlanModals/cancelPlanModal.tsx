@@ -215,7 +215,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                     />
                 );
                 handleSecondaryBtnClick = props.handleClose;
-                secondaryBtnColor = theme.palette.text.secondary;
+                secondaryBtnColor = theme.palette.text.primary;
                 secondaryBtnText = lang.createdByError.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
@@ -258,7 +258,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
             case CancellationReason.MOVE_ABROAD:
                 cancellationReasonComponent = <MoveAbroad lang={lang.moveAbroad} />;
                 handleSecondaryBtnClick = props.handleClose;
-                secondaryBtnColor = theme.palette.text.secondary;
+                secondaryBtnColor = theme.palette.text.primary;
                 secondaryBtnText = lang.moveAbroad.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
@@ -273,7 +273,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                     />
                 );
                 handleSecondaryBtnClick = props.handleClose;
-                secondaryBtnColor = theme.palette.text.secondary;
+                secondaryBtnColor = theme.palette.text.primary;
                 secondaryBtnText = lang.dontLikeMealKits.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
@@ -288,7 +288,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                     />
                 );
                 handleSecondaryBtnClick = props.handleClose;
-                secondaryBtnColor = theme.palette.text.secondary;
+                secondaryBtnColor = theme.palette.text.primary;
                 secondaryBtnText = lang.hadProblemsWithLetsCook.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
@@ -321,7 +321,7 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
                     <OtherReason handleChange={handleChangeCancellationComments} value={cancellationComments} lang={lang.otherReason} />
                 );
                 handleSecondaryBtnClick = props.handleClose;
-                secondaryBtnColor = theme.palette.text.secondary;
+                secondaryBtnColor = theme.palette.text.primary;
                 secondaryBtnText = lang.otherReason.secondaryButtonText;
                 handlePrimaryBtnClick = handleClickCancel;
                 primaryBtnColor = "#FC1919";
@@ -355,11 +355,13 @@ const CancelPlanModal = (props: CancelPlanModalProps) => {
             fullScreen={true}
             disabled={isModalPrimaryButtonDisabled() || props.isSubmitting}
         >
-            <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
+            <Typography variant="subtitle2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
                 {lang.subtitle}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl} style={{ marginBottom: theme.spacing(3) }}>
-                <InputLabel htmlFor="outlined-age-native-simple">{lang.cancellationText}</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple" style={{ color: theme.palette.text.primary }}>
+                    {lang.cancellationText}
+                </InputLabel>
                 <Select
                     native
                     value={reasonSelected && reasonSelected.value}

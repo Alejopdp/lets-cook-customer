@@ -14,7 +14,11 @@ const PaymentMethodCard = (props) => {
 
     return (
         <BoxWithTitle title={lang.title}>
-            <DataDisplay title={lang.cardLabelTitle} text={props.paymentMethod.cardLabel.charAt(0).toUpperCase() + props.paymentMethod.cardLabel.slice(1)} style={{ marginBottom: theme.spacing(2) }} />
+            <DataDisplay
+                title={lang.cardLabelTitle}
+                text={props.paymentMethod.cardLabel.charAt(0).toUpperCase() + props.paymentMethod.cardLabel.slice(1)}
+                style={{ marginBottom: theme.spacing(2) }}
+            />
             <DataDisplay title={lang.expirationDateLabelTitle} text={props.paymentMethod.expirationDateLabel} />
         </BoxWithTitle>
     );

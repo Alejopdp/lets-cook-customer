@@ -5,10 +5,12 @@ import styles from "./stripeForm.module.scss";
 // External components
 import { CardNumberElement, CardCvcElement, CardExpiryElement, PaymentRequestButtonElement, useStripe } from "@stripe/react-stripe-js";
 import Box from "@material-ui/core/Box";
+import { useTheme } from "@material-ui/core";
 
 // Internal components
 
 const StripeForm = (props) => {
+    const theme = useTheme();
     const stripe = useStripe();
     const [paymentRequest, setPaymentRequest] = useState(null);
 
@@ -38,13 +40,25 @@ const StripeForm = (props) => {
     return (
         <form onSubmit={handleSubmit}>
             {paymentRequest && <PaymentRequestButtonElement options={{ paymentRequest }} />}
-            <CardNumberElement options={{ classes: { base: styles.cardElement } }} />
+            <CardNumberElement
+                options={{ classes: { base: styles.cardElement }, style: { base: { color: theme.palette.primary.main } } }}
+            />
             <Box display="flex" justifyContent="space-between">
                 <Box flex={1} paddingRight={1}>
-                    <CardExpiryElement options={{ classes: { base: styles.cardElement + " " + styles.flex1 } }} />
+                    <CardExpiryElement
+                        options={{
+                            classes: { base: styles.cardElement + " " + styles.flex1 },
+                            style: { base: { color: theme.palette.primary.main } },
+                        }}
+                    />
                 </Box>
                 <Box flex={1} paddingLeft={1}>
-                    <CardCvcElement options={{ classes: { base: styles.cardElement + " " + styles.flex1 } }} />
+                    <CardCvcElement
+                        options={{
+                            classes: { base: styles.cardElement + " " + styles.flex1 },
+                            style: { base: { color: theme.palette.primary.main } },
+                        }}
+                    />
                 </Box>
             </Box>
         </form>

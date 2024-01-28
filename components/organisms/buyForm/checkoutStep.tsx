@@ -195,7 +195,7 @@ export const CheckoutStep = (props: CheckoutStepProps) => {
                                 <Grid item xs={12} style={{ marginBottom: theme.spacing(1) }}>
                                     <div style={{ display: "flex", alignItems: "center" }}>
                                         <img src="/icons/checkout/verified.svg" width={24} height={24} />
-                                        <Typography variant="h5" style={{ marginLeft: theme.spacing(1) }}>
+                                        <Typography variant="h5" style={{ marginLeft: theme.spacing(1) }} color="primary">
                                             {lang.title}
                                         </Typography>
                                     </div>

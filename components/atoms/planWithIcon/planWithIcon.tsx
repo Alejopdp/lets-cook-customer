@@ -21,7 +21,7 @@ export const PlanWithIcon = (props: PlanWithIconProp) => {
             onMouseOut={() => setIsHover(false)}
         >
             <img src={image} className={icon} />
-            <Typography variant="subtitle2" color="textSecondary">
+            <Typography variant="subtitle2" color="textPrimary">
                 {props.plan.name}
             </Typography>
         </ButtonBase>

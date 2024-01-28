@@ -88,11 +88,13 @@ const SwapPlanModal = (props) => {
             secondaryButtonText={lang.secondaryButtonText}
             disabled={isDisabled()}
         >
-            <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
+            <Typography variant="subtitle2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
                 {lang.choosePlanSubtitle}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl} style={{ marginBottom: theme.spacing(3) }}>
-                <InputLabel htmlFor="outlined-age-native-simple">{lang.choosePlanInputLabel}</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple" style={{ color: theme.palette.text.primary }}>
+                    {lang.choosePlanInputLabel}
+                </InputLabel>
                 <Select
                     native
                     value={planSelected.planId}
@@ -107,11 +109,13 @@ const SwapPlanModal = (props) => {
                     ))}
                 </Select>
             </FormControl>
-            <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
+            <Typography variant="subtitle2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(2) }}>
                 {lang.sizePlanSubtitle}
             </Typography>
             <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-native-simple">{lang.sizePlanInputLabel}</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple" style={{ color: theme.palette.text.primary }}>
+                    {lang.sizePlanInputLabel}
+                </InputLabel>
                 <Select
                     native
                     value={planSelected.planVariantId}

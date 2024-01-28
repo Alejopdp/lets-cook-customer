@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         webkitBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
         mozBoxShadow: "0px 3px 16px 0px rgba(0,0,0,0.1)",
+        backgroundColor: "#E83429",
     },
     cursorPointer: { cursor: "pointer" },
 }));
@@ -56,8 +57,8 @@ export const NavbarContent = (props: ToggleOpeningDrawerProps) => {
                     <MenuIcon />
                 </IconButton>
                 <div className={classes.logo}>
-                    <Link href="/">
-                        <Image src="/logo.png" width={115} height={40} className={classes.cursorPointer} unoptimized/>
+                    <Link href="https://letscook.es">
+                        <Image src="/logo.png" width={152} height={59.5 / 2} className={classes.cursorPointer} unoptimized />
                     </Link>
                 </div>
                 <UserBox />

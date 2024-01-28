@@ -5,26 +5,26 @@ import { useStyles } from "./styles";
 import { RoundedButtonProps } from "./interfaces";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-export const RoundedButton = ({ variant = "content", label, children: Component, style, ...props }: RoundedButtonProps) => {
+export const RoundedButton = ({ variant, label, children: Component, style, isLogginButton, ...props }: RoundedButtonProps) => {
     const classes = useStyles();
 
     return (
         <ButtonBase
             disabled={props.disabled}
             focusRipple
+            style={{ ...style }}
             className={clsx(
                 classes.default,
-                classes.loginButton,
+                { [classes.loginButton]: isLogginButton },
                 { [classes.outlineBorder]: variant === "outline" },
                 { [classes.contentBackground]: variant === "content" }
             )}
-            style={{ ...style }}
             {...props}
         >
             <div style={{ marginRight: 4 }}>{Component}</div>
             <Typography
                 variant="button"
-                style={{ display: "flex", alignItems: "center", ...props.textStyle }}
+                style={{ display: "flex", alignItems: "center", ...props.textStyle, color: "inherit", fontWeight: 400, fontSize: 16 }}
                 className={clsx({ [classes.contentTypography]: variant === "content" })}
             >
                 {label}
