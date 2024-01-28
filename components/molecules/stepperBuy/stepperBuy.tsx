@@ -45,8 +45,11 @@ export const StepperBuy = memo(({ steps, smUpHide, smDowmHide }: StepperBuyProps
                         </Hidden>
                         <Typography
                             variant="caption"
-                            className={clsx({ [classes.active]: step === key, [classes.visited]: step >= key })}
-                            style={{ color: !canChooseRecipes && key === steps.length - 1 ? "#cccccc" : "inherit" }}
+                            className={clsx({
+                                [classes.active]: step === key,
+                                [classes["text-visited"]]: step >= key,
+                                [classes.cantChooseRecipes]: !canChooseRecipes && key === steps.length - 1,
+                            })}
                         >
                             {item.label}
                         </Typography>

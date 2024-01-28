@@ -7,6 +7,7 @@ const theme = createTheme({
     palette: {
         primary: {
             main: colors.primaryColor,
+            light: colors.primaryColor,
             dark: colors.primaryColorDark,
             contrastText: colors.contrastColor,
         },
@@ -18,24 +19,24 @@ const theme = createTheme({
             paper: colors.backgroundPrimaryColor,
         },
         text: {
-            primary: colors.titleColor,
-            secondary: colors.paragraphColor,
+            primary: colors.primaryColor,
+            secondary: colors.backgroundSecondaryColor,
             danger: colors.dangerColor,
         },
     },
 
     typography: {
-        h1: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '34px' },
-        h2: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '30px' },
-        h3: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '26px' },
-        h4: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '22px' },
-        h5: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '20px' },
-        h6: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '16px' },
-        subtitle1: { fontFamily: fonts.titleFont, fontWeight: 500, fontSize: '18px' },
-        subtitle2: { fontFamily: fonts.titleFont, fontWeight: 500, fontSize: '16px' },
-        body1: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: '16px' },
-        body2: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: '15px' },
-        button: { fontFamily: fonts.titleFont, fontWeight: 700, fontSize: '14px', textTransform: 'uppercase' },
+        h1: { fontFamily: fonts.textsFont, fontWeight: 700, fontSize: "34px" },
+        h2: { fontFamily: fonts.textsFont, fontWeight: 700, fontSize: "30px" },
+        h3: { fontFamily: fonts.textsFont, fontWeight: 700, fontSize: "26px" },
+        h4: { fontFamily: fonts.textsFont, fontWeight: 700, fontSize: "22px" },
+        h5: { fontFamily: fonts.textsFont, fontWeight: 700, fontSize: "20px" },
+        h6: { fontFamily: fonts.textsFont, fontWeight: 700, fontSize: "16px" },
+        subtitle1: { fontFamily: fonts.textsFont, fontWeight: 500, fontSize: "18px" },
+        subtitle2: { fontFamily: fonts.textsFont, fontWeight: 500, fontSize: "16px" },
+        body1: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: "16px" },
+        body2: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: "15px" },
+        button: { fontFamily: fonts.buttonsFont, fontWeight: 700, fontSize: "14px", textTransform: "uppercase" },
     },
 
     overrides: {
@@ -43,6 +44,11 @@ const theme = createTheme({
             // Name of the component ⚛️ / style sheet
             contained: {
                 backgroundColor: colors.backgroundSecondaryColor,
+            },
+        },
+        MuiCheckbox: {
+            root: {
+                color: colors.primaryColor,
             },
         },
         MuiInput: {
@@ -57,11 +63,19 @@ const theme = createTheme({
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                 },
+                "& Mui-disabled": {
+                    color: colors.primaryColor,
+                },
             },
             underline: {
                 "&&&&:before": {
                     border: 0,
                 },
+            },
+        },
+        MuiInputLabel: {
+            root: {
+                color: colors.primaryColor,
             },
         },
     },

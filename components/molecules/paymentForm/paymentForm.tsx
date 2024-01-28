@@ -485,7 +485,7 @@ export const PaymentForm = (props) => {
                     <Grid item container justify="space-between" alignItems="center">
                         <Grid item className={classes.title}>
                             <Image unoptimized src="/icons/checkout/métodos-de-pago.svg" height={32} width={32} />
-                            <Typography variant="h6" color="textSecondary" className={classes.titleMargin}>
+                            <Typography variant="h6" color="primary" className={classes.titleMargin}>
                                 {lang.title}
                             </Typography>
                         </Grid>

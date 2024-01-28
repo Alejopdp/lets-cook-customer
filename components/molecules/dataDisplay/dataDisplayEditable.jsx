@@ -13,11 +13,11 @@ import EditIcon from "@material-ui/icons/Edit";
 const DataDisplayEditable = (props) => {
     return (
         <Box style={props.style}>
-            <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px" }}>
+            <Typography variant="subtitle2" color="textPrimary" style={{ fontSize: "14px" }}>
                 {props.title}
             </Typography>
             <Box style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px" }}>
+                <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px" }}>
                     {props.text}
                 </Typography>
                 <IconButton aria-label="edit" onClick={props.handleClick}>

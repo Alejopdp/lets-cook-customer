@@ -37,7 +37,7 @@ export default function FoodCard({
     handleDeleteRecipe,
     recipeToRate,
     lang,
-    dontRate
+    dontRate,
 }) {
     const classes = useStyles();
 
@@ -56,12 +56,13 @@ export default function FoodCard({
                             {selectedRecipe.recipeName}
                         </Typography>
                         {selectedRecipe.qtyDelivered > 0 && (
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {`${selectedRecipe.qtyDelivered} ${selectedRecipe.qtyDelivered ? lang.oneTimeDeliveredText : lang.deliveredText} `}  ({lang.lastShippmentText}{" "}
-                                {selectedRecipe.lastShippingDate})
+                            <Typography variant="body2" color="textPrimary" component="p">
+                                {`${selectedRecipe.qtyDelivered} ${
+                                    selectedRecipe.qtyDelivered ? lang.oneTimeDeliveredText : lang.deliveredText
+                                } `}{" "}
+                                ({lang.lastShippmentText} {selectedRecipe.lastShippingDate})
                             </Typography>
                         )}
-                        
                     </CardContent>
                 </CardActionArea>
 

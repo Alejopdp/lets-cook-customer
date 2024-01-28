@@ -48,8 +48,15 @@ export const AppBarStepper = () => {
         <AppBar position="fixed" color="default" className={classes.navbarClass}>
             <Toolbar>
                 <div className={classes.logo}>
-                    <Link href="/">
-                        <Image unoptimized src="/logo.png" width={115} height={40} alt="lets-cook-logo" className={classes.cursorPointer} />
+                    <Link href="https://letscook.es">
+                        <Image
+                            unoptimized
+                            src="/logo.png"
+                            width={152}
+                            height={59.5 / 2}
+                            alt="lets-cook-logo"
+                            className={classes.cursorPointer}
+                        />
                     </Link>
                 </div>
                 <StepperBuy smDowmHide steps={showLoggedInSteps ? loggedInSteps : steps} />

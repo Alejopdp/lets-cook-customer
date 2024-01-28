@@ -50,7 +50,7 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
         <Modal open={props.open} handleClose={props.handleClose} maxWidth="md" fullScreen title={lang.title}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="subtitle1" color="textSecondary" style={{ marginBottom: theme.spacing(2) }}>
+                    <Typography variant="subtitle1" color="textPrimary" style={{ marginBottom: theme.spacing(2) }}>
                         {lang.subscriptionPaid}
                     </Typography>
                     {props.data.orders?.map((order, index) => (
@@ -63,15 +63,15 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                             }}
                         >
                             <PlanInfo planName={order.planName} planIcon={order.planIcon} style={{ marginBottom: theme.spacing(1) }} />
-                            <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
+                            <Typography variant="body2" color="textPrimary" style={{ marginBottom: theme.spacing(1) }}>
                                 {order.planVariant}
                             </Typography>
-                            <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
+                            <Typography variant="body2" color="textPrimary" style={{ marginBottom: theme.spacing(1) }}>
                                 {lang.subtotal}: {order.amount} €
                             </Typography>
                             {order.hasRecipes && (
                                 <>
-                                    <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(2) }}>
+                                    <Typography variant="body2" color="textPrimary" style={{ marginBottom: theme.spacing(2) }}>
                                         {lang.recipesChoosen}
                                     </Typography>
                                     {order.recipes.length > 0 ? (
@@ -87,13 +87,13 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                                                 key={index}
                                             >
                                                 <Image unoptimized src={recipe.imageUrl} width={74} height={48} alt={recipe.name} />
-                                                <Typography variant="body2" color="textSecondary" style={{ marginLeft: theme.spacing(2) }}>
+                                                <Typography variant="body2" color="textPrimary" style={{ marginLeft: theme.spacing(2) }}>
                                                     {recipe.name}
                                                 </Typography>
                                             </div>
                                         ))
                                     ) : (
-                                        <Typography variant="body2" color="textSecondary">
+                                        <Typography variant="body2" color="textPrimary">
                                             {lang.recipesNotFound}
                                         </Typography>
                                     )}
@@ -103,20 +103,20 @@ const PaymentDetailsModal = withStyles(styles)((props: PaymentDetailsModalProps)
                     ))}
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
+                    <Typography variant="body2" color="textPrimary" style={{ marginBottom: theme.spacing(1) }}>
                         {lang.subtotal}: {props.data.amount} €
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
+                    <Typography variant="body2" color="textPrimary" style={{ marginBottom: theme.spacing(1) }}>
                         {lang.shippingCost}: {props.data.shippingCost} €
                     </Typography>
                     {props.data.discountAmount !== 0 && (
-                        <Typography variant="body2" color="textSecondary" style={{ marginBottom: theme.spacing(1) }}>
+                        <Typography variant="body2" color="textPrimary" style={{ marginBottom: theme.spacing(1) }}>
                             {lang.discount}: -{props.data.discountAmount} €
                         </Typography>
                     )}
                     <Typography
                         variant="body2"
-                        color="textSecondary"
+                        color="textPrimary"
                         style={{ fontWeight: 600, borderTop: `1px dashed rgba(0,0,0,0.1)`, paddingTop: theme.spacing(1) }}
                     >
                         {lang.total}: {props.data.totalAmount} €

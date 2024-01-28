@@ -65,6 +65,7 @@ export const useStylesVariantContent = makeStyles((theme) => ({
     formControlRadio: {
         "& span.MuiFormControlLabel-label": {
             fontSize: "16px",
+            color: theme.palette.primary.main,
         },
     },
 }));

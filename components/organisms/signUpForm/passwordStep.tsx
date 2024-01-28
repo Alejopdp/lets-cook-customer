@@ -19,6 +19,7 @@ import { useUserInfoStore } from "@stores";
 import { loginWithSocialMedia } from "helpers/serverRequests/customer";
 import { useSnackbar } from "notistack";
 import { locale } from "types/locale";
+import { Routes, localeRoutes } from "lang/routes/routes";
 
 type PasswordStepProps = {
     password: string;
@@ -50,7 +51,7 @@ const PasswordStep = (props: PasswordStepProps) => {
             saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, res.data.userInfo);
             setUserInfo(res.data.userInfo);
             cookies.set(LOCAL_STORAGE_KEYS.token, res.data.token);
-            props.signUpRedirect ? router.push("/") : "";
+            props.signUpRedirect ? router.push(localeRoutes[router.locale][Routes.perfil]) : "";
             props.handleSignUp ? props.handleSignUp(res.data.userInfo) : "";
         } else {
             enqueueSnackbar(res && res.data ? res.data.message : lang.snackbars.error.unexpectedError, { variant: "error" });
@@ -85,7 +86,7 @@ const PasswordStep = (props: PasswordStepProps) => {
                     label={lang.authorizeCheckbox.label}
                     boldText={lang.authorizeCheckbox.boldText}
                     handleOpenModal={props.handleOpenPrivacyPolicyModal}
-                    color={"default"}
+                    color={"primary"}
                 />
             </Grid>
             <Grid item xs={12}>
@@ -96,8 +97,7 @@ const PasswordStep = (props: PasswordStepProps) => {
                     label={lang.infoCheckbox.label}
                     boldText={lang.infoCheckbox.boldText}
                     redirectTo={lang.infoCheckbox.redirectTo}
-                    color={"default"}
-                    className={""}
+                    color={"primary"}
                 />
             </Grid>
             <Grid item xs={12} style={{ marginTop: theme.spacing(2) }}>

@@ -67,16 +67,16 @@ const PriceTooHigh = ({
 
     const economyPlanComponent = (
         <>
-            <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
+            <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
                 El precio del plan ahorro es el más bajo que podemos ofrecer. Let’s Cook recibe descuentos por comprar en cantidad y lo
                 traducimos directamente al precio en los planes ahorro.
             </Typography>
             <Box className={classes.planBox}>
                 <PlanInfo style={{ marginBottom: theme.spacing(2) }} planName={plan.name} planIcon={plan.iconWithColor} />
-                <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px", marginBottom: theme.spacing(2) }}>
+                <Typography variant="body2" color="textPrimary" style={{ fontSize: "14px", marginBottom: theme.spacing(2) }}>
                     {defaultPlanAhorroVariant?.description} por semana
                 </Typography>
-                <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px", marginBottom: theme.spacing(2) }}>
+                <Typography variant="body2" color="textPrimary" style={{ fontSize: "14px", marginBottom: theme.spacing(2) }}>
                     {defaultPlanAhorroVariant?.servingsLabel}
                 </Typography>
                 <Box className={classes.totalPrice}>
@@ -90,7 +90,7 @@ const PriceTooHigh = ({
             </Box>
             {hasVariantWithLowerPrice ? (
                 <>
-                    <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>
+                    <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>
                         También podemos ofrecerte reducir raciones del plan actual.
                     </Typography>
                     <Link
@@ -104,7 +104,7 @@ const PriceTooHigh = ({
                     </Link>
                 </>
             ) : (
-                <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>
+                <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>
                     No tenemos una variante del mismo plan mas barata para ofrecerte
                 </Typography>
             )}
@@ -112,7 +112,7 @@ const PriceTooHigh = ({
     );
     const lowerVariantsComponent = (
         <>
-            <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
+            <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(3) }}>
                 A continuación encontrarás una lista de opciones de tu plan actual
             </Typography>
             <FormControl variant="outlined" className={classes.formControl}>
@@ -133,7 +133,7 @@ const PriceTooHigh = ({
                         ))}
                 </Select>
             </FormControl>
-            <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>
+            <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px", marginBottom: theme.spacing(0.5) }}>
                 También podemos ofrecerte cambiar a un plan más económico.
             </Typography>
             <Link

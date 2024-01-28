@@ -263,7 +263,7 @@ const WalletPage = (props) => {
                         </Typography>
                     </Box>
                     <Box marginBottom={4}>
-                        <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px", marginBottom: theme.spacing(1) }}>
+                        <Typography variant="subtitle2" color="textPrimary" style={{ fontSize: "14px", marginBottom: theme.spacing(1) }}>
                             {lang.amountToChargeInputLabel}
                         </Typography>
                         <Box width={isMdUp ? "50%" : "100%"}>
@@ -275,8 +275,15 @@ const WalletPage = (props) => {
                                 type="number"
                                 variant="outlined"
                                 value={amountToCharge}
-                                InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start" style={{ color: theme.palette.primary.main }}>
+                                            €
+                                        </InputAdornment>
+                                    ),
+                                }}
                                 error={amountToCharge < 5}
+                                style={{ color: theme.palette.text.primary }}
                                 helperText={amountToCharge < 5 ? lang.minimumAmountToCharge : ""}
                                 FormHelperTextProps={{ style: { fontStyle: "italic", marginLeft: 0 } }}
                                 onChange={(e) => {
@@ -287,7 +294,7 @@ const WalletPage = (props) => {
                         </Box>
                     </Box>
                     <Box marginBottom={4}>
-                        <Typography variant="subtitle2" color="textSecondary" style={{ fontSize: "14px" }}>
+                        <Typography variant="subtitle2" color="textPrimary" style={{ fontSize: "14px" }}>
                             {lang.daysOfChargeTitle}
                         </Typography>
                         <FormGroup style={{ display: "flex", flexDirection: "row", marginBottom: 16 }}>

@@ -7,7 +7,7 @@ import { AttributePickerProps } from "./interface";
 const AttributePicker = (props: AttributePickerProps) => {
     return (
         <Box marginBottom={2}>
-            <Typography variant="body2" style={{ fontSize: "14px", fontWeight: 600 }}>
+            <Typography variant="body2" color="textPrimary" style={{ fontSize: "14px", fontWeight: 600 }}>
                 {props.title}
             </Typography>
             <Box display="flex">

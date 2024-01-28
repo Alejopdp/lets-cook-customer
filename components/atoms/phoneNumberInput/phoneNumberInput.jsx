@@ -20,7 +20,7 @@ const PhoneNumberInput = (props) => {
                     backgroundColor: theme.palette.background.secondary,
                     width: "100%",
                     borderRadius: "8px",
-                    color: theme.palette.text.secondary,
+                    color: theme.palette.primary.main,
                     "&:focus": {
                         borderColor: theme.palette.primary.main,
                     },
@@ -28,7 +28,7 @@ const PhoneNumberInput = (props) => {
                         borderColor: "unset",
                     },
                     "&:disabled": {
-                        color: "rgba(0, 0, 0, 0.38)",
+                        color: theme.palette.primary.main,
                         cursor: "default",
                     },
                 }}

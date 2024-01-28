@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { Grid, Container } from "@material-ui/core";
+import Image from "next/image";
 
 const FormPaper = (props) => {
     const { image, shadow, box, mt1, mb2 } = useStyles();
@@ -20,11 +21,11 @@ const FormPaper = (props) => {
                     <Box className={clsx(box, shadow)}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} className={mb2}>
-                                <Typography variant="h5" color="textSecondary">
+                                <Typography variant="h5" color="primary">
                                     {props.title}
                                 </Typography>
                                 {props.paragraph && (
-                                    <Typography variant="body2" color="textSecondary" className={mt1}>
+                                    <Typography variant="body2" color="primary" className={mt1}>
                                         {props.paragraph}
                                     </Typography>
                                 )}

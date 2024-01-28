@@ -54,7 +54,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                             {props.selectedRecipes.length >= props.maxRecipesQty && (
                                 <div className={classes.recipesQtySelected}>
                                     <CheckCircleOutline color="primary" className={classes.marginRight} />
-                                    <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
+                                    <Typography variant="body2" color="textPrimary" style={{ fontSize: "14px" }}>
                                         {lang.allRecipesChosen}
                                     </Typography>
                                 </div>
@@ -62,7 +62,7 @@ export const RecipesBottomBar = memo((props: RecipesBottomBarProps) => {
                             {props.selectedRecipes.length < props.maxRecipesQty && (
                                 <div className={classes.recipesQtySelected}>
                                     <ErrorOutlineOutlined color="secondary" className={classes.marginRight} />
-                                    <Typography variant="body2" color="textSecondary" style={{ fontSize: "14px" }}>
+                                    <Typography variant="body2" color="textPrimary" style={{ fontSize: "14px" }}>
                                         {props.maxRecipesQty - props.selectedRecipes.length === 1
                                             ? `${
                                                   recipeChoiseStep[router.locale].recipesBottomBar.recipesPendingToSelect.singular.firstText

@@ -28,7 +28,7 @@ const RecipesNextWeekCard = (props) => {
                         <Image unoptimized src="/assets/userProfile/recipesEmptyState.svg" width="80" height="80" />
                         <Typography
                             variant="body2"
-                            color="textSecondary"
+                            color="textPrimary"
                             style={{ fontSize: "16px", marginTop: theme.spacing(1), marginBottom: theme.spacing(2) }}
                         >
                             {props.canChooseRecipes
@@ -52,7 +52,7 @@ const RecipesNextWeekCard = (props) => {
                     handleClick={() => router.push(`${localeRoutes[router.locale][Routes["elegir-recetas"]]}/${props.nextWeekOrder.id}`)}
                     hideButton={!props.canChooseRecipes}
                 >
-                    <Typography variant="body2" color="textSecondary" style={{ fontSize: "16px" }}>
+                    <Typography variant="body2" color="textPrimary" style={{ fontSize: "16px" }}>
                         {lang.hasChosenRecipesForNextWeek.text} {props.nextWeekOrder.shippingDate}
                     </Typography>
                     <ChosenRecipes
