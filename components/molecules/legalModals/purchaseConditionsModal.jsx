@@ -24,7 +24,7 @@ const PurchaseConditionsModal = (props) => {
         >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography variant="body2" color="textPrimary">
                         1. INFORMACIÓN GENERAL La titularidad de este sitio web, www.letscooknow.es, (en adelante Sitio Web) la ostenta:
                         LetsCook SL, provista de NIF: B67476051 e inscrita en: Registro Mercantil de Barcelona; y cuyos datos registrales
                         son: Asiento 3356 del Diario 1313, hoja B537331, folio 115 del tomo 46986 del archivo, y cuyos datos de contacto
