@@ -314,6 +314,7 @@ export const PaymentForm = (props) => {
                     dataLayer: {
                         event: "purchase",
                         ecommerce: {
+                            md5: md5(userInfo.email),
                             items: [
                                 {
                                     item_name: skuPlanMap[form.planSku as keyof typeof skuPlanMap].name,
@@ -331,7 +332,6 @@ export const PaymentForm = (props) => {
                                     shipping: form.deliveryForm.shippingCost,
                                     currency: "EUR",
                                     coupon: form.coupon?.code ?? "",
-                                    md5: md5(userInfo.email),
                                 },
                             ],
                         },
