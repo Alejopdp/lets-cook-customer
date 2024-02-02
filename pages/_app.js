@@ -70,7 +70,7 @@ function MyApp(props) {
                 console.log({ token });
                 setVerifyingAuth(false);
                 setisLoading(false);
-                TagManager.initialize({ gtmId: "GTM-5M7F3L5", dataLayer: [{ test: "ale" }] });
+                TagManager.initialize({ gtmId: "GTM-5M7F3L5", dataLayer: { test: "ale" } });
                 return;
             }
             const res = await verifyToken(token);
@@ -78,7 +78,7 @@ function MyApp(props) {
                 setIsAuthenticated(true);
                 const userInfo = await getFromLocalStorage(LOCAL_STORAGE_KEYS.userInfo);
                 const getCustomerRes = await getCustomerById(userInfo?.id, router.locale);
-                TagManager.initialize({ gtmId: "GTM-5M7F3L5", dataLayer: [{ id: getCustomerRes.data.id, test: "ale" }] });
+                TagManager.initialize({ gtmId: "GTM-5M7F3L5", dataLayer: { id: getCustomerRes.data.id, test: "ale" } });
 
                 if (getCustomerRes && getCustomerRes.status === 200) {
                     userInfo = {
@@ -100,7 +100,7 @@ function MyApp(props) {
                 setUserInfo(userInfo);
                 saveInLocalStorage(LOCAL_STORAGE_KEYS.userInfo, userInfo);
             } else {
-                TagManager.initialize({ gtmId: "GTM-5M7F3L5", dataLayer: [{ test: "ale" }] });
+                TagManager.initialize({ gtmId: "GTM-5M7F3L5", dataLayer: { test: "ale" } });
                 removeFromLocalStorage(LOCAL_STORAGE_KEYS.token);
                 removeFromLocalStorage(LOCAL_STORAGE_KEYS.userInfo);
             }
