@@ -26,6 +26,11 @@ export const StepperBuy = memo(({ steps, smUpHide, smDowmHide }: StepperBuyProps
         canChooseRecipes: form.canChooseRecipes,
     }));
 
+    const getItemIconSrc = (originalSrc: string, isActive: boolean) => {
+        if (!isActive) return originalSrc;
+        return originalSrc.replace(".svg", "-active.svg");
+    };
+
     return (
         <Breadcrumbs
             separator={<div className={clsx(classes.separator)} />}
@@ -37,10 +42,14 @@ export const StepperBuy = memo(({ steps, smUpHide, smDowmHide }: StepperBuyProps
                     <div className={clsx({ [classes.active]: step === key }, classes.breadcrumbContainer)} key={key}>
                         <Hidden smDown implementation="css">
                             <img
-                                className={clsx(classes.icon, { [classes.active]: step === key, [classes.visited]: step >= key })}
+                                className={clsx(classes.icon)}
                                 width={24}
                                 height={24}
-                                src={!canChooseRecipes && key === steps.length - 1 ? disabledChooseIconRoute : item.icon}
+                                src={
+                                    !canChooseRecipes && key === steps.length - 1
+                                        ? disabledChooseIconRoute
+                                        : getItemIconSrc(item.icon, step >= key)
+                                }
                             />
                         </Hidden>
                         <Typography
