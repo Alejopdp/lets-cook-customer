@@ -82,3 +82,15 @@ export const getFormattedAddressFromGoogle = (address_components?: { long_name: 
     }
 
 }
+
+export const howItWorksUrlMap = {
+    es: "https://letscook.es/como-funciona/",
+    en: "https://letscook.es/en/how-does-it-work/",
+    ca: "https://letscook.es/ca/com-funciona/",
+};
+
+export const faqsUrlMap = {
+    es: "https://letscook.es/preguntas-frecuentes/",
+    en: "https://letscook.es/en/faqs/",
+    ca: "https://letscook.es/ca/preguntes-frequents/",
+};

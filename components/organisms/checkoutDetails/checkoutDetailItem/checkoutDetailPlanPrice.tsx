@@ -12,16 +12,9 @@ const CheckoutDetailPlanPrice = (props: checkoutDetailPlanPriceProps) => {
     return (
         <Box display="flex" justifyContent="space-between" marginBottom={2}>
             <Typography style={{ fontSize: 16, color: "inherit" }}>{props.title}</Typography>
-            {props.priceWithOffer ? (
-                <Typography style={{ fontSize: 16, color: "inherit" }}>
-                    <span style={{ textDecoration: "line-through", fontSize: 14, color: "#515151" }}>{props.price} €</span>{" "}
-                    {props.priceWithOffer} €/{lang.checkoutDetails.week}
-                </Typography>
-            ) : (
-                <Typography style={{ fontSize: 16, color: "inherit" }}>
-                    {props.price} €/{lang.checkoutDetails.week}
-                </Typography>
-            )}
+            <Typography style={{ fontSize: 16, color: "inherit" }}>
+                {props.priceWithOffer ?? props.price} €/{lang.checkoutDetails.week}
+            </Typography>
         </Box>
     );
 };

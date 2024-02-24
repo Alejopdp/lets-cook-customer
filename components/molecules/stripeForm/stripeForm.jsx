@@ -41,14 +41,17 @@ const StripeForm = (props) => {
         <form onSubmit={handleSubmit}>
             {paymentRequest && <PaymentRequestButtonElement options={{ paymentRequest }} />}
             <CardNumberElement
-                options={{ classes: { base: styles.cardElement }, style: { base: { color: theme.palette.primary.main } } }}
+                options={{
+                    classes: { base: styles.cardElement },
+                    style: { base: { color: theme.palette.primary.main, fontFamily: "Fraunces" } },
+                }}
             />
             <Box display="flex" justifyContent="space-between">
                 <Box flex={1} paddingRight={1}>
                     <CardExpiryElement
                         options={{
                             classes: { base: styles.cardElement + " " + styles.flex1 },
-                            style: { base: { color: theme.palette.primary.main } },
+                            style: { base: { color: theme.palette.primary.main, fontFamily: "Fraunces" } },
                         }}
                     />
                 </Box>
@@ -56,7 +59,7 @@ const StripeForm = (props) => {
                     <CardCvcElement
                         options={{
                             classes: { base: styles.cardElement + " " + styles.flex1 },
-                            style: { base: { color: theme.palette.primary.main } },
+                            style: { base: { color: theme.palette.primary.main, fontFamily: "Fraunces" } },
                         }}
                     />
                 </Box>

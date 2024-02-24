@@ -3,10 +3,10 @@ import { Divider, Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles
 import Image from "next/image";
 import { LoginButton } from "@atoms";
 import { useLang } from "@hooks";
-import * as ga from "../../../helpers/ga";
 import { useRouter } from "next/router";
 import { MyProfileButton } from "components/atoms/myProfileButton";
 import { localeRoutes, Routes } from "lang/routes/routes";
+import { faqsUrlMap, howItWorksUrlMap } from "helpers/utils/utils";
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -33,7 +33,11 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
 
     const menuOptions = {
         top: [
-            { label: lang.itemHome, path: "/", img: "/icons/checkout/home.svg" },
+            {
+                label: lang.itemHome,
+                path: `https://letscook.es/${router.locale === "es" ? "" : router.locale}`,
+                img: "/icons/checkout/home.svg",
+            },
             { label: lang.itemPlans, path: localeRoutes[router.locale][Routes.planes], img: "/icons/checkout/gestion-del-plan.svg" },
             {
                 label: lang.itemRecipes,
@@ -42,44 +46,21 @@ const NavbarDrawer = (props: NavbarDrawerProps) => {
             },
         ],
         bottom: [
-            { label: lang.itemHowItWork, path: localeRoutes[router.locale][Routes["como-funciona"]] },
-            { label: lang.itemFAQ, path: localeRoutes[router.locale][Routes["preguntas-frecuentes"]] },
-            // { label: lang.itemBlog, path: "/blogs/recetas" },
-            // { label: lang.itemGif, path: "/bono-regalo" },
+            { label: lang.itemHowItWork, path: howItWorksUrlMap[router.locale] },
+            { label: lang.itemFAQ, path: faqsUrlMap[router.locale] },
             { label: lang.itemLegal, path: localeRoutes[router.locale][Routes["aviso-legal"]] },
         ],
     };
 
     const goToLogin = () => {
-        // ga.event({
-        //     action: "clic en iniciar sesion",
-        //     params: {
-        //         event_category: props.page ? props.page : "undefined page",
-        //         event_label: "sidebar",
-        //     },
-        // });
         router.push(localeRoutes[router.locale][Routes["iniciar-sesion"]]);
     };
 
     const goToMyProfile = () => {
-        // ga.event({
-        //     action: "clic en mi perfil",
-        //     params: {
-        //         event_category: props.page ? props.page : "undefined page",
-        //         event_label: "sidebar",
-        //     },
-        // });
         router.push(localeRoutes[router.locale][Routes["perfil"]]);
     };
 
     const goToPage = (sectionName, path) => {
-        // ga.event({
-        //     action: `clic en ${sectionName.toLowerCase()}`,
-        //     params: {
-        //         event_category: "menu hamburguesa",
-        //         event_label: sectionName.toLowerCase(),
-        //     },
-        // });
         router.push(path);
     };
 

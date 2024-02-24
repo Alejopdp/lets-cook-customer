@@ -17,6 +17,7 @@ import { useStyles } from "./styles";
 import { useLang } from "@hooks";
 import { localeRoutes, Routes } from "lang/routes/routes";
 import { useRouter } from "next/router";
+import { faqsUrlMap, howItWorksUrlMap } from "helpers/utils/utils";
 
 export const Footer = () => {
     const classes = useStyles();
@@ -34,35 +35,31 @@ export const Footer = () => {
         links?: ILink[];
     }
 
-    const _links: ILink[] = useMemo(
-        () => [
+    const _links: ILink[] = useMemo(() => {
+        return [
             {
                 name: lang.links.recipes,
                 url: localeRoutes[router.locale][Routes["menu-semanal"]],
             },
-            // {
-            //     name: lang.links.bonoRegalo,
-            //     url: "/bono-regalo",
-            // },
+
             {
                 name: lang.links.howItWorks,
-                url: localeRoutes[router.locale][Routes["como-funciona"]],
+                url: howItWorksUrlMap[router.locale],
             },
             {
                 name: lang.links.faqs,
-                url: localeRoutes[router.locale][Routes["preguntas-frecuentes"]],
+                url: faqsUrlMap[router.locale],
             },
             {
                 name: lang.links.blog,
-                url: "/blog",
+                url: "https://letscook.es/blog/",
             },
             {
                 name: lang.links.legal,
                 url: localeRoutes[router.locale][Routes["aviso-legal"]],
             },
-        ],
-        [router.locale]
-    );
+        ];
+    }, [router.locale]);
 
     return (
         <div className={root} style={{ backgroundColor: theme.palette.primary.main, color: theme.palette.background.default }}>

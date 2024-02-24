@@ -55,6 +55,7 @@ export const checkoutStep = {
             taxIncluded: "Impuestos incluidos",
             doYouHaveCoupon: "¿Tienes un cupón de descuento?",
             appliedCoupon: "Cupón de descuento aplicado",
+            couponInputLabel: "Cupón de descuento",
             shippingDayLabel: {
                 firstText: "Tu primer pedido llegará este",
                 secondText: "Recibirás un correo con el horario de entrega. Luego, todas las entregas se realizarán los",
@@ -122,6 +123,7 @@ export const checkoutStep = {
             taxIncluded: "Tax included",
             doYouHaveCoupon: "Do you have a discount voucher?",
             appliedCoupon: "Discount voucher applied",
+            couponInputLabel: "Discount code",
             shippingDayLabel: {
                 firstText: "Your first order will arrive this",
                 secondText: "You’ll receive an e-mail with the delivery time. Then, all deliveries will be each",
@@ -189,6 +191,7 @@ export const checkoutStep = {
             taxIncluded: "Impostos inclosos",
             doYouHaveCoupon: "Tens un cupó de descompte?",
             appliedCoupon: "Cupó de descompte aplicat",
+            couponInputLabel: "Codi de descompte",
             shippingDayLabel: {
                 firstText: "La teva primera comanda arribarà aquest",
                 secondText: "Rebràs un correu amb l‘horari de lliurament. Després, tots els lliuraments es realitzaran els",
