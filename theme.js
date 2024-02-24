@@ -34,8 +34,8 @@ const theme = createTheme({
         h6: { fontFamily: fonts.textsFont, fontWeight: 700, fontSize: "16px" },
         subtitle1: { fontFamily: fonts.textsFont, fontWeight: 500, fontSize: "18px" },
         subtitle2: { fontFamily: fonts.textsFont, fontWeight: 500, fontSize: "16px" },
-        body1: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: "16px" },
-        body2: { fontFamily: fonts.paragraphFont, fontWeight: 400, fontSize: "15px" },
+        body1: { fontFamily: fonts.textsFont, fontWeight: 400, fontSize: "16px" },
+        body2: { fontFamily: fonts.textsFont, fontWeight: 400, fontSize: "15px" },
         button: { fontFamily: fonts.buttonsFont, fontWeight: 700, fontSize: "14px", textTransform: "uppercase" },
     },
 
