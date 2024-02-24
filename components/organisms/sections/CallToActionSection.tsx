@@ -16,7 +16,12 @@ export const CallToActionSection = (props: CallToActionSectionProps) => {
 
     const goToPlans = () => {
         trackCallToActionClickAtHomepage(props.page);
-        router.push(localeRoutes[router.locale][Routes.planes]);
+        const destinationURLMap = {
+            es: "https://letscook.es/producto/plan-gourmet/",
+            ca: "https://letscook.es/ca/producto/pla-gourmet/",
+            en: "https://letscook.es/en/producto/gourmet-plan/",
+        };
+        router.push(destinationURLMap[router.locale]);
     };
 
     return (
