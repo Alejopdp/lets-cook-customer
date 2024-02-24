@@ -17,7 +17,7 @@ const PhoneNumberInput = (props) => {
                 localization="es"
                 value={props.value}
                 inputStyle={{
-                    backgroundColor: theme.palette.background.secondary,
+                    backgroundColor: "transparent",
                     width: "100%",
                     borderRadius: "8px",
                     color: theme.palette.primary.main,
@@ -32,7 +32,7 @@ const PhoneNumberInput = (props) => {
                         cursor: "default",
                     },
                 }}
-                dropdownStyle={{ backgroundColor: theme.palette.background.secondary, color: "gray", width: props.width }}
+                dropdownStyle={{ backgroundColor: "transparent", color: "gray", width: props.width }}
                 containerStyle={{ width: "100%", fontFamily: paragraphFont, fontSize: "16px" }}
                 specialLabel={props.label}
                 inputProps={{ name: props.name, autoComplete: "no", label: props.label }}

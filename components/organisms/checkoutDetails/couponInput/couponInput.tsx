@@ -9,13 +9,16 @@ import ChevronRight from "@material-ui/icons/ChevronRight";
 // Internal components
 import { TextInput } from "../../../atoms/inputs/index";
 import { CouponInputProps } from "./interface";
+import { useLang } from "@hooks";
 
 const CouponInput = (props: CouponInputProps) => {
+    const [lang] = useLang("checkoutStep");
+
     return (
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
             <TextInput
                 onChange={props.onChange}
-                label="Cupón de descuento"
+                label={lang.checkoutDetails.couponInputLabel}
                 name={props.name}
                 value={props.value}
                 handleSubmit={props.handleSubmit}

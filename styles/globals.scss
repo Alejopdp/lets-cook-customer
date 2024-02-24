@@ -84,4 +84,15 @@ li.react-multi-carousel-item {
 
 div.MuiInputBase-root.Mui-disabled {
     color: $primary-color!important;
+
+}
+
+.react-tel-input .form-control {
+    font-family: "Fraunces";
+}
+
+.react-tel-input .special-label {
+    left: 10px!important;
+    background-color: #fbf9f5!important;
+    font-family: "Fraunces";
 }

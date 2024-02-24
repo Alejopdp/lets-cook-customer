@@ -547,7 +547,9 @@ const Perfil = (props) => {
                                                 </>
                                             ) : (
                                                 <EmptyState
-                                                    image="/empty-cart.png"
+                                                    image="/LogoLetsCookR.png"
+                                                    width={141.4}
+                                                    height={27.6}
                                                     title={lang.additionalsEmptyStateTitle}
                                                     text={lang.additionalsEmptyStateSubtitle}
                                                 />

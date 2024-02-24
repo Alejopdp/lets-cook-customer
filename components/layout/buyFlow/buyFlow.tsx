@@ -25,13 +25,6 @@ export const BuyFlowLayout = memo(({ children: Component, isInitializing }: BuyF
     };
 
     const _handleClickApplyFilters = (_filters) => {
-        // ga.event({
-        //     action: "clic en aplicar filtros",
-        //     params: {
-        //         event_category: "elegir recetas",
-        //         event_label: "aplicar filtros",
-        //     },
-        // });
         setFilters(_filters);
         _toggleOpeningDrawer();
     };

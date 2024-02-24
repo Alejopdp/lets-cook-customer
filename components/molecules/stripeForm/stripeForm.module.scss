@@ -1,6 +1,7 @@
 @import "../../../styles/colors.module.scss";
 
 .cardElement {
+    font-family: "Fraunces";
     background-color: white;
     padding: 18.5px 14px;
     margin: 8px 0px;
@@ -13,12 +14,14 @@
 
 .flex1,
 .cardElement {
+    font-family: "Fraunces";
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.23);
 }
 
 .flex1:hover,
 .cardElement:hover {
+    font-family: "Fraunces";
     border: solid 1px rgba($color: #000000, $alpha: 0.5);
 }
 
