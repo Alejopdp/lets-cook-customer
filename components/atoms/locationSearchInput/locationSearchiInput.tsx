@@ -126,7 +126,6 @@ const LocationSearchInput = (props: LocationSearchInputProps) => {
             getOptionLabel={(option) => (typeof option === "string" ? option : option.description)}
             filterOptions={(x) => x}
             options={options}
-            // autoComplete
             includeInputInList
             filterSelectedOptions
             value={props.value}
